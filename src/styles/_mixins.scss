@@ -1,0 +1,5 @@
+@mixin text-setup($color,$size,$font){
+  color:$color;
+  font-size: $size;
+  font-family: $font;
+}

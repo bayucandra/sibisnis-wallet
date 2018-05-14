@@ -1,0 +1,61 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+#header {
+  width: 100%;
+  height: 70px;
+  background-color: $dark-aqua;
+  display: flex;
+  align-items: center;
+  .header-container {
+    display: flex;
+    .left-header {
+      flex: 1;
+      .switch-icon {
+        margin-right: 15px;
+        margin-top: -4px;
+      }
+      .user-meta {
+        @include text-setup($white, 16px, $font-family);
+      }
+    }
+    .right-header {
+      flex: 1;
+      text-align: right;
+      .logout-icon {
+        margin-right: 15px;
+        margin-top: -4px;
+      }
+      .logout {
+        @include text-setup($white, 16px, $font-family);
+      }
+    }
+
+    .right-header-desktop{
+      display: block;
+    }
+
+    .right-header-mobile{
+      display: none;
+    }
+  }
+}
+
+// Media Queires
+@media screen and (max-width:576px) {
+  #header {
+    .switch-icon{
+      display: none;
+    }
+
+    .right-header-desktop{
+      display: none;
+    }
+
+    .right-header-mobile{
+      display: block;
+    }
+
+
+  }
+}

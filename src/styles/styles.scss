@@ -1,1 +1,6 @@
 @import './normalize.css';
+@import './_colors.scss';
+
+body{
+  background-color: $pale-grey;
+}

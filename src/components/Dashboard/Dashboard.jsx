@@ -9,7 +9,9 @@ class Dashboard extends Component {
   render() {
     return (
       <React.Fragment>
-        <Profile/>
+        <div id="dashboard-container">
+          <Profile />
+        </div>
       </React.Fragment>
      )
   }

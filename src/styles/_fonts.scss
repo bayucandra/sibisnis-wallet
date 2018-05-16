@@ -1,39 +1,41 @@
-@import url(./normalize.css);
 @font-face {
   font-family: "NunitoSans";
   src: url("../fonts/NunitoSans/Nunito-LightItalic.ttf");
   font-weight: 100;
-  font-style: italic; }
+  font-style: italic;
+};
 
 @font-face {
   font-family: "NunitoSans";
   src: url("../fonts/NunitoSans/Nunito-Light.ttf");
   font-weight: 300;
-  font-style: normal; }
+  font-style: normal;
+};
 
 @font-face {
   font-family: "NunitoSans";
   src: url("../fonts/NunitoSans/Nunito-SemiBold.ttf");
   font-weight: 600;
-  font-style: normal; }
+  font-style: normal;
+};
 
 @font-face {
   font-family: "NunitoSans";
   src: url("../fonts/NunitoSans/Nunito-SemiBoldItalic.ttf");
   font-weight: 600;
-  font-style: italic; }
+  font-style: italic;
+};
 
 @font-face {
   font-family: "NunitoSans";
   src: url("../fonts/NunitoSans/Nunito-Bold.ttf");
   font-weight: bold;
-  font-style: normal; }
+  font-style: normal;
+};
 
 @font-face {
   font-family: "NunitoSans";
   src: url("../fonts/NunitoSans/Nunito-Regular.ttf");
   font-weight: normal;
-  font-style: normal; }
-
-body {
-  background-color: #e3eaec; }
+  font-style: normal;
+};

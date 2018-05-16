@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 
 import switchIcon from './../../../images/icons/switch.svg';
 import logoutIcon from './../../../images/icons/logout.svg';
@@ -53,11 +55,20 @@ class Header extends Component {
             <span className="logout-text">Logout</span>
           </div>
           <div className="right-header right-header-mobile">
-            <img src={menuIcon}
+            {/* <img src={menuIcon}
               onClick={this.onMenuOpen.bind(this)}
               aria-owns={anchorEl ? 'simple-menu' : null}
               className="menu-btn"
-              alt="menuIcon" />
+              alt="menuIcon" /> */}
+            <IconButton
+              aria-label="More"
+              aria-owns={anchorEl ? 'long-menu' : null}
+              aria-haspopup="true"
+              onClick={this.onMenuOpen.bind(this)}
+            >
+              <img src={menuIcon}
+                className="menu-btn" />
+            </IconButton>
             <Menu
               id="simple-menu"
               anchorEl={anchorEl}

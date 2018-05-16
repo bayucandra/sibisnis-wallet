@@ -1,0 +1,66 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+
+#profile-card {
+  .profile-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-flow: column;
+    .profile-settings-icon{
+      position: absolute;
+      top: 0;
+      right: 0;
+      cursor: pointer;
+      margin-right: 10px;
+    }
+    .divider{
+      width: 165px;
+      height: 2px;
+      border: solid 0.5px #dedede;
+    }
+  }
+}
+
+.profile-info {
+  text-align: center;
+  margin-top: 20px;
+  .profile-img {
+    img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50px
+    }
+  }
+  .profile-name {
+    margin-top: 18px;
+    @include text-setup($charcoal-grey, 16px, $font-family);
+    font-weight: 600;
+    letter-spacing: 0.6px;
+  }
+  .profile-email {
+    margin-top: 4px;
+    @include text-setup($charcoal-grey, 13px, $font-family);
+    letter-spacing: 0.6px;
+  }
+  .divider {
+    margin-top: 15px;
+  }
+}
+.balance-info {
+  text-align: center;
+  margin-top: 15px;
+  .balance-text {
+    @include text-setup($steel-grey, 14px, $font-family);
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+  .balance-amount {
+    @include text-setup($charcoal-grey, 22px, $font-family);
+    letter-spacing: 1px;
+    font-weight: 800;
+    margin-top: 6px;
+  }
+}

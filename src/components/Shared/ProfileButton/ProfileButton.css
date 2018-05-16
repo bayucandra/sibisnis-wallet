@@ -1,0 +1,21 @@
+.profile-button-mobile {
+  width: 210px;
+  text-align: center;
+  padding: 10.5px 0px;
+  border-radius: 100px;
+  background-color: #f5f5f5;
+  color: #4a90e2;
+  font-size: 15px;
+  font-family: "NunitoSans", sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  margin: 6px 0px; }
+
+.profile-button-desktop {
+  display: none; }
+
+@media screen and (min-width: 768px) {
+  .profile-button-mobile {
+    display: none; }
+  .profile-button-desktop {
+    display: block; } }

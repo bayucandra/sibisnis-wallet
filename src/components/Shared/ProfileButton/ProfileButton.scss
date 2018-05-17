@@ -11,7 +11,7 @@
   @include text-setup($dark-sky-blue, 15px, $font-family);
   font-weight: 600;
   letter-spacing: 0.5px;
-  margin: 6px 0px;
+  margin-bottom:15px;
 }
 
 .profile-button-desktop{
@@ -25,5 +25,9 @@
 
   .profile-button-desktop{
     display: block;
+    margin:0px 24px;
+    letter-spacing: 0.5px;
+    @include text-setup($dark-sky-blue, 15px, $font-family);
+    text-decoration: underline;
   }
 }

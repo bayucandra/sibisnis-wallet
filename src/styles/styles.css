@@ -37,3 +37,16 @@
 
 body {
   background-color: #e3eaec; }
+
+.container-wrapper {
+  display: flex;
+  justify-content: center; }
+
+.container-inner {
+  max-width: 1000px;
+  width: 100%;
+  padding: 0px 10px; }
+
+@media screen and (min-width: 768px) {
+  .container-inner {
+    padding: 0px 20px !important; } }

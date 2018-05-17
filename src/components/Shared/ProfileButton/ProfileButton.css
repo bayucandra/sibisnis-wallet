@@ -9,7 +9,7 @@
   font-family: "NunitoSans", sans-serif;
   font-weight: 600;
   letter-spacing: 0.5px;
-  margin: 6px 0px; }
+  margin-bottom: 15px; }
 
 .profile-button-desktop {
   display: none; }
@@ -18,4 +18,10 @@
   .profile-button-mobile {
     display: none; }
   .profile-button-desktop {
-    display: block; } }
+    display: block;
+    margin: 0px 24px;
+    letter-spacing: 0.5px;
+    color: #4a90e2;
+    font-size: 15px;
+    font-family: "NunitoSans", sans-serif;
+    text-decoration: underline; } }

@@ -1,19 +1,17 @@
 import React, { Component } from 'react';
-import Profile from "./Profile/Profile";
+import ProfileProgress from './ProfileProgress/ProfileProgress';
 
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {}
   }
   render() {
     return (
       <React.Fragment>
-        <div id="dashboard-container">
-          <Profile />
-        </div>
+        <ProfileProgress/>
       </React.Fragment>
-     )
+    )
   }
 }
 

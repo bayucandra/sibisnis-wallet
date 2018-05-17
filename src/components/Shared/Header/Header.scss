@@ -28,7 +28,6 @@
     .right-header {
       flex: 1;
       text-align: right;
-
       .menu-btn {
         border-radius: 50px;
         padding: 10px;
@@ -48,13 +47,17 @@
 @include media-query(md) {
   #header {
     .left-header {
+      display: flex;
+      align-items: center;
       .switch-icon {
         display: inline-block !important;
         margin-top: -4px;
       }
     }
     .right-header-desktop {
-      display: block !important;
+      display: flex !important;
+      align-items: center;
+      justify-content: flex-end;
       .logout-icon {
         margin-top: -4px;
       }
@@ -67,4 +70,12 @@
       display: none;
     }
   }
+}
+
+.switch-to-desktop-text {
+  padding: 5px 9px 3px 4px;
+}
+
+.logout-text{
+  padding: 3px 0px 7px 4px;
 }

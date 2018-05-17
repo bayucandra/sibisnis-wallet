@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import Header from "./../Shared/Header/Header";
-import Dashboard from "./../Dashboard/Dashboard";
+import DashboardLayout from "./../DashboardLayout/DashboardLayout";
 
 class App extends Component {
   render() {
     return (
         <React.Fragment>
           <Header/>
-          <Dashboard/>
+          <DashboardLayout/>
         </React.Fragment>
     )
   }

@@ -20,7 +20,6 @@ class Header extends Component {
     }
   }
 
-
   onSwtich = () => {
     alert('Switched');
   }
@@ -44,8 +43,8 @@ class Header extends Component {
   render() {
     const { anchorEl } = this.state;
     return (
-      <div id="header">
-        <div className="header-container container">
+      <div id="header" className="container-wrapper">
+        <div className="header-container container-inner">
           <div className="left-header">
             <img src={switchIcon} className="switch-icon" onClick={this.onSwtich.bind(this)} alt="switch" />
             <span className="user-meta-info">BantulPulsa</span>
@@ -55,11 +54,6 @@ class Header extends Component {
             <span className="logout-text">Logout</span>
           </div>
           <div className="right-header right-header-mobile">
-            {/* <img src={menuIcon}
-              onClick={this.onMenuOpen.bind(this)}
-              aria-owns={anchorEl ? 'simple-menu' : null}
-              className="menu-btn"
-              alt="menuIcon" /> */}
             <IconButton
               aria-label="More"
               aria-owns={anchorEl ? 'long-menu' : null}
@@ -67,7 +61,7 @@ class Header extends Component {
               onClick={this.onMenuOpen.bind(this)}
             >
               <img src={menuIcon}
-                className="menu-btn" />
+                className="menu-btn ripple" />
             </IconButton>
             <Menu
               id="simple-menu"
@@ -75,9 +69,9 @@ class Header extends Component {
               open={Boolean(anchorEl)}
               onClose={this.onMenuClose.bind(this)}
             >
-              <MenuItem onClick={this.backToDashboard.bind(this)}>Switch ke dashboard transaksi</MenuItem>
+              <MenuItem onClick={this.backToDashboard.bind(this)}><span  className="switch-to-desktop-text">Switch ke dashboard transaksi</span></MenuItem>
               <Divider></Divider>
-              <MenuItem onClick={this.onLogout.bind(this)}>Logout</MenuItem>
+              <MenuItem onClick={this.onLogout.bind(this)}><span className="logout-text">Logout</span></MenuItem>
             </Menu>
           </div>
         </div>

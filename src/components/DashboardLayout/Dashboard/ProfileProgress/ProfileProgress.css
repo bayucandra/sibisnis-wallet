@@ -1,0 +1,58 @@
+.progress-bar-container {
+  text-align: center;
+  margin-top: 30px; }
+  .progress-bar-container .progress-bar-container__text {
+    color: #404852;
+    font-size: 16px;
+    font-family: "NunitoSans", sans-serif;
+    letter-spacing: 0.4px;
+    font-weight: bold; }
+  .progress-bar-container .progress-status-container {
+    display: flex;
+    align-items: center;
+    margin-top: 35px; }
+    .progress-bar-container .progress-status-container .progress-status {
+      font-weight: bold;
+      letter-spacing: 0.4px;
+      margin-left: 15px;
+      color: #e08e07;
+      font-size: 16px;
+      font-family: "NunitoSans", sans-serif; }
+
+.profile-verfication-list {
+  text-align: center;
+  margin-top: 4px; }
+  .profile-verfication-list .profile-verfication-list__content {
+    color: #404852;
+    font-size: 15px;
+    font-family: "NunitoSans", sans-serif;
+    font-weight: 400;
+    line-height: 1.53;
+    letter-spacing: 0.5px;
+    text-align: center; }
+
+.varification-list-item {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  padding: 9px 0px; }
+  .varification-list-item .verification-icon {
+    width: 22px;
+    height: 22px;
+    margin-right: 3px; }
+  .varification-list-item .varification-list-item__icon-contianer {
+    margin: 0px;
+    background-color: #f2f8ff;
+    border-radius: 50px;
+    display: flex;
+    align-items: center; }
+  .varification-list-item .varification-list-item__icon {
+    margin: 0px; }
+  .varification-list-item .varification-list-item__text {
+    color: #404852;
+    font-size: 13px;
+    font-family: "NunitoSans", sans-serif;
+    margin-left: 18px;
+    font-weight: 400;
+    letter-spacing: 0.3px;
+    flex: 1; }

@@ -3,7 +3,7 @@
 @import 'styles/_variables.scss';
 #header {
   width: 100%;
-  height: 60px;
+  height: 50px;
   background-color: $dark-aqua;
   display: flex;
   align-items: center;
@@ -23,6 +23,7 @@
       .user-meta-info {
         @include text-setup($white, 16px, $font-family);
         margin-left: 10px;
+        font-weight: 600;
       }
     }
     .right-header {
@@ -46,6 +47,7 @@
 
 @include media-query(md) {
   #header {
+    height:70px;
     .left-header {
       display: flex;
       align-items: center;

@@ -13,8 +13,8 @@ class DashboardLayout extends Component {
     return (
       <React.Fragment>
         <div id="dashboard-layout-container">
-          {/* <Profile /> */}
-          <Dashboard/>
+          <Profile />
+          {/* <Dashboard/> */}
         </div>
       </React.Fragment>
      )

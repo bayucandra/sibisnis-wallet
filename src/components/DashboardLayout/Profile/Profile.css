@@ -12,7 +12,8 @@
     margin-right: 6px; }
   #profile-card .profile-container .divider {
     width: 165px;
-    border: solid 0.5px #dedede; }
+    height: 0.5px;
+    background-color: #dedede; }
 
 @media screen and (min-width: 576px) {
   .profile-settings-icon {
@@ -74,11 +75,11 @@
 .profile-nav-btn {
   display: flex;
   align-items: center;
-  padding: 5px 0px; }
+  padding: 3.5px 0px 3.5px 0px; }
   .profile-nav-btn .profile-nav-btn__icon {
     padding-left: 4px; }
   .profile-nav-btn .profile-nav-btn__text {
-    font-weight: bold;
+    font-weight: normal;
     color: #80858a;
     font-size: 15px;
     font-family: "NunitoSans", sans-serif;
@@ -87,3 +88,8 @@
   .profile-nav-btn .profile-nav-btn__navicon {
     position: absolute;
     right: 15px; }
+
+.custom-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #dedede5c; }

@@ -60,7 +60,8 @@ const ProfileNavButton = (props) => {
   const { icon, name, onClick } = props;
   return (
     <React.Fragment>
-      <Divider />
+      {/* <Divider /> */}
+      <div className="custom-divider"></div>
       <ListItem button onClick={onClick}>
         <div className="profile-nav-btn">
           <ListItemIcon>

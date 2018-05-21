@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ProfileProgress from './ProfileProgress/ProfileProgress';
+import HistoryLogin from './HistoryLogin/HistoryLogin';
 
 class Dashboard extends Component {
   constructor(props) {
@@ -9,7 +10,8 @@ class Dashboard extends Component {
   render() {
     return (
       <React.Fragment>
-        <ProfileProgress/>
+        <ProfileProgress />
+        <HistoryLogin />
       </React.Fragment>
     )
   }

@@ -1,0 +1,62 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+#history-login-container {
+  margin-top: 25px;
+  .history-login-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
+    .history-login-header__left {
+      @include text-setup($charcoal-grey, 16px, $font-family);
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      text-align: left;
+    }
+    .history-login-header__right {
+      @include text-setup($dark-sky-blue, 15px, $font-family);
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      text-align: right;
+    }
+  }
+}
+
+.history-list-container{
+  display: flex;
+  flex-flow: column;
+  width: 100%;
+  padding-bottom:5px;
+  .history-list{
+    border-top: solid 0.5px #dedede;
+    padding-bottom: 10px;
+    .history-list__title {
+      @include text-setup($charcoal-grey, 13px, $font-family);
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.3px;
+      margin-top: 11px;
+      margin-bottom: 3px;
+    }
+
+    .history-list__name{
+      @include text-setup($charcoal-grey, 13px, $font-family);
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.3px;
+    }
+  }
+}

@@ -4,6 +4,7 @@
 .progress-bar-container {
   text-align: center;
   margin-top: 30px;
+  margin-bottom: 13px;
   .progress-bar-container__text {
     @include text-setup($charcoal-grey, 16px, $font-family);
     letter-spacing: 0.4px;
@@ -35,6 +36,7 @@
   }
 }
 
+
 .varification-list-item {
   display: flex;
   width: 100%;
@@ -61,5 +63,61 @@
     font-weight: 400;
     letter-spacing: 0.3px;
     flex: 1;
+  }
+  .desktop-verification-status{
+    display: none;
+  }
+}
+
+
+
+@include media-query(md) {
+  .progress-bar-container {
+    text-align: left !important;
+  }
+  .varification-list-item {
+    .mobile-varification-status {
+      display: none;
+    }
+    .desktop-verification-status {
+      display: block;
+      .verification-icon-container {
+        display: flex;
+        align-items: center;
+        .verification-icon {
+          width: 32px !important;
+          height: 32px !important;
+          margin-right: 18px !important;
+        }
+        .verification-icon-container__text {
+          @include text-setup($charcoal-grey, 13px, $font-family);
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+        }
+      }
+      .verification-action-btn {
+        @include text-setup($dark-sky-blue, 13px, $font-family);
+        width: 170.6px;
+        height: 40px;
+        border-radius: 200px;
+        background-color: $white;
+        border: solid 0.5px $dark-sky-blue;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        &:hover{
+          font-size: 14px;
+          border: solid 1.5px $dark-sky-blue;
+        }
+      }
+    }
   }
 }

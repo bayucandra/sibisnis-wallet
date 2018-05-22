@@ -1,6 +1,7 @@
 .progress-bar-container {
   text-align: center;
-  margin-top: 30px; }
+  margin-top: 30px;
+  margin-bottom: 13px; }
   .progress-bar-container .progress-bar-container__text {
     color: #404852;
     font-size: 16px;
@@ -56,3 +57,49 @@
     font-weight: 400;
     letter-spacing: 0.3px;
     flex: 1; }
+  .varification-list-item .desktop-verification-status {
+    display: none; }
+
+@media screen and (min-width: 768px) {
+  .progress-bar-container {
+    text-align: left !important; }
+  .varification-list-item .mobile-varification-status {
+    display: none; }
+  .varification-list-item .desktop-verification-status {
+    display: block; }
+    .varification-list-item .desktop-verification-status .verification-icon-container {
+      display: flex;
+      align-items: center; }
+      .varification-list-item .desktop-verification-status .verification-icon-container .verification-icon {
+        width: 32px !important;
+        height: 32px !important;
+        margin-right: 18px !important; }
+      .varification-list-item .desktop-verification-status .verification-icon-container .verification-icon-container__text {
+        color: #404852;
+        font-size: 13px;
+        font-family: "NunitoSans", sans-serif;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.3px; }
+    .varification-list-item .desktop-verification-status .verification-action-btn {
+      color: #4a90e2;
+      font-size: 13px;
+      font-family: "NunitoSans", sans-serif;
+      width: 170.6px;
+      height: 40px;
+      border-radius: 200px;
+      background-color: #ffffff;
+      border: solid 0.5px #4a90e2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px; }
+      .varification-list-item .desktop-verification-status .verification-action-btn:hover {
+        font-size: 14px;
+        border: solid 1.5px #4a90e2; } }

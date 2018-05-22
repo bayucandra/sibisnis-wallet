@@ -28,45 +28,64 @@ const HistoryList = (props) => {
 class HistoryLogin extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      data : [
+        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
+        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
+        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
+        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
+        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
+      ]
+    }
   }
 
   render() {
+    const { data } = this.state;
     return (
-      <React.Fragment>
-        <div id="history-login-container">
-          <Card>
-            <CardContent>
-              <div className="history-login-header">
-                <div className="history-login-header__left">Histoy Login</div>
-                <div className="history-login-header__right">Lihat Semua</div>
-              </div>
-            </CardContent>
-            <div className="history-login-list-container">
-              <CustomAccordian
-                title="Tanggal"
-                date="30 Sep 2017 , 12:45"
-                accordianBody={<HistoryList country="Indonesia" ip="127.747.304.1" browser="Google Chrome" />} />
-              <CustomAccordian
-                title="Tanggal"
-                date="30 Sep 2017 , 12:45"
-                accordianBody={<HistoryList country="Indonesia" ip="127.747.304.1" browser="Google Chrome" />} />
-              <CustomAccordian
-                title="Tanggal"
-                date="30 Sep 2017 , 12:45"
-                accordianBody={<HistoryList country="Indonesia" ip="127.747.304.1" browser="Google Chrome" />} />
-              <CustomAccordian
-                title="Tanggal"
-                date="30 Sep 2017 , 12:45"
-                accordianBody={<HistoryList country="Indonesia" ip="127.747.304.1" browser="Google Chrome" />} />
-              <CustomAccordian
-                title="Tanggal"
-                date="30 Sep 2017 , 12:45"
-                accordianBody={<HistoryList country="Indonesia" ip="127.747.304.1" browser="Google Chrome" />} />
+      <div id="history-login-container">
+        <Card>
+          <CardContent>
+            <div className="history-login-header">
+              <div className="history-login-header__left">Histoy Login</div>
+              <div className="history-login-header__right">Lihat Semua</div>
             </div>
-          </Card>
-        </div>
-      </React.Fragment>
+          </CardContent>
+          <div className="history-login-list-container">
+            {data.map((history, index) => {
+              return (
+                <CustomAccordian
+                  title="Tanggal"
+                  date={history.date}
+                  accordianBody={<HistoryList country={history.country} ip={history.ip} browser={history.browser} />} />
+              );
+            })}
+          </div>
+
+          <div className="history-login-list-container-desktop">
+            <div className="history-login-list-header">
+              <div>Tanggal</div>
+              <div>Negara</div>
+              <div>IP</div>
+              <div>Browser</div>
+            </div>
+
+            <div className="history-login-list-body">
+              {
+                data.map((history, index) => {
+                  return (
+                    <div className="history-login-list-body__item" key={index}>
+                      <div>{history.date}</div>
+                      <div>{history.country}</div>
+                      <div>{history.ip}</div>
+                      <div>{history.browser}</div>
+                    </div>
+                  )
+                })
+              }
+            </div>
+          </div>
+        </Card>
+      </div>
     )
   }
 }

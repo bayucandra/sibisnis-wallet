@@ -43,15 +43,15 @@ const ProfileVerificationList = (props) =>{
           </div>
         </CardContent>
         <div className="profile-verfication-list__container">
-          <VerificationListItem icon={phoneIcon} name="Verifikasi Nomor Handphone Anda" status={false} />
+          <VerificationListItem icon={phoneIcon}  type="text" name="Verifikasi Nomor Handphone Anda" status={false} />
           <Divider />
-          <VerificationListItem icon={emailIcon} name="Verifikasi Email Anda" status={true} />
+          <VerificationListItem icon={emailIcon}  type="text" name="Verifikasi Email Anda" status={true} />
           <Divider />
-          <VerificationListItem icon={profileIcon} name="Upload foto profil Anda" status={false} />
+          <VerificationListItem icon={profileIcon} type="upload" name="Upload foto profil Anda" status={false} />
           <Divider />
-          <VerificationListItem icon={locationIcon} name="Lengkapi Data Alamat Anda" status={false} />
+          <VerificationListItem icon={locationIcon} type="text" name="Lengkapi Data Alamat Anda" status={false} />
           <Divider />
-          <VerificationListItem icon={cardIcon} name="Lengkapi Info Data Identitas Anda" status={false} />
+          <VerificationListItem icon={cardIcon} type="text" name="Lengkapi Info Data Identitas Anda" status={false} />
         </div>
       </div>
     </React.Fragment>
@@ -59,22 +59,40 @@ const ProfileVerificationList = (props) =>{
 }
 
 const VerificationListItem = (props) => {
-  const { icon, name, status } = props;
-    return (
+  const { icon, name, status, type, onClick } = props;
+  return (
     <React.Fragment>
       <ListItem>
-          <div className="varification-list-item">
-            <ListItemIcon>
-              <div className="varification-list-item__icon-contianer">
-                <img className="varification-list-item__icon" src={icon} alt="list-icon" />
-              </div>
-            </ListItemIcon>
+        <div className="varification-list-item">
+          <ListItemIcon>
+            <div className="varification-list-item__icon-contianer">
+              <img className="varification-list-item__icon" src={icon} alt="list-icon" />
+            </div>
+          </ListItemIcon>
           <div className="varification-list-item__text">{name}</div>
-          {status === true ?
-            <img className="varification-list-item__navicon verification-icon" src={verificationIcon} alt="verification-icon" />
-            :
-            <img className="varification-list-item__navicon" src={warningIcon} alt="verification-icon" />
-          }
+          <div className="mobile-varification-status">
+            {status === true ?
+              <img className="varification-list-item__navicon verification-icon" src={verificationIcon} alt="verification-icon" />
+              :
+              <img className="varification-list-item__navicon" src={warningIcon} alt="verification-icon" />
+            }
+          </div>
+          <div className="desktop-verification-status">
+            {status ?
+              <div className="verification-icon-container">
+                <img className="varification-list-item__navicon verification-icon" src={verificationIcon} alt="verification-icon" />
+                <span className="verification-icon-container__text">Sudah Terverifikasi</span>
+              </div>
+              :
+              <div className="verification-action-container">
+                {type === 'text' ?
+                  <div className="verification-action-btn">Lengkapi Sekarang</div>
+                  :
+                  <div className="verification-action-btn">Upload Sekarang</div>
+                }
+              </div>
+            }
+          </div>
         </div>
       </ListItem>
     </React.Fragment>

@@ -60,3 +60,16 @@
     }
   }
 }
+
+.history-login-list-container-desktop {
+  display: none;
+}
+
+@include media-query(md) {
+  .history-login-list-container {
+    display: none;
+  }
+  .history-login-list-container-desktop {
+    display: block !important;
+  }
+}

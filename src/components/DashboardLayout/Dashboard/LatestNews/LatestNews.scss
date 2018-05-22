@@ -1,0 +1,33 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+
+#latest-news-container{
+  margin-top:25px;
+  .latest-news-header {
+    height: 61px;
+    border-radius: 5px;
+    background-color: #f6f7f6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 30px;
+    padding-right: 20px;
+    .latest-news-header__left {
+      @include text-setup($charcoal-grey, 16px, $font-family);
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+    }
+    .latest-news-header__right {
+      @include text-setup($dark-sky-blue, 15px, $font-family);
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+    }
+  }
+}

@@ -7,6 +7,11 @@ body {
   background-color: $pale-grey;
 }
 
+table {
+  border-collapse:collapse;
+  border-spacing:0;
+}
+
 .container-wrapper {
   display: flex;
   justify-content: center;

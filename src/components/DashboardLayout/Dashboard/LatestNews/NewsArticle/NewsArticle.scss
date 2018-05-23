@@ -74,3 +74,9 @@
 .news-read-font-weight {
   font-weight: normal !important;
 }
+
+@include media-query(md){
+  .news-article-body {
+    max-width:557px !important;
+  }
+}

@@ -70,6 +70,59 @@
     display: none;
   }
   .history-login-list-container-desktop {
-    display: block !important;
+    display: flex !important;
+    justify-content: center;
+    .history-login-list-table{
+      width:100%;
+      thead{
+        tr{
+          height: 48px;
+          background-color: #f8f8f8;
+          font-family: NunitoSans;
+          font-size: 13px;
+          font-weight: 600;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+          color: #404852;
+          .history-login-list-table__header-column:nth-child(1){
+            padding-left:30px;
+          }
+        }
+      }
+      tbody{
+        tr.history-login-list-body__item{
+          height: 45px;
+          background-color: #ffffff;
+          background-color: var(--white);
+          border-top: solid 0.5px #dedede;
+          font-family: NunitoSans;
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+          color: #404852;
+          .history-login-list-table__body-column-date{
+            width: 135px;
+            padding-left:30px;
+            padding-right: 35px;
+          }
+          .history-login-list-table__body-column-country{
+            width: 59px;
+            padding-right: 106px;
+          }
+          .history-login-list-table__body-column-ip{
+            width: 92px;
+            padding-right: 111px;
+          }
+          .history-login-list-table__body-column-browser{
+
+          }
+        }
+      }
+    }
   }
 }

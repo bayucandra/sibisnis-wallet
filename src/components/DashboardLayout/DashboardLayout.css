@@ -1,0 +1,15 @@
+.dashboard-layout-container {
+  display: none; }
+
+@media screen and (min-width: 768px) {
+  .dashboard-layout-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 50px; }
+    .dashboard-layout-container .dashboard-layout-container__left {
+      width: 247px; }
+    .dashboard-layout-container .dashboard-layout-container__right {
+      width: 723px;
+      margin-left: 29px; }
+  .dashboard-layout-container-mobile {
+    display: none; } }

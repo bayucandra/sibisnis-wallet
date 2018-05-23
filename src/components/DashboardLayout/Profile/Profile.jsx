@@ -28,6 +28,11 @@ import avatarPlacerholder from './../../../images/avatar-placeholder.png';
  */
 import ProfileButton from './../../Shared/ProfileButton/ProfileButton';
 
+/**
+ * Custom Libraries
+ */
+
+import { navigationStatus } from "./../../../lib/utilities";
 
 import './Profile.css';
 
@@ -85,6 +90,10 @@ class Profile extends Component {
     alert('hello world');
   }
 
+  onLinkClick = (name) => {
+    navigationStatus.next({ navigationLink: name });
+  }
+
   render() {
     return (
       <div id="profile-card">
@@ -107,7 +116,7 @@ class Profile extends Component {
           </CardContent>
           <div className="profile-nav-container">
             <List>
-              <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onBtnClick.bind(this)} />
+              <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard')} />
               <ProfileNavButton icon={mutasiIcon} name="Mutasi Saldo" onClick={this.onBtnClick.bind(this)} />
               <ProfileNavButton icon={transferIcon} name="Transfer Saldo" onClick={this.onBtnClick.bind(this)} />
             </List>

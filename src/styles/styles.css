@@ -38,6 +38,10 @@
 body {
   background-color: #e3eaec; }
 
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
 .container-wrapper {
   display: flex;
   justify-content: center; }

@@ -56,13 +56,38 @@ class HistoryLogin extends Component {
                 <CustomAccordian
                   title="Tanggal"
                   date={history.date}
+                  key={index}
                   accordianBody={<HistoryList country={history.country} ip={history.ip} browser={history.browser} />} />
               );
             })}
           </div>
 
           <div className="history-login-list-container-desktop">
-            <div className="history-login-list-header">
+            <table className="history-login-list-table">
+              <thead>
+                <tr>
+                  <td className="history-login-list-table__header-column">Tanggal</td>
+                  <td className="history-login-list-table__header-column">Negara</td>
+                  <td className="history-login-list-table__header-column">IP</td>
+                  <td className="history-login-list-table__header-column">Browser</td>
+                </tr>
+              </thead>
+              <tbody>
+                {
+                  data.map((history, index) => {
+                    return (
+                      <tr className="history-login-list-body__item" key={index}>
+                        <td className="history-login-list-table__body-column-date">{history.date}</td>
+                        <td className="history-login-list-table__body-column-country">{history.country}</td>
+                        <td className="history-login-list-table__body-column-ip">{history.ip}</td>
+                        <td className="history-login-list-table__body-column-browser">{history.browser}</td>
+                      </tr>
+                    )
+                  })
+                }
+              </tbody>
+            </table>
+            {/* <div className="history-login-list-header">
               <div>Tanggal</div>
               <div>Negara</div>
               <div>IP</div>
@@ -82,7 +107,7 @@ class HistoryLogin extends Component {
                   )
                 })
               }
-            </div>
+            </div> */}
           </div>
         </Card>
       </div>

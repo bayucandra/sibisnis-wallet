@@ -66,3 +66,7 @@
 
 .news-read-font-weight {
   font-weight: normal !important; }
+
+@media screen and (min-width: 768px) {
+  .news-article-body {
+    max-width: 557px !important; } }

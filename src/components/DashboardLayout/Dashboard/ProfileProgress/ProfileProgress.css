@@ -22,7 +22,8 @@
 
 .profile-verfication-list {
   text-align: center;
-  margin-top: 4px; }
+  margin-top: 4px;
+  padding-bottom: 14px; }
   .profile-verfication-list .profile-verfication-list__content {
     color: #404852;
     font-size: 15px;

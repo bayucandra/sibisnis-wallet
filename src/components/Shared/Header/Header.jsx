@@ -11,6 +11,8 @@ import logoutIcon from './../../../images/icons/logout.svg';
 import menuIcon from './../../../images/icons/menu.svg';
 
 import { navigationStatus } from './../../../lib/utilities';
+import HeaderNavigationStatus from './../HeaderNavigationStatus/HeaderNavigationStatus';
+
 import './Header.css';
 
 class Header extends Component {
@@ -58,9 +60,13 @@ class Header extends Component {
       <div id="header" className="container-wrapper">
         <div className="header-container container-inner">
           <div className="left-header">
-            <img src={switchIcon} className="switch-icon" onClick={this.onSwtich.bind(this)} alt="switch" />
-            {/* <span className="user-meta-info">BantulPulsa</span> */}
-            <span className="user-meta-info">{this.state.headerTitle}</span>
+            <div className="header-navigation-status-desktop">
+              <img src={switchIcon} className="switch-icon" onClick={this.onSwtich.bind(this)} alt="switch" />
+              <span className="user-meta-info">BantulPulsa</span>
+            </div>
+            <div className="header-navigation-status-mobile">
+              <HeaderNavigationStatus />
+            </div>
           </div>
           <div className="right-header right-header-desktop">
             <img src={logoutIcon} className="logout-icon" onClick={this.onSwtich.bind(this)} alt="switch" />

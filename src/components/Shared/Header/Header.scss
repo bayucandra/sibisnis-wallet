@@ -45,15 +45,21 @@
   }
 }
 
+.header-navigation-status-desktop{
+  display: none;
+}
+
 @include media-query(md) {
   #header {
     height:70px;
     .left-header {
-      display: flex;
-      align-items: center;
-      .switch-icon {
-        display: inline-block !important;
-        margin-top: -4px;
+      .header-navigation-status-desktop {
+        display: flex;
+        align-items: center;
+        .switch-icon {
+          display: inline-block !important;
+          margin-top: -4px;
+        }
       }
     }
     .right-header-desktop {
@@ -71,6 +77,14 @@
     .right-header-mobile {
       display: none;
     }
+  }
+
+  .header-navigation-status-desktop{
+    display: block;
+  }
+
+  .header-navigation-status-mobile{
+    display: none;
   }
 }
 

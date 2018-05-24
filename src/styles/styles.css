@@ -42,6 +42,9 @@ table {
   border-collapse: collapse;
   border-spacing: 0; }
 
+.card-border-radius {
+  border-radius: 5px !important; }
+
 .container-wrapper {
   display: flex;
   justify-content: center; }

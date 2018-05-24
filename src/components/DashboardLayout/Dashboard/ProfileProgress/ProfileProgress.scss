@@ -27,6 +27,7 @@
 .profile-verfication-list {
   text-align: center;
   margin-top: 4px;
+  padding-bottom: 14px;
   .profile-verfication-list__content {
     @include text-setup($charcoal-grey,15px,$font-family);
     font-weight: 400;

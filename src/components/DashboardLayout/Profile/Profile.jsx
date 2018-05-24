@@ -91,13 +91,13 @@ class Profile extends Component {
   }
 
   onLinkClick = (name) => {
-    navigationStatus.next({ navigationLink: name });
+    navigationStatus.next({ navigationLink: name});
   }
 
   render() {
     return (
       <div id="profile-card">
-        <Card >
+        <Card className="card-border-radius profile-card-container">
           <CardContent>
             <div className="profile-container">
               <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
@@ -116,7 +116,7 @@ class Profile extends Component {
           </CardContent>
           <div className="profile-nav-container">
             <List>
-              <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard')} />
+              <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard','Profile')} />
               <ProfileNavButton icon={mutasiIcon} name="Mutasi Saldo" onClick={this.onBtnClick.bind(this)} />
               <ProfileNavButton icon={transferIcon} name="Transfer Saldo" onClick={this.onBtnClick.bind(this)} />
             </List>

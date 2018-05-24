@@ -3,6 +3,10 @@
 @import 'styles/_variables.scss';
 
 #profile-card {
+  .profile-card-container{
+    height: calc(100vh - 50px);
+  }
+
   .profile-container {
     display: flex;
     align-items: center;
@@ -23,6 +27,14 @@
     }
   }
 }
+
+
+.custom-divider{
+  width: 100%;
+  height:1px;
+  background-color: #dedede5c;
+}
+
 
 @include media-query(sm) {
   .profile-settings-icon {
@@ -75,19 +87,6 @@
   margin-top:20px;
 }
 
-@include media-query(md){
-  .profile-buttons-container{
-    display: flex !important;
-    align-items: center;
-  }
-  .dot-desktop{
-    width: 6px;
-    height: 6px;
-    background-color: $dark-sky-blue;
-    border-radius: 20px;
-  }
-}
-
 .profile-nav-btn{
   display: flex;
   align-items: center;
@@ -107,8 +106,26 @@
   }
 }
 
-.custom-divider{
-  width: 100%;
-  height:1px;
-  background-color: #dedede5c;
+@include media-query(md){
+  .profile-card-container{
+    height:499px !important;
+  }
+  .custom-divider{
+    display: none;
+  }
+
+  .profile-buttons-container{
+    display: flex !important;
+    align-items: center;
+  }
+  .dot-desktop{
+    width: 6px;
+    height: 6px;
+    background-color: $dark-sky-blue;
+    border-radius: 20px;
+  }
+
+  .profile-nav-btn__navicon{
+    display: none;
+  }
 }

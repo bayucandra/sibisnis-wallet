@@ -1,3 +1,6 @@
+#profile-card .profile-card-container {
+  height: calc(100vh - 50px); }
+
 #profile-card .profile-container {
   display: flex;
   align-items: center;
@@ -14,6 +17,11 @@
     width: 165px;
     height: 0.5px;
     background-color: #dedede; }
+
+.custom-divider {
+  width: 100%;
+  height: 1px;
+  background-color: #dedede5c; }
 
 @media screen and (min-width: 576px) {
   .profile-settings-icon {
@@ -62,16 +70,6 @@
 .profile-buttons-container {
   margin-top: 20px; }
 
-@media screen and (min-width: 768px) {
-  .profile-buttons-container {
-    display: flex !important;
-    align-items: center; }
-  .dot-desktop {
-    width: 6px;
-    height: 6px;
-    background-color: #4a90e2;
-    border-radius: 20px; } }
-
 .profile-nav-btn {
   display: flex;
   align-items: center;
@@ -89,7 +87,18 @@
     position: absolute;
     right: 15px; }
 
-.custom-divider {
-  width: 100%;
-  height: 1px;
-  background-color: #dedede5c; }
+@media screen and (min-width: 768px) {
+  .profile-card-container {
+    height: 499px !important; }
+  .custom-divider {
+    display: none; }
+  .profile-buttons-container {
+    display: flex !important;
+    align-items: center; }
+  .dot-desktop {
+    width: 6px;
+    height: 6px;
+    background-color: #4a90e2;
+    border-radius: 20px; }
+  .profile-nav-btn__navicon {
+    display: none; } }

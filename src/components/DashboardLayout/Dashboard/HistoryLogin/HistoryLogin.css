@@ -1,5 +1,6 @@
 #history-login-container {
-  margin-top: 25px; }
+  margin-top: 25px;
+  padding-bottom: 20px; }
   #history-login-container .history-login-header {
     display: flex;
     align-items: center;

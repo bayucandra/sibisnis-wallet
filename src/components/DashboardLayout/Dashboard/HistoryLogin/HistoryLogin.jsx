@@ -43,7 +43,7 @@ class HistoryLogin extends Component {
     const { data } = this.state;
     return (
       <div id="history-login-container">
-        <Card>
+        <Card className="card-border-radius">
           <CardContent>
             <div className="history-login-header">
               <div className="history-login-header__left">Histoy Login</div>

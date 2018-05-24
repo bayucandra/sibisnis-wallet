@@ -107,7 +107,7 @@ class ProfileProgress extends Component {
   render() {
     return (
       <div id="profile-progress-container">
-        <Card>
+        <Card className="card-border-radius">
           <CardContent>
             <ProgressBar value={48} />
           </CardContent>

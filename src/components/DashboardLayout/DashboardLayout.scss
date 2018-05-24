@@ -6,11 +6,42 @@
   display: none;
 }
 
+// .profile-container{
+//   width:0px;
+//   transition: width 2s;
+// }
+
+
+.profile-container{
+  transition: transform 200ms ease-in-out;
+}
+
+.dashboard-container{
+  transition: transform 200ms ease-in-out;
+}
+
+.show-profile{
+  transform: translate(0%,0%)
+}
+
+.hide-profile{
+  transform: translate(-100%,0%)
+}
+
+.show-dashboard{
+  transform: translate(0%,0%)
+}
+
+.hide-dashboard{
+  transform: translate(100%,0%)
+}
+
 @include media-query(md){
   .dashboard-layout-container {
     display: flex;
     justify-content: space-between;
     margin-top: 50px;
+    margin-bottom: 20px;
     .dashboard-layout-container__left {
       width: 247px;
     }

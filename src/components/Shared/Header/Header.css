@@ -30,13 +30,16 @@
     #header .header-container .right-header-desktop {
       display: none; }
 
+.header-navigation-status-desktop {
+  display: none; }
+
 @media screen and (min-width: 768px) {
   #header {
     height: 70px; }
-    #header .left-header {
+    #header .left-header .header-navigation-status-desktop {
       display: flex;
       align-items: center; }
-      #header .left-header .switch-icon {
+      #header .left-header .header-navigation-status-desktop .switch-icon {
         display: inline-block !important;
         margin-top: -4px; }
     #header .right-header-desktop {
@@ -51,7 +54,11 @@
         font-family: "NunitoSans", sans-serif;
         margin-left: 10px; }
     #header .right-header-mobile {
-      display: none; } }
+      display: none; }
+  .header-navigation-status-desktop {
+    display: block; }
+  .header-navigation-status-mobile {
+    display: none; } }
 
 .switch-to-desktop-text {
   padding: 5px 9px 3px 4px; }

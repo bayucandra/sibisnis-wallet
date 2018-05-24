@@ -1,0 +1,16 @@
+.navigation-container{
+  display: flex;
+  align-items: center;
+  .navigation-label{
+    font-family: NunitoSans;
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.3px;
+    text-align: left;
+    color: #ffffff;
+    margin-left: 20px;
+  }
+}

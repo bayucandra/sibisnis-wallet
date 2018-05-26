@@ -1,6 +1,5 @@
 #history-login-container {
-  margin-top: 25px;
-  padding-bottom: 20px; }
+  margin-top: 45px; }
   #history-login-container .history-login-header {
     display: flex;
     align-items: center;
@@ -62,6 +61,8 @@
   display: none; }
 
 @media screen and (min-width: 768px) {
+  #history-login-container {
+    margin-top: 30px !important; }
   .history-login-list-container {
     display: none; }
   .history-login-list-container-desktop {

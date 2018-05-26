@@ -16,6 +16,7 @@ import locationIcon from './../../../../images/icons/profile-verification-icons/
 import cardIcon from './../../../../images/icons/profile-verification-icons/ico-identitas.svg';
 
 import Progressbar from './../../../Shared/Progressbar/Progressbar';
+import CustomDivider from './../../../Shared/CustomDivider/CustomDivider';
 import './ProfileProgress.css';
 
 
@@ -25,7 +26,7 @@ const ProgressBar = (props) => {
     <div className="progress-bar-container">
       <div className="progress-bar-container__text">Tingkat Keamanan Akun Anda</div>
       <div className="progress-status-container">
-        <Progressbar height="10px" value={value} color="#38bf0a" />
+        <Progressbar height="12px" value={value} color="#38bf0a" />
         <div className="progress-status">LEMAH</div>
       </div>
     </div>
@@ -44,13 +45,13 @@ const ProfileVerificationList = (props) =>{
         </CardContent>
         <div className="profile-verfication-list__container">
           <VerificationListItem icon={phoneIcon}  type="text" name="Verifikasi Nomor Handphone Anda" status={false} />
-          <Divider />
+          <CustomDivider />
           <VerificationListItem icon={emailIcon}  type="text" name="Verifikasi Email Anda" status={true} />
-          <Divider />
+          <CustomDivider />
           <VerificationListItem icon={profileIcon} type="upload" name="Upload foto profil Anda" status={false} />
-          <Divider />
+          <CustomDivider />
           <VerificationListItem icon={locationIcon} type="text" name="Lengkapi Data Alamat Anda" status={false} />
-          <Divider />
+          <CustomDivider />
           <VerificationListItem icon={cardIcon} type="text" name="Lengkapi Info Data Identitas Anda" status={false} />
         </div>
       </div>
@@ -107,12 +108,12 @@ class ProfileProgress extends Component {
   render() {
     return (
       <div id="profile-progress-container">
-        <Card className="card-border-radius">
+        <Card className="custom-card-styles">
           <CardContent>
             <ProgressBar value={48} />
           </CardContent>
-          <Divider />
-            <ProfileVerificationList />
+          <CustomDivider/>
+          <ProfileVerificationList />
         </Card>
       </div>
     )

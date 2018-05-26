@@ -1,5 +1,5 @@
 #latest-news-container {
-  margin-top: 25px; }
+  margin-top: 45px; }
   #latest-news-container .latest-news-header {
     height: 61px;
     border-radius: 5px;
@@ -27,3 +27,9 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: 0.4px; }
+
+@media screen and (min-width: 768px) {
+  #latest-news-container {
+    margin-top: 30px !important; }
+    #latest-news-container .latest-news-header {
+      padding-right: 30px; } }

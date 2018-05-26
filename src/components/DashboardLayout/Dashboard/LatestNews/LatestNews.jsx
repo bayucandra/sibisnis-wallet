@@ -15,14 +15,14 @@ class LatestNews extends Component {
           date: "2 Agustus 2017 23:00:00",
           tags: "Tips and Trik",
           readStatus: false,
-          articleSummary: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem …"
+          articleSummary: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 15…"
         },
         {
           title: "BRI Gangguan",
           date: "2 Agustus 2017 23:00:00",
           tags: "Tips and Trik",
           readStatus: false,
-          articleSummary: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem …"
+          articleSummary: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 15…"
         },
         {
           title: "BRI Gangguan",
@@ -51,7 +51,7 @@ class LatestNews extends Component {
   render() {
     return (
       <div id="latest-news-container">
-        <Card className="card-border-radius">
+        <Card className="custom-card-styles">
           <div className="latest-news-header">
             <div className="latest-news-header__left">Berita Terbaru</div>
             <div className="latest-news-header__right">Lihat Semua</div>

@@ -27,7 +27,6 @@ import avatarPlacerholder from './../../../images/avatar-placeholder.png';
  * Custom Components
  */
 import ProfileButton from './../../Shared/ProfileButton/ProfileButton';
-
 /**
  * Custom Libraries
  */
@@ -62,12 +61,11 @@ const Balance = (props) => {
 }
 
 const ProfileNavButton = (props) => {
-  const { icon, name, onClick } = props;
+  const { icon, name, onClick, active } = props;
   return (
     <React.Fragment>
-      {/* <Divider /> */}
       <div className="custom-divider"></div>
-      <ListItem button onClick={onClick}>
+      <ListItem button className={(active ? "profile-nav-btn-active" : null)} onClick={onClick}>
         <div className="profile-nav-btn">
           <ListItemIcon>
             <img className="profile-nav-btn__icon" src={icon} alt="list-icon" />
@@ -97,7 +95,7 @@ class Profile extends Component {
   render() {
     return (
       <div id="profile-card">
-        <Card className="card-border-radius profile-card-container">
+        <Card className="custom-card-styles profile-card-container">
           <CardContent>
             <div className="profile-container">
               <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
@@ -116,9 +114,9 @@ class Profile extends Component {
           </CardContent>
           <div className="profile-nav-container">
             <List>
-              <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard','Profile')} />
-              <ProfileNavButton icon={mutasiIcon} name="Mutasi Saldo" onClick={this.onBtnClick.bind(this)} />
-              <ProfileNavButton icon={transferIcon} name="Transfer Saldo" onClick={this.onBtnClick.bind(this)} />
+              <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard','Profile')} active={true}/>
+              <ProfileNavButton icon={mutasiIcon} name="Mutasi Saldo" onClick={this.onBtnClick.bind(this)} active={false}/>
+              <ProfileNavButton icon={transferIcon} name="Transfer Saldo" onClick={this.onBtnClick.bind(this)} active={false} />
             </List>
           </div>
         </Card>

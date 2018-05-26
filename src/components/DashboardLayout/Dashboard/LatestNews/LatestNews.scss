@@ -3,7 +3,7 @@
 @import 'styles/_variables.scss';
 
 #latest-news-container{
-  margin-top:25px;
+  margin-top:45px;
   .latest-news-header {
     height: 61px;
     border-radius: 5px;
@@ -28,6 +28,15 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: 0.4px;
+    }
+  }
+}
+
+@include media-query(md){
+  #latest-news-container{
+    margin-top:30px !important;
+    .latest-news-header {
+      padding-right:30px;
     }
   }
 }

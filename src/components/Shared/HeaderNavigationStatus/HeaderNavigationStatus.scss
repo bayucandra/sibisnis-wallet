@@ -1,16 +1,20 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+
 .navigation-container{
   display: flex;
   align-items: center;
+  margin-left: 10px;
+  img{
+    margin-right:20px;
+  }
   .navigation-label{
-    font-family: NunitoSans;
-    font-size: 16px;
+    @include text-setup($white,16px,$font-family);
     font-weight: 600;
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
     letter-spacing: 0.3px;
-    text-align: left;
-    color: #ffffff;
-    margin-left: 20px;
   }
 }

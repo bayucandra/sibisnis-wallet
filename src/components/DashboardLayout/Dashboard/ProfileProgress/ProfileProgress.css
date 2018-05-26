@@ -1,24 +1,29 @@
 .progress-bar-container {
   text-align: center;
-  margin-top: 30px;
-  margin-bottom: 13px; }
+  padding: 14px 4px 14px 4px; }
   .progress-bar-container .progress-bar-container__text {
     color: #404852;
     font-size: 16px;
     font-family: "NunitoSans", sans-serif;
     letter-spacing: 0.4px;
-    font-weight: bold; }
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal; }
   .progress-bar-container .progress-status-container {
     display: flex;
     align-items: center;
     margin-top: 35px; }
     .progress-bar-container .progress-status-container .progress-status {
+      color: #e08e07;
+      font-size: 16px;
+      font-family: "NunitoSans", sans-serif;
       font-weight: bold;
       letter-spacing: 0.4px;
       margin-left: 15px;
-      color: #e08e07;
-      font-size: 16px;
-      font-family: "NunitoSans", sans-serif; }
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal; }
 
 .profile-verfication-list {
   text-align: center;
@@ -28,7 +33,7 @@
     color: #404852;
     font-size: 15px;
     font-family: "NunitoSans", sans-serif;
-    font-weight: 400;
+    font-weight: normal;
     line-height: 1.53;
     letter-spacing: 0.5px;
     text-align: center; }
@@ -63,44 +68,65 @@
 
 @media screen and (min-width: 768px) {
   .progress-bar-container {
-    text-align: left !important; }
-  .varification-list-item .mobile-varification-status {
-    display: none; }
-  .varification-list-item .desktop-verification-status {
-    display: block; }
-    .varification-list-item .desktop-verification-status .verification-icon-container {
-      display: flex;
-      align-items: center; }
-      .varification-list-item .desktop-verification-status .verification-icon-container .verification-icon {
-        width: 32px !important;
-        height: 32px !important;
-        margin-right: 18px !important; }
-      .varification-list-item .desktop-verification-status .verification-icon-container .verification-icon-container__text {
-        color: #404852;
-        font-size: 13px;
-        font-family: "NunitoSans", sans-serif;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: 0.3px; }
-    .varification-list-item .desktop-verification-status .verification-action-btn {
-      color: #4a90e2;
-      font-size: 13px;
+    text-align: left !important;
+    padding: 5px 7px 13px 6px; }
+    .progress-bar-container .progress-bar-container__text {
+      color: #404852;
+      font-size: 16px;
       font-family: "NunitoSans", sans-serif;
-      width: 170.6px;
-      height: 40px;
-      border-radius: 200px;
-      background-color: #ffffff;
-      border: solid 0.5px #4a90e2;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
+      font-weight: 600;
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
-      letter-spacing: 0.5px; }
-      .varification-list-item .desktop-verification-status .verification-action-btn:hover {
-        font-size: 14px;
-        border: solid 1.5px #4a90e2; } }
+      letter-spacing: 0.4px; }
+    .progress-bar-container .progress-status-container {
+      margin-top: 31px; }
+  .profile-verfication-list .profile-verfication-list__content {
+    text-align: left;
+    padding-left: 6px;
+    line-height: normal; }
+  .varification-list-item {
+    padding-left: 6px;
+    padding-right: 7.4px; }
+    .varification-list-item .mobile-varification-status {
+      display: none; }
+    .varification-list-item .desktop-verification-status {
+      display: block; }
+      .varification-list-item .desktop-verification-status .verification-icon-container {
+        display: flex;
+        align-items: center; }
+        .varification-list-item .desktop-verification-status .verification-icon-container .verification-icon {
+          width: 32px !important;
+          height: 32px !important;
+          margin-right: 18px !important; }
+        .varification-list-item .desktop-verification-status .verification-icon-container .verification-icon-container__text {
+          color: #404852;
+          font-size: 13px;
+          font-family: "NunitoSans", sans-serif;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px; }
+      .varification-list-item .desktop-verification-status .verification-action-btn {
+        color: #4a90e2;
+        font-size: 13px;
+        font-family: "NunitoSans", sans-serif;
+        box-sizing: border-box;
+        width: 170.6px;
+        height: 40px;
+        border-radius: 200px;
+        background-color: #ffffff;
+        border: solid 0.5px #4a90e2;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px; }
+        .varification-list-item .desktop-verification-status .verification-action-btn:hover {
+          box-sizing: border-box;
+          font-size: 14px;
+          border: solid 1.5px #4a90e2; } }

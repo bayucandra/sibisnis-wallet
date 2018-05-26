@@ -28,8 +28,12 @@
   .profile-button-desktop{
     display: block;
     margin:0px 24px;
+    @include text-setup($dark-sky-blue, 14px, $font-family);
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
     letter-spacing: 0.5px;
-    @include text-setup($dark-sky-blue, 15px, $font-family);
     text-decoration: underline;
   }
 }

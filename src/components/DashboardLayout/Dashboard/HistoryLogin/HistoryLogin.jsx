@@ -46,7 +46,7 @@ class HistoryLogin extends Component {
         <Card className="custom-card-styles">
           <CardContent>
             <div className="history-login-header">
-              <div className="history-login-header__left">Histoy Login</div>
+              <div className="history-login-header__left">History Login</div>
               <div className="history-login-header__right">Lihat Semua</div>
             </div>
           </CardContent>
@@ -87,27 +87,6 @@ class HistoryLogin extends Component {
                 }
               </tbody>
             </table>
-            {/* <div className="history-login-list-header">
-              <div>Tanggal</div>
-              <div>Negara</div>
-              <div>IP</div>
-              <div>Browser</div>
-            </div>
-
-            <div className="history-login-list-body">
-              {
-                data.map((history, index) => {
-                  return (
-                    <div className="history-login-list-body__item" key={index}>
-                      <div>{history.date}</div>
-                      <div>{history.country}</div>
-                      <div>{history.ip}</div>
-                      <div>{history.browser}</div>
-                    </div>
-                  )
-                })
-              }
-            </div> */}
           </div>
         </Card>
       </div>

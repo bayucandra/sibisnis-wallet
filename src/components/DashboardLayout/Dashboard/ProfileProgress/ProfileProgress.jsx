@@ -45,13 +45,9 @@ const ProfileVerificationList = (props) =>{
         </CardContent>
         <div className="profile-verfication-list__container">
           <VerificationListItem icon={phoneIcon}  type="text" name="Verifikasi Nomor Handphone Anda" status={false} />
-          <CustomDivider />
           <VerificationListItem icon={emailIcon}  type="text" name="Verifikasi Email Anda" status={true} />
-          <CustomDivider />
           <VerificationListItem icon={profileIcon} type="upload" name="Upload foto profil Anda" status={false} />
-          <CustomDivider />
           <VerificationListItem icon={locationIcon} type="text" name="Lengkapi Data Alamat Anda" status={false} />
-          <CustomDivider />
           <VerificationListItem icon={cardIcon} type="text" name="Lengkapi Info Data Identitas Anda" status={false} />
         </div>
       </div>
@@ -63,7 +59,7 @@ const VerificationListItem = (props) => {
   const { icon, name, status, type, onClick } = props;
   return (
     <React.Fragment>
-      <ListItem>
+      <ListItem className="varification-list-item-container">
         <div className="varification-list-item">
           <ListItemIcon>
             <div className="varification-list-item__icon-contianer">
@@ -75,7 +71,7 @@ const VerificationListItem = (props) => {
             {status === true ?
               <img className="varification-list-item__navicon verification-icon" src={verificationIcon} alt="verification-icon" />
               :
-              <img className="varification-list-item__navicon" src={warningIcon} alt="verification-icon" />
+              <img className="varification-list-item__navicon warning-icon" src={warningIcon} alt="warning-icon" />
             }
           </div>
           <div className="desktop-verification-status">
@@ -112,7 +108,6 @@ class ProfileProgress extends Component {
           <CardContent>
             <ProgressBar value={48} />
           </CardContent>
-          <CustomDivider/>
           <ProfileVerificationList />
         </Card>
       </div>

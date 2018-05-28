@@ -64,8 +64,8 @@ const ProfileNavButton = (props) => {
   const { icon, name, onClick, active } = props;
   return (
     <React.Fragment>
-      <div className="custom-divider"></div>
-      <ListItem button className={(active ? "profile-nav-btn-active" : null)} onClick={onClick}>
+      {/* <div className="custom-divider"></div> */}
+      <ListItem button className={(active ? "profile-nav-list-item profile-nav-btn-active" : "profile-nav-list-item")} onClick={onClick}>
         <div className="profile-nav-btn">
           <ListItemIcon>
             <img className="profile-nav-btn__icon" src={icon} alt="list-icon" />
@@ -96,7 +96,7 @@ class Profile extends Component {
     return (
       <div id="profile-card">
         <Card className="custom-card-styles profile-card-container">
-          <CardContent>
+          <CardContent className="profile-card-content-container">
             <div className="profile-container">
               <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               <ProfileInfo
@@ -108,12 +108,12 @@ class Profile extends Component {
               <div className="profile-buttons-container text-center">
                 <ProfileButton value={'Tambah'} />
                 <span className="dot-desktop"></span>
-                <ProfileButton value={'Tarik'} />
+                <ProfileButton value={'Tarik'} style={{'margin-bottom':'0px'}}/>
               </div>
             </div>
           </CardContent>
           <div className="profile-nav-container">
-            <List>
+            <List className="profile-nav-list-container">
               <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard','Profile')} active={true}/>
               <ProfileNavButton icon={mutasiIcon} name="Mutasi Saldo" onClick={this.onBtnClick.bind(this)} active={false}/>
               <ProfileNavButton icon={transferIcon} name="Transfer Saldo" onClick={this.onBtnClick.bind(this)} active={false} />

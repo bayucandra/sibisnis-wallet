@@ -4,9 +4,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding-top: 4px;
-    padding-left: 4px;
-    padding-right: 4px; }
+    padding: 4px; }
     #history-login-container .history-login-header .history-login-header__left {
       color: #404852;
       font-size: 16px;

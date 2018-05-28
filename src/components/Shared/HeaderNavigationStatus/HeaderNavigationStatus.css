@@ -1,7 +1,7 @@
 .navigation-container {
   display: flex;
   align-items: center;
-  margin-left: 10px; }
+  margin-left: 5px; }
   .navigation-container img {
     margin-right: 20px; }
   .navigation-container .navigation-label {

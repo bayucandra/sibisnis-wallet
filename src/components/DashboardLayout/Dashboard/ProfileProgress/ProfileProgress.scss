@@ -3,7 +3,7 @@
 @import 'styles/_variables.scss';
 .progress-bar-container {
   text-align: center;
-  padding: 14px 4px 14px 4px;
+  padding: 14px 4px 9px 4px;
   .progress-bar-container__text {
     @include text-setup($charcoal-grey, 16px, $font-family);
     letter-spacing: 0.4px;
@@ -15,7 +15,7 @@
   .progress-status-container {
     display: flex;
     align-items: center;
-    margin-top: 35px;
+    margin-top: 30px;
     .progress-status {
       @include text-setup(#e08e07, 16px, $font-family);
       font-weight: bold;
@@ -31,47 +31,65 @@
 
 .profile-verfication-list {
   text-align: center;
-  margin-top: 4px;
+  border-top: solid 0.5px #dedede;
   padding-bottom: 14px;
+  .profile-verfication-list__container{
+    margin-top:14px;
+  }
   .profile-verfication-list__content {
     @include text-setup($charcoal-grey,15px,$font-family);
     font-weight: normal;
     line-height: 1.53;
     letter-spacing: 0.5px;
     text-align: center;
+    padding-top:5px;
   }
 }
 
 
-.varification-list-item {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  padding:9px 0px;
-  .verification-icon {
-    width: 22px;
-    height: 22px;
-    margin-right: 3px;
+.varification-list-item-container {
+  border-bottom: solid 0.5px #dedede;
+  &:last-child {
+    border-bottom: 0px;
   }
-  .varification-list-item__icon-contianer {
-    margin: 0px;
-    background-color: #f2f8ff;
-    border-radius: 50px;
+  .varification-list-item {
     display: flex;
+    width: 100%;
     align-items: center;
-  }
-  .varification-list-item__icon {
-    margin: 0px;
-  }
-  .varification-list-item__text {
-    @include text-setup($charcoal-grey, 13px, $font-family);
-    margin-left: 18px;
-    font-weight: 400;
-    letter-spacing: 0.3px;
-    flex: 1;
-  }
-  .desktop-verification-status{
-    display: none;
+    padding: 2.75px 4px;
+    .verification-icon {
+      width: 22px;
+      height: 22px;
+      margin-right: 3px;
+    }
+
+    .warning-icon {
+      height: 25px;
+      width: 25px;
+    }
+    .varification-list-item__icon-contianer {
+      margin: 0px;
+      background-color: #f2f8ff;
+      border-radius: 50px;
+      display: flex;
+      align-items: center;
+    }
+    .varification-list-item__icon {
+      margin: 0px;
+      height: 30px;
+      width: 30px;
+    }
+    .varification-list-item__text {
+      @include text-setup($charcoal-grey, 13px, $font-family);
+      margin-left: 18px;
+      font-weight: 400;
+      letter-spacing: 0.3px;
+      flex: 1;
+    }
+
+    .desktop-verification-status {
+      display: none;
+    }
   }
 }
 
@@ -80,7 +98,7 @@
 @include media-query(md) {
   .progress-bar-container {
     text-align: left !important;
-    padding: 5px 7px 13px 6px;
+    padding: 5px 7px 8px 6px;
     .progress-bar-container__text {
       @include text-setup($charcoal-grey, 16px, $font-family);
       font-weight: 600;
@@ -89,8 +107,11 @@
       line-height: normal;
       letter-spacing: 0.4px;
     }
-    .progress-status-container{
-      margin-top:31px;
+    .progress-status-container {
+      margin-top: 26px;
+      .progress-status {
+        margin-left: 44px;
+      }
     }
   }
   .profile-verfication-list{
@@ -100,51 +121,62 @@
       line-height: normal;
     }
   }
-  .varification-list-item {
-    padding-left: 6px;
-    padding-right: 7.4px;
-    .mobile-varification-status {
-      display: none;
+
+  .varification-list-item-container {
+    border-bottom: solid 0.5px #efefef;
+    &:last-child {
+      border-bottom: 0px;
     }
-    .desktop-verification-status {
-      display: block;
-      .verification-icon-container {
-        display: flex;
-        align-items: center;
-        .verification-icon {
-          width: 32px !important;
-          height: 32px !important;
-          margin-right: 18px !important;
+    .varification-list-item {
+      padding-left: 6px;
+      padding-right: 7.4px;
+      .varification-list-item__icon {
+        height: 40px;
+        width: 40px;
+      }
+      .mobile-varification-status {
+        display: none;
+      }
+      .desktop-verification-status {
+        display: block;
+        .verification-icon-container {
+          display: flex;
+          align-items: center;
+          .verification-icon {
+            width: 32px !important;
+            height: 32px !important;
+            margin-right: 18px !important;
+          }
+          .verification-icon-container__text {
+            @include text-setup($charcoal-grey, 13px, $font-family);
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.3px;
+          }
         }
-        .verification-icon-container__text {
-          @include text-setup($charcoal-grey, 13px, $font-family);
-          font-weight: normal;
+        .verification-action-btn {
+          @include text-setup($dark-sky-blue, 13px, $font-family);
+          box-sizing: border-box;
+          width: 170.6px;
+          height: 40px;
+          border-radius: 200px;
+          background-color: $white;
+          border: solid 0.5px $dark-sky-blue;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
           font-style: normal;
           font-stretch: normal;
           line-height: normal;
-          letter-spacing: 0.3px;
-        }
-      }
-      .verification-action-btn {
-        @include text-setup($dark-sky-blue, 13px, $font-family);
-        box-sizing: border-box;
-        width: 170.6px;
-        height: 40px;
-        border-radius: 200px;
-        background-color: $white;
-        border: solid 0.5px $dark-sky-blue;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-weight: bold;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: 0.5px;
-        &:hover{
-          box-sizing: border-box;
-          font-size: 14px;
-          border: solid 1.5px $dark-sky-blue;
+          letter-spacing: 0.5px;
+          &:hover {
+            box-sizing: border-box;
+            font-size: 13px;
+            border: solid 1.5px $dark-sky-blue;
+          }
         }
       }
     }

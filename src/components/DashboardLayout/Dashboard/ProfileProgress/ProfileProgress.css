@@ -42,14 +42,17 @@
     padding-top: 5px; }
 
 .varification-list-item-container {
-  border-bottom: solid 0.5px #dedede; }
+  border-bottom: solid 0.5px #dedede;
+  padding: 0px !important;
+  height: 60px; }
   .varification-list-item-container:last-child {
     border-bottom: 0px; }
   .varification-list-item-container .varification-list-item {
     display: flex;
     width: 100%;
     align-items: center;
-    padding: 2.75px 4px; }
+    margin-left: 20px;
+    margin-right: 22px; }
     .varification-list-item-container .varification-list-item .verification-icon {
       width: 22px;
       height: 22px;
@@ -71,7 +74,7 @@
       color: #404852;
       font-size: 13px;
       font-family: "NunitoSans", sans-serif;
-      margin-left: 18px;
+      margin-left: 15px;
       font-weight: 400;
       letter-spacing: 0.3px;
       flex: 1; }
@@ -100,15 +103,18 @@
     padding-left: 6px;
     line-height: normal; }
   .varification-list-item-container {
-    border-bottom: solid 0.5px #efefef; }
+    border-bottom: solid 0.5px #efefef;
+    height: 70px; }
     .varification-list-item-container:last-child {
       border-bottom: 0px; }
     .varification-list-item-container .varification-list-item {
-      padding-left: 6px;
-      padding-right: 7.4px; }
+      margin-left: 30px;
+      margin-right: 31.4px; }
       .varification-list-item-container .varification-list-item .varification-list-item__icon {
         height: 40px;
         width: 40px; }
+      .varification-list-item-container .varification-list-item .varification-list-item__text {
+        margin-left: 20px !important; }
       .varification-list-item-container .varification-list-item .mobile-varification-status {
         display: none; }
       .varification-list-item-container .varification-list-item .desktop-verification-status {

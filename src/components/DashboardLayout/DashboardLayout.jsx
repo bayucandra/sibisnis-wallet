@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Profile from './Profile/Profile';
 import Dashboard from './Dashboard/Dashboard';
+import LatestNews from "./Dashboard/LatestNews/LatestNews";
 
 import { navigationStatus } from './../../lib/utilities';
 
@@ -30,6 +31,7 @@ class DashboardLayout extends Component {
   render() {
     return (
       <React.Fragment>
+        {/* <LatestNews/> */}
         <div className="container-wrapper">
           <div className="container-inner">
             <div className="dashboard-layout-container">

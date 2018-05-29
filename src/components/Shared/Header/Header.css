@@ -21,15 +21,14 @@
         font-style: normal;
         font-stretch: normal;
         line-height: normal;
-        letter-spacing: 0.3px;
-        margin-left: 10px; }
+        letter-spacing: 0.3px; }
     #header .header-container .right-header {
       flex: 1;
       text-align: right; }
       #header .header-container .right-header .menu-btn {
         border-radius: 50px;
         padding: 10px;
-        margin-right: -15px; }
+        margin-right: 5px; }
         #header .header-container .right-header .menu-btn:focus, #header .header-container .right-header .menu-btn:hover, #header .header-container .right-header .menu-btn:active {
           background-color: #2d2c2c54; }
     #header .header-container .right-header-desktop {
@@ -46,7 +45,8 @@
       align-items: center; }
       #header .left-header .header-navigation-status-desktop .switch-icon {
         display: inline-block !important;
-        margin-top: -4px; }
+        margin-top: -2px;
+        margin-right: 20px; }
     #header .right-header-desktop {
       display: flex !important;
       align-items: center;
@@ -55,9 +55,14 @@
         margin-top: -4px; }
       #header .right-header-desktop .logout-text {
         color: #ffffff;
-        font-size: 16px;
+        font-size: 15px;
         font-family: "NunitoSans", sans-serif;
-        margin-left: 10px; }
+        margin-left: 15px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.3px; }
     #header .right-header-mobile {
       display: none; }
   .header-navigation-status-desktop {
@@ -70,3 +75,7 @@
 
 .logout-text {
   padding: 3px 0px 7px 4px; }
+
+@media screen and (min-width: 768px) {
+  .logout-text {
+    padding: 0px; } }

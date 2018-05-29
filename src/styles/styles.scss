@@ -25,7 +25,7 @@ table {
 .container-inner {
   max-width: 1000px;
   width: 100%;
-  padding: 0px 10px;
+  // padding: 0px 10px;
 }
 
 //Helper Classes
@@ -33,7 +33,39 @@ table {
   margin:0px;
 }
 
+/*
+===========================================
+      Basic Themeing for Sibisnis
+===========================================
+*/
+
+.sibisnis-card {
+  background-color: $white;
+  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11) !important;
+}
+
+.sibisnis-container-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.sibisnis-container-inner {
+  max-width: 1000px;
+  width: 100%;
+  padding: 0px 10px;
+}
+
+/*
+===========================================
+            Media Queries
+===========================================
+*/
+
 @include media-query(md){
+  .sibisnis-card {
+    border-radius: 5px !important;
+  }
+
   .container-inner{
     padding:0px 20px !important;
   }

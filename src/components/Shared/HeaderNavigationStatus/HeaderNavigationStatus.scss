@@ -6,6 +6,9 @@
   display: flex;
   align-items: center;
   margin-left: 15px;
+  .back-icon-container{
+    margin-left:7px;
+  }
   img{
     margin-right:15px;
   }
@@ -17,5 +20,15 @@
     line-height: normal;
     letter-spacing: 0.3px;
     margin-left:5px;
+  }
+}
+
+.back-btn-navigation{
+  margin-left: 0px;
+  img{
+    margin-right:0px;
+  }
+  .navigation-label{
+    margin-left: 12px !important;
   }
 }

@@ -30,4 +30,7 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: 0.5px;
-    text-decoration: underline; } }
+    text-decoration: underline;
+    cursor: pointer; }
+    .profile-button-desktop:hover {
+      text-decoration: none; } }

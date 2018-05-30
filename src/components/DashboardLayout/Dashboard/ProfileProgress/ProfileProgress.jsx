@@ -59,7 +59,7 @@ const VerificationListItem = (props) => {
   const { icon, name, status, type, onClick } = props;
   return (
     <React.Fragment>
-      <ListItem className="varification-list-item-container">
+      <ListItem className="varification-list-item-container ripple">
         <div className="varification-list-item">
           <ListItemIcon>
             <div className="varification-list-item__icon-contianer">

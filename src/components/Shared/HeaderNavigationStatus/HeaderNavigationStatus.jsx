@@ -33,12 +33,17 @@ class HeaderNavigationStatus extends Component {
     const { navigationLabel } = this.state;
     return (
       <div className="header-navigation-status">
-        <div className="navigation-container">
-          {navigationLabel !== "BantulPulsa" ?
-            <img src={backIcon} alt="back-icon" onClick={this.onBackClick.bind(this)} /> : null
-          }
-          <div className="navigation-label">{navigationLabel}</div>
-        </div>
+        {navigationLabel !== "BantulPulsa" ?
+          <div className="navigation-container back-btn-navigation">
+            <div className="icon-touch-area-container-40 back-icon-container ripple" onClick={this.onBackClick.bind(this)}>
+              <img src={backIcon} alt="back-icon" />
+            </div>
+            <div className="navigation-label">{navigationLabel}</div>
+          </div> :
+          <div className="navigation-container">
+            <div className="navigation-label">{navigationLabel}</div>
+          </div>
+        }
       </div>
      )
   }

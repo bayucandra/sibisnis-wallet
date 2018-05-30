@@ -11,6 +11,9 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import { Tooltip } from 'react-tippy';
+
 
 
 /**
@@ -98,7 +101,17 @@ class Profile extends Component {
         <Card className="custom-card-styles profile-card-container">
           <CardContent className="profile-card-content-container">
             <div className="profile-container">
-              <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
+              {/* <Tooltip
+                title="Profile anda"
+                position="left"
+                arrow={true}
+                light={true}
+              >
+                <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
+              </Tooltip> */}
+              <div className="profile-settings-icon-container icon-touch-area-container-50 ripple">
+                <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
+              </div>
               <ProfileInfo
                 name='Arziky Yusya'
                 email="arzikyyu@gmail.com"

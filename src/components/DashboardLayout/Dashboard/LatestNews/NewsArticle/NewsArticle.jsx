@@ -4,7 +4,7 @@ import './NewsArticle.css';
 const NewsArticle = (props) => {
   const { title, date, tags, articleSummary, readStatus } = props;
   return (
-    <div className="news-article-container">
+    <div className="news-article-container ripple">
 
       {!readStatus ? <div className="news-read-pending"></div> : null}
 

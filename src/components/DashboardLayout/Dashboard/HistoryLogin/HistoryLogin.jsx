@@ -44,10 +44,10 @@ class HistoryLogin extends Component {
     return (
       <div id="history-login-container">
         <Card className="custom-card-styles">
-          <CardContent>
+          <CardContent className="history-login-header-container">
             <div className="history-login-header">
               <div className="history-login-header__left">History Login</div>
-              <div className="history-login-header__right">Lihat Semua</div>
+              <div className="history-login-header__right ripple">Lihat Semua</div>
             </div>
           </CardContent>
           <div className="history-login-list-container">

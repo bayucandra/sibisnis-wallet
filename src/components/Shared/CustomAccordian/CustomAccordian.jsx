@@ -20,16 +20,16 @@ class CustomAccordian extends Component {
     const { title, date, accordianBody } = this.props;
     return (
       <div className="custom-accordian-container">
-        <div className="custom-accordian-container__title" onClick={this.accordinToggle.bind(this)}>
+        <div className="custom-accordian-container__title ripple" onClick={this.accordinToggle.bind(this)}>
           <div className="custom-accordian-container__title-left">
             <span className="custom-accordian-container__title-left-name">{title}</span>
             <span className="custom-accordian-container__title-left-date"> {date}</span>
           </div>
-          <div className="custom-accordian-container__title-right">
+          <div className="custom-accordian-container__title-right icon-touch-area-container-40">
             {this.state.collapse ?
-              <img src={iconMinus} alt="" />
+              <img src={iconMinus} alt="icon-minus" />
               :
-              <img src={iconCollapse} alt="" />
+              <img src={iconCollapse} alt="icon-plus" />
             }
           </div>
         </div>

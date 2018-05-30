@@ -12,7 +12,7 @@
     align-items: center;
     justify-content: space-between;
     padding-left: 30px;
-    padding-right: 20px;
+    padding-right: 10px;
     .latest-news-header__left {
       @include text-setup($charcoal-grey, 16px, $font-family);
       font-weight: 600;
@@ -28,6 +28,12 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: 0.4px;
+      width: 110px;
+      height: 40px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }
@@ -36,7 +42,7 @@
   #latest-news-container{
     margin-top:30px !important;
     .latest-news-header {
-      padding-right:30px;
+      padding-right:20px;
     }
   }
 }

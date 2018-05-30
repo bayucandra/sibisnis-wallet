@@ -2,6 +2,8 @@
   display: flex;
   align-items: center;
   margin-left: 15px; }
+  .navigation-container .back-icon-container {
+    margin-left: 7px; }
   .navigation-container img {
     margin-right: 15px; }
   .navigation-container .navigation-label {
@@ -14,3 +16,10 @@
     line-height: normal;
     letter-spacing: 0.3px;
     margin-left: 5px; }
+
+.back-btn-navigation {
+  margin-left: 0px; }
+  .back-btn-navigation img {
+    margin-right: 0px; }
+  .back-btn-navigation .navigation-label {
+    margin-left: 12px !important; }

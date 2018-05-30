@@ -54,7 +54,7 @@ class LatestNews extends Component {
         <Card className="custom-card-styles">
           <div className="latest-news-header">
             <div className="latest-news-header__left">Berita Terbaru</div>
-            <div className="latest-news-header__right">Lihat Semua</div>
+            <div className="latest-news-header__right ripple">Lihat Semua</div>
           </div>
           <div className="news-article-list">
             {this.state.data.map((article,index)=>{

@@ -33,8 +33,8 @@
   text-align: center;
   border-top: solid 0.5px #dedede;
   padding-bottom: 14px;
-  .profile-verfication-list__container{
-    margin-top:14px;
+  &__container{
+    margin-top:10px;
   }
   .profile-verfication-list__content {
     @include text-setup($charcoal-grey,15px,$font-family);
@@ -50,7 +50,7 @@
 .varification-list-item-container {
   border-bottom: solid 0.5px #dedede;
   padding: 0px !important;
-  height: 60px;
+  height: 62px;
   &:last-child {
     border-bottom: 0px;
   }
@@ -118,16 +118,20 @@
     }
   }
   .profile-verfication-list{
+    padding-bottom: 23px;
     .profile-verfication-list__content{
       text-align: left;
       padding-left:6px;
       line-height: normal;
     }
+    &__container {
+      margin-top:19px;
+    }
   }
 
   .varification-list-item-container {
     border-bottom: solid 0.5px #efefef;
-    height: 70px;
+    height: 72px;
     &:last-child {
       border-bottom: 0px;
     }

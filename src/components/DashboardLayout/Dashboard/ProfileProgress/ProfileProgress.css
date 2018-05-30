@@ -29,8 +29,8 @@
   text-align: center;
   border-top: solid 0.5px #dedede;
   padding-bottom: 14px; }
-  .profile-verfication-list .profile-verfication-list__container {
-    margin-top: 14px; }
+  .profile-verfication-list__container {
+    margin-top: 10px; }
   .profile-verfication-list .profile-verfication-list__content {
     color: #404852;
     font-size: 15px;
@@ -44,7 +44,7 @@
 .varification-list-item-container {
   border-bottom: solid 0.5px #dedede;
   padding: 0px !important;
-  height: 60px; }
+  height: 62px; }
   .varification-list-item-container:last-child {
     border-bottom: 0px; }
   .varification-list-item-container .varification-list-item {
@@ -98,13 +98,17 @@
       margin-top: 26px; }
       .progress-bar-container .progress-status-container .progress-status {
         margin-left: 44px; }
-  .profile-verfication-list .profile-verfication-list__content {
-    text-align: left;
-    padding-left: 6px;
-    line-height: normal; }
+  .profile-verfication-list {
+    padding-bottom: 23px; }
+    .profile-verfication-list .profile-verfication-list__content {
+      text-align: left;
+      padding-left: 6px;
+      line-height: normal; }
+    .profile-verfication-list__container {
+      margin-top: 19px; }
   .varification-list-item-container {
     border-bottom: solid 0.5px #efefef;
-    height: 70px; }
+    height: 72px; }
     .varification-list-item-container:last-child {
       border-bottom: 0px; }
     .varification-list-item-container .varification-list-item {

@@ -74,7 +74,10 @@
     #history-login-container .history-login-header {
       height: 63px !important;
       margin-left: 30px !important;
-      margin-right: 20px !important; }
+      margin-right: 0px !important; }
+      #history-login-container .history-login-header .history-login-header__right {
+        height: 48px !important;
+        width: 151px !important; }
   .history-login-list-container {
     display: none; }
   .history-login-list-container-desktop {

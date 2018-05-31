@@ -75,19 +75,6 @@ table {
   width: 100%;
   padding: 0px 10px; }
 
-/*
-===========================================
-            Media Queries
-===========================================
-*/
-@media screen and (min-width: 768px) {
-  .sibisnis-card {
-    border-radius: 5px !important; }
-  .container-inner {
-    padding: 0px 20px !important; }
-  .custom-card-styles {
-    border-radius: 5px !important; } }
-
 /* icon touch area*/
 .icon-touch-area-container-50 {
   height: 50px;
@@ -131,3 +118,50 @@ table {
   transform: scale(0, 0);
   opacity: .3;
   transition: 0s; }
+
+/* Ripple effect */
+.ripple-mobile {
+  position: relative;
+  overflow: hidden;
+  transform: translate3d(0, 0, 0); }
+
+.ripple-mobile:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #a2a0a0 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s; }
+
+.ripple-mobile:active:after {
+  transform: scale(0, 0);
+  opacity: .3;
+  transition: 0s; }
+
+/*
+===========================================
+            Media Queries
+===========================================
+*/
+@media screen and (min-width: 768px) {
+  .sibisnis-card {
+    border-radius: 5px !important; }
+  .container-inner {
+    padding: 0px 20px !important; }
+  .custom-card-styles {
+    border-radius: 5px !important; }
+  .icon-background:hover {
+    background-color: #F0F1F2; }
+  .opacity-background:hover {
+    opacity: 0.6; }
+  .ripple-mobile:after {
+    height: 0px !important;
+    width: 0px !important; } }

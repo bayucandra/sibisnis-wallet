@@ -109,7 +109,7 @@ class Profile extends Component {
               >
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </Tooltip> */}
-              <div className="profile-settings-icon-container icon-touch-area-container-50 ripple">
+              <div className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background">
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </div>
               <ProfileInfo
@@ -121,7 +121,7 @@ class Profile extends Component {
               <div className="profile-buttons-container text-center">
                 <ProfileButton value={'Tambah'} />
                 <span className="dot-desktop"></span>
-                <ProfileButton value={'Tarik'} style={{'margin-bottom':'0px'}}/>
+                <ProfileButton value={'Tarik'} style={{'marginBottom':'0px'}}/>
               </div>
             </div>
           </CardContent>

@@ -42,7 +42,11 @@
   #latest-news-container{
     margin-top:30px !important;
     .latest-news-header {
-      padding-right:20px;
+      padding-right:0px;
+      .latest-news-header__right {
+        height: 48px !important;
+        width: 151px !important;
+      }
     }
   }
 }

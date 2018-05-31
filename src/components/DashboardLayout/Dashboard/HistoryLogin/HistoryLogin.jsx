@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import CustomAccordian from './../../../Shared/CustomAccordian/CustomAccordian';
+import { withRouter } from 'react-router-dom';
 
 import './HistoryLogin.css';
 
@@ -26,8 +27,8 @@ const HistoryList = (props) => {
 }
 
 class HistoryLogin extends Component {
-  constructor(props) {
-    super(props);
+  constructor(props, context) {
+    super(props, context);
     this.state = {
       data : [
         { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
@@ -39,6 +40,10 @@ class HistoryLogin extends Component {
     }
   }
 
+  viewAllHistoryLogin = () => {
+    this.props.history.push('/all-history-logins');
+  }
+
   render() {
     const { data } = this.state;
     return (
@@ -47,7 +52,7 @@ class HistoryLogin extends Component {
           <CardContent className="history-login-header-container">
             <div className="history-login-header">
               <div className="history-login-header__left">History Login</div>
-              <div className="history-login-header__right ripple">Lihat Semua</div>
+              <div className="history-login-header__right ripple opacity-background" onClick={this.viewAllHistoryLogin.bind(this)}>Lihat Semua</div>
             </div>
           </CardContent>
           <div className="history-login-list-container">
@@ -94,4 +99,4 @@ class HistoryLogin extends Component {
   }
 }
 
-export default HistoryLogin;
+export default withRouter(HistoryLogin);

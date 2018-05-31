@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import NewsArticle from './NewsArticle/NewsArticle';
+import { withRouter } from 'react-router-dom';
 
 import './LatestNews.css';
 
@@ -48,13 +49,16 @@ class LatestNews extends Component {
       ]
     }
   }
+  onViewAllNews = () =>{
+    this.props.history.push('/all-news');
+  }
   render() {
     return (
       <div id="latest-news-container">
         <Card className="custom-card-styles">
           <div className="latest-news-header">
             <div className="latest-news-header__left">Berita Terbaru</div>
-            <div className="latest-news-header__right ripple">Lihat Semua</div>
+            <div className="latest-news-header__right ripple opacity-background" onClick={this.onViewAllNews.bind(this)}>Lihat Semua</div>
           </div>
           <div className="news-article-list">
             {this.state.data.map((article,index)=>{
@@ -62,6 +66,7 @@ class LatestNews extends Component {
                 title={article.title}
                 date={article.date}
                 tags={article.tags}
+                key={index}
                 readStatus={article.readStatus}
                 articleSummary={article.articleSummary}
               />)
@@ -73,4 +78,4 @@ class LatestNews extends Component {
   }
 }
 
-export default LatestNews;
+export default withRouter(LatestNews);

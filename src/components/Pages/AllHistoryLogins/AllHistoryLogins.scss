@@ -1,0 +1,9 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+@include media-query(md) {
+  #all-history-login-container {
+    width: 723px;
+    margin: 0 auto;
+  }
+}

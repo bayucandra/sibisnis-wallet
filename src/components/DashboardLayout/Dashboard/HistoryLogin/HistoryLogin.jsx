@@ -52,7 +52,7 @@ class HistoryLogin extends Component {
           <CardContent className="history-login-header-container">
             <div className="history-login-header">
               <div className="history-login-header__left">History Login</div>
-              <div className="history-login-header__right ripple opacity-background" onClick={this.viewAllHistoryLogin.bind(this)}>Lihat Semua</div>
+              {this.props.viewAll ? <div className="history-login-header__right ripple opacity-background" onClick={this.viewAllHistoryLogin.bind(this)}>Lihat Semua</div> : null}
             </div>
           </CardContent>
           <div className="history-login-list-container">

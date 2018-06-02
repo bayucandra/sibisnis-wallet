@@ -12,7 +12,7 @@ class Dashboard extends Component {
     return (
       <React.Fragment>
         <ProfileProgress />
-        <HistoryLogin />
+        <HistoryLogin viewAll={true} />
         <LatestNews />
       </React.Fragment>
     )

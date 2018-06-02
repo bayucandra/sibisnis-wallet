@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import backIcon from './../../../images/icons/back-white.svg';
 import { navigationStatus } from './../../../lib/utilities';
+import { withRouter } from 'react-router-dom';
 
 import './HeaderNavigationStatus.css';
 
@@ -8,7 +9,9 @@ class HeaderNavigationStatus extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      navigationLabel: 'BantulPulsa'
+      navigationLabel: 'BantulPulsa',
+      navigationState: false,
+      navigationLink: false
      }
   }
 
@@ -16,7 +19,17 @@ class HeaderNavigationStatus extends Component {
     navigationStatus.subscribe(
       (data) => {
         if (data.navigationLink) {
-          this.setState({ navigationLabel: data.navigationLink });
+          this.setState({
+            navigationLabel: data.navigationLink,
+            navigationState: false,
+            navigationLink: true
+          });
+        } else if (data.navigationState) {
+          this.setState({
+            navigationLabel: data.navigationState,
+            navigationState: true,
+            navigationLink: false
+          });
         }
       }
     )
@@ -24,9 +37,16 @@ class HeaderNavigationStatus extends Component {
 
   onBackClick = (name) => {
     let previousLink = '';
-    if(this.state.navigationLabel === 'Dashboard'){
-      navigationStatus.next({ navigationLink: 'BantulPulsa'});
+
+    if (this.state.navigationState) {
+      if(this.state.navigationLabel === 'Dashboard'){
+        navigationStatus.next({ navigationState: 'BantulPulsa'});
+      }
+    } else if (this.state.navigationLink) {
+        this.props.history.goBack();
+        navigationStatus.next({navigationState: 'BantulPulsa'})
     }
+
   }
 
   render() {
@@ -49,4 +69,4 @@ class HeaderNavigationStatus extends Component {
   }
 }
 
-export default HeaderNavigationStatus;
+export default withRouter(HeaderNavigationStatus);

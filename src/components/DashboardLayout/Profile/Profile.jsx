@@ -92,7 +92,7 @@ class Profile extends Component {
   }
 
   onLinkClick = (name) => {
-    navigationStatus.next({ navigationLink: name});
+    navigationStatus.next({ navigationState: name});
   }
 
   render() {

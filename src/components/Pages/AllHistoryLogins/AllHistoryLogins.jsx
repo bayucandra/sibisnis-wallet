@@ -11,7 +11,7 @@ class AllHistoryLogins extends Component {
 
   componentWillMount() {
     navigationStatus.next({
-      navigationLink: 'Dashboard'
+      navigationLink: 'History Login'
     })
   }
 
@@ -19,7 +19,7 @@ class AllHistoryLogins extends Component {
     return (
       <div id="all-history-login-container">
         <PageBackButton/>
-        <HistoryLogin viewAll={false}/>
+        <HistoryLogin viewAll={true}/>
       </div>
       )
   }

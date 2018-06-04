@@ -16,7 +16,7 @@ class PageBackButton extends Component {
   render() {
     return (
       <div className="back-btn-container">
-        <div className="icon-container" onClick={this.onPageBack.bind(this)}>
+        <div className="icon-container ripple opacity-background" onClick={this.onPageBack.bind(this)}>
           <img src={BackBlueIcon} alt="back-blue-icon" />
         </div>
         <div className="back-btn-text">Kembali</div>

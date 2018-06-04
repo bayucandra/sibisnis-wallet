@@ -2,7 +2,7 @@
 @import 'styles/_mixins.scss';
 @import 'styles/_variables.scss';
 
-#latest-news-container{
+.latest-news-container{
   margin-top:45px;
   .latest-news-header {
     height: 61px;
@@ -38,14 +38,31 @@
   }
 }
 
+.all-news{
+  margin-top:0px !important;
+  .latest-news-header{
+    display: none !important;
+  }
+}
+
 @include media-query(md){
-  #latest-news-container{
+  .latest-news-container{
     margin-top:30px !important;
     .latest-news-header {
       padding-right:0px;
       .latest-news-header__right {
         height: 48px !important;
         width: 151px !important;
+      }
+    }
+  }
+
+  .all-news {
+    margin-top:7px !important;
+    .latest-news-header {
+      display: flex !important;
+      .latest-news-header__right {
+        display: none !important;
       }
     }
   }

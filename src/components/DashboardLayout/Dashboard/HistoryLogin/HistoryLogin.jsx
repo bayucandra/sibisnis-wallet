@@ -47,12 +47,12 @@ class HistoryLogin extends Component {
   render() {
     const { data } = this.state;
     return (
-      <div id="history-login-container">
+      <div className={this.props.viewAll ? "history-login-container all-history-login" : "history-login-container"}>
         <Card className="custom-card-styles">
           <CardContent className="history-login-header-container">
             <div className="history-login-header">
               <div className="history-login-header__left">History Login</div>
-              {this.props.viewAll ? <div className="history-login-header__right ripple opacity-background" onClick={this.viewAllHistoryLogin.bind(this)}>Lihat Semua</div> : null}
+              <div className="history-login-header__right ripple opacity-background" onClick={this.viewAllHistoryLogin.bind(this)}>Lihat Semua</div>
             </div>
           </CardContent>
           <div className="history-login-list-container">

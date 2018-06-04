@@ -12,7 +12,7 @@ class AllNews extends Component {
 
   componentWillMount() {
     navigationStatus.next({
-      navigationLink: 'Dashboard'
+      navigationLink: 'Berita Terbaru'
     })
   }
 
@@ -20,7 +20,7 @@ class AllNews extends Component {
     return (
       <div id="all-news-container">
         <PageBackButton />
-        <LatestNews />
+        <LatestNews viewAll={true}/>
       </div>
     )
   }

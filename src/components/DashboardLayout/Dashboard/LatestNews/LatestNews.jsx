@@ -54,7 +54,7 @@ class LatestNews extends Component {
   }
   render() {
     return (
-      <div id="latest-news-container">
+      <div className={this.props.viewAll ? "latest-news-container all-news" : 'latest-news-container'}>
         <Card className="custom-card-styles">
           <div className="latest-news-header">
             <div className="latest-news-header__left">Berita Terbaru</div>

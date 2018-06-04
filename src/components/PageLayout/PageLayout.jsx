@@ -9,6 +9,11 @@ class PageLayout extends Component {
     super(props);
     this.state = {}
   }
+
+  componentWillUpdate() {
+    window.scrollTo(0,0);
+  }
+
   render() {
     return (
       <div>

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Transition from 'react-transition-group/Transition';
 import iconCollapse from './../../../images/icons/ico-collaps.svg';
 import iconMinus from './../../../images/icons/ico-minus.svg';
 

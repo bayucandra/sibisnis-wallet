@@ -1,15 +1,15 @@
-#history-login-container {
+.history-login-container {
   margin-top: 45px; }
-  #history-login-container .history-login-header-container {
+  .history-login-container .history-login-header-container {
     padding: 0px; }
-    #history-login-container .history-login-header-container .history-login-header {
+    .history-login-container .history-login-header-container .history-login-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
       height: 61px;
       margin-left: 20px;
       margin-right: 10px; }
-      #history-login-container .history-login-header-container .history-login-header .history-login-header__left {
+      .history-login-container .history-login-header-container .history-login-header .history-login-header__left {
         color: #404852;
         font-size: 16px;
         font-family: "NunitoSans", sans-serif;
@@ -19,7 +19,7 @@
         line-height: normal;
         letter-spacing: 0.4px;
         text-align: left; }
-      #history-login-container .history-login-header-container .history-login-header .history-login-header__right {
+      .history-login-container .history-login-header-container .history-login-header .history-login-header__right {
         color: #4a90e2;
         font-size: 15px;
         font-family: "NunitoSans", sans-serif;
@@ -35,6 +35,11 @@
         display: flex;
         align-items: center;
         justify-content: center; }
+
+.all-history-login {
+  margin-top: 0px !important; }
+  .all-history-login .history-login-header-container {
+    display: none !important; }
 
 .history-list-container {
   display: flex;
@@ -69,13 +74,13 @@
   display: none; }
 
 @media screen and (min-width: 768px) {
-  #history-login-container {
+  .history-login-container {
     margin-top: 30px !important; }
-    #history-login-container .history-login-header {
+    .history-login-container .history-login-header {
       height: 63px !important;
       margin-left: 30px !important;
       margin-right: 0px !important; }
-      #history-login-container .history-login-header .history-login-header__right {
+      .history-login-container .history-login-header .history-login-header__right {
         height: 48px !important;
         width: 151px !important; }
   .history-login-list-container {
@@ -120,4 +125,10 @@
           padding-right: 106px; }
         .history-login-list-container-desktop .history-login-list-table tbody tr.history-login-list-body__item .history-login-list-table__body-column-ip {
           width: 92px;
-          padding-right: 111px; } }
+          padding-right: 111px; }
+  .all-history-login {
+    margin-top: 7px !important; }
+    .all-history-login .history-login-header-container {
+      display: block !important; }
+      .all-history-login .history-login-header-container .history-login-header__right {
+        display: none !important; } }

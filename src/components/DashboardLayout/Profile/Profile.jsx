@@ -13,6 +13,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import { Tooltip } from 'react-tippy';
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 
@@ -109,9 +110,11 @@ class Profile extends Component {
               >
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </Tooltip> */}
+
               <div className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background">
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </div>
+
               <ProfileInfo
                 name='Arziky Yusya'
                 email="arzikyyu@gmail.com"

@@ -62,7 +62,9 @@ class Header extends Component {
           <div className="left-header">
             <div className="header-navigation-status-desktop">
               <img src={switchIcon} className="switch-icon" onClick={this.onSwtich.bind(this)} alt="switch" />
-              <span className="user-meta-info">BantulPulsa</span>
+              <div className="user-meta-info-container ripple">
+                 <span className="user-meta-info">BantulPulsa</span>
+              </div>
             </div>
             <div className="header-navigation-status-mobile">
               <HeaderNavigationStatus />

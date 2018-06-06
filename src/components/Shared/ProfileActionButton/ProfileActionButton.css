@@ -1,0 +1,23 @@
+.verification-action-btn {
+  color: #4a90e2;
+  font-size: 13px;
+  font-family: "NunitoSans", sans-serif;
+  box-sizing: border-box;
+  width: 170.6px;
+  height: 40px;
+  border-radius: 200px;
+  background-color: #ffffff;
+  border: solid 0.5px #4a90e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  cursor: pointer; }
+  .verification-action-btn:hover {
+    box-sizing: border-box;
+    font-size: 13px;
+    border: solid 1.5px #4a90e2; }

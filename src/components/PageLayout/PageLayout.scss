@@ -1,0 +1,14 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+#main-area-content {
+  padding-top: 50px;
+  margin-bottom: 0px;
+}
+
+@include media-query(md) {
+  #main-area-content {
+    padding-top: 0px;
+    margin-bottom: 40px
+  }
+}

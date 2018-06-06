@@ -17,7 +17,10 @@ import cardIcon from './../../../../images/icons/profile-verification-icons/ico-
 
 import Progressbar from './../../../Shared/Progressbar/Progressbar';
 import CustomDivider from './../../../Shared/CustomDivider/CustomDivider';
+import ProfileActionButton from './../../../Shared/ProfileActionButton/ProfileActionButton';
 import './ProfileProgress.css';
+
+import ButtonBase from '@material-ui/core/ButtonBase';
 
 
 const ProgressBar = (props) => {
@@ -83,9 +86,16 @@ const VerificationListItem = (props) => {
               :
               <div className="verification-action-container">
                 {type === 'text' ?
-                  <div className="verification-action-btn">Lengkapi Sekarang</div>
+                // <ButtonBase focusRipple style={{'borderRadius':'200px'}}>
+
+                //   <div className="verification-action-btn">Lengkapi Sekarang</div>
+                // </ButtonBase>
+                <ProfileActionButton label="Lengkapi Sekarang"/>
                   :
-                  <div className="verification-action-btn">Upload Sekarang</div>
+                  // <ButtonBase focusRipple style={{'borderRadius':'200px'}}>
+                  //   <div className="verification-action-btn">Upload Sekarang</div>
+                  // </ButtonBase>
+                  <ProfileActionButton label="Upload Sekarang"/>
                 }
               </div>
             }

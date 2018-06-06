@@ -16,6 +16,13 @@
     line-height: normal;
     letter-spacing: 0.3px;
     margin-left: 5px; }
+  .navigation-container .home-page-label {
+    display: flex;
+    height: 50px;
+    align-items: center;
+    cursor: pointer;
+    padding: 0px 10px;
+    margin-left: -5px; }
 
 .back-btn-navigation {
   margin-left: 0px; }

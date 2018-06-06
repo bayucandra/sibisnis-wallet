@@ -1,0 +1,17 @@
+.notification-banner-container {
+  background-color: #d4e8f2;
+  border: solid 0.5px #1ba0e2;
+  display: flex;
+  padding: 15px; }
+  .notification-banner-container__icon {
+    display: block;
+    margin-right: 15px; }
+  .notification-banner-container__text {
+    font-family: NunitoSans;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: #005179; }

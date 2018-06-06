@@ -49,6 +49,10 @@ class HeaderNavigationStatus extends Component {
 
   }
 
+  goToDashboard = () =>{
+    this.props.history.push('/');
+  }
+
   render() {
     const { navigationLabel } = this.state;
     return (
@@ -61,7 +65,11 @@ class HeaderNavigationStatus extends Component {
             <div className="navigation-label">{navigationLabel}</div>
           </div> :
           <div className="navigation-container">
-            <div className="navigation-label">{navigationLabel}</div>
+            {navigationLabel == 'BantulPulsa' ?
+              <div className="navigation-label home-page-label ripple" onClick={this.goToDashboard.bind(this)}>{navigationLabel}</div>
+              :
+              <div className="navigation-label">{navigationLabel}</div>
+            }
           </div>
         }
       </div>

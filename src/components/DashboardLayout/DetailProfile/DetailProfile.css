@@ -1,5 +1,5 @@
 .detail-profile-container .detail-profile-header {
-  padding: 15px 15px 10px 15px; }
+  padding: 20px 15px 10px 15px; }
   .detail-profile-container .detail-profile-header__title {
     display: none; }
 
@@ -10,17 +10,16 @@
 
 @media screen and (min-width: 768px) {
   .detail-profile-container .detail-profile-header {
-    padding: 15px 20px 10px 20px; }
+    padding: 21px 20px 20px 20px; }
     .detail-profile-container .detail-profile-header__title {
-      display: block;
-      font-family: NunitoSans;
+      color: #404852;
       font-size: 16px;
+      font-family: "NunitoSans", sans-serif;
+      display: block;
       font-weight: bold;
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
       letter-spacing: 0.4px;
-      color: #404852;
       margin-left: 10px;
-      margin-bottom: 30px;
-      margin-top: 6px; } }
+      margin-bottom: 30px; } }

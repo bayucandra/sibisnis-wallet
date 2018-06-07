@@ -12,7 +12,7 @@ class Dashboard extends Component {
   render() {
     return (
       <React.Fragment>
-        <DetailProfile/>
+        {/* <DetailProfile/> */}
         <ProfileProgress />
         <HistoryLogin />
         <LatestNews />

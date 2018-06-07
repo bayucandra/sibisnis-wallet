@@ -1,5 +1,5 @@
-
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 /**
  * React Material Compoenents
@@ -92,6 +92,10 @@ class Profile extends Component {
     alert('hello world');
   }
 
+  onProfileSettingClick = () => {
+    this.props.history.push('/dashboard/detail-profile');
+  }
+
   onLinkClick = (name) => {
     navigationStatus.next({ navigationState: name});
   }
@@ -111,7 +115,7 @@ class Profile extends Component {
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </Tooltip> */}
 
-              <div className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background">
+              <div className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </div>
 
@@ -141,4 +145,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withRouter(Profile);

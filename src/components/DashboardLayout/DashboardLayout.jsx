@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import Profile from './Profile/Profile';
 import Dashboard from './Dashboard/Dashboard';
+import DetailProfile from './DetailProfile/DetailProfile';
 import LatestNews from "./Dashboard/LatestNews/LatestNews";
 
 import { navigationStatus } from './../../lib/utilities';
+
+import { Route } from 'react-router-dom';
 
 import './DashboardLayout.css';
 
@@ -39,7 +42,8 @@ class DashboardLayout extends Component {
                 <Profile />
               </div>
               <div className="dashboard-layout-container__right">
-                <Dashboard />
+                <Route path="/dashboard" exact={true} component={Dashboard} />
+                <Route path="/dashboard/detail-profile" component={DetailProfile} />
               </div>
             </div>
           </div>
@@ -51,7 +55,8 @@ class DashboardLayout extends Component {
             </div>
             :
             <div className={"dashboard-container "+(!this.state.profileStatus ? 'show-dashboard':'hide-dashboard')}>
-              <Dashboard />
+              <Route path="/dashboard" exact={true} component={Dashboard} />
+              <Route path="/dashboard/detail-profile" component={DetailProfile} />
             </div>
           }
         </div>

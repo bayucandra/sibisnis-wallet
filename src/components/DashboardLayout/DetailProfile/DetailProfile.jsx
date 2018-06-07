@@ -11,6 +11,7 @@ import profileIcon from './../../../images/icons/profile-verification-icons/nama
 import locationIcon from './../../../images/icons/profile-verification-icons/ico-alamat.svg';
 import cardIcon from './../../../images/icons/profile-verification-icons/ico-identitas.svg';
 import passwordIcon from './../../../images/icons/profile-verification-icons/ico-password.svg';
+import { navigationStatus } from "./../../../lib/utilities";
 
 import './DetailProfile.css';
 
@@ -19,6 +20,11 @@ class DetailProfile extends Component {
     super(props);
     this.state = {}
   }
+
+  componentWillMount() {
+    navigationStatus.next({ navigationState: 'Dashboard' });
+  }
+
   render() {
     return (
       <div id="detail-profile">

@@ -1,6 +1,5 @@
 .detail-profile-list-item {
-  padding: 15px 15px;
-  padding-top: 14.5px; }
+  padding: 8px 15px 15px 15px; }
   .detail-profile-list-item .list-meta-info {
     display: flex;
     align-items: center;
@@ -25,22 +24,24 @@
           left: 16px;
           top: -7px; }
       .detail-profile-list-item .list-meta-info__left .item-title {
-        height: 19px;
-        font-family: NunitoSans;
+        color: #404852;
         font-size: 14px;
+        font-family: "NunitoSans", sans-serif;
+        height: 19px;
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
         line-height: normal;
-        letter-spacing: 0.5px;
-        color: #404852; }
-    .detail-profile-list-item .list-meta-info__right .item-edit-icon {
+        letter-spacing: 0.5px; }
+    .detail-profile-list-item .list-meta-info__right .item-edit-icon-mobile {
       height: 50px;
       width: 50px;
       display: flex;
       align-items: center;
       justify-content: center;
       margin-right: -13px; }
+    .detail-profile-list-item .list-meta-info__right .item-edit-icon-desktop {
+      display: none; }
   .detail-profile-list-item .item-info-container {
     margin-top: -12px; }
     .detail-profile-list-item .item-info-container .item-info {
@@ -49,38 +50,40 @@
       margin-left: 45px; }
       .detail-profile-list-item .item-info-container .item-info__title {
         height: 19px;
-        font-family: NunitoSans;
+        color: #404852;
         font-size: 14px;
+        font-family: "NunitoSans", sans-serif;
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
         line-height: normal;
-        letter-spacing: 0.5px;
-        color: #404852; }
+        letter-spacing: 0.5px; }
       .detail-profile-list-item .item-info-container .item-info__value {
         height: 19px;
-        font-family: NunitoSans;
+        color: #07a8b7;
         font-size: 14px;
+        font-family: "NunitoSans", sans-serif;
         font-weight: 600;
         font-style: normal;
         font-stretch: normal;
         line-height: normal;
         letter-spacing: 0.5px;
-        color: #07a8b7;
-        margin-bottom: 9px; }
+        margin-bottom: 4px;
+        margin-top: 5px; }
       .detail-profile-list-item .item-info-container .item-info__description {
-        font-family: NunitoSans;
+        color: #80858a;
         font-size: 13px;
+        font-family: "NunitoSans", sans-serif;
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;
         line-height: 1.69;
         letter-spacing: 0.5px;
-        color: #80858a; }
+        margin-top: 5px; }
 
 @media screen and (min-width: 768px) {
   .detail-profile-list-item {
-    padding: 15px 30px; }
+    padding: 20px 30px; }
     .detail-profile-list-item .list-meta-info__left .item-icon {
       margin-right: 22.1px; }
       .detail-profile-list-item .list-meta-info__left .item-icon .i-icon {
@@ -88,6 +91,10 @@
         width: 40px; }
       .detail-profile-list-item .list-meta-info__left .item-icon .warning-icon {
         left: 24px; }
+    .detail-profile-list-item .list-meta-info__right .item-edit-icon-mobile {
+      display: none; }
+    .detail-profile-list-item .list-meta-info__right .item-edit-icon-desktop {
+      display: flex; }
     .detail-profile-list-item .item-info-container .item-info {
       width: 400px;
       margin-left: 62px; } }

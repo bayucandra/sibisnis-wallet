@@ -1,8 +1,12 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+
 .notification-banner-container{
-  background-color: #d4e8f2;
-  border: solid 0.5px #1ba0e2;
+  background-color: #ffeaea;
+  border: solid 0.5px #f3abab;
   display: flex;
-  padding: 15px;
+  padding: 14.5px;
   &__icon{
     display: block;
     margin-right: 15px;
@@ -15,6 +19,17 @@
     font-stretch: normal;
     line-height: normal;
     letter-spacing: 0.4px;
-    color: #005179;
+    color: #ac2626;
+  }
+}
+
+@include media-query(md){
+  .notification-banner-container{
+    padding: 13px 15px;
+    &__icon{
+      margin-right: 20px;
+    }
+    &__text{
+    }
   }
 }

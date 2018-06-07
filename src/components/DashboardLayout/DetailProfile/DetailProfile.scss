@@ -3,7 +3,7 @@
 @import 'styles/_variables.scss';
 .detail-profile-container {
   .detail-profile-header {
-    padding: 15px 15px 10px 15px;
+    padding: 20px 15px 10px 15px;
     &__title {
       display: none;
     }
@@ -21,21 +21,17 @@
 @include media-query(md) {
   .detail-profile-container {
     .detail-profile-header {
-      padding: 15px 20px 10px 20px;
+      padding: 21px 20px 20px 20px;
       &__title {
+        @include text-setup(#404852, 16px, $font-family);
         display: block;
-        font-family: NunitoSans;
-        font-size: 16px;
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
         line-height: normal;
         letter-spacing: 0.4px;
-        color: #404852;
-
         margin-left: 10px;
         margin-bottom: 30px;
-        margin-top: 6px;
       }
     }
   }

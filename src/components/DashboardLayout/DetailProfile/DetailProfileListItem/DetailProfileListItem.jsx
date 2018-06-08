@@ -16,7 +16,7 @@ const ItemInfo = (props) => {
 }
 
 const ListMetaInfo = (props) => {
-  const { title, status, value, icon } = props;
+  const { title, status, value, icon, edit } = props;
   return (
     <div className="list-meta-info">
       <div className="list-meta-info__left">
@@ -30,16 +30,17 @@ const ListMetaInfo = (props) => {
           {title}
         </div>
       </div>
-      {!value ?
+
+      {(!value && edit) ?
         <div className="list-meta-info__right">
-          <div className="item-edit-icon-mobile ripple">
+          <div className="item-edit-icon-mobile ripple" onClick={props.onActionClick.bind(null, (!status ? 'complete' : 'change'), props.id)}>
             <img src={editIcon} alt="edit-icon" />
           </div>
           <div className="item-edit-icon-desktop">
             {!status ?
-              <ProfileActionButton label={`Lengkapi ${title}`} />
+              <ProfileActionButton onClick={props.onActionClick.bind(null, 'complete', props.id)} label={`Lengkapi ${title}`} />
               :
-              <ProfileActionButton label="Ubah" />
+              <ProfileActionButton onClick={props.onActionClick.bind(null, 'change', props.id)} label="Ubah" />
             }
           </div>
         </div>
@@ -49,10 +50,10 @@ const ListMetaInfo = (props) => {
 }
 
 const DetailProfileListItem = (props) => {
-  const { icon, title, value, description, status } = props;
+  const { icon, title, value, description, status, edit, id } = props;
   return (
     <div className="detail-profile-list-item">
-      <ListMetaInfo value={value} icon={icon} title={title} status={status} />
+      <ListMetaInfo {...props} />
       <ItemInfo value={value} description={description} />
     </div>
   )

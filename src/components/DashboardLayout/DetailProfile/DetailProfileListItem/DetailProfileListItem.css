@@ -83,7 +83,7 @@
 
 @media screen and (min-width: 768px) {
   .detail-profile-list-item {
-    padding: 20px 30px; }
+    padding: 30px 30px 20px 30px; }
     .detail-profile-list-item .list-meta-info__left .item-icon {
       margin-right: 22.1px; }
       .detail-profile-list-item .list-meta-info__left .item-icon .i-icon {

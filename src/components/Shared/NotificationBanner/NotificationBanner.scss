@@ -25,6 +25,7 @@
 
 @include media-query(md){
   .notification-banner-container{
+    margin-top: 30px;
     padding: 13px 15px;
     &__icon{
       margin-right: 20px;

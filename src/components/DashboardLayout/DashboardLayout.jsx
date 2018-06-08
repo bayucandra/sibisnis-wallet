@@ -38,17 +38,17 @@ class DashboardLayout extends Component {
         <div className="container-wrapper">
           <div className="container-inner">
             <div className="dashboard-layout-container">
-              <div className="dashboard-layout-container__left">
+              <div className={this.state.profileStatus ? "dashboard-layout-container__left show-profile" : ' dashboard-layout-container__left hide-profile'}>
                 <Profile />
               </div>
-              <div className="dashboard-layout-container__right">
+              <div className={!this.state.profileStatus ? "dashboard-layout-container__right show-dashboard" : 'dashboard-layout-container__right hide-dashboard'}>
                 <Route path="/dashboard" exact={true} component={Dashboard} />
                 <Route path="/dashboard/detail-profile" component={DetailProfile} />
               </div>
             </div>
           </div>
         </div>
-        <div className="dashboard-layout-container-mobile">
+        {/* <div className="dashboard-layout-container-mobile">
           {this.state.profileStatus ?
             <div className={"profile-container "+ (this.state.profileStatus ? 'show-profile':'hide-profile')}>
               <Profile />
@@ -59,7 +59,7 @@ class DashboardLayout extends Component {
               <Route path="/dashboard/detail-profile" component={DetailProfile} />
             </div>
           }
-        </div>
+        </div> */}
       </React.Fragment>
      )
   }

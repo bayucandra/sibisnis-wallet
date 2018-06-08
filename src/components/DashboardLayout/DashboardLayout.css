@@ -1,23 +1,17 @@
-.dashboard-layout-container {
+.dashboard-layout-container__right {
   display: none; }
 
-.profile-container {
-  transition: transform 200ms ease-in-out; }
-
-.dashboard-container {
-  transition: transform 200ms ease-in-out; }
-
 .show-profile {
-  transform: translate(0%, 0%); }
-
-.hide-profile {
-  transform: translate(-100%, 0%); }
+  display: block; }
 
 .show-dashboard {
-  transform: translate(0%, 0%); }
+  display: block; }
+
+.hide-profile {
+  display: none; }
 
 .hide-dashboard {
-  transform: translate(100%, 0%); }
+  display: none; }
 
 @media screen and (min-width: 768px) {
   .dashboard-layout-container {
@@ -25,9 +19,11 @@
     justify-content: space-between;
     margin-top: 50px;
     margin-bottom: 20px; }
-    .dashboard-layout-container .dashboard-layout-container__left {
+    .dashboard-layout-container__left {
+      display: block;
       width: 247px; }
-    .dashboard-layout-container .dashboard-layout-container__right {
+    .dashboard-layout-container__right {
+      display: block;
       width: 723px;
       margin-left: 29px; }
   .dashboard-layout-container-mobile {

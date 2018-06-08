@@ -183,3 +183,34 @@ table {
   //   background-color: #F0F1F2;
   // }
 }
+
+/*
+===========================================
+          Mobile First Utilities
+===========================================
+*/
+
+
+@each $bp, $val in $bp-mobile-first {
+  .hidden-#{$bp}-up {
+    display: flex !important;
+    &--block {
+      display: block !important;
+    }
+    @media screen and (min-width: $val) {
+      display: none !important;
+    }
+  }
+}
+
+@each $bp, $val in $bp-mobile-first {
+  .visible-#{$bp}-up {
+    display: none !important;
+    @media screen and (min-width: $val){
+      display: flex !important;
+      &--block {
+        display: block !important;
+      }
+    }
+  }
+}

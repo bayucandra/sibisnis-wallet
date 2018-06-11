@@ -163,3 +163,27 @@
       .profile-nav-container .profile-nav-btn-active .profile-nav-btn__text {
         font-weight: bold;
         color: #4a90e2; } }
+
+.custom-tooltip-profile {
+  font-family: "NunitoSans", sans-serif !important;
+  font-size: 13px !important;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  color: white !important;
+  background-color: #404852 !important;
+  opacity: 1 !important;
+  top: 126px !important;
+  padding: 0px;
+  width: 115.6px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
+.custom-tooltip-profile:after {
+  border-left-color: #404852 !important;
+  border-left-style: solid !important;
+  border-left-width: 6px !important; }

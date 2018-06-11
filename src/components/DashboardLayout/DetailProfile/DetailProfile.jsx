@@ -80,7 +80,7 @@ class DetailProfile extends Component {
   }
 
   componentWillMount() {
-    navigationStatus.next({ navigationState: 'Dashboard' });
+    navigationStatus.next({ navigationState: 'Detail Profile' });
   }
 
   componentDidMount(){
@@ -113,9 +113,7 @@ class DetailProfile extends Component {
                 <NotificationBanner type="help" message="Untuk meningkat keamanan akun anda silahkan lengkapi profile yang bertanda warning" /> : null
               }
             </div>
-
             <div className="detail-profile-list">
-
               {itemListingData.map((item, index) => {
                 return (
                   <DetailProfileListItem
@@ -131,57 +129,6 @@ class DetailProfile extends Component {
                   />
                 )
               })}
-
-              {/* <DetailProfileListItem
-              icon={profileIcon}
-              title="Nama Lengkap"
-              value="Bapak Dwinawan Hari Wijaya"
-              status={true}
-              description="Nama lengkap adalah info yang penting untuk memperlancar proses
-              verifikasi untuk setiap transaksi saldo Anda"
-              edit={false}
-              />
-              <DetailProfileListItem
-              icon={phoneIcon}
-              title="Nomor Handphone"
-              value=""
-              status={false}
-              description="Nomor handphone sangat penting digunakan untuk proses pengiriman
-              token, Saat Anda melakukan transaksi"
-              edit={false}
-              />
-              <DetailProfileListItem
-              icon={emailIcon}
-              title="Email"
-              status={true}
-              value="dwinaxxxxx@gmail.com"
-              description="Email sangat penting digunakan untuk proses pengiriman invoice dan cara pembayaran, Saat Anda melakukan transaksi"
-              edit={false}
-              />
-              <DetailProfileListItem
-              icon={locationIcon}
-              title="Alamat"
-              value=""
-              status={false}
-              description="Alamat Anda adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda"
-              edit={true}
-              />
-              <DetailProfileListItem
-              icon={cardIcon}
-              title="Identitas"
-              value=""
-              status={false}
-              description="Data Identitas Anda sangat penting digunakan untuk melakukan verifikasi pembayaran dalam jumlah yang besar."
-              edit={true}
-              />
-              <DetailProfileListItem
-              icon={passwordIcon}
-              title="Password"
-              value=""
-              status={true}
-              description="Untuk keamanan akun anda lakukan penggantian password secara berkala, gunakan kombinasi huruf angka dan karakter."
-              edit={true}
-              /> */}
             </div>
           </div>
         </Card>

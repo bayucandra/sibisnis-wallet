@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height:50px;
     &__left {
       display: flex;
       align-items: center;
@@ -97,6 +98,7 @@
   .detail-profile-list-item {
     padding: 30px 30px 20px 30px;
     .list-meta-info{
+      height:50px;
       &__left{
         .item-icon{
           margin-right: 22.1px;

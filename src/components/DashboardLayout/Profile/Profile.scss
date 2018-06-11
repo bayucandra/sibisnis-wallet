@@ -211,3 +211,29 @@
   }
 
 }
+
+.custom-tooltip-profile {
+  font-family: $font-family !important;
+  font-size: 13px !important;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(64, 72, 82) !important;
+  opacity: 1 !important;
+  top: 126px !important;
+  padding: 0px;
+  width: 115.6px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-tooltip-profile:after {
+  border-left-color: #404852 !important;
+  border-left-style: solid !important;
+  border-left-width: 6px !important;
+}

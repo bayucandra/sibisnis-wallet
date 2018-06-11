@@ -3,7 +3,8 @@
   .detail-profile-list-item .list-meta-info {
     display: flex;
     align-items: center;
-    justify-content: space-between; }
+    justify-content: space-between;
+    height: 50px; }
     .detail-profile-list-item .list-meta-info__left {
       display: flex;
       align-items: center; }
@@ -84,17 +85,19 @@
 @media screen and (min-width: 768px) {
   .detail-profile-list-item {
     padding: 30px 30px 20px 30px; }
-    .detail-profile-list-item .list-meta-info__left .item-icon {
-      margin-right: 22.1px; }
-      .detail-profile-list-item .list-meta-info__left .item-icon .i-icon {
-        height: 40px;
-        width: 40px; }
-      .detail-profile-list-item .list-meta-info__left .item-icon .warning-icon {
-        left: 24px; }
-    .detail-profile-list-item .list-meta-info__right .item-edit-icon-mobile {
-      display: none; }
-    .detail-profile-list-item .list-meta-info__right .item-edit-icon-desktop {
-      display: flex; }
+    .detail-profile-list-item .list-meta-info {
+      height: 50px; }
+      .detail-profile-list-item .list-meta-info__left .item-icon {
+        margin-right: 22.1px; }
+        .detail-profile-list-item .list-meta-info__left .item-icon .i-icon {
+          height: 40px;
+          width: 40px; }
+        .detail-profile-list-item .list-meta-info__left .item-icon .warning-icon {
+          left: 24px; }
+      .detail-profile-list-item .list-meta-info__right .item-edit-icon-mobile {
+        display: none; }
+      .detail-profile-list-item .list-meta-info__right .item-edit-icon-desktop {
+        display: flex; }
     .detail-profile-list-item .item-info-container .item-info {
       width: 400px;
       margin-left: 62px; } }

@@ -22,7 +22,7 @@ class DashboardLayout extends Component {
   componentWillMount() {
     navigationStatus.subscribe(
       (data) => {
-        if (data.navigationState === 'Dashboard') {
+        if (data.navigationState === 'Dashboard' || data.navigationState === 'Detail Profile' ) {
           this.setState({ profileStatus: false });
         } else {
           this.setState({ profileStatus: true });

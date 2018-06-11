@@ -39,7 +39,7 @@ class HeaderNavigationStatus extends Component {
     let previousLink = '';
 
     if (this.state.navigationState) {
-      if(this.state.navigationLabel === 'Dashboard'){
+      if(this.state.navigationLabel === 'Dashboard' || this.state.navigationLabel === 'Detail Profile'){
         if(this.props.location.pathname === "/dashboard/detail-profile"){
           this.props.history.goBack();
           navigationStatus.next({ navigationState: 'BantulPulsa'});

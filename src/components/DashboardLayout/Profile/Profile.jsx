@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import ReactTooltip from 'react-tooltip'
 
 /**
  * React Material Compoenents
@@ -9,13 +10,6 @@ import CardContent from '@material-ui/core/CardContent';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import { Tooltip } from 'react-tippy';
-import ButtonBase from '@material-ui/core/ButtonBase';
-
-
 
 /**
  * Custom Icons
@@ -106,16 +100,8 @@ class Profile extends Component {
         <Card className="custom-card-styles profile-card-container">
           <CardContent className="profile-card-content-container">
             <div className="profile-container">
-              {/* <Tooltip
-                title="Profile anda"
-                position="left"
-                arrow={true}
-                light={true}
-              >
-                <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
-              </Tooltip> */}
-
-              <div className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
+              <ReactTooltip className="custom-tooltip-profile" place="left" type="dark" effect="solid" />
+              <div data-tip='Profile anda' className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </div>
 

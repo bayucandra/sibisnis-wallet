@@ -1,0 +1,25 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+
+.MuiDialog-paper-22{
+  margin:0px !important;
+  border-radius: 2px !important;
+}
+
+.close-icon-container{
+  position: absolute;
+  opacity: 0.2;
+  right: 1px;
+  top: 1px;
+}
+
+@include media-query(md){
+  .close-icon-container{
+    right: 6px !important;
+    top: 5px !important;
+    &:hover{
+      opacity: 1 !important;
+    }
+  }
+}

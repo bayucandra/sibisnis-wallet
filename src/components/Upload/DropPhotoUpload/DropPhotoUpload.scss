@@ -1,0 +1,129 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+.drop-photo-upload-container {
+  width: 290px;
+  padding: 30px 25px 50px 25px;
+  .drop-photo-upload-header {
+    &__title {
+      @include text-setup($charcoal-grey, 18px, $font-family);
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      text-align: center;
+    }
+    &__description {
+      @include text-setup($charcoal-grey, 14px, $font-family);
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 25px;
+    }
+  }
+  .drop-zone-area-container {
+    .drop-zone {
+      height: 170px;
+      border-radius: 2px;
+      background-color: #fbfbfb;
+      border: dashed 2px #dedede;
+      cursor: pointer;
+      .drop-zone-area {
+        text-align: center;
+        margin-top: 28px;
+        .upload-icon-desktop {
+          display: none;
+        }
+        &__icon {
+          margin-bottom: 24px;
+        }
+        &__description {
+          width: 200px;
+          @include text-setup(#bfc6c8, 13px, $font-family);
+          font-weight: 600;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: center;
+          margin: 0 auto;
+        }
+      }
+    }
+  }
+  .drop-photo-upload-button {
+    @include text-setup($white, 14px, $font-family);
+    height: 50px;
+    border-radius: 2px;
+    background-color: #2196f3;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+    cursor: pointer;
+  }
+}
+
+@include media-query(md) {
+  .drop-photo-upload-container {
+    width: 430px !important;
+    padding: 50px 60px 40px 60px !important;
+    .drop-photo-upload-header {
+        width: 380px;
+        margin: 0 auto;
+      &__title {
+        @include text-setup($charcoal-grey, 20px, $font-family);
+      }
+      &__description{
+        width: 380px !important;
+        margin-top: 15px !important;
+        margin-bottom: 40px !important;
+      }
+    }
+
+    .drop-zone-area-container{
+      .drop-zone{
+        height: 248px !important;
+        .drop-zone-area{
+          margin-top:49px !important;
+          .upload-icon-mobile{
+            display: none !important;
+          }
+          .upload-icon-desktop{
+            display: inline-block !important;
+          }
+          &__icon{
+            margin-bottom:20px !important;
+          }
+
+          &__description{
+            width:240px !important;
+          }
+        }
+        &:hover{
+          border: dashed 2px #2196f3;
+        }
+      }
+      .drop-zone-active{
+        border: dashed 2px #2196f3;
+      }
+    }
+
+    .drop-photo-upload-button{
+      width: 360px !important;
+      margin: 0 auto !important;
+      margin-top: 40px !important;
+    }
+  }
+}

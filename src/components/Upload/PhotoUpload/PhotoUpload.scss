@@ -1,0 +1,99 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+.photo-upload-container {
+  width: 290px;
+  padding: 30px 25px 60px 25px;
+  .photo-upload-header {
+    text-align: center;
+    &__title {
+      @include text-setup($charcoal-grey, 18px, $font-family);
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      width: 200px;
+      margin: 0 auto;
+    }
+    &__description {
+      @include text-setup($charcoal-grey, 14px, $font-family);
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      margin-top: 20px;
+    }
+  }
+  .photo-upload-button {
+    margin-top: 50px;
+    &__file {
+      margin-bottom: 20px;
+    }
+  }
+}
+
+.upload-button-container {
+  .upload-button {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    border-radius: 2px;
+    background-color: #f8f8f8;
+    cursor: pointer;
+    &__icon {
+      display: flex;
+      margin-left: 30px;
+      margin-right: 25px;
+      img {
+        height: 24px;
+        width: 24px;
+      }
+    }
+    &__label {
+      font-family: NunitoSans;
+      font-size: 14px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      color: #049ff7;
+    }
+  }
+  .upload-file-input {
+    display: none;
+  }
+}
+
+@include media-query(md) {
+  .photo-upload-container {
+    width: 360px;
+    padding: 50px 95px 80px 95px;
+    .photo-upload-header {
+      &__title {
+        @include text-setup($charcoal-grey, 20px, $font-family);
+        width: auto !important;
+      }
+      &__description {
+        @include text-setup($charcoal-grey, 14px, $font-family);
+        margin-top: 15px;
+      }
+    }
+    .photo-upload-button {
+      margin-top: 80px;
+    }
+  }
+  .upload-button-container {
+    .upload-button {
+      &__icon {
+        margin-left: 35px !important;
+        margin-right: 55px !important;
+      }
+      &:hover{
+        background-color: #eff9ff !important;
+      }
+    }
+  }
+}

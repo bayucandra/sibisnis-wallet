@@ -4,7 +4,7 @@
 
 #profile-card {
   .profile-card-container{
-    height: calc(100vh - 50px);
+    min-height: calc(100vh - 50px);
     .profile-card-content-container{
       padding: 0px;
     }
@@ -65,6 +65,7 @@
       height: 60px;
       border-radius: 50px;
       vertical-align: top;
+      cursor: pointer;
     }
   }
   .profile-info__name {

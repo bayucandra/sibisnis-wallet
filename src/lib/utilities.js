@@ -8,3 +8,11 @@ import { Subject } from 'rxjs'
  * }
  */
 export const navigationStatus = new Subject();
+
+/**
+ * Sample Data
+ * data = {
+ *  status
+ * }
+ */
+export const modalToggle = new Subject();

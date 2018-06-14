@@ -1,0 +1,79 @@
+.photo-upload-container {
+  width: 290px;
+  padding: 30px 25px 60px 25px; }
+  .photo-upload-container .photo-upload-header {
+    text-align: center; }
+    .photo-upload-container .photo-upload-header__title {
+      color: #404852;
+      font-size: 18px;
+      font-family: "NunitoSans", sans-serif;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      width: 200px;
+      margin: 0 auto; }
+    .photo-upload-container .photo-upload-header__description {
+      color: #404852;
+      font-size: 14px;
+      font-family: "NunitoSans", sans-serif;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      margin-top: 20px; }
+  .photo-upload-container .photo-upload-button {
+    margin-top: 50px; }
+    .photo-upload-container .photo-upload-button__file {
+      margin-bottom: 20px; }
+
+.upload-button-container .upload-button {
+  display: flex;
+  align-items: center;
+  height: 50px;
+  border-radius: 2px;
+  background-color: #f8f8f8;
+  cursor: pointer; }
+  .upload-button-container .upload-button__icon {
+    display: flex;
+    margin-left: 30px;
+    margin-right: 25px; }
+    .upload-button-container .upload-button__icon img {
+      height: 24px;
+      width: 24px; }
+  .upload-button-container .upload-button__label {
+    font-family: NunitoSans;
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    color: #049ff7; }
+
+.upload-button-container .upload-file-input {
+  display: none; }
+
+@media screen and (min-width: 768px) {
+  .photo-upload-container {
+    width: 360px;
+    padding: 50px 95px 80px 95px; }
+    .photo-upload-container .photo-upload-header__title {
+      color: #404852;
+      font-size: 20px;
+      font-family: "NunitoSans", sans-serif;
+      width: auto !important; }
+    .photo-upload-container .photo-upload-header__description {
+      color: #404852;
+      font-size: 14px;
+      font-family: "NunitoSans", sans-serif;
+      margin-top: 15px; }
+    .photo-upload-container .photo-upload-button {
+      margin-top: 80px; }
+  .upload-button-container .upload-button__icon {
+    margin-left: 35px !important;
+    margin-right: 55px !important; }
+  .upload-button-container .upload-button:hover {
+    background-color: #eff9ff !important; } }

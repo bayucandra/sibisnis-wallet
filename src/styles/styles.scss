@@ -37,12 +37,9 @@ table {
   display: none;
 }
 
-.show {
-  display: block;
-}
-
-.show-flex {
-  display: flex;
+.disabled{
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /*
@@ -190,27 +187,51 @@ table {
 ===========================================
 */
 
-
-@each $bp, $val in $bp-mobile-first {
-  .hidden-#{$bp}-up {
+.mobile-show {
+  &__flex {
     display: flex !important;
-    &--block {
-      display: block !important;
-    }
-    @media screen and (min-width: $val) {
-      display: none !important;
-    }
+  }
+  &__block {
+    display: block !important;
+  }
+  &__inline-block {
+    display: inline-block !important;
   }
 }
 
-@each $bp, $val in $bp-mobile-first {
-  .visible-#{$bp}-up {
+.desktop-show {
+  &__flex {
     display: none !important;
-    @media screen and (min-width: $val){
+  }
+  &__block {
+    display: none !important;
+  }
+  &__inline-block {
+    display: none !important;
+  }
+}
+
+@include media-query(md) {
+  .mobile-show {
+    &__flex {
+      display: none !important;
+    }
+    &__block {
+      display: none !important;
+    }
+    &__inline-block {
+      display: none !important;
+    }
+  }
+  .desktop-show {
+    &__flex {
       display: flex !important;
-      &--block {
-        display: block !important;
-      }
+    }
+    &__block {
+      display: block !important;
+    }
+    &__inline-block {
+      display: inline-block !important;
     }
   }
 }

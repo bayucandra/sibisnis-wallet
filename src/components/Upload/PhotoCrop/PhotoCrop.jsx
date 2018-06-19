@@ -47,7 +47,12 @@ class PhotoCrop extends Component {
         height: 80,
       },
       src: null,
-      pixelCrop: null,
+      pixelCrop: {
+        x: 10,
+        y: 10,
+        width: 80,
+        height: 80,
+      },
       croppedSrc: null
     }
   }
@@ -66,6 +71,9 @@ class PhotoCrop extends Component {
 
   onCropComplete = (crop, pixelCrop) => {
     this.setState({ pixelCrop })
+
+    let cropedImage = getCroppedImg(this.props.src, this.state.pixelCrop, 'cropped-image');
+    this.props.onImageCrop(cropedImage);
   }
 
   onCropChange = (crop, pixelCrop) => {
@@ -80,7 +88,7 @@ class PhotoCrop extends Component {
     // })
 
     let cropedImage = getCroppedImg(file, pixelCrop, fileName);
-    debugger;
+    this.props.onImageCrop(cropedImage);
     this.setState({ croppedSrc: cropedImage });
   }
 
@@ -94,8 +102,8 @@ class PhotoCrop extends Component {
           onComplete={this.onCropComplete}
           onChange={this.onCropChange}
         />
-        <button onClick={this.onImageCroped.bind(this, this.state.src, this.state.pixelCrop, 'croped-file')}>Get Croped Image</button>
-        {this.state.croppedSrc ? <img src={this.state.croppedSrc} alt="image-src" height="200" width="200" /> : ''}
+        {/* <button onClick={this.onImageCroped.bind(this, this.props.src, this.state.pixelCrop, 'croped-file')}>Get Croped Image</button>
+        {this.state.croppedSrc ? <img src={this.state.croppedSrc} alt="image-src" height="200" width="200" /> : ''} */}
       </div>
     )
   }

@@ -66,6 +66,26 @@
     justify-content: center;
     margin-top: 50px;
     cursor: pointer; }
+  .drop-photo-upload-container .change-image-button-container .change-image-button {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 2px;
+    background-color: #ffffff;
+    color: #404852;
+    font-size: 14px;
+    font-family: "NunitoSans", sans-serif;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    margin-top: 10px; }
+  .drop-photo-upload-container .change-image-button-container .change-image-input {
+    display: none; }
 
 @media screen and (min-width: 768px) {
   .drop-photo-upload-container {

@@ -19,7 +19,7 @@ import mutasiIcon from './../../../images/icons/ico-mutasi.svg';
 import transferIcon from './../../../images/icons/transfer-saldo.svg';
 import rightArrow from './../../../images/icons/litle-right.svg';
 import profileSettings from './../../../images/icons/profile-settings.svg';
-import avatarPlacerholder from './../../../images/avatar-placeholder.png';
+import avatarPlacerholderBlank from './../../../images/avatar-placeholder-blank.svg';
 
 /**
  * Custom Components
@@ -38,7 +38,7 @@ const ProfileInfo = (props) => {
   return (
     <div className="profile-info">
       <div className="profile-info__img">
-        <img src={image} alt="profile-avatar" onClick={imageAction}/>
+        <img src={image ? image : avatarPlacerholderBlank} alt="profile-avatar" onClick={imageAction} />
       </div>
       <div className="profile-info__name">{name ? name : 'N/A'}</div>
       <div className="profile-info__email">{email ? email : 'N/A'}</div>
@@ -111,7 +111,7 @@ class Profile extends Component {
               <ProfileInfo
                 name='Arziky Yusya'
                 email="arzikyyu@gmail.com"
-                image={avatarPlacerholder}
+                image={null}
                 imageAction={this.onProfileImageClick.bind(this)}
               />
               <Balance balance={'100.750.565'} />

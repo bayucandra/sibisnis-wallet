@@ -3,7 +3,7 @@
 @import 'styles/_variables.scss';
 .drop-photo-upload-container {
   width: 290px;
-  padding: 30px 25px 50px 25px;
+  padding: 30px 25px 20px 25px;
   .drop-photo-upload-header {
     &__title {
       @include text-setup($charcoal-grey, 18px, $font-family);
@@ -102,7 +102,7 @@
 @include media-query(md) {
   .drop-photo-upload-container {
     width: 430px !important;
-    padding: 50px 60px 40px 60px !important;
+    padding: 50px 60px 20px 60px !important;
     .drop-photo-upload-header {
         width: 380px;
         margin: 0 auto;

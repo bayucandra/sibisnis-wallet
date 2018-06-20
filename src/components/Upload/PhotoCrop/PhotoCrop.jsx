@@ -45,6 +45,7 @@ class PhotoCrop extends Component {
         y: 10,
         width: 80,
         height: 80,
+        aspect: 1 / 1,
       },
       src: null,
       pixelCrop: {
@@ -58,14 +59,31 @@ class PhotoCrop extends Component {
   }
 
   onImageLoaded = (image) => {
-    this.setState({
-      crop: makeAspectCrop({
-        x: 0,
-        y: 0,
-        aspect: 1 / 1,
-        width: 50,
-      }, image.width / image.height),
-    });
+    // debugger;
+    let crop = {
+      x: 15,
+      y: 15,
+      width: 70,
+      height: 70,
+      aspect: 1 / 1,
+    }
+
+    if (image.height > image.width) {
+      crop.x = 0;
+      crop.width = 100;
+    } else {
+      crop.y = 0;
+      crop.height = 100;
+    }
+    this.setState({crop:crop})
+    // this.setState({
+    //   crop: makeAspectCrop({
+    //     x: 50,
+    //     y: 50,
+    //     aspect: 1 / 1,
+    //     width: 50,
+    //   }, image.width / image.height),
+    // });
     console.log('onCropComplete', image)
   }
 
@@ -95,13 +113,29 @@ class PhotoCrop extends Component {
   render() {
     return (
       <div className="photo-crop-container">
-        <ReactCrop
-          src={this.props.src}
-          crop={this.state.crop}
-          onImageLoaded={this.onImageLoaded}
-          onComplete={this.onCropComplete}
-          onChange={this.onCropChange}
-        />
+        <div className="photo-crop-container__desktop">
+          <ReactCrop
+            src={this.props.src}
+            crop={this.state.crop}
+            onImageLoaded={this.onImageLoaded}
+            onComplete={this.onCropComplete}
+            onChange={this.onCropChange}
+            imageStyle={{ height: '252px' }}
+            className="my-image"
+          />
+        </div>
+        <div className="photo-crop-container__mobile">
+          <ReactCrop
+            src={this.props.src}
+            crop={this.state.crop}
+            onImageLoaded={this.onImageLoaded}
+            onComplete={this.onCropComplete}
+            onChange={this.onCropChange}
+            imageStyle={{ height: '170px' }}
+            className="my-image"
+          />
+        </div>
+
         {/* <button onClick={this.onImageCroped.bind(this, this.props.src, this.state.pixelCrop, 'croped-file')}>Get Croped Image</button>
         {this.state.croppedSrc ? <img src={this.state.croppedSrc} alt="image-src" height="200" width="200" /> : ''} */}
       </div>

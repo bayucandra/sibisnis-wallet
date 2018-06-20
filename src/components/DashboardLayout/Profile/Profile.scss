@@ -134,31 +134,33 @@
 }
 
 @include media-query(md) {
-
-
-  .profile-card-container {
-    height: 499px !important;
-    .profile-card-content-container {
-      padding: 0px;
-    }
-    .profile-container {
-      margin-top: 0px !important;
-      .profile-settings-icon-container {
-        position: absolute;
-        top: 7px !important;
-        right: 7px !important;
-        height: 40px;
-        width: 40px;
+  #profile-card{
+    .profile-card-container {
+      height: 499px !important;
+      min-height: 499px !important;
+      .profile-card-content-container {
+        padding: 0px;
       }
-      .profile-info {
-        margin-top: 30px;
-        .profile-info__name {}
-        .profile-info__img {
-          height: 60px;
+      .profile-container {
+        margin-top: 0px !important;
+        .profile-settings-icon-container {
+          position: absolute;
+          top: 7px !important;
+          right: 7px !important;
+          height: 40px;
+          width: 40px;
+        }
+        .profile-info {
+          margin-top: 30px;
+          .profile-info__name {}
+          .profile-info__img {
+            height: 60px;
+          }
         }
       }
     }
   }
+
   .custom-divider{
     display: none;
   }

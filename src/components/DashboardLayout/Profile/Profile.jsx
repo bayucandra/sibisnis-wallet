@@ -30,6 +30,7 @@ import ProfileButton from './../../Shared/ProfileButton/ProfileButton';
  */
 
 import { navigationStatus, modalToggle } from "./../../../lib/utilities";
+import { modalTypes } from './../../../lib/constants';
 
 import './Profile.css';
 
@@ -38,7 +39,7 @@ const ProfileInfo = (props) => {
   return (
     <div className="profile-info">
       <div className="profile-info__img">
-        <img src={image ? image : avatarPlacerholderBlank} alt="profile-avatar" onClick={imageAction} />
+        <img src={image ? image : avatarPlacerholderBlank} alt="profile-avatar" onClick={imageAction.bind(this,image ? image : null)} />
       </div>
       <div className="profile-info__name">{name ? name : 'N/A'}</div>
       <div className="profile-info__email">{email ? email : 'N/A'}</div>
@@ -90,8 +91,12 @@ class Profile extends Component {
     this.props.history.push('/dashboard/detail-profile');
   }
 
-  onProfileImageClick = () => {
-    modalToggle.next({status:true});
+  onProfileImageClick = (image) => {
+    if (!image) {
+      modalToggle.next({ status: true, type: modalTypes.imageUpload });
+    } else {
+      modalToggle.next({ status: true, type: modalTypes.profileImagePreview, payload: { image: image } });
+    }
   }
 
   onLinkClick = (name) => {
@@ -111,8 +116,9 @@ class Profile extends Component {
               <ProfileInfo
                 name='Arziky Yusya'
                 email="arzikyyu@gmail.com"
-                image={null}
-                imageAction={this.onProfileImageClick.bind(this)}
+                image={profileSettings}
+                // image={null}
+                imageAction={this.onProfileImageClick}
               />
               <Balance balance={'100.750.565'} />
               <div className="profile-buttons-container text-center">

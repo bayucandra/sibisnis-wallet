@@ -85,19 +85,22 @@ class DropPhotoUpload extends Component {
             <PhotoCrop src={this.state.src} onImageCrop={this.onImageCrop} />
           </div>
         }
-        <div className={"drop-photo-upload-button " + (this.state.files.length > 0 ? '' : 'disabled')} onClick={this.onImageUploadStart.bind(this)}>
-          Upload Foto
-          <div className="upload-progress"></div>
-        </div>
 
-        {this.state.src ?
-          <div className="change-image-button-container">
-            <label htmlFor="change-image" className="change-image-button ripple">
-              Ganti Foto
-         </label>
-            <input type="file" id="change-image" onChange={this.onImageChange.bind(this)} className="change-image-input" accept="image/jpeg, image/png" />
-          </div> : null
-        }
+        <div className="image-actions-container">
+          <div className={"drop-photo-upload-button " + (this.state.files.length > 0 ? '' : 'disabled')} onClick={this.onImageUploadStart.bind(this)}>
+            Upload Foto
+          <div className="upload-progress"></div>
+          </div>
+
+          {this.state.src ?
+            <div className="change-image-button-container">
+              <label htmlFor="change-image" className="change-image-button ripple">
+                Ganti Foto
+              </label>
+              <input type="file" id="change-image" onChange={this.onImageChange.bind(this)} className="change-image-input" accept="image/jpeg, image/png" />
+            </div> : null
+          }
+        </div>
 
       </div>
     )

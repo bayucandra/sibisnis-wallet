@@ -1,8 +1,8 @@
 {
-  "main.css": "static/css/main.7d700e74.css",
-  "main.css.map": "static/css/main.7d700e74.css.map",
-  "main.js": "static/js/main.ad7ba049.js",
-  "main.js.map": "static/js/main.ad7ba049.js.map",
+  "main.css": "static/css/main.60cd08ab.css",
+  "main.css.map": "static/css/main.60cd08ab.css.map",
+  "main.js": "static/js/main.3e970716.js",
+  "main.js.map": "static/js/main.3e970716.js.map",
   "static\\media\\Nunito-Bold.ttf": "static/media/Nunito-Bold.6f47bcfc.ttf",
   "static\\media\\Nunito-Light.ttf": "static/media/Nunito-Light.c41c2502.ttf",
   "static\\media\\Nunito-LightItalic.ttf": "static/media/Nunito-LightItalic.42441320.ttf",
@@ -35,6 +35,8 @@
   "static\\media\\nama-lengkap.svg": "static/media/nama-lengkap.c0960b0d.svg",
   "static\\media\\nomor-hp.svg": "static/media/nomor-hp.7c961d72.svg",
   "static\\media\\profile-settings.svg": "static/media/profile-settings.3a4a29a3.svg",
+  "static\\media\\s-litle-right.svg": "static/media/s-litle-right.4a04bb62.svg",
   "static\\media\\switch.svg": "static/media/switch.706509d6.svg",
+  "static\\media\\test.jpg": "static/media/test.f6912f85.jpg",
   "static\\media\\transfer-saldo.svg": "static/media/transfer-saldo.839c8ce0.svg"
 }

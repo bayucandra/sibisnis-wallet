@@ -62,7 +62,7 @@ class Modal extends Component {
         break;
 
       default:
-        return null
+        return <React.Fragment></React.Fragment>
         break;
     }
   }

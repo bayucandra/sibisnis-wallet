@@ -33,6 +33,7 @@ import { navigationStatus, modalToggle } from "./../../../lib/utilities";
 import { modalTypes } from './../../../lib/constants';
 
 import './Profile.css';
+import profileTestImage from './../../../images/test.jpg';
 
 const ProfileInfo = (props) => {
   const { name, email, image, imageAction } = props;
@@ -116,7 +117,7 @@ class Profile extends Component {
               <ProfileInfo
                 name='Arziky Yusya'
                 email="arzikyyu@gmail.com"
-                image={profileSettings}
+                image={profileTestImage}
                 // image={null}
                 imageAction={this.onProfileImageClick}
               />

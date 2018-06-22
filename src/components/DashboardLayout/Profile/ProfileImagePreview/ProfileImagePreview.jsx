@@ -40,7 +40,7 @@ class ProfileImagePreview extends Component {
     const { anchorEl } = this.state;
     return (
       <div className="profile-image-preview-container" >
-        <img src={`..${this.props.data.image}`} alt="" className="image-preview" onClick={this.onMenuClose.bind(this)} />
+        <img src={`${this.props.data.image}`} alt="" className="image-preview" onClick={this.onMenuClose.bind(this)} />
         <div className="profile-menu-container">
           <div className="profile-menu-button ripple icon-touch-area-container-40">
             {/* <img src={menuIcon} alt="menu-icon" /> */}

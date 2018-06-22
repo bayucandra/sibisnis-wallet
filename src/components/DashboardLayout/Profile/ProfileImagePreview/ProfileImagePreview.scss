@@ -21,6 +21,9 @@
     .profile-menu-button {
       border-radius: 50px;
     }
+    &:hover{
+      background-image: linear-gradient(197deg, rgba(0, 96, 255, 0.35), rgba(0, 96, 255, 0));
+    }
   }
 
 }
@@ -28,7 +31,7 @@
 .custom-menu {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 5px;
   background-color: #fff;
   border-radius: 3px;
   .custom-menu-item {
@@ -36,7 +39,40 @@
     width: 176px;
     display: flex;
     align-items: center;
-    justify-content: center;
+    cursor: pointer;
+    border-top: solid 0.5px #dedede;
+    &__text{
+      margin-left:20px;
+      display: flex;
+      align-items: center;
+      font-family: NunitoSans;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      color: #404852;
+      img{
+        margin-left:5px;
+      }
+    }
+  }
+  .expand {
+    width: 216px;
+    .custom-menu-item__text {
+      margin-left: 46px;
+      img {
+        margin-left: -36px;
+        margin-right: 13px;
+      }
+    }
+    .active{
+      color: #27a9d1;
+    }
+  }
+  &:nth-child(1){
+    border:0px;
   }
 }
 

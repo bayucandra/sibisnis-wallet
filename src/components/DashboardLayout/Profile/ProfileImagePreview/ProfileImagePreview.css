@@ -15,11 +15,13 @@
     justify-content: flex-end; }
     .profile-image-preview-container .profile-menu-container .profile-menu-button {
       border-radius: 50px; }
+    .profile-image-preview-container .profile-menu-container:hover {
+      background-image: linear-gradient(197deg, rgba(0, 96, 255, 0.35), rgba(0, 96, 255, 0)); }
 
 .custom-menu {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: 5px;
   background-color: #fff;
   border-radius: 3px; }
   .custom-menu .custom-menu-item {
@@ -27,7 +29,33 @@
     width: 176px;
     display: flex;
     align-items: center;
-    justify-content: center; }
+    cursor: pointer;
+    border-top: solid 0.5px #dedede; }
+    .custom-menu .custom-menu-item__text {
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+      font-family: NunitoSans;
+      font-size: 16px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      color: #404852; }
+      .custom-menu .custom-menu-item__text img {
+        margin-left: 5px; }
+  .custom-menu .expand {
+    width: 216px; }
+    .custom-menu .expand .custom-menu-item__text {
+      margin-left: 46px; }
+      .custom-menu .expand .custom-menu-item__text img {
+        margin-left: -36px;
+        margin-right: 13px; }
+    .custom-menu .expand .active {
+      color: #27a9d1; }
+  .custom-menu:nth-child(1) {
+    border: 0px; }
 
 .profile-menu {
   width: 171px !important;

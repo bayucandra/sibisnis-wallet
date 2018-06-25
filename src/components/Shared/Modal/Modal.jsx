@@ -75,8 +75,7 @@ class Modal extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
-          className={'custom-modal ' + classes.paper}
-          styles={{padding:'0px'}}
+          className='custom-modal'
         >
           {this.getModal()}
         </Dialog>

@@ -3,6 +3,7 @@ import Dropzone from 'react-dropzone';
 import uploadIconMobile from './../../../images/icons/ico-upload-mobile.svg';
 import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
+import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';
 import './DropPhotoUpload.css';
 
 class DropPhotoUpload extends Component {
@@ -87,10 +88,15 @@ class DropPhotoUpload extends Component {
         }
 
         <div className="image-actions-container">
-          <div className={"drop-photo-upload-button " + (this.state.files.length > 0 ? '' : 'disabled')} onClick={this.onImageUploadStart.bind(this)}>
-            Upload Foto
-          <div className="upload-progress"></div>
-          </div>
+          <UploadProgressButton
+            disabled={this.state.files.length > 0}
+            progress={70}
+            onImageUploadStart={this.onImageUploadStart.bind(this)}
+          />
+          {/* <div className={"drop-photo-upload-button " + (this.state.files.length > 0 ? '' : 'disabled')}  onClick={this.onImageUploadStart.bind(this)}>
+            <span className="drop-photo-upload-button__text">Upload Foto</span>
+            <div className="drop-photo-upload-button__progress" style={{'width':'80%'}}></div>
+          </div> */}
 
           {this.state.src ?
             <div className="change-image-button-container">

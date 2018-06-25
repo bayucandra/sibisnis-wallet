@@ -3,12 +3,13 @@ import DropPhotoUpload from './../DropPhotoUpload/DropPhotoUpload';
 import './PhotoUpload.css';
 import fileIconBlue from './../../../images/icons/ico-file-blue.svg';
 import cameraIconBlue from './../../../images/icons/ico-camera-blue.svg';
+import WebcamCapture from './../../Shared/WebcamCapture/WebcamCapture';
 
 const UploadButton = (props) => {
-  const { id, icon, label } = props
+  const { id, icon, label, onClick } = props
   return (
     <div className="upload-button-container">
-      <label htmlFor={id} className="upload-button ripple">
+      <label htmlFor={id} className="upload-button ripple" onClick={onClick(id)}>
         <div className="upload-button__icon">
           <img src={icon} alt="icon-button" />
         </div>
@@ -17,7 +18,7 @@ const UploadButton = (props) => {
         </div>
       </label>
       {id === "camera" ?
-        <input type="file" accept="image/*;capture=camera" id={id} className="upload-file-input" />
+        <input type="file" accept="image/*;capture=camera" capture="camera" id={id} className="upload-file-input" />
         :
         <input type="file" id={id} className="upload-file-input" />
       }
@@ -28,7 +29,8 @@ class PhotoUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dragPhotoUpload: false
+      dragPhotoUpload: false,
+      cameraCapture: false
     }
   }
 
@@ -36,8 +38,20 @@ class PhotoUpload extends Component {
     this.setState({dragPhotoUpload:true});
   }
 
+  toggleCameraCapture = (id) =>{
+    // if(!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)){
+    //   this.setState({ cameraCapture: true })
+    // }else{
+    //   alert('getUserMedia() is not supported by your browser');
+    // }
+  }
+
+  onCameraCapture = (image) =>{
+    debugger;
+  }
+
   render() {
-    const { dragPhotoUpload } = this.state;
+    const { dragPhotoUpload, cameraCapture } = this.state;
     return (
       <React.Fragment>
         {!dragPhotoUpload ?
@@ -60,7 +74,19 @@ class PhotoUpload extends Component {
                 </div>
               </div>
               <div className="photo-upload-button__Camera">
-                <UploadButton icon={cameraIconBlue} label="Ambil dari Kamera" id="camera" />
+                {cameraCapture ? <WebcamCapture onCameraCapture={this.onCameraCapture} /> : null}
+                {/* <UploadButton icon={cameraIconBlue} label="Ambil dari Kamera" onClick={this.toggleCameraCapture.bind(this)} id="camera" /> */}
+
+                <div className="upload-button-container">
+                  <label htmlFor="file" className="upload-button ripple" onClick={this.toggleCameraCapture.bind(this)}>
+                    <div className="upload-button__icon">
+                      <img src={cameraIconBlue} alt="icon-button" />
+                    </div>
+                    <div className="upload-button__label">
+                      Ambil dari Kamera
+                    </div>
+                  </label>
+                </div>
               </div>
             </div>
           </div> :

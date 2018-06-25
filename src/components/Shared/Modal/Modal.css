@@ -1,4 +1,8 @@
-.custom-modal div:nth-child(2) {
+.jss30 {
+  margin: 0px !important;
+  border-radius: 2px !important; }
+
+.MuiPaper-rounded-30 {
   margin: 0px !important;
   border-radius: 2px !important; }
 

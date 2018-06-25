@@ -23,7 +23,7 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: normal;
-      margin-top: 20px; }
+      margin-top: 20px !important; }
   .photo-upload-container .photo-upload-button {
     margin-top: 50px; }
     .photo-upload-container .photo-upload-button__file {
@@ -69,7 +69,7 @@
       color: #404852;
       font-size: 14px;
       font-family: "NunitoSans", sans-serif;
-      margin-top: 15px; }
+      margin-top: 15px !important; }
     .photo-upload-container .photo-upload-button {
       margin-top: 80px; }
   .upload-button-container .upload-button__icon {

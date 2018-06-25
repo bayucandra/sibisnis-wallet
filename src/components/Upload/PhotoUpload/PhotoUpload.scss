@@ -23,7 +23,7 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: normal;
-      margin-top: 20px;
+      margin-top: 20px !important;
     }
   }
   .photo-upload-button {
@@ -78,7 +78,7 @@
       }
       &__description {
         @include text-setup($charcoal-grey, 14px, $font-family);
-        margin-top: 15px;
+        margin-top: 15px !important;
       }
     }
     .photo-upload-button {

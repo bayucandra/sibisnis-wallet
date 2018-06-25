@@ -18,6 +18,7 @@
     "react-scripts": "1.1.4",
     "react-tooltip": "^3.6.1",
     "react-transition-group": "^2.3.1",
+    "react-webcam": "^0.5.0",
     "rxjs": "^6.2.0"
   },
   "scripts": {

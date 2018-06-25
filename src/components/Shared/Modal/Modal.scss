@@ -2,13 +2,23 @@
 @import 'styles/_mixins.scss';
 @import 'styles/_variables.scss';
 
-.custom-modal {
-  div{
-    &:nth-child(2) {
-      margin: 0px !important;
-      border-radius: 2px !important;
-    }
-  }
+// .custom-modal {
+//   div{
+//     &:nth-of-type(2) {
+//       margin: 0px !important;
+//       border-radius: 2px !important;
+//     }
+//   }
+// }
+
+.jss30 {
+  margin: 0px !important;
+  border-radius: 2px !important;
+}
+
+.MuiPaper-rounded-30 {
+  margin: 0px !important;
+  border-radius: 2px !important;
 }
 
 .close-icon-container{

@@ -9,7 +9,6 @@ import { modalToggle } from './../../../lib/utilities';
 import { modalTypes } from './../../../lib/constants';
 
 import './Modal.css';
-
 class Modal extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +67,7 @@ class Modal extends Component {
   }
 
   render() {
-    const { fullScreen } = this.props;
+    const { fullScreen, classes  } = this.props;
     return (
       <div>
         <Dialog
@@ -76,7 +75,8 @@ class Modal extends Component {
           open={this.state.open}
           onClose={this.handleClose}
           aria-labelledby="responsive-dialog-title"
-          className="custom-modal"
+          className={'custom-modal ' + classes.paper}
+          styles={{padding:'0px'}}
         >
           {this.getModal()}
         </Dialog>

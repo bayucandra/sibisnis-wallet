@@ -4,6 +4,8 @@ import './PhotoUpload.css';
 import fileIconBlue from './../../../images/icons/ico-file-blue.svg';
 import cameraIconBlue from './../../../images/icons/ico-camera-blue.svg';
 import WebcamCapture from './../../Shared/WebcamCapture/WebcamCapture';
+import { modalToggle } from '../../../lib/utilities';
+import { modalTypes } from '../../../lib/constants';
 
 const UploadButton = (props) => {
   const { id, icon, label, onClick } = props
@@ -38,12 +40,14 @@ class PhotoUpload extends Component {
     this.setState({dragPhotoUpload:true});
   }
 
-  toggleCameraCapture = (id) =>{
-    // if(!!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia)){
-    //   this.setState({ cameraCapture: true })
-    // }else{
-    //   alert('getUserMedia() is not supported by your browser');
-    // }
+  toggleCameraCapture = (id) => {
+    // this.setState({ cameraCapture: true });
+    if (navigator.getUserMedia) {
+      // this.setState({ cameraCapture: true })
+      modalToggle.next({ status: true, type: modalTypes.webCameraCapture });
+    } else {
+      alert('getUserMedia() is not supported by your browser');
+    }
   }
 
   onCameraCapture = (image) =>{
@@ -68,7 +72,7 @@ class PhotoUpload extends Component {
                       <img src={fileIconBlue} alt="icon-button" />
                     </div>
                     <div className="upload-button__label">
-                      Ambil dari direktori
+                      Ambil dari direktoriz
                     </div>
                   </label>
                 </div>

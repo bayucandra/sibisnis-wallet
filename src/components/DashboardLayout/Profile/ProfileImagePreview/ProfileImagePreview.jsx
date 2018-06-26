@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
 import menuIcon from './../../../../images/icons/menu.svg';
-
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
-import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import rightArrowIcon from './../../../../images/icons/s-litle-right.svg'
 import backBlueIcon from './../../../../images/icons/ico-back-blue.svg'
@@ -34,6 +30,10 @@ class ProfileImagePreview extends Component {
 
   getImageFromGallery = () => {
     modalToggle.next({ status: true, type: modalTypes.imageUpload })
+  }
+
+  getImageFromCamera = () => {
+    modalToggle.next({ status: true, type: modalTypes.webCameraCapture })
   }
 
   render() {
@@ -80,7 +80,7 @@ class ProfileImagePreview extends Component {
                 <div className="custom-menu-item expand ripple" onClick={this.getImageFromGallery.bind(this)}>
                   <div className="custom-menu-item__text">Ambil dari galeri</div>
                 </div>
-                <div className="custom-menu-item expand ripple">
+                <div className="custom-menu-item expand ripple" onClick={this.getImageFromCamera.bind(this)}>
                   <div className="custom-menu-item__text">Ambil dari kamera</div>
                 </div>
               </div>

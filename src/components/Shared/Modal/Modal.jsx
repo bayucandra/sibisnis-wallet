@@ -5,6 +5,7 @@ import Dialog from '@material-ui/core/Dialog';
 import PhotoUpload from "./../../Upload/PhotoUpload/PhotoUpload";
 import ProfileImagePreview from './../../DashboardLayout/Profile/ProfileImagePreview/ProfileImagePreview';
 import closeIconBlack from './../../../images/icons/ico-close-black.svg';
+import WebcamCapture from './../WebcamCapture/WebcamCapture';
 import { modalToggle } from './../../../lib/utilities';
 import { modalTypes } from './../../../lib/constants';
 
@@ -59,6 +60,11 @@ class Modal extends Component {
       case modalTypes.profileImagePreview:
         return (
           <ProfileImagePreview data={this.state.data} />
+        )
+        break;
+      case modalTypes.webCameraCapture:
+        return (
+          <WebcamCapture />
         )
         break;
 

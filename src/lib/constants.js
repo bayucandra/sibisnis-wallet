@@ -1,4 +1,5 @@
 export const modalTypes = {
   imageUpload: 'image-upload',
-  profileImagePreview: 'profile-image-preview'
+  profileImagePreview: 'profile-image-preview',
+  webCameraCapture: 'web-camera-capture'
 }

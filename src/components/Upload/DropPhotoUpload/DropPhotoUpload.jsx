@@ -4,6 +4,7 @@ import uploadIconMobile from './../../../images/icons/ico-upload-mobile.svg';
 import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
 import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';
+import { modalToggle } from './../../../lib/utilities';
 import './DropPhotoUpload.css';
 
 class DropPhotoUpload extends Component {
@@ -12,7 +13,10 @@ class DropPhotoUpload extends Component {
     this.state = {
       files: [],
       src: null,
-      croppedImage: null
+      croppedImage: null,
+      error:false,
+      success:false,
+      uploading:false
     }
   }
 
@@ -58,10 +62,23 @@ class DropPhotoUpload extends Component {
   }
 
   onImageUploadStart = () => {
-    console.log('Cropped Image', this.state.croppedImage);
+    if (this.state.success) {
+      this.onImageCompleteDialogClose();
+    } else {
+      this.setState({ uploading: true });
+      setTimeout(() => {
+        this.setState({ success: true, uploading: false })
+      }, 1500)
+      console.log('Cropped Image', this.state.croppedImage);
+    }
+  }
+
+  onImageCompleteDialogClose = () => {
+    modalToggle.next({ status: false })
   }
 
   render() {
+    const { error, success, uploading } = this.state;
     return (
       <div className="drop-photo-upload-container">
         <div className="drop-photo-upload-header">
@@ -82,7 +99,6 @@ class DropPhotoUpload extends Component {
             </Dropzone>
           </div> :
           <div className="image-preview-container">
-            {/* <img src={this.state.files[0].preview} style={{width:'100%',height:'100%'}} alt="" /> */}
             <PhotoCrop src={this.state.src} onImageCrop={this.onImageCrop} />
           </div>
         }
@@ -91,13 +107,9 @@ class DropPhotoUpload extends Component {
           <UploadProgressButton
             disabled={this.state.files.length > 0}
             progress={70}
+            uploadingStatus={{ error, success, uploading }}
             onImageUploadStart={this.onImageUploadStart.bind(this)}
           />
-          {/* <div className={"drop-photo-upload-button " + (this.state.files.length > 0 ? '' : 'disabled')}  onClick={this.onImageUploadStart.bind(this)}>
-            <span className="drop-photo-upload-button__text">Upload Foto</span>
-            <div className="drop-photo-upload-button__progress" style={{'width':'80%'}}></div>
-          </div> */}
-
           {this.state.src ?
             <div className="change-image-button-container">
               <label htmlFor="change-image" className="change-image-button ripple">

@@ -24,6 +24,8 @@ class Modal extends Component {
       (data) => {
         if (data.status) {
           this.handleClickOpen(data);
+        }else{
+          this.handleClose();
         }
       }
     )

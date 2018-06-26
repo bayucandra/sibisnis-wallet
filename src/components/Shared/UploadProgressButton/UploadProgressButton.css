@@ -1,3 +1,21 @@
+.progress-status-text {
+  font-family: NunitoSans;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  text-align: center;
+  margin-top: 13.7px;
+  margin-bottom: 10px; }
+
+.error {
+  color: #ff233e; }
+
+.success {
+  color: #1dae10; }
+
 .drop-photo-upload-button {
   color: #ffffff;
   font-size: 14px;
@@ -14,7 +32,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
   cursor: pointer;
   position: relative;
   z-index: 10; }
@@ -35,8 +52,12 @@
     border-radius: 2px;
     z-index: 20; }
 
+.without-text-spacing {
+  margin-top: 50px; }
+
 @media screen and (min-width: 768px) {
   .drop-photo-upload-button {
     width: 360px !important;
-    margin: 0 auto !important;
+    margin: 0 auto !important; }
+  .without-text-spacing {
     margin-top: 40px !important; } }

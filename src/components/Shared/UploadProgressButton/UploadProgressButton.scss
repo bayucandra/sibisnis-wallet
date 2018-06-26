@@ -1,6 +1,24 @@
 @import 'styles/_colors.scss';
 @import 'styles/_mixins.scss';
 @import 'styles/_variables.scss';
+.progress-status-text{
+  font-family: NunitoSans;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.4px;
+  text-align: center;
+  margin-top: 13.7px;
+  margin-bottom: 10px;
+}
+.error{
+ color: #ff233e;
+}
+.success{
+ color: #1dae10;
+}
 .drop-photo-upload-button {
   @include text-setup($white, 14px, $font-family);
   height: 50px;
@@ -15,7 +33,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 50px;
+  // margin-top: 50px;
   cursor: pointer;
   position: relative;
   z-index: 10;
@@ -40,10 +58,16 @@
   }
 }
 
-@include media-query(md){
-  .drop-photo-upload-button{
+.without-text-spacing {
+  margin-top: 50px;
+}
+
+@include media-query(md) {
+  .drop-photo-upload-button {
     width: 360px !important;
-    margin: 0 auto !important;
+    margin: 0 auto !important; // margin-top: 40px !important;
+  }
+  .without-text-spacing {
     margin-top: 40px !important;
   }
 }

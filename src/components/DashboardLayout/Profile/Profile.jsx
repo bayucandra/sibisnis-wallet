@@ -117,8 +117,8 @@ class Profile extends Component {
               <ProfileInfo
                 name='Arziky Yusya'
                 email="arzikyyu@gmail.com"
-                image={profileTestImage}
-                // image={null}
+                // image={profileTestImage}
+                image={null}
                 imageAction={this.onProfileImageClick}
               />
               <Balance balance={'100.750.565'} />

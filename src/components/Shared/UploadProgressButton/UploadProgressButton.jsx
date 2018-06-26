@@ -17,27 +17,73 @@ class UploadProgressButton extends Component {
         buttonText: 'Tutup',
         messageText: 'Selamat foto profile berhasil disimpan'
       },
-      progress:{
+      progressing: {
         status: false,
         buttonText: 'Proses Upload',
         messageText: null
       }
     }
   }
+
+  componentWillReceiveProps(props) {
+    const { error, success, uploading } = props.uploadingStatus;
+    if (error) {
+      let error = { ...this.state.error, status: true };
+      let uploading = { ...this.state.progressing, status: false };
+      this.setState({ error: error, progressing: uploading });
+    }
+    if (success) {
+      let success = { ...this.state.success, status: true };
+      let uploading = { ...this.state.progressing, status: false };
+      this.setState({ success: success, progressing: uploading });
+    }
+    if (uploading) {
+      let uploading = { ...this.state.progressing, status: true };
+      this.setState({ progressing: uploading });
+    }
+  }
+
+  getProgressButtonText = () => {
+    const { error, success, progressing } = this.state;
+    if (error.status) {
+      return (
+        <React.Fragment>
+          <img src={uploadErrorIcon} alt="ico-upload-progress-error" /> {error.buttonText}
+        </React.Fragment>
+      )
+    } else if (success.status) {
+      return (
+        <React.Fragment>
+          <img src={uploadSuccessIcon} alt="ico-upload-progress-success" /> {success.buttonText}
+        </React.Fragment>
+      )
+    }
+    else if (progressing.status) {
+      return (
+        <React.Fragment>
+          {progressing.buttonText}
+        </React.Fragment>
+      )
+    } else {
+      return (
+        <React.Fragment>
+          Upload Foto
+        </React.Fragment>
+      )
+    }
+  }
+
   render() {
-    const { disabled, onImageUploadStart, progress } = this.props;
-    const { error, success } = this.state;
+    const { disabled, onImageUploadStart, progress, uploadingStatus } = this.props;
+    const { error, success, progressing } = this.state;
     return (
       <React.Fragment>
-      <div className="progress-status-text">
-
-      </div>
-      <div className={"drop-photo-upload-button " + (disabled ? '' : 'disabled')} onClick={onImageUploadStart}>
-        {/* <span className="drop-photo-upload-button__text">Upload Foto</span> */}
-        {/* <span className="drop-photo-upload-button__text error"><img src={uploadErrorIcon} alt="ico-upload-progress-error" /> Kirim ulang</span> */}
-        <span className="drop-photo-upload-button__text success"><img src={uploadSuccessIcon} alt="ico-upload-progress-success" /> Kirim ulang</span>
-        {/* <div className="drop-photo-upload-button__progress" style={{ 'width': progress + '%' }}></div> */}
-      </div>
+        {error.status ? <div className="progress-status-text error">{error.messageText}</div> : ''}
+        {success.status ? <div className="progress-status-text success">{success.messageText}</div> : ''}
+        <div className={"drop-photo-upload-button " + ((error.status || success.status) ? '' : 'without-text-spacing ') + (disabled ? '' : 'disabled')} onClick={onImageUploadStart}>
+          <span className="drop-photo-upload-button__text">{this.getProgressButtonText()}</span>
+          {progressing.status ? <div className="drop-photo-upload-button__progress" style={{ 'width': progress + '%' }}></div> : null}
+        </div>
       </React.Fragment>
     )
   }

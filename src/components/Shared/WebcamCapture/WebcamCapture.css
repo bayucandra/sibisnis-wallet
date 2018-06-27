@@ -1,33 +1,37 @@
 .webcam-capture-container {
   width: 360px;
+  border-radius: 2px;
   background-color: #e0e0e0; }
   .webcam-capture-container .webcam-header {
-    height: 70px;
+    height: 60px;
     background-color: #00c0a5;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative; }
     .webcam-capture-container .webcam-header__text {
-      font-family: NunitoSans;
-      font-size: 18px;
+      color: #ffffff;
+      font-size: 16px;
+      font-family: "NunitoSans", sans-serif;
       font-weight: 600;
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
       letter-spacing: 0.7px;
-      text-align: center;
-      color: #ffffff; }
+      text-align: center; }
     .webcam-capture-container .webcam-header__close-icon {
       position: absolute;
-      right: 26px;
+      right: 30px;
       opacity: 0.2; }
   .webcam-capture-container .webcam-container {
     display: flex; }
-  .webcam-capture-container .webcam-capture {
-    object-fit: cover;
-    width: 100%;
-    height: 260px; }
+    .webcam-capture-container .webcam-container .captured-preview {
+      height: 260px;
+      width: 100%; }
+    .webcam-capture-container .webcam-container .webcam-capture {
+      object-fit: cover;
+      width: 100%;
+      height: 260px; }
   .webcam-capture-container .capture-button-container {
     display: flex;
     align-items: center;
@@ -45,12 +49,60 @@
       box-shadow: 0 1.5px 1.5px 0 rgba(0, 0, 0, 0.24), 0 0 1.5px 0 rgba(0, 0, 0, 0.12);
       justify-content: center;
       cursor: pointer; }
+    .webcam-capture-container .capture-button-container .capture-button-finish {
+      margin-right: 20px; }
+  .webcam-capture-container .capture-button-finish-container {
+    justify-content: flex-end; }
+  .webcam-capture-container .camera-reset-button-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -45px;
+    margin-bottom: 15px; }
+    .webcam-capture-container .camera-reset-button-container .camera-reset-button {
+      width: 143px;
+      height: 40px;
+      border-radius: 30px;
+      background-color: #d1d1d1;
+      box-shadow: 0 1.5px 1.5px 0 rgba(0, 0, 0, 0.24), 0 0 1.5px 0 rgba(0, 0, 0, 0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer; }
+      .webcam-capture-container .camera-reset-button-container .camera-reset-button__icon {
+        margin-right: 12px; }
+      .webcam-capture-container .camera-reset-button-container .camera-reset-button__text {
+        color: #ffffff;
+        font-size: 13px;
+        font-family: "NunitoSans", sans-serif;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px; }
 
 @media screen and (min-width: 768px) {
   .webcam-capture-container {
     width: 500px !important; }
-    .webcam-capture-container .webcam-capture {
+    .webcam-capture-container .webcam-header {
+      height: 70px; }
+      .webcam-capture-container .webcam-header__text {
+        font-size: 16px !important; }
+      .webcam-capture-container .webcam-header__close-icon {
+        right: 26px !important; }
+    .webcam-capture-container .webcam-container .captured-preview {
+      height: 360px !important;
+      width: 100%; }
+    .webcam-capture-container .webcam-container .webcam-capture {
       height: 360px !important; }
     .webcam-capture-container .capture-button-container {
       padding-bottom: 22px !important;
-      top: -27px; } }
+      top: -27px; }
+      .webcam-capture-container .capture-button-container .capture-button-finish {
+        margin-right: 30px; }
+    .webcam-capture-container .camera-reset-button-container {
+      margin-bottom: 20px !important;
+      margin-top: -60px !important; }
+      .webcam-capture-container .camera-reset-button-container .camera-reset-button {
+        width: 153px !important;
+        height: 50px !important; } }

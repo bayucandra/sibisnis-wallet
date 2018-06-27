@@ -14,11 +14,15 @@
     "react-dom": "^16.3.2",
     "react-dropzone": "^4.2.11",
     "react-image-crop": "^4.0.1",
+    "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "1.1.4",
     "react-tooltip": "^3.6.1",
     "react-transition-group": "^2.3.1",
     "react-webcam": "^0.5.0",
+    "redux": "^4.0.0",
+    "redux-observable": "^1.0.0",
     "rxjs": "^6.2.0"
   },
   "scripts": {

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip'
+import { connect } from 'react-redux';
+import {getUser} from './../../../redux/actions/UserActions';
 
 /**
  * React Material Compoenents
@@ -84,6 +86,10 @@ class Profile extends Component {
     this.state = {  }
   }
 
+  componentWillMount() {
+    this.props.getUser();
+  }
+
   onBtnClick = () =>{
     alert('hello world');
   }
@@ -142,4 +148,15 @@ class Profile extends Component {
   }
 }
 
-export default withRouter(Profile);
+const mapStateToProps = (store) => {
+  return {
+    user: store.UserReducer.user
+  }
+}
+
+const mapDispatchToProps = {
+  getUser
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Profile));

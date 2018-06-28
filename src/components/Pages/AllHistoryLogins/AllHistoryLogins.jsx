@@ -1,8 +1,16 @@
 import React, { Component } from 'react';
-import { navigationStatus } from './../../../lib/utilities';
-import './AllHistoryLogins.css';
+
+// Custom Components
 import HistoryLogin from './../../DashboardLayout/Dashboard/HistoryLogin/HistoryLogin';
 import PageBackButton from './../../Shared/PageBackButton/PageBackButton';
+
+// Custom Libraries
+import { navigationStatus } from './../../../lib/utilities';
+
+// Redux
+import { connect } from 'react-redux';
+import { getHistoryLoginList } from './../../../redux/actions/HistoryLoginActions';
+import './AllHistoryLogins.css';
 class AllHistoryLogins extends Component {
   constructor(props) {
     super(props);
@@ -12,17 +20,29 @@ class AllHistoryLogins extends Component {
   componentWillMount() {
     navigationStatus.next({
       navigationLink: 'History Login'
-    })
+    });
+    this.props.getHistoryLoginList();
   }
 
   render() {
+    const { historyLoginList } = this.props;
     return (
       <div id="all-history-login-container">
-        <PageBackButton/>
-        <HistoryLogin viewAll={true}/>
+        <PageBackButton />
+        {historyLoginList ? <HistoryLogin historyLoginList={historyLoginList} viewAll={true} /> : null}
       </div>
-      )
+    )
   }
 }
 
-export default AllHistoryLogins;
+const mapStateToProps = (store) => {
+  return {
+    historyLoginList: store.HistoryLoginReducer.historyLoginList
+  }
+}
+
+const mapDispatchToProps = {
+  getHistoryLoginList
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(AllHistoryLogins);

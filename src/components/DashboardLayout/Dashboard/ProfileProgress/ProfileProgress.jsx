@@ -21,6 +21,7 @@ import ProfileActionButton from './../../../Shared/ProfileActionButton/ProfileAc
 import './ProfileProgress.css';
 
 import ButtonBase from '@material-ui/core/ButtonBase';
+import {connect} from 'react-redux';
 
 
 const ProgressBar = (props) => {
@@ -37,6 +38,7 @@ const ProgressBar = (props) => {
 }
 
 const ProfileVerificationList = (props) =>{
+  const { user } = props;
   return(
     <React.Fragment>
       <div className="profile-verfication-list">
@@ -47,8 +49,8 @@ const ProfileVerificationList = (props) =>{
           </div>
         </CardContent>
         <div className="profile-verfication-list__container">
-          <VerificationListItem icon={phoneIcon}  type="text" name="Verifikasi Nomor Handphone Anda" status={false} />
-          <VerificationListItem icon={emailIcon}  type="text" name="Verifikasi Email Anda" status={true} />
+          <VerificationListItem icon={phoneIcon}  type="text" name="Verifikasi Nomor Handphone Anda" status={user.phoneVerfication} />
+          <VerificationListItem icon={emailIcon}  type="text" name="Verifikasi Email Anda" status={user.emailVerification} />
           <VerificationListItem icon={profileIcon} type="upload" name="Upload foto profil Anda" status={false} />
           <VerificationListItem icon={locationIcon} type="text" name="Lengkapi Data Alamat Anda" status={false} />
           <VerificationListItem icon={cardIcon} type="text" name="Lengkapi Info Data Identitas Anda" status={false} />
@@ -86,16 +88,9 @@ const VerificationListItem = (props) => {
               :
               <div className="verification-action-container">
                 {type === 'text' ?
-                // <ButtonBase focusRipple style={{'borderRadius':'200px'}}>
-
-                //   <div className="verification-action-btn">Lengkapi Sekarang</div>
-                // </ButtonBase>
-                <ProfileActionButton label="Lengkapi Sekarang"/>
+                  <ProfileActionButton label="Lengkapi Sekarang" />
                   :
-                  // <ButtonBase focusRipple style={{'borderRadius':'200px'}}>
-                  //   <div className="verification-action-btn">Upload Sekarang</div>
-                  // </ButtonBase>
-                  <ProfileActionButton label="Upload Sekarang"/>
+                  <ProfileActionButton label="Upload Sekarang" />
                 }
               </div>
             }
@@ -112,17 +107,28 @@ class ProfileProgress extends Component {
     this.state = {}
   }
   render() {
+    const {user} = this.props;
     return (
       <div id="profile-progress-container">
         <Card className="custom-card-styles">
           <CardContent>
             <ProgressBar value={48} />
           </CardContent>
-          <ProfileVerificationList />
+         {user ? <ProfileVerificationList user={user}/> : null}
         </Card>
       </div>
     )
   }
 }
 
-export default ProfileProgress;
+
+const mapStateToProps = (store) => {
+  return {
+    user: store.UserReducer.user
+  }
+}
+
+const mapDispatchToProps = {}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(ProfileProgress);

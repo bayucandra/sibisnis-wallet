@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import ReactTooltip from 'react-tooltip'
-import { connect } from 'react-redux';
-import {getUser} from './../../../redux/actions/UserActions';
 
 /**
  * React Material Compoenents
@@ -33,6 +31,10 @@ import ProfileButton from './../../Shared/ProfileButton/ProfileButton';
 
 import { navigationStatus, modalToggle } from "./../../../lib/utilities";
 import { modalTypes } from './../../../lib/constants';
+
+// Redux
+import { connect } from 'react-redux';
+import {getUser} from './../../../redux/actions/UserActions';
 
 import './Profile.css';
 import profileTestImage from './../../../images/test.jpg';
@@ -111,6 +113,7 @@ class Profile extends Component {
   }
 
   render() {
+    const {user} = this.props;
     return (
       <div id="profile-card">
         <Card className="custom-card-styles profile-card-container">
@@ -120,14 +123,16 @@ class Profile extends Component {
               <div data-tip='Profile anda' className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </div>
-              <ProfileInfo
-                name='Arziky Yusya'
-                email="arzikyyu@gmail.com"
-                image={profileTestImage}
-                // image={null}
-                imageAction={this.onProfileImageClick}
-              />
-              <Balance balance={'100.750.565'} />
+              {user ?
+                <ProfileInfo
+                  name={user.name ? user.name : 'N/A'}
+                  email={user.email ? user.email : 'N/A'}
+                  image={user.profilePicture ? user.profilePicture : null}
+                  // image={null}
+                  imageAction={this.onProfileImageClick}
+                /> : null}
+              {user ? <Balance balance={user.balance ? user.balance : 'N/A'} /> : null}
+
               <div className="profile-buttons-container text-center">
                 <ProfileButton value={'Tambah'} />
                 <span className="dot-desktop"></span>
@@ -157,6 +162,5 @@ const mapStateToProps = (store) => {
 const mapDispatchToProps = {
   getUser
 }
-
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Profile));

@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import CustomAccordian from './../../../Shared/CustomAccordian/CustomAccordian';
-import { withRouter } from 'react-router-dom';
 
+// Custom Components
+import CustomAccordian from './../../../Shared/CustomAccordian/CustomAccordian';
 import './HistoryLogin.css';
 
 const HistoryList = (props) => {
@@ -30,13 +31,7 @@ class HistoryLogin extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      data : [
-        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
-        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
-        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
-        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
-        { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
-      ]
+      historyList : []
     }
   }
 
@@ -44,8 +39,16 @@ class HistoryLogin extends Component {
     this.props.history.push('/all-history-logins');
   }
 
+  componentWillMount() {
+    this.setState({historyList:this.props.historyLoginList});
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({historyList:nextProps.historyLoginList});
+  }
+
   render() {
-    const { data } = this.state;
+    const { historyList } = this.state;
     return (
       <div className={this.props.viewAll ? "history-login-container all-history-login" : "history-login-container"}>
         <Card className="custom-card-styles">
@@ -56,7 +59,7 @@ class HistoryLogin extends Component {
             </div>
           </CardContent>
           <div className="history-login-list-container">
-            {data.map((history, index) => {
+            {historyList.map((history, index) => {
               return (
                 <CustomAccordian
                   title="Tanggal"
@@ -79,7 +82,7 @@ class HistoryLogin extends Component {
               </thead>
               <tbody>
                 {
-                  data.map((history, index) => {
+                  historyList.map((history, index) => {
                     return (
                       <tr className="history-login-list-body__item" key={index}>
                         <td className="history-login-list-table__body-column-date">{history.date}</td>

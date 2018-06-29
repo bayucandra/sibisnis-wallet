@@ -71,7 +71,10 @@ class WebcamCapture extends Component {
               screenshotFormat="image/jpeg"
               className="webcam-capture"
             /> :
-            <img src={captureImage} className="captured-preview" alt="" />}
+            <div  className="captured-preview" style={{'backgroundImage':"url("+captureImage+")"}}></div>
+            // <img src={captureImage} className="captured-preview" alt="" />
+
+            }
         </div>
 
 

@@ -13,3 +13,11 @@ export const setUser = (userData) => {
     payload: userData
   };
 }
+
+// Only for stub purpose
+export const getUserWithUpdatedProfile = (profileImage) => {
+  return {
+    type: Types.GET_USER_UPDATED_IMAGE,
+    payload: profileImage
+  }
+}

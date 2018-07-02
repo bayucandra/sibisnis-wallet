@@ -6,6 +6,7 @@ import * as NewsEpics from './NewsEpics';
 
 export default combineEpics(
   UserEpics.getUser,
+  UserEpics.updateUserProfile,
   HistoryLoginEpics.getHistoryList,
   NewsEpics.getNewsList
 );

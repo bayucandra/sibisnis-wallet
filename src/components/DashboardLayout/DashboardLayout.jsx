@@ -48,18 +48,6 @@ class DashboardLayout extends Component {
             </div>
           </div>
         </div>
-        {/* <div className="dashboard-layout-container-mobile">
-          {this.state.profileStatus ?
-            <div className={"profile-container "+ (this.state.profileStatus ? 'show-profile':'hide-profile')}>
-              <Profile />
-            </div>
-            :
-            <div className={"dashboard-container "+(!this.state.profileStatus ? 'show-dashboard':'hide-dashboard')}>
-              <Route path="/dashboard" exact={true} component={Dashboard} />
-              <Route path="/dashboard/detail-profile" component={DetailProfile} />
-            </div>
-          }
-        </div> */}
       </React.Fragment>
      )
   }

@@ -5,6 +5,8 @@ import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
 import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';
 import { modalToggle } from './../../../lib/utilities';
+import { getUserWithUpdatedProfile } from './../../../redux/actions/UserActions';
+import { connect } from 'react-redux';
 import './DropPhotoUpload.css';
 
 class DropPhotoUpload extends Component {
@@ -57,6 +59,7 @@ class DropPhotoUpload extends Component {
     });
   }
 
+  // Set the image or directly upload it to server from here
   onImageCrop = (image) => {
     this.setState({ croppedImage: image });
   }
@@ -68,6 +71,7 @@ class DropPhotoUpload extends Component {
       this.setState({ uploading: true });
       setTimeout(() => {
         this.setState({ success: true, uploading: false })
+        this.props.getUserWithUpdatedProfile(this.state.croppedImage);
       }, 1500)
       console.log('Cropped Image', this.state.croppedImage);
     }
@@ -125,4 +129,13 @@ class DropPhotoUpload extends Component {
   }
 }
 
-export default DropPhotoUpload;
+const mapStateToProps = (store) => {
+  return {}
+}
+
+const mapDispatchToProps = {
+  getUserWithUpdatedProfile
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(DropPhotoUpload);

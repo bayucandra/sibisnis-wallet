@@ -7,6 +7,8 @@ import cameraIconReset from './../../../images/icons/ico-upload-reset.svg';
 
 import './WebcamCapture.css';
 import { modalToggle } from '../../../lib/utilities';
+import { connect } from 'react-redux';
+import { getUserWithUpdatedProfile } from './../../../redux/actions/UserActions';
 
 const CameraResetButton = (props) => {
   const { onCameraReset } = props;
@@ -46,6 +48,7 @@ class WebcamCapture extends Component {
   }
 
   onCaptureConfirm = () => {
+    this.props.getUserWithUpdatedProfile(this.state.captureImage);
     modalToggle.next({ status: false });
   }
 
@@ -96,4 +99,12 @@ class WebcamCapture extends Component {
   }
 }
 
-export default WebcamCapture;
+const mapStateToProps = (store) => {
+  return {}
+}
+
+const mapDispatchToProps = {
+  getUserWithUpdatedProfile
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(WebcamCapture);

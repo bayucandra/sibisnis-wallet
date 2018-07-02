@@ -34,7 +34,10 @@ import { modalTypes } from './../../../lib/constants';
 
 // Redux
 import { connect } from 'react-redux';
-import {getUser} from './../../../redux/actions/UserActions';
+import { getUser } from './../../../redux/actions/UserActions';
+
+// Loaders
+import { ProfileInfoLoader, BalanceLoader } from './../../Loaders/ProfileLoader/ProfileLoader';
 
 import './Profile.css';
 import profileTestImage from './../../../images/test.jpg';
@@ -130,9 +133,14 @@ class Profile extends Component {
                   image={user.profilePicture ? user.profilePicture : null}
                   // image={null}
                   imageAction={this.onProfileImageClick}
-                /> : null}
-              {user ? <Balance balance={user.balance ? user.balance : 'N/A'} /> : null}
-
+                /> :
+                <ProfileInfoLoader />
+              }
+              {user ?
+                <Balance balance={user.balance ? user.balance : 'N/A'} />
+                :
+                <BalanceLoader />
+              }
               <div className="profile-buttons-container text-center">
                 <ProfileButton value={'Tambah'} />
                 <span className="dot-desktop"></span>

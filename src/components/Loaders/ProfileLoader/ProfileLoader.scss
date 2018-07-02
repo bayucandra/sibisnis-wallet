@@ -1,0 +1,79 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+// Animation
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #F6F6F6;
+  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative;
+}
+
+//Profile Loader
+.profile-info-loader {
+  text-align: center;
+  margin-top: 40px;
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  &__image-placeholder {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: $loading-grey;
+    @extend .animated-background;
+  }
+  &__name-placeholder {
+    width: 109px;
+    height: 10px;
+    background-color: $loading-grey;
+    margin-top: 21px;
+    @extend .animated-background;
+  }
+  &__email-placeholder {
+    width: 150px;
+    height: 10px;
+    background-color: $loading-grey;
+    margin-top: 15px;
+    @extend .animated-background;
+  }
+  .divider {
+    margin-top: 19px;
+  }
+}
+
+// Balance Loader
+.balance-loader {
+  margin-top: 15px;
+  &__text-placeholder {
+    @include text-setup($steel-grey, 14px, $font-family);
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    text-align: center;
+  }
+  &__amount-placeholder {
+    width: 170px;
+    height: 10px;
+    background-color: $loading-grey;
+    margin-top:13px;
+    @extend .animated-background;
+  }
+}

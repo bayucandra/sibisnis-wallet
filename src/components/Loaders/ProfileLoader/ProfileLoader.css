@@ -1,0 +1,59 @@
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0; }
+  100% {
+    background-position: 468px 0; } }
+
+.animated-background, .profile-info-loader__image-placeholder, .profile-info-loader__name-placeholder, .profile-info-loader__email-placeholder, .balance-loader__amount-placeholder {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #F6F6F6;
+  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative; }
+
+.profile-info-loader {
+  text-align: center;
+  margin-top: 40px;
+  display: flex;
+  flex-flow: column;
+  align-items: center; }
+  .profile-info-loader__image-placeholder {
+    height: 60px;
+    width: 60px;
+    border-radius: 50%;
+    background-color: #f5f6f8; }
+  .profile-info-loader__name-placeholder {
+    width: 109px;
+    height: 10px;
+    background-color: #f5f6f8;
+    margin-top: 21px; }
+  .profile-info-loader__email-placeholder {
+    width: 150px;
+    height: 10px;
+    background-color: #f5f6f8;
+    margin-top: 15px; }
+  .profile-info-loader .divider {
+    margin-top: 19px; }
+
+.balance-loader {
+  margin-top: 15px; }
+  .balance-loader__text-placeholder {
+    color: #80858a;
+    font-size: 14px;
+    font-family: "NunitoSans", sans-serif;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    text-align: center; }
+  .balance-loader__amount-placeholder {
+    width: 170px;
+    height: 10px;
+    background-color: #f5f6f8;
+    margin-top: 13px; }

@@ -30,6 +30,7 @@ class DropPhotoUpload extends Component {
         () =>
           this.setState({
             src: reader.result,
+            croppedImage: reader.result
           }),
         false
       )
@@ -49,6 +50,7 @@ class DropPhotoUpload extends Component {
         () =>
           this.setState({
             src: reader.result,
+            croppedImage: reader.result
           }),
         false
       )
@@ -71,8 +73,8 @@ class DropPhotoUpload extends Component {
       this.setState({ uploading: true });
       setTimeout(() => {
         this.setState({ success: true, uploading: false })
-        this.props.getUserWithUpdatedProfile(this.state.croppedImage);
       }, 1500)
+      this.props.getUserWithUpdatedProfile(this.state.croppedImage);
       console.log('Cropped Image', this.state.croppedImage);
     }
   }

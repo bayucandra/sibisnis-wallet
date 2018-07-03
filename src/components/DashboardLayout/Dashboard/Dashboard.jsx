@@ -26,7 +26,7 @@ class Dashboard extends Component {
     return (
       <React.Fragment>
         <ProfileProgress />
-        {historyLoginList ? <HistoryLogin historyLoginList={historyLoginList} /> : null}
+        <HistoryLogin historyLoginList={historyLoginList} />
         {newsList ? <LatestNews newsList={newsList} /> : null}
       </React.Fragment>
     )

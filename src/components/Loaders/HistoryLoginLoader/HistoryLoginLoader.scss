@@ -1,0 +1,117 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+/*
+===========================================
+            Animation
+===========================================
+*/
+
+@keyframes placeHolderShimmer {
+  0% {
+    background-position: -468px 0
+  }
+  100% {
+    background-position: 468px 0
+  }
+}
+
+.animated-background {
+  animation-duration: 1.25s;
+  animation-fill-mode: forwards;
+  animation-iteration-count: infinite;
+  animation-name: placeHolderShimmer;
+  animation-timing-function: linear;
+  background: #F6F6F6;
+  background: linear-gradient(to right, #F6F6F6 8%, #F0F0F0 18%, #F6F6F6 33%);
+  background-size: 800px 104px;
+  height: 96px;
+  position: relative;
+}
+
+.history-login-mobile-loader {
+  height: 56.5px;
+  display: flex;
+  align-items: center;
+  border-top: solid 0.5px #dedede;
+  &__name-placeholder {
+    width: 50px;
+    height: 10px;
+    background-color: $loading-grey;
+    margin-left: 20px;
+    margin-right: 20px;
+    @extend .animated-background;
+  }
+  &__date-placeholder {
+    width: 130px;
+    height: 10px;
+    background-color: $loading-grey;
+    @extend .animated-background;
+  }
+}
+
+.history-login-loader-container{
+  width: 100%;
+  .history-login-loader-header{
+    display: flex;
+    height: 48px;
+    background-color: #f8f8f8;
+    align-items: center;
+    .header-text{
+      font-family: NunitoSans;
+      font-size: 13px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.3px;
+      color: #404852;
+    }
+    &__date-placeholder {
+      margin-left:30px;
+      margin-right:120px;
+    }
+    &__country-placeholder {
+      margin-right:120px;
+    }
+    &__ip-placeholder {
+      margin-right:190px;
+    }
+    &__browser-placeholder {
+    }
+  }
+  .history-login-desktop-loader {
+    display: flex;
+    height: 45px;
+    align-items: center;
+    &__date-placeholder {
+      width: 126px;
+      height: 10px;
+      background-color: $loading-grey;
+      margin-left:30px;
+      margin-right:44px;
+      @extend .animated-background;
+    }
+    &__country-placeholder {
+      width: 60px;
+      height: 10px;
+      background-color: $loading-grey;
+      margin-right:105px;
+      @extend .animated-background;
+    }
+    &__ip-placeholder {
+      width: 95px;
+      height: 10px;
+      background-color: $loading-grey;
+      margin-right:105px;
+      @extend .animated-background;
+    }
+    &__browser-placeholder {
+      width: 95px;
+      height: 10px;
+      background-color: $loading-grey;
+      @extend .animated-background;
+    }
+  }
+
+}

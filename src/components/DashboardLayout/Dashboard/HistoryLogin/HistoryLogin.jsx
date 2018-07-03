@@ -5,6 +5,7 @@ import CardContent from '@material-ui/core/CardContent';
 
 // Custom Components
 import CustomAccordian from './../../../Shared/CustomAccordian/CustomAccordian';
+import { HistoryLoginMobileLoader, HistoryLoginDesktopLoader } from './../../../Loaders/HistoryLoginLoader/HistoryLoginLoader';
 import './HistoryLogin.css';
 
 const HistoryList = (props) => {
@@ -31,7 +32,7 @@ class HistoryLogin extends Component {
   constructor(props, context) {
     super(props, context);
     this.state = {
-      historyList : []
+      historyList : null
     }
   }
 
@@ -59,30 +60,33 @@ class HistoryLogin extends Component {
             </div>
           </CardContent>
           <div className="history-login-list-container">
-            {historyList.map((history, index) => {
-              return (
-                <CustomAccordian
-                  title="Tanggal"
-                  date={history.date}
-                  key={index}
-                  accordianBody={<HistoryList country={history.country} ip={history.ip} browser={history.browser} />} />
-              );
-            })}
+            {historyList ?
+              historyList.map((history, index) => {
+                return (
+                  <CustomAccordian
+                    title="Tanggal"
+                    date={history.date}
+                    key={index}
+                    accordianBody={<HistoryList country={history.country} ip={history.ip} browser={history.browser} />} />
+                );
+              })
+              : <HistoryLoginMobileLoader />
+            }
           </div>
 
           <div className="history-login-list-container-desktop">
-            <table className="history-login-list-table">
-              <thead>
-                <tr>
-                  <td className="history-login-list-table__header-column">Tanggal</td>
-                  <td className="history-login-list-table__header-column">Negara</td>
-                  <td className="history-login-list-table__header-column">IP</td>
-                  <td className="history-login-list-table__header-column">Browser</td>
-                </tr>
-              </thead>
-              <tbody>
-                {
-                  historyList.map((history, index) => {
+            {historyList ?
+              <table className="history-login-list-table">
+                <thead>
+                  <tr>
+                    <td className="history-login-list-table__header-column">Tanggal</td>
+                    <td className="history-login-list-table__header-column">Negara</td>
+                    <td className="history-login-list-table__header-column">IP</td>
+                    <td className="history-login-list-table__header-column">Browser</td>
+                  </tr>
+                </thead>
+                <tbody>
+                  {historyList.map((history, index) => {
                     return (
                       <tr className="history-login-list-body__item" key={index}>
                         <td className="history-login-list-table__body-column-date">{history.date}</td>
@@ -92,9 +96,11 @@ class HistoryLogin extends Component {
                       </tr>
                     )
                   })
-                }
-              </tbody>
-            </table>
+                  }
+                </tbody>
+              </table>
+              : <HistoryLoginDesktopLoader />
+            }
           </div>
         </Card>
       </div>

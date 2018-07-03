@@ -1,7 +1,12 @@
 @import 'styles/_colors.scss';
 @import 'styles/_mixins.scss';
 @import 'styles/_variables.scss';
-// Animation
+
+/*
+===========================================
+            Animation
+===========================================
+*/
 @keyframes placeHolderShimmer {
   0% {
     background-position: -468px 0
@@ -23,6 +28,7 @@
   height: 96px;
   position: relative;
 }
+
 
 //Profile Loader
 .profile-info-loader {

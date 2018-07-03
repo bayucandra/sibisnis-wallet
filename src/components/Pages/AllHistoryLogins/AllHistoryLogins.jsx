@@ -29,7 +29,7 @@ class AllHistoryLogins extends Component {
     return (
       <div id="all-history-login-container">
         <PageBackButton />
-        {historyLoginList ? <HistoryLogin historyLoginList={historyLoginList} viewAll={true} /> : null}
+        <HistoryLogin historyLoginList={historyLoginList} viewAll={true} />
       </div>
     )
   }

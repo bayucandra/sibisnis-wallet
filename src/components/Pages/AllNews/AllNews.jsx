@@ -31,7 +31,7 @@ class AllNews extends Component {
     return (
       <div id="all-news-container">
         <PageBackButton />
-        {newsList ? <LatestNews newsList={newsList} viewAll={true} /> : null}
+        <LatestNews newsList={newsList} viewAll={true} />
       </div>
     )
   }

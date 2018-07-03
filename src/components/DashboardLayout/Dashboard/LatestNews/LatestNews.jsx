@@ -3,6 +3,7 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import NewsArticle from './NewsArticle/NewsArticle';
 import { withRouter } from 'react-router-dom';
+import { LatestNewsLoader } from './../../../Loaders/LatestNewsLoader/LatestNewsLoader';
 
 import './LatestNews.css';
 
@@ -36,16 +37,20 @@ class LatestNews extends Component {
             <div className="latest-news-header__right ripple opacity-background" onClick={this.onViewAllNews.bind(this)}>Lihat Semua</div>
           </div>
           <div className="news-article-list">
-            {articles.map((article,index)=>{
-             return( <NewsArticle
-                title={article.title}
-                date={article.date}
-                tags={article.tags}
-                key={index}
-                readStatus={article.readStatus}
-                articleSummary={article.articleSummary}
-              />)
-            })}
+            {articles ?
+              articles.map((article, index) => {
+                return (<NewsArticle
+                  title={article.title}
+                  date={article.date}
+                  tags={article.tags}
+                  key={index}
+                  readStatus={article.readStatus}
+                  articleSummary={article.articleSummary}
+                />)
+              })
+              :
+              <LatestNewsLoader />
+            }
           </div>
         </Card>
       </div>

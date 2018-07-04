@@ -12,6 +12,7 @@ import menuIcon from './../../../images/icons/menu.svg';
 
 import { navigationStatus } from './../../../lib/utilities';
 import HeaderNavigationStatus from './../HeaderNavigationStatus/HeaderNavigationStatus';
+import { withRouter } from 'react-router-dom';
 
 import './Header.css';
 
@@ -54,6 +55,10 @@ class Header extends Component {
     alert('Back to Dashboard');
   }
 
+  goToDashboard = () =>{
+    this.props.history.replace('/');
+  }
+
   render() {
     const { anchorEl } = this.state;
     return (
@@ -62,7 +67,7 @@ class Header extends Component {
           <div className="left-header">
             <div className="header-navigation-status-desktop">
               <img src={switchIcon} className="switch-icon" onClick={this.onSwtich.bind(this)} alt="switch" />
-              <div className="user-meta-info-container ripple">
+              <div className="user-meta-info-container ripple" onClick={this.goToDashboard.bind()}>
                  <span className="user-meta-info">BantulPulsa</span>
               </div>
             </div>
@@ -101,4 +106,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header);

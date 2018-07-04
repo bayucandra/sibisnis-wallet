@@ -18,7 +18,8 @@ class DropPhotoUpload extends Component {
       croppedImage: null,
       error:false,
       success:false,
-      uploading:false
+      uploading:false,
+      changeImageStatus: false
     }
   }
 
@@ -30,6 +31,7 @@ class DropPhotoUpload extends Component {
         () =>
           this.setState({
             src: reader.result,
+            changeImageStatus:true,
             croppedImage: reader.result
           }),
         false
@@ -50,7 +52,11 @@ class DropPhotoUpload extends Component {
         () =>
           this.setState({
             src: reader.result,
-            croppedImage: reader.result
+            changeImageStatus:true,
+            croppedImage: reader.result,
+            error:false,
+            success:false,
+            uploading:false,
           }),
         false
       )
@@ -67,15 +73,21 @@ class DropPhotoUpload extends Component {
   }
 
   onImageUploadStart = () => {
-    if (this.state.success) {
-      this.onImageCompleteDialogClose();
+
+    if (this.state.error || this.state.success) {
+      if (this.state.success) {
+        this.onImageCompleteDialogClose();
+      } else {
+        this.setState({ uploading: true, changeImageStatus: false, error: false }, () => {
+          setTimeout(() => {
+            this.setState({ success: true, uploading: false })
+          }, 1500)
+        });
+        this.props.getUserWithUpdatedProfile(this.state.croppedImage);
+        console.log('Cropped Image', this.state.croppedImage);
+      }
     } else {
-      this.setState({ uploading: true });
-      setTimeout(() => {
-        this.setState({ success: true, uploading: false })
-      }, 1500)
-      this.props.getUserWithUpdatedProfile(this.state.croppedImage);
-      console.log('Cropped Image', this.state.croppedImage);
+      this.setState({ error: true })
     }
   }
 
@@ -116,7 +128,7 @@ class DropPhotoUpload extends Component {
             uploadingStatus={{ error, success, uploading }}
             onImageUploadStart={this.onImageUploadStart.bind(this)}
           />
-          {this.state.src ?
+          {(this.state.src && this.state.changeImageStatus) ?
             <div className="change-image-button-container">
               <label htmlFor="change-image" className="change-image-button ripple">
                 Ganti Foto

@@ -4,7 +4,7 @@ import './PhotoUpload.css';
 import fileIconBlue from './../../../images/icons/ico-file-blue.svg';
 import cameraIconBlue from './../../../images/icons/ico-camera-blue.svg';
 import WebcamCapture from './../../Shared/WebcamCapture/WebcamCapture';
-import { modalToggle } from '../../../lib/utilities';
+import { modalToggle,cameraCaptureFileUpload } from '../../../lib/utilities';
 import { modalTypes } from '../../../lib/constants';
 
 const UploadButton = (props) => {
@@ -36,8 +36,18 @@ class PhotoUpload extends Component {
     }
   }
 
+  componentDidMount() {
+    cameraCaptureFileUpload.subscribe(
+      (data)=>{
+        if(data.status){
+          this.toggleDragPhotpUpload();
+        }
+      }
+    )
+  }
+
   toggleDragPhotpUpload = () =>{
-    this.setState({dragPhotoUpload:true});
+    this.setState({ dragPhotoUpload: true });
   }
 
   toggleCameraCapture = (id) => {
@@ -72,7 +82,7 @@ class PhotoUpload extends Component {
                       <img src={fileIconBlue} alt="icon-button" />
                     </div>
                     <div className="upload-button__label">
-                      Ambil dari direktoriz
+                      Ambil dari direktori
                     </div>
                   </label>
                 </div>

@@ -12,7 +12,16 @@ export const navigationStatus = new Subject();
 /**
  * Sample Data
  * data = {
- *  status
+ *  status,
+ *  type
  * }
  */
 export const modalToggle = new Subject();
+
+/**
+ * Sample Data
+ * data = {
+ *  status
+ * }
+ */
+export const cameraCaptureFileUpload = new Subject();

@@ -69,9 +69,9 @@ const Balance = (props) => {
 
 const ProfileNavButton = (props) => {
   const { icon, name, onClick, active } = props;
+
   return (
     <React.Fragment>
-      {/* <div className="custom-divider"></div> */}
       <ListItem button className={(active ? "profile-nav-list-item profile-nav-btn-active" : "profile-nav-list-item")} onClick={onClick}>
         <div className="profile-nav-btn">
           <ListItemIcon>
@@ -113,6 +113,9 @@ class Profile extends Component {
 
   onLinkClick = (name) => {
     navigationStatus.next({ navigationState: name});
+    if (window.innerWidth > 767) {
+      this.props.history.replace('/');
+    }
   }
 
   render() {

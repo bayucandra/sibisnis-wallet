@@ -3,7 +3,7 @@ import menuIcon from './../../../../images/icons/menu.svg';
 import IconButton from '@material-ui/core/IconButton';
 import rightArrowIcon from './../../../../images/icons/s-litle-right.svg'
 import backBlueIcon from './../../../../images/icons/ico-back-blue.svg'
-import {modalToggle} from './../../../../lib/utilities';
+import {modalToggle, cameraCaptureFileUpload} from './../../../../lib/utilities';
 import {modalTypes} from './../../../../lib/constants';
 import './ProfileImagePreview.css';
 
@@ -29,7 +29,10 @@ class ProfileImagePreview extends Component {
   }
 
   getImageFromGallery = () => {
-    modalToggle.next({ status: true, type: modalTypes.imageUpload })
+    modalToggle.next({ status: true, type: modalTypes.imageUpload });
+    setTimeout(() => {
+      cameraCaptureFileUpload.next({ status: true });
+    }, 0);
   }
 
   getImageFromCamera = () => {

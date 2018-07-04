@@ -29,17 +29,24 @@ class UploadProgressButton extends Component {
     const { error, success, uploading } = props.uploadingStatus;
     if (error) {
       let error = { ...this.state.error, status: true };
+      let success = { ...this.state.success, status: false };
       let uploading = { ...this.state.progressing, status: false };
-      this.setState({ error: error, progressing: uploading });
-    }
-    if (success) {
+      this.setState({ success: success, error: error, progressing: uploading });
+    }else if (success) {
       let success = { ...this.state.success, status: true };
       let uploading = { ...this.state.progressing, status: false };
-      this.setState({ success: success, progressing: uploading });
-    }
-    if (uploading) {
+      let error = { ...this.state.error, status: false };
+      this.setState({ success: success, progressing: uploading, error: error });
+    }else if (uploading) {
       let uploading = { ...this.state.progressing, status: true };
-      this.setState({ progressing: uploading });
+      let success = { ...this.state.success, status: false };
+      let error = { ...this.state.error, status: false };
+      this.setState({ success: success, progressing: uploading, error: error });
+    }else {
+      let uploading = { ...this.state.progressing, status: false };
+      let success = { ...this.state.success, status: false };
+      let error = { ...this.state.error, status: false };
+      this.setState({ success: success, progressing: uploading, error: error });
     }
   }
 

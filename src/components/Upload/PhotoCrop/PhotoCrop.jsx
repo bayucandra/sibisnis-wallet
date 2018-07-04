@@ -53,6 +53,7 @@ class PhotoCrop extends Component {
         y: 10,
         width: 80,
         height: 80,
+        aspect: 1 / 1,
       },
       croppedSrc: null
     }
@@ -71,10 +72,23 @@ class PhotoCrop extends Component {
     if (image.height > image.width) {
       crop.x = 0;
       crop.width = 100;
-    } else {
+    } else if (image.height < image.width) {
       crop.y = 0;
       crop.height = 100;
+    } else {
+      crop.x = 0;
+      crop.y = 0;
+      crop.width = 100;
+      crop.height = 100;
     }
+
+    // if (image.height > image.width) {
+    //   crop.x = 15;
+    //   crop.width = 70;
+    // } else {
+    //   crop.y = 15;
+    //   crop.height = 70;
+    // }
     this.setState({crop:crop})
     // this.setState({
     //   crop: makeAspectCrop({

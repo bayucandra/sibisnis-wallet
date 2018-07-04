@@ -15,7 +15,7 @@ export const getUserData = () => {
           phoneVerfication: true
         }
       })
-    }, 5000);
+    }, 2000);
   })
 }
 
@@ -34,7 +34,7 @@ export const getHistory = () => {
           { date: '30 Sep 2017 , 12:45', country: 'Indonesia', ip: '127.747.304.1', browser: 'Google Chrome' },
         ]
       })
-    }, 5000);
+    }, 2000);
   })
 }
 
@@ -83,6 +83,6 @@ export const getNews = () => {
           }
         ]
       })
-    }, 5000);
+    }, 2000);
   })
 }

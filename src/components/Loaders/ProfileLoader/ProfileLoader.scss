@@ -29,7 +29,6 @@
   position: relative;
 }
 
-
 //Profile Loader
 .profile-info-loader {
   text-align: center;
@@ -82,4 +81,155 @@
     margin-top:13px;
     @extend .animated-background;
   }
+}
+
+// Profile Progress Loader
+
+.profile-progress-loader {
+  margin-bottom: 14px;
+  &__title-placeholder {
+    width: 240px;
+    height: 10px;
+    background-color: $loading-grey;
+    @extend .animated-background;
+    margin: 0 auto;
+    margin-top: 36px;
+  }
+  .progress-status-container {
+    display: flex;
+    align-items: center;
+    margin-top: 41px;
+    margin-left: 4px;
+    &__progressbar-placeholder {
+      width: 247px;
+      height: 12px;
+      border-radius: 200px;
+      background-color: $loading-grey;
+      @extend .animated-background;
+      margin-right: 13px;
+    }
+    &__status-placeholder {
+      width: 60px;
+      height: 12px;
+      background-color: $loading-grey;
+      @extend .animated-background;
+    }
+  }
+}
+
+// Profile Progress List Loader
+.profile-progress-list-loader-container {
+  border-top: solid 0.5px #dedede;
+  padding-bottom: 14px;
+  .loader-title {
+    margin-top: 27px;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+    &__1-placeholder {
+      width: 210px;
+      height: 10px;
+      background-color: $loading-grey;
+      @extend .animated-background;
+    }
+    &__2-placeholder {
+      width: 270px;
+      height: 10px;
+      background-color: $loading-grey;
+      @extend .animated-background;
+      margin-top: 13px;
+    }
+  }
+  .loader-list {
+    margin-top: 30px;
+    .loader-list-item {
+      height: 62px;
+      display: flex;
+      align-items: center;
+      border-bottom: solid 0.5px #dedede;
+      &__icon-placeholder {
+        width: 30px;
+        height: 30px;
+        background-color: $loading-grey;
+        @extend .animated-background;
+        border-radius: 50px;
+        margin-left: 20px;
+        margin-right: 15px;
+      }
+      &__title-placeholder {
+        width: 210px;
+        height: 10px;
+        background-color: $loading-grey;
+        @extend .animated-background;
+      }
+      &__action-placeholder{
+        width: 170px;
+        height: 10px;
+        background-color: $loading-grey;
+        @extend .animated-background;
+        display: none;
+      }
+      &:nth-last-child(1){
+        border-bottom:0px;
+      }
+    }
+  }
+}
+
+@include media-query(md) {
+
+  // Profile Progress Loader
+  .profile-progress-loader {
+    padding-left:6px;
+    margin-bottom:13px !important;
+    &__title-placeholder {
+      width:230px !important;
+      margin:0px !important;
+      margin-top:14px !important;
+    }
+    .progress-status-container {
+      margin-left:0px;
+      margin-top:34px;
+      &__progressbar-placeholder {
+        width: 560px !important;
+        margin-right: 42px !important;
+      }
+      &__status-placeholder {}
+    }
+  }
+
+  // Profile Progress List Loader
+.profile-progress-list-loader-container {
+  .loader-title {
+    flex-flow: row;
+    margin-left: 30px;
+    margin-top: 25px;
+    &__1-placeholder {
+      width: 520px !important;
+    }
+    &__2-placeholder {
+      display: none;
+    }
+  }
+  .loader-list {
+    .loader-list-item {
+      height: 70px !important;
+      &__icon-placeholder {
+        height: 40px !important;
+        width: 40px !important;
+        margin-left: 30px !important;
+        margin-right: 20px !important;
+      }
+      &__title-placeholder {
+      }
+      &__action-placeholder {
+        display: inline-block !important;
+        margin-left: 221px;
+      }
+      &:nth-last-child(1){
+        border-bottom:0px;
+      }
+    }
+  }
+}
 }

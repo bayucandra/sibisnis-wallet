@@ -20,6 +20,8 @@ import CustomDivider from './../../../Shared/CustomDivider/CustomDivider';
 import ProfileActionButton from './../../../Shared/ProfileActionButton/ProfileActionButton';
 import './ProfileProgress.css';
 
+import { ProfileProgressLoader, ProfileProgressListLoader } from './../../../Loaders/ProfileLoader/ProfileLoader';
+
 import ButtonBase from '@material-ui/core/ButtonBase';
 import {connect} from 'react-redux';
 
@@ -112,9 +114,9 @@ class ProfileProgress extends Component {
       <div id="profile-progress-container">
         <Card className="custom-card-styles">
           <CardContent>
-            <ProgressBar value={48} />
+          {user ? <ProgressBar value={48} /> : <ProfileProgressLoader />}
           </CardContent>
-         {user ? <ProfileVerificationList user={user}/> : null}
+          {user ? <ProfileVerificationList user={user} /> : <ProfileProgressListLoader/>}
         </Card>
       </div>
     )

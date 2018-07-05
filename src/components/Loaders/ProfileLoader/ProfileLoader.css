@@ -9,7 +9,7 @@
   100% {
     background-position: 468px 0; } }
 
-.animated-background, .profile-info-loader__image-placeholder, .profile-info-loader__name-placeholder, .profile-info-loader__email-placeholder, .balance-loader__amount-placeholder {
+.animated-background, .profile-info-loader__image-placeholder, .profile-info-loader__name-placeholder, .profile-info-loader__email-placeholder, .balance-loader__amount-placeholder, .profile-progress-loader__title-placeholder, .profile-progress-loader .progress-status-container__progressbar-placeholder, .profile-progress-loader .progress-status-container__status-placeholder, .profile-progress-list-loader-container .loader-title__1-placeholder, .profile-progress-list-loader-container .loader-title__2-placeholder, .profile-progress-list-loader-container .loader-list .loader-list-item__icon-placeholder, .profile-progress-list-loader-container .loader-list .loader-list-item__title-placeholder, .profile-progress-list-loader-container .loader-list .loader-list-item__action-placeholder {
   animation-duration: 1.25s;
   animation-fill-mode: forwards;
   animation-iteration-count: infinite;
@@ -62,3 +62,105 @@
     height: 10px;
     background-color: #f5f6f8;
     margin-top: 13px; }
+
+.profile-progress-loader {
+  margin-bottom: 14px; }
+  .profile-progress-loader__title-placeholder {
+    width: 240px;
+    height: 10px;
+    background-color: #f5f6f8;
+    margin: 0 auto;
+    margin-top: 36px; }
+  .profile-progress-loader .progress-status-container {
+    display: flex;
+    align-items: center;
+    margin-top: 41px;
+    margin-left: 4px; }
+    .profile-progress-loader .progress-status-container__progressbar-placeholder {
+      width: 247px;
+      height: 12px;
+      border-radius: 200px;
+      background-color: #f5f6f8;
+      margin-right: 13px; }
+    .profile-progress-loader .progress-status-container__status-placeholder {
+      width: 60px;
+      height: 12px;
+      background-color: #f5f6f8; }
+
+.profile-progress-list-loader-container {
+  border-top: solid 0.5px #dedede;
+  padding-bottom: 14px; }
+  .profile-progress-list-loader-container .loader-title {
+    margin-top: 27px;
+    display: flex;
+    flex-flow: column;
+    align-items: center; }
+    .profile-progress-list-loader-container .loader-title__1-placeholder {
+      width: 210px;
+      height: 10px;
+      background-color: #f5f6f8; }
+    .profile-progress-list-loader-container .loader-title__2-placeholder {
+      width: 270px;
+      height: 10px;
+      background-color: #f5f6f8;
+      margin-top: 13px; }
+  .profile-progress-list-loader-container .loader-list {
+    margin-top: 30px; }
+    .profile-progress-list-loader-container .loader-list .loader-list-item {
+      height: 62px;
+      display: flex;
+      align-items: center;
+      border-bottom: solid 0.5px #dedede; }
+      .profile-progress-list-loader-container .loader-list .loader-list-item__icon-placeholder {
+        width: 30px;
+        height: 30px;
+        background-color: #f5f6f8;
+        border-radius: 50px;
+        margin-left: 20px;
+        margin-right: 15px; }
+      .profile-progress-list-loader-container .loader-list .loader-list-item__title-placeholder {
+        width: 210px;
+        height: 10px;
+        background-color: #f5f6f8; }
+      .profile-progress-list-loader-container .loader-list .loader-list-item__action-placeholder {
+        width: 170px;
+        height: 10px;
+        background-color: #f5f6f8;
+        display: none; }
+      .profile-progress-list-loader-container .loader-list .loader-list-item:nth-last-child(1) {
+        border-bottom: 0px; }
+
+@media screen and (min-width: 768px) {
+  .profile-progress-loader {
+    padding-left: 6px;
+    margin-bottom: 13px !important; }
+    .profile-progress-loader__title-placeholder {
+      width: 230px !important;
+      margin: 0px !important;
+      margin-top: 14px !important; }
+    .profile-progress-loader .progress-status-container {
+      margin-left: 0px;
+      margin-top: 34px; }
+      .profile-progress-loader .progress-status-container__progressbar-placeholder {
+        width: 560px !important;
+        margin-right: 42px !important; }
+  .profile-progress-list-loader-container .loader-title {
+    flex-flow: row;
+    margin-left: 30px;
+    margin-top: 25px; }
+    .profile-progress-list-loader-container .loader-title__1-placeholder {
+      width: 520px !important; }
+    .profile-progress-list-loader-container .loader-title__2-placeholder {
+      display: none; }
+  .profile-progress-list-loader-container .loader-list .loader-list-item {
+    height: 70px !important; }
+    .profile-progress-list-loader-container .loader-list .loader-list-item__icon-placeholder {
+      height: 40px !important;
+      width: 40px !important;
+      margin-left: 30px !important;
+      margin-right: 20px !important; }
+    .profile-progress-list-loader-container .loader-list .loader-list-item__action-placeholder {
+      display: inline-block !important;
+      margin-left: 221px; }
+    .profile-progress-list-loader-container .loader-list .loader-list-item:nth-last-child(1) {
+      border-bottom: 0px; } }

@@ -6,6 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^1.0.0-rc.0",
     "@material-ui/icons": "^1.0.0-rc.0",
+    "firebase": "^5.2.0",
     "history": "^4.7.2",
     "node-sass-chokidar": "^1.3.0",
     "normalize.css": "^8.0.0",

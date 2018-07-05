@@ -7,6 +7,7 @@ import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProg
 import { modalToggle } from './../../../lib/utilities';
 import { getUserWithUpdatedProfile } from './../../../redux/actions/UserActions';
 import { connect } from 'react-redux';
+import * as firebase from 'firebase';
 import './DropPhotoUpload.css';
 
 class DropPhotoUpload extends Component {
@@ -19,7 +20,8 @@ class DropPhotoUpload extends Component {
       error:false,
       success:false,
       uploading:false,
-      changeImageStatus: false
+      changeImageStatus: false,
+      uploadProgress: 0
     }
   }
 
@@ -78,17 +80,43 @@ class DropPhotoUpload extends Component {
       if (this.state.success) {
         this.onImageCompleteDialogClose();
       } else {
-        this.setState({ uploading: true, changeImageStatus: false, error: false }, () => {
-          setTimeout(() => {
-            this.setState({ success: true, uploading: false })
-          }, 1500)
-        });
+        this.firebaseUploadSimulation(this.state.files[0])
+        // this.setState({ uploading: true, changeImageStatus: false, error: false }, () => {
+        //   setTimeout(() => {
+        //     this.setState({ success: true, uploading: false })
+        //   }, 1500)
+        // });
         this.props.getUserWithUpdatedProfile(this.state.croppedImage);
         console.log('Cropped Image', this.state.croppedImage);
       }
     } else {
       this.setState({ error: true })
     }
+  }
+
+  firebaseUploadSimulation = (file) =>{
+
+    // Create Storage Reference
+    var storageRef =  firebase.storage().ref('sibinis_samples/'+file.name);
+
+    // Upload File
+    // var task = storageRef.put(file);
+    var task = storageRef.putString(this.state.croppedImage,'data_url');
+
+    // Update Progress Bar
+    var thiss =this;
+    task.on('state_changed',
+     function progress(snapshot){
+       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+       thiss.setState({ uploading: true, changeImageStatus: false, error: false, uploadProgress: progress });
+     },
+     function error(err){
+      thiss.setState({ error: true })
+     },
+     function complete(){
+      thiss.setState({ success: true, uploading: false })
+     }
+    )
   }
 
   onImageCompleteDialogClose = () => {
@@ -124,7 +152,7 @@ class DropPhotoUpload extends Component {
         <div className="image-actions-container">
           <UploadProgressButton
             disabled={this.state.files.length > 0}
-            progress={70}
+            progress={this.state.uploadProgress}
             uploadingStatus={{ error, success, uploading }}
             onImageUploadStart={this.onImageUploadStart.bind(this)}
           />

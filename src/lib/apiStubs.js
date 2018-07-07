@@ -11,7 +11,7 @@ export const getUserData = () => {
           email: 'arzikyyu@gmail.com',
           balance: '100.750.565',
           profilePicture: null,
-          emailVerification: true,
+          emailVerification: false,
           phoneVerfication: true
         }
       })

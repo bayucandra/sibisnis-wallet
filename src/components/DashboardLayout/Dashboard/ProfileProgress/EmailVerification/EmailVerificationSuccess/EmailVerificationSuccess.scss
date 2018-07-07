@@ -1,0 +1,182 @@
+@import 'styles/_colors.scss';
+@import 'styles/_mixins.scss';
+@import 'styles/_variables.scss';
+.verification-success-mobile {
+  width: 320px;
+  padding: 70px 10px;
+  flex-flow: column;
+  align-items: center;
+  &__icon {
+    display: flex;
+  }
+  &__title {
+    font-family: NunitoSans;
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    text-align: center;
+    color: #404852;
+    margin-top: 30px;
+    margin-bottom: 9px;
+  }
+  &__description {
+    font-family: NunitoSans;
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.77;
+    letter-spacing: 0.2px;
+    text-align: center;
+    color: #80858a;
+  }
+  &__actions {
+    margin-top: 35px;
+    .not-received-action {
+      font-family: NunitoSans;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.64;
+      letter-spacing: 0.2px;
+      text-align: center;
+      color: #80858a;
+      margin-bottom: 30px;
+    }
+    .resend-action {
+      font-family: NunitoSans;
+      font-size: 13px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.3px;
+      text-align: center;
+      color: #4a90e2;
+      cursor: pointer;
+      &:hover {
+        font-weight: 800;
+      }
+    }
+  }
+}
+
+.arrow_box {
+  position: relative;
+  background: #f1f1f1;
+  border: 0.5px solid #cccccc;
+  border-radius: 5px;
+}
+
+.arrow_box:after,
+.arrow_box:before {
+  bottom: 100%;
+  left: 93%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.arrow_box:after {
+  border-color: rgba(136, 183, 213, 0);
+  border-bottom-color: #f1f1f1;
+  border-width: 13.5px;
+  margin-left: -29.5px;
+}
+
+.arrow_box:before {
+  border-color: rgba(194, 225, 245, 0);
+  border-bottom-color: #cccccc;
+  border-width: 14.5px;
+  margin-left: -30.5px;
+}
+
+@include media-query(md) {
+  .verification-success-desktop {
+    justify-content: center;
+    padding-bottom: 15px;
+    border-bottom: solid 0.5px #efefef;
+    .email-verfication-success {
+      display: flex;
+      padding-top: 10px;
+      padding-bottom: 20px;
+      width: 664px;
+      .left-container {
+        .email-verification-icon {
+          margin-top: 20px;
+          display: flex;
+          margin-left: 45px;
+          margin-right: 46px;
+          img {}
+        }
+      }
+      .right-container {
+        display: flex;
+        flex-flow: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        .email-verification-info {
+          text-align: left;
+          margin-right: 40px;
+          &__title {
+            margin-bottom: 15px;
+            font-family: NunitoSans;
+            font-size: 16px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.4px;
+            color: #404852
+          }
+          &__description {
+            font-family: NunitoSans;
+            font-size: 13px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.77;
+            letter-spacing: 0.2px;
+            color: #80858a;
+          }
+        }
+        .email-verification-actions {
+          display: flex;
+          margin-right: 30px;
+          margin-top: 30px;
+          .not-received-action {
+            margin-right: 15px;
+            font-family: NunitoSans;
+            font-size: 13px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.2px;
+            text-align: center;
+            color: #80858a;
+          }
+          .resend-action {
+            font-family: NunitoSans;
+            font-size: 13px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.3px;
+            text-align: center;
+            color: #4a90e2;
+            cursor: pointer;
+          }
+        }
+      }
+    }
+  }
+}

@@ -10,6 +10,7 @@ import { modalToggle } from './../../../lib/utilities';
 import { modalTypes } from './../../../lib/constants';
 
 import './Modal.css';
+import EmailVerification from '../../DashboardLayout/Dashboard/ProfileProgress/EmailVerification/EmailVerificiation';
 class Modal extends Component {
   constructor(props) {
     super(props);
@@ -65,6 +66,18 @@ class Modal extends Component {
       case modalTypes.webCameraCapture:
         return (
           <WebcamCapture />
+        )
+        break;
+      case modalTypes.emailVerification:
+        return (
+          <React.Fragment>
+            <div className="close-icon-container">
+              <div className="close-icon icon-touch-area-container-50 ripple" onClick={this.handleClose.bind(this)}>
+                <img src={closeIconBlack} alt="close-icon-black" />
+              </div>
+            </div>
+            <EmailVerification />
+          </React.Fragment>
         )
         break;
 

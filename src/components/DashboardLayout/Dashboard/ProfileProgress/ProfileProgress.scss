@@ -51,6 +51,12 @@
   border-bottom: solid 0.5px #dedede;
   padding: 0px !important;
   height: 62px;
+  position: relative;
+  .list-item-mobile-action{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
   &:last-child {
     border-bottom: 0px;
   }
@@ -132,6 +138,9 @@
   .varification-list-item-container {
     border-bottom: solid 0.5px #efefef;
     height: 72px;
+    .list-item-mobile-action{
+      display: none;
+    }
     &:last-child {
       border-bottom: 0px;
     }
@@ -150,6 +159,19 @@
       }
       .desktop-verification-status {
         display: block;
+        .close-email-verification-form-btn{
+          margin-right: 42.6px;
+          cursor: pointer;
+          font-family: NunitoSans;
+          font-size: 13px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          text-align: center;
+          color: #4a90e2;
+        }
         .verification-icon-container {
           display: flex;
           align-items: center;
@@ -192,5 +214,9 @@
         // }
       }
     }
+  }
+
+  .border-0{
+    border:0px !important;
   }
 }

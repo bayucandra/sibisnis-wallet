@@ -59,6 +59,7 @@ class DropPhotoUpload extends Component {
             error:false,
             success:false,
             uploading:false,
+            uploadStatus:false
           }),
         false
       )
@@ -87,11 +88,23 @@ class DropPhotoUpload extends Component {
         //   }, 1500)
         // });
         this.props.getUserWithUpdatedProfile(this.state.croppedImage);
-        console.log('Cropped Image', this.state.croppedImage);
       }
     } else {
-      this.setState({ error: true })
+      this.simulateErrorOnImageUpload();
     }
+  }
+
+  // Create simulation for image upload if error
+  simulateErrorOnImageUpload = () =>{
+    this.setState({ uploading: true, uploadStatus: true }, () => {
+      setTimeout(() => {
+        this.setState({ uploadProgress: 45 }, () => {
+          setTimeout(() => {
+            this.setState({ error: true, });
+          }, 2000);
+        })
+      }, 1000);
+    });
   }
 
   firebaseUploadSimulation = (file) =>{
@@ -108,7 +121,7 @@ class DropPhotoUpload extends Component {
     task.on('state_changed',
      function progress(snapshot){
        var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-       thiss.setState({ uploading: true, changeImageStatus: false, error: false, uploadProgress: progress });
+       thiss.setState({ uploading: true,uploadStatus:true, changeImageStatus: false, error: false, uploadProgress: progress });
      },
      function error(err){
       thiss.setState({ error: true })
@@ -156,7 +169,7 @@ class DropPhotoUpload extends Component {
             uploadingStatus={{ error, success, uploading }}
             onImageUploadStart={this.onImageUploadStart.bind(this)}
           />
-          {(this.state.src && this.state.changeImageStatus) ?
+          {((this.state.src && this.state.changeImageStatus) && !this.state.uploadStatus) ?
             <div className="change-image-button-container">
               <label htmlFor="change-image" className="change-image-button ripple">
                 Ganti Foto

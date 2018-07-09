@@ -46,8 +46,7 @@ const ProfileInfo = (props) => {
   const { name, email, image, imageAction } = props;
   return (
     <div className="profile-info">
-      <div className="profile-info__img">
-        <img src={image ? image : avatarPlacerholderBlank} alt="profile-avatar" onClick={imageAction.bind(this,image ? image : null)} />
+      <div className="profile-info__img" style={{ 'backgroundImage': "url(" + (image ? image : avatarPlacerholderBlank) + ")" }} onClick={imageAction.bind(this, image ? image : null)}>
       </div>
       <div className="profile-info__name">{name ? name : 'N/A'}</div>
       <div className="profile-info__email">{email ? email : 'N/A'}</div>

@@ -1,23 +1,14 @@
 import React, { Component } from 'react';
 import TextField from '@material-ui/core/TextField';
-import LinearProgress from '@material-ui/core/LinearProgress';
-import { withStyles } from '@material-ui/core/styles';
 import EmailVerificationSuccess from './EmailVerificationSuccess/EmailVerificationSuccess';
+import { InfiniteProgressBar } from './../../../../Shared/Progressbar/Progressbar';
 import './EmailVerification.css';
-
-const styles = {
-  progress:{
-    colorPrimary:{
-      backgroundColor: '#cccccc'
-    }
-  }
-}
 
 class EmailVerification extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      email: 'bayu@sibinis-example.com',
+      email: 'dwinawan@gmail.com',
       progressIndicator: false,
       emailVerificationStatus: false
     }
@@ -58,14 +49,12 @@ class EmailVerification extends Component {
                   disabled
                 />
                 {progressIndicator ?
-                  <LinearProgress
-                    style={{
-                      'width': '100%'
-                    }} /> :
+                  <InfiniteProgressBar />
+                  :
                   <div className="email-verification-form__note">Pastikan email sesuai</div>
                 }
                 <div className="email-verification-form__button-container">
-                  <div className="resend-button ripple" onClick={this.onSubmit.bind(this)}>Lanjutkan</div>
+                  <div className={"resend-button ripple " + (progressIndicator ? 'disabled' : '')} onClick={this.onSubmit.bind(this)}>Lanjutkan</div>
                 </div>
               </div>
             </div>
@@ -85,17 +74,11 @@ class EmailVerification extends Component {
                 </div>
 
                 <div className="email-verification-form__button-container">
-                  <div className="resend-button ripple" onClick={this.onSubmit.bind(this)}>Lanjutkan</div>
+                  <div className={"resend-button ripple " + (progressIndicator ? 'disabled' : '')} onClick={this.onSubmit.bind(this)}>Lanjutkan</div>
                 </div>
                 {progressIndicator ?
-                  <LinearProgress
-                    style={{
-                      'width': '100%',
-                      'position': 'absolute',
-                      'bottom': 0,
-                      'borderBottomRightRadius': '5px',
-                      'borderBottomLeftRadius': '5px',
-                    }} /> : null}
+                  <InfiniteProgressBar />
+                  : null}
               </div>
             </div>
           </React.Fragment>}

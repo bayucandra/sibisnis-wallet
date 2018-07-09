@@ -1,6 +1,12 @@
 import React from "react";
 
+import './Progressbar.css';
 
+export const InfiniteProgressBar = (props) =>{
+  return (
+    <div className="infinite-loader"></div>
+  )
+}
 
 const Progressbar = props => {
   const { height, value, color } = props;

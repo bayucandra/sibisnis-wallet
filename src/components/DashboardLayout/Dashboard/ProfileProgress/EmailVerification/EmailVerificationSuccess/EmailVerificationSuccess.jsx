@@ -15,7 +15,7 @@ const EmailVerificationSuccessMobile = (props) => {
     </div>
       <div className="verification-success-mobile__actions">
         <div className="not-received-action">Belum menerima link verifikasi?</div>
-        <div className="resend-action">Kirim ulang link verifikasi</div>
+        <div className="resend-action ripple action-btn">Kirim ulang link verifikasi</div>
       </div>
     </div>
   )
@@ -39,7 +39,7 @@ const EmailVerificationSuccessDesktop = (props) => {
           </div>
           <div className="email-verification-actions">
             <div className="not-received-action">Belum menerima link verifikasi?</div>
-            <div className="resend-action">Kirim ulang link verifikasi</div>
+            <div className="resend-action action-btn">Kirim ulang link verifikasi</div>
           </div>
         </div>
       </div>

@@ -73,19 +73,20 @@
 .arrow_box:after {
   border-color: rgba(136, 183, 213, 0);
   border-bottom-color: #f1f1f1;
-  border-width: 13.5px;
-  margin-left: -29.5px; }
+  border-width: 0px 9.5px 12.5px 9.5px;
+  margin-left: -27.5px; }
 
 .arrow_box:before {
   border-color: rgba(194, 225, 245, 0);
   border-bottom-color: #cccccc;
-  border-width: 14.5px;
-  margin-left: -30.5px; }
+  border-width: 0px 10.5px 13.5px 10.5px;
+  margin-left: -28.5px; }
 
 @media screen and (min-width: 768px) {
   .email-verification-desktop-container {
     justify-content: center;
     padding-bottom: 15px;
+    margin-top: -4px;
     border-bottom: solid 0.5px #efefef; }
     .email-verification-desktop-container .email-verification-form {
       display: flex;
@@ -99,7 +100,8 @@
         margin-left: 30px;
         margin-bottom: 30px; }
         .email-verification-desktop-container .email-verification-form .input-field-container__email-input {
-          width: 100%; }
+          width: 100%;
+          margin-top: 12px !important; }
           .email-verification-desktop-container .email-verification-form .input-field-container__email-input label {
             font-family: NunitoSans;
             height: 16px;

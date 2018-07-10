@@ -1,5 +1,8 @@
+ // Node Modules
 import React, { Component } from 'react';
 import ReactCrop, {makeAspectCrop} from 'react-image-crop';
+
+// Custom CSS
 import './PhotoCrop.css';
 
 const getCroppedImg = (image, pixelCrop, fileName) => {
@@ -70,10 +73,14 @@ class PhotoCrop extends Component {
     }
 
     if (image.height > image.width) {
+      crop.height = (image.width / image.height) * 100;
       crop.x = 0;
+      crop.y = (100 - crop.height) / 2;
       crop.width = 100;
     } else if (image.height < image.width) {
+      crop.width = (image.height / image.width) * 100;
       crop.y = 0;
+      crop.x = (100 - crop.width) / 2;
       crop.height = 100;
     } else {
       crop.x = 0;
@@ -82,23 +89,9 @@ class PhotoCrop extends Component {
       crop.height = 100;
     }
 
-    // if (image.height > image.width) {
-    //   crop.x = 15;
-    //   crop.width = 70;
-    // } else {
-    //   crop.y = 15;
-    //   crop.height = 70;
-    // }
-    this.setState({crop:crop})
-    // this.setState({
-    //   crop: makeAspectCrop({
-    //     x: 50,
-    //     y: 50,
-    //     aspect: 1 / 1,
-    //     width: 50,
-    //   }, image.width / image.height),
-    // });
-    console.log('onCropComplete', image)
+    this.setState({
+      crop: crop
+    });
   }
 
   onCropComplete = (crop, pixelCrop) => {
@@ -149,9 +142,6 @@ class PhotoCrop extends Component {
             className="my-image"
           />
         </div>
-
-        {/* <button onClick={this.onImageCroped.bind(this, this.props.src, this.state.pixelCrop, 'croped-file')}>Get Croped Image</button>
-        {this.state.croppedSrc ? <img src={this.state.croppedSrc} alt="image-src" height="200" width="200" /> : ''} */}
       </div>
     )
   }

@@ -1,11 +1,20 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// Custom Components
 import DropPhotoUpload from './../DropPhotoUpload/DropPhotoUpload';
-import './PhotoUpload.css';
+
+// Custom Libraries
+import { modalToggle,cameraCaptureFileUpload } from '../../../lib/utilities';
+import { modalTypes } from '../../../lib/constants';
+
+// Local Images
 import fileIconBlue from './../../../images/icons/ico-file-blue.svg';
 import cameraIconBlue from './../../../images/icons/ico-camera-blue.svg';
 import WebcamCapture from './../../Shared/WebcamCapture/WebcamCapture';
-import { modalToggle,cameraCaptureFileUpload } from '../../../lib/utilities';
-import { modalTypes } from '../../../lib/constants';
+
+// Custom CSS
+import './PhotoUpload.css';
 
 const UploadButton = (props) => {
   const { id, icon, label, onClick } = props
@@ -51,9 +60,7 @@ class PhotoUpload extends Component {
   }
 
   toggleCameraCapture = (id) => {
-    // this.setState({ cameraCapture: true });
     if (navigator.getUserMedia) {
-      // this.setState({ cameraCapture: true })
       modalToggle.next({ status: true, type: modalTypes.webCameraCapture });
     } else {
       alert('getUserMedia() is not supported by your browser');
@@ -61,7 +68,6 @@ class PhotoUpload extends Component {
   }
 
   onCameraCapture = (image) =>{
-    debugger;
   }
 
   render() {
@@ -89,8 +95,6 @@ class PhotoUpload extends Component {
               </div>
               <div className="photo-upload-button__Camera">
                 {cameraCapture ? <WebcamCapture onCameraCapture={this.onCameraCapture} /> : null}
-                {/* <UploadButton icon={cameraIconBlue} label="Ambil dari Kamera" onClick={this.toggleCameraCapture.bind(this)} id="camera" /> */}
-
                 <div className="upload-button-container">
                   <label htmlFor="file" className="upload-button ripple" onClick={this.toggleCameraCapture.bind(this)}>
                     <div className="upload-button__icon">

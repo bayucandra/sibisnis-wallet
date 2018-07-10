@@ -56,40 +56,6 @@
       }
     }
   }
-  // .drop-photo-upload-button {
-  //   @include text-setup($white, 14px, $font-family);
-  //   height: 50px;
-  //   border-radius: 2px;
-  //   background-color: #2196f3;
-  //   font-weight: bold;
-  //   font-style: normal;
-  //   font-stretch: normal;
-  //   line-height: normal;
-  //   letter-spacing: 0.5px;
-  //   text-align: center;
-  //   display: flex;
-  //   align-items: center;
-  //   justify-content: center;
-  //   margin-top: 50px;
-  //   cursor: pointer;
-  //   position: relative;
-  //   z-index: 10;
-  //   &__text{
-  //     position: relative;
-  //     z-index: 30;
-  //   }
-  //   &__progress{
-  //     height: 100%;
-  //     width: 55%;
-  //     position: absolute;
-  //     background-color: #1a70b3;
-  //     top: 0;
-  //     left: 0;
-  //     border-radius: 2px;
-  //     z-index: 20;
-  //   }
-  // }
-
   .change-image-button-container{
     .change-image-button{
       width: 100%;
@@ -131,7 +97,6 @@
         margin-bottom: 40px !important;
       }
     }
-
     .drop-zone-area-container{
       .drop-zone{
         height: 248px !important;
@@ -159,11 +124,5 @@
         border: dashed 2px #2196f3;
       }
     }
-
-    // .drop-photo-upload-button{
-    //   width: 360px !important;
-    //   margin: 0 auto !important;
-    //   margin-top: 40px !important;
-    // }
   }
 }

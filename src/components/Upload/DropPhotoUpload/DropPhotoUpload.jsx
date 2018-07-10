@@ -1,13 +1,25 @@
+// Node Modules
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import uploadIconMobile from './../../../images/icons/ico-upload-mobile.svg';
-import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
+import * as firebase from 'firebase';
+
+
+// Custom Components
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
 import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';
+
+// Custom Libraries
 import { modalToggle } from './../../../lib/utilities';
+
+// Redux
 import { getUserWithUpdatedProfile } from './../../../redux/actions/UserActions';
 import { connect } from 'react-redux';
-import * as firebase from 'firebase';
+
+// Local Images
+import uploadIconMobile from './../../../images/icons/ico-upload-mobile.svg';
+import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
+
+// Custom CSS
 import './DropPhotoUpload.css';
 
 class DropPhotoUpload extends Component {

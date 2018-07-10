@@ -1,18 +1,25 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// React Material
 import Card from '@material-ui/core/Card';
+
+// Custom Components
 import DetailProfileListItem from './DetailProfileListItem/DetailProfileListItem';
 import NotificationBanner from './../../Shared/NotificationBanner/NotificationBanner';
 
-import verificationIcon from './../../../images/icons/profile-verification-icons/ico-terverifikasi.svg';
-import warningIcon from './../../../images/icons/profile-verification-icons/ico-warning-red.svg';
+// Custom Libraries
+import { navigationStatus } from "./../../../lib/utilities";
+
+// Local Images
 import emailIcon from './../../../images/icons/profile-verification-icons/email.svg';
 import phoneIcon from './../../../images/icons/profile-verification-icons/nomor-hp.svg';
 import profileIcon from './../../../images/icons/profile-verification-icons/nama-lengkap.svg';
 import locationIcon from './../../../images/icons/profile-verification-icons/ico-alamat.svg';
 import cardIcon from './../../../images/icons/profile-verification-icons/ico-identitas.svg';
 import passwordIcon from './../../../images/icons/profile-verification-icons/ico-password.svg';
-import { navigationStatus } from "./../../../lib/utilities";
 
+// Custom CSS
 import './DetailProfile.css';
 
 class DetailProfile extends Component {

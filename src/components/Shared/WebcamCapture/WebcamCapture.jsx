@@ -1,14 +1,22 @@
+// Node Modules
 import React, { Component } from 'react';
 import Webcam from 'react-webcam';
+
+// Local Images
 import closeIconBlack from './../../../images/icons/ico-close-black.svg';
 import cameraIconWhite from './../../../images/icons/ico-camera-white.svg';
 import cameraFinishIcon from './../../../images/icons/ico-camera-finish.svg';
 import cameraIconReset from './../../../images/icons/ico-upload-reset.svg';
 
-import './WebcamCapture.css';
-import { modalToggle } from '../../../lib/utilities';
-import { connect } from 'react-redux';
+// Redux
 import { getUserWithUpdatedProfile } from './../../../redux/actions/UserActions';
+import { connect } from 'react-redux';
+
+// Custom Libraries
+import { modalToggle } from '../../../lib/utilities';
+
+// Custom CSS
+import './WebcamCapture.css';
 
 const CameraResetButton = (props) => {
   const { onCameraReset } = props;

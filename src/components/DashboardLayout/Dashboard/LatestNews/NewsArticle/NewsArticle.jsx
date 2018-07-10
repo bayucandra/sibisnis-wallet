@@ -1,13 +1,14 @@
+// Node Modules
 import React from 'react';
+
+// Custom CSS
 import './NewsArticle.css';
 
 const NewsArticle = (props) => {
   const { title, date, tags, articleSummary, readStatus } = props;
   return (
     <div className="news-article-container ripple opacity-background">
-
       {!readStatus ? <div className="news-read-pending"></div> : null}
-
       <div className="news-article-inner-container">
         <div className="news-article-header">
           <div className="news-article-header-top">

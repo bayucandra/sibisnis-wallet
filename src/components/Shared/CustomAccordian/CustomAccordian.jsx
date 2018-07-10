@@ -1,8 +1,11 @@
+// Node Modules
 import React, { Component } from 'react';
-import Transition from 'react-transition-group/Transition';
+
+// Local Image
 import iconCollapse from './../../../images/icons/ico-collaps.svg';
 import iconMinus from './../../../images/icons/ico-minus.svg';
 
+// Custom CSS
 import './CustomAccordian.css';
 
 class CustomAccordian extends Component {

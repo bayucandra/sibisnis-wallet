@@ -10,6 +10,7 @@ import { getHistoryLoginList } from './../../../redux/actions/HistoryLoginAction
 import { getNewsList } from './../../../redux/actions/NewsActions'
 import { connect } from 'react-redux';
 
+// Custom CSS
 class Dashboard extends Component {
   constructor(props) {
     super(props);

@@ -1,10 +1,15 @@
+// Node Modules
 import React, { Component } from 'react';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import NewsArticle from './NewsArticle/NewsArticle';
 import { withRouter } from 'react-router-dom';
+
+// React Material
+import Card from '@material-ui/core/Card';
+
+// Custom Components
+import NewsArticle from './NewsArticle/NewsArticle';
 import { LatestNewsLoader } from './../../../Loaders/LatestNewsLoader/LatestNewsLoader';
 
+// Custom CSS
 import './LatestNews.css';
 
 class LatestNews extends Component {

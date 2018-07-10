@@ -1,3 +1,4 @@
+// Node Modules
 import React, { Component } from 'react';
 
 // Custom Components
@@ -11,6 +12,7 @@ import { navigationStatus } from './../../../lib/utilities';
 import { getNewsList } from './../../../redux/actions/NewsActions';
 import {connect} from 'react-redux';
 
+// Custom CSS
 import './AllNews.css';
 class AllNews extends Component {
   constructor(props) {

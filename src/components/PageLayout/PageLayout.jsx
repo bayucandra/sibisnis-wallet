@@ -1,10 +1,15 @@
+// Node Modules
 import React, { Component } from 'react';
-import DashboardLayout from './../DashboardLayout/DashboardLayout';
-import AllNews from './../Pages/AllNews/AllNews';
-import AllHistorLogins from './../Pages/AllHistoryLogins/AllHistoryLogins';
 import { BrowserRouter as Router, Switch, Redirect,Route, Link } from "react-router-dom";
-import './PageLayout.css';
+
+// Custom Compoenents
 import Modal from './../Shared/Modal/Modal';
+import AllHistorLogins from './../Pages/AllHistoryLogins/AllHistoryLogins';
+import AllNews from './../Pages/AllNews/AllNews';
+import DashboardLayout from './../DashboardLayout/DashboardLayout';
+
+// Custom CSS
+import './PageLayout.css';
 
 class PageLayout extends Component {
   constructor(props) {

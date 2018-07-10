@@ -1,8 +1,14 @@
+// Node Modules
 import React, { Component } from 'react';
-import backIcon from './../../../images/icons/back-white.svg';
-import { navigationStatus } from './../../../lib/utilities';
 import { withRouter } from 'react-router-dom';
 
+// Local Images
+import backIcon from './../../../images/icons/back-white.svg';
+
+// Custom Libraries
+import { navigationStatus } from './../../../lib/utilities';
+
+// Custom CSS
 import './HeaderNavigationStatus.css';
 
 class HeaderNavigationStatus extends Component {

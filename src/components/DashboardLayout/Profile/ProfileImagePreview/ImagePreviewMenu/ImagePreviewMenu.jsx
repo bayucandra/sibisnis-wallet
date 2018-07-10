@@ -1,6 +1,11 @@
+// Node Modules
 import React, { Component } from 'react'
+
+// Local Images
 import rightArrowIcon from './../../../../images/icons/s-litle-right.svg'
 import backBlueIcon from './../../../../images/icons/ico-back-blue.svg'
+
+// Custom Libraries
 import { modalToggle } from './../../../../lib/utilities';
 import { modalTypes } from './../../../../lib/constants';
 

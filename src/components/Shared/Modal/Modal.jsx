@@ -1,16 +1,25 @@
+// Node Modules
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
-import Button from '@material-ui/core/Button';
+
+// React Material
 import Dialog from '@material-ui/core/Dialog';
+
+// Local Images
+import closeIconBlack from './../../../images/icons/ico-close-black.svg';
+
+// Custom Components
+import EmailVerification from '../../DashboardLayout/Dashboard/ProfileProgress/EmailVerification/EmailVerificiation';
+import WebcamCapture from './../WebcamCapture/WebcamCapture';
 import PhotoUpload from "./../../Upload/PhotoUpload/PhotoUpload";
 import ProfileImagePreview from './../../DashboardLayout/Profile/ProfileImagePreview/ProfileImagePreview';
-import closeIconBlack from './../../../images/icons/ico-close-black.svg';
-import WebcamCapture from './../WebcamCapture/WebcamCapture';
+
+// Custom Libraries
 import { modalToggle } from './../../../lib/utilities';
 import { modalTypes } from './../../../lib/constants';
 
+// Custom CSS
 import './Modal.css';
-import EmailVerification from '../../DashboardLayout/Dashboard/ProfileProgress/EmailVerification/EmailVerificiation';
+
 class Modal extends Component {
   constructor(props) {
     super(props);

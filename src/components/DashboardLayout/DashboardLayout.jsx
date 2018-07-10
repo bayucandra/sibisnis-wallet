@@ -1,13 +1,16 @@
+// Node Modules
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+
+// Custom Components
 import Profile from './Profile/Profile';
 import Dashboard from './Dashboard/Dashboard';
 import DetailProfile from './DetailProfile/DetailProfile';
-import LatestNews from "./Dashboard/LatestNews/LatestNews";
 
+// Custom Libraries
 import { navigationStatus } from './../../lib/utilities';
 
-import { Route } from 'react-router-dom';
-
+// Custom CSS
 import './DashboardLayout.css';
 
 class DashboardLayout extends Component {
@@ -17,7 +20,6 @@ class DashboardLayout extends Component {
       profileStatus: true
      }
   }
-
 
   componentWillMount() {
     navigationStatus.subscribe(
@@ -34,7 +36,6 @@ class DashboardLayout extends Component {
   render() {
     return (
       <React.Fragment>
-        {/* <LatestNews/> */}
         <div className="container-wrapper">
           <div className="container-inner">
             <div className="dashboard-layout-container">

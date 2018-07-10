@@ -1,10 +1,19 @@
+// Node Modules
 import React, { Component } from 'react';
-import menuIcon from './../../../../images/icons/menu.svg';
+
+// React Material
 import IconButton from '@material-ui/core/IconButton';
+
+// Local Images
+import menuIcon from './../../../../images/icons/menu.svg';
 import rightArrowIcon from './../../../../images/icons/s-litle-right.svg'
 import backBlueIcon from './../../../../images/icons/ico-back-blue.svg'
+
+// Custom Libraries
 import {modalToggle, cameraCaptureFileUpload} from './../../../../lib/utilities';
 import {modalTypes} from './../../../../lib/constants';
+
+// Custom CSS
 import './ProfileImagePreview.css';
 
 class ProfileImagePreview extends Component {

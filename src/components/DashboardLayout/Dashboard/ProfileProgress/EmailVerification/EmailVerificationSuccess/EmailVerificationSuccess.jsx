@@ -1,6 +1,10 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// Local Images
 import emailVerficationIcon from './../../../../../../images/icons/ico-verification-email.svg';
 
+// Custom CSS
 import './EmailVerificationSuccess.css';
 
 const EmailVerificationSuccessMobile = (props) => {
@@ -46,7 +50,6 @@ const EmailVerificationSuccessDesktop = (props) => {
     </div>
   )
 }
-
 class EmailVerficationSuccess extends Component {
   constructor(props) {
     super(props);

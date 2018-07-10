@@ -1,7 +1,14 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// React Material
 import TextField from '@material-ui/core/TextField';
+
+// Custom Components
 import EmailVerificationSuccess from './EmailVerificationSuccess/EmailVerificationSuccess';
 import { InfiniteProgressBar } from './../../../../Shared/Progressbar/Progressbar';
+
+// Custom CSS
 import './EmailVerification.css';
 
 class EmailVerification extends Component {

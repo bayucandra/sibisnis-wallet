@@ -1,19 +1,25 @@
+// Node Modules
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
+// React Material
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
 
+// Local Images
 import switchIcon from './../../../images/icons/switch.svg';
 import logoutIcon from './../../../images/icons/logout.svg';
 import menuIcon from './../../../images/icons/menu.svg';
 
+// Custom Libraries
 import { navigationStatus } from './../../../lib/utilities';
-import HeaderNavigationStatus from './../HeaderNavigationStatus/HeaderNavigationStatus';
-import { withRouter } from 'react-router-dom';
 
+// Custom Components
+import HeaderNavigationStatus from './../HeaderNavigationStatus/HeaderNavigationStatus';
+
+// Custom CSS
 import './Header.css';
 
 class Header extends Component {

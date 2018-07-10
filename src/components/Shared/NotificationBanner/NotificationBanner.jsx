@@ -1,5 +1,10 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// Local Images
 import HelpIconRed from './../../../images/icons/ico-help-red.svg';
+
+// Custom CSS
 import './NotificationBanner.css';
 
 const NotificationBanner = (props) => {

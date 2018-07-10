@@ -1,7 +1,12 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// Local Images
 import editIcon from './../../../../images/icons/ico-edit.svg';
 import warningIcon from './../../../../images/icons/profile-verification-icons/ico-warning-red.svg';
 import ProfileActionButton from './../../../Shared/ProfileActionButton/ProfileActionButton';
+
+// Custom CSS
 import './DetailProfileListItem.css';
 
 const ItemInfo = (props) => {

@@ -1,12 +1,26 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// React Material
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Divider from '@material-ui/core/Divider';
-import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
+// Custom Components
+import Progressbar from './../../../Shared/Progressbar/Progressbar';
+import ProfileActionButton from './../../../Shared/ProfileActionButton/ProfileActionButton';
+import { ProfileProgressLoader, ProfileProgressListLoader } from './../../../Loaders/ProfileLoader/ProfileLoader';
+import EmailVerification from './EmailVerification/EmailVerificiation';
+
+// Custom Libraries
+import { modalToggle } from '../../../../lib/utilities';
+import { modalTypes } from '../../../../lib/constants';
+
+// Redux
+import {connect} from 'react-redux';
+
+// Local Images
 import verificationIcon from './../../../../images/icons/profile-verification-icons/ico-terverifikasi.svg';
 import warningIcon from './../../../../images/icons/profile-verification-icons/ico-warning-red.svg';
 import emailIcon from './../../../../images/icons/profile-verification-icons/email.svg';
@@ -15,19 +29,8 @@ import profileIcon from './../../../../images/icons/profile-verification-icons/n
 import locationIcon from './../../../../images/icons/profile-verification-icons/ico-alamat.svg';
 import cardIcon from './../../../../images/icons/profile-verification-icons/ico-identitas.svg';
 
-import Progressbar from './../../../Shared/Progressbar/Progressbar';
-import CustomDivider from './../../../Shared/CustomDivider/CustomDivider';
-import ProfileActionButton from './../../../Shared/ProfileActionButton/ProfileActionButton';
+// Custom CSS
 import './ProfileProgress.css';
-
-import { ProfileProgressLoader, ProfileProgressListLoader } from './../../../Loaders/ProfileLoader/ProfileLoader';
-
-import ButtonBase from '@material-ui/core/ButtonBase';
-import {connect} from 'react-redux';
-import { modalToggle } from '../../../../lib/utilities';
-import { modalTypes } from '../../../../lib/constants';
-import EmailVerification from './EmailVerification/EmailVerificiation';
-
 
 const ProgressBar = (props) => {
   const { value } = props;

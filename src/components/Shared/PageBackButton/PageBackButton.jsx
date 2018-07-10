@@ -1,8 +1,12 @@
+// Node Modules
 import React, { Component } from 'react';
-import BackBlueIcon from './../../../images/icons/back-blue.svg';
-import './PageBackButton.css';
 import { withRouter } from 'react-router-dom';
 
+// Local Images
+import BackBlueIcon from './../../../images/icons/back-blue.svg';
+
+// Custom CSS
+import './PageBackButton.css';
 class PageBackButton extends Component {
   constructor(props) {
     super(props);

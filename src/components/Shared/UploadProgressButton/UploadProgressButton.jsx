@@ -1,6 +1,11 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// Local Images
 import uploadErrorIcon from './../../../images/icons/ico-upload-progress-error.svg';
 import uploadSuccessIcon from './../../../images/icons/ico-upload-progress-complete.svg';
+
+// Custom CSS
 import './UploadProgressButton.css';
 
 class UploadProgressButton extends Component {

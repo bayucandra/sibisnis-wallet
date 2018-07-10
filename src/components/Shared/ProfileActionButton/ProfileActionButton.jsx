@@ -1,6 +1,10 @@
+// Node Modules
 import React, { Component } from 'react';
+
+// React Material
 import ButtonBase from '@material-ui/core/ButtonBase';
 
+// Custom CSS
 import './ProfileActionButton.css';
 
 const ProfileActionButton = (props) => {

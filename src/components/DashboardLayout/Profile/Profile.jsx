@@ -102,6 +102,12 @@ class Profile extends Component {
     this.props.history.push('/dashboard/detail-profile');
   }
 
+  // Will navigate to add balance pages
+  onTambahClick = () => {
+    this.props.history.push('/dashboard/deposit-requirements-check');
+    navigationStatus.next({ navigationState: 'Tambah Saldo'});
+  }
+
   onProfileImageClick = (image) => {
     if (!image) {
       modalToggle.next({ status: true, type: modalTypes.imageUpload });
@@ -144,7 +150,7 @@ class Profile extends Component {
                 <BalanceLoader />
               }
               <div className="profile-buttons-container text-center">
-                <ProfileButton value={'Tambah'} />
+                <ProfileButton onClick={this.onTambahClick.bind(this)} value={'Tambah'} />
                 <span className="dot-desktop"></span>
                 <ProfileButton value={'Tarik'} style={{'marginBottom':'0px'}}/>
               </div>

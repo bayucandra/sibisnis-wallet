@@ -6,6 +6,7 @@ import { Route } from 'react-router-dom';
 import Profile from './Profile/Profile';
 import Dashboard from './Dashboard/Dashboard';
 import DetailProfile from './DetailProfile/DetailProfile';
+import DepositRequirementsCheck from './Dashboard/Deposit/DepositRequirementsCheck/DepositRequirementsCheck';
 
 // Custom Libraries
 import { navigationStatus } from './../../lib/utilities';
@@ -24,7 +25,11 @@ class DashboardLayout extends Component {
   componentWillMount() {
     navigationStatus.subscribe(
       (data) => {
-        if (data.navigationState === 'Dashboard' || data.navigationState === 'Detail Profile' ) {
+        if (
+          data.navigationState === 'Dashboard' ||
+          data.navigationState === 'Detail Profile' ||
+          data.navigationState === 'Tambah Saldo'
+        ) {
           this.setState({ profileStatus: false });
         } else {
           this.setState({ profileStatus: true });
@@ -45,6 +50,7 @@ class DashboardLayout extends Component {
               <div className={!this.state.profileStatus ? "dashboard-layout-container__right show-dashboard" : 'dashboard-layout-container__right hide-dashboard'}>
                 <Route path="/dashboard" exact={true} component={Dashboard} />
                 <Route path="/dashboard/detail-profile" component={DetailProfile} />
+                <Route path="/dashboard/deposit-requirements-check" component={DepositRequirementsCheck} />
               </div>
             </div>
           </div>

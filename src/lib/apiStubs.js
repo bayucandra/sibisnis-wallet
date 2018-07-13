@@ -12,7 +12,8 @@ export const getUserData = () => {
           balance: '100.750.565',
           profilePicture: null,
           emailVerification: false,
-          phoneVerfication: true
+          phoneVerfication: true,
+          address: null
         }
       })
     }, 2000);

@@ -1,6 +1,10 @@
 // Node Modules
 import React, { Component } from 'react';
 
+// Custom Libraries
+import { modalTypes } from './../../../../../../lib/constants';
+import { modalToggle } from './../../../../../../lib/utilities';
+
 // Local Images
 import finishIcon from './../../../../../../images/icons/ico-camera-finish.svg';
 
@@ -10,6 +14,12 @@ class RequirementsStep2 extends Component {
     super(props);
     this.state = {}
   }
+
+
+  onCompleteAddress = () => {
+    modalToggle.next({ status: true, type: modalTypes.addressForm });
+  }
+
   render() {
     const { status, active } = this.props;
     return (
@@ -29,7 +39,7 @@ class RequirementsStep2 extends Component {
             {!status ?
               <div className="requirements-step__body">
                 <div className="step-description">Data alamat juga digunakan sebagai syarat untuk melakukan penambahan deposit dan aktifitas lainnya</div>
-                <div className="step-button ripple">
+                <div className="step-button ripple" onClick={this.onCompleteAddress.bind(this)}>
                   <span className="step-button__text">Lengkapi alamat</span>
                 </div>
               </div>

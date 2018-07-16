@@ -54,6 +54,11 @@ table {
   max-width: 1000px;
   width: 100%; }
 
+.layout-center {
+  display: flex;
+  align-items: center;
+  justify-content: center; }
+
 .mr-0 {
   margin: 0px; }
 

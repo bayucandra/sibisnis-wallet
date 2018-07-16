@@ -12,6 +12,7 @@ import EmailVerification from '../../DashboardLayout/Dashboard/ProfileProgress/E
 import WebcamCapture from './../WebcamCapture/WebcamCapture';
 import PhotoUpload from "./../../Upload/PhotoUpload/PhotoUpload";
 import ProfileImagePreview from './../../DashboardLayout/Profile/ProfileImagePreview/ProfileImagePreview';
+import AddressForm from './../../Forms/AddressForm/AddressForm';
 
 // Custom Libraries
 import { modalToggle } from './../../../lib/utilities';
@@ -35,7 +36,7 @@ class Modal extends Component {
       (data) => {
         if (data.status) {
           this.handleClickOpen(data);
-        }else{
+        } else {
           this.handleClose();
         }
       }
@@ -89,7 +90,11 @@ class Modal extends Component {
           </React.Fragment>
         )
         break;
-
+      case modalTypes.addressForm:
+        return (
+          <AddressForm />
+        )
+        break;
       default:
         return <React.Fragment></React.Fragment>
         break;
@@ -97,13 +102,14 @@ class Modal extends Component {
   }
 
   render() {
-    const { fullScreen, classes  } = this.props;
+    const { fullScreen, classes } = this.props;
     return (
       <div>
         <Dialog
           fullScreen={fullScreen}
           open={this.state.open}
           onClose={this.handleClose}
+          maxWidth={false}
           aria-labelledby="responsive-dialog-title"
           className='custom-modal'
         >

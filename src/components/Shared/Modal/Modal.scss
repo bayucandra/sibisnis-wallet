@@ -29,6 +29,9 @@
 }
 
 @include media-query(md){
+  .custom-modal{
+    // max-width: 670px;
+  }
   .close-icon-container{
     right: 6px !important;
     top: 5px !important;

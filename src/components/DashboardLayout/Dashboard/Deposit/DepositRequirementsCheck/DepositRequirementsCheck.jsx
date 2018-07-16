@@ -24,12 +24,12 @@ class DepositRequirementsCheck extends Component {
     super(props);
     this.state = {
       step1: {
-        status: false,
+        status: true, //Todo: Set to false
         active: true
       },
       step2: {
         status: false,
-        active: false
+        active: true //Todo: Set to false
       }
     }
   }

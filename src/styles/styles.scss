@@ -28,6 +28,12 @@ table {
   // padding: 0px 10px;
 }
 
+.layout-center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 //Helper Classes
 .mr-0{
   margin:0px;

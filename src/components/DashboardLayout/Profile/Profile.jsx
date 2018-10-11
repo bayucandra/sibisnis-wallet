@@ -105,7 +105,7 @@ class Profile extends Component {
   // Will navigate to add balance pages
   onTambahClick = () => {
     this.props.history.push('/dashboard/deposit-requirements-check');
-    navigationStatus.next({ navigationState: 'Tambah Saldo'});
+    // navigationStatus.next({ navigationState: 'Tambah Saldo'});
   }
 
   onProfileImageClick = (image) => {
@@ -173,10 +173,10 @@ const mapStateToProps = (store) => {
   return {
     user: store.UserReducer.user
   }
-}
+};
 
 const mapDispatchToProps = {
   getUser
-}
+};
 
 export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Profile));

@@ -1,4 +1,4 @@
-import * as Types from './../../lib/actionTypes';
+import ActionTypes from '../action-types';
 import * as ApiStubs from './../../lib/apiStubs';
 import * as UserActions from './../actions/UserActions';
 import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent} from 'rxjs';
@@ -6,9 +6,9 @@ import {  mergeMap, filter, map, mapTo,flatMap,  delay, catchError } from 'rxjs/
 import { ajax } from 'rxjs/ajax';
 import { ofType } from 'redux-observable';
 
-export const getUser = action$ => {
+const getUser = action$ => {
   return action$.pipe(
-    ofType(Types.GET_USER),
+    ofType(ActionTypes.user.GET),
     mergeMap(action => {
       return from(ApiStubs.getUserData()).pipe(
         flatMap(response => {
@@ -17,12 +17,12 @@ export const getUser = action$ => {
       )
     })
   )
-}
+};
 
 // Only for stub purpose
-export const updateUserProfile = action$ => {
+const updateUserProfile = action$ => {
   return action$.pipe(
-    ofType(Types.GET_USER_UPDATED_IMAGE),
+    ofType(ActionTypes.user.GET_UPDATED_IMAGE),
     mergeMap(action => {
       let profileImage = action.payload;
       return from(ApiStubs.getUserData()).pipe(
@@ -33,4 +33,8 @@ export const updateUserProfile = action$ => {
       )
     })
   )
-}
+};
+
+let UserEpics = [ updateUserProfile, getUser ];
+
+export default UserEpics;

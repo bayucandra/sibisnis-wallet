@@ -1,12 +1,14 @@
 import { combineEpics } from 'redux-observable';
 
-import * as UserEpics from './UserEpics';
+import UserEpics from './UserEpics';
 import * as HistoryLoginEpics from './HistoryLoginEpics';
 import * as NewsEpics from './NewsEpics';
 
-export default combineEpics(
-  UserEpics.getUser,
-  UserEpics.updateUserProfile,
-  HistoryLoginEpics.getHistoryList,
-  NewsEpics.getNewsList
-);
+let epics_arr = [
+  ...UserEpics,
+  ...[HistoryLoginEpics.getHistoryList, NewsEpics.getNewsList]
+];
+
+
+
+export default combineEpics.apply( null, epics_arr );

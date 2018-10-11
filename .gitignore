@@ -3,6 +3,7 @@
 .idea
 firebase.json
 .firebaserc
+_dev
 
 # dependencies
 /node_modules

@@ -1,7 +1,7 @@
 // Node Modules
 import React, { Component } from 'react';
 import Dropzone from 'react-dropzone';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase';//TODO: delete later
 
 
 // Custom Components
@@ -93,7 +93,7 @@ class DropPhotoUpload extends Component {
       if (this.state.success) {
         this.onImageCompleteDialogClose();
       } else {
-        this.firebaseUploadSimulation(this.state.files[0])
+        this.firebaseUploadSimulation(this.state.files[0]);//Todo: delete later
         // this.setState({ uploading: true, changeImageStatus: false, error: false }, () => {
         //   setTimeout(() => {
         //     this.setState({ success: true, uploading: false })
@@ -119,7 +119,7 @@ class DropPhotoUpload extends Component {
     });
   }
 
-  firebaseUploadSimulation = (file) =>{
+  firebaseUploadSimulation = (file) =>{//TODO: delete later
 
     // Create Storage Reference
     var storageRef =  firebase.storage().ref('sibinis_samples/'+file.name);

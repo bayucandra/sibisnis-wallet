@@ -1,0 +1,5 @@
+export default {
+  GET : 'USER_GET',
+  SET : 'USER_SET',
+  GET_UPDATED_IMAGE: 'USER_GET_UPDATED_IMAGE'
+};

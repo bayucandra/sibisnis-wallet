@@ -1,15 +1,15 @@
-import * as Types from './../../lib/actionTypes';
+import ActionTypes from '../action-types';
 
 export const getUser = () => {
   return {
-    type: Types.GET_USER,
+    type: ActionTypes.user.GET,
     payload: null
   };
 }
 
 export const setUser = (userData) => {
   return {
-    type: Types.SET_USER,
+    type: ActionTypes.user.SET,
     payload: userData
   };
 }
@@ -17,7 +17,7 @@ export const setUser = (userData) => {
 // Only for stub purpose
 export const getUserWithUpdatedProfile = (profileImage) => {
   return {
-    type: Types.GET_USER_UPDATED_IMAGE,
+    type: ActionTypes.user.GET_UPDATED_IMAGE,
     payload: profileImage
   }
 }

@@ -1,7 +1,4 @@
 // User Action Types
-export const GET_USER = 'GET_USER';
-export const SET_USER = 'SET_USER';
-export const GET_USER_UPDATED_IMAGE = 'GET_USER_UPDATED_IMAGE';
 
 // History Login Action Types
 export const GET_HISTORY_LOGINS_LIST = 'GET_HISTORY_LOGINS_LIST';

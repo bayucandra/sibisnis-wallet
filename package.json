@@ -2,13 +2,14 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": ".",
+  "homepage": "./wallet",
   "dependencies": {
+    "@babel/polyfill": "^7.0.0",
     "@material-ui/core": "^1.0.0-rc.0",
     "@material-ui/icons": "^1.0.0-rc.0",
     "firebase": "^5.2.0",
     "history": "^4.7.2",
-    "node-sass-chokidar": "^1.3.0",
+    "node-sass-chokidar": "^1.3.4",
     "normalize.css": "^8.0.0",
     "npm-run-all": "^4.1.3",
     "react": "^16.3.2",
@@ -18,7 +19,7 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-router-redux": "^4.0.8",
-    "react-scripts": "1.1.4",
+    "react-scripts": "^2.0.4",
     "react-select": "^2.0.0-beta.7",
     "react-tooltip": "^3.6.1",
     "react-transition-group": "^2.3.1",
@@ -30,11 +31,18 @@
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
+    "start-js": "HOST='newzonatik.com' PORT=8080 react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-css build-js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "devDependencies": {},
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

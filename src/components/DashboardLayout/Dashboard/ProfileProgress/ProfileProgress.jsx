@@ -162,7 +162,7 @@ class ProfileProgress extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    user: store.UserReducer.user
+    user: store.user.user
   }
 }
 

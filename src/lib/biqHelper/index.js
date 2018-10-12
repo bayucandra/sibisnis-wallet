@@ -1,13 +1,13 @@
 import {biqHelperLocalStorageClass} from "./modules/localStorage";
 import {biqHelperJSONClass} from "./modules/json";
-import {biqHelperUtilClass} from "./modules/util";
+import {biqHelperUtilsClass} from "./modules/utils";
 
 class biqHelperClass {
 
   constructor() {
     this.localStorage = new biqHelperLocalStorageClass();
     this.JSON = new biqHelperJSONClass();
-    this.util = new biqHelperUtilClass();
+    this.utils = new biqHelperUtilsClass();
   }
 
 }

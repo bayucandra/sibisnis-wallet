@@ -41,7 +41,7 @@ class AllNews extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    newsList: store.NewsReducer.newsList
+    newsList: store.news.newsList
   }
 }
 

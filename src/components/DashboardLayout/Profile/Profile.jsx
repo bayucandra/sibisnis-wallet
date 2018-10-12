@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import ReactTooltip from 'react-tooltip'
+import ReactTooltip from 'react-tooltip';
 
-/**
- * React Material Compoenents
- */
+/**React Material Compoenents*/
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
+
+/**External libraries*/
+import NumberFormat from 'react-number-format';
 
 /**
  * Custom Icons
@@ -31,6 +32,7 @@ import ProfileButton from './../../Shared/ProfileButton/ProfileButton';
 
 import { navigationStatus, modalToggle } from "./../../../lib/utilities";
 import { modalTypes } from './../../../lib/constants';
+import biqHelper from '../../../lib/biqHelper';
 
 // Redux
 import { connect } from 'react-redux';
@@ -43,7 +45,9 @@ import './Profile.css';
 import profileTestImage from './../../../images/test.jpg';
 
 const ProfileInfo = (props) => {
-  const { name, email, image, imageAction } = props;
+  let { name, email, image, imageAction } = props;
+  name = biqHelper.utils.isNull( name ) ? 'N/A': name;
+  biqHelper.utils.assignDefault( email, 'N/A' );
   return (
     <div className="profile-info">
       <div className="profile-info__img" style={{ 'backgroundImage': "url(" + (image ? image : avatarPlacerholderBlank) + ")" }} onClick={imageAction.bind(this, image ? image : null)}>
@@ -53,18 +57,19 @@ const ProfileInfo = (props) => {
       <div className="divider"></div>
     </div>
   )
-}
+};
 
 // Saldo Anda Means Your Balance
 const Balance = (props) => {
-  const { balance } = props;
+  let { balance } = props;
+  biqHelper.utils.assignDefault( balance, 'N/A' );
   return (
     <div className="balance-info">
       <div className="balance-info__text">Saldo Anda</div>
-      <div className="balance-info__amount">Rp {balance}</div>
+      <NumberFormat displayType={'text'} value={balance} prefix={'Rp '} renderText={value => <div className="balance-info__amount">{value}</div>} thousandSeparator={'.'} decimalSeparator={','}/>
     </div>
   )
-}
+};
 
 const ProfileNavButton = (props) => {
   const { icon, name, onClick, active } = props;
@@ -82,7 +87,7 @@ const ProfileNavButton = (props) => {
       </ListItem>
     </React.Fragment>
   )
-}
+};
 
 class Profile extends Component {
   constructor(props) {
@@ -96,17 +101,17 @@ class Profile extends Component {
 
   onBtnClick = () =>{
     alert('hello world');
-  }
+  };
 
   onProfileSettingClick = () => {
     this.props.history.push('/dashboard/detail-profile');
-  }
+  };
 
   // Will navigate to add balance pages
   onTambahClick = () => {
     this.props.history.push('/dashboard/deposit-requirements-check');
     // navigationStatus.next({ navigationState: 'Tambah Saldo'});
-  }
+  };
 
   onProfileImageClick = (image) => {
     if (!image) {
@@ -114,17 +119,17 @@ class Profile extends Component {
     } else {
       modalToggle.next({ status: true, type: modalTypes.profileImagePreview, payload: { image: image } });
     }
-  }
+  };
 
   onLinkClick = (name) => {
     navigationStatus.next({ navigationState: name});
     if (window.innerWidth > 767) {
       this.props.history.replace('/');
     }
-  }
+  };
 
   render() {
-    const {user} = this.props;
+    const {user_profile} = this.props;
     return (
       <div id="profile-card">
         <Card className="custom-card-styles profile-card-container">
@@ -134,18 +139,18 @@ class Profile extends Component {
               <div data-tip='Profile anda' className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </div>
-              {user ?
+              {!biqHelper.utils.isNull( user_profile ) ?
                 <ProfileInfo
-                  name={user.name ? user.name : 'N/A'}
-                  email={user.email ? user.email : 'N/A'}
-                  image={user.profilePicture ? user.profilePicture : null}
+                  name={user_profile.nama}
+                  email={user_profile.email}
+                  image={user_profile.profilePicture ? user_profile.profilePicture : null}
                   // image={null}
                   imageAction={this.onProfileImageClick}
                 /> :
                 <ProfileInfoLoader />
               }
-              {user ?
-                <Balance balance={user.balance ? user.balance : 'N/A'} />
+              {!biqHelper.utils.isNull( user_profile )?
+                <Balance balance={user_profile.saldo} />
                 :
                 <BalanceLoader />
               }
@@ -171,7 +176,8 @@ class Profile extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    user: store.UserReducer.user
+    user: store.user.user,
+    user_profile: store.app.profile
   }
 };
 

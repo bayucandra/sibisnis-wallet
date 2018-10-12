@@ -36,8 +36,8 @@ class Dashboard extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    historyLoginList: store.HistoryLoginReducer.historyLoginList,
-    newsList: store.NewsReducer.newsList,
+    historyLoginList: store.historyLogin.historyLoginList,
+    newsList: store.news.newsList,
   }
 }
 

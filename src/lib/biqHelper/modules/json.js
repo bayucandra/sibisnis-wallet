@@ -1,10 +1,10 @@
-import biqHelperUtil from "./util";
+import biqHelperUtils from "./utils";
 class biqHelperJSONClass {
 
   parse(val) {
     let ret = {};
 
-    if (!biqHelperUtil.isNull(val)) {
+    if (!biqHelperUtils.isNull(val)) {
 
       switch (typeof val) {
 

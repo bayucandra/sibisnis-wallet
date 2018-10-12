@@ -5,11 +5,11 @@ let state_default = {
 };
 
 export default ( state = state_default, action ) => {
-
   switch ( action.type ) {
 
     case ActionTypes.app.SET_PROFILE_DATA:
-      return Object.assign( state, action.payload );
+      let new_state = Object.assign( state, { profile: action.payload } );
+      return new_state;
 
     default:
       return state;

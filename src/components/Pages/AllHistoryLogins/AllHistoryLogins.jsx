@@ -38,7 +38,7 @@ class AllHistoryLogins extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    historyLoginList: store.HistoryLoginReducer.historyLoginList
+    historyLoginList: store.historyLogin.historyLoginList
   }
 }
 

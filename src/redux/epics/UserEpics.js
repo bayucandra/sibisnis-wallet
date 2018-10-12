@@ -22,7 +22,7 @@ const getUser = action$ => {
 // Only for stub purpose
 const updateUserProfile = action$ => {
   return action$.pipe(
-    ofType(ActionTypes.user.GET_UPDATED_IMAGE),
+    ofType(ActionTypes.user.IMAGE_GET),
     mergeMap(action => {
       let profileImage = action.payload;
       return from(ApiStubs.getUserData()).pipe(

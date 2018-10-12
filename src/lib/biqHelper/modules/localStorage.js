@@ -30,8 +30,6 @@ class biqHelperLocalStorageClass {
       ? prefix + '.' + key
       : '' + key;
 
-      console.log( key );
-    console.log(localStorage[key]);
     return biqHelperJSON.parse(localStorage[key] || value);
   }
 

@@ -1,9 +1,9 @@
-import biqHelperUtil from "./biqHelper/modules/util";
+import biqHelperUtils from "./biqHelper/modules/utils";
 let path_arr = window.location.pathname.replace(/^\/|\/$/g, '').split( "/" );
 path_arr.pop();
 let path = path_arr.join("/");
 
-if ( !biqHelperUtil.isNull( path ) ) {
+if ( !biqHelperUtils.isNull( path ) ) {
   path = "/" + path;
 }
 let api_url_base = window.location.protocol + '//' + window.location.host + path ;

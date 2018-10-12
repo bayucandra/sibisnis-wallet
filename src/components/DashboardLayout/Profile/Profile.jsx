@@ -36,7 +36,6 @@ import biqHelper from '../../../lib/biqHelper';
 
 // Redux
 import { connect } from 'react-redux';
-import { getUser } from './../../../redux/actions/UserActions';
 
 // Loaders
 import { ProfileInfoLoader, BalanceLoader } from './../../Loaders/ProfileLoader/ProfileLoader';
@@ -93,10 +92,6 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {  }
-  }
-
-  componentWillMount() {
-    this.props.getUser();
   }
 
   onBtnClick = () =>{
@@ -181,8 +176,4 @@ const mapStateToProps = (store) => {
   }
 };
 
-const mapDispatchToProps = {
-  getUser
-};
-
-export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Profile));
+export default withRouter( connect(mapStateToProps)(Profile) );

@@ -1,6 +1,4 @@
 import ActionTypes from '../action-types';
-import biqHelper from "../../lib/biqHelper";
-import biqConfig from "../../lib/biqConfig";
 
 export const getUser = () => {
   return {

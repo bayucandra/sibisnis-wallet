@@ -1,6 +1,5 @@
 export default {
   GET : 'USER_GET',
   SET : 'USER_SET',
-  SET_PROFILE_DATA : 'USER_PROFILE_DATA_SET',
   IMAGE_GET: 'USER_IMAGE_GET'
 };

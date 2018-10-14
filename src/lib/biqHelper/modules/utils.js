@@ -3,9 +3,9 @@ class biqHelperUtilsClass {
   isNull(val) {
     let json_is_empty = false;
 
-    if ( typeof val === 'object' ) {
+    if ( typeof val === 'object' && !Array.isArray( val ) ) {
       try {
-        json_is_empty = JSON.stringify(val) === '{}';
+        json_is_empty = Object.keys(val).length === 0 && val.constructor === Object;
       } catch(e) {}
     }
 

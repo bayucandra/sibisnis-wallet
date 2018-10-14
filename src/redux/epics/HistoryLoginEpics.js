@@ -15,7 +15,7 @@ export const getHistoryList = action$ => {
           return [HistoryLoginActions.setHistoryLoginList(response.data)]
         }),
         catchError(err=>{
-          console.log(err)
+          console.error(err)
         })
       )
     })

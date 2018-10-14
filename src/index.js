@@ -15,6 +15,7 @@ import 'react-image-crop/dist/ReactCrop.css';
 
 // import biqPolyfill from './lib/biqPolyfill/biqPolyfill';//TODO: Deprecated, remove later when sure babel polyfill handle all ES5
 import "@babel/polyfill";
+
 // import biqHelperClass from './lib/biqHelper/biqHelper';
 
 //BEGIN INITALIZING ================

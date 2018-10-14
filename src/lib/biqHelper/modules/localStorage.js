@@ -33,9 +33,30 @@ class biqHelperLocalStorageClass {
     return biqHelperJSON.parse(localStorage[key] || value);
   }
 
-  clear() {
-    return localStorage.clear();
-  }
+  clear( prefix = '') {
+    try {
+
+      if (prefix !== '') {
+
+        for (var key in localStorage) {
+
+          let key_split = key.split('.');
+          let key_is_match = key === prefix + '.' + key_split[1];
+          if (!key_is_match) continue;
+
+          localStorage.removeItem(key);
+
+        }//for key in localStorage
+
+      } else {
+        return localStorage.clear();
+      }
+
+    } catch( e ) {
+      console.error( 'ERROR:: biqHelper.localStorange:' + e.message );
+    }
+
+  }//clear()
 
   remove(key, prefix='') {
     key = prefix !== ''

@@ -1,20 +1,52 @@
 import ActionTypes from "../action-types";
 import biqHelper from "../../lib/biqHelper";
-import biqConfig from "../../lib/biqConfig";
+import biqConfig from "../../providers/biqConfig";
 
-  const setProfileData = () => {
+  const appInit = () => {
+    return {
+      type: ActionTypes.app.INIT
+    }
+  };
+
+  const appSetProfileData = () => {
 
     let profile_data = biqHelper.localStorage.getObject( biqConfig.local_storage_key.user_data, {}, 'zonatikAgen' );
 
     return {
-      type: ActionTypes.app.SET_PROFILE_DATA,
+      type: ActionTypes.app.PROFILE_DATA_SET,
       payload: profile_data
     }
 
   };
 
+  const appSseAgenInit = () => {
+    return {
+      type: ActionTypes.app.SSE_AGEN_INIT
+    }
+  };
+
+  const appLogout = () => {
+    return {
+      type: ActionTypes.app.LOGOUT
+    }
+  };
+
+  /**
+   * Reset all APP states after logout succeed
+   */
+
+  const appStatesReset = () => {
+      return {
+        type: ActionTypes.app.STATES_RESET
+      }
+  };
+
   const actions = {
-    setProfileData: setProfileData
+    appInit,
+    appSetProfileData,
+    appSseAgenInit,
+    appLogout,
+    appStatesReset
   };
 
 export default actions;

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import ReactCrop, {makeAspectCrop} from 'react-image-crop';
 
 // Custom CSS
-import './PhotoCrop.css';
+import './PhotoCrop.scss';
 
 const getCroppedImg = (image, pixelCrop, fileName) => {
 

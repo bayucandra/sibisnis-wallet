@@ -19,7 +19,7 @@ import { modalToggle } from './../../../lib/utilities';
 import { modalTypes } from './../../../lib/constants';
 
 // Custom CSS
-import './Modal.css';
+import './Modal.scss';
 
 class Modal extends Component {
   constructor(props) {

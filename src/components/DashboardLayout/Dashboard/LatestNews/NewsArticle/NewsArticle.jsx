@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Custom CSS
-import './NewsArticle.css';
+import './NewsArticle.scss';
 
 const NewsArticle = (props) => {
   const { title, date, tags, articleSummary, readStatus } = props;

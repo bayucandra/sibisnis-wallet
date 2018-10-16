@@ -30,7 +30,7 @@ import locationIcon from './../../../../images/icons/profile-verification-icons/
 import cardIcon from './../../../../images/icons/profile-verification-icons/ico-identitas.svg';
 
 // Custom CSS
-import './ProfileProgress.css';
+import './ProfileProgress.scss';
 
 const ProgressBar = (props) => {
   const { value } = props;

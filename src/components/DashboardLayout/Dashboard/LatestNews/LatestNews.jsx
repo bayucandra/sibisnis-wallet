@@ -10,7 +10,7 @@ import NewsArticle from './NewsArticle/NewsArticle';
 import { LatestNewsLoader } from './../../../Loaders/LatestNewsLoader/LatestNewsLoader';
 
 // Custom CSS
-import './LatestNews.css';
+import './LatestNews.scss';
 
 class LatestNews extends Component {
   constructor(props) {

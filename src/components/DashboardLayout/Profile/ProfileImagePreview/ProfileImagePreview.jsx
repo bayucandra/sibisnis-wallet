@@ -14,7 +14,7 @@ import {modalToggle, cameraCaptureFileUpload} from './../../../../lib/utilities'
 import {modalTypes} from './../../../../lib/constants';
 
 // Custom CSS
-import './ProfileImagePreview.css';
+import './ProfileImagePreview.scss';
 
 class ProfileImagePreview extends Component {
   constructor(props) {

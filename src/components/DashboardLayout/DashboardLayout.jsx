@@ -12,7 +12,7 @@ import DepositRequirementsCheck from './Dashboard/Deposit/DepositRequirementsChe
 import { navigationStatus } from './../../lib/utilities';
 
 // Custom CSS
-import './DashboardLayout.css';
+import './DashboardLayout.scss';
 
 class DashboardLayout extends Component {
   constructor(props) {

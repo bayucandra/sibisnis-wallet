@@ -1,6 +1,6 @@
 import React from 'react';
 
-import './LatestNewsLoader.css';
+import './LatestNewsLoader.scss';
 
 const count = [1, 2, 3, 4, 5];
 

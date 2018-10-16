@@ -22,7 +22,7 @@ import uploadIconMobile from './../../../images/icons/ico-upload-mobile.svg';
 import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
 
 // Custom CSS
-import './DropPhotoUpload.css';
+import './DropPhotoUpload.scss';
 import closeIconBlack from "../../../images/icons/ico-close-black.svg";
 
 class DropPhotoUpload extends Component {

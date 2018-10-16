@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
 // Custom CSS
-import './ProfileActionButton.css';
+import './ProfileActionButton.scss';
 
 const ProfileActionButton = (props) => {
   const {label} = props;

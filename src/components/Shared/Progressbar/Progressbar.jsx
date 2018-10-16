@@ -1,6 +1,6 @@
 import React from "react";
 
-import './Progressbar.css';
+import './Progressbar.scss';
 
 export const InfiniteProgressBar = (props) =>{
   return (

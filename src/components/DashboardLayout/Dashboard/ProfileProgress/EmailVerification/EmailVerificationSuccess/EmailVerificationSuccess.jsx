@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import emailVerficationIcon from './../../../../../../images/icons/ico-verification-email.svg';
 
 // Custom CSS
-import './EmailVerificationSuccess.css';
+import './EmailVerificationSuccess.scss';
 
 const EmailVerificationSuccessMobile = (props) => {
   return (

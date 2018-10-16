@@ -16,7 +16,7 @@ import { connect } from 'react-redux';
 import { modalToggle } from '../../../lib/utilities';
 
 // Custom CSS
-import './WebcamCapture.css';
+import './WebcamCapture.scss';
 
 const CameraResetButton = (props) => {
   const { onCameraReset } = props;

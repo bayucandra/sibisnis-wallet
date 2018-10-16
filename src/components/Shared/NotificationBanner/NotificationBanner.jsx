@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import HelpIconRed from './../../../images/icons/ico-help-red.svg';
 
 // Custom CSS
-import './NotificationBanner.css';
+import './NotificationBanner.scss';
 
 const NotificationBanner = (props) => {
   const { message } = props;

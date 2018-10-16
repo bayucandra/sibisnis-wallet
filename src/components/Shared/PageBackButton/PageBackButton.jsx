@@ -6,7 +6,7 @@ import { withRouter } from 'react-router-dom';
 import BackBlueIcon from './../../../images/icons/back-blue.svg';
 
 // Custom CSS
-import './PageBackButton.css';
+import './PageBackButton.scss';
 class PageBackButton extends Component {
   constructor(props) {
     super(props);

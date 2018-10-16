@@ -17,7 +17,7 @@ import { navigationStatus } from './../../../../../lib/utilities';
 import { connect } from 'react-redux';
 
 // Custom CSS
-import './DepositRequirementsCheck.css';
+import './DepositRequirementsCheck.scss';
 
 class DepositRequirementsCheck extends Component {
   constructor(props) {

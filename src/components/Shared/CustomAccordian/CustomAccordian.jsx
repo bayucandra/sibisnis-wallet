@@ -6,7 +6,7 @@ import iconCollapse from './../../../images/icons/ico-collaps.svg';
 import iconMinus from './../../../images/icons/ico-minus.svg';
 
 // Custom CSS
-import './CustomAccordian.css';
+import './CustomAccordian.scss';
 
 class CustomAccordian extends Component {
   constructor(props) {

@@ -13,7 +13,7 @@ import { getNewsList } from './../../../redux/actions/NewsActions';
 import {connect} from 'react-redux';
 
 // Custom CSS
-import './AllNews.css';
+import './AllNews.scss';
 class AllNews extends Component {
   constructor(props) {
     super(props);

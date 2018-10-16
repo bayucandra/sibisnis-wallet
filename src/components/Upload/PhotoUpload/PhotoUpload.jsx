@@ -15,7 +15,7 @@ import cameraIconBlue from './../../../images/icons/ico-camera-blue.svg';
 import WebcamCapture from './../../Shared/WebcamCapture/WebcamCapture';
 
 // Custom CSS
-import './PhotoUpload.css';
+import './PhotoUpload.scss';
 import closeIconBlack from "../../../images/icons/ico-close-black.svg";
 
 const UploadButton = (props) => {

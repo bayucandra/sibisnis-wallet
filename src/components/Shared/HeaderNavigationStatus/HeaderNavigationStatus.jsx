@@ -9,7 +9,7 @@ import backIcon from './../../../images/icons/back-white.svg';
 import { navigationStatus } from './../../../lib/utilities';
 
 // Custom CSS
-import './HeaderNavigationStatus.css';
+import './HeaderNavigationStatus.scss';
 
 class HeaderNavigationStatus extends Component {
   constructor(props) {

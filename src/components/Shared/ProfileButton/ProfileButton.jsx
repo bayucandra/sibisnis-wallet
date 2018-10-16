@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './ProfileButton.css';
+import './ProfileButton.scss';
 
 const ProfileButton = (props) => {
   return (

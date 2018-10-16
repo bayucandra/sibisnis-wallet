@@ -9,7 +9,7 @@ import EmailVerificationSuccess from './EmailVerificationSuccess/EmailVerificati
 import { InfiniteProgressBar } from './../../../../Shared/Progressbar/Progressbar';
 
 // Custom CSS
-import './EmailVerification.css';
+import './EmailVerification.scss';
 
 class EmailVerification extends Component {
   constructor(props) {

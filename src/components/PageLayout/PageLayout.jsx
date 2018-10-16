@@ -9,7 +9,7 @@ import AllNews from './../Pages/AllNews/AllNews';
 import DashboardLayout from './../DashboardLayout/DashboardLayout';
 
 // Custom CSS
-import './PageLayout.css';
+import './PageLayout.scss';
 
 class PageLayout extends Component {
   constructor(props) {

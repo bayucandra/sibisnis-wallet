@@ -20,7 +20,7 @@ import cardIcon from './../../../images/icons/profile-verification-icons/ico-ide
 import passwordIcon from './../../../images/icons/profile-verification-icons/ico-password.svg';
 
 // Custom CSS
-import './DetailProfile.css';
+import './DetailProfile.scss';
 
 class DetailProfile extends Component {
   constructor(props) {

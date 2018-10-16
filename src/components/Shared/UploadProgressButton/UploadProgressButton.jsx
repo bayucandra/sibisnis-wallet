@@ -6,7 +6,7 @@ import uploadErrorIcon from './../../../images/icons/ico-upload-progress-error.s
 import uploadSuccessIcon from './../../../images/icons/ico-upload-progress-complete.svg';
 
 // Custom CSS
-import './UploadProgressButton.css';
+import './UploadProgressButton.scss';
 
 class UploadProgressButton extends Component {
   constructor(props) {

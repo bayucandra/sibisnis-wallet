@@ -1,5 +1,5 @@
 import React from 'react';
-import './ProfileLoader.css';
+import './ProfileLoader.scss';
 
 const count = [1, 2, 3, 4, 5];
 

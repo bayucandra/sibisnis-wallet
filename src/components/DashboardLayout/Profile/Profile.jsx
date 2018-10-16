@@ -42,8 +42,8 @@ import { connect } from 'react-redux';
 // Loaders
 import { ProfileInfoLoader, BalanceLoader } from './../../Loaders/ProfileLoader/ProfileLoader';
 
-import './Profile.css';
-import '../../../components/Shared/Modal/Modal.css';
+import './Profile.scss';
+import '../../../components/Shared/Modal/Modal.scss';
 import profileTestImage from './../../../images/test.jpg';
 import PhotoUpload from "../../Upload/PhotoUpload/PhotoUpload";
 import closeIconBlack from "../../../images/icons/ico-close-black.svg";

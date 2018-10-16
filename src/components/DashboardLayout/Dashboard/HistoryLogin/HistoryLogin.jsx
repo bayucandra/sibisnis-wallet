@@ -11,7 +11,7 @@ import CustomAccordian from './../../../Shared/CustomAccordian/CustomAccordian';
 import { HistoryLoginMobileLoader, HistoryLoginDesktopLoader } from './../../../Loaders/HistoryLoginLoader/HistoryLoginLoader';
 
 // Custom CSS
-import './HistoryLogin.css';
+import './HistoryLogin.scss';
 
 const HistoryList = (props) => {
   const { country, ip, browser } = props;

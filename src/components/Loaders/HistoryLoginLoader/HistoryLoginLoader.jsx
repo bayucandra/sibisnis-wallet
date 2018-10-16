@@ -1,5 +1,5 @@
 import React from 'react';
-import './HistoryLoginLoader.css';
+import './HistoryLoginLoader.scss';
 
 const count = [1, 2, 3, 4, 5]
 

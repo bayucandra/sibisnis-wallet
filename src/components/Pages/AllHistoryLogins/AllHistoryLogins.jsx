@@ -11,7 +11,7 @@ import { navigationStatus } from './../../../lib/utilities';
 // Redux
 import { connect } from 'react-redux';
 import { getHistoryLoginList } from './../../../redux/actions/HistoryLoginActions';
-import './AllHistoryLogins.css';
+import './AllHistoryLogins.scss';
 class AllHistoryLogins extends Component {
   constructor(props) {
     super(props);

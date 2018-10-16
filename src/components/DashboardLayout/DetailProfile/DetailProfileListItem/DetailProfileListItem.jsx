@@ -7,7 +7,7 @@ import warningIcon from './../../../../images/icons/profile-verification-icons/i
 import ProfileActionButton from './../../../Shared/ProfileActionButton/ProfileActionButton';
 
 // Custom CSS
-import './DetailProfileListItem.css';
+import './DetailProfileListItem.scss';
 
 const ItemInfo = (props) => {
   return (

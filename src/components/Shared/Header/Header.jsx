@@ -20,7 +20,7 @@ import { navigationStatus } from './../../../lib/utilities';
 import HeaderNavigationStatus from './../HeaderNavigationStatus/HeaderNavigationStatus';
 
 // Custom CSS
-import './Header.css';
+import './Header.scss';
 
 class Header extends Component {
   constructor(props) {

@@ -10,7 +10,7 @@ import AutoSuggestSelect from './../../Shared/AutoSuggestSelect/AutoSuggestSelec
 import { InfiniteProgressBar } from './../../Shared/Progressbar/Progressbar';
 
 // Custom CSS
-import './AddressForm.css';
+import './AddressForm.scss';
 
 class AddressForm extends Component {
   constructor(props) {

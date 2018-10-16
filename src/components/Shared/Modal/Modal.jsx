@@ -63,7 +63,6 @@ class Modal extends Component {
                 <img src={closeIconBlack} alt="close-icon-black" />
               </div>
             </div>
-            <PhotoUpload />
           </React.Fragment>
         )
         break;
@@ -104,18 +103,16 @@ class Modal extends Component {
   render() {
     const { fullScreen, classes } = this.props;
     return (
-      <div>
-        <Dialog
-          fullScreen={fullScreen}
-          open={this.state.open}
-          onClose={this.handleClose}
-          maxWidth={false}
-          aria-labelledby="responsive-dialog-title"
-          className='custom-modal'
-        >
-          {this.getModal()}
-        </Dialog>
-      </div>
+      <Dialog
+        fullScreen={fullScreen}
+        open={this.state.open}
+        onClose={this.handleClose}
+        maxWidth={false}
+        aria-labelledby="responsive-dialog-title"
+        className='custom-modal'
+      >
+        {this.getModal()}
+      </Dialog>
     )
   }
 }

@@ -1,9 +1,26 @@
 @import 'styles/_colors.scss';
 @import 'styles/_mixins.scss';
 @import 'styles/_variables.scss';
+.photo-upload {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 10;
+}
+
 .photo-upload-container {
-  width: 290px;
+  position: relative;
+  //width: 290px;
+  margin: 0 10px;
   padding: 30px 25px 60px 25px;
+  box-sizing: border-box;
+  border-radius: 2px;
+  background-color: #FFFFFF;
+  pointer-events: auto;
+
   .photo-upload-header {
     text-align: center;
     &__title {
@@ -69,7 +86,8 @@
 
 @include media-query(md) {
   .photo-upload-container {
-    width: 360px;
+    width: 550px;
+    margin: 0;
     padding: 50px 95px 80px 95px;
     .photo-upload-header {
       &__title {

@@ -11,6 +11,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 
 /**External libraries*/
 import NumberFormat from 'react-number-format';
+import Modal from '@material-ui/core/Modal';
+import $ from 'jquery';
 
 /**
  * Custom Icons
@@ -41,7 +43,10 @@ import { connect } from 'react-redux';
 import { ProfileInfoLoader, BalanceLoader } from './../../Loaders/ProfileLoader/ProfileLoader';
 
 import './Profile.css';
+import '../../../components/Shared/Modal/Modal.css';
 import profileTestImage from './../../../images/test.jpg';
+import PhotoUpload from "../../Upload/PhotoUpload/PhotoUpload";
+import closeIconBlack from "../../../images/icons/ico-close-black.svg";
 
 const ProfileInfo = (props) => {
   let { name, email, image, imageAction } = props;
@@ -91,10 +96,17 @@ const ProfileNavButton = (props) => {
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {
+      modal_is_open: true,
+      modal_active_component: PhotoUpload
+    };
   }
 
-  onBtnClick = () =>{
+  modalSetActiveComponent = ( component ) => {
+    this.setState({ modal_active_component: component });
+  };
+
+  onBtnClick = () => {
     alert('hello world');
   };
 
@@ -109,12 +121,25 @@ class Profile extends Component {
   };
 
   onProfileImageClick = (image) => {
+    if ( biqHelper.utils.isNull( image )) {
+      this.modalSetActiveComponent( PhotoUpload );
+      this.setState({ modal_is_open: true });
+    } else {
+    }
+  };
+
+  modalClose = () => {
+    this.setState({ modal_is_open: false });
+  };
+
+/*
+  onProfileImageClick = (image) => {
     if (!image) {
       modalToggle.next({ status: true, type: modalTypes.imageUpload });
     } else {
       modalToggle.next({ status: true, type: modalTypes.profileImagePreview, payload: { image: image } });
     }
-  };
+  };*/
 
   onLinkClick = (name) => {
     navigationStatus.next({ navigationState: name});
@@ -125,6 +150,7 @@ class Profile extends Component {
 
   render() {
     const {user_profile} = this.props;
+    let ModalActiveComponent = this.state.modal_active_component;
     return (
       <div id="profile-card">
         <Card className="custom-card-styles profile-card-container">
@@ -139,8 +165,9 @@ class Profile extends Component {
                   name={user_profile.nama}
                   email={user_profile.email}
                   image={user_profile.profilePicture ? user_profile.profilePicture : null}
+                  imageAction={ this.onProfileImageClick }
                   // image={null}
-                  imageAction={this.onProfileImageClick}
+                  // imageAction={this.onProfileImageClick}
                 /> :
                 <ProfileInfoLoader />
               }
@@ -164,6 +191,19 @@ class Profile extends Component {
             </List>
           </div>
         </Card>
+
+        <Modal
+          aria-labelledby="simple-modal-title"
+          aria-describedby="simple-modal-description"
+          open={this.state.modal_is_open}
+          onClose={this.modalClose}>
+
+            <div className="photo-upload">
+              <ModalActiveComponent modalSetActiveComponent={this.modalSetActiveComponent} modalClose={this.modalClose}/>
+            </div>
+
+        </Modal>
+
       </div>
     )
   }

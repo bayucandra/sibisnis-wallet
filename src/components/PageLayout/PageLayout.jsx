@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Redirect,Route, Link } from "react-router-dom";
 
 // Custom Compoenents
-import Modal from './../Shared/Modal/Modal';
+// import Modal from './../Shared/Modal/Modal';//TODO: delete very soon
 import AllHistorLogins from './../Pages/AllHistoryLogins/AllHistoryLogins';
 import AllNews from './../Pages/AllNews/AllNews';
 import DashboardLayout from './../DashboardLayout/DashboardLayout';
@@ -24,7 +24,6 @@ class PageLayout extends Component {
   render() {
     return (
       <div id="main-area-content">
-      <Modal/>
         <Switch>
           <Redirect from="/" exact={true} to="/dashboard" />
           <Route path="/dashboard" component={DashboardLayout}></Route>

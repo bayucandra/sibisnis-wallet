@@ -3,11 +3,15 @@ import biqHelper from "../../lib/biqHelper";
 // import biqConfig from "../../providers/biqConfig";
 import esProvider from "../../providers/esProvider";
 
+import $ from 'jquery';
+
+let window_el = $(window);
 let state_default = {
   profile: {}
   , is_app_initialized: false
   , is_es_initialized: false
   , is_logged_in: false
+  , window_size: { width: window_el.outerWidth(), height: window_el.outerHeight() }
 };
 
 export default ( state = state_default, action ) => {
@@ -43,6 +47,10 @@ export default ( state = state_default, action ) => {
       new_state = { is_logged_in: false };
       return Object.assign({}, state, new_state);
       //END OF: ActionTypes.app.LOGOUT
+
+    case ActionTypes.app.WINDOW_RESIZE:
+      new_state = { width: action.payload.width, height: action.payload.height };
+      return Object.assign( {}, state, new_state );
 
 
     default:

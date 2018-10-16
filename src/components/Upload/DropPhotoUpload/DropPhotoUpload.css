@@ -1,6 +1,11 @@
 .drop-photo-upload-container {
-  width: 290px;
-  padding: 30px 25px 20px 25px; }
+  position: relative;
+  margin: 0 10px;
+  padding: 30px 25px 20px 25px;
+  box-sizing: border-box;
+  background: #FFFFFF;
+  border-radius: 2px;
+  pointer-events: auto; }
   .drop-photo-upload-container .drop-photo-upload-header__title {
     color: #404852;
     font-size: 18px;
@@ -71,8 +76,9 @@
 
 @media screen and (min-width: 768px) {
   .drop-photo-upload-container {
-    width: 430px !important;
-    padding: 50px 60px 20px 60px !important; }
+    width: 550px;
+    margin: 0;
+    padding: 50px 60px 40px 60px; }
     .drop-photo-upload-container .drop-photo-upload-header {
       width: 380px;
       margin: 0 auto; }

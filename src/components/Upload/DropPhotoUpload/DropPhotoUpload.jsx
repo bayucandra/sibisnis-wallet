@@ -1,5 +1,6 @@
 // Node Modules
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import * as firebase from 'firebase';//TODO: delete later
 
@@ -9,7 +10,8 @@ import PhotoCrop from './../PhotoCrop/PhotoCrop';
 import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';
 
 // Custom Libraries
-import { modalToggle } from './../../../lib/utilities';
+import { modalToggle } from './../../../lib/utilities';//TODO: Delete soon
+import biqHelper from "../../../lib/biqHelper";
 
 // Redux
 import { getUserWithUpdatedProfile } from './../../../redux/actions/UserActions';
@@ -21,6 +23,7 @@ import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
 
 // Custom CSS
 import './DropPhotoUpload.css';
+import closeIconBlack from "../../../images/icons/ico-close-black.svg";
 
 class DropPhotoUpload extends Component {
   constructor(props) {
@@ -33,7 +36,8 @@ class DropPhotoUpload extends Component {
       success:false,
       uploading:false,
       changeImageStatus: false,
-      uploadProgress: 0
+      uploadProgress: 0,
+      modalPosTop: 0
     }
   }
 
@@ -142,16 +146,45 @@ class DropPhotoUpload extends Component {
       thiss.setState({ success: true, uploading: false })
      }
     )
-  }
+  };
 
   onImageCompleteDialogClose = () => {
     modalToggle.next({ status: false })
+  };
+
+  modalPosTopGen() {
+    let ratio_opt = { box_selector: '.drop-photo-upload-container', top_space: 155, bottom_space: 317};
+    if ( biqHelper.mediaQuery.isMobile() ) {
+      ratio_opt.top_space = 30;
+      ratio_opt.bottom_space = 30;
+    }
+    let top_pos = biqHelper.utils.modalTopRatio( ratio_opt );
+    return top_pos;
+  }
+
+  componentDidMount(){
+    let top_pos = this.modalPosTopGen();
+    this.setState( {modalPosTop : top_pos } );
+  }
+
+  componentDidUpdate(prevProp, prevState){
+    let top_pos = this.modalPosTopGen();
+    if ( prevState.modalPosTop !== top_pos ) {
+      this.setState( { modalPosTop: top_pos } );
+    }
   }
 
   render() {
     const { error, success, uploading } = this.state;
     return (
-      <div className="drop-photo-upload-container">
+      <div className="drop-photo-upload-container" style={{ marginTop: this.state.modalPosTop }}>
+
+        <div className="close-icon-container">
+          <div className="close-icon icon-touch-area-container-50 ripple" onClick={this.props.modalClose}>
+            <img src={closeIconBlack} alt="close-icon-black" />
+          </div>
+        </div>
+
         <div className="drop-photo-upload-header">
           <div className="drop-photo-upload-header__title mobile-show__block">Tambahkan foto dari galeri</div>
           <div className="drop-photo-upload-header__title desktop-show__block">Tambahkan foto dari direktori</div>
@@ -196,13 +229,9 @@ class DropPhotoUpload extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
-  return {}
-}
-
 const mapDispatchToProps = {
   getUserWithUpdatedProfile
-}
+};
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(DropPhotoUpload);
+export default withRouter( connect( null, mapDispatchToProps)(DropPhotoUpload) );

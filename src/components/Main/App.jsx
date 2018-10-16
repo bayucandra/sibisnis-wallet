@@ -9,6 +9,10 @@ import esProvider from "../../providers/esProvider";
 import biqHelper from "../../lib/biqHelper";
 import biqConfig from "../../providers/biqConfig";
 
+import {fromEvent} from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+import $ from 'jquery';
+
 
 class App extends Component {
 
@@ -22,6 +26,18 @@ class App extends Component {
         this.props.appLogout();
       }
     } );
+
+
+    let source$ = fromEvent(window, 'resize')
+        .pipe( map( (e) => {
+          let window_el = $(window);
+          return { width: window_el.outerWidth(), height: window_el.outerHeight() };
+        } ) )
+        .pipe( debounceTime(100) );
+
+    source$.subscribe((e) => {
+      this.props.appWindowResize( e );
+    });
 
   }
 

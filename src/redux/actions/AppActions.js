@@ -41,12 +41,20 @@ import biqConfig from "../../providers/biqConfig";
       }
   };
 
+  const appWindowResize = ( window_sizes ) => {
+    return {
+      type: ActionTypes.app.WINDOW_RESIZE,
+      payload: window_sizes
+    }
+  };
+
   const actions = {
     appInit,
     appSetProfileData,
     appSseAgenInit,
     appLogout,
-    appStatesReset
+    appStatesReset,
+    appWindowResize
   };
 
 export default actions;

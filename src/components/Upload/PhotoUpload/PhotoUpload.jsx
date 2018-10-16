@@ -5,8 +5,9 @@ import React, { Component } from 'react';
 import DropPhotoUpload from './../DropPhotoUpload/DropPhotoUpload';
 
 // Custom Libraries
-import { modalToggle,cameraCaptureFileUpload } from '../../../lib/utilities';
-import { modalTypes } from '../../../lib/constants';
+import { modalToggle,cameraCaptureFileUpload } from '../../../lib/utilities';//TODO: Delete soon
+import { modalTypes } from '../../../lib/constants';//TODO: Delete soon
+import biqHelper from "../../../lib/biqHelper";
 
 // Local Images
 import fileIconBlue from './../../../images/icons/ico-file-blue.svg';
@@ -15,6 +16,7 @@ import WebcamCapture from './../../Shared/WebcamCapture/WebcamCapture';
 
 // Custom CSS
 import './PhotoUpload.css';
+import closeIconBlack from "../../../images/icons/ico-close-black.svg";
 
 const UploadButton = (props) => {
   const { id, icon, label, onClick } = props
@@ -41,22 +43,24 @@ class PhotoUpload extends Component {
     super(props);
     this.state = {
       dragPhotoUpload: false,
-      cameraCapture: false
-    }
+      cameraCapture: false,
+      modalPosTop: 0
+    };
   }
 
   componentDidMount() {
     cameraCaptureFileUpload.subscribe(
       (data)=>{
         if(data.status){
-          this.toggleDragPhotpUpload();
+          this.toggleDragPhotoUpload();
         }
       }
     )
   }
 
-  toggleDragPhotpUpload = () =>{
-    this.setState({ dragPhotoUpload: true });
+  toggleDragPhotoUpload = () =>{
+    // this.setState({ dragPhotoUpload: true });
+    this.props.modalSetActiveComponent( DropPhotoUpload );
   }
 
   toggleCameraCapture = (id) => {
@@ -68,14 +72,43 @@ class PhotoUpload extends Component {
   }
 
   onCameraCapture = (image) =>{
+  };
+
+  modalPosTopGen() {
+    let ratio_opt = { box_selector: '.photo-upload-container', top_space: 155, bottom_space: 459};
+    if ( biqHelper.mediaQuery.isMobile() ) {
+      ratio_opt.top_space = 97;
+      ratio_opt.bottom_space = 97;
+    }
+    let top_pos = biqHelper.utils.modalTopRatio( ratio_opt );
+    return top_pos;
+  }
+
+  componentDidMount(){
+    let top_pos = this.modalPosTopGen();
+    this.setState( {modalPosTop : top_pos } );
+  }
+
+  componentDidUpdate(prevProp, prevState){
+    let top_pos = this.modalPosTopGen();
+    if ( prevState.modalPosTop !== top_pos ) {
+      this.setState( { modalPosTop: top_pos } );
+    }
   }
 
   render() {
+
     const { dragPhotoUpload, cameraCapture } = this.state;
     return (
-      <React.Fragment>
-        {!dragPhotoUpload ?
-          <div className="photo-upload-container">
+        <>
+          <div className="photo-upload-container" style={{marginTop: this.state.modalPosTop}}>
+
+            <div className="close-icon-container">
+              <div className="close-icon icon-touch-area-container-50 ripple" onClick={this.props.modalClose}>
+                <img src={closeIconBlack} alt="close-icon-black" />
+              </div>
+            </div>
+
             <div className="photo-upload-header">
               <div className="photo-upload-header__title">Anda belum memiliki photo profile</div>
               <div className="photo-upload-header__description">Untuk keperluan validasi, silahkan tambahkan foto profile terkini anda</div>
@@ -83,7 +116,7 @@ class PhotoUpload extends Component {
             <div className="photo-upload-button">
               <div className="photo-upload-button__file">
                 <div className="upload-button-container">
-                  <label htmlFor="file" className="upload-button ripple" onClick={this.toggleDragPhotpUpload.bind(this)}>
+                  <label htmlFor="file" className="upload-button ripple" onClick={this.toggleDragPhotoUpload}>
                     <div className="upload-button__icon">
                       <img src={fileIconBlue} alt="icon-button" />
                     </div>
@@ -107,9 +140,8 @@ class PhotoUpload extends Component {
                 </div>
               </div>
             </div>
-          </div> :
-          <DropPhotoUpload />}
-      </React.Fragment>
+          </div>}
+        </>
     )
   }
 }

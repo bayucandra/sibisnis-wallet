@@ -66,7 +66,7 @@
 .balance-loader {
   margin-top: 15px;
   &__text-placeholder {
-    @include text-setup($steel-grey, 14px, $font-family);
+    @include text-setup($steel-grey, 14px);
     font-weight: 600;
     font-style: normal;
     font-stretch: normal;

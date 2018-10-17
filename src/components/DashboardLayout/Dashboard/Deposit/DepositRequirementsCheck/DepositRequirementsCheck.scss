@@ -48,7 +48,7 @@
         }
         &__text {
           color: $white;
-          @include text-setup($white, 13px, $font-family);
+          @include text-setup($white, 13px);
           font-weight: 600;
           font-style: normal;
           font-stretch: normal;
@@ -131,7 +131,7 @@
   .deposit-requirments-check {
     &__title {
       display: block;
-      @include text-setup($charcoal-grey, 16px, $font-family);
+      @include text-setup($charcoal-grey, 16px);
       font-weight: bold;
       font-style: normal;
       font-stretch: normal;
@@ -178,7 +178,7 @@
           }
           &__text {
             color: $white;
-            @include text-setup($white, 13px, $font-family);
+            @include text-setup($white, 13px);
             font-weight: 600;
             font-style: normal;
             font-stretch: normal;
@@ -190,7 +190,7 @@
           background-color: #9ea6a9;
         }
         .step-title {
-          @include text-setup($charcoal-grey, 14px, $font-family);
+          @include text-setup($charcoal-grey, 14px);
           font-weight: 600;
           font-style: normal;
           font-stretch: normal;
@@ -206,7 +206,7 @@
         height: 127px;
         .step-description {
           width: 450px;
-          @include text-setup($steel-grey, 13px, $font-family);
+          @include text-setup($steel-grey, 13px);
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
@@ -225,7 +225,7 @@
           justify-content: center;
           cursor: pointer;
           &__text {
-            @include text-setup($white, 14px, $font-family);
+            @include text-setup($white, 14px);
             font-weight: bold;
             font-style: normal;
             font-stretch: normal;

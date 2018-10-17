@@ -23,7 +23,7 @@
     .detail-profile-header {
       padding: 21px 20px 20px 20px;
       &__title {
-        @include text-setup(#404852, 16px, $font-family);
+        @include text-setup(#404852, 16px);
         display: block;
         font-weight: bold;
         font-style: normal;

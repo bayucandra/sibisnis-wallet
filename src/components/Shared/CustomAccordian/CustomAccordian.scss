@@ -13,7 +13,7 @@
     border-top: solid 0.5px #dedede;
     .custom-accordian-container__title-left{
       .custom-accordian-container__title-left-name{
-        @include text-setup($charcoal-grey,13px,$font-family);
+        @include text-setup($charcoal-grey,13px);
         margin-right: 20px;
         font-weight: 600;
         font-style: normal;
@@ -22,7 +22,7 @@
         letter-spacing: 0.3px;
       }
       .custom-accordian-container__title-left-date{
-        @include text-setup($charcoal-grey,13px,$font-family);
+        @include text-setup($charcoal-grey,13px);
         margin-right: 20px;
         font-weight: normal;
         font-style: normal;

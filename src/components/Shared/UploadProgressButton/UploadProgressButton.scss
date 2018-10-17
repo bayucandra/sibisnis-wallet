@@ -20,7 +20,7 @@
  color: #1dae10;
 }
 .drop-photo-upload-button {
-  @include text-setup($white, 14px, $font-family);
+  @include text-setup($white, 14px);
   height: 50px;
   border-radius: 2px;
   background-color: #2196f3;

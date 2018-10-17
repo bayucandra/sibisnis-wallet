@@ -32,7 +32,7 @@
         }
       }
       .item-title {
-        @include text-setup(#404852, 14px, $font-family);
+        @include text-setup(#404852, 14px);
         height: 19px;
         font-weight: bold;
         font-style: normal;
@@ -63,7 +63,7 @@
       margin-left: 45px;
       &__title {
         height: 19px;
-        @include text-setup(#404852, 14px, $font-family);
+        @include text-setup(#404852, 14px);
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
@@ -72,7 +72,7 @@
       }
       &__value {
         height: 19px;
-        @include text-setup(#07a8b7, 14px, $font-family);
+        @include text-setup(#07a8b7, 14px);
         font-weight: 600;
         font-style: normal;
         font-stretch: normal;
@@ -82,7 +82,7 @@
         margin-top:5px;
       }
       &__description {
-        @include text-setup(#80858a, 13px, $font-family);
+        @include text-setup(#80858a, 13px);
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;

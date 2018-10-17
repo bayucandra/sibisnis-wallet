@@ -11,7 +11,7 @@
     align-items: center;
     justify-content: space-between;
     &__title {
-      @include text-setup( rgba(0, 0, 0, 0.87), 16px, $font-family);
+      @include text-setup( rgba(0, 0, 0, 0.87), 16px);
       font-weight: bold;
       font-style: normal;
       font-stretch: normal;

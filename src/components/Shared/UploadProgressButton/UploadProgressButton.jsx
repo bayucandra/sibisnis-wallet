@@ -83,7 +83,7 @@ class UploadProgressButton extends Component {
         </React.Fragment>
       )
     }
-  }
+  };
 
   render() {
     const { disabled, onImageUploadStart, progress, uploadingStatus } = this.props;
@@ -99,6 +99,7 @@ class UploadProgressButton extends Component {
       </React.Fragment>
     )
   }
+
 }
 
 export default UploadProgressButton;

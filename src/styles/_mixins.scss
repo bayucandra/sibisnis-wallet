@@ -1,9 +1,8 @@
 @import './variables.scss';
 
-@mixin text-setup($color,$size,$font){
+@mixin text-setup($color,$size){
   color:$color;
   font-size: $size;
-  font-family: $font;
 }
 
 @mixin media-query($mq-breakpoint, $mq-breakpoints: $bp-mobile-first) {

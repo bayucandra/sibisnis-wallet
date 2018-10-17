@@ -64,19 +64,18 @@ class Modal extends Component {
               </div>
             </div>
           </React.Fragment>
-        )
-        break;
+        );
 
       case modalTypes.profileImagePreview:
         return (
           <ProfileImagePreview data={this.state.data} />
-        )
-        break;
+        );
+
       case modalTypes.webCameraCapture:
         return (
           <WebcamCapture />
-        )
-        break;
+        );
+
       case modalTypes.emailVerification:
         return (
           <React.Fragment>
@@ -87,18 +86,18 @@ class Modal extends Component {
             </div>
             <EmailVerification />
           </React.Fragment>
-        )
-        break;
+        );
+
       case modalTypes.addressForm:
         return (
           <AddressForm />
-        )
-        break;
+        );
+
       default:
-        return <React.Fragment></React.Fragment>
-        break;
+        return <React.Fragment></React.Fragment>;
     }
-  }
+
+  };
 
   render() {
     const { fullScreen, classes } = this.props;

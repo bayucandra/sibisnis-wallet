@@ -21,7 +21,7 @@
         align-items: center;
         justify-content: space-between;
         .news-article-header-top__title {
-          @include text-setup($charcoal-grey, 16px, $font-family);
+          @include text-setup($charcoal-grey, 16px);
           font-weight: bold;
           font-style: normal;
           font-stretch: normal;
@@ -36,7 +36,7 @@
           height: 25px;
           border-radius: 3px;
           background-color: #EDF6FD;
-          @include text-setup($charcoal-grey, 11px, $font-family);
+          @include text-setup($charcoal-grey, 11px);
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
@@ -46,7 +46,7 @@
       }
       .news-article-header-bottom {
         .news-article-header-bottom__date {
-          @include text-setup($steel-grey, 12px, $font-family);
+          @include text-setup($steel-grey, 12px);
           font-weight: normal;
           font-style: normal;
           font-stretch: normal;
@@ -57,7 +57,7 @@
       }
     }
     .news-article-body {
-      @include text-setup($charcoal-grey, 14px, $font-family);
+      @include text-setup($charcoal-grey, 14px);
       font-weight: bold;
       font-style: normal;
       font-stretch: normal;

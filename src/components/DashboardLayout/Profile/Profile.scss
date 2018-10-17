@@ -78,7 +78,7 @@
   }
   .profile-info__name {
     margin-top: 15px;
-    @include text-setup($charcoal-grey, 16px, $font-family);
+    @include text-setup($charcoal-grey, 16px);
     font-style: normal;
     font-stretch: normal;
     line-height: normal;
@@ -87,7 +87,7 @@
   }
   .profile-info__email {
     margin-top: 5px;
-    @include text-setup($charcoal-grey, 13px, $font-family);
+    @include text-setup($charcoal-grey, 13px);
     letter-spacing: 0.6px;
     font-weight: normal;
     font-style: normal;
@@ -103,7 +103,7 @@
   text-align: center;
   margin-top: 15px;
   .balance-info__text {
-    @include text-setup($steel-grey, 14px, $font-family);
+    @include text-setup($steel-grey, 14px);
     font-weight: 600;
     font-style: normal;
     font-stretch: normal;
@@ -111,7 +111,7 @@
     letter-spacing: 0.5px;
   }
   .balance-info__amount {
-    @include text-setup($charcoal-grey, 22px, $font-family);
+    @include text-setup($charcoal-grey, 22px);
     font-weight: bold;
     font-style: normal;
     font-stretch: normal;
@@ -131,7 +131,7 @@
   margin-left: 20px;
   .profile-nav-btn__text{
     font-weight: normal;
-    @include text-setup($steel-grey,15px,$font-family);
+    @include text-setup($steel-grey,15px);
     letter-spacing: 0.5px;
     margin-top: 2px;
   }
@@ -201,7 +201,7 @@
         margin-right: 15px !important;
       }
       .profile-nav-btn__text{
-        @include text-setup($steel-grey, 13px, $font-family);
+        @include text-setup($steel-grey, 13px);
         font-weight: normal;
         font-style: normal;
         font-stretch: normal;

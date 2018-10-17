@@ -140,7 +140,7 @@ class PhotoUpload extends Component {
                 </div>
               </div>
             </div>
-          </div>}
+          </div>
         </>
     )
   }

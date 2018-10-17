@@ -3,7 +3,7 @@
 @import '../../../styles/variables.scss';
 
 .verification-action-btn {
-  @include text-setup($dark-sky-blue, 13px, $font-family);
+  @include text-setup($dark-sky-blue, 13px);
   box-sizing: border-box;
   width: 170.6px;
   height: 40px;

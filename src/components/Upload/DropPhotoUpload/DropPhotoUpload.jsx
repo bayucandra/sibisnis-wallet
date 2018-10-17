@@ -2,8 +2,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
-import * as firebase from 'firebase';//TODO: delete later
-
+import Button from '@material-ui/core/Button';
 
 // Custom Components
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
@@ -42,8 +41,10 @@ class DropPhotoUpload extends Component {
   }
 
   onDrop = (files) => {
+
     if (files && files.length > 0) {
-      const reader = new FileReader()
+
+      const reader = new FileReader();
       reader.addEventListener(
         'load',
         () =>
@@ -53,22 +54,25 @@ class DropPhotoUpload extends Component {
             croppedImage: reader.result
           }),
         false
-      )
-      reader.readAsDataURL(files[0])
+      );
+
+      reader.readAsDataURL(files[0]);
+
     }
-    this.setState({
-      files
-    });
-  }
+
+    this.setState({files});
+
+  };
 
   onImageChange = (e) => {
     let files = e.target.files;
+
     if (files && files.length > 0) {
-      const reader = new FileReader()
+      const reader = new FileReader();
+
       reader.addEventListener(
         'load',
-        () =>
-          this.setState({
+        () => this.setState({
             src: reader.result,
             changeImageStatus:true,
             croppedImage: reader.result,
@@ -77,27 +81,30 @@ class DropPhotoUpload extends Component {
             uploading:false,
             uploadStatus:false
           }),
+
         false
-      )
+      );
+
       reader.readAsDataURL(files[0])
+
     }
+
     this.setState({
       files
     });
-  }
+
+  };
 
   // Set the image or directly upload it to server from here
   onImageCrop = (image) => {
     this.setState({ croppedImage: image });
-  }
+  };
 
   onImageUploadStart = () => {
 
     if (this.state.error || this.state.success) {
       if (this.state.success) {
-        this.onImageCompleteDialogClose();
       } else {
-        this.firebaseUploadSimulation(this.state.files[0]);//Todo: delete later
         // this.setState({ uploading: true, changeImageStatus: false, error: false }, () => {
         //   setTimeout(() => {
         //     this.setState({ success: true, uploading: false })
@@ -105,11 +112,11 @@ class DropPhotoUpload extends Component {
         // });
         this.props.getUserWithUpdatedProfile(this.state.croppedImage);
       }
-    } else {
-      this.simulateErrorOnImageUpload();
     }
-  }
 
+  };
+
+/*
   // Create simulation for image upload if error
   simulateErrorOnImageUpload = () =>{
     this.setState({ uploading: true, uploadStatus: true }, () => {
@@ -121,36 +128,8 @@ class DropPhotoUpload extends Component {
         })
       }, 1000);
     });
-  }
+  }*/
 
-  firebaseUploadSimulation = (file) =>{//TODO: delete later
-
-    // Create Storage Reference
-    var storageRef =  firebase.storage().ref('sibinis_samples/'+file.name);
-
-    // Upload File
-    // var task = storageRef.put(file);
-    var task = storageRef.putString(this.state.croppedImage,'data_url');
-
-    // Update Progress Bar
-    var thiss =this;
-    task.on('state_changed',
-     function progress(snapshot){
-       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-       thiss.setState({ uploading: true,uploadStatus:true, changeImageStatus: false, error: false, uploadProgress: progress });
-     },
-     function error(err){
-      thiss.setState({ error: true })
-     },
-     function complete(){
-      thiss.setState({ success: true, uploading: false })
-     }
-    )
-  };
-
-  onImageCompleteDialogClose = () => {
-    modalToggle.next({ status: false })
-  };
 
   modalPosTopGen() {
     let ratio_opt = { box_selector: '.drop-photo-upload-container', top_space: 155, bottom_space: 317};
@@ -176,6 +155,8 @@ class DropPhotoUpload extends Component {
 
   render() {
     const { error, success, uploading } = this.state;
+    let file_not_set = this.state.files.length > 0;
+
     return (
       <div className="drop-photo-upload-container" style={{ marginTop: this.state.modalPosTop }}>
 
@@ -208,12 +189,20 @@ class DropPhotoUpload extends Component {
         }
 
         <div className="image-actions-container">
-          <UploadProgressButton
+
+          <Button className={ "upload-photo-btn" + (file_not_set ? ' is-disabled' : '') }>
+            <div className="icon"></div>
+            <div className="text text--upload">Upload Foto</div>
+          </Button>
+
+{/*          <UploadProgressButton
             disabled={this.state.files.length > 0}
             progress={this.state.uploadProgress}
             uploadingStatus={{ error, success, uploading }}
             onImageUploadStart={this.onImageUploadStart.bind(this)}
-          />
+          />*/}
+
+
           {((this.state.src && this.state.changeImageStatus) && !this.state.uploadStatus) ?
             <div className="change-image-button-container">
               <label htmlFor="change-image" className="change-image-button ripple">

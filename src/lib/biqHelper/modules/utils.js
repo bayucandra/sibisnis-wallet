@@ -38,8 +38,6 @@ class biqHelperUtilsClass {
 
     let top_ratio = opt.top_space / ( opt.top_space + opt.bottom_space );
 
-    console.log( screen_height + ' ' + box_outer_height + ' ' + vertical_space_left + ' ' + top_ratio );
-
     let top_space = Math.ceil( top_ratio * vertical_space_left );
     return top_space;
   }

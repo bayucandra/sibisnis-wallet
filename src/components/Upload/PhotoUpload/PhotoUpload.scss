@@ -24,7 +24,7 @@
   .photo-upload-header {
     text-align: center;
     &__title {
-      @include text-setup($charcoal-grey, 18px, $font-family);
+      @include text-setup($charcoal-grey, 18px);
       font-weight: bold;
       font-style: normal;
       font-stretch: normal;
@@ -34,7 +34,7 @@
       margin: 0 auto;
     }
     &__description {
-      @include text-setup($charcoal-grey, 14px, $font-family);
+      @include text-setup($charcoal-grey, 14px);
       font-weight: normal;
       font-style: normal;
       font-stretch: normal;
@@ -91,11 +91,11 @@
     padding: 50px 95px 80px 95px;
     .photo-upload-header {
       &__title {
-        @include text-setup($charcoal-grey, 20px, $font-family);
+        @include text-setup($charcoal-grey, 20px);
         width: auto !important;
       }
       &__description {
-        @include text-setup($charcoal-grey, 14px, $font-family);
+        @include text-setup($charcoal-grey, 14px);
         margin-top: 15px !important;
       }
     }

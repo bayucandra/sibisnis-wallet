@@ -97,7 +97,7 @@ class Profile extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modal_is_open: true,
+      modal_is_open: false,
       modal_active_component: PhotoUpload
     };
   }

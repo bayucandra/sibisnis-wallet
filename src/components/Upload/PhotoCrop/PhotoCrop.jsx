@@ -48,7 +48,7 @@ class PhotoCrop extends Component {
         y: 10,
         width: 80,
         height: 80,
-        aspect: 1 / 1,
+        aspect: 1,
       },
       src: null,
       pixelCrop: {
@@ -56,7 +56,7 @@ class PhotoCrop extends Component {
         y: 10,
         width: 80,
         height: 80,
-        aspect: 1 / 1,
+        aspect: 1,
       },
       croppedSrc: null
     }
@@ -69,8 +69,8 @@ class PhotoCrop extends Component {
       y: 15,
       width: 70,
       height: 70,
-      aspect: 1 / 1,
-    }
+      aspect: 1
+    };
 
     if (image.height > image.width) {
       crop.height = (image.width / image.height) * 100;
@@ -92,14 +92,15 @@ class PhotoCrop extends Component {
     this.setState({
       crop: crop
     });
-  }
+
+  };
 
   onCropComplete = (crop, pixelCrop) => {
     this.setState({ pixelCrop })
 
     let cropedImage = getCroppedImg(this.props.src, this.state.pixelCrop, 'cropped-image');
     this.props.onImageCrop(cropedImage);
-  }
+  };
 
   onCropChange = (crop, pixelCrop) => {
     this.setState({ crop })
@@ -115,7 +116,7 @@ class PhotoCrop extends Component {
     let cropedImage = getCroppedImg(file, pixelCrop, fileName);
     this.props.onImageCrop(cropedImage);
     this.setState({ croppedSrc: cropedImage });
-  }
+  };
 
   render() {
     return (

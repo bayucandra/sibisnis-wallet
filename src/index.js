@@ -4,8 +4,9 @@ import './styles/styles.scss';
 import App from './components/Main/App';
 import registerServiceWorker from './registerServiceWorker';
 import { /*BrowserRouter as Router,*/ HashRouter /*, Route, Link*/ } from "react-router-dom";
+// Material UI
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 //import createHistory from 'history/createBrowserHistory';
-import * as firebase from 'firebase';
 import { Provider } from 'react-redux';
 // import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';//Consider to uninstall later
 import { store } from './redux/store';
@@ -22,26 +23,27 @@ import "@babel/polyfill";
 // new biqPolyfill();
 // let biqHelper = new biqHelperClass();
 
-var config = {
-  apiKey: "AIzaSyCbCR4mvzjGTPDdzFnBfAEBKahVNj9skYg",
-  authDomain: "testapi-220dc.firebaseapp.com",
-  databaseURL: "https://testapi-220dc.firebaseio.com",
-  projectId: "testapi-220dc",
-  storageBucket: "testapi-220dc.appspot.com",
-  messagingSenderId: "532452300007"
-};
+const THEME = createMuiTheme({
+  typography: {
+    "fontFamily": "\"NunitoSans\", sans-serif",
+    "fontSize": 14,
+    "fontWeightLight": 300,
+    "fontWeightMedium": 600
+  }
+});
 
-firebase.initializeApp(config);//TODO: remove later, for development purpose demo only
 //END INITIALIZING***************
 
 class Index extends React.Component {
   render() {
       return (
-        <Provider store={ store }>
-          <HashRouter hashType="hashbang">
-            <App />
-          </HashRouter>
-        </Provider>
+        <MuiThemeProvider theme={THEME}>
+          <Provider store={ store }>
+            <HashRouter hashType="hashbang">
+              <App />
+            </HashRouter>
+          </Provider>
+        </MuiThemeProvider>
       );
   }
 }

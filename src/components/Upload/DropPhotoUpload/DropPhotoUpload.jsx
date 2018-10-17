@@ -4,12 +4,15 @@ import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import Button from '@material-ui/core/Button';
 
+import { Observable } from 'rxjs'; // = require("rxjs")
+import { ajax } from 'rxjs/ajax'; // = require("rxjs/ajax")
+import { map } from 'rxjs/operators'; // = require("rxjs/operators")
+
 // Custom Components
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
-import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';
+import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';//TODO: deprecated and delete soon
 
 // Custom Libraries
-import { modalToggle } from './../../../lib/utilities';//TODO: Delete soon
 import biqHelper from "../../../lib/biqHelper";
 
 // Redux
@@ -23,6 +26,7 @@ import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
 // Custom CSS
 import './DropPhotoUpload.scss';
 import closeIconBlack from "../../../images/icons/ico-close-black.svg";
+import biqConfig from "../../../providers/biqConfig";
 
 class DropPhotoUpload extends Component {
   constructor(props) {
@@ -30,7 +34,9 @@ class DropPhotoUpload extends Component {
     this.state = {
       files: [],
       src: null,
-      croppedImage: null,
+      cropData: {
+        pixelCrop: null
+      },
       error:false,
       success:false,
       uploading:false,
@@ -42,7 +48,7 @@ class DropPhotoUpload extends Component {
 
   onDrop = (files) => {
 
-    if (files && files.length > 0) {
+    if ( !biqHelper.utils.isNull(files) && files.length > 0) {
 
       const reader = new FileReader();
       reader.addEventListener(
@@ -50,8 +56,7 @@ class DropPhotoUpload extends Component {
         () =>
           this.setState({
             src: reader.result,
-            changeImageStatus:true,
-            croppedImage: reader.result
+            changeImageStatus:true
           }),
         false
       );
@@ -75,7 +80,6 @@ class DropPhotoUpload extends Component {
         () => this.setState({
             src: reader.result,
             changeImageStatus:true,
-            croppedImage: reader.result,
             error:false,
             success:false,
             uploading:false,
@@ -95,24 +99,84 @@ class DropPhotoUpload extends Component {
 
   };
 
-  // Set the image or directly upload it to server from here
-  onImageCrop = (image) => {
-    this.setState({ croppedImage: image });
+
+  parseCroppedImg = ( pixelCrop ) => {
+    this.setState( { cropData: { pixelCrop } }  );
+  };
+
+  getCroppedImg = (image, pixelCrop, fileName) => {
+
+    const canvas = document.createElement('canvas');
+    canvas.width = pixelCrop.width;
+    canvas.height = pixelCrop.height;
+    var img2 = document.createElement('img'); // use DOM HTMLImageElement
+    img2.src = image;
+    const ctx = canvas.getContext('2d');
+    // debugger;
+    ctx.drawImage(
+      img2,
+      pixelCrop.x,
+      pixelCrop.y,
+      pixelCrop.width,
+      pixelCrop.height,
+      0,
+      0,
+      pixelCrop.width,
+      pixelCrop.height
+    );
+
+    // As Base64 string
+    // const base64Image = canvas.toDataURL('image/jpeg');
+
+    // return base64Image;
+    // As a blob
+
+    return Observable.create(( observer )=>{
+      observer.next();
+      canvas.toBlob(file => {
+        file.name = fileName;
+        observer.next(file);
+      }, 'image/jpeg');
+
+    });
   };
 
   onImageUploadStart = () => {
+    console.log(this.state.src);
+    console.log(this.state.cropData.pixelCrop);
+return;
+    this.getCroppedImg( this.state.src, this.state.cropData.pixelCrop, 'test' )
+      .subscribe(( file )=>{
 
-    if (this.state.error || this.state.success) {
-      if (this.state.success) {
-      } else {
-        // this.setState({ uploading: true, changeImageStatus: false, error: false }, () => {
-        //   setTimeout(() => {
-        //     this.setState({ success: true, uploading: false })
-        //   }, 1500)
-        // });
-        this.props.getUserWithUpdatedProfile(this.state.croppedImage);
-      }
-    }
+        console.log(file);
+        return;
+        let form_data = new FormData();
+        form_data.append( 'profile-picture' );
+
+        let request$ = ajax({
+          url: biqConfig.api.url_base,
+          method: 'POST',
+          headers: {
+            'Content-Type': 'multipart/form-data; charset=utf-8; ',
+          },
+          body: {
+            hello: 'World!'
+          }
+        });
+
+        if (this.state.error || this.state.success) {
+          if (this.state.success) {
+          } else {
+            // this.setState({ uploading: true, changeImageStatus: false, error: false }, () => {
+            //   setTimeout(() => {
+            //     this.setState({ success: true, uploading: false })
+            //   }, 1500)
+            // });
+            // this.props.getUserWithUpdatedProfile(this.state.croppedImage);
+          }
+        }
+
+      });
 
   };
 
@@ -184,13 +248,13 @@ class DropPhotoUpload extends Component {
             </Dropzone>
           </div> :
           <div className="image-preview-container">
-            <PhotoCrop src={this.state.src} onImageCrop={this.onImageCrop} />
+            <PhotoCrop src={this.state.src} parseCroppedImg={this.parseCroppedImg} />
           </div>
         }
 
         <div className="image-actions-container">
 
-          <Button className={ "upload-photo-btn" + (file_not_set ? ' is-disabled' : '') }>
+          <Button className={ "upload-photo-btn" + (file_not_set ? ' is-disabled' : '') } onClick={this.onImageUploadStart}>
             <div className="icon"></div>
             <div className="text text--upload">Upload Foto</div>
           </Button>

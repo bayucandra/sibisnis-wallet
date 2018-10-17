@@ -5,40 +5,6 @@ import ReactCrop, {makeAspectCrop} from 'react-image-crop';
 // Custom CSS
 import './PhotoCrop.scss';
 
-const getCroppedImg = (image, pixelCrop, fileName) => {
-
-  const canvas = document.createElement('canvas');
-  canvas.width = pixelCrop.width;
-  canvas.height = pixelCrop.height;
-  var img2 = document.createElement('img'); // use DOM HTMLImageElement
-  img2.src = image;
-  const ctx = canvas.getContext('2d');
-  // debugger;
-  ctx.drawImage(
-    img2,
-    pixelCrop.x,
-    pixelCrop.y,
-    pixelCrop.width,
-    pixelCrop.height,
-    0,
-    0,
-    pixelCrop.width,
-    pixelCrop.height
-  );
-
-  // As Base64 string
-  const base64Image = canvas.toDataURL('image/jpeg');
-
-  return base64Image;
-  // As a blob
-  // return new Promise((resolve, reject) => {
-  //   canvas.toBlob(file => {
-  //     file.name = fileName;
-  //     resolve(file);
-  //   }, 'image/jpeg');
-  // });
-}
-
 class PhotoCrop extends Component {
   constructor(props) {
     super(props);
@@ -62,7 +28,7 @@ class PhotoCrop extends Component {
     }
   }
 
-  onImageLoaded = (image) => {
+  onImageLoaded = (image, pixelCrop, something) => {
     // debugger;
     let crop = {
       x: 15,
@@ -92,19 +58,29 @@ class PhotoCrop extends Component {
     this.setState({
       crop: crop
     });
+    console.log(image);
+    console.log(pixelCrop);
+    console.log(something);
+    console.log(this.pixelCrop);
+    this.props.parseCroppedImg( pixelCrop );
+    console.log('onImageLoaded');
 
   };
 
   onCropComplete = (crop, pixelCrop) => {
     this.setState({ pixelCrop })
+    console.log('onCropComplete');
 
-    let cropedImage = getCroppedImg(this.props.src, this.state.pixelCrop, 'cropped-image');
-    this.props.onImageCrop(cropedImage);
+    // let cropedImage = this.props.getCroppedImg(this.props.src, this.state.pixelCrop, 'cropped-image');
   };
 
   onCropChange = (crop, pixelCrop) => {
-    this.setState({ crop })
-  }
+    console.log('onCropChange');
+    console.log(crop);
+    console.log(pixelCrop);
+    this.setState({ crop });
+    this.props.parseCroppedImg( pixelCrop );
+  };
 
   onImageCroped = (file, pixelCrop, fileName) => {
     // As a blob
@@ -113,8 +89,6 @@ class PhotoCrop extends Component {
     //   console.log("Croped Image ====>", result);
     // })
 
-    let cropedImage = getCroppedImg(file, pixelCrop, fileName);
-    this.props.onImageCrop(cropedImage);
     this.setState({ croppedSrc: cropedImage });
   };
 

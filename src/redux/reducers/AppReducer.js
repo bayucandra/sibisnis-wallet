@@ -20,8 +20,19 @@ export default ( state = state_default, action ) => {
   switch ( action.type ) {
 
     case ActionTypes.app.INIT:
+      let is_logged_in_agen = biqHelper.localStorage.get( 'is_logged_in', false, 'zonatikAgen' );
+      let is_logged_in_dealer = biqHelper.localStorage.get( 'is_logged_in', false, 'zonatikDealer' );
+
+      let ls_prefix = is_logged_in_agen ? 'zonatikAgen'
+        : is_logged_in_dealer ? 'zonatikDealer' : '';
+
+      if ( !biqHelper.utils.isNull( ls_prefix ) ) {
+        biqHelper.localStorage.setPrefixDefault(ls_prefix);
+      }
+
+      let is_logged_in = biqHelper.localStorage.get('is_logged_in', false);//Fetch local storage again after set prefix done
+
       new_state = { is_app_initialized: true, is_logged_in: false };
-      let is_logged_in = biqHelper.localStorage.get( 'is_logged_in', false, 'zonatikAgen' );
       new_state.is_logged_in = is_logged_in === true || is_logged_in === 'true';
       return Object.assign( {}, state, new_state );
 

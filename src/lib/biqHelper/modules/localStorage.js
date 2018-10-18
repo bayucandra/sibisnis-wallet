@@ -1,8 +1,25 @@
+import biqHelperUtils from "./utils";
 import biqHelperJSON from "./json";
+import biqHelperString from "./string";
 
 class biqHelperLocalStorageClass {
 
+  setPrefixDefault( prefix ) {
+    if ( biqHelperUtils.isNull( prefix ) ) return;
+    localStorage.prefix = prefix;
+  }
+
+  getPrefixDefault(){
+    let prefix = localStorage.prefix;
+    return !biqHelperUtils.isNull( prefix ) ? prefix : '';
+  }
+
   set(key, value, prefix = '') {
+    let prefix_default = this.getPrefixDefault();
+    prefix = !biqHelperUtils.isNull( prefix )
+      ? prefix
+      : prefix_default !== '' ? prefix_default : '';
+
     key = prefix !== ''
       ? prefix + '.' + key
       : '' + key;
@@ -10,7 +27,12 @@ class biqHelperLocalStorageClass {
     return localStorage[key];
   }
 
-  get(key, defaultValue, prefix = '') {
+  get(key, defaultValue = '', prefix = '') {
+    let prefix_default = this.getPrefixDefault();
+    prefix = !biqHelperUtils.isNull( prefix )
+      ? prefix
+      : prefix_default !== '' ? prefix_default : '';
+
     key = prefix !== ''
       ? prefix + '.' + key
       : '' + key;
@@ -18,6 +40,11 @@ class biqHelperLocalStorageClass {
   }
 
   setObject(key, value, prefix = '') {
+    let prefix_default = this.getPrefixDefault();
+    prefix = !biqHelperUtils.isNull( prefix )
+      ? prefix
+      : prefix_default !== '' ? prefix_default : '';
+
     key = prefix !== ''
       ? prefix + '.' + key
       : '' + key;
@@ -26,6 +53,11 @@ class biqHelperLocalStorageClass {
   }
 
   getObject(key, value = {}, prefix = '') {
+    let prefix_default = this.getPrefixDefault();
+    prefix = !biqHelperUtils.isNull( prefix )
+      ? prefix
+      : prefix_default !== '' ? prefix_default : '';
+
     key = prefix !== ''
       ? prefix + '.' + key
       : '' + key;
@@ -34,6 +66,11 @@ class biqHelperLocalStorageClass {
   }
 
   clear( prefix = '') {
+    let prefix_default = this.getPrefixDefault();
+    prefix = !biqHelperUtils.isNull( prefix )
+      ? prefix
+      : prefix_default !== '' ? prefix_default : '';
+
     try {
 
       if (prefix !== '') {
@@ -59,6 +96,11 @@ class biqHelperLocalStorageClass {
   }//clear()
 
   remove(key, prefix='') {
+    let prefix_default = this.getPrefixDefault();
+    prefix = !biqHelperUtils.isNull( prefix )
+      ? prefix
+      : prefix_default !== '' ? prefix_default : '';
+
     key = prefix !== ''
       ? prefix + '.' + key
       : '' + key;

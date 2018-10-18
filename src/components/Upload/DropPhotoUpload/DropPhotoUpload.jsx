@@ -133,7 +133,8 @@ class DropPhotoUpload extends Component {
           },*/
           crossDomain: true,
           withCredentials: true,
-          body: form_data
+          body: form_data,
+          progressSubscriber
         });
 
 /*        $.ajax({

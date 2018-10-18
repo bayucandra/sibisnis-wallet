@@ -16,14 +16,14 @@ import $ from 'jquery';
 
 class App extends Component {
 
-  componentWillMount(){
+  componentDidMount(){
     this.props.appInit();
     this.props.appSetProfileData();
     this.props.appSseAgenInit();
 
     esProvider.addEventListener( 'login', ( e ) => {
       if ( e.data === 'false' || !e.data ) {
-        // this.props.appLogout();//TODO: enable this soon
+        this.props.appLogout();//TODO: enable this soon
       }
     } );
 

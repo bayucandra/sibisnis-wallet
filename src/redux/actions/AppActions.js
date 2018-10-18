@@ -10,7 +10,7 @@ import biqConfig from "../../providers/biqConfig";
 
   const appSetProfileData = () => {
 
-    let profile_data = biqHelper.localStorage.getObject( biqConfig.local_storage_key.user_data, {}, 'zonatikAgen' );
+    let profile_data = biqHelper.localStorage.getObject( biqConfig.local_storage_key.user_data, {} );
 
     return {
       type: ActionTypes.app.PROFILE_DATA_SET,

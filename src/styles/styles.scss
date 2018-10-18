@@ -2,6 +2,7 @@
 @import './colors.scss';
 @import './fonts.scss';
 @import './mixins.scss';
+@import './responsive-utils';
 
 body {
   background-color: $pale-grey;
@@ -193,6 +194,7 @@ table {
           Mobile First Utilities
 ===========================================
 */
+/*
 
 .mobile-show {
   &__flex {
@@ -241,4 +243,4 @@ table {
       display: inline-block !important;
     }
   }
-}
+}*/

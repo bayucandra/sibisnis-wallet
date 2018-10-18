@@ -35,11 +35,13 @@ class DropPhotoUpload extends Component {
     this.state = {
       files: [],
       src: null,
+      img_file_name: '',
       img_is_set: false,
-      img_file_name: ''
+      img_is_uploading: false
     };
 
     this.imageCropRef = null;
+    this.dropzoneRef = React.createRef();
   }
 
   _setFileState( files, callback=null ) {
@@ -77,11 +79,10 @@ class DropPhotoUpload extends Component {
     this._setFileState( files );
   }
 
-  onImageChange( e ) {
-    let files = e.target.files;
-
-    this._setFileState(files);
-
+  onImageChange() {
+    biqHelper.utils.clickTimeout( ()=>{
+      this.dropzoneRef.current.open();
+    } );
   }
 
   imageCropRefSet( ref ) {
@@ -91,14 +92,12 @@ class DropPhotoUpload extends Component {
   }
 
   imageCropGet = () => {
-
-
-    // return new Promise((resolve, reject) => {
-    //   canvas.toBlob(file => {
-    //     file.name = fileName;
-    //     resolve(file);
-    //   }, 'image/jpeg');
-    // });
+/*    return new Promise((resolve, reject) => {
+      canvas.toBlob(file => {
+        file.name = fileName;
+        resolve(file);
+      }, 'image/jpeg');
+    });*/
 
     return Observable.create( ( observer ) => {
 
@@ -113,10 +112,12 @@ class DropPhotoUpload extends Component {
 
   imageUpload = () => {
 
+    if ( !this.state.img_is_set ) return;
+
+    this.setState({ img_is_uploading: true });
+
     this.imageCropGet()
       .subscribe(( file )=>{
-
-        console.log(file);
 
         let form_data = new FormData();
         form_data.append( 'column', 'image' );
@@ -125,41 +126,24 @@ class DropPhotoUpload extends Component {
         const progressSubscriber = new Subject();
 
         let request$ = rxAjax({
-          url: biqConfig.api.url_base + '/api/wallet/profile_update',
-          // url: 'http://newzonatik.com/agen/dev-api/preflight.php',
+          // url: biqConfig.api.url_base + '/api/wallet/profile_update',
+          url: 'http://newzonatik.com/agen/dev-api/preflight.php',
           method: 'POST',
-/*          headers: {
-            'Content-Type': 'multipart/form-data; charset=utf-8;',
-          },*/
           crossDomain: true,
           withCredentials: true,
           body: form_data,
           progressSubscriber
         });
 
-/*        $.ajax({
-          url: biqConfig.api.url_base + '/wallet/profile_update',
-          method: 'POST',
-          data: form_data,
-          contentType: false,
-          processData: false,
-          xhrFields: {
-            withCredentials: true
-          },
-          crossDomain: true,
-          uploadProgress: function(e) {
-            // track uploading
-            if (e.lengthComputable) {
-              let completedPercentage = Math.round((e.loaded * 100) / e.total);
-              console.log(completedPercentage);
-            }
-          }
-        });*/
 
         progressSubscriber
           .pipe( merge(request$) )
           .subscribe( data =>{
-            console.log(data);
+
+            if ( data.hasOwnProperty('status') ) {
+
+            }
+
           });
 
         return;
@@ -179,21 +163,6 @@ class DropPhotoUpload extends Component {
       });
 
   };
-
-/*
-  // Create simulation for image upload if error
-  simulateErrorOnImageUpload = () =>{
-    this.setState({ uploading: true, uploadStatus: true }, () => {
-      setTimeout(() => {
-        this.setState({ uploadProgress: 45 }, () => {
-          setTimeout(() => {
-            this.setState({ error: true, });
-          }, 2000);
-        })
-      }, 1000);
-    });
-  }*/
-
 
   modalPosTopGen() {
     let ratio_opt = { box_selector: '.drop-photo-upload-container', top_space: 155, bottom_space: 317};
@@ -219,7 +188,6 @@ class DropPhotoUpload extends Component {
 
   render() {
     const { error, success, uploading } = this.state;
-    let file_not_set = this.state.files.length > 0;
 
     return (
       <div className="drop-photo-upload-container" style={{ marginTop: this.state.modalPosTop }}>
@@ -231,43 +199,35 @@ class DropPhotoUpload extends Component {
         </div>
 
         <div className="drop-photo-upload-header">
-          <div className="drop-photo-upload-header__title mobile-show__block">Tambahkan foto dari galeri</div>
-          <div className="drop-photo-upload-header__title desktop-show__block">Tambahkan foto dari direktori</div>
+          <div className="drop-photo-upload-header__title hidden-md-up hidden-md-up--block">Tambahkan foto dari galeri</div>
+          <div className="drop-photo-upload-header__title visible-md-up visible-md-up--block">Tambahkan foto dari direktori</div>
           <div className="drop-photo-upload-header__description">Maksimum file berukuran 10 Mb, Untuk keperluan validasi pastikan upload foto profile terakhir anda</div>
         </div>
 
-        {!this.state.src ?
-          <div className="drop-zone-area-container">
-            <Dropzone activeClassName="drop-zone-active" accept="image/jpeg, image/png" className="drop-zone" onDrop={this.onDrop.bind(this)}>
-              <div className="drop-zone-area">
-                <img src={uploadIconMobile} className="drop-zone-area__icon upload-icon-mobile" alt="" />
-                <img src={uploadIconDesktop} className="drop-zone-area__icon upload-icon-desktop" alt="" />
-                <div className="drop-zone-area__description mobile-show__block">Klik untuk menuju ke direktori lokasi Foto</div>
-                <div className="drop-zone-area__description desktop-show__block">Tarik file anda kesini, atau klik untuk menuju ke direktori lokasi Foto</div>
-              </div>
-            </Dropzone>
-          </div>
+        <div className={"drop-zone-area-container" + (this.state.img_is_set ? ' hidden' : '' ) }>
+          <Dropzone ref={this.dropzoneRef} activeClassName="drop-zone-active" accept="image/jpeg, image/png" className="drop-zone" onDrop={this.onDrop.bind(this)}>
+            <div className="drop-zone-area">
+              <img src={uploadIconMobile} className="drop-zone-area__icon upload-icon-mobile" alt="" />
+              <img src={uploadIconDesktop} className="drop-zone-area__icon upload-icon-desktop" alt="" />
+              <div className="drop-zone-area__description mobile-show__block">Klik untuk menuju ke direktori lokasi Foto</div>
+              <div className="drop-zone-area__description visible-md-up visible-md-up--block">Tarik file anda kesini, atau klik untuk menuju ke direktori lokasi Foto</div>
+            </div>
+          </Dropzone>
+        </div>
 
-          :
-
-          <PhotoCrop src={this.state.src} imageCropRefSet={this.imageCropRefSet.bind(this)} />
-        }
+        <PhotoCrop imgIsSet={ this.state.img_is_set } src={this.state.src} imageCropRefSet={this.imageCropRefSet.bind(this)} />
 
         <div className="image-actions-container">
 
-          <Button className={ "upload-photo-btn" + (file_not_set ? ' is-disabled' : '') } onClick={this.imageUpload}>
+          <Button className={ `upload-photo-btn${ !this.state.img_is_set ? ' is-disabled' : '' }` } onClick={this.imageUpload}>
             <div className="icon"></div>
             <div className="text text--upload">Upload Foto</div>
           </Button>
 
-          {(this.state.img_is_set ) ?
-            <div className="change-image-button-container">
-              <label htmlFor="change-image" className="change-image-button ripple">
-                Ganti Foto
-              </label>
-              <input type="file" id="change-image" onChange={this.onImageChange.bind(this)} className="change-image-input" accept="image/jpeg, image/png" />
-            </div> : null
-          }
+          <Button className={`change-photo-btn${ !this.state.img_is_set ? ' hidden' : '' }`} onClick={this.onImageChange.bind(this)}>
+            Ganti Foto
+          </Button>
+
         </div>
 
       </div>

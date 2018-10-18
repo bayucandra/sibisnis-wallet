@@ -77,6 +77,7 @@
   .image-actions-container {
     display: flex;
     flex-direction: column;
+    align-items: center;
     padding: 50px 0;
 
     .upload-photo-btn {
@@ -84,7 +85,6 @@
       align-items: center;
       justify-content: center;
       height: 50px;
-      opacity: 0.5;
       border-radius: 2px;
       background-color: #2196f3;
 
@@ -97,55 +97,56 @@
       text-align: center;
       color: $white;
       text-transform: none;
+
+      &.is-disabled {
+        opacity: 0.5;
+      }//&.is-active
+
     }//.upload-photo-btn
 
-  }//.image-actions-container
-
-  .change-image-button-container{
-    .change-image-button{
-      width: 100%;
-      height: 50px;
+    .change-photo-btn{
       display: flex;
       align-items: center;
       justify-content: center;
+      height: 50px;
+      margin-top: 10px;
       border-radius: 2px;
-      background-color: $white;
-      @include text-setup($charcoal-grey, 14px);
+
+      font-size: 14px;
       font-weight: bold;
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
       letter-spacing: 0.5px;
       cursor: pointer;
-      margin-top: 10px;
-    }
+      color: $charcoal-grey;
+    }//.change-phpoto-btn
 
-    .change-image-input{
-      display: none;
-    }
-
-  }//.change-image-button-container
+  }//.image-actions-container
 
 }//.drop-photo-upload-container
 
-@include media-query(md) {
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
   .drop-photo-upload-container {
     width: 550px;
     margin: 0;
-    padding: 50px 60px 40px 60px;
+    padding: 50px 60px 0 60px;
     .drop-photo-upload-header {
         width: 380px;
         margin: 0 auto;
       &__title {
-        @include text-setup($charcoal-grey, 20px);
+        margin: 0;
+        color: $charcoal-grey;
+        font-size: 20px;
       }
       &__description{
-        width: 380px !important;
-        margin-top: 15px !important;
-        margin-bottom: 40px !important;
+        width: 380px;
+        margin-top: 15px;
       }
     }
     .drop-zone-area-container{
+      margin-top: 40px;
+
       .drop-zone{
         height: 252px;
         .drop-zone-area{
@@ -171,6 +172,21 @@
       .drop-zone-active{
         border: dashed 2px #2196f3;
       }
-    }
+    }//.drop-zone-area-container
+
+    .image-actions-container {
+      padding: 40px 0;
+
+      .upload-photo-btn {
+        width: 360px;
+      }//.upload-photo-btn
+
+      .change-photo-btn {
+        width: 360px;
+      }//.change-photo-btn
+
+    }//.image-actions-container
+
   }
+
 }

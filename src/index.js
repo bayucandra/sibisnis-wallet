@@ -24,12 +24,22 @@ import "@babel/polyfill";
 // let biqHelper = new biqHelperClass();
 
 const THEME = createMuiTheme({
+
   typography: {
     "fontFamily": "\"NunitoSans\", sans-serif",
     "fontSize": 14,
     "fontWeightLight": 300,
     "fontWeightMedium": 600
+  },
+
+  overrides: {
+    MuiButton: {
+      root: { // Name of the rule
+        "textTransform": "none"
+      },
+    }
   }
+
 });
 
 //END INITIALIZING***************

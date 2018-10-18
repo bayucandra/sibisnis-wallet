@@ -11,8 +11,9 @@
   }
 }
 
-@include media-query(md) {
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
   .photo-crop {
-    text-align: center;
+    height: 252px;
+    margin-top: 40px;
   }
 }

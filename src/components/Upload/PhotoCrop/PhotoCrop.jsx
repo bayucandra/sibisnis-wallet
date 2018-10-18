@@ -33,7 +33,7 @@ class PhotoCrop extends Component {
   render() {
     return (
         <ReactCrop
-          className="photo-crop"
+          className={"photo-crop" + ( !this.props.imgIsSet ? ' hidden' : '' )}
           aspectRatio={1}
           src={this.props.src}
           ref={this.props.imageCropRefSet}

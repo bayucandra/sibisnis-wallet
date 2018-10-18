@@ -44,7 +44,7 @@ class EmailVerification extends Component {
           <EmailVerificationSuccess />
           :
           <React.Fragment>
-            <div className="email-verification-mobile-container mobile-show__block">
+            <div className="email-verification-mobile-container hidden-md-up hidden-md-up--block">
               <div className="email-verification-form">
                 <TextField
                   id="email"
@@ -65,7 +65,7 @@ class EmailVerification extends Component {
                 </div>
               </div>
             </div>
-            <div className="email-verification-desktop-container desktop-show__flex">
+            <div className="email-verification-desktop-container visible-md-up">
               <div className="email-verification-form arrow_box">
                 <div className="input-field-container">
                   <TextField

@@ -57,6 +57,20 @@ class biqHelperUtilsClass {
     }
   };
 
+  clickTimeout( callback, timeout = 250 ){
+
+    if ( typeof callback !== 'function') return;
+
+    setTimeout( ()=> {
+      try {
+        callback();
+      } catch (e) {
+        console.error(`ERROR:: biqHelper.utils.clickTimeout(): ${e.message}`);
+      }
+    }, timeout );
+
+  }
+
 }
 
 export { biqHelperUtilsClass };

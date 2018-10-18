@@ -9,7 +9,7 @@ import './EmailVerificationSuccess.scss';
 
 const EmailVerificationSuccessMobile = (props) => {
   return (
-    <div className="verification-success-mobile mobile-show__flex">
+    <div className="verification-success-mobile hidden-md-up">
       <div className="verification-success-mobile__icon">
         <img src={emailVerficationIcon} alt="email-verification-icon" />
       </div>
@@ -27,7 +27,7 @@ const EmailVerificationSuccessMobile = (props) => {
 
 const EmailVerificationSuccessDesktop = (props) => {
   return (
-    <div className="verification-success-desktop desktop-show__flex">
+    <div className="verification-success-desktop visible-md-up">
       <div className="email-verfication-success arrow_box">
         <div className="left-container">
           <div className="email-verification-icon">

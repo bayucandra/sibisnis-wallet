@@ -4,9 +4,10 @@ import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import Button from '@material-ui/core/Button';
 
-import { Observable } from 'rxjs'; // = require("rxjs")
-import { ajax } from 'rxjs/ajax'; // = require("rxjs/ajax")
-import { map } from 'rxjs/operators'; // = require("rxjs/operators")
+import { Observable, Subject } from 'rxjs'; // = require("rxjs")
+import { ajax as rxAjax } from 'rxjs/ajax'; // = require("rxjs/ajax")
+import { map, merge } from 'rxjs/operators'; // = require("rxjs/operators")
+import $ from 'jquery';
 
 // Custom Components
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
@@ -34,31 +35,34 @@ class DropPhotoUpload extends Component {
     this.state = {
       files: [],
       src: null,
-      cropData: {
-        pixelCrop: null
-      },
-      error:false,
-      success:false,
-      uploading:false,
-      changeImageStatus: false,
-      uploadProgress: 0,
-      modalPosTop: 0
-    }
+      img_is_set: false,
+      img_file_name: ''
+    };
+
+    this.imageCropRef = null;
   }
 
-  onDrop = (files) => {
+  _setFileState( files, callback=null ) {
 
     if ( !biqHelper.utils.isNull(files) && files.length > 0) {
 
       const reader = new FileReader();
+
       reader.addEventListener(
-        'load',
-        () =>
+
+        'load', () => {
           this.setState({
             src: reader.result,
-            changeImageStatus:true
-          }),
+            img_file_name: files[0].name,
+            img_is_set: true
+          });
+
+          if ( typeof callback === 'function') callback();
+
+        },
+
         false
+
       );
 
       reader.readAsDataURL(files[0]);
@@ -67,102 +71,97 @@ class DropPhotoUpload extends Component {
 
     this.setState({files});
 
-  };
+  }
 
-  onImageChange = (e) => {
+  onDrop( files ) {
+    this._setFileState( files );
+  }
+
+  onImageChange( e ) {
     let files = e.target.files;
 
-    if (files && files.length > 0) {
-      const reader = new FileReader();
+    this._setFileState(files);
 
-      reader.addEventListener(
-        'load',
-        () => this.setState({
-            src: reader.result,
-            changeImageStatus:true,
-            error:false,
-            success:false,
-            uploading:false,
-            uploadStatus:false
-          }),
+  }
 
-        false
-      );
+  imageCropRefSet( ref ) {
+    if ( this.imageCropRef !== null ) return;
 
-      reader.readAsDataURL(files[0])
+    this.imageCropRef = ref;
+  }
 
-    }
-
-    this.setState({
-      files
-    });
-
-  };
+  imageCropGet = () => {
 
 
-  parseCroppedImg = ( pixelCrop ) => {
-    this.setState( { cropData: { pixelCrop } }  );
-  };
+    // return new Promise((resolve, reject) => {
+    //   canvas.toBlob(file => {
+    //     file.name = fileName;
+    //     resolve(file);
+    //   }, 'image/jpeg');
+    // });
 
-  getCroppedImg = (image, pixelCrop, fileName) => {
+    return Observable.create( ( observer ) => {
 
-    const canvas = document.createElement('canvas');
-    canvas.width = pixelCrop.width;
-    canvas.height = pixelCrop.height;
-    var img2 = document.createElement('img'); // use DOM HTMLImageElement
-    img2.src = image;
-    const ctx = canvas.getContext('2d');
-    // debugger;
-    ctx.drawImage(
-      img2,
-      pixelCrop.x,
-      pixelCrop.y,
-      pixelCrop.width,
-      pixelCrop.height,
-      0,
-      0,
-      pixelCrop.width,
-      pixelCrop.height
-    );
-
-    // As Base64 string
-    // const base64Image = canvas.toDataURL('image/jpeg');
-
-    // return base64Image;
-    // As a blob
-
-    return Observable.create(( observer )=>{
-      observer.next();
-      canvas.toBlob(file => {
-        file.name = fileName;
+      this.imageCropRef.getCroppedCanvas().toBlob( file => {
+        // file.name = fileName;
         observer.next(file);
       }, 'image/jpeg');
 
-    });
+    })
+
   };
 
-  onImageUploadStart = () => {
-    console.log(this.state.src);
-    console.log(this.state.cropData.pixelCrop);
-return;
-    this.getCroppedImg( this.state.src, this.state.cropData.pixelCrop, 'test' )
+  imageUpload = () => {
+
+    this.imageCropGet()
       .subscribe(( file )=>{
 
         console.log(file);
-        return;
-        let form_data = new FormData();
-        form_data.append( 'profile-picture' );
 
-        let request$ = ajax({
-          url: biqConfig.api.url_base,
+        let form_data = new FormData();
+        form_data.append( 'column', 'image' );
+        form_data.append( 'value', file, this.state.img_file_name );
+
+        const progressSubscriber = new Subject();
+
+        let request$ = rxAjax({
+          url: biqConfig.api.url_base + '/api/wallet/profile_update',
+          // url: 'http://newzonatik.com/agen/dev-api/preflight.php',
           method: 'POST',
-          headers: {
-            'Content-Type': 'multipart/form-data; charset=utf-8; ',
-          },
-          body: {
-            hello: 'World!'
-          }
+/*          headers: {
+            'Content-Type': 'multipart/form-data; charset=utf-8;',
+          },*/
+          crossDomain: true,
+          withCredentials: true,
+          body: form_data
         });
+
+/*        $.ajax({
+          url: biqConfig.api.url_base + '/wallet/profile_update',
+          method: 'POST',
+          data: form_data,
+          contentType: false,
+          processData: false,
+          xhrFields: {
+            withCredentials: true
+          },
+          crossDomain: true,
+          uploadProgress: function(e) {
+            // track uploading
+            if (e.lengthComputable) {
+              let completedPercentage = Math.round((e.loaded * 100) / e.total);
+              console.log(completedPercentage);
+            }
+          }
+        });*/
+
+        progressSubscriber
+          .pipe( merge(request$) )
+          .subscribe( data =>{
+            console.log(data);
+          });
+
+        return;
 
         if (this.state.error || this.state.success) {
           if (this.state.success) {
@@ -246,28 +245,21 @@ return;
                 <div className="drop-zone-area__description desktop-show__block">Tarik file anda kesini, atau klik untuk menuju ke direktori lokasi Foto</div>
               </div>
             </Dropzone>
-          </div> :
-          <div className="image-preview-container">
-            <PhotoCrop src={this.state.src} parseCroppedImg={this.parseCroppedImg} />
           </div>
+
+          :
+
+          <PhotoCrop src={this.state.src} imageCropRefSet={this.imageCropRefSet.bind(this)} />
         }
 
         <div className="image-actions-container">
 
-          <Button className={ "upload-photo-btn" + (file_not_set ? ' is-disabled' : '') } onClick={this.onImageUploadStart}>
+          <Button className={ "upload-photo-btn" + (file_not_set ? ' is-disabled' : '') } onClick={this.imageUpload}>
             <div className="icon"></div>
             <div className="text text--upload">Upload Foto</div>
           </Button>
 
-{/*          <UploadProgressButton
-            disabled={this.state.files.length > 0}
-            progress={this.state.uploadProgress}
-            uploadingStatus={{ error, success, uploading }}
-            onImageUploadStart={this.onImageUploadStart.bind(this)}
-          />*/}
-
-
-          {((this.state.src && this.state.changeImageStatus) && !this.state.uploadStatus) ?
+          {(this.state.img_is_set ) ?
             <div className="change-image-button-container">
               <label htmlFor="change-image" className="change-image-button ripple">
                 Ganti Foto

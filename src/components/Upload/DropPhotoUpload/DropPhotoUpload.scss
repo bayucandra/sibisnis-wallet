@@ -77,14 +77,13 @@
   .image-actions-container {
     display: flex;
     flex-direction: column;
-    padding-bottom: 50px;
+    padding: 50px 0;
 
     .upload-photo-btn {
       display: flex;
       align-items: center;
       justify-content: center;
       height: 50px;
-      margin-top: 50px;
       opacity: 0.5;
       border-radius: 2px;
       background-color: #2196f3;

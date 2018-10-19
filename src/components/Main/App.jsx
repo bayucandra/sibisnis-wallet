@@ -17,23 +17,24 @@ import $ from 'jquery';
 class App extends Component {
 
   componentDidMount(){
+
     this.props.appInit();
     this.props.appSetProfileData();
     this.props.appSseAgenInit();
 
     esProvider.addEventListener( 'login', ( e ) => {
       if ( e.data === 'false' || !e.data ) {
-        this.props.appLogout();//TODO: enable this soon
+        // this.props.appLogout();//TODO: enable this soon
       }
     } );
 
 
     let source$ = fromEvent(window, 'resize')
-        .pipe( map( (e) => {
-          let window_el = $(window);
-          return { width: window_el.outerWidth(), height: window_el.outerHeight() };
-        } ) )
-        .pipe( debounceTime(100) );
+      .pipe( map( (e) => {
+        let window_el = $(window);
+        return { width: window_el.outerWidth(), height: window_el.outerHeight() };
+      } ) )
+      .pipe( debounceTime(100) );
 
     source$.subscribe((e) => {
       this.props.appWindowResize( e );
@@ -42,7 +43,6 @@ class App extends Component {
   }
 
   render() {
-
     if ( this.props.app.is_app_initialized && !this.props.app.is_logged_in ) {
       biqHelper.localStorage.clear();
       this.props.appStatesReset();

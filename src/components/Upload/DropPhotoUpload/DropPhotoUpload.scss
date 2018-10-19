@@ -81,6 +81,7 @@
     padding: 50px 0;
 
     .upload-photo-btn {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -98,9 +99,27 @@
       color: $white;
       text-transform: none;
 
+      &__inner {
+        z-index: 2;
+      }
+
       &.is-disabled {
         opacity: 0.5;
       }//&.is-active
+
+      .progress-bar {
+        display: none;
+        position: absolute;
+        left: 0; top:0; bottom: 0;
+        max-width: 100%;
+        border-radius: 2px;
+        background-color: #0772c6;
+
+        &.is-visible {
+          display: block;
+        }//&.is-visible
+
+      }//.progress-bar
 
     }//.upload-photo-btn
 

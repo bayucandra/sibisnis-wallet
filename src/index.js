@@ -61,4 +61,4 @@ class Index extends React.Component {
 ReactDOM.render(
 <Index />,
  document.getElementById('root'));
-registerServiceWorker();
+// registerServiceWorker();//TODO: enable in production env

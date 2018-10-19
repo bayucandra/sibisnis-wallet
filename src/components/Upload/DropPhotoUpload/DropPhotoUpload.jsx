@@ -4,14 +4,13 @@ import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import Button from '@material-ui/core/Button';
 
-import { Observable, Subject } from 'rxjs'; // = require("rxjs")
-import { ajax as rxAjax } from 'rxjs/ajax'; // = require("rxjs/ajax")
-import { map, merge } from 'rxjs/operators'; // = require("rxjs/operators")
-import $ from 'jquery';
+import { Observable, Subject } from 'rxjs';
+import { ajax as rxAjax } from 'rxjs/ajax';
+import { merge } from 'rxjs/operators';
 
 // Custom Components
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
-import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';//TODO: deprecated and delete soon
+// import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';//TODO: deprecated and delete soon
 
 // Custom Libraries
 import biqHelper from "../../../lib/biqHelper";
@@ -37,7 +36,8 @@ class DropPhotoUpload extends Component {
       src: null,
       img_file_name: '',
       img_is_set: false,
-      img_is_uploading: false
+      img_is_uploading: false,
+      img_upload_progress: 0
     };
 
     this.imageCropRef = null;
@@ -126,8 +126,8 @@ class DropPhotoUpload extends Component {
         const progressSubscriber = new Subject();
 
         let request$ = rxAjax({
-          // url: biqConfig.api.url_base + '/api/wallet/profile_update',
-          url: 'http://newzonatik.com/agen/dev-api/preflight.php',
+          url: biqConfig.api.url_base + '/api/wallet/profile_update',
+          // url: 'http://newzonatik.com/agen/dev-api/preflight.php',
           method: 'POST',
           crossDomain: true,
           withCredentials: true,
@@ -139,6 +139,11 @@ class DropPhotoUpload extends Component {
         progressSubscriber
           .pipe( merge(request$) )
           .subscribe( data =>{
+            if ( data.type === 'progress' ) {
+              let upload_progress = Math.floor(data.loaded / data.total * 100 );
+              this.setState( { img_upload_progress: upload_progress } );
+              console.log(upload_progress);
+            }
 
             if ( data.hasOwnProperty('status') ) {
 
@@ -220,8 +225,11 @@ class DropPhotoUpload extends Component {
         <div className="image-actions-container">
 
           <Button className={ `upload-photo-btn${ !this.state.img_is_set ? ' is-disabled' : '' }` } onClick={this.imageUpload}>
-            <div className="icon"></div>
-            <div className="text text--upload">Upload Foto</div>
+            <div className={"progress-bar" + (this.state.img_is_uploading ? ' is-visible' : '')} style={{ "width" : `${ this.state.img_upload_progress }%` }}/>
+            <div className="upload-photo-btn__inner">
+              <div className="icon"></div>
+              <div className="text text--upload">Upload Foto</div>
+            </div>
           </Button>
 
           <Button className={`change-photo-btn${ !this.state.img_is_set ? ' hidden' : '' }`} onClick={this.onImageChange.bind(this)}>

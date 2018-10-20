@@ -6,6 +6,14 @@ class biqHelperStringClass {
     return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
   }
 
+  toInt( str ){
+    try {
+      return typeof str === 'string' ? parseInt( str ) : str;
+    } catch( e ) {
+      return 0;
+    }
+  }
+
 }
 
 export { biqHelperStringClass };

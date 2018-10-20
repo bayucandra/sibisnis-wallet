@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 
 import { Observable, Subject } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
-import { merge } from 'rxjs/operators';
+import { merge, catchError } from 'rxjs/operators';
 
 // Custom Components
 import PhotoCrop from './../PhotoCrop/PhotoCrop';
@@ -22,6 +22,8 @@ import { connect } from 'react-redux';
 // Local Images
 import uploadIconMobile from './../../../images/icons/ico-upload-mobile.svg';
 import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
+import imgUploadSukses from '../../../images/icons/upload-sukses.svg';
+import imgUploadGagal from '../../../images/icons/upload-gagal.svg';
 
 // Custom CSS
 import './DropPhotoUpload.scss';
@@ -35,8 +37,10 @@ class DropPhotoUpload extends Component {
       files: [],
       src: null,
       img_file_name: '',
+      img_mime: 'image/jpeg',
       img_is_set: false,
       img_is_uploading: false,
+      server_response: null,
       img_upload_progress: 0
     };
 
@@ -52,14 +56,22 @@ class DropPhotoUpload extends Component {
 
       reader.addEventListener(
 
-        'load', () => {
-          this.setState({
-            src: reader.result,
-            img_file_name: files[0].name,
-            img_is_set: true
-          });
+        'loadend',
 
-          if ( typeof callback === 'function') callback();
+        (e) => {
+
+          if (e.target.readyState === FileReader.DONE) {
+            let result = e.target.result;
+
+            this.setState({
+              src: result,
+              img_file_name: files[0].name,
+              img_is_set: true,
+              img_mime: files[0].type
+            });
+
+            if (typeof callback === 'function') callback();
+          }
 
         },
 
@@ -79,10 +91,12 @@ class DropPhotoUpload extends Component {
     this._setFileState( files );
   }
 
-  onImageChange() {
-    biqHelper.utils.clickTimeout( ()=>{
-      this.dropzoneRef.current.open();
-    } );
+  changeImage() {
+    biqHelper.utils.clickTimeout({
+      callback: ()=>{
+        this.dropzoneRef.current.open();
+      }
+    });
   }
 
   imageCropRefSet( ref ) {
@@ -91,7 +105,7 @@ class DropPhotoUpload extends Component {
     this.imageCropRef = ref;
   }
 
-  imageCropGet = () => {
+  imageCropGet() {
 /*    return new Promise((resolve, reject) => {
       canvas.toBlob(file => {
         file.name = fileName;
@@ -104,15 +118,24 @@ class DropPhotoUpload extends Component {
       this.imageCropRef.getCroppedCanvas().toBlob( file => {
         // file.name = fileName;
         observer.next(file);
-      }, 'image/jpeg');
+      }, this.state.img_mime);
 
     })
 
   };
 
-  imageUpload = () => {
+  _imageUpload() {
+    biqHelper.utils.clickTimeout({
+      callback: () => {
+        this._imageUploadActual();
+      }
+    });
+  }
+
+  _imageUploadActual() {
 
     if ( !this.state.img_is_set ) return;
+    if ( this._imgIsUploadedSuccess() ) this.props.modalClose();
 
     this.setState({ img_is_uploading: true });
 
@@ -138,36 +161,77 @@ class DropPhotoUpload extends Component {
 
         progressSubscriber
           .pipe( merge(request$) )
-          .subscribe( data =>{
-            if ( data.type === 'progress' ) {
-              let upload_progress = Math.floor(data.loaded / data.total * 100 );
-              this.setState( { img_upload_progress: upload_progress } );
-              console.log(upload_progress);
+          .subscribe(
+            data =>{
+              if ( data.type === 'progress' ) {
+                let upload_progress = Math.floor(data.loaded / data.total * 100 );
+                this.setState( { img_upload_progress: upload_progress } );
+              }
+
+              if ( data.hasOwnProperty('status') || data.hasOwnProperty('load') ) {
+                this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
+              }
+
+            },
+            err => {
+              this.setState( { img_is_uploading: false, server_response: err.target.response, img_upload_progress: 0 } );
             }
-
-            if ( data.hasOwnProperty('status') ) {
-
-            }
-
-          });
-
-        return;
-
-        if (this.state.error || this.state.success) {
-          if (this.state.success) {
-          } else {
-            // this.setState({ uploading: true, changeImageStatus: false, error: false }, () => {
-            //   setTimeout(() => {
-            //     this.setState({ success: true, uploading: false })
-            //   }, 1500)
-            // });
-            // this.props.getUserWithUpdatedProfile(this.state.croppedImage);
-          }
-        }
+          );
 
       });
 
   };
+
+  _imgIsUploadedError() {
+    if ( this.state.img_is_uploading ) return false;
+    if ( biqHelper.utils.isNull( this.state.server_response )
+      || biqHelper.JSON.pathIsNull(this.state.server_response, 'response_code.status') ) return false;
+
+    if ( biqHelper.utils.httpResponseIsError( this.state.server_response.response_code.status ) ) {
+      return true;
+    }
+
+    return false;
+
+  }
+
+  _imgIsUploadedSuccess() {
+    if ( this.state.img_is_uploading ) return false;
+    if ( biqHelper.utils.isNull( this.state.server_response )
+      || biqHelper.JSON.pathIsNull(this.state.server_response, 'response_code.status') ) return false;
+
+
+    if ( biqHelper.utils.httpResponseIsSuccess( this.state.server_response.response_code.status ) ) {
+      return true;
+    }
+
+    return false;
+
+  }
+
+  _buttonUploadInner() {
+
+    if ( this.state.img_is_uploading ) {
+      return <div className="text">Proses Upload</div>;
+    } else if( this._imgIsUploadedError() ){
+      return <>
+          <div className="icon" style={{ backgroundImage: `url( ${imgUploadGagal} )`} } />
+          <div>Kirim ulang</div>
+        </>
+    } else if ( this._imgIsUploadedSuccess() ){
+      return <>
+          <div className="icon" style={{ backgroundImage: `url( ${imgUploadSukses} )` }}/>
+          <div>Tutup</div>
+        </>
+    } else {
+      return <div className="text">Upload Foto</div>;
+    }
+
+  }
+
+  _canChangePhoto() {
+    return !this.state.img_is_set || this.state.img_is_uploading || this._imgIsUploadedSuccess() || this._imgIsUploadedError();
+  }
 
   modalPosTopGen() {
     let ratio_opt = { box_selector: '.drop-photo-upload-container', top_space: 155, bottom_space: 317};
@@ -222,17 +286,20 @@ class DropPhotoUpload extends Component {
 
         <PhotoCrop imgIsSet={ this.state.img_is_set } src={this.state.src} imageCropRefSet={this.imageCropRefSet.bind(this)} />
 
+        <div className={ `notices${ this._imgIsUploadedSuccess() ? ' notices--success' : this._imgIsUploadedError() ? ' notices--error' : '' }` }>
+          { this._imgIsUploadedSuccess() || this._imgIsUploadedError() ? this.state.server_response.response_code.message : '' }
+        </div>
+
         <div className="image-actions-container">
 
-          <Button className={ `upload-photo-btn${ !this.state.img_is_set ? ' is-disabled' : '' }` } onClick={this.imageUpload}>
+          <Button className={ `upload-photo-btn${ !this.state.img_is_set ? ' is-disabled' : '' }` } onClick={this._imageUpload.bind(this)}>
             <div className={"progress-bar" + (this.state.img_is_uploading ? ' is-visible' : '')} style={{ "width" : `${ this.state.img_upload_progress }%` }}/>
             <div className="upload-photo-btn__inner">
-              <div className="icon"></div>
-              <div className="text text--upload">Upload Foto</div>
+              {this._buttonUploadInner()}
             </div>
           </Button>
 
-          <Button className={`change-photo-btn${ !this.state.img_is_set ? ' hidden' : '' }`} onClick={this.onImageChange.bind(this)}>
+          <Button className={`change-photo-btn${ this._canChangePhoto()  ? ' hidden' : '' }`} onClick={this.changeImage.bind(this)}>
             Ganti Foto
           </Button>
 

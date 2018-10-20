@@ -1,5 +1,7 @@
 import $ from 'jquery';
 
+import biqHelperString from "./string";
+
 class biqHelperUtilsClass {
 
   isNull(val) {
@@ -57,19 +59,38 @@ class biqHelperUtilsClass {
     }
   };
 
-  clickTimeout( callback, timeout = 250 ){
+  clickTimeout( p_obj ){
 
-    if ( typeof callback !== 'function') return;
+    let params = {
+      callback: null,
+      bind: null,
+      timeout: 250
+    };
+
+    Object.assign( params, p_obj );
+
+    if ( typeof params.callback !== 'function') return;
 
     setTimeout( ()=> {
       try {
-        callback();
+        if ( !this.isNull( params.bind ) ) params.callback.bind(params.bind)();
+        else params.callback();
       } catch (e) {
         console.error(`ERROR:: biqHelper.utils.clickTimeout(): ${e.message}`);
       }
-    }, timeout );
+    }, params.timeout );
 
   }
+
+  httpResponseIsError( key ){
+    key = biqHelperString.toInt( key );
+    return key >= 400 && key < 500;
+  };
+
+  httpResponseIsSuccess( key ){
+    key = biqHelperString.toInt( key );
+    return key >= 200 && key < 300;
+  };
 
 }
 

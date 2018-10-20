@@ -1,6 +1,7 @@
 // Node Modules
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Switch, Redirect,Route, Link } from "react-router-dom";
+import $ from 'jquery';
 
 // Custom Compoenents
 // import Modal from './../Shared/Modal/Modal';//TODO: delete very soon
@@ -18,7 +19,9 @@ class PageLayout extends Component {
   }
 
   componentWillUpdate() {
-    window.scrollTo(0,0);
+    // window.scrollTo(0,0);
+    let body = $('body');
+    body.stop().animate({scrollTop:0});
   }
 
   render() {

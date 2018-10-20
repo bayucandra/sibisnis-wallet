@@ -24,7 +24,7 @@ class App extends Component {
 
     esProvider.addEventListener( 'login', ( e ) => {
       if ( e.data === 'false' || !e.data ) {
-        // this.props.appLogout();//TODO: enable this soon
+        this.props.appLogout();//TODO: enable this soon
       }
     } );
 

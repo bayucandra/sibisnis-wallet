@@ -11,6 +11,7 @@ export default (state = initialState, action = {}) => {
 
     case ActionTypes.user.PROFILE_GET:
       new_state = { profile: action.payload };
+      new_state.profile.photo = null;
       return Object.assign({}, state, new_state);
 
     case ActionTypes.app.PROFILE_UPDATE:

@@ -39,6 +39,7 @@ class PhotoCrop extends Component {
           ref={this.props.imageCropRefSet}
           ready={this._ready.bind(this)}
           zoomable={false}
+          autoCropArea={1}
         />
     )
   }

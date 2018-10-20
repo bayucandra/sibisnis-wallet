@@ -50,24 +50,6 @@ import PhotoUpload from "../../Upload/PhotoUpload/PhotoUpload";
 // import closeIconBlack from "../../../images/icons/ico-close-black.svg";
 
 
-const ProfileInfo = (props) => {
-  let { name, email, image, imageAction } = props;
-  name = biqHelper.utils.isNull( name ) ? 'N/A': name;
-  biqHelper.utils.assignDefault( email, 'N/A' );
-  let profileImageUrl = !biqHelper.utils.isNull( image ) ? `${biqConfig.api.url_base}/agen/assets/user_profile/${image}` : avatarPlacerholderBlank;
-  return (
-    <div className="profile-info">
-      <div className="profile-info__img"
-           style={{ 'backgroundImage': "url(" + ( profileImageUrl ) + ")" }}
-           onClick={imageAction.bind(this, !biqHelper.utils.isNull( image ) ? image : null)}>
-      </div>
-      <div className="profile-info__name">{name ? name : 'N/A'}</div>
-      <div className="profile-info__email">{email ? email : 'N/A'}</div>
-      <div className="divider"></div>
-    </div>
-  )
-};
-
 // Saldo Anda Means Your Balance
 const Balance = (props) => {
   let { balance } = props;
@@ -134,6 +116,28 @@ class Profile extends Component {
     }
   };
 
+  _profileInfoRender(props) {
+    // let { name, email, image, imageAction } = props;
+
+    const { nama, email, photo } = this.props.user.profile;
+
+    let profileImageUrl = !biqHelper.utils.isNull( photo ) ?
+        `${biqConfig.api.url_base}/agen/assets/user_profile/${photo}` :
+        avatarPlacerholderBlank;
+
+    return (
+      <div className="profile-info">
+        <div className="profile-info__img"
+             style={{ 'backgroundImage': "url(" + ( profileImageUrl ) + ")" }}
+             onClick={this.onProfileImageClick.bind(this, !biqHelper.utils.isNull( photo ) ? photo : null)}>
+        </div>
+        <div className="profile-info__name">{ biqHelper.utils.isNull( nama ) ? 'N/A': nama }</div>
+        <div className="profile-info__email">{ biqHelper.utils.isNull( email ) ? 'N/A': email }</div>
+        <div className="divider" />
+      </div>
+    )
+  };
+
   modalClose = () => {
     this.setState({ modal_is_open: false });
   };
@@ -167,14 +171,8 @@ class Profile extends Component {
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </div>
               {!biqHelper.utils.isNull( user ) ?
-                <ProfileInfo
-                  name={user.profile.nama}
-                  email={user.profile.email}
-                  image={ !biqHelper.utils.isNull( user.profile.photo ) ? user.profile.photo : ''}
-                  imageAction={ this.onProfileImageClick }
-                  // image={null}
-                  // imageAction={this.onProfileImageClick}
-                /> :
+                this._profileInfoRender()
+                :
                 <ProfileInfoLoader />
               }
               {!biqHelper.utils.isNull( user )?

@@ -137,7 +137,10 @@ class DropPhotoUpload extends Component {
     let {dispatch} = this.props;
 
     if ( !this.state.img_is_set ) return;
-    if ( this._imgIsUploadedSuccess() ) this.props.modalClose();
+    if ( this._imgIsUploadedSuccess() ) {
+      this.props.modalClose();
+      return;
+    }
 
     this.setState({ img_is_uploading: true });
 

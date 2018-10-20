@@ -20,8 +20,8 @@ class PageLayout extends Component {
 
   componentWillUpdate() {
     // window.scrollTo(0,0);
-    let body = $('body');
-    body.stop().animate({scrollTop:0});
+    let body = $('html, body');
+    body.stop().animate({scrollTop:0}, 500, 'swing');
   }
 
   render() {

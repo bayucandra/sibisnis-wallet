@@ -6,7 +6,7 @@ import {  mergeMap, filter, map, mapTo,flatMap,  delay, catchError } from 'rxjs/
 import { ajax } from 'rxjs/ajax';
 import { ofType } from 'redux-observable';
 
-const getUser = action$ => {
+/*const getUser = action$ => {
   return action$.pipe(
     ofType(ActionTypes.user.GET),
     mergeMap(action => {
@@ -17,24 +17,8 @@ const getUser = action$ => {
       )
     })
   )
-};
+};*/
 
-// Only for stub purpose
-const updateUserProfile = action$ => {
-  return action$.pipe(
-    ofType(ActionTypes.user.IMAGE_GET),
-    mergeMap(action => {
-      let profileImage = action.payload;
-      return from(ApiStubs.getUserData()).pipe(
-        flatMap(response => {
-          response.data.profilePicture = profileImage;
-          return [UserActions.setUser(response.data)]
-        })
-      )
-    })
-  )
-};
-
-let UserEpics = [ updateUserProfile, getUser ];
+let UserEpics = [  ];
 
 export default UserEpics;

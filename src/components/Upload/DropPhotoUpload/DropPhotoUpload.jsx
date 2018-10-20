@@ -16,7 +16,7 @@ import PhotoCrop from './../PhotoCrop/PhotoCrop';
 import biqHelper from "../../../lib/biqHelper";
 
 // Redux
-import { getUserWithUpdatedProfile } from './../../../redux/actions/UserActions';
+import { UserActions } from './../../../redux/actions/UserActions';
 import { connect } from 'react-redux';
 
 // Local Images
@@ -134,6 +134,8 @@ class DropPhotoUpload extends Component {
 
   _imageUploadActual() {
 
+    let {dispatch} = this.props;
+
     if ( !this.state.img_is_set ) return;
     if ( this._imgIsUploadedSuccess() ) this.props.modalClose();
 
@@ -170,6 +172,11 @@ class DropPhotoUpload extends Component {
 
               if ( data.hasOwnProperty('status') || data.hasOwnProperty('load') ) {
                 this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
+
+                let status_code = biqHelper.string.toInt(data.response.response_code.status);
+                if ( status_code === 200 ) {
+                  // dispatch( UserActions.userProfileUpdate( { photo: data.response } ) );
+                }
               }
 
             },
@@ -256,7 +263,6 @@ class DropPhotoUpload extends Component {
   }
 
   render() {
-    const { error, success, uploading } = this.state;
 
     return (
       <div className="drop-photo-upload-container" style={{ marginTop: this.state.modalPosTop }}>
@@ -310,9 +316,5 @@ class DropPhotoUpload extends Component {
   }
 }
 
-const mapDispatchToProps = {
-  getUserWithUpdatedProfile
-};
 
-
-export default withRouter( connect( null, mapDispatchToProps)(DropPhotoUpload) );
+export default withRouter( connect( null)(DropPhotoUpload) );

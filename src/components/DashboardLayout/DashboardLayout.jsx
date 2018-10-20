@@ -1,6 +1,6 @@
 // Node Modules
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 // Custom Components
 import Profile from './Profile/Profile';
@@ -48,9 +48,11 @@ class DashboardLayout extends Component {
                 <Profile />
               </div>
               <div className={!this.state.profileStatus ? "dashboard-layout-container__right show-dashboard" : 'dashboard-layout-container__right hide-dashboard'}>
-                <Route path="/dashboard" exact={true} component={Dashboard} />
-                <Route path="/dashboard/detail-profile" component={DetailProfile} />
-                <Route path="/dashboard/deposit-requirements-check" component={DepositRequirementsCheck} />
+                <Switch>
+                  <Route path="/dashboard/detail-profile" component={DetailProfile} />
+                  <Route path="/dashboard/deposit-requirements-check" component={DepositRequirementsCheck} />
+                  <Route path="/dashboard" component={Dashboard} />
+                </Switch>
               </div>
             </div>
           </div>

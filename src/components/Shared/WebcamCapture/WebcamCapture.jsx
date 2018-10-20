@@ -9,7 +9,6 @@ import cameraFinishIcon from './../../../images/icons/ico-camera-finish.svg';
 import cameraIconReset from './../../../images/icons/ico-upload-reset.svg';
 
 // Redux
-import { getUserWithUpdatedProfile } from './../../../redux/actions/UserActions';
 import { connect } from 'react-redux';
 
 // Custom Libraries
@@ -56,7 +55,7 @@ class WebcamCapture extends Component {
   }
 
   onCaptureConfirm = () => {
-    this.props.getUserWithUpdatedProfile(this.state.captureImage);
+    // this.props.getUserWithUpdatedProfile(this.state.captureImage);
     modalToggle.next({ status: false });
   }
 
@@ -109,10 +108,6 @@ class WebcamCapture extends Component {
 
 const mapStateToProps = (store) => {
   return {}
-}
+};
 
-const mapDispatchToProps = {
-  getUserWithUpdatedProfile
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(WebcamCapture);
+export default connect(mapStateToProps)(WebcamCapture);

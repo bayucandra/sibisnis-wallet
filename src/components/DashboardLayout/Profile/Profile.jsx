@@ -33,8 +33,9 @@ import ProfileButton from './../../Shared/ProfileButton/ProfileButton';
  */
 
 import { navigationStatus, modalToggle } from "./../../../lib/utilities";
-import { modalTypes } from './../../../lib/constants';
-import biqHelper from '../../../lib/biqHelper';
+// import { modalTypes } from './../../../lib/constants';
+import biqHelper from "../../../lib/biqHelper";
+import biqConfig from "../../../providers/biqConfig";
 
 // Redux
 import { connect } from 'react-redux';
@@ -44,17 +45,21 @@ import { ProfileInfoLoader, BalanceLoader } from './../../Loaders/ProfileLoader/
 
 import './Profile.scss';
 import '../../../components/Shared/Modal/Modal.scss';
-import profileTestImage from './../../../images/test.jpg';
+// import profileTestImage from './../../../images/test.jpg';
 import PhotoUpload from "../../Upload/PhotoUpload/PhotoUpload";
-import closeIconBlack from "../../../images/icons/ico-close-black.svg";
+// import closeIconBlack from "../../../images/icons/ico-close-black.svg";
+
 
 const ProfileInfo = (props) => {
   let { name, email, image, imageAction } = props;
   name = biqHelper.utils.isNull( name ) ? 'N/A': name;
   biqHelper.utils.assignDefault( email, 'N/A' );
+  let profileImageUrl = !biqHelper.utils.isNull( image ) ? `${biqConfig.api.url_base}/agen/assets/user_profile/${image}` : avatarPlacerholderBlank;
   return (
     <div className="profile-info">
-      <div className="profile-info__img" style={{ 'backgroundImage': "url(" + (image ? image : avatarPlacerholderBlank) + ")" }} onClick={imageAction.bind(this, image ? image : null)}>
+      <div className="profile-info__img"
+           style={{ 'backgroundImage': "url(" + ( profileImageUrl ) + ")" }}
+           onClick={imageAction.bind(this, !biqHelper.utils.isNull( image ) ? image : null)}>
       </div>
       <div className="profile-info__name">{name ? name : 'N/A'}</div>
       <div className="profile-info__email">{email ? email : 'N/A'}</div>
@@ -125,6 +130,7 @@ class Profile extends Component {
       this.modalSetActiveComponent( PhotoUpload );
       this.setState({ modal_is_open: true });
     } else {
+
     }
   };
 
@@ -149,7 +155,7 @@ class Profile extends Component {
   };
 
   render() {
-    const {user_profile} = this.props;
+    const {user} = this.props;
     let ModalActiveComponent = this.state.modal_active_component;
     return (
       <div id="profile-card">
@@ -160,19 +166,19 @@ class Profile extends Component {
               <div data-tip='Profile anda' className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
                 <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
               </div>
-              {!biqHelper.utils.isNull( user_profile ) ?
+              {!biqHelper.utils.isNull( user ) ?
                 <ProfileInfo
-                  name={user_profile.nama}
-                  email={user_profile.email}
-                  image={user_profile.profilePicture ? user_profile.profilePicture : null}
+                  name={user.profile.nama}
+                  email={user.profile.email}
+                  image={ !biqHelper.utils.isNull( user.profile.photo ) ? user.profile.photo : ''}
                   imageAction={ this.onProfileImageClick }
                   // image={null}
                   // imageAction={this.onProfileImageClick}
                 /> :
                 <ProfileInfoLoader />
               }
-              {!biqHelper.utils.isNull( user_profile )?
-                <Balance balance={user_profile.saldo} />
+              {!biqHelper.utils.isNull( user )?
+                <Balance balance={user.profile.saldo} />
                 :
                 <BalanceLoader />
               }
@@ -211,8 +217,7 @@ class Profile extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    user: store.user.user,
-    user_profile: store.app.profile
+    user: store.user
   }
 };
 

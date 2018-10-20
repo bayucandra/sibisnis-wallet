@@ -5,6 +5,7 @@ import { withRouter } from 'react-router-dom';
 import Header from "./../Shared/Header/Header";
 import PageLayout from './../PageLayout/PageLayout';
 import AppActions from "../../redux/actions/AppActions";
+import UserActions from "../../redux/actions/UserActions";
 import esProvider from "../../providers/esProvider";
 import biqHelper from "../../lib/biqHelper";
 import biqConfig from "../../providers/biqConfig";
@@ -17,14 +18,15 @@ import $ from 'jquery';
 class App extends Component {
 
   componentDidMount(){
-
-    this.props.appInit();
-    this.props.appSetProfileData();
-    this.props.appSseAgenInit();
+    let {dispatch} = this.props;
+    console.log('initializing app');
+    dispatch(AppActions.appInit());
+    dispatch(AppActions.appSseAgenInit());
+    dispatch(UserActions.userProfileGet());
 
     esProvider.addEventListener( 'login', ( e ) => {
       if ( e.data === 'false' || !e.data ) {
-        this.props.appLogout();//TODO: enable this soon
+        dispatch( AppActions.appLogout() );//TODO: enable this soon
       }
     } );
 
@@ -43,7 +45,7 @@ class App extends Component {
   }
 
   render() {
-    if ( this.props.app.is_app_initialized && !this.props.app.is_logged_in ) {
+    if ( this.props.is_app_initialized && !this.props.is_logged_in ) {
       biqHelper.localStorage.clear();
       this.props.appStatesReset();
       window.location = biqConfig.agen.url_base + '/#/login/default';
@@ -60,8 +62,10 @@ class App extends Component {
 
 const mapStateToProps = ( store ) => {
   return {
-    app: store.app
+    is_app_initialized: store.app.is_app_initialized,
+    is_logged_in: store.app.is_app_initialized,
+    window_size: store.app.window_size
   }
 };
 
-export default withRouter(connect( mapStateToProps, AppActions)(App) );
+export default withRouter(connect( mapStateToProps )(App) );

@@ -7,8 +7,7 @@ import $ from 'jquery';
 
 let window_el = $(window);
 let state_default = {
-  profile: {}
-  , is_app_initialized: false
+  is_app_initialized: false
   , is_es_initialized: false
   , is_logged_in: false
   , window_size: { width: window_el.outerWidth(), height: window_el.outerHeight() }
@@ -35,10 +34,6 @@ export default ( state = state_default, action ) => {
       new_state = { is_app_initialized: true, is_logged_in: false };
       new_state.is_logged_in = is_logged_in === true || is_logged_in === 'true';
       return Object.assign( {}, state, new_state );
-
-    case ActionTypes.app.PROFILE_DATA_SET:
-      new_state = { profile: action.payload };
-      return Object.assign({}, state, new_state);//case ActionTypes.app.PROFILE_DATA_SET:
 
     case ActionTypes.app.SSE_AGEN_INIT:
       new_state = { is_es_initialized: false };

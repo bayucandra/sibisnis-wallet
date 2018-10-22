@@ -55,9 +55,8 @@ export default ( state = state_default, action ) => {
       //END OF: ActionTypes.app.LOGOUT
 
     case ActionTypes.app.WINDOW_RESIZE:
-      new_state = { width: action.payload.width, height: action.payload.height };
+      new_state = { window_size: action.payload };
       return Object.assign( {}, state, new_state );
-
 
     default:
       return state;

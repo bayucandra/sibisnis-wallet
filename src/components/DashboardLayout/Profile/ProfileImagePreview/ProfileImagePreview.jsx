@@ -55,7 +55,7 @@ class ProfileImagePreview extends Component {
   }
 
   _modalPosTopGen() {
-    let ratio_opt = { box_selector: '.drop-photo-upload-container', top_space: 184, bottom_space: 240};
+    let ratio_opt = { box_selector: '.profile-image-preview', top_space: 184, bottom_space: 240};
     if ( biqHelper.mediaQuery.isMobile() ) {
       ratio_opt.top_space = 85;
       ratio_opt.bottom_space = 115;
@@ -66,12 +66,12 @@ class ProfileImagePreview extends Component {
 
   componentDidMount() {
     let top_pos = this._modalPosTopGen();
-    console.log(top_pos);
     this.setState( {modalPosTop : top_pos } );
   }
 
   componentDidUpdate(prevProp, prevState){
     let top_pos = this._modalPosTopGen();
+    console.log(top_pos);
     if ( prevState.modalPosTop !== top_pos ) {
       this.setState( { modalPosTop: top_pos } );
     }

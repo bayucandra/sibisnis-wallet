@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 
 /**React Material Compoenents*/
@@ -27,27 +28,23 @@ import avatarPlacerholderBlank from './../../../images/avatar-placeholder-blank.
 /**
  * Custom Components
  */
-import ProfileButton from './../../Shared/ProfileButton/ProfileButton';
+import ProfileButton from './../../Shared/ProfileButton/ProfileButton';//TODO: take this out and make it as member function to render
+import ProfileImagePreview from './ProfileImagePreview/ProfileImagePreview';
+
 /**
  * Custom Libraries
  */
 
-import { navigationStatus, modalToggle } from "./../../../lib/utilities";
-// import { modalTypes } from './../../../lib/constants';
+import { navigationStatus } from "./../../../lib/utilities";
 import biqHelper from "../../../lib/biqHelper";
 import biqConfig from "../../../providers/biqConfig";
-
-// Redux
-import { connect } from 'react-redux';
 
 // Loaders
 import { ProfileInfoLoader, BalanceLoader } from './../../Loaders/ProfileLoader/ProfileLoader';
 
 import './Profile.scss';
 import '../../../components/Shared/Modal/Modal.scss';
-// import profileTestImage from './../../../images/test.jpg';
 import PhotoUpload from "../../Upload/PhotoUpload/PhotoUpload";
-// import closeIconBlack from "../../../images/icons/ico-close-black.svg";
 
 
 // Saldo Anda Means Your Balance
@@ -107,22 +104,21 @@ class Profile extends Component {
     // navigationStatus.next({ navigationState: 'Tambah Saldo'});
   };
 
-  onProfileImageClick = (image) => {
+  onProfileImageClick(image) {
     if ( biqHelper.utils.isNull( image )) {
       this.modalSetActiveComponent( PhotoUpload );
       this.setState({ modal_is_open: true });
     } else {
-
+      this.modalSetActiveComponent( ProfileImagePreview );
+      this.setState({ modal_is_open: true });
     }
   };
 
-  _profileInfoRender(props) {
-    // let { name, email, image, imageAction } = props;
-
+  _profileInfoRender() {
     const { nama, email, photo } = this.props.user.profile;
 
     let profileImageUrl = !biqHelper.utils.isNull( photo ) ?
-        `${biqConfig.api.url_base}/agen/assets/user_profile/${photo}` :
+        `${biqConfig.profile_photo_url_base}/${encodeURI( photo )}` :
         avatarPlacerholderBlank;
 
     return (
@@ -141,15 +137,6 @@ class Profile extends Component {
   modalClose = () => {
     this.setState({ modal_is_open: false });
   };
-
-/*
-  onProfileImageClick = (image) => {
-    if (!image) {
-      modalToggle.next({ status: true, type: modalTypes.imageUpload });
-    } else {
-      modalToggle.next({ status: true, type: modalTypes.profileImagePreview, payload: { image: image } });
-    }
-  };*/
 
   onLinkClick = (name) => {
     navigationStatus.next({ navigationState: name});
@@ -219,4 +206,4 @@ const mapStateToProps = (store) => {
   }
 };
 
-export default withRouter( connect(mapStateToProps)(Profile) );
+export default withRouter( connect( mapStateToProps ) (Profile) );

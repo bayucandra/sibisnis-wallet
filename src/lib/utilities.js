@@ -18,7 +18,7 @@ export const navigationStatus = new Subject();
  *  type
  * }
  */
-export const modalToggle = new Subject();
+export const modalToggle = new Subject();//TODO: Plan to delete this
 
 /**
  * Sample Data

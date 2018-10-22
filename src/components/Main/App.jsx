@@ -39,15 +39,16 @@ class App extends Component {
       .pipe( debounceTime(100) );
 
     source$.subscribe((e) => {
-      this.props.appWindowResize( e );
+      dispatch( AppActions.appWindowResize( e ) );
     });
 
   }
 
   render() {
+    const {dispatch} = this.props;
     if ( this.props.is_app_initialized && !this.props.is_logged_in ) {
       biqHelper.localStorage.clear();
-      this.props.appStatesReset();
+      dispatch( AppActions.appStatesReset() );
       window.location = biqConfig.agen.url_base + '/#/login/default';
     }
 

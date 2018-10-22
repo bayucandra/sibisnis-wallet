@@ -6,23 +6,14 @@ let path = path_arr.join("/");
 if ( !biqHelperUtils.isNull( path ) ) {
   path = "/" + path;
 }
-let api_url_base = window.location.protocol + '//' + window.location.host + path ;
-let data_package_name = {};
-
-if ( window.location.hostname.search( 'newzonatik.com' ) !== -1
-  || window.location.hostname === 'webagen-dev.sibisnis.com'
-) {//TODO: For development only, remove this conditional block at production stage
-  api_url_base = 'https://webagen.dev.sibisnis.com';
-  data_package_name = {
-    'Package-Name' : 'COM.ZON32080288.PPOB'
-  };
-}
 
 let biqConfig = {};
 
+biqConfig.url_base = `${window.location.protocol}//${window.location.host}`;
+
 biqConfig.api = {
-  url_base: api_url_base,
-  data_package_name: data_package_name
+  url_base: `${window.location.protocol}//${window.location.host + path}`,
+  data_package_name: {}
 };
 
 biqConfig.local_storage_key = {
@@ -33,7 +24,21 @@ biqConfig.local_storage_key = {
 };
 
 biqConfig.agen = {
-  url_base: window.location.protocol + '//' + window.location.host + '/agen'
+  url_base:  `${biqConfig.url_base}/agen`
 };
+
+biqConfig.profile_photo_url_base = `${biqConfig.url_base}/assets/user_profile`;
+
+
+if ( window.location.hostname === 'newzonatik.com'
+  || window.location.hostname === 'webagen-dev.sibisnis.com'
+) {//TODO: For development only, remove this conditional block at production stage
+  biqConfig.api.url_base = 'https://webagen.dev.sibisnis.com';
+  biqConfig.api.data_package_name = {
+    'Package-Name' : 'COM.ZON32080288.PPOB'
+  };
+
+  biqConfig.profile_photo_url_base = `${biqConfig.api.url_base}/assets/user_profile`;
+}
 
 export default biqConfig;

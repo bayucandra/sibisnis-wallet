@@ -2,14 +2,27 @@
 @import '../../../../styles/mixins.scss';
 @import '../../../../styles/variables.scss';
 
-.profile-image-preview-container {
+.profile-image-preview {
   display: flex;
   position: relative;
-  .image-preview {
-    max-width: 360px;
-    max-height: 360px;
-  }
-  .profile-menu-container {
+  pointer-events: auto;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 360px;
+    height: 360px;
+    background: #dddddd;
+
+    img {
+      max-width: 100%;
+      max-height: 100%;
+    }//img
+
+  }//.image-preview
+
+  .menu {
     position: absolute;
     top: 0;
     right: 0;
@@ -28,7 +41,7 @@
     }
   }
 
-}
+}//.profile-image-preview
 
 .custom-menu {
   position: absolute;

@@ -59,24 +59,25 @@
 .profile-info {
   text-align: center;
   margin-top: 40px;
-  .profile-info__img {
+
+  &__img {
     height: 60px;
     width: 60px;
-    background-position: center;
-    background-repeat: no-repeat;
+    background: #dddddd no-repeat center;
     background-size: cover;
     cursor: pointer;
     margin: 0 auto;
-    border-radius: 50px;
-    img {
+    border-radius: 30px;
+/*    img {
       width: 60px;
       height: 60px;
       border-radius: 50px;
       vertical-align: top;
       cursor: pointer;
-    }
+    }*/
   }
-  .profile-info__name {
+
+  &__name {
     margin-top: 15px;
     @include text-setup($charcoal-grey, 16px);
     font-style: normal;

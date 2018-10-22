@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "738bcd808df95659388c4dd2b81a2a0f",
-    "url": "./static/media/ico-mutasi.738bcd80.svg"
+    "revision": "839c8ce0dc00ed2ccda96d4ed64fd650",
+    "url": "./static/media/transfer-saldo.839c8ce0.svg"
   },
   {
-    "revision": "679aa7beb5bbf05d7f84",
-    "url": "./static/css/main.18ce9aa2.chunk.css"
+    "revision": "a22644b3277cd8060bf1",
+    "url": "./static/css/main.fe3aae97.chunk.css"
   },
   {
-    "revision": "f6912f850a95e668f52873dfb7cc2ef3",
-    "url": "./static/media/test.f6912f85.jpg"
+    "revision": "65bb0a158ee1967292ee4d11079d45ae",
+    "url": "./static/media/Nunito-Regular.65bb0a15.ttf"
   },
   {
-    "revision": "7002719080dcf019a0fe",
-    "url": "./static/js/1.70027190.chunk.js"
+    "revision": "e6caeefce4294f715291",
+    "url": "./static/js/1.e6caeefc.chunk.js"
   },
   {
     "revision": "4a686d48d5a089750c49",
@@ -26,6 +26,10 @@ self.__precacheManifest = [
   {
     "revision": "09d1921949de7d1f50d885decc02b1f4",
     "url": "./static/media/ico-camera-finish.09d19219.svg"
+  },
+  {
+    "revision": "706c529db35347dbde4b025a9a43a9c5",
+    "url": "./static/media/menu.706c529d.svg"
   },
   {
     "revision": "9b1d022a08f6e8c19c5f742b4bdf0fba",
@@ -68,10 +72,6 @@ self.__precacheManifest = [
     "url": "./static/media/logout.474b16f2.svg"
   },
   {
-    "revision": "706c529db35347dbde4b025a9a43a9c5",
-    "url": "./static/media/menu.706c529d.svg"
-  },
-  {
     "revision": "805e99d2210f832a808c98dc1334e743",
     "url": "./static/media/back-white.805e99d2.svg"
   },
@@ -92,12 +92,12 @@ self.__precacheManifest = [
     "url": "./static/media/ico-dashboard.9aa4efd9.svg"
   },
   {
-    "revision": "679aa7beb5bbf05d7f84",
-    "url": "./static/js/main.679aa7be.chunk.js"
+    "revision": "738bcd808df95659388c4dd2b81a2a0f",
+    "url": "./static/media/ico-mutasi.738bcd80.svg"
   },
   {
-    "revision": "839c8ce0dc00ed2ccda96d4ed64fd650",
-    "url": "./static/media/transfer-saldo.839c8ce0.svg"
+    "revision": "a22644b3277cd8060bf1",
+    "url": "./static/js/main.a22644b3.chunk.js"
   },
   {
     "revision": "787475500b19b30ca2e8d4ff9531c5a2",
@@ -110,6 +110,14 @@ self.__precacheManifest = [
   {
     "revision": "f4630a9e263c27d2bca1bb7125c7cbc7",
     "url": "./static/media/avatar-placeholder-blank.f4630a9e.svg"
+  },
+  {
+    "revision": "4a04bb6272b3ced88435949069336469",
+    "url": "./static/media/s-litle-right.4a04bb62.svg"
+  },
+  {
+    "revision": "c78576480aa7fa37d42b8fef4b144df5",
+    "url": "./static/media/ico-back-blue.c7857648.svg"
   },
   {
     "revision": "2b660c8b2cced4d4f2af52841b4b3e4b",
@@ -176,15 +184,11 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-Bold.6f47bcfc.ttf"
   },
   {
-    "revision": "65bb0a158ee1967292ee4d11079d45ae",
-    "url": "./static/media/Nunito-Regular.65bb0a15.ttf"
+    "revision": "e6caeefce4294f715291",
+    "url": "./static/css/1.604f7713.chunk.css"
   },
   {
-    "revision": "7002719080dcf019a0fe",
-    "url": "./static/css/1.721fcb32.chunk.css"
-  },
-  {
-    "revision": "3c590c016fded767f93d6c5e73dde044",
+    "revision": "cded012e1d4a48bc4bb8499c43281508",
     "url": "./index.html"
   }
 ];

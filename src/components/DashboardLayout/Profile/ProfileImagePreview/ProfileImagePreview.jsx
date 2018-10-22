@@ -1,5 +1,7 @@
 // Node Modules
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 // React Material
 import IconButton from '@material-ui/core/IconButton';
@@ -15,6 +17,7 @@ import {modalTypes} from './../../../../lib/constants';
 
 // Custom CSS
 import './ProfileImagePreview.scss';
+import biqConfig from "../../../../providers/biqConfig";
 
 class ProfileImagePreview extends Component {
   constructor(props) {
@@ -23,6 +26,7 @@ class ProfileImagePreview extends Component {
       anchorEl: null,
       menuExpand: false
     }
+    console.log(props);
   }
 
   onMenuOpen = (event) => {
@@ -50,12 +54,20 @@ class ProfileImagePreview extends Component {
 
   render() {
     const { anchorEl } = this.state;
+    let { photo } = this.props.user_profile;
     return (
-      <div className="profile-image-preview-container" >
-        <img src={`${this.props.data.image}`} alt="" className="image-preview" onClick={this.onMenuClose.bind(this)} />
-        <div className="profile-menu-container">
+      <div className="profile-image-preview" >
+
+        <div className={"profile-image-preview__inner"}
+             onClick={this.onMenuClose.bind(this)}>
+          <img alt={"Profile picture"} src={`${biqConfig.profile_photo_url_base}/${ encodeURI(photo) }`}/>
+        </div>
+
+        <div className="menu">
+
           <div className="profile-menu-button ripple icon-touch-area-container-40">
             {/* <img src={menuIcon} alt="menu-icon" /> */}
+
             <IconButton
               aria-label="More"
               aria-owns={anchorEl ? 'long-menu' : null}
@@ -65,8 +77,11 @@ class ProfileImagePreview extends Component {
               <img src={menuIcon}
                 className="menu-btn ripple" />
             </IconButton>
+
           </div>
+
         </div>
+
         {this.state.anchorEl ?
           <div className="custom-menu">
             {!this.state.menuExpand ?
@@ -103,4 +118,10 @@ class ProfileImagePreview extends Component {
   }
 }
 
-export default ProfileImagePreview;
+const mapStateToProps = (store) => {
+  return {
+    user_profile: store.user.profile
+  }
+};
+
+export default withRouter( connect( mapStateToProps ) (ProfileImagePreview) );

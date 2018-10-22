@@ -30,7 +30,7 @@ biqConfig.agen = {
 biqConfig.profile_photo_url_base = `${biqConfig.url_base}/assets/user_profile`;
 
 
-if ( window.location.hostname === 'newzonatik.com'
+if ( window.location.hostname === 'newzonatik.com' && window.location.protocol.search('https') === -1
   || window.location.hostname === 'webagen-dev.sibisnis.com'
 ) {//TODO: For development only, remove this conditional block at production stage
   biqConfig.api.url_base = 'https://webagen.dev.sibisnis.com';

@@ -14,6 +14,7 @@ import backBlueIcon from './../../../../images/icons/ico-back-blue.svg'
 // Custom Libraries
 import {modalToggle, cameraCaptureFileUpload} from './../../../../lib/utilities';
 import {modalTypes} from './../../../../lib/constants';
+import biqHelper from "../../../../lib/biqHelper";
 
 // Custom CSS
 import './ProfileImagePreview.scss';
@@ -23,6 +24,7 @@ class ProfileImagePreview extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      modalPosTop: 0,
       anchorEl: null,
       menuExpand: false
     }
@@ -52,11 +54,34 @@ class ProfileImagePreview extends Component {
     modalToggle.next({ status: true, type: modalTypes.webCameraCapture })
   }
 
+  _modalPosTopGen() {
+    let ratio_opt = { box_selector: '.drop-photo-upload-container', top_space: 184, bottom_space: 240};
+    if ( biqHelper.mediaQuery.isMobile() ) {
+      ratio_opt.top_space = 85;
+      ratio_opt.bottom_space = 115;
+    }
+    let top_pos = biqHelper.utils.modalTopRatio( ratio_opt );
+    return top_pos;
+  }
+
+  componentDidMount() {
+    let top_pos = this._modalPosTopGen();
+    console.log(top_pos);
+    this.setState( {modalPosTop : top_pos } );
+  }
+
+  componentDidUpdate(prevProp, prevState){
+    let top_pos = this._modalPosTopGen();
+    if ( prevState.modalPosTop !== top_pos ) {
+      this.setState( { modalPosTop: top_pos } );
+    }
+  }
+
   render() {
     const { anchorEl } = this.state;
     let { photo } = this.props.user_profile;
     return (
-      <div className="profile-image-preview" >
+      <div className="profile-image-preview" style={{ marginTop: this.state.modalPosTop }} >
 
         <div className={"profile-image-preview__inner"}
              onClick={this.onMenuClose.bind(this)}>

@@ -243,7 +243,7 @@ class DropPhotoUpload extends Component {
     return !this.state.img_is_set || this.state.img_is_uploading || this._imgIsUploadedSuccess() || this._imgIsUploadedError();
   }
 
-  modalPosTopGen() {
+  _modalPosTopGen() {
     let ratio_opt = { box_selector: '.drop-photo-upload-container', top_space: 155, bottom_space: 317};
     if ( biqHelper.mediaQuery.isMobile() ) {
       ratio_opt.top_space = 30;
@@ -254,12 +254,12 @@ class DropPhotoUpload extends Component {
   }
 
   componentDidMount(){
-    let top_pos = this.modalPosTopGen();
+    let top_pos = this._modalPosTopGen();
     this.setState( {modalPosTop : top_pos } );
   }
 
   componentDidUpdate(prevProp, prevState){
-    let top_pos = this.modalPosTopGen();
+    let top_pos = this._modalPosTopGen();
     if ( prevState.modalPosTop !== top_pos ) {
       this.setState( { modalPosTop: top_pos } );
     }

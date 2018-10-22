@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "./static/media/transfer-saldo.839c8ce0.svg"
   },
   {
-    "revision": "a22644b3277cd8060bf1",
+    "revision": "d09e29a6ee685e448df8",
     "url": "./static/css/main.fe3aae97.chunk.css"
   },
   {
@@ -96,8 +96,8 @@ self.__precacheManifest = [
     "url": "./static/media/ico-mutasi.738bcd80.svg"
   },
   {
-    "revision": "a22644b3277cd8060bf1",
-    "url": "./static/js/main.a22644b3.chunk.js"
+    "revision": "d09e29a6ee685e448df8",
+    "url": "./static/js/main.d09e29a6.chunk.js"
   },
   {
     "revision": "787475500b19b30ca2e8d4ff9531c5a2",
@@ -168,16 +168,16 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-LightItalic.42441320.ttf"
   },
   {
+    "revision": "1b31a5055cad7ed13ad2c1bc423adec6",
+    "url": "./static/media/Nunito-SemiBoldItalic.1b31a505.ttf"
+  },
+  {
     "revision": "c41c2502180f63ce383b6e3cc042617a",
     "url": "./static/media/Nunito-Light.c41c2502.ttf"
   },
   {
     "revision": "713ac08dfb7141494d4a69f344ff69fd",
     "url": "./static/media/Nunito-SemiBold.713ac08d.ttf"
-  },
-  {
-    "revision": "1b31a5055cad7ed13ad2c1bc423adec6",
-    "url": "./static/media/Nunito-SemiBoldItalic.1b31a505.ttf"
   },
   {
     "revision": "6f47bcfc065790f02ed3cb8b51bef56f",
@@ -188,7 +188,7 @@ self.__precacheManifest = [
     "url": "./static/css/1.604f7713.chunk.css"
   },
   {
-    "revision": "cded012e1d4a48bc4bb8499c43281508",
+    "revision": "dc1a90ed16c9cab94aa6cc91deb41f3c",
     "url": "./index.html"
   }
 ];

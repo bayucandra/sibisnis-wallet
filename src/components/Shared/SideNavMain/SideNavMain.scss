@@ -1,0 +1,315 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.side-nav-main{
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+  background-color: #FFFFFF;
+}
+
+.profile {
+  flex: 1 1 1px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-bottom: 30px;
+  position: relative;
+  overflow: auto;
+
+  > * {
+    flex: none;
+  }// > *
+
+  .profile-settings-icon-container{
+    position: absolute;
+    top: 10px;
+    right: 2px;
+  }//.profile-settings-icon-container
+
+}//.profile
+
+.profile-nav-container {
+  .profile-nav-list-container {
+    padding: 0px;
+    .profile-nav-list-item {
+      padding:0px;
+      height:55px;
+      border-top: solid 0.5px #dedede;
+    }
+  }
+}
+
+
+@include media-query(sm) {
+  .profile-settings-icon {
+    margin-right: 0px !important;
+  }
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+
+  &__img {
+    height: 60px;
+    width: 60px;
+    background: #dddddd no-repeat center;
+    background-size: cover;
+    cursor: pointer;
+    margin: 0 auto;
+    border-radius: 30px;
+  }
+
+  &__name {
+    margin-top: 15px;
+    @include text-setup($charcoal-grey, 16px);
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.6px;
+    font-weight: 600;
+  }
+
+  &__email {
+    margin-top: 5px;
+    @include text-setup($charcoal-grey, 13px);
+    letter-spacing: 0.6px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+  }
+
+  .divider {
+    margin-top: 15px;
+    width: 165px;
+    height: 0;
+    border-top: solid 0.5px #dedede;
+  }//.divider
+
+}//.profile-info
+
+.balance-info {
+  text-align: center;
+  margin-top: 15px;
+
+  &__text {
+    font-size: 14px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    color: map-get( $colors, steel-grey );
+    letter-spacing: 0.5px;
+  }//&__text
+
+  &__amount {
+    font-size: 22px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    color: map-get( $colors, charcoal-grey );
+    letter-spacing: 1px;
+    margin-top: 3px;
+  }//&__amount
+
+}//.balance-info
+
+.balance {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+
+  &__divider {
+    width: 6px;
+    height: 6px;
+    border-radius: 3px;
+    background: map-get( $colors, dark-sky-blue );
+  }//&__divider
+
+  &__btn {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 210px;
+    height: 45px;
+    border-radius: 100px;
+    background-color: map-get($colors, white);
+
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    color: map-get( $colors, dark-sky-blue );
+
+    &--withdraw {
+      margin-top: 15px;
+    }//&--withdraw
+
+  }//&__btn
+
+}//.balance
+
+.profile-nav-btn{
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+
+  &__text{
+    font-weight: normal;
+    @include text-setup($steel-grey,15px);
+    letter-spacing: 0.5px;
+    margin-top: 2px;
+  }
+
+  &__navicon{
+    position: absolute;
+    right:15px;
+  }
+
+}//.profile-nav-btn
+
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .side-nav-main {
+    flex: none;
+    width: 247px;
+    min-height: 499px;
+  }//.side-nav-main
+
+  .profile {
+    flex: none;
+
+    .profile-settings-icon-container {
+      position: absolute;
+      top: 7px;
+      right: 7px;
+      height: 40px;
+      width: 40px;
+    }//.profile-settings-icon-container
+
+  }//.profile
+
+  .profile-info {
+    margin-top: 30px;
+
+    &__img {
+      height: 60px;
+    }
+
+  }//.profile-info
+
+  .balance {
+    flex-direction: row;
+
+    &__btn {
+      flex: 1 0 0;
+      text-decoration: underline;
+      width: auto;
+      height: auto;
+      border-radius: 2px;
+      background: none;
+      transition: opacity 250ms ease-in-out;
+
+      &:hover {
+        background: none;
+        text-decoration: underline;
+        opacity: 0.6;
+      }//&:hover
+
+      &--add {
+        justify-content: flex-end;
+        padding-right: 20px;
+      }
+
+      &--withdraw {
+        margin-top: 0;
+        justify-content: flex-start;
+        padding-left: 20px;
+      }
+
+    }//&__btn
+
+  }//.balance
+
+  .profile-nav-container {
+    margin-top: 10px;
+
+    .profile-nav-list-container .profile-nav-list-item {
+      height:48px !important;
+      border-top:0px !important;
+    }
+
+    .profile-nav-btn {
+      padding: 0px;
+      // margin-left:-4px;
+
+      &__icon{
+        padding:0px;
+        margin-right: 15px !important;
+      }
+
+      &__text{
+        @include text-setup($steel-grey, 13px);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+      }
+
+      &__navicon {
+        display: none;
+      }//&__navicon
+
+    }//.profile-nav-btn
+
+    .profile-nav-btn-active{
+      border-left:3px solid $dark-sky-blue;
+
+      .profile-nav-btn__text{
+        font-weight: bold;
+        color: $dark-sky-blue;
+      }//.profile-nav-btn__text
+
+    }//.profile-nav-btn-active
+
+  }//.profile-nav-container
+
+}//@media
+
+.custom-tooltip-profile {
+  font-family: $font-family !important;
+  font-size: 13px !important;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  color: rgb(255, 255, 255) !important;
+  background-color: rgb(64, 72, 82) !important;
+  opacity: 1 !important;
+  top: 126px !important;
+  padding: 0px;
+  width: 115.6px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-tooltip-profile:after {
+  border-left-color: #404852 !important;
+  border-left-style: solid !important;
+  border-left-width: 6px !important;
+}

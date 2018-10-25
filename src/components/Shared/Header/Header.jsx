@@ -68,7 +68,7 @@ class Header extends Component {
   render() {
     const { anchorEl } = this.state;
     return (
-      <div id="header" className="container-wrapper">
+      <div id="header">
         <div className="header-container container-inner">
           <div className="left-header">
             <div className="header-navigation-status-desktop">

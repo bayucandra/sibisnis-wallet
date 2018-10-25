@@ -1,2 +1,32 @@
 $font-family: 'NunitoSans',sans-serif;
 $bp-mobile-first: ( sm: 576px, md: 768px, lg: 992px, xl: 1200px);
+
+$zindex-raised-button: 100 !default;
+$zindex-raised-panel: 500 !default;
+$zindex-dropdown-backdrop: 990 !default;
+$zindex-navbar: 1000 !default;
+$zindex-dropdown: 1000 !default;
+$zindex-fixed: 1030 !default;
+$zindex-sticky: 1030 !default;
+$zindex-modal-backdrop: 1040 !default;
+$zindex-modal: 1050 !default;
+$zindex-popover: 1060 !default;
+$zindex-tooltip: 1070 !default;
+
+$dark-aqua: #075f67;
+$white-grey: #f0f0f0;
+$charcoal-grey: #404852;
+$steel-grey: #80858a;
+$dark-sky-blue : #4a90e2;
+$white: #ffffff;
+$pale-grey: #e3eaec;
+$loading-grey: #f5f6f8;
+$grey: #cccccc;
+
+$colors: (
+        charcoal-grey: #404852,
+        white: #f5f5f5,
+        steel-grey: #80858a,
+        dark-sky-blue: #4a90e2,
+        pale-grey: #e3eaec
+);

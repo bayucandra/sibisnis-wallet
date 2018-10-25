@@ -4,8 +4,7 @@ import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 
 /**React Material Compoenents*/
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
@@ -13,36 +12,34 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 /**External libraries*/
 import NumberFormat from 'react-number-format';
 import Modal from '@material-ui/core/Modal';
-import $ from 'jquery';
 
 /**
  * Custom Icons
  */
-import dashboardIcon from './../../../images/icons/ico-dashboard.svg';
-import mutasiIcon from './../../../images/icons/ico-mutasi.svg';
-import transferIcon from './../../../images/icons/transfer-saldo.svg';
-import rightArrow from './../../../images/icons/litle-right.svg';
-import profileSettings from './../../../images/icons/profile-settings.svg';
-import avatarPlacerholderBlank from './../../../images/avatar-placeholder-blank.svg';
+import dashboardIcon from '../../../images/icons/ico-dashboard.svg';
+import mutasiIcon from '../../../images/icons/ico-mutasi.svg';
+import transferIcon from '../../../images/icons/transfer-saldo.svg';
+import rightArrow from '../../../images/icons/litle-right.svg';
+import profileSettings from '../../../images/icons/profile-settings.svg';
+import avatarPlacerholderBlank from '../../../images/avatar-placeholder-blank.svg';
 
 /**
  * Custom Components
  */
-import ProfileButton from './../../Shared/ProfileButton/ProfileButton';//TODO: take this out and make it as member function to render
 import ProfileImagePreview from './ProfileImagePreview/ProfileImagePreview';
 
 /**
  * Custom Libraries
  */
 
-import { navigationStatus } from "./../../../lib/utilities";
-import biqHelper from "../../../lib/biqHelper";
+import { navigationStatus } from "../../../lib/utilities";
+import biqHelper from "../../../lib/biqHelper/index";
 import biqConfig from "../../../providers/biqConfig";
 
 // Loaders
-import { ProfileInfoLoader, BalanceLoader } from './../../Loaders/ProfileLoader/ProfileLoader';
+import { ProfileInfoLoader, BalanceLoader } from '../../Loaders/ProfileLoader/ProfileLoader';
 
-import './Profile.scss';
+import './SideNavMain.scss';
 import '../../../components/Shared/Modal/Modal.scss';
 import PhotoUpload from "../../Upload/PhotoUpload/PhotoUpload";
 
@@ -77,7 +74,7 @@ const ProfileNavButton = (props) => {
   )
 };
 
-class Profile extends Component {
+class SideNavMain extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -99,10 +96,14 @@ class Profile extends Component {
   };
 
   // Will navigate to add balance pages
-  onTambahClick = () => {
-    this.props.history.push('/dashboard/deposit-requirements-check');
+  onTambahClick() {
+    biqHelper.utils.clickTimeout( {
+      callback: () =>{
+        this.props.history.push('/balance');
+      }
+    } );
     // navigationStatus.next({ navigationState: 'Tambah Saldo'});
-  };
+  }
 
   onProfileImageClick(image) {
     if ( biqHelper.utils.isNull( image )) {
@@ -149,31 +150,32 @@ class Profile extends Component {
     const {user} = this.props;
     let ModalActiveComponent = this.state.modal_active_component;
     return (
-      <div id="profile-card">
-        <Card className="custom-card-styles profile-card-container">
-          <CardContent className="profile-card-content-container">
-            <div className="profile-container">
-              <ReactTooltip className="custom-tooltip-profile" place="left" type="dark" effect="solid" />
-              <div data-tip='Profile anda' className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
-                <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
-              </div>
-              {!biqHelper.utils.isNull( user ) ?
-                this._profileInfoRender()
-                :
-                <ProfileInfoLoader />
-              }
-              {!biqHelper.utils.isNull( user )?
-                <Balance balance={user.profile.saldo} />
-                :
-                <BalanceLoader />
-              }
-              <div className="profile-buttons-container text-center">
-                <ProfileButton onClick={this.onTambahClick.bind(this)} value={'Tambah'} />
-                <span className="dot-desktop"></span>
-                <ProfileButton value={'Tarik'} style={{'marginBottom':'0px'}}/>
-              </div>
+      <>
+
+        <div className="side-nav-main">
+
+          <div className="profile">
+            <ReactTooltip className="custom-tooltip-profile" place="left" type="dark" effect="solid" />
+            <div data-tip='Profile anda' className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
+              <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
             </div>
-          </CardContent>
+            {!biqHelper.utils.isNull( user ) ?
+              this._profileInfoRender()
+              :
+              <ProfileInfoLoader />
+            }
+            {!biqHelper.utils.isNull( user )?
+              <Balance balance={user.profile.saldo} />
+              :
+              <BalanceLoader />
+            }
+            <div className="balance">
+              <Button className="balance__btn balance__btn--add" onClick={this.onTambahClick.bind(this)}>Tambah</Button>
+              <div className="balance__divider visible-md-up" />
+              <Button className="balance__btn balance__btn--withdraw">Tarik</Button>
+            </div>
+          </div>
+
           <div className="profile-nav-container">
             <List className="profile-nav-list-container">
               <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard','Profile')} active={true}/>
@@ -181,7 +183,8 @@ class Profile extends Component {
               <ProfileNavButton icon={transferIcon} name="Transfer Saldo" onClick={this.onBtnClick.bind(this)} active={false} />
             </List>
           </div>
-        </Card>
+
+        </div>
 
         <Modal
           aria-labelledby="simple-modal-title"
@@ -195,10 +198,11 @@ class Profile extends Component {
 
         </Modal>
 
-      </div>
+      </>
     )
-  }
-}
+  }//render()
+
+}//class Profile
 
 const mapStateToProps = (store) => {
   return {
@@ -206,4 +210,4 @@ const mapStateToProps = (store) => {
   }
 };
 
-export default withRouter( connect( mapStateToProps ) (Profile) );
+export default withRouter( connect( mapStateToProps ) (SideNavMain) );

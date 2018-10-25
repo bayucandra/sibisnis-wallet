@@ -139,7 +139,7 @@ class ProfileProgress extends Component {
   }
 
   render() {
-    const {user} = this.props;
+    const user = this.props.user_profile.nama;
     return (
       <div id="profile-progress-container">
         <Card className="custom-card-styles">
@@ -162,11 +162,9 @@ class ProfileProgress extends Component {
 
 const mapStateToProps = (store) => {
   return {
-    user: store.user.user
+    user_profile: store.user.profile
   }
-}
-
-const mapDispatchToProps = {}
+};
 
 
-export default connect(mapStateToProps,mapDispatchToProps)(ProfileProgress);
+export default connect(mapStateToProps)(ProfileProgress);

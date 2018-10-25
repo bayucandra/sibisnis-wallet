@@ -1,4 +1,3 @@
-@import '../../../styles/colors.scss';
 @import '../../../styles/mixins.scss';
 @import '../../../styles/variables.scss';
 #header {
@@ -8,7 +7,7 @@
   display: flex;
   align-items: center;
   position: fixed;
-  z-index: 1;
+  z-index: $zindex-navbar;
   button{
     &:focus{
       outline: 0px;

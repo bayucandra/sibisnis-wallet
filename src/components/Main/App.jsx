@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 
 import Header from "./../Shared/Header/Header";
-import PageLayout from './../PageLayout/PageLayout';
 import AppActions from "../../redux/actions/AppActions";
 import UserActions from "../../redux/actions/UserActions";
 import esProvider from "../../providers/esProvider";
@@ -13,6 +12,9 @@ import biqConfig from "../../providers/biqConfig";
 import {fromEvent} from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import $ from 'jquery';
+import DashboardLayout from "../DashboardLayout/DashboardLayout";
+import AllNews from "../Pages/AllNews/AllNews";
+import AllHistorLogins from "../Pages/AllHistoryLogins/AllHistoryLogins";
 
 
 class App extends Component {
@@ -44,6 +46,12 @@ class App extends Component {
 
   }
 
+  componentDidUpdate() {
+    // window.scrollTo(0,0);
+    let body = $('html, body');
+    body.stop().animate({scrollTop:0}, 500, 'swing');
+  }
+
   render() {
     const {dispatch} = this.props;
     if ( this.props.is_app_initialized && !this.props.is_logged_in ) {
@@ -55,7 +63,13 @@ class App extends Component {
     return (
         <React.Fragment>
           <Header/>
-          <PageLayout/>
+          <Switch>
+            <Redirect from="/" exact={true} to="/dashboard" />
+            {/*<Route path"/balance"/>*/}
+            <Route path="/dashboard" component={DashboardLayout} />
+            <Route path="/all-news" component={AllNews} />
+            <Route path="/all-history-logins" component={AllHistorLogins} />
+          </Switch>
         </React.Fragment>
     )
   }

@@ -12,7 +12,7 @@ import closeIconBlack from './../../../images/icons/ico-close-black.svg';
 import EmailVerification from '../../DashboardLayout/Dashboard/ProfileProgress/EmailVerification/EmailVerificiation';
 import WebcamCapture from './../WebcamCapture/WebcamCapture';
 import PhotoUpload from "./../../Upload/PhotoUpload/PhotoUpload";
-import ProfileImagePreview from './../../DashboardLayout/Profile/ProfileImagePreview/ProfileImagePreview';
+import ProfileImagePreview from '../SideNavMain/ProfileImagePreview/ProfileImagePreview';
 import AddressForm from './../../Forms/AddressForm/AddressForm';
 
 // Custom Libraries

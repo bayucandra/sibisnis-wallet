@@ -1,11 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import JssProvider from 'react-jss/lib/JssProvider';
+import { create } from 'jss';
+import { MuiThemeProvider, createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
+
 import './styles/styles.scss';
 import App from './components/Main/App';
 import registerServiceWorker from './registerServiceWorker';
 import { /*BrowserRouter as Router,*/ HashRouter /*, Route, Link*/ } from "react-router-dom";
-// Material UI
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
 //import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
 // import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';//Consider to uninstall later
@@ -23,6 +27,11 @@ import "@babel/polyfill";
 // new biqPolyfill();
 // let biqHelper = new biqHelperClass();
 
+
+const generateClassName = createGenerateClassName();
+const jss = create(jssPreset());
+jss.options.insertionPoint = document.getElementById('jss-insertion-point');
+
 const THEME = createMuiTheme({
 
   typography: {
@@ -35,7 +44,9 @@ const THEME = createMuiTheme({
   overrides: {
     MuiButton: {
       root: { // Name of the rule
-        "textTransform": "none"
+        "textTransform": "none",
+        "padding" : 0,
+        "minHeight" : 0
       },
     }
   }
@@ -50,7 +61,9 @@ class Index extends React.Component {
         <MuiThemeProvider theme={THEME}>
           <Provider store={ store }>
             <HashRouter hashType="hashbang">
-              <App />
+              <JssProvider jss={jss} generateClassName={generateClassName}>
+                <App />
+              </JssProvider>
             </HashRouter>
           </Provider>
         </MuiThemeProvider>

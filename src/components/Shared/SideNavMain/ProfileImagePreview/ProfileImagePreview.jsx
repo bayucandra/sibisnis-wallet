@@ -7,14 +7,14 @@ import { connect } from 'react-redux';
 import IconButton from '@material-ui/core/IconButton';
 
 // Local Images
-import menuIcon from './../../../../images/icons/menu.svg';
-import rightArrowIcon from './../../../../images/icons/s-litle-right.svg'
-import backBlueIcon from './../../../../images/icons/ico-back-blue.svg'
+import menuIcon from '../../../../images/icons/menu.svg';
+import rightArrowIcon from '../../../../images/icons/s-litle-right.svg'
+import backBlueIcon from '../../../../images/icons/ico-back-blue.svg'
 
 // Custom Libraries
-import {modalToggle, cameraCaptureFileUpload} from './../../../../lib/utilities';
-import {modalTypes} from './../../../../lib/constants';
-import biqHelper from "../../../../lib/biqHelper";
+import {modalToggle, cameraCaptureFileUpload} from '../../../../lib/utilities';
+import {modalTypes} from '../../../../lib/constants';
+import biqHelper from "../../../../lib/biqHelper/index";
 
 // Custom CSS
 import './ProfileImagePreview.scss';
@@ -27,8 +27,7 @@ class ProfileImagePreview extends Component {
       modalPosTop: 0,
       anchorEl: null,
       menuExpand: false
-    }
-    console.log(props);
+    };
   }
 
   onMenuOpen = (event) => {
@@ -69,9 +68,8 @@ class ProfileImagePreview extends Component {
     this.setState( {modalPosTop : top_pos } );
   }
 
-  componentDidUpdate(prevProp, prevState){
+  componentDidUpdate(prevProp, prevState) {
     let top_pos = this._modalPosTopGen();
-    console.log(top_pos);
     if ( prevState.modalPosTop !== top_pos ) {
       this.setState( { modalPosTop: top_pos } );
     }

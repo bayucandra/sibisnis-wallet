@@ -2,17 +2,17 @@
 import React, { Component } from 'react';
 
 // Custom Components
-import DropPhotoUpload from './../DropPhotoUpload/DropPhotoUpload';
+import DropPhotoUpload from '../DropPhotoUpload/DropPhotoUpload';
 
 // Custom Libraries
 import { modalToggle,cameraCaptureFileUpload } from '../../../lib/utilities';//TODO: Delete soon
 import { modalTypes } from '../../../lib/constants';//TODO: Delete soon
-import biqHelper from "../../../lib/biqHelper";
+import biqHelper from "../../../lib/biqHelper/index";
 
 // Local Images
-import fileIconBlue from './../../../images/icons/ico-file-blue.svg';
-import cameraIconBlue from './../../../images/icons/ico-camera-blue.svg';
-import WebcamCapture from './../../Shared/WebcamCapture/WebcamCapture';
+import fileIconBlue from '../../../images/icons/ico-file-blue.svg';
+import cameraIconBlue from '../../../images/icons/ico-camera-blue.svg';
+import WebcamCapture from '../WebcamCapture/WebcamCapture';
 
 // Custom CSS
 import './PhotoUpload.scss';
@@ -96,6 +96,12 @@ class PhotoUpload extends Component {
     }
   }
 
+  _modalClose = ()=>{
+    biqHelper.utils.clickTimeout({
+      callback: this.props.modalClose
+    });
+  };
+
   render() {
 
     const { dragPhotoUpload, cameraCapture } = this.state;
@@ -103,8 +109,8 @@ class PhotoUpload extends Component {
         <>
           <div className="photo-upload-container" style={{marginTop: this.state.modalPosTop}}>
 
-            <div className="close-icon-container">
-              <div className="close-icon icon-touch-area-container-50 ripple" onClick={this.props.modalClose}>
+            <div className="modal-close-block">
+              <div className="close-icon icon-touch-area-container-50 ripple" onClick={this._modalClose}>
                 <img src={closeIconBlack} alt="close-icon-black" />
               </div>
             </div>

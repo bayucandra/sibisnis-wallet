@@ -1,0 +1,173 @@
+@import "../../../../styles/variables";
+
+.balance-profile-verification {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 1px;
+  background: #FFFFFF;
+
+  &__notice {
+    margin: 30px 20px 0;
+
+    font-size: 16px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: rgba(0, 0, 0, 0.87);
+  }//.notice
+
+  &__steps {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin: 30px 23px 0;
+
+      .step-row {
+        display: flex;
+        margin-top: 8px;
+
+        &:first-child {
+          margin-top: 0;
+        }//&:first-child
+
+        .col-number {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: flex-start;
+
+          .number-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 12px;
+            background-color: map-get($colors, cool-grey);
+
+            font-size: 13px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.2px;
+            color: #ffffff;
+
+            &.is-active {
+              background-color: map-get($colors, dark-mint);
+            }//.is-active
+
+          }//.number-item
+
+          &:after {
+            content: ' ';
+            flex: 1 1 1px;
+            margin-top: 8px;
+            display: block;
+            width: 0;
+            min-height: 24px;
+            border-right: solid 1px map-get( $colors, cool-grey );
+          }//&:after
+
+        }//.col-number
+
+        .col-action {
+          display: flex;
+          flex-direction: column;
+
+          .title {
+            margin: 2px 0 0 15px;
+            font-size: 14px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.2px;
+            color: map-get( $colors, charcoal-grey );
+          }//.title
+
+          .action-body {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 250ms ease-in-out;
+
+            &.is-expanded {
+              max-height: 300px;
+            }//&.is-expanded
+
+            &__inner {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+
+              .notice {
+                margin: 5px 0 0 16px;
+                font-size: 13px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.2px;
+                color: map-get( $colors, steel-grey );
+              }//.notice
+
+              .action-btn {
+                margin: 25px 0 (40px - 8px) 16px;
+                padding: 10px 15px;
+                border-radius: 3px;
+                box-shadow: 0 2px 10px 0 rgba(127, 127, 127, 0.3);
+                background-color: map-get($colors, dark-mint);
+
+                font-size: 14px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.5px;
+                text-align: center;
+                color: #ffffff;
+              }//.action-btn
+
+            }//&__inner
+
+          }//.action-body
+
+        }//.col-action
+
+
+        &--photo {
+
+          .col-action {
+
+            .notice {
+              max-width: 450px;
+            }//.notice
+
+          }//.col-action
+
+        }//&--photo
+
+        &:last-child {
+
+          .col-number {
+
+            &:after {
+              display: none;
+            }//&:after
+
+          }//.col-number
+
+        }//&:last-child
+
+      }//step-row
+
+  }//&__steps
+
+}//.balance-profile-verification
+
+@import "./BalanceProfileVerification-md-min";

@@ -6,7 +6,7 @@ import { create } from 'jss';
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 
 import './styles/styles.scss';
-import App from './components/Main/App';
+import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import { /*BrowserRouter as Router,*/ HashRouter /*, Route, Link*/ } from "react-router-dom";
 

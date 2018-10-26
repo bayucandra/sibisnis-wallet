@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { matchPath, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 
@@ -27,6 +27,7 @@ import avatarPlacerholderBlank from '../../../images/avatar-placeholder-blank.sv
  * Custom Components
  */
 import ProfileImagePreview from './ProfileImagePreview/ProfileImagePreview';
+import PhotoUpload from "../PhotoUpload/PhotoUpload";
 
 /**
  * Custom Libraries
@@ -41,40 +42,26 @@ import { ProfileInfoLoader, BalanceLoader } from '../../Loaders/ProfileLoader/Pr
 
 import './SideNavMain.scss';
 import '../../../components/Shared/Modal/Modal.scss';
-import PhotoUpload from "../../Upload/PhotoUpload/PhotoUpload";
 
-
-// Saldo Anda Means Your Balance
-const Balance = (props) => {
-  let { balance } = props;
-  biqHelper.utils.assignDefault( balance, 'N/A' );
-  return (
-    <div className="balance-info">
-      <div className="balance-info__text">Saldo Anda</div>
-      <NumberFormat displayType={'text'} value={balance} prefix={'Rp '} renderText={value => <div className="balance-info__amount">{value}</div>} thousandSeparator={'.'} decimalSeparator={','}/>
-    </div>
-  )
-};
 
 const ProfileNavButton = (props) => {
   const { icon, name, onClick, active } = props;
 
   return (
-    <React.Fragment>
-      <ListItem button className={(active ? "profile-nav-list-item profile-nav-btn-active" : "profile-nav-list-item")} onClick={onClick}>
-        <div className="profile-nav-btn">
-          <ListItemIcon>
-            <img className="profile-nav-btn__icon" src={icon} alt="list-icon" />
-          </ListItemIcon>
-          <div className="profile-nav-btn__text">{name}</div>
-          <img className="profile-nav-btn__navicon" src={rightArrow} alt="right-arrow" />
-        </div>
-      </ListItem>
-    </React.Fragment>
+    <ListItem button className={ `profile-nav-list-item${ active ? ' is-active' : '' }` } onClick={onClick}>
+      <div className="profile-nav-btn">
+        <ListItemIcon>
+          <img className="profile-nav-btn__icon" src={icon} alt="list-icon" />
+        </ListItemIcon>
+        <div className="profile-nav-btn__text">{name}</div>
+        <img className="profile-nav-btn__navicon" src={rightArrow} alt="right-arrow" />
+      </div>
+    </ListItem>
   )
 };
 
 class SideNavMain extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -115,6 +102,19 @@ class SideNavMain extends Component {
     }
   };
 
+  _balanceRender() {
+
+    const {saldo} = this.props.user.profile;
+    biqHelper.utils.assignDefault( saldo, 'N/A' );
+    return (
+      <div className="balance-info">
+        <div className="balance-info__text">Saldo Anda</div>
+        <NumberFormat displayType={'text'} value={saldo} prefix={'Rp '} renderText={value => <div className="balance-info__amount">{value}</div>} thousandSeparator={'.'} decimalSeparator={','}/>
+      </div>
+    )
+
+  }
+
   _profileInfoRender() {
     const { nama, email, photo } = this.props.user.profile;
 
@@ -148,11 +148,15 @@ class SideNavMain extends Component {
 
   render() {
     const {user} = this.props;
+    let {cssClasses} = this.props;
     let ModalActiveComponent = this.state.modal_active_component;
+
+    cssClasses = biqHelper.utils.isNull(cssClasses) ? '' : ` ${cssClasses}`;
+
     return (
       <>
 
-        <div className="side-nav-main">
+        <div className= {`side-nav-main${cssClasses}`}>
 
           <div className="profile">
             <ReactTooltip className="custom-tooltip-profile" place="left" type="dark" effect="solid" />
@@ -165,7 +169,7 @@ class SideNavMain extends Component {
               <ProfileInfoLoader />
             }
             {!biqHelper.utils.isNull( user )?
-              <Balance balance={user.profile.saldo} />
+              this._balanceRender()
               :
               <BalanceLoader />
             }
@@ -178,7 +182,7 @@ class SideNavMain extends Component {
 
           <div className="profile-nav-container">
             <List className="profile-nav-list-container">
-              <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard','Profile')} active={true}/>
+              <ProfileNavButton icon={dashboardIcon} name="Dashboard" onClick={this.onLinkClick.bind(this,'Dashboard','Profile')} active={matchPath( this.props.location.pathname, '/dashboard' )}/>
               <ProfileNavButton icon={mutasiIcon} name="Mutasi Saldo" onClick={this.onBtnClick.bind(this)} active={false}/>
               <ProfileNavButton icon={transferIcon} name="Transfer Saldo" onClick={this.onBtnClick.bind(this)} active={false} />
             </List>
@@ -187,12 +191,12 @@ class SideNavMain extends Component {
         </div>
 
         <Modal
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
+          aria-labelledby="modal-upload"
+          aria-describedby="modal-upload-desc"
           open={this.state.modal_is_open}
           onClose={this.modalClose}>
 
-            <div className="photo-upload">
+            <div className="modal-inner">
               <ModalActiveComponent modalSetActiveComponent={this.modalSetActiveComponent} modalClose={this.modalClose}/>
             </div>
 

@@ -9,19 +9,19 @@ import { ajax as rxAjax } from 'rxjs/ajax';
 import { merge, catchError } from 'rxjs/operators';
 
 // Custom Components
-import PhotoCrop from './../PhotoCrop/PhotoCrop';
+import PhotoCrop from '../PhotoCrop/PhotoCrop';
 // import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';//TODO: deprecated and delete soon
 
 // Custom Libraries
-import biqHelper from "../../../lib/biqHelper";
+import biqHelper from "../../../lib/biqHelper/index";
 
 // Redux
-import { UserActions } from './../../../redux/actions/UserActions';
+import UserActions from '../../../redux/actions/UserActions';
 import { connect } from 'react-redux';
 
 // Local Images
-import uploadIconMobile from './../../../images/icons/ico-upload-mobile.svg';
-import uploadIconDesktop from './../../../images/icons/ico-upload-desktop.svg';
+import uploadIconMobile from '../../../images/icons/ico-upload-mobile.svg';
+import uploadIconDesktop from '../../../images/icons/ico-upload-desktop.svg';
 import imgUploadSukses from '../../../images/icons/upload-sukses.svg';
 import imgUploadGagal from '../../../images/icons/upload-gagal.svg';
 
@@ -163,10 +163,10 @@ class DropPhotoUpload extends Component {
           progressSubscriber
         });
 
-
         progressSubscriber
           .pipe( merge(request$) )
           .subscribe(
+
             data =>{
               if ( data.type === 'progress' ) {
                 let upload_progress = Math.floor(data.loaded / data.total * 100 );
@@ -178,14 +178,16 @@ class DropPhotoUpload extends Component {
 
                 let status_code = biqHelper.string.toInt(data.response.response_code.status);
                 if ( status_code === 200 ) {
-                  // dispatch( UserActions.userProfileUpdate( { photo: data.response } ) );
+                  dispatch( UserActions.userProfileUpdate( { key: 'photo', value: data.response.data.value } ) );
                 }
               }
 
             },
+
             err => {
               this.setState( { img_is_uploading: false, server_response: err.target.response, img_upload_progress: 0 } );
             }
+
           );
 
       });
@@ -270,7 +272,7 @@ class DropPhotoUpload extends Component {
     return (
       <div className="drop-photo-upload-container" style={{ marginTop: this.state.modalPosTop }}>
 
-        <div className="close-icon-container">
+        <div className="modal-close-block">
           <div className="close-icon icon-touch-area-container-50 ripple" onClick={this.props.modalClose}>
             <img src={closeIconBlack} alt="close-icon-black" />
           </div>

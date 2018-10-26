@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 
-import Header from "./../Shared/Header/Header";
-import AppActions from "../../redux/actions/AppActions";
-import UserActions from "../../redux/actions/UserActions";
-import esProvider from "../../providers/esProvider";
-import biqHelper from "../../lib/biqHelper";
-import biqConfig from "../../providers/biqConfig";
+import Header from "./components/Shared/Header/Header";
+import AppActions from "./redux/actions/AppActions";
+import UserActions from "./redux/actions/UserActions";
+import esProvider from "./providers/esProvider";
+import biqHelper from "./lib/biqHelper/index";
+import biqConfig from "./providers/biqConfig";
 
 import {fromEvent} from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import $ from 'jquery';
-import DashboardLayout from "../DashboardLayout/DashboardLayout";
-import AllNews from "../Pages/AllNews/AllNews";
-import AllHistorLogins from "../Pages/AllHistoryLogins/AllHistoryLogins";
+import DashboardLayout from "./components/DashboardLayout/DashboardLayout";
+import Balance from "./components/Pages/Balance";
+import AllNews from "./components/Pages/AllNews/AllNews";
+import AllHistorLogins from "./components/Pages/AllHistoryLogins/AllHistoryLogins";
 
 
 class App extends Component {
@@ -65,7 +66,7 @@ class App extends Component {
           <Header/>
           <Switch>
             <Redirect from="/" exact={true} to="/dashboard" />
-            {/*<Route path"/balance"/>*/}
+            <Route path="/balance" component={Balance}/>
             <Route path="/dashboard" component={DashboardLayout} />
             <Route path="/all-news" component={AllNews} />
             <Route path="/all-history-logins" component={AllHistorLogins} />

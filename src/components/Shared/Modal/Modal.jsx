@@ -11,7 +11,7 @@ import closeIconBlack from './../../../images/icons/ico-close-black.svg';
 // Custom Components
 import EmailVerification from '../../DashboardLayout/Dashboard/ProfileProgress/EmailVerification/EmailVerificiation';
 import WebcamCapture from './../WebcamCapture/WebcamCapture';
-import PhotoUpload from "./../../Upload/PhotoUpload/PhotoUpload";
+import PhotoUpload from "../PhotoUpload/PhotoUpload";
 import ProfileImagePreview from '../SideNavMain/ProfileImagePreview/ProfileImagePreview';
 import AddressForm from './../../Forms/AddressForm/AddressForm';
 
@@ -59,7 +59,7 @@ class Modal extends Component {
       case modalTypes.imageUpload:
         return (
           <React.Fragment>
-            <div className="close-icon-container">
+            <div className="modal-close-block">
               <div className="close-icon icon-touch-area-container-50 ripple" onClick={this.handleClose.bind(this)}>
                 <img src={closeIconBlack} alt="close-icon-black" />
               </div>
@@ -80,7 +80,7 @@ class Modal extends Component {
       case modalTypes.emailVerification:
         return (
           <React.Fragment>
-            <div className="close-icon-container">
+            <div className="modal-close-block">
               <div className="close-icon icon-touch-area-container-50 ripple" onClick={this.handleClose.bind(this)}>
                 <img src={closeIconBlack} alt="close-icon-black" />
               </div>

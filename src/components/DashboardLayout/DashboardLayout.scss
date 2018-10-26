@@ -4,13 +4,13 @@
 .l-dashboard{
 
   &__inner {
-    flex: 1 1 0;
+    flex: 1 1 1px;
     flex-direction: column;
     align-items: normal;
   }//&__inner
 
   .side-nav-main {
-    flex: 1 1 0;
+    flex: 1 1 1px;
   }//side-nav-main
 
   &__panel{

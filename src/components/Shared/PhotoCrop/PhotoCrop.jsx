@@ -5,7 +5,7 @@ import ReactCrop from 'react-cropper';
 import 'cropperjs/dist/cropper.css'
 
 /** Custom JS libs */
-import biqHelper from "../../../lib/biqHelper";
+import biqHelper from "../../../lib/biqHelper/index";
 
 // Custom CSS
 import './PhotoCrop.scss';

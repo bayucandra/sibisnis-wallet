@@ -23,6 +23,7 @@ class biqHelperLocalStorageClass {
     key = prefix !== ''
       ? prefix + '.' + key
       : '' + key;
+    value = typeof value === 'object' ? JSON.stringify( value ) : value;
     localStorage[key] = value;
     return localStorage[key];
   }

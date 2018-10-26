@@ -1,0 +1,23 @@
+@import "../../../styles/variables";
+
+.l-balance {
+
+  &__inner {
+    flex: 1 1 1px;
+    align-items: normal;
+  }//&__inner
+
+}//.l-balance
+
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-balance {
+
+    &__inner {
+      flex: none;
+      align-items: flex-start;
+    }//&__inner
+
+  }//.balance
+
+}

@@ -10,7 +10,7 @@
 //   }
 // }
 
-.jss30 {
+/*.jss30 {
   margin: 0px !important;
   border-radius: 2px !important;
 }
@@ -18,20 +18,27 @@
 .MuiPaper-rounded-30 {
   margin: 0px !important;
   border-radius: 2px !important;
-}
+}*/
 
-.close-icon-container{
+.modal-close-block{
   position: absolute;
   opacity: 0.2;
   right: 1px;
   top: 1px;
 }
 
+.modal-inner {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  pointer-events: none;
+  z-index: 10;
+}//.modal-content-wrapper
+
 @include media-query(md){
-  .custom-modal{
-    // max-width: 670px;
-  }
-  .close-icon-container{
+  .modal-close-block{
     right: 6px !important;
     top: 5px !important;
     &:hover{

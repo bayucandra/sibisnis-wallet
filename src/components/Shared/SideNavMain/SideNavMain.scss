@@ -248,6 +248,17 @@
     .profile-nav-list-container .profile-nav-list-item {
       height:48px !important;
       border-top:0px !important;
+
+      &.is-active {
+        border-left:3px solid $dark-sky-blue;
+
+        .profile-nav-btn__text{
+          font-weight: bold;
+          color: $dark-sky-blue;
+        }//.profile-nav-btn__text
+
+      }//&.is-active
+
     }
 
     .profile-nav-btn {
@@ -273,16 +284,6 @@
       }//&__navicon
 
     }//.profile-nav-btn
-
-    .profile-nav-btn-active{
-      border-left:3px solid $dark-sky-blue;
-
-      .profile-nav-btn__text{
-        font-weight: bold;
-        color: $dark-sky-blue;
-      }//.profile-nav-btn__text
-
-    }//.profile-nav-btn-active
 
   }//.profile-nav-container
 

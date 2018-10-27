@@ -152,6 +152,18 @@
 
         }//&--photo
 
+        &--address {
+
+          .col-action {
+
+            .notice {
+              max-width: 470px;
+            }//.notice
+
+          }//.col-action
+
+        }//&--address
+
         &:last-child {
 
           .col-number {

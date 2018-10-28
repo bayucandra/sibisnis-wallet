@@ -35,10 +35,11 @@ jss.options.insertionPoint = document.getElementById('jss-insertion-point');
 const THEME = createMuiTheme({
 
   typography: {
-    "fontFamily": "\"NunitoSans\", sans-serif",
-    "fontSize": 14,
-    "fontWeightLight": 300,
-    "fontWeightMedium": 600
+    fontFamily: `"NunitoSans", sans-serif`,
+    fontSize: 14,
+    fontWeightLight: 300,
+    fontWeightMedium: 600,
+    useNextVariants: true
   },
 
   overrides: {

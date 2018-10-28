@@ -5,6 +5,7 @@ import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
 
 import PhotoUpload from "../../../Shared/PhotoUpload/PhotoUpload";
+import AddressInputDialog from "../../../Shared/AddressInputDialog/AddressInputDialog";
 
 import biqHelper from "../../../../lib/biqHelper";
 
@@ -37,8 +38,17 @@ class BalanceProfileVerification extends Component {
 
   _onPhotoSetActual = () => {
     this._modalSetActiveComponent(PhotoUpload);
+    this._modalOpen();
+  };
+
+  _onAddressSet = () => {
+    this._modalSetActiveComponent(AddressInputDialog);
+    this._modalOpen();
+  };
+
+  _modalOpen = () => {
     this.setState({ modal_is_open: true });
-  }
+  };
 
   _modalClose = () => {
     this.setState({ modal_is_open: false });
@@ -96,7 +106,7 @@ class BalanceProfileVerification extends Component {
               <div className={`action-body${ is_photo_set && !is_address_set ? ' is-expanded' : '' }`}>
                 <div className={"action-body__inner"}>
                   <div className={"notice"}>Data alamat juga digunakan sebagai syarat untuk melakukan penambahan deposit dan aktifitas lainnya</div>
-                  <Button className="action-btn">Lengkapi alamat</Button>
+                  <Button className="action-btn" onClick={this._onAddressSet}>Lengkapi alamat</Button>
                 </div>
               </div>
 

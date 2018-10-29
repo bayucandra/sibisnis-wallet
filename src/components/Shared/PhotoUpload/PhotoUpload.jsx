@@ -69,7 +69,7 @@ class PhotoUpload extends Component {
     } else {
       alert('getUserMedia() is not supported by your browser');
     }
-  }
+  };
 
   onCameraCapture = (image) =>{
   };

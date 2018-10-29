@@ -1,0 +1,52 @@
+.mui-text-field {
+
+  > div:first-child {
+    &:after {
+      border-bottom: solid 2px map-get($colors, dark-sky-blue);
+    }//&:after
+  }//> div:first-child
+
+  &__input {
+    display: flex;
+    padding: 0;
+    height: 30px;
+
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.87);
+  }//&__input
+
+}//.mui-text-field
+
+.mui-text-area {
+
+  > div:first-child {
+    &:after {
+      border-bottom: solid 2px map-get($colors, dark-sky-blue);
+    }//&:after
+  }//> div:first-child
+
+  textarea {
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    color: rgba(0, 0, 0, 0.87);
+    overflow: hidden;
+
+    &::placeholder {
+      font-size: 0.875rem;
+      font-family: "NunitoSans", sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+    }//&::placeholder
+
+  }//textarea
+
+}//.mui-text-area

@@ -49,6 +49,11 @@ const THEME = createMuiTheme({
         "padding" : 0,
         "minHeight" : 0
       },
+    },
+    MuiTextField: {
+      root: {
+
+      }
     }
   }
 

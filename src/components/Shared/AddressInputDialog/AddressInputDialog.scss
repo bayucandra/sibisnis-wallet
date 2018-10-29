@@ -1,6 +1,8 @@
 @import "../../../styles/variables";
+@import "../../../styles/mui";
 
 .address-input-dialog {
+  position: relative;
   flex: 1 1 1px;
   margin: 0 10px;
   padding: 21px 20px 31px;
@@ -8,6 +10,21 @@
   border: solid 0.5px map-get( $colors, very-light-pink );
   background-color: map-get( $colors, light-grey-8 );
   pointer-events: auto;
+
+  &__close-btn {
+    $size-diff: 32px - 24px;
+    position: absolute;
+    top: 20px - $size-diff;
+    right: 20px - $size-diff;
+    min-width: 0;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    background: url('../../../images/icons/close-black.svg') no-repeat center;
+    &:hover {
+      background-color: transparent;
+    }//&:hover
+  }//&__close-btn
 
   &__title {
 
@@ -27,7 +44,7 @@
     margin-top: 26px;
 
     .select-dropdown {
-      margin-top: 21px;
+      margin-top: 26px - 5px;
 
       &:first-child {
         margin-top: 0;
@@ -38,19 +55,13 @@
 
   .select-dropdown {
 
+    &.is-disabled {
+      opacity: 0.4;
+    }//&.is-disabled
+
     .mui-text-field {
 
-      > div:first-child {
-        &:after {
-          border-bottom: solid 2px map-get($colors, dark-sky-blue);
-        }//&:after
-      }//> div:first-child
-
-      &__input {
-        display: flex;
-        padding: 0;
-        height: 30px;
-
+      &__display {
         font-size: 15px;
         font-weight: normal;
         font-style: normal;
@@ -58,7 +69,7 @@
         line-height: normal;
         letter-spacing: 0.5px;
         color: rgba(0, 0, 0, 0.87);
-      }//&__input
+      }//&__display
 
     }//.input-control
 
@@ -67,7 +78,18 @@
       top: 50%;
       left: 2px;
       transform: translateY( -50% );
+
+      font-size: 0.875rem;
+      font-family: "NunitoSans", sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
     }//.input-place-holder
+
+    .loading-indicator {
+      position: relative;
+      height: 100%;
+      width: 30px;
+    }//.loading-indicator
 
     .dropdown-indicator {
       width: 0; height: 0;
@@ -77,5 +99,9 @@
     }//.dropdown-indicator
 
   }//.select-dropdown
+
+  .alamat {
+    margin-top: 26px - 5px;
+  }//.alamat
 
 }//.address-input-dialog

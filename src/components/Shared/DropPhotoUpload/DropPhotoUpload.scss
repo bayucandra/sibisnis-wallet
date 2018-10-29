@@ -100,7 +100,7 @@
   .image-actions-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: normal;
     padding-bottom: 50px;
 
     .upload-photo-btn {
@@ -232,6 +232,7 @@
     }//.notices
 
     .image-actions-container {
+      align-items: center;
       padding-bottom: 40px;
 
       .upload-photo-btn {

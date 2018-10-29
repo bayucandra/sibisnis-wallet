@@ -8,6 +8,7 @@ import UserActions from "./redux/actions/UserActions";
 import esProvider from "./providers/esProvider";
 import biqHelper from "./lib/biqHelper/index";
 import biqConfig from "./providers/biqConfig";
+import addressProvider from "./providers/addressProvider";
 
 import {fromEvent} from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
@@ -45,6 +46,10 @@ class App extends Component {
       dispatch( AppActions.appWindowResize( e ) );
     });
 
+    //BEGIN INITIALIZE ADDRESS===========
+    addressProvider.provinsi$().subscribe();
+    //END INITIALIZE ADDRESS************
+
   }
 
   componentDidUpdate() {
@@ -58,6 +63,7 @@ class App extends Component {
     if ( this.props.is_app_initialized && !this.props.is_logged_in ) {
       biqHelper.localStorage.clear();
       dispatch( AppActions.appStatesReset() );
+      console.log(biqConfig.agen.url_base);
       window.location = biqConfig.agen.url_base + '/#/login/default';
     }
 

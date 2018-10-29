@@ -20,7 +20,10 @@ biqConfig.local_storage_key = {
   user_data : 'user_data', //Store user data got from API login
   is_logged_in : 'is_logged_in',
   product_all: 'product_all',
-  page_last_state: 'page_last_state'// contain JSON { state: '', data:{ json: data} }
+  page_last_state: 'page_last_state',// contain JSON { state: '', data:{ json: data} }
+  address_provinsi: 'address_provinsi',
+  address_kabupaten: 'address_kabupaten',
+  address_kecamatan: 'address_kecamatan'
 };
 
 biqConfig.agen = {

@@ -6,7 +6,7 @@ import biqConfig from "../providers/biqConfig";
 import biqHelper from "../lib/biqHelper";
 // import 'event-source-polyfill';//TODO: Decide to implement later with backend or use pure eventSource
 
-class esProviderClass {
+class EsProvider {
 
   constructor() {
     this.state = {
@@ -41,6 +41,6 @@ class esProviderClass {
 
 }
 
-const esProvider = new esProviderClass();
+const esProvider = new EsProvider();
 
 export default esProvider;

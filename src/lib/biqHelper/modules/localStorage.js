@@ -86,6 +86,8 @@ class biqHelperLocalStorageClass {
 
         }//for key in localStorage
 
+        localStorage.removeItem('prefix');
+
       } else {
         return localStorage.clear();
       }

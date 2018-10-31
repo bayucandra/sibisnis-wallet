@@ -1,9 +1,9 @@
-import biqHelperUtils from "../lib/biqHelper/modules/utils";
+import biqHelper from "../lib/biqHelper";
 let path_arr = window.location.pathname.replace(/^\/|\/$/g, '').split( "/" );
 path_arr.pop();
 let path = path_arr.join("/");
 
-if ( !biqHelperUtils.isNull( path ) ) {
+if ( biqHelper.utils.isNull( path ) ) {
   path = "/" + path;
 }
 
@@ -13,7 +13,8 @@ biqConfig.url_base = `${window.location.protocol}//${window.location.host}`;
 
 biqConfig.api = {
   url_base: `${window.location.protocol}//${window.location.host + path}`,
-  data_package_name: {}
+  data_package_name: {},
+  csrf_token: ''
 };
 
 biqConfig.local_storage_key = {

@@ -4,6 +4,8 @@ import biqHelperString from "./string";
 
 class biqHelperUtilsClass {
 
+  click_timeout_list = {};//key is group name, default key is 'default' should clear on callback done ( whether error/success )
+
   isNull(val) {
     let json_is_empty = false;
 
@@ -19,6 +21,18 @@ class biqHelperUtilsClass {
       return true;
     }
 
+  }
+
+  isNullAll( ...args ) {
+    let is_null = false;
+    for( let i =0; i< args.length; i++) {
+      if ( this.isNull( args[i] ) ) {
+        is_null = true;
+        break;
+      }
+    }
+
+    return is_null;
   }
 
   assignDefault( val, def = null ){
@@ -59,11 +73,12 @@ class biqHelperUtilsClass {
     }
   };
 
-  clickTimeout( p_obj ){
+  clickTimeout( p_obj ) {
 
     let params = {
       callback: null,
       bind: null,
+      group: 'default',
       timeout: 250
     };
 
@@ -71,15 +86,52 @@ class biqHelperUtilsClass {
 
     if ( typeof params.callback !== 'function') return;
 
-    setTimeout( ()=> {
+
+    let timeout_obj = setTimeout( ()=> {
       try {
         if ( !this.isNull( params.bind ) ) params.callback.bind(params.bind)();
         else params.callback();
+        clearTimeoutObj.bind(this)(timeout_obj);
       } catch (e) {
         console.error(`ERROR:: biqHelper.utils.clickTimeout(): ${e.message}`);
+        clearTimeoutObj.bind(this)(timeout_obj);
       }
     }, params.timeout );
 
+    if ( !this.click_timeout_list.hasOwnProperty(params.group) ) this.click_timeout_list[params.group] = [];
+    this.click_timeout_list[params.group].push( timeout_obj );
+
+    function clearTimeoutObj( p_timeout_ref ) {
+      let idx = this.click_timeout_list[params.group].indexOf( p_timeout_ref );
+      if ( idx !== -1 ) {
+        this.click_timeout_list[params.group].splice( idx, 1 );
+      }
+    }
+
+    function cancel() {
+      clearTimeout( timeout_obj );
+    }
+
+    return {
+      cancel: cancel
+    };
+
+  }
+
+  clickTimeoutClear( group ) {
+    if ( this.isNull(this.click_timeout_list) ) return;
+    let click_timeout_list_arr = this.click_timeout_list[group];
+    if ( this.isNull( click_timeout_list_arr ) ) return;
+
+    for( let i=0; i<click_timeout_list_arr.length; i++ ) {
+      let timeout_obj = click_timeout_list_arr[i];
+      clearTimeout( timeout_obj );
+
+      let idx = click_timeout_list_arr.indexOf( timeout_obj );
+      if ( idx !== -1 ) {
+        click_timeout_list_arr.splice( idx, 1 );
+      }
+    }
   }
 
   httpResponseIsError( key ){

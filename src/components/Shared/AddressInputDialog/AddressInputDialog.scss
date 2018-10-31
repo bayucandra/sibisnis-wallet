@@ -4,8 +4,9 @@
 .address-input-dialog {
   position: relative;
   flex: 1 1 1px;
+  max-width: 663px;
   margin: 0 10px;
-  padding: 21px 20px 31px;
+  padding: 20px 20px 30px;
   border-radius: 5px;
   border: solid 0.5px map-get( $colors, very-light-pink );
   background-color: map-get( $colors, light-grey-8 );
@@ -51,57 +52,116 @@
       }
     }//.select-dropdown
 
+    .select-dropdown {
+
+      &.is-disabled {
+        opacity: 0.4;
+      }//&.is-disabled
+
+      .mui-text-field {
+
+        &__display {
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: rgba(0, 0, 0, 0.87);
+        }//&__display
+
+      }//.input-control
+
+      .input-place-holder {
+        position: absolute;
+        top: 50%;
+        left: 2px;
+        transform: translateY( -50% );
+
+        font-size: 0.875rem;
+        font-family: "NunitoSans", sans-serif;
+        font-weight: 400;
+        line-height: 1.5;
+      }//.input-place-holder
+
+      .loading-indicator {
+        position: relative;
+        height: 100%;
+        width: 30px;
+      }//.loading-indicator
+
+      .dropdown-indicator {
+        width: 0; height: 0;
+        border-width: 5px 5px 0;
+        border-style: solid;
+        border-color: map-get( $colors, very-light-pink ) transparent transparent;
+      }//.dropdown-indicator
+
+    }//.select-dropdown
+
+    .alamat {
+      margin-top: 26px - 5px;
+    }//.alamat
+
   }//&__body
 
-  .select-dropdown {
+  &__footer-action {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 46px;
 
-    &.is-disabled {
-      opacity: 0.4;
-    }//&.is-disabled
+    .cancel-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 120px;
+      height: 45px;
+      margin-right: 15px;
+      border-radius: 5px;
 
-    .mui-text-field {
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.87);
+    }//.cancel-btn
 
-      &__display {
-        font-size: 15px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: 0.5px;
-        color: rgba(0, 0, 0, 0.87);
-      }//&__display
+    .submit-btn {
+      min-width: 160px;
+      height: 45px;
+      border-radius: 5px;
+      background-color: map-get($colors, dark-mint);
 
-    }//.input-control
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      text-align: center;
+      color: #ffffff;
+    }//.submit-btn
 
-    .input-place-holder {
-      position: absolute;
-      top: 50%;
-      left: 2px;
-      transform: translateY( -50% );
+  }//&__footer-action
 
-      font-size: 0.875rem;
-      font-family: "NunitoSans", sans-serif;
-      font-weight: 400;
-      line-height: 1.5;
-    }//.input-place-holder
-
-    .loading-indicator {
-      position: relative;
-      height: 100%;
-      width: 30px;
-    }//.loading-indicator
-
-    .dropdown-indicator {
-      width: 0; height: 0;
-      border-width: 5px 5px 0;
-      border-style: solid;
-      border-color: map-get( $colors, very-light-pink ) transparent transparent;
-    }//.dropdown-indicator
-
-  }//.select-dropdown
-
-  .alamat {
-    margin-top: 26px - 5px;
-  }//.alamat
+  .widget-loading-indicator-bar {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }//.widget-loading-indicator-bar
 
 }//.address-input-dialog
+
+
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .address-input-dialog {
+    padding: 20px 30px 30px;
+  }//.address-input-dialog
+
+}//@media

@@ -4,7 +4,8 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 import {Subject} from 'rxjs';
-import {takeUntil} from 'rxjs/operators';
+import {ajax as rxAjax} from 'rxjs/ajax';
+import {takeUntil, map} from 'rxjs/operators';
 
 import Select from 'react-select';
 import { withStyles } from '@material-ui/core/styles';
@@ -17,9 +18,12 @@ import $ from 'jquery';
 
 import biqHelper from "../../../lib/biqHelper";
 import addressProvider from "../../../providers/addressProvider";
+import LoadingIndicatorBar from "../../Widgets/LoadingIndicatorBar";
 
 import "./AddressInputDialog.scss";
 import "../../../styles/_components.scss";
+import biqConfig from "../../../providers/biqConfig";
+import UserActions from "../../../redux/actions/UserActions";
 
 const styles = theme => ({
   root: {
@@ -181,7 +185,11 @@ class AddressInputDialog extends React.Component {
     kelurahan_is_loading: false,
     kelurahan_data: [],
 
-    modalPosTop: 0
+    alamat: '',
+
+    modalPosTop: 0,
+
+    is_submitting: false
   };
 
 
@@ -298,6 +306,9 @@ class AddressInputDialog extends React.Component {
   };
 
   _kelurahanChange = () => {
+
+    if(biqHelper.utils.isNull(this.state.kelurahan_selected)) return;
+
     $('.address-input-dialog .alamat textarea').focus();
   };
 
@@ -315,6 +326,54 @@ class AddressInputDialog extends React.Component {
     biqHelper.utils.clickTimeout({
       callback: this.props.modalClose
     });
+  };
+
+  _onSubmit = () => {
+    let {dispatch} = this.props;
+    let is_valid = !biqHelper.utils.isNullAll( this.state.provinsi_selected, this.state.kabupaten_selected, this.state.kecamatan_selected, this.state.kelurahan_selected, this.state.alamat );
+/*    console.log(is_valid);
+    console.log( this.state.provinsi_selected );
+    console.log( this.state.kabupaten_selected );
+    console.log( this.state.kecamatan_selected );
+    console.log( this.state.kelurahan_selected );
+    console.log( this.state.alamat );*/
+    if ( is_valid ) {
+
+      let data = {
+        provinsi: this.state.provinsi_selected.value.label,
+        kotakab: this.state.kabupaten_selected.value.label,
+        kecamatan: this.state.kecamatan_selected.value.label,
+        kelurahan: this.state.kelurahan_selected.value.label,
+        alamat: this.state.alamat
+      };
+
+      this.setState({is_submitting: true});
+      rxAjax({
+        url: `${biqConfig.api.url_base}/api/address/edit`,
+        method: 'POST',
+        crossDomain: true,
+        withCredentials: true,
+        body: Object.assign( data, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
+      })
+        .pipe(
+          takeUntil( this.stop$ ),
+          map( e => e.response )
+        )
+        .subscribe( res => {
+          if ( res.response_code.status === 200 ) {
+            dispatch( UserActions.userProfileUpdate( { key: 'alamat', value: res.data.alamat } ) );
+            this._modalClose();
+            return;
+          } else {
+            alert( `Error: ${res.response_code.message}` );
+          }
+
+          this.setState({is_submitting: false});
+        } );
+
+    } else {
+      alert("Maaf input tidak valid!");
+    }
   };
 
   componentDidMount(){
@@ -432,10 +491,20 @@ class AddressInputDialog extends React.Component {
           <TextField
             fullWidth multiline={true}
             placeholder="Alamat"
-            className="mui-text-area alamat"/>
+            className="mui-text-area alamat"
+            value={this.state.alamat}
+            onChange={ e => this.setState({ alamat : e.target.value }) }/>
 
         </div>
 
+        <div className="address-input-dialog__footer-action">
+
+          <Button className="cancel-btn">BATAL</Button>
+          <Button className="submit-btn" onClick={this._onSubmit}>Simpan</Button>
+
+        </div>
+
+        { this.state.is_submitting ? <LoadingIndicatorBar/> : '' }
       </div>
     );
   }

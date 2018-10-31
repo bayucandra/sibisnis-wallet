@@ -150,6 +150,7 @@ class DropPhotoUpload extends Component {
         let form_data = new FormData();
         form_data.append( 'column', 'image' );
         form_data.append( 'value', file, this.state.img_file_name );
+        form_data.append( 'csrf_token', biqConfig.api.csrf_token );
 
         const progressSubscriber = new Subject();
 

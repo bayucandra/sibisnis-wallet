@@ -15,12 +15,15 @@ import "./BalanceProfileVerification.scss";
 
 class BalanceProfileVerification extends Component {
 
+  stop = false;
+
   constructor( props ) {
     super(props);
 
     this.state = {
       is_ready: false,
       modal_is_open: false,
+      leave_verification: false,
       modal_active_component: PhotoUpload
     };
 
@@ -42,8 +45,12 @@ class BalanceProfileVerification extends Component {
   };
 
   _onAddressSet = () => {
-    this._modalSetActiveComponent(AddressInputDialog);
-    this._modalOpen();
+    biqHelper.utils.clickTimeout({
+      callback: ()=>{
+        this._modalSetActiveComponent(AddressInputDialog);
+        this._modalOpen();
+      }
+    });
   };
 
   _modalOpen = () => {
@@ -54,10 +61,33 @@ class BalanceProfileVerification extends Component {
     this.setState({ modal_is_open: false });
   };
 
+  _continueTopupBalance = () => {
+    biqHelper.utils.clickTimeout({
+      callback: () => {
+        this.setState({ leave_verification: true });
+        this.props._setVerifiyingState(false);
+      }
+    });
+  };
+
   componentDidMount() {
+    if ( !biqHelper.utils.isNull( this.props.user_profile ) ) {
+      this.props._setVerifiyingState(true);
+    }
     setTimeout( ()=> {
+      if ( this.stop ) return;
       this.setState( { is_ready: true });
     }, 300 );
+  }
+
+  componentDidUpdate( prevProps, prevState ) {
+    if ( !prevState.leave_verification ) {
+      this.props._setVerifiyingState( true );
+    }
+  }
+
+  componentWillUnmount() {
+    this.stop = true;
   }
 
   render() {
@@ -96,7 +126,7 @@ class BalanceProfileVerification extends Component {
           <div className={"step-row step-row--address"}>
 
             <div className="col-number">
-              <div className={`number-item`}>{is_address_set? "": "2"}</div>
+              <div className={`number-item${is_address_set ? ' is-active' : '' }`}>{is_address_set? "": "2"}</div>
             </div>
 
             <div className={"col-action"}>
@@ -107,6 +137,24 @@ class BalanceProfileVerification extends Component {
                 <div className={"action-body__inner"}>
                   <div className={"notice"}>Data alamat juga digunakan sebagai syarat untuk melakukan penambahan deposit dan aktifitas lainnya</div>
                   <Button className="action-btn" onClick={this._onAddressSet}>Lengkapi alamat</Button>
+                </div>
+              </div>
+
+              <div className={`action-body${ is_photo_set && is_address_set ? ' is-expanded' : '' }`}>
+                <div className={"action-body__inner"}>
+                  <div className={"notice"}>
+                    Selamat anda saat ini sudah bisa melakukan penambahan saldo, namun demi kenyamanan anda silahkan isi data identitas anda dan dapatkan banyak manfaat serta keuntungannya
+                  </div>
+
+                  <div className={"notice"}>
+                    Anda bisa melewati langkah ini dan sewaktu-waktu anda bisa meningkatkan status akun dengan mengisi data identitas
+                  </div>
+
+                  <div className={"action-btn-group"}>
+                    <Button className={"balance-topup-btn"} onClick={this._continueTopupBalance}>Tambah deposit sekarang</Button>
+                    <Button className={"complete-identity-btn"}>Lengkapi identitas</Button>
+                  </div>
+
                 </div>
               </div>
 

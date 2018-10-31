@@ -7,11 +7,11 @@ import biqHelper from "../lib/biqHelper";
 class AddressProvider {
 
   provinsiFetch$ = rxAjax({
-      url: biqConfig.api.url_base + '/api/address/provinsi',
+      url: `${biqConfig.api.url_base}/api/address/provinsi`,
       method: 'POST',
       crossDomain: true,
       withCredentials: true,
-      body: biqConfig.api.data_package_name
+      body: Object.assign( {}, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
     })
       .pipe(
         map((e) => e.response),
@@ -39,11 +39,11 @@ class AddressProvider {
   }//provinsi$()
 
   kabupatenFetch$ = rxAjax({
-    url: biqConfig.api.url_base + '/api/address/kota_kab',
+    url: `${biqConfig.api.url_base}/api/address/kota_kab`,
     method: 'POST',
     crossDomain: true,
     withCredentials: true,
-    body: Object.assign( { id_provinsi: 'all' }, biqConfig.api.data_package_name )
+    body: Object.assign( { id_provinsi: 'all' }, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
   })
     .pipe(
       map((e) => e.response),
@@ -76,7 +76,7 @@ class AddressProvider {
     method: 'POST',
     crossDomain: true,
     withCredentials: true,
-    body: Object.assign( { id_kotakab: 'all' }, biqConfig.api.data_package_name )
+    body: Object.assign( { id_kotakab: 'all' }, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
   })
     .pipe(
       map((e) => e.response),
@@ -110,10 +110,10 @@ class AddressProvider {
       method: 'POST',
       crossDomain: true,
       withCredentials: true,
-      body: Object.assign({id_kecamatan: id_kecamatan}, biqConfig.api.data_package_name)
+      body: Object.assign({id_kecamatan: id_kecamatan}, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
     })
       .pipe(
-        map((e) => e.response),
+        map( e => e.response),
         publishReplay(1),
         refCount()
       );//kelurahanFetch$

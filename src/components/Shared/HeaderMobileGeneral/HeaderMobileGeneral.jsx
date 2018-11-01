@@ -35,6 +35,8 @@ class HeaderMobileGeneral extends Component {
           <div className="title">{this.props.headerTitle}</div>
         </div>
 
+        {!biqHelper.utils.isNull( this.props.headerButtonWidget ) ? this.props.headerButtonWidget : ''}
+
         <div className="header-mobile-general__right">
           <HeaderMenuMobile/>
         </div>

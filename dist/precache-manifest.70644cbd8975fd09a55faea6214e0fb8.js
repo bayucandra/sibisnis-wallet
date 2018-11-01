@@ -172,12 +172,12 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-Light.c41c2502.ttf"
   },
   {
-    "revision": "713ac08dfb7141494d4a69f344ff69fd",
-    "url": "./static/media/Nunito-SemiBold.713ac08d.ttf"
-  },
-  {
     "revision": "1b31a5055cad7ed13ad2c1bc423adec6",
     "url": "./static/media/Nunito-SemiBoldItalic.1b31a505.ttf"
+  },
+  {
+    "revision": "713ac08dfb7141494d4a69f344ff69fd",
+    "url": "./static/media/Nunito-SemiBold.713ac08d.ttf"
   },
   {
     "revision": "6f47bcfc065790f02ed3cb8b51bef56f",

@@ -73,6 +73,11 @@ class biqHelperUtilsClass {
     }
   };
 
+  /**
+   *
+   * @param p_obj Can be object which will override `params` or just a function to call
+   * @returns {{cancel: cancel}}
+   */
   clickTimeout( p_obj ) {
 
     let params = {
@@ -82,7 +87,11 @@ class biqHelperUtilsClass {
       timeout: 250
     };
 
-    Object.assign( params, p_obj );
+    if ( typeof p_obj === 'function' ) {
+      params.callback = p_obj;
+    } else {
+      Object.assign( params, p_obj );
+    }
 
     if ( typeof params.callback !== 'function') return;
 

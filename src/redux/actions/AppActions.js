@@ -12,6 +12,13 @@ import ActionTypes from "../action-types";
     }
   }
 
+  function appRouterChange( new_route_state ) {
+    return {
+      type: ActionTypes.app.ROUTER_CHANGE,
+      payload: new_route_state
+    }
+  }
+
   function appLogout() {
     return {
       type: ActionTypes.app.LOGOUT
@@ -40,7 +47,8 @@ import ActionTypes from "../action-types";
     appSseAgenInit,
     appLogout,
     appStatesReset,
-    appWindowResize
+    appWindowResize,
+    appRouterChange
   };
 
 export default actions;

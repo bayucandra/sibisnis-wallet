@@ -10,6 +10,7 @@ let state_default = {
   is_app_initialized: false
   , is_es_initialized: false
   , is_logged_in: false
+  , main_header_mobile_show: true
   , window_size: { width: window_el.outerWidth(), height: window_el.outerHeight() }
 };
 
@@ -48,6 +49,10 @@ export default ( state = state_default, action ) => {
       }
       return Object.assign({}, state, new_state);
       //END OF: case ActionTypes.app.SSE_AGEN_INIT
+
+    case ActionTypes.app.ROUTER_CHANGE:
+      //payload key should match to the state_default key
+      return Object.assign({}, state, action.payload);
 
     case ActionTypes.app.LOGOUT:
       new_state = { is_logged_in: false };

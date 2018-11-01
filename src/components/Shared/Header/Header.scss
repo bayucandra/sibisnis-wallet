@@ -5,6 +5,12 @@
   position: fixed;
   z-index: $zindex-navbar;
 
+  @media screen and ( max-width: map-get( $bp-desktop-first, sm ) ) {
+    &--hidden-mobile {
+      display: none;
+    }//&--hidden-mobile
+  }//@media
+
   &__inner {
     height: 50px;
     display: flex;
@@ -30,7 +36,7 @@
 
       .brand {
         height: 100%;
-        padding: 0 7px;
+        padding: 0 20px;
         display: flex;
         align-items: center;
 
@@ -75,32 +81,6 @@
         }
       }//.logout-btn
 
-      .menu-btn-mobile {
-        height: 100%;
-        display: flex;
-        align-items: center;
-
-        &__trigger {
-          min-width: 40px;
-          height: 40px;
-          align-items: center;
-          margin-right: 7px;
-          padding: 0;
-
-          .icon {
-            border-radius: 50px;
-            &:focus,
-            &:hover,
-            &:active {
-              background-color: #2d2c2c54;
-            }
-
-          }//.icon
-
-        }//&__trigger
-
-      }//.menu-btn-mobile
-
     }//.right
 
   }//&__inner
@@ -122,6 +102,15 @@
 
     &__inner {
       height:70px;
+
+      .left {
+
+        .brand {
+          padding: 0 7px;
+        }//.brand
+
+      }//.left
+
     }//&__inner
 
   }//.header-main

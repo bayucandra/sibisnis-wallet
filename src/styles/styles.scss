@@ -27,6 +27,11 @@ table {
   @media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
     padding-bottom: 20px !important;
   }
+  @media screen and ( max-width: map-get( $bp-desktop-first, sm ) ) {
+    &--mobile-no-header {
+      padding-top: 0 !important;
+    }
+  }
 }
 
 .biq-wrapper {

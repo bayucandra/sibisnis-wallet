@@ -56,7 +56,7 @@
             color: #ffffff;
 
             &.is-active {
-              background-color: map-get($colors, dark-mint);
+              background: map-get($colors, dark-mint) url("../../../../images/icons/ic-check.svg") no-repeat center center;
             }//.is-active
 
           }//.number-item

@@ -2,6 +2,7 @@ import ActionTypes from '../action-types';
 import biqHelper from "../../lib/biqHelper";
 
 const initialState = {
+  is_profile_parsed: false,
   profile: {}
 };
 
@@ -11,7 +12,7 @@ export default (state = initialState, action = {}) => {
   switch (action.type) {
 
     case ActionTypes.user.PROFILE_GET:
-      new_state = { profile: action.payload };
+      new_state = { is_profile_parsed: true, profile: action.payload };
       // new_state.profile.photo = null;
       return Object.assign({}, state, new_state);
 

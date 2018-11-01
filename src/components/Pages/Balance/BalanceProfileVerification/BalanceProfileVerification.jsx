@@ -10,6 +10,7 @@ import AddressInputDialog from "../../../Shared/AddressInputDialog/AddressInputD
 import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceProfileVerification.scss";
+import HeaderMobileGeneral from "../../../Shared/HeaderMobileGeneral";
 
 
 
@@ -97,6 +98,8 @@ class BalanceProfileVerification extends Component {
 
     return (
       <div className="balance-profile-verification">
+
+        <HeaderMobileGeneral headerTitle="Tambah Saldo"/>
 
         <div className={"balance-profile-verification__notice"}>Anda belum bisa melakukan penambahan saldo, silahkan penuhi langkah berikut</div>
 

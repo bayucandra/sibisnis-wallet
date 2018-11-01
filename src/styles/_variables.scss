@@ -1,5 +1,6 @@
 $font-family: 'NunitoSans',sans-serif;
 $bp-mobile-first: ( sm: 576px, md: 768px, lg: 992px, xl: 1200px);
+$bp-desktop-first: (xs: 575px, sm: 767px, md: 991px, lg: 1199px);
 
 $zindex-raised-button: 100 !default;
 $zindex-raised-panel: 500 !default;
@@ -34,5 +35,6 @@ $colors: (
         cerulean: #048ccd,
         pale-grey: #e3eaec,
         dark-mint: #49bf65,
-        darkish-green: #309047
+        darkish-green: #309047,
+        dark-aqua: #075f67
 );

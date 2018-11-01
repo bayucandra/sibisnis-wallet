@@ -142,7 +142,7 @@ class SideNavMain extends Component {
   onLinkClick = (name) => {
     navigationStatus.next({ navigationState: name});
     if (window.innerWidth > 767) {
-      this.props.history.replace('/');
+      this.props.history.push('/');
     }
   };
 

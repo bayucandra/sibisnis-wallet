@@ -24,6 +24,7 @@ class App extends Component {
   componentDidMount(){
     let {dispatch} = this.props;
     console.log('initializing app');
+
     dispatch(AppActions.appInit());
     dispatch(AppActions.appSseAgenInit());
     dispatch(UserActions.userProfileGet());
@@ -52,7 +53,16 @@ class App extends Component {
 
   }
 
-  componentDidUpdate() {
+  shouldComponentUpdate(nextProps, nextState) {
+    let {dispatch} = this.props;
+    if ( this.props.location !== nextProps.location ) {
+      dispatch( AppActions.appRouterChange( { main_header_mobile_show : true } ) );//default should always true, it will be overridden at page/component part if it should be false
+    }
+
+    return true;
+  }
+
+  componentDidUpdate(prevProps) {
     // window.scrollTo(0,0);
     let body = $('html, body');
     body.stop().animate({scrollTop:0}, 500, 'swing');

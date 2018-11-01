@@ -2,6 +2,7 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  background: #FFFFFF;
 
   .history-btn-mobile {
     min-width: 67px;
@@ -19,5 +20,40 @@
     text-align: right;
     color: #ffffff;
   }//.history-btn-mobile
+
+  .tab-nav {
+    display: flex;
+    justify-content: flex-start;
+
+    .widget-tab {
+      flex: 1 1 auto;
+      margin-top: 7px;
+    }//.widget-tab
+
+  }//.tab-nav
+
+  .tab-panel {
+    display: flex;
+    flex-direction: column;
+
+    &__pick-nominal {
+      display: flex;
+      flex-direction: column;
+
+      .nominal-item {
+
+        &__inner {
+          display: flex;
+          flex-direction: column;
+        }//&__inner
+
+        &:hover{
+          background: none;
+        }
+      }//.nominal-item
+
+    }//&__pick-nominal
+
+  }//.tab-panel
 
 }//.balance-topup

@@ -1,0 +1,51 @@
+@import "../../../styles/variables";
+
+.widget-tab {
+  position: relative;
+  display: flex;
+  border-bottom: solid 1px map-get($colors, light-grey-8);
+
+  &__highlight {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 0;
+    height: 2px;
+    background: map-get($colors, tealish);
+    transition: left 250ms ease-in-out, width 300ms ease-in-out;
+
+    &.fast-anim {
+      transition: left 100ms ease-in-out, width 50ms ease-in-out;
+    }
+
+  }//&__highlight
+
+}//.widget-tab
+
+.widget-tab-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 20px;
+
+  font-size: 15px;
+  font-weight: 600;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.5px;
+  color: rgba(black, 0.2);
+
+  &.is-active {
+    font-size: 15px;
+    font-weight: 600;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    color: map-get($colors, tealish);
+  }//&.is-active
+
+}//.widget-tab-item
+
+@import "./Tab-md-min";

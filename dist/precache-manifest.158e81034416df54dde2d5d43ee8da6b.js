@@ -4,16 +4,16 @@ self.__precacheManifest = [
     "url": "./static/media/ico-upload-mobile.2b660c8b.svg"
   },
   {
-    "revision": "7d3370e0181c8161a003",
-    "url": "./static/css/main.97b59916.chunk.css"
+    "revision": "b2ba4f05a016ccfc2d54",
+    "url": "./static/css/main.80bb9047.chunk.css"
   },
   {
     "revision": "805e99d2210f832a808c98dc1334e743",
     "url": "./static/media/back-white.805e99d2.svg"
   },
   {
-    "revision": "32767f6b0e2d3d159e1e",
-    "url": "./static/js/1.32767f6b.chunk.js"
+    "revision": "e4d125b382deb979db28",
+    "url": "./static/js/1.e4d125b3.chunk.js"
   },
   {
     "revision": "4a686d48d5a089750c49",
@@ -100,8 +100,8 @@ self.__precacheManifest = [
     "url": "./static/media/ico-back-blue.c7857648.svg"
   },
   {
-    "revision": "7d3370e0181c8161a003",
-    "url": "./static/js/main.7d3370e0.chunk.js"
+    "revision": "b2ba4f05a016ccfc2d54",
+    "url": "./static/js/main.b2ba4f05.chunk.js"
   },
   {
     "revision": "19926ea46f8ed33d96cea93fc427da61",
@@ -172,12 +172,12 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-SemiBold.713ac08d.ttf"
   },
   {
-    "revision": "6f47bcfc065790f02ed3cb8b51bef56f",
-    "url": "./static/media/Nunito-Bold.6f47bcfc.ttf"
-  },
-  {
     "revision": "1b31a5055cad7ed13ad2c1bc423adec6",
     "url": "./static/media/Nunito-SemiBoldItalic.1b31a505.ttf"
+  },
+  {
+    "revision": "6f47bcfc065790f02ed3cb8b51bef56f",
+    "url": "./static/media/Nunito-Bold.6f47bcfc.ttf"
   },
   {
     "revision": "65bb0a158ee1967292ee4d11079d45ae",
@@ -192,11 +192,11 @@ self.__precacheManifest = [
     "url": "./static/media/ic-check.a91bcfe3.svg"
   },
   {
-    "revision": "32767f6b0e2d3d159e1e",
-    "url": "./static/css/1.37442d81.chunk.css"
+    "revision": "e4d125b382deb979db28",
+    "url": "./static/css/1.740d721b.chunk.css"
   },
   {
-    "revision": "0dec97df7ce56249482b431c82b7cae9",
+    "revision": "150a44495fd4cc7b1621eb1cfd1846bd",
     "url": "./index.html"
   }
 ];

@@ -1,6 +1,7 @@
 @media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
 
   .balance-topup {
+    min-height: 500px;
     margin-left: 29px;
     padding: 0 30px;
 
@@ -94,6 +95,28 @@
         }//.nominal-item
 
       }//&__pick-nominal
+
+      &__custom-nominal {
+
+        .input-nominal {
+          flex: 1 1 auto;
+
+          &:before {
+            height: 41px;
+          }//&:before
+
+          input[type="text"] {
+            height: 50px;
+          }//input[type="text"]
+
+        }//.input-nominal
+
+        .submit-btn {
+          width: 130px;
+          margin: 0 0 0 21px;
+        }//.submit-btn
+
+      }//&__custom-nominal
 
     }//.tab-panel
 

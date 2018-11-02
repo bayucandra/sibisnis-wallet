@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 import Button from "@material-ui/core/Button";
 import Modal from "@material-ui/core/Modal";
@@ -24,7 +25,6 @@ class BalanceProfileVerification extends Component {
     this.state = {
       is_ready: false,
       modal_is_open: false,
-      leave_verification: false,
       modal_active_component: PhotoUpload
     };
 
@@ -69,26 +69,16 @@ class BalanceProfileVerification extends Component {
   _continueTopupBalance = () => {
     biqHelper.utils.clickTimeout({
       callback: () => {
-        this.setState({ leave_verification: true });
-        this.props._setVerifiyingState(false);
+        this.props.history.push('/balance');
       }
     });
   };
 
   componentDidMount() {
-    if ( !biqHelper.utils.isNull( this.props.user_profile ) ) {
-      this.props._setVerifiyingState(true);
-    }
     setTimeout( ()=> {
       if ( this.stop ) return;
       this.setState( { is_ready: true });
     }, 300 );
-  }
-
-  componentDidUpdate( prevProps, prevState ) {
-    if ( !prevState.leave_verification ) {
-      this.props._setVerifiyingState( true );
-    }
   }
 
   componentWillUnmount() {
@@ -195,4 +185,4 @@ const mapStateToProps = store => {
   }
 };
 
-export default connect( mapStateToProps )(BalanceProfileVerification);
+export default withRouter( connect( mapStateToProps )(BalanceProfileVerification) );

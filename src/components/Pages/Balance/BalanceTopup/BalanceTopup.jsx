@@ -1,10 +1,15 @@
 import React, {Component} from 'react';
-import Button from '@material-ui/core/Button';
+import {withRouter, Redirect} from "react-router-dom";
+import connect from "react-redux/es/connect/connect";
 
+import Button from '@material-ui/core/Button';
+import NumberFormat from "react-number-format";
 
 import HeaderMobileGeneral from "../../../Shared/HeaderMobileGeneral";
 import Tab, {TabItem} from "../../../Widgets/Tab";
-import NumberFormat from "react-number-format";
+
+import AppActions from "../../../../redux/actions/AppActions";
+import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceTopup.scss";
 
@@ -33,15 +38,29 @@ class BalanceTopup extends Component {
   }
 
   _tabChange = ( tab_state ) => {
-    console.log(tab_state);
     this.setState( { active_tab: tab_state } );
   };
 
   _historyBtn = <Button className="history-btn-mobile">History</Button>;
 
+
+  componentDidMount() {
+    let {dispatch} = this.props;
+    dispatch( AppActions.appRouterChange( { main_header_mobile_show : false } ) );
+
+    // Redirect()
+  }
+
   render() {
+
+    let is_photo_set = !biqHelper.utils.isNull(this.props.user_profile.photo);
+    let is_address_set = !biqHelper.utils.isNull(this.props.user_profile.alamat);
+
     return (
       <div className={`balance-topup`}>
+
+        { !is_photo_set || !is_address_set ? <Redirect to={"/balance/profile-verification"}/> : '' }
+
         <HeaderMobileGeneral headerTitle="Tambah Saldo" headerButtonWidget={this._historyBtn}/>
 
         <div className="balance-topup__top-nav visible-md-up">
@@ -53,7 +72,7 @@ class BalanceTopup extends Component {
         </div>
 
         <div className="tab-nav">
-          <Tab tabChangeCallback={ this._tabChange }>
+          <Tab tabChange={ this._tabChange }>
             <TabItem label="Pilih nominal" tabState="pick_nominal"/>
             <TabItem label="Nominal lainnya" tabState="custom_nominal"/>
           </Tab>
@@ -81,10 +100,22 @@ class BalanceTopup extends Component {
             :
 
             <section className="tab-panel__custom-nominal">
-              <div className="nominal-input">
-                <input type="text" value={this.state.custom_nominal.input_value}
-                       onChange={ e => this.setState(  {custom_nominal: Object.assign( {}, this.state.custom_nominal, { input_value: e.target.value } ) } ) }  />
+
+              <div className="input-wrapper">
+                <div className="input-nominal">
+                  <input type="text" value={this.state.custom_nominal.input_value}
+                         onChange={ e => this.setState(  {custom_nominal: Object.assign( {}, this.state.custom_nominal, { input_value: e.target.value } ) } ) }  />
+                </div>
+
+                <Button className="submit-btn visible-md-up">Lanjutkan</Button>
               </div>
+
+              <div className="input-notice">
+                Minimal pengisian saldo Rp 10.000 , Isi hanya dengan angka
+              </div>
+
+              <Button className="submit-btn hidden-md-up">Lanjutkan</Button>
+
             </section>
 
           }
@@ -96,4 +127,10 @@ class BalanceTopup extends Component {
 
 }
 
-export default BalanceTopup;
+const mapStateToProps = state => {
+  return {
+    user_profile: state.user.profile
+  }
+};
+
+export default withRouter( connect(mapStateToProps) (BalanceTopup) );

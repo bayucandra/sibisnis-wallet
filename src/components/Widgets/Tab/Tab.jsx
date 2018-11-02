@@ -23,7 +23,7 @@ class Tab extends Component {
   _tabItemOnClick = (tabItemActive) => {
     console.log(tabItemActive.props);
     this.tab_item_active = tabItemActive;
-    this.props.tabChangeCallback( tabItemActive.props.tabState );
+    if ( typeof this.props.tabChange === 'function' ) this.props.tabChange( tabItemActive.props.tabState );
     this.setState({ active_label: tabItemActive.props.label });
     // console.log(tabItemActive.props.tabState);
     // this.forceUpdate();

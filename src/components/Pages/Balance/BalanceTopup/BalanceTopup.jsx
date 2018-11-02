@@ -11,7 +11,11 @@ import "./BalanceTopup.scss";
 class BalanceTopup extends Component {
 
   state = {
-    active_tab: 'pick_nominal'
+    active_tab: 'pick_nominal',
+    pick_nominal: {},
+    custom_nominal: {
+      input_value: 0
+    }
   };
 
   nominal_list = [
@@ -77,7 +81,10 @@ class BalanceTopup extends Component {
             :
 
             <section className="tab-panel__custom-nominal">
-
+              <div className="nominal-input">
+                <input type="text" value={this.state.custom_nominal.input_value}
+                       onChange={ e => this.setState(  {custom_nominal: Object.assign( {}, this.state.custom_nominal, { input_value: e.target.value } ) } ) }  />
+              </div>
             </section>
 
           }

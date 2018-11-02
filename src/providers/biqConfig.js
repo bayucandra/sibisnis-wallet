@@ -1,11 +1,11 @@
 import biqHelper from "../lib/biqHelper";
 let path_arr = window.location.pathname.replace(/^\/|\/$/g, '').split( "/" );
 path_arr.pop();
-let path = path_arr.join("/");
+let path = path_arr.length > 0 ? path_arr.join("/") : '';
 
-if ( biqHelper.utils.isNull( path ) ) {
+/*if ( biqHelper.utils.isNull( path ) ) {
   path = "/" + path;
-}
+}*/
 
 let biqConfig = {};
 
@@ -16,6 +16,7 @@ biqConfig.api = {
   data_package_name: {},
   csrf_token: ''
 };
+
 
 biqConfig.local_storage_key = {
   user_data : 'user_data', //Store user data got from API login

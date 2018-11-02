@@ -32,6 +32,10 @@
       margin-top: 7px;
     }//.widget-tab
 
+    .widget-tab-item {
+      flex: 1 1 0%;
+    }//.widget-tab-item
+
   }//.tab-nav
 
   .tab-panel {
@@ -84,7 +88,7 @@
           font-stretch: normal;
           line-height: normal;
           letter-spacing: 0.5px;
-          color: var(--battleship-grey);
+          color: map-get($colors, battleship-grey);
         }//&__text
 
         &:hover{
@@ -94,6 +98,51 @@
       }//.nominal-item
 
     }//&__pick-nominal
+
+    &__custom-nominal {
+      display: flex;
+      flex-direction: column;
+      align-items: normal;
+      padding: 0 15px;
+
+      .nominal-input {
+        position: relative;
+        margin-top: 35px;
+
+        &:before {
+          content: 'Rp';
+          position: absolute;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          top: 5px; left: 5px;
+          width: 41px;
+          height: 35px;
+          border-radius: 3px;
+          background-color: map-get($colors, white-two);
+
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: map-get($colors, steel-grey);
+        }//&:before
+
+        input[type="text"] {
+          width: 100%;
+          height: 45px;
+          padding-left: 56px;
+          box-sizing: border-box;
+          border-radius: 5px;
+          border: solid 0.5px map-get($colors, cool-grey);
+          color: map-get( $colors, charcoal-grey );
+        }//input[type="text"]
+
+      }//.nominal-input
+
+    }//&__custom-nominal
 
   }//.tab-panel
 

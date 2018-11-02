@@ -35,6 +35,10 @@ class BalanceProfileVerification extends Component {
   };
 
   _onPhotoSet = () => {
+    if ( !biqHelper.utils.isNull( this.props.user_profile.photo ) ) {
+      this.forceUpdate();
+      return;
+    }
     biqHelper.utils.clickTimeout({
       callback: this._onPhotoSetActual
     });
@@ -109,7 +113,7 @@ class BalanceProfileVerification extends Component {
           <div className={"step-row step-row--photo"}>
 
             <div className="col-number">
-              <div className={`number-item is-active`}>{is_photo_set? "": "1"}</div>
+              <div className={`number-item is-active${ is_photo_set ? ' is-done' : '' }`}>{is_photo_set? "": "1"}</div>
             </div>
 
             <div className={"col-action"}>
@@ -129,7 +133,7 @@ class BalanceProfileVerification extends Component {
           <div className={"step-row step-row--address"}>
 
             <div className="col-number">
-              <div className={`number-item${is_address_set ? ' is-active' : '' }`}>{is_address_set? "": "2"}</div>
+              <div className={`number-item${is_address_set ? ' is-active is-done' : '' }`}>{is_address_set? "": "2"}</div>
             </div>
 
             <div className={"col-action"}>

@@ -71,6 +71,25 @@ table {
   }
 }
 
+input[type="text"], input[type="password"], input[type="number"] {
+  outline: none !important;
+  appearance: none;
+  border: 0;
+
+  &:disabled {
+    background-color: transparent;
+  }
+
+  &.has-value {
+
+    &::placeholder {
+      color: transparent;
+    }//&::placeholder
+
+  }//&.has-value
+
+}//input[type="text"], input[type="number"]
+
 .custom-card-styles {
   border-radius: 0px !important;
   box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11) !important;
@@ -195,9 +214,7 @@ table {
   top: 0;
   left: 0;
   pointer-events: none;
-  background-image: radial-gradient(circle, rgb(162, 160, 160) 10%, transparent 10.01%);
-  background-repeat: no-repeat;
-  background-position: 50%;
+  background: radial-gradient(circle, rgb(162, 160, 160) 10%, transparent 10.01%) no-repeat 50%;
 
   transform: scale(10, 10);
   opacity: 0;
@@ -210,15 +227,12 @@ table {
  }
 
 
-.icon-background {}
-.opacity-background {}
-
 /*
 ===========================================
             Media Queries
 ===========================================
 */
-
+/*
 @include media-query(md){
   .sibisnis-card {
     border-radius: 5px !important;
@@ -244,7 +258,7 @@ table {
   // .ripple:hover {
   //   background-color: #F0F1F2;
   // }
-}
+}*/
 
 /*
 ===========================================

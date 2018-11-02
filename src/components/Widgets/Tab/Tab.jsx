@@ -12,6 +12,10 @@ class Tab extends Component {
 
   tab_item_active = null;
 
+  state = {
+    active_label: ''
+  };
+
   constructor( props ) {
     super(props);
   }
@@ -20,8 +24,9 @@ class Tab extends Component {
     console.log(tabItemActive.props);
     this.tab_item_active = tabItemActive;
     this.props.tabChangeCallback( tabItemActive.props.tabState );
+    this.setState({ active_label: tabItemActive.props.label });
     // console.log(tabItemActive.props.tabState);
-    this.forceUpdate();
+    // this.forceUpdate();
   };
 
   _renderHighlight = () => {
@@ -68,7 +73,9 @@ class Tab extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    this._renderHighlight();
+    if ( prevState.active_label !== this.state.active_label ) {
+      this._renderHighlight();
+    }
   }
 
   render() {

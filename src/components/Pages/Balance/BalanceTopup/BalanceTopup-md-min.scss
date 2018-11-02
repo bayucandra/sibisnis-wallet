@@ -1,0 +1,96 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .balance-topup {
+    margin-left: 29px;
+    padding: 0 30px;
+
+    border-radius: 5px;
+    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+    background-color: #ffffff;
+
+    &__top-nav {
+      display: flex;
+      justify-content: space-between;
+
+      .title {
+        margin-top: 21px;
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, charcoal-grey);
+      }//.title
+
+      .history-btn {
+        margin-top: 23px - 5px;
+        margin-right: -5px;
+        min-width: 0;
+        height: 28px;
+        padding: 0 5px;
+
+        font-size: 13px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.3px;
+        text-align: right;
+        color: map-get($colors, dark-sky-blue);
+
+      }//.history-btn
+
+    }//&__title
+
+    .tab-nav {
+
+      .widget-tab {
+        flex: none;
+      }//.widget-tab
+
+    }//.tab-nav
+
+    .tab-panel {
+
+      &__pick-nominal {
+        margin-top: 30px;
+        margin-bottom: 32px;
+        border-radius: 2px;
+        border: solid 1px map-get($colors, gray-87);
+
+        .nominal-item {
+
+          &__inner {
+            height: 50px;
+            padding-left: 30px;
+            padding-right: 25px;
+          }//&__inner
+
+          &__number {
+            font-size: 15px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.5px;
+            color: map-get($colors, charcoal-grey);
+          }//&__number
+
+          &.is-last {
+            .nominal-item {
+              &__inner {
+                border-bottom: transparent;
+              }//&__inner
+            }//.nominal-item
+          }//&.is-last
+
+        }//.nominal-item
+
+      }//&__pick-nominal
+
+    }//.tab-panel
+
+  }//.balance-topup
+
+}

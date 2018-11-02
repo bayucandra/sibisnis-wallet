@@ -41,14 +41,18 @@ class BalanceTopup extends Component {
     this.setState( { active_tab: tab_state } );
   };
 
-  _historyBtn = <Button className="history-btn-mobile">History</Button>;
+  _historyBtnClick = ()=>{
+    biqHelper.utils.clickTimeout( ()=>{
+      this.props.history.push('/balance/topup-history');
+    } );
+  };
+
+  _historyBtn = <Button className="history-btn-mobile" onClick={this._historyBtnClick}>History</Button>;
 
 
   componentDidMount() {
     let {dispatch} = this.props;
     dispatch( AppActions.appRouterChange( { main_header_mobile_show : false } ) );
-
-    // Redirect()
   }
 
   render() {
@@ -59,7 +63,7 @@ class BalanceTopup extends Component {
     return (
       <div className={`balance-topup`}>
 
-        { !is_photo_set || !is_address_set ? <Redirect to={"/balance/profile-verification"}/> : '' }
+        { this.props.is_profile_parsed && ( !is_photo_set || !is_address_set ) ? <Redirect to={"/balance/profile-verification"}/> : '' }
 
         <HeaderMobileGeneral headerTitle="Tambah Saldo" headerButtonWidget={this._historyBtn}/>
 
@@ -67,7 +71,9 @@ class BalanceTopup extends Component {
 
           <h3 className="title">Tambah Saldo</h3>
 
-          <Button className="history-btn">History topup</Button>
+          <Button className="history-btn" onClick={ this._historyBtnClick }>
+            History topup
+          </Button>
 
         </div>
 
@@ -129,6 +135,7 @@ class BalanceTopup extends Component {
 
 const mapStateToProps = state => {
   return {
+    is_profile_parsed: state.user.is_profile_parsed,
     user_profile: state.user.profile
   }
 };

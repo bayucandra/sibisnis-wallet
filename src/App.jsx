@@ -9,6 +9,7 @@ import esProvider from "./providers/esProvider";
 import biqHelper from "./lib/biqHelper/index";
 import biqConfig from "./providers/biqConfig";
 import addressProvider from "./providers/addressProvider";
+import walletProvider from "./providers/walletProvider";
 
 import {fromEvent} from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
@@ -49,7 +50,12 @@ class App extends Component {
 
     //BEGIN INITIALIZE ADDRESS===========
     addressProvider.provinsi$().subscribe();
+    addressProvider.kabupaten$().subscribe();
     //END INITIALIZE ADDRESS************
+
+    //BEGIN INITIALIZE WALLET LIST=========
+    walletProvider.deposit$().subscribe();
+    //END INITIALIZE WALLET LIST*********
 
   }
 
@@ -73,7 +79,6 @@ class App extends Component {
     if ( this.props.is_app_initialized && !this.props.is_logged_in ) {
       biqHelper.localStorage.clear();
       dispatch( AppActions.appStatesReset() );
-      console.log(biqConfig.agen.url_base);
       window.location = biqConfig.agen.url_base + '/#/login/default';
     }
 
@@ -95,7 +100,7 @@ class App extends Component {
 const mapStateToProps = ( store ) => {
   return {
     is_app_initialized: store.app.is_app_initialized,
-    is_logged_in: store.app.is_app_initialized,
+    is_logged_in: store.app.is_logged_in,
     window_size: store.app.window_size
   }
 };

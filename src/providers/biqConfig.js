@@ -25,7 +25,7 @@ biqConfig.local_storage_key = {
   page_last_state: 'page_last_state',// contain JSON { state: '', data:{ json: data} }
   address_provinsi: 'address_provinsi',
   address_kabupaten: 'address_kabupaten',
-  address_kecamatan: 'address_kecamatan'
+  wallet_deposit: 'wallet_deposit'
 };
 
 biqConfig.agen = {
@@ -45,5 +45,7 @@ if ( window.location.hostname === 'newzonatik.com' && window.location.protocol.s
 
   biqConfig.profile_photo_url_base = `${biqConfig.api.url_base}/assets/user_profile`;
 }
+
+biqConfig.api.data_auth = Object.assign( {}, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } );
 
 export default biqConfig;

@@ -19,13 +19,13 @@ class AddressProvider {
       );//provinsiFetch$
 
   provinsi$(){
-    return Observable.create( ( observer )=>{
+    return Observable.create( observer =>{
       let provinsi_ls = biqHelper.localStorage.getObject( biqConfig.local_storage_key.address_provinsi );
 
       if ( biqHelper.utils.isNull( provinsi_ls ) ) {
         this.provinsiFetch$.subscribe(
           data => {
-            biqHelper.localStorage.set( biqConfig.local_storage_key.address_provinsi, data.data );
+            if ( data.hasOwnProperty('data') ) biqHelper.localStorage.set( biqConfig.local_storage_key.address_provinsi, data.data );
 
             observer.next( data.data );
             observer.complete();
@@ -47,18 +47,17 @@ class AddressProvider {
   })
     .pipe(
       map((e) => e.response),
-      publishReplay(1),
-      refCount()
+      share()
     );//kabupatenFetch$
 
   kabupaten$(){
-    return Observable.create( ( observer )=>{
+    return Observable.create( observer =>{
       let kabupaten_ls = biqHelper.localStorage.getObject( biqConfig.local_storage_key.address_kabupaten );
 
       if ( biqHelper.utils.isNull( kabupaten_ls ) ) {
         this.kabupatenFetch$.subscribe(
           data => {
-            biqHelper.localStorage.set( biqConfig.local_storage_key.address_kabupaten, data.data );
+            if ( data.hasOwnProperty('data') )  biqHelper.localStorage.set( biqConfig.local_storage_key.address_kabupaten, data.data );
 
             observer.next( data.data );
             observer.complete();
@@ -85,21 +84,15 @@ class AddressProvider {
     );//kecamatanFetch$
 
   kecamatan$(){
-    return Observable.create( ( observer )=>{
-      let kecamatan_ls = biqHelper.localStorage.getObject( biqConfig.local_storage_key.address_kecamatan );
+    return Observable.create( observer =>{
 
-      if ( biqHelper.utils.isNull( kecamatan_ls ) ) {
-        this.kecamatanFetch$.subscribe(
-          data => {
-            biqHelper.localStorage.set( biqConfig.local_storage_key.address_kecamatan, data.data );
+      this.kecamatanFetch$.subscribe(
+        data => {
 
-            observer.next( data.data );
-            observer.complete();
-          }
-        );
-      } else {
-        observer.next( kecamatan_ls );
-      }
+          observer.next( data.data );
+          observer.complete();
+        }
+      );
 
     } );
   }//kecamatan$()
@@ -114,8 +107,7 @@ class AddressProvider {
     })
       .pipe(
         map( e => e.response),
-        publishReplay(1),
-        refCount()
+        share()
       );//kelurahanFetch$
   }
 

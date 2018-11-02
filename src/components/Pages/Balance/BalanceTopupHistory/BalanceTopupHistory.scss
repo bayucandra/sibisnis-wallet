@@ -1,0 +1,29 @@
+@import "../../../../styles/variables";
+
+.balance-topup-history {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+
+  .nav-mobile {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    background-color: map-get($colors, dark-aqua);
+
+    .title {
+      margin-left: 25px;
+
+      font-size: 16px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.3px;
+      color: #ffffff;
+    }//.title
+
+  }//.nav-mobile
+
+}//.balance-topup-history

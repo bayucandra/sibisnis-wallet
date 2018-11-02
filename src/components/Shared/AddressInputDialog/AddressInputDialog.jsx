@@ -392,6 +392,8 @@ class AddressInputDialog extends React.Component {
         this.setState( { provinsi_is_loading: false } );
       } );
 
+    addressProvider.kecamatan$().subscribe();
+
   }
 
   componentDidUpdate(prevProp, prevState){

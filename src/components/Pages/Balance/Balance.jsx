@@ -4,9 +4,10 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 
 import SideNavMain from "../../Shared/SideNavMain/SideNavMain";
 import BalanceProfileVerification from "./BalanceProfileVerification";
+import BalanceTopupHistory from "./BalanceTopupHistory";
+import BalanceTopup from "./BalanceTopup/BalanceTopup";
 
 import "./Balance.scss";
-import BalanceTopup from "./BalanceTopup/BalanceTopup";
 
 class Balance extends Component {
 
@@ -27,6 +28,7 @@ class Balance extends Component {
 
           <Switch>
             <Route path="/balance/profile-verification" component={BalanceProfileVerification} />
+            <Route path="/balance/topup-history" component={BalanceTopupHistory} />
             <Route path="/balance" component={BalanceTopup}/>
           </Switch>
 

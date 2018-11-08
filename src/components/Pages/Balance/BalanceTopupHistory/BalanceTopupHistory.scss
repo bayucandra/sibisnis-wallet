@@ -4,6 +4,7 @@
   flex: 1 1 auto;
   display: flex;
   flex-direction: column;
+  background-color: #ffffff;
 
   .nav-mobile {
     display: flex;
@@ -24,6 +25,84 @@
       color: #ffffff;
     }//.title
 
+    .close-btn {
+      color: #FFFFFF;
+    }//.close-btn
+
   }//.nav-mobile
 
+  .history-panel {
+    flex: 1 1 auto;
+    display: flex;
+    flex-direction: column;
+  }//.history-panel
+
+  .biq-col {
+    display: flex;
+
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: rgba(0, 0, 0, 0.87);
+
+    &--method {
+      flex: 1 1 auto;
+    }//&--transfer-method
+
+    &--amount {
+      flex: none;
+    }//&--amount
+
+  }//.biq-col
+
+  .history-item {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 15px 0;
+    padding: 15px 20px;
+    border-radius: 6px;
+    border: solid 1px map-get( $colors, light-periwinkle );
+
+    &.is-first {
+      margin-top: 20px;
+    }//&.is-first
+
+    .row-inner {
+      display: flex;
+      justify-content: space-between;
+    }//.biq-row
+
+    .transfer-status-mobile {
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: map-get($colors, dark-sky-blue);
+
+      &.is-failed {
+        color: map-get( $colors, lightish-red );
+      }//&.is-failed
+    }//.transfer-status-mobile
+
+    .date-mobile {
+      margin-top: 13px;
+
+      font-size: 13px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.3px;
+      color: map-get($colors, cool-grey-two);
+    }//.date-mobile
+
+  }//.history-item
+
 }//.balance-topup-history
+
+@import "./BalanceTopupHistory-md-min";

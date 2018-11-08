@@ -97,6 +97,7 @@
       }//&__pick-nominal
 
       &__custom-nominal {
+        padding: 0;
 
         .input-nominal {
           flex: 1 1 auto;
@@ -115,6 +116,10 @@
           width: 130px;
           margin: 0 0 0 21px;
         }//.submit-btn
+
+        .input-notice {
+          margin-top: 7px;
+        }//.input-notice
 
       }//&__custom-nominal
 

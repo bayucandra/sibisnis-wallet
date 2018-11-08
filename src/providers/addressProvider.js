@@ -28,12 +28,13 @@ class AddressProvider {
             if ( data.hasOwnProperty('data') ) biqHelper.localStorage.set( biqConfig.local_storage_key.address_provinsi, data.data );
 
             observer.next( data.data );
-            observer.complete();
           }
         );
       } else {
         observer.next( provinsi_ls );
       }
+
+      observer.complete();
 
     } );
   }//provinsi$()
@@ -60,12 +61,12 @@ class AddressProvider {
             if ( data.hasOwnProperty('data') )  biqHelper.localStorage.set( biqConfig.local_storage_key.address_kabupaten, data.data );
 
             observer.next( data.data );
-            observer.complete();
           }
         );
       } else {
         observer.next( kabupaten_ls );
       }
+      observer.complete();
 
     } );
   }//kabupaten$()

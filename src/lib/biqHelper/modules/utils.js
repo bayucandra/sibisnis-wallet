@@ -153,6 +153,11 @@ class biqHelperUtilsClass {
     return key >= 200 && key < 300;
   };
 
+  numberFormat(input, prefix = '', thousand_separator = '.') {
+    input = this.isNull( input ) ? 0 : input;
+    return prefix + input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
+  }
+
 }
 
 export { biqHelperUtilsClass };

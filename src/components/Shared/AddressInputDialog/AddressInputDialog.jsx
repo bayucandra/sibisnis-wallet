@@ -14,11 +14,13 @@ import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
 import Button from '@material-ui/core/Button';
+import Modal from '@material-ui/core/Modal';
 import $ from 'jquery';
 
 import biqHelper from "../../../lib/biqHelper";
 import addressProvider from "../../../providers/addressProvider";
 import LoadingIndicatorBar from "../../Widgets/LoadingIndicatorBar";
+import ModalNotice from "../../Widgets/ModalNotice/ModalNotice";
 
 import "./AddressInputDialog.scss";
 import "../../../styles/_components.scss";
@@ -189,7 +191,12 @@ class AddressInputDialog extends React.Component {
 
     modalPosTop: 0,
 
-    is_submitting: false
+    is_submitting: false,
+    submit_response: {
+      status_title: 'Gagal',
+      response_code: { status:200, message: '' }
+    },
+    modal_child_is_open: true
   };
 
 
@@ -328,6 +335,10 @@ class AddressInputDialog extends React.Component {
     });
   };
 
+  _modalChildClose = () =>  {
+    this.setState({modal_child_is_open: false});
+  };
+
   _onSubmit = () => {
     let {dispatch} = this.props;
     let is_valid = !biqHelper.utils.isNullAll( this.state.provinsi_selected, this.state.kabupaten_selected, this.state.kecamatan_selected, this.state.kelurahan_selected, this.state.alamat );
@@ -360,13 +371,16 @@ class AddressInputDialog extends React.Component {
           map( e => e.response )
         )
         .subscribe( res => {
-          if ( res.response_code.status === 200 ) {
+          let status_title = 'Sukses';
+          if ( biqHelper.utils.httpResponseIsSuccess( res.response_code.status ) ) {
             dispatch( UserActions.userProfileUpdate( { key: 'alamat', value: res.data.alamat } ) );
             this._modalClose();
-            return;
           } else {
+            status_title = 'Gagal'
             alert( `Error: ${res.response_code.message}` );
           }
+
+          this.setState( { submit_response: Object.assign( {}, { status_title: status_title }, res ) } );
 
           this.setState({is_submitting: false});
         } );
@@ -507,15 +521,21 @@ class AddressInputDialog extends React.Component {
         </div>
 
         { this.state.is_submitting ? <LoadingIndicatorBar/> : '' }
+
+        <Modal
+          open={this.state.modal_child_is_open}
+          onClose={this._modalChildClose}>
+
+          <div className="modal-inner">
+            <ModalNotice title={this.state.submit_response.status_title} notice={this.state.submit_response.response_code.message}/>
+          </div>
+
+        </Modal>
+
       </div>
     );
   }
 }
 
-const mapStateToProps = store => {
-  return {
-    window_size: store.app.window_size
-  }
-};
 
-export default withRouter( connect( mapStateToProps )( withStyles(styles, { withTheme: true })(AddressInputDialog) ) );
+export default withStyles(styles, { withTheme: true })(AddressInputDialog) ;

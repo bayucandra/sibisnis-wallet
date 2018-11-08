@@ -11,7 +11,7 @@ import biqConfig from "./providers/biqConfig";
 import addressProvider from "./providers/addressProvider";
 import walletProvider from "./providers/walletProvider";
 
-import {fromEvent} from 'rxjs';
+import {fromEvent, forkJoin} from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import $ from 'jquery';
 import DashboardLayout from "./components/DashboardLayout/DashboardLayout";
@@ -21,6 +21,10 @@ import AllHistorLogins from "./components/Pages/AllHistoryLogins/AllHistoryLogin
 
 
 class App extends Component {
+
+  state = {
+    initialized: false
+  };
 
   componentDidMount(){
     let {dispatch} = this.props;
@@ -32,7 +36,7 @@ class App extends Component {
 
     esProvider.addEventListener( 'login', ( e ) => {
       if ( e.data === 'false' || !e.data ) {
-        dispatch( AppActions.appLogout() );//TODO: enable this soon
+        // dispatch( AppActions.appLogout() );//TODO: enable this soon
       }
     } );
 
@@ -49,12 +53,23 @@ class App extends Component {
     });
 
     //BEGIN INITIALIZE ADDRESS===========
-    addressProvider.provinsi$().subscribe();
-    addressProvider.kabupaten$().subscribe();
+    // addressProvider.provinsi$().subscribe();
+    // addressProvider.kabupaten$().subscribe();
+    forkJoin(
+      addressProvider.provinsi$(),
+      addressProvider.kabupaten$(),
+      walletProvider.depositStatus$(),
+      walletProvider.bankList$()
+    ).subscribe( res =>{
+      this.setState( { initialized: true }, ()=>{
+        this.forceUpdate();
+      } );
+    });
     //END INITIALIZE ADDRESS************
 
     //BEGIN INITIALIZE WALLET LIST=========
-    walletProvider.deposit$().subscribe();
+    // walletProvider.depositStatus$().subscribe();
+    // walletProvider.bankList$().subscribe();
     //END INITIALIZE WALLET LIST*********
 
   }
@@ -85,13 +100,13 @@ class App extends Component {
     return (
         <React.Fragment>
           <Header/>
-          <Switch>
-            <Redirect from="/" exact={true} to="/dashboard" />
-            <Route path="/balance" component={Balance}/>
-            <Route path="/dashboard" component={DashboardLayout} />
-            <Route path="/all-news" component={AllNews} />
-            <Route path="/all-history-logins" component={AllHistorLogins} />
-          </Switch>
+            <Switch>
+              <Redirect from="/" exact={true} to="/dashboard" />
+              <Route path="/balance" component={Balance}/>
+              <Route path="/dashboard" component={DashboardLayout} />
+              <Route path="/all-news" component={AllNews} />
+              <Route path="/all-history-logins" component={AllHistorLogins} />
+            </Switch>
         </React.Fragment>
     )
   }

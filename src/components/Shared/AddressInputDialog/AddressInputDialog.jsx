@@ -196,7 +196,7 @@ class AddressInputDialog extends React.Component {
       status_title: 'Gagal',
       response_code: { status:200, message: '' }
     },
-    modal_child_is_open: true
+    modal_child_is_open: false
   };
 
 
@@ -330,9 +330,11 @@ class AddressInputDialog extends React.Component {
   }
 
   _modalClose = ()=>{
-    biqHelper.utils.clickTimeout({
-      callback: this.props.modalClose
-    });
+    biqHelper.utils.clickTimeout(()=>this.props.modalClose());
+  };
+
+  _modalChildOpen = () => {
+    this.setState({modal_child_is_open: true});
   };
 
   _modalChildClose = () =>  {
@@ -340,14 +342,13 @@ class AddressInputDialog extends React.Component {
   };
 
   _onSubmit = () => {
+    biqHelper.utils.clickTimeout( () => this._onSubmitActual() );
+  };
+
+  _onSubmitActual = () => {
     let {dispatch} = this.props;
     let is_valid = !biqHelper.utils.isNullAll( this.state.provinsi_selected, this.state.kabupaten_selected, this.state.kecamatan_selected, this.state.kelurahan_selected, this.state.alamat );
-/*    console.log(is_valid);
-    console.log( this.state.provinsi_selected );
-    console.log( this.state.kabupaten_selected );
-    console.log( this.state.kecamatan_selected );
-    console.log( this.state.kelurahan_selected );
-    console.log( this.state.alamat );*/
+
     if ( is_valid ) {
 
       let data = {
@@ -380,13 +381,19 @@ class AddressInputDialog extends React.Component {
             alert( `Error: ${res.response_code.message}` );
           }
 
-          this.setState( { submit_response: Object.assign( {}, { status_title: status_title }, res ) } );
+          this.setState( { submit_response: Object.assign( {}, this.state.submit_response, { status_title: status_title }, res ) } );
 
           this.setState({is_submitting: false});
         } );
 
     } else {
-      alert("Maaf input tidak valid!");
+      this.setState( {
+        submit_response: Object.assign(
+          {},
+          this.state.submit_response, { status_title: 'Input tidak valid', response_code: { message: 'Harap periksa kembali data yang anda input.' } }
+        )
+      } );
+      this._modalChildOpen();
     }
   };
 
@@ -515,7 +522,7 @@ class AddressInputDialog extends React.Component {
 
         <div className="address-input-dialog__footer-action">
 
-          <Button className="cancel-btn">BATAL</Button>
+          <Button className="cancel-btn" onClick={this._modalClose}>BATAL</Button>
           <Button className="submit-btn" onClick={this._onSubmit}>Simpan</Button>
 
         </div>
@@ -527,7 +534,7 @@ class AddressInputDialog extends React.Component {
           onClose={this._modalChildClose}>
 
           <div className="modal-inner">
-            <ModalNotice title={this.state.submit_response.status_title} notice={this.state.submit_response.response_code.message}/>
+            <ModalNotice modalClose={this._modalChildClose} title={this.state.submit_response.status_title} notice={this.state.submit_response.response_code.message}/>
           </div>
 
         </Modal>

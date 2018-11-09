@@ -42,7 +42,7 @@ class ModalNotice extends Component {
         <div className="icon"></div>
         <div className="title">{this.props.title}</div>
         <div className="notice">{this.props.notice}</div>
-        <Button className="close-btn">Tutup</Button>
+        <Button className="close-btn" onClick={() => biqHelper.utils.clickTimeout(()=>this.props.modalClose())}>Tutup</Button>
       </section>
     );
 

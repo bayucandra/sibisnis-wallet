@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "19926ea46f8ed33d96cea93fc427da61",
-    "url": "./static/media/ico-upload-desktop.19926ea4.svg"
+    "revision": "f3d4eb57c182f0e8ceb0dce7de9a78ee",
+    "url": "./static/media/ico-camera-white.f3d4eb57.svg"
   },
   {
-    "revision": "86e9f7ef2f40a1e40f34",
-    "url": "./static/css/main.11e780b5.chunk.css"
+    "revision": "95e569fac95b412aa67d",
+    "url": "./static/css/main.4363de01.chunk.css"
   },
   {
     "revision": "c2dead55f5593c790408d5a3e10d5a5e",
     "url": "./static/media/right-thema.c2dead55.svg"
   },
   {
-    "revision": "e7c504ae83beb1976d99",
-    "url": "./static/js/1.e7c504ae.chunk.js"
+    "revision": "6f2309d06d858df5c26b",
+    "url": "./static/js/1.6f2309d0.chunk.js"
   },
   {
     "revision": "4a686d48d5a089750c49",
@@ -104,8 +104,8 @@ self.__precacheManifest = [
     "url": "./static/media/ico-upload-mobile.2b660c8b.svg"
   },
   {
-    "revision": "86e9f7ef2f40a1e40f34",
-    "url": "./static/js/main.86e9f7ef.chunk.js"
+    "revision": "19926ea46f8ed33d96cea93fc427da61",
+    "url": "./static/media/ico-upload-desktop.19926ea4.svg"
   },
   {
     "revision": "569e39df8a5c3799d00a9e36d132fa69",
@@ -124,8 +124,8 @@ self.__precacheManifest = [
     "url": "./static/media/ico-camera-blue.2cfa045c.svg"
   },
   {
-    "revision": "f3d4eb57c182f0e8ceb0dce7de9a78ee",
-    "url": "./static/media/ico-camera-white.f3d4eb57.svg"
+    "revision": "95e569fac95b412aa67d",
+    "url": "./static/js/main.95e569fa.chunk.js"
   },
   {
     "revision": "09d1921949de7d1f50d885decc02b1f4",
@@ -164,6 +164,14 @@ self.__precacheManifest = [
     "url": "./static/media/back-blue.c7857648.svg"
   },
   {
+    "revision": "26a1ec90be635d027479741f815494cb",
+    "url": "./static/media/Nunito-ExtraLight.26a1ec90.ttf"
+  },
+  {
+    "revision": "592f55ff60492e54ca877f588bb8d52e",
+    "url": "./static/media/Nunito-ExtraLightItalic.592f55ff.ttf"
+  },
+  {
     "revision": "424413200c2a4c02e03d6edf064960aa",
     "url": "./static/media/Nunito-LightItalic.42441320.ttf"
   },
@@ -176,16 +184,44 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-SemiBold.713ac08d.ttf"
   },
   {
-    "revision": "1b31a5055cad7ed13ad2c1bc423adec6",
-    "url": "./static/media/Nunito-SemiBoldItalic.1b31a505.ttf"
-  },
-  {
     "revision": "6f47bcfc065790f02ed3cb8b51bef56f",
     "url": "./static/media/Nunito-Bold.6f47bcfc.ttf"
   },
   {
+    "revision": "725d81f848fb5c0189c9fd6102d33ee6",
+    "url": "./static/media/Nunito-BoldItalic.725d81f8.ttf"
+  },
+  {
+    "revision": "1b31a5055cad7ed13ad2c1bc423adec6",
+    "url": "./static/media/Nunito-SemiBoldItalic.1b31a505.ttf"
+  },
+  {
+    "revision": "bffb5c4446bb138c323417f225980727",
+    "url": "./static/media/Nunito-BlackItalic.bffb5c44.ttf"
+  },
+  {
+    "revision": "2d623765c6268f283e93862ff2209af1",
+    "url": "./static/media/Nunito-ExtraBoldItalic.2d623765.ttf"
+  },
+  {
+    "revision": "8f56148bb7b75bdf3358914c28cb798f",
+    "url": "./static/media/Nunito-ExtraBold.8f56148b.ttf"
+  },
+  {
+    "revision": "76e62b379c08d7d94c86ad5301d4abb5",
+    "url": "./static/media/Nunito-Black.76e62b37.ttf"
+  },
+  {
+    "revision": "7726e581d53ee89148d110321729344f",
+    "url": "./static/media/Nunito-Italic.7726e581.ttf"
+  },
+  {
     "revision": "65bb0a158ee1967292ee4d11079d45ae",
     "url": "./static/media/Nunito-Regular.65bb0a15.ttf"
+  },
+  {
+    "revision": "4ce7e79825241165247918d8a62b7353",
+    "url": "./static/media/gagal.4ce7e798.svg"
   },
   {
     "revision": "0dea40537bf38032e642366accfcfe28",
@@ -200,11 +236,15 @@ self.__precacheManifest = [
     "url": "./static/media/back-white.805e99d2.svg"
   },
   {
-    "revision": "e7c504ae83beb1976d99",
-    "url": "./static/css/1.5f98388d.chunk.css"
+    "revision": "c78576480aa7fa37d42b8fef4b144df5",
+    "url": "./static/media/back-blue-new.c7857648.svg"
   },
   {
-    "revision": "76f69538ada9c21b93bf0a0b177d712d",
+    "revision": "6f2309d06d858df5c26b",
+    "url": "./static/css/1.aae3f4a4.chunk.css"
+  },
+  {
+    "revision": "e08cce97dae48495074215819a3ed0ce",
     "url": "./index.html"
   }
 ];

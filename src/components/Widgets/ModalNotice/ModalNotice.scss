@@ -1,3 +1,4 @@
+@import "../../../styles/variables";
 .widget-modal-notice {
   flex: 1 1 auto;
   display: flex;
@@ -64,3 +65,14 @@
   }//.close-btn
 
 }//.widget-modal-notice
+
+
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+  .widget-modal-notice {
+
+    .close-btn {
+      cursor: pointer;
+    }//.close-btn
+
+  }//.widget-modal-notice
+}//@media

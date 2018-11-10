@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import "./HeaderMenuMobile.scss";
 import IconButton from "@material-ui/core/IconButton";
@@ -26,7 +27,7 @@ class HeaderMenuMobile extends  Component {
 
     return (
 
-      <div className="header-menu-mobile hidden-md-up">
+      <div className={`header-menu-mobile hidden-md-up${ !this.props.main_header_menu_mobile_show ? ' header-menu-mobile--hidden-mobile' : '' }`}>
 
         <IconButton
           className="header-menu-mobile__trigger"
@@ -62,4 +63,12 @@ class HeaderMenuMobile extends  Component {
 
 }
 
-export default HeaderMenuMobile;
+const mapStateToProps = state => {
+
+  return {
+    main_header_menu_mobile_show: state.app.main_header_menu_mobile_show
+  };
+
+};
+
+export default connect( mapStateToProps ) ( HeaderMenuMobile );

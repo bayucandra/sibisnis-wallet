@@ -25,7 +25,7 @@ import ModalNotice from "../../Widgets/ModalNotice/ModalNotice";
 import "./AddressInputDialog.scss";
 import "../../../styles/_components.scss";
 import biqConfig from "../../../providers/biqConfig";
-import UserActions from "../../../redux/actions/UserActions";
+import UserActions from "../../../redux/actions/Global/UserActions";
 
 const styles = theme => ({
   root: {

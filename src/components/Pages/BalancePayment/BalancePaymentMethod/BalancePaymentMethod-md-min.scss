@@ -1,0 +1,50 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .balance-payment-method {
+
+    &__method-list {
+      margin-top: 31px;
+      border-radius: 3px;
+      box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+      background-color: #FFFFFF;
+      //background-color: map-get($colors, white-three);
+
+      .payment-method-item {
+        margin-top: 0;
+        border-radius: 0;
+        box-shadow: 0 0.5px 0 0 map-get($colors, silver);
+        background: none;
+
+        &:after {
+          top: 19px; right: 20px;
+        }
+
+        &__inner {
+
+          .label {
+            justify-content: space-between;
+            height: 62px;
+            border: 0;
+
+            .icon-desktop {
+              margin-right: 54px;
+
+              img {
+                width: auto;
+                height: 30px;
+                margin-left: 10px;
+              }//img
+
+            }//.icon-desktop
+
+          }//.label
+
+        }//&__inner
+
+      }//.payment-method-item
+
+    }//&__method-list
+
+  }//.balance-payment-method
+
+}//@media

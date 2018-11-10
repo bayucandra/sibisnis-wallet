@@ -9,7 +9,7 @@ import PageBackButton from './../../Shared/PageBackButton/PageBackButton';
 import { navigationStatus } from './../../../lib/utilities';
 
 // Redux
-import { getNewsList } from './../../../redux/actions/NewsActions';
+import { getNewsList } from '../../../redux/actions/Pages/NewsActions';
 import {connect} from 'react-redux';
 
 // Custom CSS

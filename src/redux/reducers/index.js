@@ -3,22 +3,26 @@ import { combineReducers } from 'redux';
 
 import ActionTypes from "../../redux/action-types";
 
-import app from './AppReducer';
-import user from './UserReducer';
-import historyLogin from './HistoryLoginReducer';
-import news from './NewsReducers';
+import app from './Global/AppReducer';
+import user from './Global/UserReducer';
+
+import historyLogin from './Pages/HistoryLoginReducer';
+import news from './Pages/NewsReducers';
+import balance from './Pages/BalanceReducer';
 
 
 const appReducers = combineReducers({
   app,
   user,
+
   historyLogin,
-  news
+  news,
+  balance
 });
 
 const rootReducer = (state, action) => {
   if (action.type === ActionTypes.app.STATES_RESET) {
-    console.warn('Resetting state===============');
+    if ( process.env.NODE_ENV === 'development' ) console.warn('Resetting state===============');
     state = undefined
   }
 

@@ -41,7 +41,8 @@ class Balance extends Component {
 
 const mapStateToProps = state => {
   return {
-    main_header_mobile_show: state.app.main_header_mobile_show
+    main_header_mobile_show: state.app.main_header_mobile_show,
+    balance: state.balance
   }
 };
 

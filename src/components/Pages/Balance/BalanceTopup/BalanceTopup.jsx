@@ -8,7 +8,8 @@ import NumberFormat from "react-number-format";
 import HeaderMobileGeneral from "../../../Shared/HeaderMobileGeneral";
 import Tab, {TabItem} from "../../../Widgets/Tab";
 
-import AppActions from "../../../../redux/actions/AppActions";
+import AppActions from "../../../../redux/actions/Global/AppActions";
+import BalanceActions from "../../../../redux/actions/Pages/BalanceActions";
 import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceTopup.scss";
@@ -24,13 +25,13 @@ class BalanceTopup extends Component {
   };
 
   nominal_list = [
-    { number: 50000, text: "Limapuluh ribu rupiah" },
-    { number: 100000, text: "Seratus ribu rupiah" },
-    { number: 150000, text: "Seratus limapuluh ribu rupiah" },
-    { number: 200000, text: "Duaratus ribu rupiah" },
-    { number: 250000, text: "Duaratus limapuluh ribu rupiah" },
-    { number: 500000, text: "Limaratus ribu rupiah" },
-    { number: 1000000, text: "Satu juta rupiah" }
+    { amount: 50000, text: "Limapuluh ribu rupiah" },
+    { amount: 100000, text: "Seratus ribu rupiah" },
+    { amount: 150000, text: "Seratus limapuluh ribu rupiah" },
+    { amount: 200000, text: "Duaratus ribu rupiah" },
+    { amount: 250000, text: "Duaratus limapuluh ribu rupiah" },
+    { amount: 500000, text: "Limaratus ribu rupiah" },
+    { amount: 1000000, text: "Satu juta rupiah" }
   ];
 
   constructor( props ) {
@@ -49,6 +50,13 @@ class BalanceTopup extends Component {
 
   _historyBtn = <Button className="history-btn-mobile" onClick={this._historyBtnClick}>History</Button>;
 
+  _nominalClick = nominal => {
+    let {dispatch} = this.props;
+    biqHelper.utils.clickTimeout( () => {
+      dispatch( BalanceActions.balanceNominalSet( nominal ) );
+      this.props.history.push('/balance/payment');
+    } );
+  };
 
   componentDidMount() {
     let {dispatch} = this.props;
@@ -90,11 +98,11 @@ class BalanceTopup extends Component {
             <section className="tab-panel__pick-nominal">
               { this.nominal_list.map( ( el, idx, arr ) => {
                 return (
-                  <Button className={`nominal-item${ idx === ( arr.length-1 ) ? ' is-last' : '' }`} key={el.number}>
+                  <Button className={`nominal-item${ idx === ( arr.length-1 ) ? ' is-last' : '' }`} onClick={ () => this._nominalClick( el.amount )} key={el.amount}>
                     <div className="nominal-item__inner">
-                      <NumberFormat displayType={'text'} value={el.number} prefix={'Rp '}
+                      <NumberFormat displayType={'text'} value={el.amount} prefix={'Rp '}
                                     renderText={value => <div className="nominal-item__number hidden-md-up">{value}</div>} thousandSeparator={'.'} decimalSeparator={','}/>
-                      <NumberFormat displayType={'text'} value={el.number} prefix={''}
+                      <NumberFormat displayType={'text'} value={el.amount} prefix={''}
                                     renderText={value => <div className="nominal-item__number visible-md-up">{value}</div>} thousandSeparator={'.'} decimalSeparator={','}/>
                       <div className="nominal-item__text hidden-md-up">{ el.text }</div>
                     </div>
@@ -136,7 +144,8 @@ class BalanceTopup extends Component {
 const mapStateToProps = state => {
   return {
     is_profile_parsed: state.user.is_profile_parsed,
-    user_profile: state.user.profile
+    user_profile: state.user.profile,
+    balance: state.balance
   }
 };
 

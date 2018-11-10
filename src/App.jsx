@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 
 import Header from "./components/Shared/Header/Header";
-import AppActions from "./redux/actions/AppActions";
-import UserActions from "./redux/actions/UserActions";
+import AppActions from "./redux/actions/Global/AppActions";
+import UserActions from "./redux/actions/Global/UserActions";
 import esProvider from "./providers/esProvider";
 import biqHelper from "./lib/biqHelper/index";
 import biqConfig from "./providers/biqConfig";
@@ -16,6 +16,7 @@ import { debounceTime, map } from 'rxjs/operators';
 import $ from 'jquery';
 import DashboardLayout from "./components/DashboardLayout/DashboardLayout";
 import Balance from "./components/Pages/Balance";
+import BalancePayment from "./components/Pages/BalancePayment/BalancePayment";
 import AllNews from "./components/Pages/AllNews/AllNews";
 import AllHistorLogins from "./components/Pages/AllHistoryLogins/AllHistoryLogins";
 
@@ -28,17 +29,19 @@ class App extends Component {
 
   componentDidMount(){
     let {dispatch} = this.props;
-    console.log('initializing app');
+    if ( process.env.NODE_ENV === 'development' ) console.log('initializing app');
 
     dispatch(AppActions.appInit());
     dispatch(AppActions.appSseAgenInit());
     dispatch(UserActions.userProfileGet());
 
-    esProvider.addEventListener( 'login', ( e ) => {
-      if ( e.data === 'false' || !e.data ) {
-        // dispatch( AppActions.appLogout() );//TODO: enable this soon
-      }
-    } );
+    if ( process.env.NODE_ENV === 'production' ) {
+      esProvider.addEventListener('login', (e) => {
+        if (e.data === 'false' || !e.data) {
+          dispatch(AppActions.appLogout());
+        }
+      });
+    }
 
 
     let source$ = fromEvent(window, 'resize')
@@ -77,7 +80,7 @@ class App extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     let {dispatch} = this.props;
     if ( this.props.location !== nextProps.location ) {
-      dispatch( AppActions.appRouterChange( { main_header_mobile_show : true } ) );//default should always true, it will be overridden at page/component part if it should be false
+      dispatch( AppActions.appRouterChange( { main_header_mobile_show : true, main_header_menu_mobile_show: true } ) );//default should always true, it will be overridden at page/component part if it should be false
     }
 
     return true;
@@ -99,14 +102,18 @@ class App extends Component {
 
     return (
         <React.Fragment>
+
           <Header/>
-            <Switch>
-              <Redirect from="/" exact={true} to="/dashboard" />
-              <Route path="/balance" component={Balance}/>
-              <Route path="/dashboard" component={DashboardLayout} />
-              <Route path="/all-news" component={AllNews} />
-              <Route path="/all-history-logins" component={AllHistorLogins} />
-            </Switch>
+
+          <Switch>
+            <Redirect from="/" exact={true} to="/dashboard" />
+            <Route path="/balance/payment" component={BalancePayment}/>
+            <Route path="/balance" component={Balance}/>
+            <Route path="/dashboard" component={DashboardLayout} />
+            <Route path="/all-news" component={AllNews} />
+            <Route path="/all-history-logins" component={AllHistorLogins} />
+          </Switch>
+
         </React.Fragment>
     )
   }

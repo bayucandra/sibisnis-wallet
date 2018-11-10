@@ -12,7 +12,7 @@ import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceProfileVerification.scss";
 import HeaderMobileGeneral from "../../../Shared/HeaderMobileGeneral";
-import AppActions from "../../../../redux/actions/AppActions";
+import AppActions from "../../../../redux/actions/Global/AppActions";
 
 
 

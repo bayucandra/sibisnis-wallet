@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import {IconButton, Button} from '@material-ui/core';
 
-import AppActions from "../../../../redux/actions/AppActions";
+import AppActions from "../../../../redux/actions/Global/AppActions";
 import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceTopupHistory.scss";

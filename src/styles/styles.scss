@@ -1,6 +1,6 @@
 @import '~normalize.css/normalize';
-@import './fonts.scss';
-@import './mixins.scss';
+@import './fonts';
+@import './mixins';
 @import './responsive-utils';
 $layout-width: (
         short: 1000px, extra: 1200px, full: 1440px

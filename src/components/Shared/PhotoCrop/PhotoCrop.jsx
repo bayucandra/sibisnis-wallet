@@ -5,7 +5,6 @@ import ReactCrop from 'react-cropper';
 import 'cropperjs/dist/cropper.css'
 
 /** Custom JS libs */
-import biqHelper from "../../../lib/biqHelper/index";
 
 // Custom CSS
 import './PhotoCrop.scss';
@@ -17,18 +16,9 @@ class PhotoCrop extends Component {
 
   }
 
-  _crop(){
-    console.log( this.cropper.getCropBoxData() );
-    console.log( this.cropper.getCanvasData() );
-    // console.log(this.cropper.getCroppedCanvas().toDataURL());
-    // let dataUrl = this.ref.cropper.getCroppedCanvas().toDataURL();
-    // console.log(dataUrl);
-  }
+  _ready = ()=>{
 
-  _ready(){
-    // let canvas_data = this.prop.cropper.getCanvasData();
-
-  }
+  };
 
   render() {
     return (
@@ -37,7 +27,7 @@ class PhotoCrop extends Component {
           aspectRatio={1}
           src={this.props.src}
           ref={this.props.imageCropRefSet}
-          ready={this._ready.bind(this)}
+          ready={this._ready}
           zoomable={false}
           autoCropArea={1}
         />

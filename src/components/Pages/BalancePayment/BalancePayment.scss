@@ -1,0 +1,16 @@
+.balance-payment {
+
+  &__inner {
+    flex: 1 1 1px;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: flex-start;
+    overflow-y: auto;
+
+    > * {
+      flex: none;
+    }
+
+  }//&__inner
+
+}//.balance-payment

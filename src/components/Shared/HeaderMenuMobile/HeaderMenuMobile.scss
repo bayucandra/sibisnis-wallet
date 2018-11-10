@@ -3,6 +3,10 @@
   display: flex;
   align-items: center;
 
+  &--hidden-mobile {
+    display: none !important;
+  }//&--hidden-mobile
+
   &__trigger {
     min-width: 40px;
     height: 40px;

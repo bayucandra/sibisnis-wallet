@@ -18,16 +18,19 @@ class BalancePayment extends Component {
   render() {
 
     return (
-      <div className="main-wrapper biq-wrapper balance-payment">
-        <div className="biq-wrapper__inner balance-payment__inner">
+        <div className="main-wrapper biq-wrapper biq-wrapper--md-no-side-padding balance-payment">
 
-          <Switch>
-            <Route path="/balance/payment/method" component={BalancePaymentMethod}/>
-            <Redirect from="/balance/payment" to="/balance/payment/method"/>
-          </Switch>
+          <div className="balance-payment__header-background visible-md-up" />
 
+          <div className="biq-wrapper__inner balance-payment__inner">
+
+            <Switch>
+              <Route path="/balance/payment/method" component={BalancePaymentMethod}/>
+              <Redirect from="/balance/payment" to="/balance/payment/method"/>
+            </Switch>
+
+          </div>
         </div>
-      </div>
     );
 
   }

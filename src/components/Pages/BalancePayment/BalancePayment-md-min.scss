@@ -1,0 +1,21 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .balance-payment {
+    padding-top: 0 !important;
+
+    &__header-background {
+      width: 100%;
+      height: 290px - 70px;
+      background-color: map-get( $colors, blue-green );
+      background-image: url('../../../images/bg/ico-oval-1.svg'), url('../../../images/bg/oval-2.svg');
+      background-position: bottom left, top -70px right 0, top left;
+      background-repeat: no-repeat, no-repeat, repeat;
+    }//&__header-background
+
+    &__inner {
+      margin-top: -( 290px - 70px );
+    }//&__inner
+
+  }//.balance-payment
+
+}//@media

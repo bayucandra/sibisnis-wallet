@@ -1,9 +1,26 @@
 @media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
 
   .balance-payment-method {
+    padding-bottom: 0;
+
+    &__header {
+      margin: 38px 0 31px;
+      font-size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }//&__header
+
+    &__body {
+      align-items: flex-start;
+    }
 
     &__method-list {
-      margin-top: 31px;
+      flex: 609 1 1px;
+      margin-top: 0;
       border-radius: 3px;
       box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
       background-color: #FFFFFF;
@@ -14,6 +31,7 @@
         border-radius: 0;
         box-shadow: 0 0.5px 0 0 map-get($colors, silver);
         background: none;
+        cursor: pointer;
 
         &:after {
           top: 19px; right: 20px;
@@ -25,6 +43,15 @@
             justify-content: space-between;
             height: 62px;
             border: 0;
+
+            font-size: 14px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.5px;
+            color: map-get($colors, charcoal-grey);
+            transition: all 200ms ease-in-out;
 
             .icon-desktop {
               margin-right: 54px;
@@ -41,9 +68,135 @@
 
         }//&__inner
 
+        &:hover {
+          &:before {
+            position: absolute;
+            content: ' ';
+            display: block;
+            left: 0; top: 0;
+            width: 4px;
+            height: 100%;
+            background-color: map-get($colors, tealish);
+          }//&:before
+
+          .payment-method-item__inner {
+
+            .label {
+              font-size: 15px;
+              font-weight: bold;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.5px;
+              color: map-get($colors, tealish);
+            }//.label
+
+          }//..payment-method-item__inner
+
+        }//&:hover
+
       }//.payment-method-item
 
     }//&__method-list
+
+    &__spacer {
+      flex: 50 1 1px;
+    }
+
+    &__payment-info {
+      flex: 300 1 1px;
+      display: flex;
+      border-radius: 3px;
+      box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+
+      .header {
+        height: 60px;
+        box-sizing: border-box;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        background-color: map-get($colors, off-white);
+
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: map-get($colors, charcoal-grey);
+
+        &__title {
+          margin-left: 19px;
+        }//&__title
+
+      }//.header
+
+      .info-section {
+        padding-left: 19px;
+        box-sizing: border-box;
+
+        &__title {
+          margin-top: 20px;
+
+          font-size: 14px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: map-get($colors, charcoal-grey);
+        }//&__title
+
+        &__name {
+          margin-top: 16px;
+
+          font-size: 13px;
+          font-weight: 600;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+          color: map-get($colors, charcoal-grey);
+        }//&__name
+
+        %account-and-nominal {
+
+          .label {
+            font-size: 13px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.3px;
+            color: map-get($colors, charcoal-grey);
+          }//.label
+
+          .value {
+            margin-left: 10px;
+
+            font-size: 13px;
+            font-weight: 300;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.3px;
+            color: map-get($colors, charcoal-grey);
+          }//.value
+        }//%account-and-nominal
+
+        &__account-number {
+          margin-top: 9px;
+          @extend %account-and-nominal;
+        }//&__account-number
+
+        &__nominal {
+          margin-top: 5px;
+          margin-bottom: 40px;
+          @extend %account-and-nominal;
+        }//&__nominal
+
+      }//.info-section
+
+    }//&__payment-info
 
   }//.balance-payment-method
 

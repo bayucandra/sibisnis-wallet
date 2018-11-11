@@ -6,6 +6,10 @@
   flex-direction: column;
   background: #FFFFFF;
 
+  > * {
+    flex: none;
+  }//> *
+
   .history-btn-mobile {
     min-width: 67px;
     height: 35px;
@@ -39,8 +43,14 @@
   }//.tab-nav
 
   .tab-panel {
+    flex: 1 1 1px;
     display: flex;
     flex-direction: column;
+    overflow-y: auto;
+
+    > * {
+      flex: none;
+    }//> *
 
     &__pick-nominal {
       display: flex;

@@ -8,8 +8,8 @@ import NumberFormat from "react-number-format";
 import HeaderMobileGeneral from "../../../Shared/HeaderMobileGeneral";
 import Tab, {TabItem} from "../../../Widgets/Tab";
 
-import AppActions from "../../../../redux/actions/Global/AppActions";
-import BalanceActions from "../../../../redux/actions/Pages/BalanceActions";
+import AppActions from "../../../../redux/actions/global/appActions";
+import balanceActions from "../../../../redux/actions/pages/balanceActions";
 import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceTopup.scss";
@@ -53,7 +53,8 @@ class BalanceTopup extends Component {
   _nominalClick = nominal => {
     let {dispatch} = this.props;
     biqHelper.utils.clickTimeout( () => {
-      dispatch( BalanceActions.balanceNominalSet( nominal ) );
+      dispatch( balanceActions.balanceNominalSet( nominal ) );
+      dispatch( balanceActions.balanceMethodReset() );
       this.props.history.push('/balance/payment');
     } );
   };

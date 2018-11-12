@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Redirect} from 'react-router-dom';
 
 import {Button} from '@material-ui/core';
 
+import balanceActions from "../../../../redux/actions/pages/balanceActions";
+
 import biqHelper from "../../../../lib/biqHelper";
+
+import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 
 import "./BalancePaymentMethod.scss";
 
@@ -37,21 +42,33 @@ import iconCimbClick from "../../../../images/icons/payment/cimb-klik@3x.png";
 
 class BalancePaymentMethod extends Component {
 
-  state = {
-    payment_info_is_visible_mobile: false
-  };
-
   constructor( props ) {
     super(props);
   }
 
   _paymentInfoVisibilityToggle = () => {
     biqHelper.utils.clickTimeout( () => {
-      this.setState( { payment_info_is_visible_mobile : !this.state.payment_info_is_visible_mobile } );
+      let {dispatch} = this.props;
+      dispatch( balanceActions.balancePaymentInfoVisibility() );
     } );
   };
 
+  _paymentMethodSelect = ( type ) => {
+    biqHelper.utils.clickTimeout( () => {
+      let {dispatch} = this.props;
+      dispatch( balanceActions.balanceMethodSet( type ) );
+    });
+  };
+
   render() {
+
+    if ( !biqHelper.utils.isNull( this.props.balance.payment_method ) ) {
+      switch( this.props.balance.payment_method ) {
+        case 'bank-transfer':
+          return <Redirect to="/balance/payment/bank-transfer"/>
+      }
+    }
+
     return (
       <div className="balance-payment-method">
 
@@ -65,7 +82,7 @@ class BalancePaymentMethod extends Component {
 
           <section className="balance-payment-method__method-list">
 
-            <Button className="payment-method-item is-first">
+            <Button className="payment-method-item is-first" onClick={() => { this._paymentMethodSelect( 'bank-transfer' ) }}>
               <div className="payment-method-item__inner">
                 <div className="label">
                   <div>Transfer Bank</div>
@@ -178,32 +195,7 @@ class BalancePaymentMethod extends Component {
 
           <div className="balance-payment-method__spacer visible-md-up"/>
 
-          <section className={`balance-payment-method__payment-info${ this.state.payment_info_is_visible_mobile ? ' is-visible-mobile' : '' }`}>
-
-            <div className="header">
-              <div className="header__title">Info Transaksi</div>
-              <Button className="header__close-btn hidden-md-up" onClick={this._paymentInfoVisibilityToggle}>&nbsp;</Button>
-            </div>
-
-            <div className="info-section">
-
-              <div className="info-section__title">Penambahan saldo</div>
-
-              <div className="info-section__name">{this.props.user_profile.nama}</div>
-
-              <div className="info-section__account-number">
-                <div className="label">Nomor akun :</div>
-                <div className="value">{this.props.user_profile.kontak}</div>
-              </div>
-
-              <div className="info-section__nominal">
-                <div className="label">Nominal Penambahan :</div>
-                <div className="value">{biqHelper.utils.numberFormat(this.props.balance.nominal_value, 'Rp ')}</div>
-              </div>
-
-            </div>
-
-          </section>
+          <BalanceTransactionInfo/>
 
         </div>
 
@@ -215,8 +207,7 @@ class BalancePaymentMethod extends Component {
 
 const mapStateToProps = state => {
   return {
-    balance: state.balance,
-    user_profile: state.user.profile
+    balance: state.balance
   };
 };
 

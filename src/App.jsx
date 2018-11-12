@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 
 import Header from "./components/Shared/Header/Header";
-import AppActions from "./redux/actions/Global/AppActions";
-import UserActions from "./redux/actions/Global/UserActions";
+import AppActions from "./redux/actions/global/appActions";
+import UserActions from "./redux/actions/global/userActions";
 import esProvider from "./providers/esProvider";
 import biqHelper from "./lib/biqHelper/index";
 import biqConfig from "./providers/biqConfig";

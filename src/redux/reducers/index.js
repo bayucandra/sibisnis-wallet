@@ -3,12 +3,12 @@ import { combineReducers } from 'redux';
 
 import ActionTypes from "../../redux/action-types";
 
-import app from './Global/AppReducer';
-import user from './Global/UserReducer';
+import app from './global/appReducer';
+import user from './global/userReducer';
 
-import historyLogin from './Pages/HistoryLoginReducer';
-import news from './Pages/NewsReducers';
-import balance from './Pages/BalanceReducer';
+import historyLogin from './pages/historyLoginReducer';
+import news from './pages/newsReducers';
+import balance from './pages/balanceReducer';
 
 
 const appReducers = combineReducers({

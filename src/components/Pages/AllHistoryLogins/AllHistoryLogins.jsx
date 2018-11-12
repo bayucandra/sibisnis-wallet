@@ -10,7 +10,7 @@ import { navigationStatus } from './../../../lib/utilities';
 
 // Redux
 import { connect } from 'react-redux';
-import { getHistoryLoginList } from '../../../redux/actions/Pages/HistoryLoginActions';
+import { getHistoryLoginList } from '../../../redux/actions/pages/historyLoginActions';
 import './AllHistoryLogins.scss';
 class AllHistoryLogins extends Component {
   constructor(props) {

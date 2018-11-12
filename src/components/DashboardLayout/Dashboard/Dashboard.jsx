@@ -6,8 +6,8 @@ import HistoryLogin from './HistoryLogin/HistoryLogin';
 import LatestNews from './LatestNews/LatestNews';
 
 // Redux
-import { getHistoryLoginList } from '../../../redux/actions/Pages/HistoryLoginActions';
-import { getNewsList } from '../../../redux/actions/Pages/NewsActions'
+import { getHistoryLoginList } from '../../../redux/actions/pages/historyLoginActions';
+import { getNewsList } from '../../../redux/actions/pages/newsActions'
 import { connect } from 'react-redux';
 
 // Custom CSS

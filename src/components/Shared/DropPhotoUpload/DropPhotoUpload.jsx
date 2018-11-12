@@ -16,7 +16,7 @@ import PhotoCrop from '../PhotoCrop/PhotoCrop';
 import biqHelper from "../../../lib/biqHelper/index";
 
 // Redux
-import UserActions from '../../../redux/actions/Global/UserActions';
+import UserActions from '../../../redux/actions/global/userActions';
 import { connect } from 'react-redux';
 
 // Local Images

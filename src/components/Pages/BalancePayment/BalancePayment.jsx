@@ -2,9 +2,10 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
-import AppActions from "../../../redux/actions/Global/AppActions";
+import AppActions from "../../../redux/actions/global/appActions";
 
 import BalancePaymentMethod from "./BalancePaymentMethod/BalancePaymentMethod";
+import BalancePaymentBank from "./BalancePaymentBank/BalancePaymentBank";
 
 import "./BalancePayment.scss";
 
@@ -26,6 +27,7 @@ class BalancePayment extends Component {
 
             <Switch>
               <Route path="/balance/payment/method" component={BalancePaymentMethod}/>
+              <Route path="/balance/payment/bank-transfer" component={BalancePaymentBank}/>
               <Redirect from="/balance/payment" to="/balance/payment/method"/>
             </Switch>
 

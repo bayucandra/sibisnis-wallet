@@ -5,7 +5,7 @@ export const getHistoryLoginList = () => {
     type: Types.GET_HISTORY_LOGINS_LIST,
     payload: null
   };
-}
+};
 
 export const setHistoryLoginList = (historyLoginList) => {
   return {

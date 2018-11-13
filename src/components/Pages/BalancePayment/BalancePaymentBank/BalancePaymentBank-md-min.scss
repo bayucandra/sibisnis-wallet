@@ -1,12 +1,10 @@
 @media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
 
   .balance-payment-bank {
-
-    align-items: center;
+    align-items: normal;
+    padding: 0 15px;
 
     &__header {
-      width: 100%;
-      max-width: 619px;
       margin-top: 38px;
 
       font-size: 20px;
@@ -19,9 +17,16 @@
     }//&__header
 
     &__body {
-      max-width: 619px;
+      align-items: flex-start;
       margin-top: 31px;
+      overflow: visible;
+    }//&__body
+
+    &__main-panel {
+      flex: 619 1 1px;
+      max-width: 619px;
       padding: 0 40px;
+      margin-bottom: 50px;
       border-radius: 3px;
       box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
 
@@ -96,60 +101,6 @@
 
       }//.bank-destination
 
-      .detail-payment {
-        margin-top: 40px;
-
-        &__title {
-          font-size: 14px;
-          font-weight: bold;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: 0.4px;
-          color: map-get($colors, charcoal-grey);
-        }//&__title
-
-
-        .biq-row {
-          height: auto;
-          padding: 0 20px;
-          box-shadow: none;
-
-          &:first-child {
-            border-top-left-radius: 3px;
-            border-top-right-radius: 3px;
-            padding-top: 20px;
-          }//&:first-child
-
-          &:nth-child( 2 ) {
-            padding: 15px 20px;
-          }//&:nth-child( 2 )
-
-          &:last-child {
-            height: 60px;
-            border-bottom-left-radius: 3px;
-            border-bottom-right-radius: 3px;
-
-            font-size: 16px;
-            font-weight: 600;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: normal;
-            letter-spacing: 0.4px;
-          }//&:last-child
-
-          .label {
-            font-weight: normal;
-          }//.label
-
-          .value {
-            font-weight: normal;
-          }//.value
-
-        }//.biq-row
-
-      }//.detail-payment
-
       .email-notification {
         margin-top: 40px;
 
@@ -168,7 +119,7 @@
 
       .action {
         margin-top: 20px;
-        margin-bottom: 40px;
+        margin-bottom: 50px;
 
         .submit-btn {
           flex: none;
@@ -178,7 +129,11 @@
 
       }//.action
 
-    }//&__body
+    }//&__main-panel
+
+    &__spacer {
+      flex: 50 1 1px;
+    }//&__spacer
 
   }//.balance-payment-bank
 

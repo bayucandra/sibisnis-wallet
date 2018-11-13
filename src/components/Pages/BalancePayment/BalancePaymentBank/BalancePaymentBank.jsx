@@ -13,6 +13,7 @@ import iconBni from "../../../../images/icons/payment/bni-1@3x.png";
 import iconBca from "../../../../images/icons/payment/bca-1@3x.png";
 import iconBri from "../../../../images/icons/payment/bri-1@3x.png";
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
+import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 
 class BalancePaymentBank extends Component {
 
@@ -67,97 +68,103 @@ class BalancePaymentBank extends Component {
 
         <div className="balance-payment-bank__body">
 
+          <div className="balance-payment-bank__main-panel">
 
-          <div className="top-nav">
+            <div className="top-nav">
 
-            <Button className="back-btn" onClick={this._backBtnClick}>Kembali</Button>
+              <Button className="back-btn" onClick={this._backBtnClick}>Kembali</Button>
 
-            <div className="divider visible-md-up"/>
+              <div className="divider visible-md-up"/>
 
-            <div className="title visible-md-up">Transfer Bank</div>
+              <div className="title visible-md-up">Transfer Bank</div>
 
-          </div>
+            </div>
 
-          <div className="notice-top">
-            <ul>
-              <li>Bisa menggunakan channel ATM, IBanking, MBanking, SMS Banking</li>
-              <li>Setelah Anda menekan "Bayar Sekarang", Anda tidak bisa mengubah metode pembayaran Anda</li>
-            </ul>
-          </div>
+            <div className="notice-top">
+              <ul>
+                <li>Bisa menggunakan channel ATM, IBanking, MBanking, SMS Banking</li>
+                <li>Setelah Anda menekan "Bayar Sekarang", Anda tidak bisa mengubah metode pembayaran Anda</li>
+              </ul>
+            </div>
 
-          <div className="bank-destination">
+            <div className="bank-destination">
 
-            <div className="bank-destination__title">Pilih Bank Tujuan Transfer</div>
+              <div className="bank-destination__title">Pilih Bank Tujuan Transfer</div>
 
-            <div className="bank-destination__row">
+              <div className="bank-destination__row">
 
-              {
-                [
-                  {method: 'bank-tf-mandiri', label: 'Mandiri', icon: iconMandiri, icon_width: '51px', icon_height: '27px'},
-                  {method: 'bank-tf-bni', label: 'BNI', icon: iconBni, icon_width: '43px', icon_height: '13px'},
-                  {method: 'bank-tf-bca', label: 'BCA', icon: iconBca, icon_width: '41px', icon_height: '13px'},
-                  {method: 'bank-tf-bri', label: 'BRI', icon: iconBri, icon_width: '60px', icon_height: '14px'},
-                ]
-                  .map((el) => {
-                    return (
-                      <Button className={`bank-select${ this._bankSelectedClassGen( el.method ) }`} onClick={ () => this._bankSelectClick( el.method )} key={el.method}>
-                        <div className="bank-select__radio-circle"/>
-                        <div className="bank-select__label">{el.label}</div>
-                        <div className="bank-select__spacer"/>
-                        <div className="bank-select__icon" style={{ backgroundImage: `url(${el.icon})`, width: el.icon_width, height: el.icon_height }}/>
-                      </Button>
-                    )
-                  })
-              }
+                {
+                  [
+                    {method: 'bank-tf-mandiri', label: 'Mandiri', icon: iconMandiri, icon_width: '51px', icon_height: '27px'},
+                    {method: 'bank-tf-bni', label: 'BNI', icon: iconBni, icon_width: '43px', icon_height: '13px'},
+                    {method: 'bank-tf-bca', label: 'BCA', icon: iconBca, icon_width: '41px', icon_height: '13px'},
+                    {method: 'bank-tf-bri', label: 'BRI', icon: iconBri, icon_width: '60px', icon_height: '14px'},
+                  ]
+                    .map((el) => {
+                      return (
+                        <Button className={`bank-select${ this._bankSelectedClassGen( el.method ) }`} onClick={ () => this._bankSelectClick( el.method )} key={el.method}>
+                          <div className="bank-select__radio-circle"/>
+                          <div className="bank-select__label">{el.label}</div>
+                          <div className="bank-select__spacer"/>
+                          <div className="bank-select__icon" style={{ backgroundImage: `url(${el.icon})`, width: el.icon_width, height: el.icon_height }}/>
+                        </Button>
+                      )
+                    })
+                }
 
+
+              </div>
+
+            </div>
+
+            <div className="detail-payment hidden-md-up">
+
+              <div className="detail-payment__title">Detail Pembayaran</div>
+
+              <div className="detail-payment__panel">
+
+                <div className="biq-row">
+                  <div className="label">Pemilik akun</div>
+                  <div className="value">{ this.props.user_profile.nama }</div>
+                </div>
+
+                <div className="biq-row">
+                  <div className="label">Nomor Akun</div>
+                  <div className="value">{ this.props.user_profile.kontak }</div>
+                </div>
+
+                <div className="biq-row">
+                  <div className="label">Request Topup</div>
+                  <div className="value">{ biqHelper.utils.numberFormat( this.props.balance.nominal_value, 'Rp ' ) }</div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <div className="email-notification">
+
+              <div className="email-notification__title">Alamat Email Anda</div>
+
+              <div className="email-notification__notice">Untuk mengirimkan invoice dan status pemesanan Anda</div>
+
+              <input type="text" className="email-notification__input" value={this.state.user_email} onChange={ e => this.setState( { user_email: e.target.value } ) }/>
+
+            </div>
+
+            <div className="action">
+
+              <Button className="submit-btn">
+                Bayar Sekarang
+              </Button>
 
             </div>
 
           </div>
 
-          <div className="detail-payment">
+          <div className="balance-payment-bank__spacer"/>
 
-            <div className="detail-payment__title">Detail Pembayaran</div>
-
-            <div className="detail-payment__panel">
-
-              <div className="biq-row">
-                <div className="label">Pemilik akun</div>
-                <div className="value">{ this.props.user_profile.nama }</div>
-              </div>
-
-              <div className="biq-row">
-                <div className="label">Nomor Akun</div>
-                <div className="value">{ this.props.user_profile.kontak }</div>
-              </div>
-
-              <div className="biq-row">
-                <div className="label">Request Topup</div>
-                <div className="value">{ biqHelper.utils.numberFormat( this.props.balance.nominal_value, 'Rp ' ) }</div>
-              </div>
-
-            </div>
-
-          </div>
-
-          <div className="email-notification">
-
-            <div className="email-notification__title">Alamat Email Anda</div>
-
-            <div className="email-notification__notice">Untuk mengirimkan invoice dan status pemesanan Anda</div>
-
-            <input type="text" className="email-notification__input" value={this.state.user_email} onChange={ e => this.setState( { user_email: e.target.value } ) }/>
-
-          </div>
-
-          <div className="action">
-
-            <Button className="submit-btn">
-              Bayar Sekarang
-            </Button>
-
-          </div>
-
+          <BalanceTransactionInfo/>
 
         </div>
 

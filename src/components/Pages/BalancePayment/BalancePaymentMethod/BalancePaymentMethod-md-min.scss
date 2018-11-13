@@ -19,8 +19,10 @@
     }
 
     &__method-list {
-      flex: 609 1 1px;
+      flex: 619 1 1px;
+      max-width: 619px;
       margin-top: 0;
+      box-sizing: border-box;
       border-radius: 3px;
       box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
       background-color: #FFFFFF;

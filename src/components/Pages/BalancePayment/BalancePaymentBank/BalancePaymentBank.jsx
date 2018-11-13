@@ -43,6 +43,10 @@ class BalancePaymentBank extends Component {
     return this.state.bank_selected === method ? ' is-selected' : '';
   };
 
+  _submitBtnClick = () => {
+    this.props.history.push( '/balance/payment/status' );
+  };
+
   componentDidUpdate(){
 
     if ( this.props.is_app_initialized && !this.state.user_email_copied ) {
@@ -53,7 +57,6 @@ class BalancePaymentBank extends Component {
   }
 
   componentDidMount() {
-
     if ( this.props.is_app_initialized ) {
       this.setState({ user_email_copied: true });
       this.setState({ user_email: this.props.user_profile.email });

@@ -4,6 +4,11 @@ import { map, share } from 'rxjs/operators'
 import biqConfig from "./biqConfig";
 import biqHelper from "../lib/biqHelper";
 
+import icMandiriMain from "../images/icons/payment/mandiri-1@3x.png";
+import icBniMain from "../images/icons/payment/bni-1@3x.png";
+import icBcaMain from "../images/icons/payment/bca-1@3x.png";
+import icBriMain from "../images/icons/payment/bri-1@3x.png";
+
 
 class WalletProvider {
 
@@ -59,6 +64,13 @@ class WalletProvider {
 
   }
 
+  bankIcons = {
+    'mandiri-1' : icMandiriMain,
+    'bni-1' : icBniMain,
+    'bca-1' : icBcaMain,
+    'bri-1' : icBriMain
+  };
+
   bankListFetch$ = rxAjax({
     url: `${biqConfig.api.url_base}/api/wallet/list_bank`,
     method: 'POST',
@@ -79,7 +91,35 @@ class WalletProvider {
       if ( biqHelper.utils.isNull( bank_list_ls ) ) {
         this.bankListFetch$.subscribe(
           data => {
-            if ( data.hasOwnProperty('data') ) biqHelper.localStorage.set( ls_key, data.data );
+            let bank_list_data = data.data.map( ( el )=>{
+              let icons = {};
+              switch( el.payment_method ) {
+                case 'bank-tf-mandiri':
+                  icons = {
+                    main: 'mandiri-1'
+                  };
+                  break;
+                case 'bank-tf-bni':
+                  icons = {
+                    main: 'bni-1'
+                  };
+                  break;
+                case 'bank-tf-bca':
+                  icons = {
+                    main: 'bca-1'
+                  };
+                  break;
+                case 'bank-tf-bri':
+                  icons = {
+                    main: 'bri-1'
+                  };
+                  break;
+              }
+
+              el.icons = icons;
+              return el;
+            } );
+            if ( data.hasOwnProperty('data') ) biqHelper.localStorage.set( ls_key, bank_list_data );
 
             observer.next( data.data );
           }
@@ -92,20 +132,34 @@ class WalletProvider {
     } );
   }
 
-  bankByMethodAbreviation( abreviation ) {
-
+  bankListGet() {
     let ls_key = biqConfig.local_storage_key.wallet_bank_list;
     let bank_list_ls = biqHelper.localStorage.getObject( ls_key );
 
-    if ( biqHelper.utils.isNull(bank_list_ls) ) return {};
+    if ( biqHelper.utils.isNull(bank_list_ls) ) return [];
 
-    let ret = bank_list_ls.filter( el =>{
-      if ( el.payment_method === abreviation ) {
+    return bank_list_ls;
+  }
+
+  bankByMethodAbreviation( abbreviation ) {
+
+    let bank_list = this.bankListGet();
+
+    let ret = bank_list.filter( el =>{
+      if ( el.payment_method === abbreviation ) {
         return true;
       }
       return false;
     });
     return ret.length === 1 ? ret [0] : {};
+  }
+
+  bankIconGet( abbreviation, type ) {
+    let bank_record = this.bankByMethodAbreviation( abbreviation );
+
+    if ( biqHelper.JSON.pathIsNull( bank_record, `icons.${type}` ) ) return null;
+
+    return this.bankIcons[ bank_record.icons[type] ];
   }
 
 }

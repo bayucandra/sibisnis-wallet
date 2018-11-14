@@ -4,10 +4,8 @@ import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 
 /**React Material Compoenents*/
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
+import {List, ListItem, ListItemIcon} from '@material-ui/core';
+import {Button} from "../../Widgets/material-ui";
 
 /**External libraries*/
 import NumberFormat from 'react-number-format';

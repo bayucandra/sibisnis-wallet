@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { Button } from '@material-ui/core';
+import { Button } from '../../Widgets/material-ui';
 import "./ModalNotice.scss";
 import biqHelper from "../../../lib/biqHelper";
 

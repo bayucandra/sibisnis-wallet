@@ -1,0 +1,93 @@
+@import "../../../../styles/variables";
+.balance-payment-status {
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: none;
+  }//> *
+
+  &__header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: map-get($colors, dark-aqua);
+
+    .title {
+      flex: 1 1 auto;
+      margin: 0 45px 0 20px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      font-size: 16px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.3px;
+      color: #ffffff;
+    }//.title
+
+  }//&__header
+
+  &__body {
+    flex: 1 1 auto;
+    background: #ffffff;
+
+    .expiration-notice {
+      display: flex;
+      margin: 30px 15px 0;
+      padding: 15px 0;
+      border-radius: 3px;
+      background-color: map-get($colors, pale);
+
+      &__icon {
+        width: 28px;
+        height: 28px;
+        margin-left: 25px;
+        background: url('../../../../images/icons/warning-1.svg') no-repeat center;
+      }//&__icon
+
+      &__time {
+        display: flex;
+        flex-direction: column;
+        margin-left: 15px;
+
+        .notice {
+          font-size: 14px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          text-align: right;
+          color: map-get($colors, tomato-red);
+        }//.notice
+
+        .time {
+          font-size: 14px;
+          font-weight: 300;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: map-get($colors, tomato-red);
+        }//.time
+
+      }//&__time
+
+    }//.expiration-notice
+
+    .payment-detail {
+      display: flex;
+      margin: 30px 15px 0;
+      flex-direction: column;
+      border-radius: 3px;
+      border: solid 0.5px map-get($colors, cool-grey);
+      background-color: #ffffff;
+    }//.payment-detail
+
+  }//&__body
+
+}//.balance-payment-status

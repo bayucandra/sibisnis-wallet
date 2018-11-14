@@ -7,7 +7,7 @@ import { MuiThemeProvider, createMuiTheme, createGenerateClassName, jssPreset } 
 
 import './styles/styles.scss';
 import App from './App';
-import registerServiceWorker from './registerServiceWorker';
+// import registerServiceWorker from './registerServiceWorker';
 import { /*BrowserRouter as Router,*/ HashRouter /*, Route, Link*/ } from "react-router-dom";
 
 //import createHistory from 'history/createBrowserHistory';
@@ -48,7 +48,8 @@ const THEME = createMuiTheme({
       root: { // Name of the rule
         "textTransform": "none",
         "padding" : 0,
-        "minHeight" : 0
+        "minHeight" : 0,
+        "component" : "div"
       },
     },
     MuiTextField: {

@@ -4,7 +4,7 @@ import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 // Material UI
-import Button from '@material-ui/core/Button';
+import { Button } from '../../Widgets/material-ui';
 
 import HeaderMenuMobile from "../HeaderMenuMobile";
 

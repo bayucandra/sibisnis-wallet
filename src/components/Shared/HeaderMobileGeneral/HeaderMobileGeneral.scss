@@ -30,6 +30,11 @@
       line-height: normal;
       letter-spacing: 0.3px;
       color: #ffffff;
+
+      &--no-back-btn {
+        margin-left: 20px;
+      }//&--no-back-btn
+
     }//.title
 
   }//&__left

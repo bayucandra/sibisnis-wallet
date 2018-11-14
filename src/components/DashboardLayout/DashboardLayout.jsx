@@ -7,16 +7,13 @@ import SideNavMain from '../Shared/SideNavMain/SideNavMain';
 import Dashboard from './Dashboard/Dashboard';
 import DetailProfile from './DetailProfile/DetailProfile';
 // import DepositRequirementsCheck from './Dashboard/Deposit/DepositRequirementsCheck/DepositRequirementsCheck';//TODO: delete along with file soon
-import Deposit from "../Pages/Balance"
+// import Deposit from "../Pages/Balance"
 
 
 // Custom CSS
 import './DashboardLayout.scss';
 
 class DashboardLayout extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   render() {
     return (

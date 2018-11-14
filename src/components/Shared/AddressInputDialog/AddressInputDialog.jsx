@@ -13,7 +13,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
 import MenuItem from '@material-ui/core/MenuItem';
-import Button from '@material-ui/core/Button';
+import {Button} from '../../Widgets/material-ui';
 import Modal from '@material-ui/core/Modal';
 import $ from 'jquery';
 

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
-import {IconButton, Button} from '@material-ui/core';
+import {IconButton} from '@material-ui/core';
+import {Button} from '../../../Widgets/material-ui';
 
 import AppActions from "../../../../redux/actions/global/appActions";
 import biqHelper from "../../../../lib/biqHelper";

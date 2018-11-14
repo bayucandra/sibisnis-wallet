@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import Button from "@material-ui/core/Button";
+import {Button} from "../../../Widgets/material-ui";
 import Modal from "@material-ui/core/Modal";
 
 import PhotoUpload from "../../../Shared/PhotoUpload/PhotoUpload";

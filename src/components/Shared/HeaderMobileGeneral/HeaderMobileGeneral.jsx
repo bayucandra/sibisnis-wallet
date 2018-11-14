@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import Button from '@material-ui/core/Button';
+import { Button } from '../../Widgets/material-ui';
 
 import HeaderMenuMobile from "../HeaderMenuMobile";
 import biqHelper from "../../../lib/biqHelper";
@@ -11,10 +11,6 @@ import "./HeaderMobileGeneral.scss";
 class HeaderMobileGeneral extends Component {
 
   router_back_path = '/dashboard';
-
-  constructor( props ) {
-    super(props);
-  }
 
   componentDidMount() {
     if ( !biqHelper.utils.isNull( this.props.headerRouterBack ) ) this.router_back_path = this.props.headerRouterBack;
@@ -28,11 +24,13 @@ class HeaderMobileGeneral extends Component {
   };
 
   render() {
+    let has_back_btn = biqHelper.utils.isNull( this.props.hasBackBtn ) || this.props.hasBackBtn === true;
     return (
       <div className="header-mobile-general hidden-md-up">
+
         <div className="header-mobile-general__left">
-          <Button className="back-btn" onClick={this._backBtnClick}>&nbsp;</Button>
-          <div className="title">{this.props.headerTitle}</div>
+          { has_back_btn ? <Button className="back-btn" onClick={this._backBtnClick}>&nbsp;</Button> : '' }
+          <div className={`title${ !has_back_btn ? ' title--no-back-btn' : '' }`}>{this.props.headerTitle}</div>
         </div>
 
         {!biqHelper.utils.isNull( this.props.headerButtonWidget ) ? this.props.headerButtonWidget : ''}

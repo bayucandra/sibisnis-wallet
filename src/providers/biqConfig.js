@@ -1,4 +1,4 @@
-import biqHelper from "../lib/biqHelper";
+// import biqHelper from "../lib/biqHelper";
 let path_arr = window.location.pathname.replace(/^\/|\/$/g, '').split( "/" );
 path_arr.pop();
 let path = path_arr.length > 0 ? path_arr.join("/") : '';
@@ -36,9 +36,7 @@ biqConfig.agen = {
 biqConfig.profile_photo_url_base = `${biqConfig.url_base}/assets/user_profile`;
 
 
-if ( window.location.hostname === 'newzonatik.com' && window.location.protocol.search('https') === -1
-  || window.location.hostname === 'webagen-dev.sibisnis.com'
-) {//TODO: For development only, remove this conditional block at production stage
+if ( process.env.NODE_ENV === 'development' ) {//TODO: !!!!!For development only, remove this conditional block at production stage
   biqConfig.api.url_base = 'https://dealer.sibisnis.ml';
   biqConfig.api.data_package_name = {
     'Package-Name' : 'COM.ZON32080288.PPOB'

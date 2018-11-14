@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { withRouter } from 'react-router-dom';
 
-import {Button} from "@material-ui/core";
+import {Button} from "../../../Widgets/material-ui";
 
 import biqHelper from "../../../../lib/biqHelper";
 
@@ -22,10 +22,6 @@ class BalancePaymentBank extends Component {
     user_email: '',
     user_email_copied: false
   };
-
-  constructor( props ) {
-    super(props);
-  }
 
   _backBtnClick = () => {
     biqHelper.utils.clickTimeout( ()=>{
@@ -157,7 +153,7 @@ class BalancePaymentBank extends Component {
 
             <div className="action">
 
-              <Button className="submit-btn">
+              <Button className="submit-btn" onClick={this._submitBtnClick}>
                 Bayar Sekarang
               </Button>
 

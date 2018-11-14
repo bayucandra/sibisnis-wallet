@@ -4,16 +4,16 @@ self.__precacheManifest = [
     "url": "./static/media/ico-minus.72962dda.svg"
   },
   {
-    "revision": "f3c934c86b89986f9ef8",
-    "url": "./static/css/main.16c0a292.chunk.css"
+    "revision": "2321bcfb9bc9cbebd8cf",
+    "url": "./static/css/main.e1f7b10d.chunk.css"
   },
   {
     "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
     "url": "./static/media/oval-2.4bacff9e.svg"
   },
   {
-    "revision": "5b43581ff34900a20d6a",
-    "url": "./static/js/1.5b43581f.chunk.js"
+    "revision": "7a0e61ac0776b34cad43",
+    "url": "./static/js/1.7a0e61ac.chunk.js"
   },
   {
     "revision": "4a686d48d5a089750c49",
@@ -144,8 +144,8 @@ self.__precacheManifest = [
     "url": "./static/media/ico-collaps.dc6e2283.svg"
   },
   {
-    "revision": "f3c934c86b89986f9ef8",
-    "url": "./static/js/main.f3c934c8.chunk.js"
+    "revision": "2321bcfb9bc9cbebd8cf",
+    "url": "./static/js/main.2321bcfb.chunk.js"
   },
   {
     "revision": "96b80493328f106e349715da71bb1f3a",
@@ -276,15 +276,19 @@ self.__precacheManifest = [
     "url": "./static/media/radio-active.6bba1781.svg"
   },
   {
+    "revision": "6bb145cf900d083c03a22edffc464a92",
+    "url": "./static/media/warning-1.6bb145cf.svg"
+  },
+  {
     "revision": "c6fbefa06248ba0dce0e4a4fdd4961c3",
     "url": "./static/media/ico-oval-1.c6fbefa0.svg"
   },
   {
-    "revision": "5b43581ff34900a20d6a",
-    "url": "./static/css/1.64341cdd.chunk.css"
+    "revision": "7a0e61ac0776b34cad43",
+    "url": "./static/css/1.e97fb640.chunk.css"
   },
   {
-    "revision": "562486b40f09e6c7098b339dd0cffa46",
+    "revision": "98548b012889b32581c5e3cb7816036d",
     "url": "./index.html"
   }
 ];

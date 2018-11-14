@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
 
-import {Button} from "@material-ui/core";
+import {Button} from "../../../Widgets/material-ui";
 import biqHelper from "../../../../lib/biqHelper/index";
 
 import balanceActions from "../../../../redux/actions/pages/balanceActions";

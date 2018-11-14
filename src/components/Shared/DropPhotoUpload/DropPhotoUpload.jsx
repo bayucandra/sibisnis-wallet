@@ -2,11 +2,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
-import Button from '@material-ui/core/Button';
+import {Button} from '../../Widgets/material-ui';
 
 import { Observable, Subject } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
-import { merge, catchError } from 'rxjs/operators';
+import { merge } from 'rxjs/operators';
 
 // Custom Components
 import PhotoCrop from '../PhotoCrop/PhotoCrop';

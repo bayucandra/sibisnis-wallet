@@ -12,7 +12,7 @@ import icBriMain from "../images/icons/payment/bri-1@3x.png";
 
 class WalletProvider {
 
-  depositStatusFetch$ = rxAjax({
+  paymentStatusFetch$ = rxAjax({
     url: `${biqConfig.api.url_base}/api/wallet/list_deposit_status`,
     method: 'POST',
     crossDomain: true,
@@ -24,13 +24,13 @@ class WalletProvider {
       share()
     );
 
-  depositStatus$() {
+  paymentStatus$() {
     return Observable.create( observer => {
-      let ls_key = biqConfig.local_storage_key.wallet_deposit;
+      let ls_key = biqConfig.local_storage_key.wallet_payment_status;
       let deposit_ls = biqHelper.localStorage.getObject( ls_key );
 
       if ( biqHelper.utils.isNull( deposit_ls ) ) {
-        this.depositStatusFetch$.subscribe(
+        this.paymentStatusFetch$.subscribe(
           data => {
             if ( data.hasOwnProperty('data') ) biqHelper.localStorage.set( ls_key, data.data );
 
@@ -49,8 +49,8 @@ class WalletProvider {
 
     id = typeof id === 'number' ? id.toString() : id;
 
-    let ls_key = biqConfig.local_storage_key.wallet_deposit;
-    let deposit_ls = biqHelper.localStorage.getObject( ls_key )
+    let ls_key = biqConfig.local_storage_key.wallet_payment_status;
+    let deposit_ls = biqHelper.localStorage.getObject( ls_key );
 
     if ( biqHelper.utils.isNull(deposit_ls) ) return {};
 
@@ -96,22 +96,22 @@ class WalletProvider {
               switch( el.payment_method ) {
                 case 'bank-tf-mandiri':
                   icons = {
-                    main: 'mandiri-1'
+                    main: { name: 'mandiri-1', size_default: [ 51, 27 ] }
                   };
                   break;
                 case 'bank-tf-bni':
                   icons = {
-                    main: 'bni-1'
+                    main: { name: 'bni-1', size_default: [43,13] }
                   };
                   break;
                 case 'bank-tf-bca':
                   icons = {
-                    main: 'bca-1'
+                    main: { name: 'bca-1', size_default: [41,13] }
                   };
                   break;
                 case 'bank-tf-bri':
                   icons = {
-                    main: 'bri-1'
+                    main: { name: 'bri-1', size_default: [60,14] }
                   };
                   break;
               }
@@ -159,7 +159,7 @@ class WalletProvider {
 
     if ( biqHelper.JSON.pathIsNull( bank_record, `icons.${type}` ) ) return null;
 
-    return this.bankIcons[ bank_record.icons[type] ];
+    return this.bankIcons[ bank_record.icons[type].name ];
   }
 
 }

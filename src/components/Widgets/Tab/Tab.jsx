@@ -16,10 +16,6 @@ class Tab extends Component {
     active_label: ''
   };
 
-  constructor( props ) {
-    super(props);
-  }
-
   _tabItemOnClick = (tabItemActive) => {
     this.tab_item_active = tabItemActive;
     if ( typeof this.props.tabChange === 'function' ) this.props.tabChange( tabItemActive.props.tabState );

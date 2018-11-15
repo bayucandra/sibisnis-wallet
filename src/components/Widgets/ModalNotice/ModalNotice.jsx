@@ -9,10 +9,6 @@ class ModalNotice extends Component {
     modalPosTop: 0,
   };
 
-  constructor( props ) {
-    super(props);
-  }
-
   _modalPosTopGen() {
     let ratio_opt = { box_selector: '.widget-modal-notice', top_space: 200, bottom_space: 699};
     if ( biqHelper.mediaQuery.isMobile() ) {

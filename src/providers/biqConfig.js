@@ -25,7 +25,7 @@ biqConfig.local_storage_key = {
   page_last_state: 'page_last_state',// contain JSON { state: '', data:{ json: data} }
   address_provinsi: 'address_provinsi',
   address_kabupaten: 'address_kabupaten',
-  wallet_deposit: 'wallet_deposit',
+  wallet_payment_status: 'wallet_payment_status',
   wallet_bank_list: 'wallet_bank_list'
 };
 

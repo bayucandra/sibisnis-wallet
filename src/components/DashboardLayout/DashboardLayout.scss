@@ -23,6 +23,7 @@
   .l-dashboard {
 
     &__inner {
+      flex: none;
       flex-direction: row;
       align-items: flex-start;
       justify-content: space-between;

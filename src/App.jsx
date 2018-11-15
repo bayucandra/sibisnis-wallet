@@ -55,25 +55,20 @@ class App extends Component {
       dispatch( AppActions.appWindowResize( e ) );
     });
 
-    //BEGIN INITIALIZE ADDRESS===========
+    //BEGIN INITIALIZE LOCAL DATA===========
     // addressProvider.provinsi$().subscribe();
     // addressProvider.kabupaten$().subscribe();
     forkJoin(
       addressProvider.provinsi$(),
       addressProvider.kabupaten$(),
-      walletProvider.depositStatus$(),
+      walletProvider.paymentStatus$(),
       walletProvider.bankList$()
     ).subscribe( res =>{
       this.setState( { initialized: true }, ()=>{
         this.forceUpdate();
       } );
     });
-    //END INITIALIZE ADDRESS************
-
-    //BEGIN INITIALIZE WALLET LIST=========
-    // walletProvider.depositStatus$().subscribe();
-    // walletProvider.bankList$().subscribe();
-    //END INITIALIZE WALLET LIST*********
+    //END INITIALIZE LOCAL DATA************
 
   }
 

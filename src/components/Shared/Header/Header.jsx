@@ -21,10 +21,6 @@ import './Header.scss';
 
 class Header extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   onSwitch = () => {
     biqHelper.utils.clickTimeout( () => {
       window.location = biqConfig.agen.url_base;

@@ -1,5 +1,6 @@
 @import "../../../../styles/variables";
 .balance-payment-status {
+  flex: 1 1 auto !important;
   display: flex;
   flex-direction: column;
 
@@ -33,11 +34,21 @@
 
   &__body {
     flex: 1 1 auto;
+    display: flex;
+    align-items: flex-start;
+    overflow-y: auto;
+  }//&__body
+
+  &__main-panel {
+    flex: 619 1 1px;
+    display: flex;
+    flex-direction: column;
+    padding: 30px 0 180px;
     background: #ffffff;
 
     .expiration-notice {
       display: flex;
-      margin: 30px 15px 0;
+      margin: 0 15px;
       padding: 15px 0;
       border-radius: 3px;
       background-color: map-get($colors, pale);
@@ -52,6 +63,7 @@
       &__time {
         display: flex;
         flex-direction: column;
+        align-items: flex-start;
         margin-left: 15px;
 
         .notice {
@@ -61,11 +73,11 @@
           font-stretch: normal;
           line-height: normal;
           letter-spacing: 0.4px;
-          text-align: right;
           color: map-get($colors, tomato-red);
         }//.notice
 
         .time {
+          display: block;
           font-size: 14px;
           font-weight: 300;
           font-style: normal;
@@ -73,6 +85,21 @@
           line-height: normal;
           letter-spacing: 0.5px;
           color: map-get($colors, tomato-red);
+
+          > * {
+            display: inline-block;
+          }
+
+          span {
+            font-size: 17px;
+            font-weight: 600;
+          }
+
+          div {
+            font-size: 16px;
+            font-weight: 600;
+          }
+
         }//.time
 
       }//&__time
@@ -86,8 +113,177 @@
       border-radius: 3px;
       border: solid 0.5px map-get($colors, cool-grey);
       background-color: #ffffff;
+
+      &__row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        border-bottom: solid 0.5px map-get($colors, gray-87);
+
+        .label {
+          white-space: nowrap;
+
+          font-size: 16px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get($colors, charcoal-grey);
+        }//.label
+
+        .bank-account-number {
+          font-size: 16px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: map-get($colors, dark-mint);
+        }//.bank-account-number
+
+        .bank-account-holder {
+          margin-left: 50px;
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          text-align: right;
+          color: map-get($colors, charcoal-grey);
+        }//.bank-account-holder
+
+        &.bill-amount-row {
+          padding-bottom: 8px;
+        }//&.bill-amount-row
+
+        .bill-amount {
+          font-size: 16px;
+          font-weight: 700;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get( $colors, tomato-red );
+
+          span {
+            display: inline-block;
+            width: 41px;
+            height: 28px;
+            background-color: map-get($colors, ice-blue);
+
+            font-size: 21px;
+            font-weight: bold;
+          }//span
+
+        }//.bill-amount
+
+        &.is-last {
+          border-bottom: 0;
+        }//&.is-last
+
+      }//&__row
+
+      &__row-notice {
+        position: relative;
+        margin: 8px 5px 5px;
+        padding: 10px 15px 14px;
+        background-color: map-get($colors, pale);
+        border: 5px;
+
+        font-size: 14px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, tomato-red);
+
+        &:before {
+          position: absolute;
+          top: -10px;
+          right: 30px;
+
+          content: ' ';
+          display: block;
+          width: 0; height: 0;
+          border-style: solid;
+          border-width: 0 10px 10px;
+          border-color: transparent transparent map-get($colors, pale);
+        }//&:after
+
+      }//&__row-notice
+
     }//.payment-detail
 
-  }//&__body
+    .notice-bottom {
+      margin: 30px 30px 0;
+      font-size: 14px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: map-get($colors, blue-grey);
+    }//.notice-bottom
+
+    .confirmation-block {
+      display: flex;
+      flex-direction: column;
+      margin: 30px 30px 0;
+
+      .header {
+        display: flex;
+        align-items: center;
+
+        .icon {
+          width: 18px; height: 18px;
+          background: url('../../../../images/icons/help.svg') no-repeat center;
+        }//.icon
+
+        .title {
+          margin-left: 20px;
+
+          font-size: 16px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get($colors, charcoal-grey);
+        }//.title
+
+      }//.header
+
+      .action {
+        display: flex;
+
+        .confirmation-btn {
+          flex: 1 1 auto;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 50px;
+          margin-top: 10px;
+          border-radius: 3px;
+          background-color: map-get($colors, white-three);
+
+          font-size: 16px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.6px;
+          color: map-get($colors, dark-sky-blue);
+        }//.confirmation-block
+
+      }//.action
+
+    }//confirmation-block
+
+  }//&__main-panel
 
 }//.balance-payment-status
+
+@import "./BalancePaymentStatus-md-min";

@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "72962dda86443dda47957754795a298f",
-    "url": "./static/media/ico-minus.72962dda.svg"
+    "revision": "96b80493328f106e349715da71bb1f3a",
+    "url": "./static/media/ico-edit.96b80493.svg"
   },
   {
-    "revision": "2321bcfb9bc9cbebd8cf",
-    "url": "./static/css/main.e1f7b10d.chunk.css"
+    "revision": "9570af2dba141f5aaa36",
+    "url": "./static/css/main.a314e3d0.chunk.css"
   },
   {
-    "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
-    "url": "./static/media/oval-2.4bacff9e.svg"
+    "revision": "c6fbefa06248ba0dce0e4a4fdd4961c3",
+    "url": "./static/media/ico-oval-1.c6fbefa0.svg"
   },
   {
-    "revision": "7a0e61ac0776b34cad43",
-    "url": "./static/js/1.7a0e61ac.chunk.js"
+    "revision": "f18c10c262ce726a4e69",
+    "url": "./static/js/1.f18c10c2.chunk.js"
   },
   {
     "revision": "4a686d48d5a089750c49",
@@ -144,12 +144,12 @@ self.__precacheManifest = [
     "url": "./static/media/ico-collaps.dc6e2283.svg"
   },
   {
-    "revision": "2321bcfb9bc9cbebd8cf",
-    "url": "./static/js/main.2321bcfb.chunk.js"
+    "revision": "72962dda86443dda47957754795a298f",
+    "url": "./static/media/ico-minus.72962dda.svg"
   },
   {
-    "revision": "96b80493328f106e349715da71bb1f3a",
-    "url": "./static/media/ico-edit.96b80493.svg"
+    "revision": "9570af2dba141f5aaa36",
+    "url": "./static/js/main.9570af2d.chunk.js"
   },
   {
     "revision": "4bbdfb81059c95e1b56fedf1ac37ce42",
@@ -280,15 +280,19 @@ self.__precacheManifest = [
     "url": "./static/media/warning-1.6bb145cf.svg"
   },
   {
-    "revision": "c6fbefa06248ba0dce0e4a4fdd4961c3",
-    "url": "./static/media/ico-oval-1.c6fbefa0.svg"
+    "revision": "704c45a71ef31ef81d959d548927622e",
+    "url": "./static/media/help.704c45a7.svg"
   },
   {
-    "revision": "7a0e61ac0776b34cad43",
+    "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
+    "url": "./static/media/oval-2.4bacff9e.svg"
+  },
+  {
+    "revision": "f18c10c262ce726a4e69",
     "url": "./static/css/1.e97fb640.chunk.css"
   },
   {
-    "revision": "98548b012889b32581c5e3cb7816036d",
+    "revision": "a84b9ff6e58773a5a24bf4aed03046f7",
     "url": "./index.html"
   }
 ];

@@ -10,15 +10,10 @@ import 'cropperjs/dist/cropper.css'
 import './PhotoCrop.scss';
 
 class PhotoCrop extends Component {
-
-  constructor( props ) {
-    super(props);
-
-  }
-
+/*
   _ready = ()=>{
 
-  };
+  };*/
 
   render() {
     return (

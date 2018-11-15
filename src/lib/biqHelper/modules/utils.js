@@ -153,9 +153,25 @@ class biqHelperUtilsClass {
     return key >= 200 && key < 300;
   };
 
-  numberFormat(input, prefix = '', thousand_separator = '.') {
+  numberFormat(input, prefix = '', opt = {}) {
+    let params = {thousand_separator : '.', wrap_last_thousand: '' };
+
+    Object.assign( params, opt );
+
     input = this.isNull( input ) ? 0 : input;
-    return prefix + input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, thousand_separator);
+    let ret = prefix + input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, params.thousand_separator);
+
+    if ( params.wrap_last_thousand !== '' ) {
+      let last_thousand_pos = ret.search( /(?:.(?!\d{3}))+$/ );
+      let last_thousand = ret.substring( last_thousand_pos, ret.length );
+
+      ret = [
+        ret.replace( /(?:.(?!\d{3}))+$/,  '' ),
+        last_thousand
+      ]
+    }
+
+    return ret;
   }
 
   phoneDashFormat( input ) {

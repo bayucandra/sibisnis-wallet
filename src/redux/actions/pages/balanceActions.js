@@ -26,11 +26,41 @@ import ActionTypes from "../../action-types";
     }
   }
 
+
+  function balancePaymentBankSubmit() {
+    return {
+      type: ActionTypes.balance.PAYMENT_BANK_SUBMIT
+    }
+  }
+  function balancePaymentBankSubmited( data ) {
+    return {
+      type: ActionTypes.balance.PAYMENT_BANK_SUBMITTED,
+      payload: data
+    }
+  }
+
+
+  function balancePaymentTransactionFetch() {
+    return {
+      type: ActionTypes.balance.PAYMENT_TRANSACTION_FETCH
+    }
+  }
+  function balancePaymentTransactionFetched( data ) {
+    return {
+      type: ActionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
+      payload: data
+    }
+  }
+
 const actions = {
   balanceNominalSet,
   balanceMethodSet,
   balanceMethodReset,
-  balancePaymentInfoVisibility
+  balancePaymentInfoVisibility,
+  balancePaymentTransactionFetch,
+  balancePaymentTransactionFetched,
+  balancePaymentBankSubmit,
+  balancePaymentBankSubmited
 };
 
 export default actions;

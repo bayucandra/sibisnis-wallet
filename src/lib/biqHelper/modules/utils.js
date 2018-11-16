@@ -23,11 +23,23 @@ class biqHelperUtilsClass {
 
   }
 
-  isNullAll( ...args ) {
+  isNullSome( ...args ) {
     let is_null = false;
     for( let i =0; i< args.length; i++) {
       if ( this.isNull( args[i] ) ) {
         is_null = true;
+        break;
+      }
+    }
+
+    return is_null;
+  }
+
+  isNullAll( ...args ) {
+    let is_null = true;
+    for( let i =0; i< args.length; i++) {
+      if ( !this.isNull( args[i] ) ) {
+        is_null = false;
         break;
       }
     }

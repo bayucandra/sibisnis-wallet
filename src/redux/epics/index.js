@@ -4,9 +4,12 @@ import UserEpics from './UserEpics';
 import * as HistoryLoginEpics from './HistoryLoginEpics';
 import * as NewsEpics from './NewsEpics';
 
+import balanceEpics from "./pages/balanceEpics";
+
 let epics_arr = [
   ...UserEpics,
-  ...[HistoryLoginEpics.getHistoryList, NewsEpics.getNewsList]
+  ...[HistoryLoginEpics.getHistoryList, NewsEpics.getNewsList],
+  ...balanceEpics
 ];
 
 

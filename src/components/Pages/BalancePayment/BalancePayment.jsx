@@ -19,17 +19,24 @@ class BalancePayment extends Component {
 
   render() {
 
+    let is_loading = this.props.balance.payment_bank_submit.is_submitting || this.props.balance.payment_transaction.is_fetching;
+
     return (
         <div className={`main-wrapper${!this.props.main_header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper biq-wrapper--md-no-side-padding balance-payment`}>
 
-          <div className="balance-payment__header-background visible-md-up" />
+          {
+            !is_loading ?
+            <div className="balance-payment__header-background visible-md-up"/>
+            : ''
+          }
 
           <div className="biq-wrapper__inner balance-payment__inner">
 
             <Switch>
               <Route path="/balance/payment/method" component={BalancePaymentMethod}/>
               <Route path="/balance/payment/bank-transfer" component={BalancePaymentBank}/>
-              <Route path="/balance/payment/status" component={BalancePaymentStatus}/>
+              <Route path="/balance/payment/status" exact render={ props => (<BalancePaymentStatus {...props}/>)}/>
+              <Route path="/balance/payment/status/:id" render={ props => (<BalancePaymentStatus {...props}/>)}/>
               <Redirect from="/balance/payment" to="/balance/payment/method"/>
             </Switch>
 

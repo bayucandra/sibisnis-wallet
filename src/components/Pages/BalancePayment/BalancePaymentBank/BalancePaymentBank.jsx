@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 
 import {Button} from "../../../Widgets/material-ui";
 
 import biqHelper from "../../../../lib/biqHelper";
+
+import balanceActions from "../../../../redux/actions/pages/balanceActions";
 
 import "./BalancePaymentBank.scss";
 
@@ -12,7 +14,6 @@ import iconMandiri from "../../../../images/icons/payment/mandiri-1@3x.png";
 import iconBni from "../../../../images/icons/payment/bni-1@3x.png";
 import iconBca from "../../../../images/icons/payment/bca-1@3x.png";
 import iconBri from "../../../../images/icons/payment/bri-1@3x.png";
-import balanceActions from "../../../../redux/actions/pages/balanceActions";
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 
 class BalancePaymentBank extends Component {
@@ -40,7 +41,10 @@ class BalancePaymentBank extends Component {
   };
 
   _submitBtnClick = () => {
-    this.props.history.push( '/balance/payment/status' );
+    let {dispatch} = this.props;
+    dispatch( balanceActions.balancePaymentBankSubmit() );
+
+    this.props.history.push( '/balance/payment/status', { referrer: '/balance/payment/bank-transfer' } );
   };
 
   componentDidUpdate(){
@@ -60,6 +64,7 @@ class BalancePaymentBank extends Component {
   }
 
   render() {
+
     return (
       <div className="balance-payment-bank">
 
@@ -155,6 +160,17 @@ class BalancePaymentBank extends Component {
 
               <Button className="submit-btn" onClick={this._submitBtnClick}>
                 Bayar Sekarang
+                {
+                  this.props.balance.payment_transaction.is_fetching ?
+
+                    <div className="c-loading-indicator">
+                      <div className="c-loading-indicator__circle"/>
+                    </div>
+
+                    :
+
+                    ''
+                }
               </Button>
 
             </div>

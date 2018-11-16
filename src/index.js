@@ -8,7 +8,7 @@ import { MuiThemeProvider, createMuiTheme, createGenerateClassName, jssPreset } 
 import './styles/styles.scss';
 import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
-import { /*BrowserRouter as Router,*/ HashRouter /*, Route, Link*/ } from "react-router-dom";
+import { BrowserRouter as Router/*, HashRouter , Route, Link*/ } from "react-router-dom";
 
 //import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
@@ -65,14 +65,15 @@ const THEME = createMuiTheme({
 
 class Index extends React.Component {
   render() {
+      let router_base_name = process.env.NODE_ENV === 'development' ? 'wallet' : '';
       return (
         <MuiThemeProvider theme={THEME}>
           <Provider store={ store }>
-            <HashRouter hashType="hashbang">
+            <Router basename={router_base_name}>
               <JssProvider jss={jss} generateClassName={generateClassName}>
                 <App />
               </JssProvider>
-            </HashRouter>
+            </Router>
           </Provider>
         </MuiThemeProvider>
       );

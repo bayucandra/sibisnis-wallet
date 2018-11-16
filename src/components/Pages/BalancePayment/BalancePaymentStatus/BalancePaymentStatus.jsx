@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {Button} from "../../../Widgets/material-ui";
 
 import biqHelper from "../../../../lib/biqHelper";
 
 import walletProvider from "../../../../providers/walletProvider";
 
-import AppActions from "../../../../redux/actions/global/appActions";
+import appActions from "../../../../redux/actions/global/appActions";
+import balanceActions from "../../../../redux/actions/pages/balanceActions";
 
 import HeaderMenuMobile from "../../../Shared/HeaderMenuMobile/HeaderMenuMobile";
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
@@ -17,10 +19,29 @@ class BalancePaymentStatus extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( AppActions.appRouterChange( { main_header_mobile_show : false } ) );
+    dispatch( appActions.appRouterChange( { main_header_mobile_show : false } ) );
+
+    console.log(this.props.location.state);
+
+    let is_submit = !this.props.match.params.hasOwnProperty( 'id' );
+    if ( !is_submit ) {
+      balanceActions.balancePaymentTransactionFetch();
+    }
+
   }
 
   render() {
+    // let is_submit = biqHelper.JSON.pathValueGet( this.props, 'location.state.referrer' ) === '/balance/payment/bank-transfer';
+    let is_submit = !this.props.match.params.hasOwnProperty( 'id' );
+
+    //BEGIN LOADING PROCEDURE===
+    if ( is_submit && this.props.balance.payment_bank_submit.is_submitting ) return <div/>;
+
+    if ( !is_submit && this.props.balance.payment_transaction.is_fetching ) return <div/>;
+    //END LOADING PROCEDURE**********
+
+    let data = is_submit ? this.props.balance.payment_bank_submit.data : this.props.balance.payment_transaction.data;
+
     let bank_record = walletProvider.bankByMethodAbreviation('bank-tf-bni');
     let bank_icon_size = bank_record.icons.main.size_default;
 
@@ -114,6 +135,7 @@ class BalancePaymentStatus extends Component {
 
 const mapStateToProps = state => {
   return {
+    balance: state.balance,
     main_header_mobile_show: state.app.main_header_mobile_show
   };
 };

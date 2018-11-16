@@ -347,7 +347,7 @@ class AddressInputDialog extends React.Component {
 
   _onSubmitActual = () => {
     let {dispatch} = this.props;
-    let is_valid = !biqHelper.utils.isNullAll( this.state.provinsi_selected, this.state.kabupaten_selected, this.state.kecamatan_selected, this.state.kelurahan_selected, this.state.alamat );
+    let is_valid = !biqHelper.utils.isNullSome( this.state.provinsi_selected, this.state.kabupaten_selected, this.state.kecamatan_selected, this.state.kelurahan_selected, this.state.alamat );
 
     if ( is_valid ) {
 

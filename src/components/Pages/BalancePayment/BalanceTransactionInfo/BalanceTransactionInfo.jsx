@@ -29,6 +29,24 @@ class BalanceTransactionInfo extends Component {
 
         <div className="info-section">
 
+          {
+            !biqHelper.utils.isNullAll(this.props.balance.payment_transaction_id, this.props.balance.payment_status_id) ?
+
+            <>
+              <div className="info-section__row">
+                <div className="label">ID Transaksi</div>
+                <div className="value">63872388103</div>
+              </div>
+
+              <div className="info-section__row">
+                <div className="label">Status</div>
+                <div className="status">Menunggu Pembayaran</div>
+              </div>
+            </>
+            :
+            ''
+          }
+
           <div className="info-section__title">Penambahan saldo</div>
 
           <div className="info-section__name">{this.props.user_profile.nama}</div>

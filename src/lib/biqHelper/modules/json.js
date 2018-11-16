@@ -57,6 +57,31 @@ class biqHelperJSONClass {
 
   }
 
+  pathValueGet() {
+    if (  arguments.length < 2) {
+      console.error( 'biqHelper.JSONPathIsNull() : Parameter is invalid' );
+      return;
+    }
+
+    let json_obj = arguments[0];//JSON object
+    let json_path = arguments[1];//String of json path eg: Root.branch.branch.leave
+
+    if ( this.pathIsNull( json_obj, json_path ) ) return null;
+
+    let json_path_split = json_path.split('.');
+
+    let cur_path = Object.assign( {}, json_obj );
+
+    for ( let i=0; i < json_path_split.length; i++ ) {
+      if ( cur_path.hasOwnProperty( json_path_split[i] ) ) {
+        cur_path = cur_path[json_path_split[i]];
+      }
+    }
+
+    return cur_path;
+
+  }
+
 }
 
 export { biqHelperJSONClass }

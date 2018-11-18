@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Switch, Route, Redirect} from 'react-router-dom';
 
-import AppActions from "../../../redux/actions/global/appActions";
+import appActions from "../../../redux/actions/global/appActions";
 
 import BalancePaymentMethod from "./BalancePaymentMethod/BalancePaymentMethod";
 import BalancePaymentBank from "./BalancePaymentBank/BalancePaymentBank";
@@ -14,15 +14,19 @@ class BalancePayment extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( AppActions.appRouterChange({ main_header_menu_mobile_show: false }) );
+    dispatch( appActions.appRouterChange({ header_menu_mobile_show: false }) );
   }
 
   render() {
 
+    let {dispatch} = this.props;
+    if ( this.props.balance.payment_bank_submit.is_submitting ) dispatch(appActions.appLoadingIndicatorShow());
+    if ( this.props.balance.payment_bank_submit.is_submitted ) dispatch(appActions.appLoadingIndicatorHide());
+
     let is_loading = this.props.balance.payment_bank_submit.is_submitting || this.props.balance.payment_transaction.is_fetching;
 
     return (
-        <div className={`main-wrapper${!this.props.main_header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper biq-wrapper--md-no-side-padding balance-payment`}>
+        <div className={`main-wrapper${!this.props.header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper biq-wrapper--md-no-side-padding balance-payment`}>
 
           {
             !is_loading ?
@@ -51,7 +55,7 @@ class BalancePayment extends Component {
 const mapStateToProps = state => {
   return {
     balance: state.balance,
-    main_header_mobile_show: state.app.main_header_mobile_show
+    header_mobile_show: state.app.header_mobile_show
   };
 };
 

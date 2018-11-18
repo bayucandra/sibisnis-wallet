@@ -19,9 +19,10 @@ class BalancePaymentStatus extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( appActions.appRouterChange( { main_header_mobile_show : false } ) );
+    dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
     console.log(this.props.location.state);
+    console.log(this.props.match.params);
 
     let is_submit = !this.props.match.params.hasOwnProperty( 'id' );
     if ( !is_submit ) {
@@ -136,7 +137,7 @@ class BalancePaymentStatus extends Component {
 const mapStateToProps = state => {
   return {
     balance: state.balance,
-    main_header_mobile_show: state.app.main_header_mobile_show
+    header_mobile_show: state.app.header_mobile_show
   };
 };
 

@@ -35,7 +35,7 @@ class Header extends Component {
 
   render() {
     return (
-      <div className={`biq-wrapper header-main${!this.props.main_header_mobile_show ? ' header-main--hidden-mobile' : ''}`}>
+      <div className={`biq-wrapper header-main${!this.props.header_mobile_show ? ' header-main--hidden-mobile' : ''}`}>
 
         <div className="biq-wrapper__inner header-main__inner">
 
@@ -71,7 +71,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    main_header_mobile_show: state.app.main_header_mobile_show
+    header_mobile_show: state.app.header_mobile_show
   }
 };
 

@@ -10,8 +10,9 @@ let state_default = {
   is_app_initialized: false
   , is_es_initialized: false
   , is_logged_in: false
-  , main_header_mobile_show: true
-  , main_header_menu_mobile_show: true
+  , header_mobile_show: true
+  , header_menu_mobile_show: true
+  , loading_indicator_show: false
   , window_size: { width: window_el.outerWidth(), height: window_el.outerHeight() }
 };
 
@@ -62,6 +63,14 @@ export default ( state = state_default, action ) => {
 
     case ActionTypes.app.WINDOW_RESIZE:
       new_state = { window_size: action.payload };
+      return Object.assign( {}, state, new_state );
+
+    case ActionTypes.app.LOADING_INDICATOR_SHOW:
+      new_state = { loading_indicator_show: true };
+      return Object.assign( {}, state, new_state );
+
+    case ActionTypes.app.LOADING_INDICATOR_HIDE:
+      new_state = { loading_indicator_show: false };
       return Object.assign( {}, state, new_state );
 
     default:

@@ -48,16 +48,6 @@ class PhotoUpload extends Component {
     };
   }
 
-  componentDidMount() {
-    cameraCaptureFileUpload.subscribe(
-      (data)=>{
-        if(data.status){
-          this.toggleDragPhotoUpload();
-        }
-      }
-    )
-  }
-
   toggleDragPhotoUpload = () =>{
     // this.setState({ dragPhotoUpload: true });
     this.props.modalSetActiveComponent( DropPhotoUpload );
@@ -80,13 +70,22 @@ class PhotoUpload extends Component {
       ratio_opt.top_space = 97;
       ratio_opt.bottom_space = 97;
     }
-    let top_pos = biqHelper.utils.modalTopRatio( ratio_opt );
+    let top_pos;
+    top_pos = biqHelper.utils.modalTopRatio(ratio_opt);
     return top_pos;
   }
 
   componentDidMount(){
     let top_pos = this.modalPosTopGen();
     this.setState( {modalPosTop : top_pos } );
+
+    cameraCaptureFileUpload.subscribe(
+      (data)=>{
+        if(data.status){
+          this.toggleDragPhotoUpload();
+        }
+      }
+    )
   }
 
   componentDidUpdate(prevProp, prevState){

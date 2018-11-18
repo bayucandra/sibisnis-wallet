@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import {IconButton} from '@material-ui/core';
 import {Button} from '../../../Widgets/material-ui';
 
-import AppActions from "../../../../redux/actions/global/appActions";
+import appActions from "../../../../redux/actions/global/appActions";
 import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceTopupHistory.scss";
@@ -65,7 +65,7 @@ class BalanceTopupHistory extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( AppActions.appRouterChange( { main_header_mobile_show : false } ) );
+    dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
   }
 
   _navBackClick = () => {
@@ -122,7 +122,7 @@ class BalanceTopupHistory extends Component {
                   </div>
                   <div className="biq-col biq-col--status visible-md-up">
                     <div className={`status-box${ el.status === '2' || el.status === '3' ? ' is-failed' : '' }`}>
-                      { walletProvider.depositStatusGet( el.status ) }
+                      { walletProvider.paymentStatusGet( el.status ) }
                     </div>
                   </div>
                   <div className="biq-col-spacer-right visible-md-up"/>
@@ -130,7 +130,7 @@ class BalanceTopupHistory extends Component {
 
 
                 <div className={ `transfer-status-mobile hidden-md-up${ el.status === '2' || el.status === '3' ? ' is-failed' : '' }` }>
-                  { walletProvider.depositStatusGet( el.status ) }
+                  { walletProvider.paymentStatusGet( el.status ) }
                 </div>
 
                 <div className="date-mobile hidden-md-up">

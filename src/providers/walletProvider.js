@@ -45,7 +45,7 @@ class WalletProvider {
     } );
   }
 
-  depositStatusGet( id ) {
+  paymentStatusGet( id ) {
 
     id = typeof id === 'number' ? id.toString() : id;
 

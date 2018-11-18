@@ -7,7 +7,7 @@ let state_default = {
 
   payment_bank_submit: {
     is_submitting: false,
-    is_Submitted: false,
+    is_submitted: false,
     data: []
   },
 

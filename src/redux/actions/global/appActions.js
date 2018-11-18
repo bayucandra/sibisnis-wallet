@@ -42,13 +42,27 @@ import ActionTypes from "../../action-types/index";
     }
   }
 
+  function appLoadingIndicatorShow() {
+    return {
+      type: ActionTypes.app.LOADING_INDICATOR_SHOW
+    }
+  }
+
+  function appLoadingIndicatorHide() {
+    return {
+      type: ActionTypes.app.LOADING_INDICATOR_HIDE
+    }
+  }
+
   const actions = {
     appInit,
     appSseAgenInit,
     appLogout,
     appStatesReset,
     appWindowResize,
-    appRouterChange
+    appRouterChange,
+    appLoadingIndicatorShow,
+    appLoadingIndicatorHide
   };
 
 export default actions;

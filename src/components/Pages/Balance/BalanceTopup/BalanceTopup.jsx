@@ -8,7 +8,7 @@ import NumberFormat from "react-number-format";
 import HeaderMobileGeneral from "../../../Shared/HeaderMobileGeneral";
 import Tab, {TabItem} from "../../../Widgets/Tab";
 
-import AppActions from "../../../../redux/actions/global/appActions";
+import appActions from "../../../../redux/actions/global/appActions";
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
 import biqHelper from "../../../../lib/biqHelper";
 
@@ -61,7 +61,7 @@ class BalanceTopup extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( AppActions.appRouterChange( { main_header_mobile_show : false } ) );
+    dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
   }
 
   render() {

@@ -12,7 +12,7 @@ import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceProfileVerification.scss";
 import HeaderMobileGeneral from "../../../Shared/HeaderMobileGeneral";
-import AppActions from "../../../../redux/actions/global/appActions";
+import appActions from "../../../../redux/actions/global/appActions";
 
 
 
@@ -77,7 +77,7 @@ class BalanceProfileVerification extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( AppActions.appRouterChange( { main_header_mobile_show : false } ) );
+    dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
     setTimeout( ()=> {
       if ( this.stop ) return;

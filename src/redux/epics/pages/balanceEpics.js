@@ -5,6 +5,7 @@ import {switchMap, delay, map, takeUntil, filter } from 'rxjs/operators';
 
 import actionTypes from "../../action-types";
 import balanceActions from "../../actions/pages/balanceActions";
+import appActions from "../../actions/global/appActions";
 
 const paymentSubmitAjax = () => of({
   "response_code": { "status": 200, "message": '' },
@@ -27,7 +28,7 @@ const paymentBankSubmit = action$ => action$.pipe(
     ofType(actionTypes.balance.PAYMENT_BANK_SUBMIT),
     switchMap(
       action => paymentSubmitAjax().pipe(
-        map( response => balanceActions.balancePaymentBankSubmited( response ) ),
+        map( response => balanceActions.balancePaymentBankSubmited( response )),
         takeUntil( action$.pipe(
           filter( action => action.type === actionTypes.balance.PAYMENT_BANK_CANCELED )
         ) )

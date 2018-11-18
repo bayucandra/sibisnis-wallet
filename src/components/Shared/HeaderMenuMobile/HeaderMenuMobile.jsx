@@ -29,7 +29,7 @@ class HeaderMenuMobile extends  Component {
 
     return (
 
-      <div className={`header-menu-mobile hidden-md-up${ !this.props.main_header_menu_mobile_show && !force_visible ? ' header-menu-mobile--hidden-mobile' : '' }`}>
+      <div className={`header-menu-mobile hidden-md-up${ !this.props.header_menu_mobile_show && !force_visible ? ' header-menu-mobile--hidden-mobile' : '' }`}>
 
         <IconButton
           className="header-menu-mobile__trigger"
@@ -68,7 +68,7 @@ class HeaderMenuMobile extends  Component {
 const mapStateToProps = state => {
 
   return {
-    main_header_menu_mobile_show: state.app.main_header_menu_mobile_show
+    header_menu_mobile_show: state.app.header_menu_mobile_show
   };
 
 };

@@ -1,0 +1,10 @@
+@import "styles/variables";
+.loading-indicator-main {
+  position: absolute;
+  top: 50px; left: 0;
+  height: 3px;
+  background: map-get( $colors, pale-sky-blue );
+  z-index: $zindex-modal;
+}//.loading-indicator-main
+
+@import "App-md-min";

@@ -22,7 +22,7 @@ class Balance extends Component {
 
   render() {
     return (
-      <div className={`main-wrapper${!this.props.main_header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper l-balance`}>
+      <div className={`main-wrapper${!this.props.header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper l-balance`}>
         <div className="biq-wrapper__inner l-balance__inner">
           <SideNavMain cssClasses={"visible-md-up"} />
 
@@ -41,7 +41,7 @@ class Balance extends Component {
 
 const mapStateToProps = state => {
   return {
-    main_header_mobile_show: state.app.main_header_mobile_show,
+    header_mobile_show: state.app.header_mobile_show,
     balance: state.balance
   }
 };

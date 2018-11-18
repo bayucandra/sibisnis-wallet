@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 
 import {Button} from "../../../Widgets/material-ui";
 import biqHelper from "../../../../lib/biqHelper/index";
@@ -7,6 +8,7 @@ import biqHelper from "../../../../lib/biqHelper/index";
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
 
 import "./BalanceTransactionInfo.scss";
+import walletProvider from "../../../../providers/walletProvider";
 
 class BalanceTransactionInfo extends Component {
 
@@ -19,6 +21,17 @@ class BalanceTransactionInfo extends Component {
 
   render() {
 
+    let is_submit = !this.props.match.params.hasOwnProperty( 'id' );
+
+    let has_transaction = ( is_submit && this.props.balance.payment_bank_submit.is_submitted === true
+                            && biqHelper.utils.httpResponseIsSuccess( this.props.balance.payment_bank_submit.data.response_code.status )
+                          )
+                          || ( !is_submit && this.props.balance.payment_transaction.is_fetched === true
+                            && biqHelper.utils.httpResponseIsSuccess( this.props.balance.payment_transaction.data.response_code.status )
+                          );
+
+    let data = is_submit ? this.props.balance.payment_bank_submit.data.data : this.props.balance.payment_transaction.data.data;
+
     return (
       <div className={`balance-transaction-info${ this.props.balance.payment_info_is_visible_mobile ? ' is-visible-mobile' : '' }`}>
 
@@ -30,17 +43,17 @@ class BalanceTransactionInfo extends Component {
         <div className="info-section">
 
           {
-            !biqHelper.utils.isNullAll(this.props.balance.payment_transaction_id, this.props.balance.payment_status_id) ?
+            has_transaction ?
 
             <>
               <div className="info-section__row">
                 <div className="label">ID Transaksi</div>
-                <div className="value">63872388103</div>
+                <div className="value">{ data.invoice_id }</div>
               </div>
 
               <div className="info-section__row">
                 <div className="label">Status</div>
-                <div className="status">Menunggu Pembayaran</div>
+                <div className="status"> { walletProvider.paymentStatusGet( data.status ) } </div>
               </div>
             </>
             :
@@ -77,4 +90,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps) (BalanceTransactionInfo);
+export default withRouter( connect(mapStateToProps) (BalanceTransactionInfo) );

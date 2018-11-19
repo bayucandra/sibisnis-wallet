@@ -111,12 +111,12 @@ class App extends Component {
           }
 
           <Switch>
-            <Redirect from="/" exact={true} to="/dashboard" />
             <Route path="/balance/payment" component={BalancePayment}/>
             <Route path="/balance" component={Balance}/>
             <Route path="/dashboard" component={DashboardLayout} />
             <Route path="/all-news" component={AllNews} />
             <Route path="/all-history-logins" component={AllHistorLogins} />
+            <Redirect from="/" to="/dashboard" />
           </Switch>
 
         </React.Fragment>

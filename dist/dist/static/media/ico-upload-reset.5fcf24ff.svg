@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24" height="24" viewBox="0 0 24 24">
+    <defs>
+        <path id="b" d="M19.945.094L123 .015c11.037-.008 19.992 8.932 20 19.97V20c0 11.046-8.954 20-20 20H19.945C8.93 40 0 31.07 0 20.055 0 9.037 8.927.103 19.945.095z"/>
+        <filter id="a" width="106.3%" height="122.5%" x="-3.1%" y="-7.5%" filterUnits="objectBoundingBox">
+            <feOffset dy="1.5" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur in="shadowOffsetOuter1" result="shadowBlurOuter1" stdDeviation=".75"/>
+            <feColorMatrix in="shadowBlurOuter1" result="shadowMatrixOuter1" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.237602 0"/>
+            <feOffset in="SourceAlpha" result="shadowOffsetOuter2"/>
+            <feGaussianBlur in="shadowOffsetOuter2" result="shadowBlurOuter2" stdDeviation=".75"/>
+            <feColorMatrix in="shadowBlurOuter2" result="shadowMatrixOuter2" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.12 0"/>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"/>
+                <feMergeNode in="shadowMatrixOuter2"/>
+            </feMerge>
+        </filter>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <rect width="210" height="45" fill="#F5F5F5" rx="22.5" transform="translate(-49 -19)"/>
+        <path fill="#232A30" fill-opacity=".85" d="M-124-393h360v560h-360z"/>
+        <path fill="#E0E0E0" d="M-122.006-341.942l356-1.057a2 2 0 0 1 2.006 2V45a2 2 0 0 1-2 2h-356a2 2 0 0 1-2-2v-384.942a2 2 0 0 1 1.994-2z"/>
+        <g transform="translate(-15 -8)">
+            <use fill="#000" filter="url(#a)" xlink:href="#b"/>
+            <use fill="#D1D1D1" xlink:href="#b"/>
+        </g>
+        <path fill="#FFF" stroke="#FFF" stroke-width=".5" d="M17.65 6.35L19.2 4.8v4.8h-4.8l2.12-2.12A6.351 6.351 0 0 0 12 5.6 6.407 6.407 0 0 0 5.6 12c0 3.529 2.871 6.4 6.4 6.4 2.63 0 4.893-1.648 5.877-3.92l1.732-.007C18.565 17.678 15.549 20 12 20c-4.411 0-8-3.589-8-8s3.589-8 8-8c2.172 0 4.176.871 5.65 2.35z"/>
+    </g>
+</svg>

@@ -8,7 +8,7 @@ import { MuiThemeProvider, createMuiTheme, createGenerateClassName, jssPreset } 
 import './styles/styles.scss';
 import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
-import { BrowserRouter as Router/*, HashRouter , Route, Link*/ } from "react-router-dom";
+import { BrowserRouter as Router, HashRouter /*, Route, Link*/ } from "react-router-dom";
 
 //import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';

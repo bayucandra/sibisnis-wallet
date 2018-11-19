@@ -8,13 +8,13 @@ let state_default = {
   payment_bank_submit: {
     is_submitting: false,
     is_submitted: false,
-    data: []
+    data: {}
   },
 
   payment_transaction: {
     is_fetching: false,
     is_fetched: false,
-    data: []
+    data: {}
   }
 
 };

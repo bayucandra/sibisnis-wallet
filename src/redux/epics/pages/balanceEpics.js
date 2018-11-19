@@ -2,6 +2,7 @@ import { ofType } from 'redux-observable';
 // import { ajax } from 'rxjs/ajax';
 import { of } from 'rxjs';
 import {switchMap, delay, map, takeUntil, filter } from 'rxjs/operators';
+import * as moment from 'moment';
 
 import actionTypes from "../../action-types";
 import balanceActions from "../../actions/pages/balanceActions";
@@ -20,9 +21,9 @@ const paymentSubmitAjax = () => of({
     "opr": "otomatic",
     "invoice_id": 115763,
     "nominal_origin": 10161,
-    "expired": 10161
+    "expired": moment().add(4, 'hours').format('YYYY-MM-DD HH:mm:ss')
   }
-}).pipe(delay(5000));
+}).pipe(delay(2000));
 
 const paymentBankSubmit = action$ => action$.pipe(
     ofType(actionTypes.balance.PAYMENT_BANK_SUBMIT),

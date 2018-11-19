@@ -17,11 +17,13 @@ class BalancePayment extends Component {
     dispatch( appActions.appRouterChange({ header_menu_mobile_show: false }) );
   }
 
-  render() {
-
+  componentWillUpdate(nextProps, nextState, nextContext) {
     let {dispatch} = this.props;
-    if ( this.props.balance.payment_bank_submit.is_submitting ) dispatch(appActions.appLoadingIndicatorShow());
-    if ( this.props.balance.payment_bank_submit.is_submitted ) dispatch(appActions.appLoadingIndicatorHide());
+    if ( nextProps.balance.payment_bank_submit.is_submitting ) dispatch(appActions.appLoadingIndicatorShow());
+    if ( nextProps.balance.payment_bank_submit.is_submitted ) dispatch(appActions.appLoadingIndicatorHide());
+  }
+
+  render() {
 
     let is_loading = this.props.balance.payment_bank_submit.is_submitting || this.props.balance.payment_transaction.is_fetching;
 

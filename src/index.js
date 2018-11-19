@@ -65,11 +65,10 @@ const THEME = createMuiTheme({
 
 class Index extends React.Component {
   render() {
-      let router_base_name = process.env.NODE_ENV === 'development' ? 'wallet' : '';
       return (
         <MuiThemeProvider theme={THEME}>
           <Provider store={ store }>
-            <Router basename={router_base_name}>
+            <Router basename={'wallet'}>
               <JssProvider jss={jss} generateClassName={generateClassName}>
                 <App />
               </JssProvider>

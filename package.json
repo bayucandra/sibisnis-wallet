@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "http://newzonatik.com/wallet",
+  "homepage": ".",
   "homepage-dev": "http://newzonatik.com/wallet",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",

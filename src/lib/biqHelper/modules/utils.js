@@ -166,14 +166,14 @@ class biqHelperUtilsClass {
   };
 
   numberFormat(input, prefix = '', opt = {}) {
-    let params = {thousand_separator : '.', wrap_last_thousand: '' };
+    let params = {thousand_separator : '.', split_last_thousand: false };
 
     Object.assign( params, opt );
 
     input = this.isNull( input ) ? 0 : input;
     let ret = prefix + input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, params.thousand_separator);
 
-    if ( params.wrap_last_thousand !== '' ) {
+    if ( params.split_last_thousand === true ) {
       let last_thousand_pos = ret.search( /(?:.(?!\d{3}))+$/ );
       let last_thousand = ret.substring( last_thousand_pos, ret.length );
 

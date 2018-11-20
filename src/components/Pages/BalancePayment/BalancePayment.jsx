@@ -19,8 +19,13 @@ class BalancePayment extends Component {
 
   componentWillUpdate(nextProps, nextState, nextContext) {
     let {dispatch} = this.props;
-    if ( nextProps.balance.payment_bank_submit.is_submitting ) dispatch(appActions.appLoadingIndicatorShow());
-    if ( nextProps.balance.payment_bank_submit.is_submitted ) dispatch(appActions.appLoadingIndicatorHide());
+    if (
+      ( nextProps.balance.payment_bank_submit.is_submitting || nextProps.balance.payment_transaction.is_fetching )
+    ) dispatch(appActions.appLoadingIndicatorShow());
+    if (
+      (nextProps.balance.payment_bank_submit.is_submitted && !nextProps.balance.payment_transaction.is_fetching)
+      || ( nextProps.balance.payment_transaction.is_fetched && !nextProps.balance.payment_bank_submit.is_submitting )
+    ) dispatch(appActions.appLoadingIndicatorHide());
   }
 
   render() {
@@ -41,8 +46,7 @@ class BalancePayment extends Component {
             <Switch>
               <Route path="/balance/payment/method" component={BalancePaymentMethod}/>
               <Route path="/balance/payment/bank-transfer" component={BalancePaymentBank}/>
-              <Route path="/balance/payment/status" exact render={ props => (<BalancePaymentStatus {...props}/>)}/>
-              <Route path="/balance/payment/status/:id" render={ props => (<BalancePaymentStatus {...props}/>)}/>
+              <Route path="/balance/payment/status/:type/:id/:referrer" render={ props => (<BalancePaymentStatus {...props}/>)}/>
               <Redirect from="/balance/payment" to="/balance/payment/method"/>
             </Switch>
 

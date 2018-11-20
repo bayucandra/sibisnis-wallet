@@ -20,6 +20,25 @@
         color: #ffffff;
       }//.title
 
+      .nav-back {
+        $design-with-diff: (50px-24px)/2;
+
+        &__btn {
+          margin: (-$design-with-diff) (5px-$design-with-diff) (-$design-with-diff) (-15px);
+        }//&__btn
+
+        &__text {
+          font-size: 20px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: #ffffff;
+        }//&__text
+
+      }//.nav-back
+
     }//&__header
 
     &__body {
@@ -29,13 +48,12 @@
 
     &__main-panel {
       margin-bottom: 50px;
-      padding-bottom: 50px;
       border-radius: 3px;
       box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
       background-color: #ffffff;
 
       .expiration-notice {
-        margin: 0 30px;
+        margin: 30px 30px 0;
 
         &__icon {
           margin-left: 20px;
@@ -57,6 +75,18 @@
         }//&__time
 
       }//.expiration-notice
+
+      .notice-bottom-expired {
+        margin-top: 45px;
+
+        &__inner {
+          font-size: 13px;
+          line-height: 1.77;
+          letter-spacing: 0.2px;
+          text-align: center;
+        }//&__inner
+
+      }//.notice-bottom-expired
 
       .payment-detail {
         margin: 20px 30px 0;
@@ -82,6 +112,10 @@
 
           }//.bank-info
 
+          &.bill-amount-row-expired {
+            padding: 15px 20px;
+          }//.bill-amount-row-expired
+
         }//&__row
 
         &__row-notice {
@@ -98,8 +132,12 @@
         font-size: 15px;
       }//.notice-bottom
 
+      .customer-service-block {
+        margin-top: 41px;
+      }//.customer-service-block
+
       .confirmation-block {
-        margin: 25px 50px 0;
+        margin: 25px 50px 55px;
 
         .action {
 
@@ -114,6 +152,18 @@
         }//.action
 
       }//.confirmation-block
+
+      .add-deposit-block {
+
+        justify-content: flex-end;
+        margin: 70px 29px 50px;
+
+        .add-deposit-btn {
+          flex: none;
+          width: 200px;
+        }//.add-deposit-btn
+
+      }//.add-deposit-block
 
     }//&__main-panel
 

@@ -21,7 +21,7 @@ class BalanceTransactionInfo extends Component {
 
   render() {
 
-    let is_submit = !this.props.match.params.hasOwnProperty( 'id' );
+    let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
 
     let has_transaction = ( is_submit && this.props.balance.payment_bank_submit.is_submitted === true
                             && biqHelper.utils.httpResponseIsSuccess( this.props.balance.payment_bank_submit.data.response_code.status )
@@ -53,7 +53,7 @@ class BalanceTransactionInfo extends Component {
 
               <div className="info-section__row">
                 <div className="label">Status</div>
-                <div className="status"> { walletProvider.paymentStatusGet( data.status ) } </div>
+                <div className={`status${ data.status === 3 ? ' status--expired' : '' }`}> { walletProvider.paymentStatusGet( data.status ) } </div>
               </div>
             </>
             :

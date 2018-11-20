@@ -44,7 +44,7 @@ class BalancePaymentBank extends Component {
     let {dispatch} = this.props;
     dispatch( balanceActions.balancePaymentBankSubmit() );
 
-    this.props.history.push( '/balance/payment/status', { referrer: '/balance/payment/bank-transfer' } );
+    this.props.history.push( `/balance/payment/status/submit/0/${encodeURIComponent( btoa('/balance/payment/bank-transfer') )}` );
   };
 
   componentDidUpdate(){

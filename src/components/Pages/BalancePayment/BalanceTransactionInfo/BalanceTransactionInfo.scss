@@ -81,6 +81,11 @@
         line-height: normal;
         letter-spacing: 0.3px;
         color: map-get($colors, tomato-red);
+
+        &--expired {
+          background-color: map-get($colors, very-light-pink-three);
+        }
+
       }//.status
 
     }//&__row

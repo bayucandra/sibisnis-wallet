@@ -41,10 +41,12 @@ class BalancePaymentBank extends Component {
   };
 
   _submitBtnClick = () => {
-    let {dispatch} = this.props;
-    dispatch( balanceActions.balancePaymentBankSubmit() );
 
-    this.props.history.push( `/balance/payment/status/submit/0/${encodeURIComponent( btoa('/balance/payment/bank-transfer') )}` );
+    biqHelper.utils.clickTimeout(()=>{
+      let {dispatch} = this.props;
+      dispatch( balanceActions.balancePaymentBankSubmit() );
+      this.props.history.push( `/balance/payment/status/submit/0/${encodeURIComponent( btoa('/balance/payment/bank-transfer') )}` );
+    });
   };
 
   componentDidUpdate(){

@@ -21,27 +21,29 @@ import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransaction
 import "./BalancePaymentStatus.scss";
 
 class BalancePaymentStatus extends Component {
+  count_down_obj = null;
 
   state = {
+    should_fetch: false,
     is_ready: false,
-    modal_is_open: true
+    modal_is_open: true,
+    count_down: {
+      hours: 0, minutes: 0, seconds: 0
+    }
   };
 
   _modalClose = () => {
     this.setState( { modal_is_open: false }, () => {
-      setTimeout(() => this.props.history.push( this.state.referrer ), 250);
+      let param_referrer_encoded = atob( decodeURIComponent( biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer') ) );
+      setTimeout(() => this.props.history.push( param_referrer_encoded ), 250);
     } );
   };
 
-  _countdownRender = ({ hours, minutes, seconds, completed }) => {
-    let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
-    if ( completed && is_submit ){
-      let invoice_id = this.props.balance.payment_bank_submit.data.data.invoice_id;
-      let target_url = `/balance/payment/status/transaction/${invoice_id}/${encodeURIComponent( btoa('/balance/topup-history') )}`;
-      return <Redirect to={target_url}/>;
-    }
-
-    return <div className="time"><span>{hours}</span> jam &nbsp;<div>:</div> &nbsp;<span>{minutes}</span> menit &nbsp;<div>:</div> &nbsp;<span>{seconds}</span> detik</div>
+  _paymentConfirmClick = ( param_type, invoice_id, param_referrer ) => {
+    biqHelper.utils.clickTimeout(()=> {
+      let confirm_url = `/balance/payment/status/${param_type}/${invoice_id}/${param_referrer}/confirm`;
+      this.props.history.push(confirm_url);
+    });
   };
 
   componentDidMount() {
@@ -51,28 +53,85 @@ class BalancePaymentStatus extends Component {
 
     let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
 
-    console.log('did mount');
-    if ( !is_submit ) {
+    let param_invoice_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    if ( !is_submit || ( is_submit && param_invoice_id !== '0') ) {
       dispatch( balanceActions.balancePaymentTransactionFetch() );
     }
+
     this.setState({is_ready: true});
 
   }
 
   shouldComponentUpdate(nextProp, nextState, nextContext) {
     let {dispatch} = this.props;
+
+    let is_fetched_current = this.props.balance.payment_transaction.is_fetched;
+    let is_fetched_next = nextProp.balance.payment_transaction.is_fetched;
+
+    let data_source_next = nextProp.balance.payment_transaction.data;
+    let data_next = biqHelper.JSON.pathValueGet( data_source_next, 'data' );
+    let status_next = biqHelper.JSON.pathValueGet( data_next, 'status' );
+
+    if ( !is_fetched_current && is_fetched_next && !biqHelper.utils.isNull(data_next) && status_next === 1 ) {
+      this.count_down_obj = biqHelper.moment.countDown({
+        compared_dt: moment( data_next.expired ).valueOf(),
+        current_dt: biqHelper.moment.now().valueOf(),
+        callback_update: ( duration )=> {
+          let counter_obj = {
+            hours: duration.hours(),
+            minutes: duration.minutes(),
+            seconds: duration.seconds()
+          };
+
+          this.setState({ count_down: counter_obj });
+        },
+        callback_done: () => {
+          this.setState({should_fetch: true});
+        }
+      });
+      return false;
+    }
+
+    if ( nextState.should_fetch ) {
+      this.setState({ should_fetch: false });
+      dispatch( balanceActions.balancePaymentTransactionFetch(1) );
+      return false;
+    }
+
     let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
     let is_submit_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'type' ) === 'submit';
+    let param_invoice_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    let param_invoice_id_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'id' );
+
+
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
-    if ( is_submit_current && !is_submit_next ) {
+    if ( (is_submit_current && !is_submit_next) || ( is_submit_current && is_submit_next && param_invoice_id_current === '0' && param_invoice_id_next !== '0' ) ) {
       dispatch( balanceActions.balancePaymentTransactionFetch() );
       return false;
     }
+
+    let is_submitting_current = this.props.balance.payment_bank_submit.is_submitting;
+    let is_submitted_next = nextProp.balance.payment_bank_submit.is_submitted;
+    let invoice_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.data, 'data.invoice_id' );
+
+    if ( is_submit_current && param_invoice_id_current === '0' && is_submitting_current && is_submitted_next ) {
+      let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
+      this.props.history.push(`/balance/payment/status/submit/${invoice_id_submit}/${param_referrer}`);
+      return false;
+    }
+
     return true;
   }
 
+  componentWillUnmount() {
+    if ( !biqHelper.utils.isNull( this.count_down_obj ) && typeof this.count_down_obj.stop === 'function') this.count_down_obj.stop();
+  }
+
   render() {
-    let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
+    let param_type = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' );
+    let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
+    let param_invoice_id = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
+    let is_submit = param_type === 'submit';
 
     //BEGIN LOADING PROCEDURE===
     let dummy_header= (
@@ -86,13 +145,20 @@ class BalancePaymentStatus extends Component {
       </div>
       );
 
-    if ( is_submit && this.props.balance.payment_bank_submit.is_submitting ) return dummy_header;
+    if ( is_submit && this.props.balance.payment_bank_submit.is_submitting ){
+      return dummy_header;
+    }
+
+    if ( is_submit && param_invoice_id !== '0' && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
+
+    if ( is_submit && param_invoice_id === '0' && this.props.balance.payment_bank_submit.is_submitted ) return dummy_header;
 
     if ( !is_submit && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
     //END LOADING PROCEDURE**********
 
-    let response_code = this.props.balance.payment_bank_submit.data.response_code;
-    let data = is_submit ? this.props.balance.payment_bank_submit.data.data : this.props.balance.payment_transaction.data.data;
+    let data_source = is_submit && (param_invoice_id === '0') ? this.props.balance.payment_bank_submit.data : this.props.balance.payment_transaction.data;
+    let data = data_source.data;
+    let response_code = data_source.response_code;
 
     if ( this.state.is_ready && biqHelper.utils.isNull(data) ) {//is_ready to ensure that procedure on componentDidMount has ben ran
       return <Redirect to={'/balance/topup-history'}/>;
@@ -125,10 +191,9 @@ class BalancePaymentStatus extends Component {
         <div className="balance-payment-status__header">
           {
             data.status === 3 ?
+
               <div className="nav-back">
-                <Button className="nav-back__btn" onClick={()=> biqHelper.utils.clickTimeout( () => this.props.history.push('/balance/topup-history') )}>
-                  &nbsp;
-                </Button>
+                <Button className="nav-back__btn" onClick={()=> biqHelper.utils.clickTimeout( () => this.props.history.push('/balance/topup-history') )}>&nbsp;</Button>
                 <div className="nav-back__text">Status pembayaran</div>
               </div>
 
@@ -151,7 +216,10 @@ class BalancePaymentStatus extends Component {
                   <div className="expiration-notice__time">
 
                     <div className="notice">Batas Waktu Pembayaran</div>
-                    <Countdown date={moment(data.expired).valueOf()} renderer={this._countdownRender}/>
+
+                    <div className="time">
+                      <span>{this.state.count_down.hours}</span> jam &nbsp;<div>:</div> &nbsp;<span>{this.state.count_down.minutes}</span> menit &nbsp;<div>:</div> &nbsp;<span>{this.state.count_down.seconds}</span> detik
+                    </div>
 
                   </div>
 
@@ -245,7 +313,9 @@ class BalancePaymentStatus extends Component {
                     <div className="title">Sudah transfer?</div>
                   </div>
                   <div className="action">
-                    <Button className="confirmation-btn">Konfirmasi transfer</Button>
+                    <Button className="confirmation-btn" onClick={ () => this._paymentConfirmClick( param_type, param_invoice_id, param_referrer ) }>
+                      Konfirmasi transfer
+                    </Button>
                   </div>
                 </div>
 
@@ -260,7 +330,7 @@ class BalancePaymentStatus extends Component {
 
           </div>
 
-          <div className="balance-payment-status__spacer"/>
+          <div className="balance-payment-status__spacer visible-md-up"/>
 
           <BalanceTransactionInfo/>
 

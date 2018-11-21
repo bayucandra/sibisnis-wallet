@@ -22,15 +22,21 @@ class BalanceTransactionInfo extends Component {
   render() {
 
     let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
+    let param_invoice_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
 
     let has_transaction = ( is_submit && this.props.balance.payment_bank_submit.is_submitted === true
-                            && biqHelper.utils.httpResponseIsSuccess( this.props.balance.payment_bank_submit.data.response_code.status )
+                            && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.data, 'response_code.status' ) )
+                          )
+                          || ( is_submit && param_invoice_id !== '0'
+                              && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.data, 'response_code.status') )
                           )
                           || ( !is_submit && this.props.balance.payment_transaction.is_fetched === true
-                            && biqHelper.utils.httpResponseIsSuccess( this.props.balance.payment_transaction.data.response_code.status )
+                            && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.data, 'response_code.status') )
                           );
 
-    let data = is_submit ? this.props.balance.payment_bank_submit.data.data : this.props.balance.payment_transaction.data.data;
+    let data = is_submit && (param_invoice_id === '0')  ? biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.data, 'data' ) : biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.data, 'data');
+    let invoice_id = biqHelper.JSON.pathValueGet( data, 'invoice_id' );
+    let status = biqHelper.JSON.pathValueGet( data, 'status' );
 
     return (
       <div className={`balance-transaction-info${ this.props.balance.payment_info_is_visible_mobile ? ' is-visible-mobile' : '' }`}>
@@ -48,12 +54,12 @@ class BalanceTransactionInfo extends Component {
             <>
               <div className="info-section__row">
                 <div className="label">ID Transaksi</div>
-                <div className="value">{ data.invoice_id }</div>
+                <div className="value">{ invoice_id }</div>
               </div>
 
               <div className="info-section__row">
                 <div className="label">Status</div>
-                <div className={`status${ data.status === 3 ? ' status--expired' : '' }`}> { walletProvider.paymentStatusGet( data.status ) } </div>
+                <div className={`status${ status === 3 ? ' status--expired' : '' }`}> { walletProvider.paymentStatusGet( status ) } </div>
               </div>
             </>
             :

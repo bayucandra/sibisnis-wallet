@@ -1,5 +1,5 @@
 import biqHelperUtils from "./utils";
-class biqHelperJSONClass {
+class BiqHelperJSONClass {
 
   parse(val) {
     let ret = {};
@@ -82,9 +82,28 @@ class biqHelperJSONClass {
 
   }
 
+  pathValueGetMulti( ) {
+    if (  arguments.length < 2) {
+      console.error( 'biqHelper.JSONPathIsNull() : Parameter is invalid' );
+      return;
+    }
+
+    let json_obj = arguments[0];//JSON object
+    let json_path_arr = arguments[1];//Array of String of json key ( not path / 1 level depth ) eg: [key1, key2, key3]
+
+    let ret = {};
+
+    for ( let i=0; i<json_path_arr.length; i++ ) {
+      ret[json_path_arr[i]] = this.pathValueGet( json_obj, json_path_arr[i] );
+    }
+
+    return ret;
+
+  }
+
 }
 
-export { biqHelperJSONClass }
+export { BiqHelperJSONClass }
 
-const biqHelperJSON = new biqHelperJSONClass();
+const biqHelperJSON = new BiqHelperJSONClass();
 export default biqHelperJSON;

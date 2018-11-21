@@ -1,0 +1,93 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .balance-payment-confirmation {
+    padding: 0 15px;
+
+    &__header {
+      height: auto;
+      background: none;
+      margin: 38px 0 0;
+
+      .title {
+        font-size: 20px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: #ffffff;
+      }//.title
+
+    }//&__header
+
+    &__body {
+      margin-top: 31px;
+      background: none;
+    }//&__body
+
+    &__main-panel {
+      flex: 619 1 1px;
+      min-height: 501px;
+      margin-bottom: 30px;
+      border-radius: 5px;
+      box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+      background-color: #ffffff;
+
+      .top-nav {
+        display: flex;
+        margin: 15px 20px 0;
+        justify-content: flex-start;
+
+        > * {
+          flex: none;
+        }//> *
+
+        .back-btn {
+          display: flex;
+          align-items: center;
+
+          .icon {
+            width: 25px; height: 25px;
+            background: url('../../../../images/icons/back-blue-new.svg') no-repeat center;
+          }//.icon
+
+          .label {
+            margin: 0 15px;
+            font-size: 13px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.3px;
+            color: map-get($colors, charcoal-grey);
+          }//.label
+
+        }//.back-btn
+
+      }//.top-nav
+
+      .upload-block {
+
+        .title {
+          margin-top: 50px;
+        }//.title
+
+        .notice {
+          margin-top: 11px;
+        }//.notice
+
+        .add-photo-btn {
+          margin-top: 40px;
+        }//.add-photo-btn
+
+      }//.initial-upload-block
+
+    }//&__main-panel
+
+    &__spacer {
+      flex: 50 1 1px;
+    }//&__spacer
+
+  }//.balance-payment-confirmation
+
+}//@media

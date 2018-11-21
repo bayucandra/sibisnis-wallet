@@ -115,9 +115,9 @@ class DropPhotoUpload extends Component {
 
     return Observable.create( ( observer ) => {
 
-      this.imageCropRef.getCroppedCanvas().toBlob( file => {
+      this.imageCropRef.getCroppedCanvas().toBlob( blob => {
         // file.name = fileName;
-        observer.next(file);
+        observer.next(blob);
       }, this.state.img_mime);
 
     })

@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 import biqHelperString from "./string";
 
-class biqHelperUtilsClass {
+class BiqHelperUtilsClass {
 
   click_timeout_list = {};//key is group name, default key is 'default' should clear on callback done ( whether error/success )
 
@@ -213,7 +213,7 @@ class biqHelperUtilsClass {
 
 }
 
-export { biqHelperUtilsClass };
+export { BiqHelperUtilsClass };
 
-const biqHelperUtils = new biqHelperUtilsClass();//only for import at current dir
+const biqHelperUtils = new BiqHelperUtilsClass();//only for import at current dir
 export default biqHelperUtils;

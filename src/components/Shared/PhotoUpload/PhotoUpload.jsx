@@ -17,7 +17,7 @@ import WebcamCapture from '../WebcamCapture/WebcamCapture';
 // Custom CSS
 import './PhotoUpload.scss';
 import closeIconBlack from "../../../images/icons/ico-close-black.svg";
-
+/*
 const UploadButton = (props) => {
   const { id, icon, label, onClick } = props
   return (
@@ -31,13 +31,13 @@ const UploadButton = (props) => {
         </div>
       </label>
       {id === "camera" ?
-        <input type="file" accept="image/*;capture=camera" capture="camera" id={id} className="upload-file-input" />
+        <input type="file" accept="image/!*;capture=camera" capture="camera" id={id} className="upload-file-input" />
         :
         <input type="file" id={id} className="upload-file-input" />
       }
     </div>
   )
-}
+}*/
 class PhotoUpload extends Component {
   constructor(props) {
     super(props);

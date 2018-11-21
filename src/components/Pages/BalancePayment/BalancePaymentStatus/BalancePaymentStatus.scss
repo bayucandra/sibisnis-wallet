@@ -62,7 +62,7 @@
         color: #ffffff;
       }//&__text
 
-    }//.nav-back-btn
+    }//.nav-back
 
   }//&__header
 
@@ -74,8 +74,7 @@
   }//&__body
 
   &__main-panel {
-    position: relative;
-    flex: 619 1 1px;
+    flex: 1 1 1px;
     display: flex;
     flex-direction: column;
     background: #ffffff;
@@ -452,12 +451,6 @@
       }//.add-deposit-btn
 
     }//.add-deposit-block
-
-    .loading-indicator {
-      position: absolute;
-      top: 0; right: 0; bottom: 0; left: 0;
-      z-index: $zindex-raised-panel;
-    }
 
   }//&__main-panel
 

@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 const $bpMobileFirst = {sm: 576, md: 768, lg: 992, xl: 1200};
 
-class biqHelperMediaQueryClass {
+class BiqHelperMediaQueryClass {
 
   query() {
     let result = 'xs';
@@ -60,8 +60,8 @@ class biqHelperMediaQueryClass {
 
 }//class
 
-export {biqHelperMediaQueryClass};
+export {BiqHelperMediaQueryClass};
 
-const biqHelperMediaQuery = new biqHelperMediaQueryClass();
+const biqHelperMediaQuery = new BiqHelperMediaQueryClass();
 
 export default  biqHelperMediaQuery;

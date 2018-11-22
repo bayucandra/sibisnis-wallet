@@ -1,21 +1,23 @@
-import {BiqHelperStringClass} from "./modules/string";
-import {BiqHelperLocalStorageClass} from "./modules/localStorage";
-import {BiqHelperJSONClass} from "./modules/json";
-import {BiqHelperUtilsClass} from "./modules/utils";
-import {BiqHelperMediaQueryClass} from "./modules/mediaQuery";
-import {BiqHelperMomentClass} from "./modules/moment";
-import {BiqHelperImageClass} from "./modules/image";
+import {BiqHelperString} from "./modules/string";
+import {BiqHelperLocalStorage} from "./modules/localStorage";
+import {BiqHelperJSON} from "./modules/json";
+import {BiqHelperUtils} from "./modules/utils";
+import {BiqHelperMediaQuery} from "./modules/mediaQuery";
+import {BiqHelperMoment} from "./modules/moment";
+import {BiqHelperImage} from "./modules/image";
+import {BiqHelperNumber} from "./modules/number";
 
 class biqHelperClass {
 
   constructor() {
-    this.string = new BiqHelperStringClass();
-    this.localStorage = new BiqHelperLocalStorageClass();
-    this.JSON = new BiqHelperJSONClass();
-    this.utils = new BiqHelperUtilsClass();
-    this.mediaQuery = new BiqHelperMediaQueryClass();
-    this.moment = new BiqHelperMomentClass();
-    this.image = new BiqHelperImageClass();
+    this.string = new BiqHelperString();
+    this.localStorage = new BiqHelperLocalStorage();
+    this.JSON = new BiqHelperJSON();
+    this.utils = new BiqHelperUtils();
+    this.mediaQuery = new BiqHelperMediaQuery();
+    this.moment = new BiqHelperMoment();
+    this.image = new BiqHelperImage();
+    this.number = new BiqHelperNumber();
   }
 
 }

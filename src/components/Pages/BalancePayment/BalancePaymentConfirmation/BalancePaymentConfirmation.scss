@@ -69,6 +69,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      margin-bottom: 50px;
 
      .title {
        margin-top: 60px;
@@ -116,7 +117,115 @@
         color: map-get($colors, dark-mint);
       }//.add-phone-btn
 
-    }//.initial-upload-block
+      .image-list {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        max-width: 360px;
+        margin: 41px 0 0;
+        padding: 0 40px;
+        box-sizing: border-box;
+
+        &__item {
+          display: flex;
+          margin-top: 10px;
+
+          &.is-first {
+            margin-top: 0;
+          }//&.is-first
+
+          .icon {
+            width: 32px;
+            height: 38px;
+            background: url('../../../../images/icons/ico-jpeg.svg') no-repeat center;
+          }//.icon
+
+          .info {
+            flex: 1 1 1px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            margin-left: 14px;
+
+            .text {
+              display: flex;
+              margin-top: 2px;
+
+              &__inner {
+                flex: 1 1 1px;
+                width:0;
+
+                font-size: 13px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.4px;
+                color: map-get($colors, charcoal-grey);
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+              }
+            }//.text
+
+            .progress-bar {
+              height: 2px;
+              margin-top: 8px;
+              background: map-get( $colors, very-light-pink-four );
+
+              .indicator {
+                height: 100%;
+                width: 0;
+                background: map-get( $colors, vibrant-green );
+                transition: all 250ms ease-in-out;
+              }//.indicator
+
+            }//.progress-bar
+
+            .size {
+              margin-top: 2px;
+
+              font-size: 10px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.3px;
+              color: map-get($colors, steel-grey);
+            }//.size
+
+          }//.info
+
+          .action {
+            width: 24px; height: 24px;
+            min-width: 0;
+            margin: 7px 0 0 14px;
+            border-radius: 12px;
+            background: transparent no-repeat center;
+
+            &:hover {
+              background-color: transparent;
+            }
+
+            &--cancel {
+              background-image: url('../../../../images/icons/ico-batal.svg');
+            }//&--cancel
+
+            &--retry {
+              background-image: url('../../../../images/icons/ico-refresh.svg');
+            }//&--failed
+
+            &--uploaded {
+              background-image: url('../../../../images/icons/ico-upload-sukses.svg');
+            }//&--uploaded
+
+          }//.action
+
+        }//&__item
+
+      }//.image-list
+
+    }//.upload-block
 
   }//&__main-panel
 

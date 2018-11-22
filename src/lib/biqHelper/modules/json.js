@@ -1,5 +1,5 @@
 import biqHelperUtils from "./utils";
-class BiqHelperJSONClass {
+class BiqHelperJSON {
 
   parse(val) {
     let ret = {};
@@ -103,7 +103,7 @@ class BiqHelperJSONClass {
 
 }
 
-export { BiqHelperJSONClass }
+export { BiqHelperJSON }
 
-const biqHelperJSON = new BiqHelperJSONClass();
+const biqHelperJSON = new BiqHelperJSON();
 export default biqHelperJSON;

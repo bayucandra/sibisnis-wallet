@@ -365,7 +365,7 @@ class AddressInputDialog extends React.Component {
         method: 'POST',
         crossDomain: true,
         withCredentials: true,
-        body: Object.assign( data, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
+        body: Object.assign( data, biqConfig.api.data_auth )
       })
         .pipe(
           takeUntil( this.stop$ ),

@@ -1,8 +1,7 @@
 import biqHelperUtils from "./utils";
 import biqHelperJSON from "./json";
-import biqHelperString from "./string";
 
-class BiqHelperLocalStorageClass {
+class BiqHelperLocalStorage {
 
   setPrefixDefault( prefix ) {
     if ( biqHelperUtils.isNull( prefix ) ) return;
@@ -112,8 +111,8 @@ class BiqHelperLocalStorageClass {
 
 }
 
-export { BiqHelperLocalStorageClass };
+export { BiqHelperLocalStorage };
 
-const biqHelperLocalStorage = new BiqHelperLocalStorageClass();
+const biqHelperLocalStorage = new BiqHelperLocalStorage();
 
 export default biqHelperLocalStorage;

@@ -2,7 +2,7 @@ import * as moment from 'moment';
 
 import biqHelperUtils from "./utils";
 
-class BiqHelperMomentClass {
+class BiqHelperMoment {
 
   /**
    * Get day relative to current day, i.e: "Kemarin", "Hari ini"
@@ -86,7 +86,7 @@ class BiqHelperMomentClass {
 
 }
 
-export { BiqHelperMomentClass };
+export { BiqHelperMoment };
 
-const biqHelperMoment = new BiqHelperMomentClass();
+const biqHelperMoment = new BiqHelperMoment();
 export default biqHelperMoment;

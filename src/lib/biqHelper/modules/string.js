@@ -1,5 +1,5 @@
 import biqHelperUtils from "./utils";
-class BiqHelperStringClass {
+class BiqHelperString {
 
   capitalize( input ){
     let str = biqHelperUtils.isNull( input ) ? '' : input;
@@ -16,8 +16,8 @@ class BiqHelperStringClass {
 
 }
 
-export { BiqHelperStringClass };
+export { BiqHelperString };
 
-const biqHelperString = new BiqHelperStringClass();
+const biqHelperString = new BiqHelperString();
 
 export default biqHelperString;

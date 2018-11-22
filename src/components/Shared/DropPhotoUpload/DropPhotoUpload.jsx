@@ -4,9 +4,9 @@ import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
 import {Button} from '../../Widgets/material-ui';
 
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, of } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
-import { merge } from 'rxjs/operators';
+import { merge, catchError } from 'rxjs/operators';
 
 // Custom Components
 import PhotoCrop from '../PhotoCrop/PhotoCrop';
@@ -105,7 +105,7 @@ class DropPhotoUpload extends Component {
     this.imageCropRef = ref;
   }
 
-  imageCropGet() {
+  imageCropGet$() {
 /*    return new Promise((resolve, reject) => {
       canvas.toBlob(file => {
         file.name = fileName;
@@ -118,6 +118,7 @@ class DropPhotoUpload extends Component {
       this.imageCropRef.getCroppedCanvas().toBlob( blob => {
         // file.name = fileName;
         observer.next(blob);
+        observer.complete();
       }, this.state.img_mime);
 
     })
@@ -144,12 +145,12 @@ class DropPhotoUpload extends Component {
 
     this.setState({ img_is_uploading: true });
 
-    this.imageCropGet()
-      .subscribe(( file )=>{
+    this.imageCropGet$()
+      .subscribe(( blob )=>{
 
         let form_data = new FormData();
         form_data.append( 'column', 'image' );
-        form_data.append( 'value', file, this.state.img_file_name );
+        form_data.append( 'value', blob, this.state.img_file_name );
         form_data.append( 'csrf_token', biqConfig.api.csrf_token );
 
         const progressSubscriber = new Subject();
@@ -165,7 +166,10 @@ class DropPhotoUpload extends Component {
         });
 
         progressSubscriber
-          .pipe( merge(request$) )
+          .pipe(
+            merge(request$),
+            catchError( err => of(err.currentTarget) )
+          )
           .subscribe(
 
             data =>{
@@ -174,7 +178,7 @@ class DropPhotoUpload extends Component {
                 this.setState( { img_upload_progress: upload_progress } );
               }
 
-              if ( data.hasOwnProperty('status') || data.hasOwnProperty('load') ) {
+              if ( biqHelper.utils.isNull( data.status) || data.hasOwnProperty('load') ) {
                 this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
 
                 let status_code = biqHelper.string.toInt(data.response.response_code.status);

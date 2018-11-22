@@ -11,7 +11,7 @@ class AddressProvider {
       method: 'POST',
       crossDomain: true,
       withCredentials: true,
-      body: Object.assign( {}, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
+      body: Object.assign( {}, biqConfig.api.data_auth )
     })
       .pipe(
         map((e) => e.response),
@@ -44,7 +44,7 @@ class AddressProvider {
     method: 'POST',
     crossDomain: true,
     withCredentials: true,
-    body: Object.assign( { id_provinsi: 'all' }, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
+    body: Object.assign( { id_provinsi: 'all' }, biqConfig.api.data_auth )
   })
     .pipe(
       map((e) => e.response),
@@ -76,7 +76,7 @@ class AddressProvider {
     method: 'POST',
     crossDomain: true,
     withCredentials: true,
-    body: Object.assign( { id_kotakab: 'all' }, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
+    body: Object.assign( { id_kotakab: 'all' }, biqConfig.api.data_auth )
   })
     .pipe(
       map((e) => e.response),
@@ -104,7 +104,7 @@ class AddressProvider {
       method: 'POST',
       crossDomain: true,
       withCredentials: true,
-      body: Object.assign({id_kecamatan: id_kecamatan}, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } )
+      body: Object.assign({id_kecamatan: id_kecamatan}, biqConfig.api.data_auth )
     })
       .pipe(
         map( e => e.response),

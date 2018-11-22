@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 import biqHelperString from "./string";
 
-class BiqHelperUtilsClass {
+class BiqHelperUtils {
 
   click_timeout_list = {};//key is group name, default key is 'default' should clear on callback done ( whether error/success )
 
@@ -157,7 +157,7 @@ class BiqHelperUtilsClass {
 
   httpResponseIsError( key ){
     key = biqHelperString.toInt( key );
-    return key >= 400 && key < 500;
+    return key >= 400 && key < 600;
   };
 
   httpResponseIsSuccess( key ){
@@ -213,7 +213,7 @@ class BiqHelperUtilsClass {
 
 }
 
-export { BiqHelperUtilsClass };
+export { BiqHelperUtils };
 
-const biqHelperUtils = new BiqHelperUtilsClass();//only for import at current dir
+const biqHelperUtils = new BiqHelperUtils();//only for import at current dir
 export default biqHelperUtils;

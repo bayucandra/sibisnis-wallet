@@ -6,7 +6,7 @@ import {Button} from '../../Widgets/material-ui';
 
 import { Observable, Subject, of } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
-import { merge, catchError } from 'rxjs/operators';
+import { merge, catchError, takeUntil } from 'rxjs/operators';
 
 // Custom Components
 import PhotoCrop from '../PhotoCrop/PhotoCrop';
@@ -31,6 +31,9 @@ import closeIconBlack from "../../../images/icons/ico-close-black.svg";
 import biqConfig from "../../../providers/biqConfig";
 
 class DropPhotoUpload extends Component {
+
+  stop$ = new Subject();
+
   constructor(props) {
     super(props);
     this.state = {
@@ -166,10 +169,13 @@ class DropPhotoUpload extends Component {
         });
 
         progressSubscriber
+
           .pipe(
+            takeUntil( this.stop$ ),
             merge(request$),
             catchError( err => of(err.currentTarget) )
           )
+
           .subscribe(
 
             data =>{
@@ -178,19 +184,16 @@ class DropPhotoUpload extends Component {
                 this.setState( { img_upload_progress: upload_progress } );
               }
 
-              if ( biqHelper.utils.isNull( data.status) || data.hasOwnProperty('load') ) {
+              if ( !biqHelper.utils.isNull( data.status) ) {
                 this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
 
-                let status_code = biqHelper.string.toInt(data.response.response_code.status);
-                if ( status_code === 200 ) {
+                if ( biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
                   dispatch( UserActions.userProfileUpdate( { key: 'photo', value: data.response.data.value } ) );
+                } else {
+                  this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
                 }
               }
 
-            },
-
-            err => {
-              this.setState( { img_is_uploading: false, server_response: err.target.response, img_upload_progress: 0 } );
             }
 
           );
@@ -272,6 +275,11 @@ class DropPhotoUpload extends Component {
     }
   }
 
+  componentWillUnmount() {
+    this.stop$.next();
+    this.stop$.complete();
+  }
+
   render() {
 
     return (
@@ -302,8 +310,8 @@ class DropPhotoUpload extends Component {
 
         <PhotoCrop imgIsSet={ this.state.img_is_set } src={this.state.src} imageCropRefSet={this.imageCropRefSet.bind(this)} />
 
-        <div className={ `notices${ this._imgIsUploadedSuccess() ? ' notices--success' : this._imgIsUploadedError() ? ' notices--error' : '' }` }>
-          { this._imgIsUploadedSuccess() || this._imgIsUploadedError() ? this.state.server_response.response_code.message : '' }
+        <div className={ `notices${ this._imgIsUploadedSuccess() ? ' notices--success' : this._imgIsUploadedError() ? ' notices--error' : '' }` }
+          dangerouslySetInnerHTML={ { __html: this._imgIsUploadedSuccess() || this._imgIsUploadedError() ? this.state.server_response.response_code.message : '' } }>
         </div>
 
         <div className="image-actions-container">

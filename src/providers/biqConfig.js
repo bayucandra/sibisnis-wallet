@@ -14,7 +14,7 @@ biqConfig.url_base = `${window.location.protocol}//${window.location.host}`;
 biqConfig.api = {
   url_base: `${window.location.protocol}//${window.location.host + path}`,
   data_package_name: {},
-  csrf_token: ''
+  csrf_token: Date.now()
 };
 
 

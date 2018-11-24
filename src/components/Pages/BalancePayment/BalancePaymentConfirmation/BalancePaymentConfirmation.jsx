@@ -26,7 +26,8 @@ class BalancePaymentConfirmation extends Component{
     modal_failed_is_open: false,
     modal_failed_text: { title: '', notice: '' },
     duplicate_file_name: '',
-    image_list: []
+    image_list: [],
+    upload_errors: []
   };
 
   stop$ = new Subject();
@@ -135,6 +136,11 @@ class BalancePaymentConfirmation extends Component{
                 this.imageObj[key].progress = upload_progress;
               }else if ( !biqHelper.utils.isNull( data.status) ) {
                 this.imageObj[key].status = data.status;
+
+                if ( !biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
+                  this._uploadErrorAdd( { title: 'Gagal', notice: data.response.response_code.message } );
+                }
+
               }
 
               this._updateImageList();
@@ -146,6 +152,51 @@ class BalancePaymentConfirmation extends Component{
     }
 
   }
+
+  uploadErrors = [];
+
+  _uploadErrorAdd = ( p_obj ) => {
+    let params = {
+      id: Date.now(),
+      title: '',
+      notice: '',
+      state: -1// -1 : new / notvisible, 0: ready, 1: visible
+    };
+
+    Object.assign( params, p_obj );
+
+    this.uploadErrors.push( params );
+
+    this._uploadErrorRender();
+
+    setTimeout( ()=>{
+
+      for( let i=0; i<this.uploadErrors.length; i++ ) {
+        let upload_error = this.uploadErrors[i];
+        if ( upload_error.id === params.id ) {
+          this.uploadErrors[i].state = 0;
+        }
+      }
+
+      this._uploadErrorRender();
+
+    }, 100 );
+
+  };
+
+  _uploadErrorClose = ( id ) => {
+    let upload_error_item = this.uploadErrors.filter( (el)=>{
+      return el.id === id;
+    } );
+    let idx = this.uploadErrors.indexOf( upload_error_item );
+
+    this.uploadErrors.splice( idx, 1 );
+    this._uploadErrorRender();
+  };
+
+  _uploadErrorRender = () => {
+    this.setState( { upload_errors: this.uploadErrors } );
+  };
 
   _addPhotoClick = () => {
     biqHelper.utils.clickTimeout( ()=>{
@@ -190,6 +241,35 @@ class BalancePaymentConfirmation extends Component{
         <div className="balance-payment-confirmation__body">
 
           <div className="balance-payment-confirmation__main-panel">
+
+            {
+              this.state.upload_errors.length > 0 ?
+
+                <div className="alert-box">
+                  {
+                    this.state.upload_errors.map((el) => {
+
+                      return (
+                        <div className={`alert-item${el.state === 0 ? ' is-visible' : ''}`} key={el.id}>
+                          <div className="icon icon--failure"/>
+
+                          <div className="info">
+                            <div className="title">{el.title}</div>
+                            <div className="notice" dangerouslySetInnerHTML={{__html: el.notice}}/>
+                          </div>
+
+                          <Button className="close-btn" onClick={() => this._uploadErrorClose(el.id)}>&nbsp;</Button>
+                        </div>
+                      );
+
+                    })
+                  }
+                </div>
+
+                :
+
+                ''
+            }
 
             <div className="top-nav visible-md-up">
               <Button className="back-btn" onClick={ this._backBtnClick }>

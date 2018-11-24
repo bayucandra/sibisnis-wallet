@@ -26,12 +26,28 @@
     }//&__body
 
     &__main-panel {
+      position: relative;
       flex: 619 1 1px;
       min-height: 501px;
       margin-bottom: 30px;
       border-radius: 5px;
       box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
       background-color: #ffffff;
+
+      .alert-box {
+        position: absolute;
+        top: 10px; right: 10px; left: auto;
+        width: 340px;
+
+        .alert-item {
+
+          .icon {
+            margin: 15px 0 0 15px;
+          }//.icon
+
+        }//.alert-item
+
+      }//alert-box
 
       .top-nav {
         display: flex;

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Subject, of} from 'rxjs';
-import {merge, takeUntil, catchError} from 'rxjs/operators'
+import {merge, takeUntil, catchError, switchMap} from 'rxjs/operators'
 import {ajax as rxAjax} from 'rxjs/ajax'
 
 import "./BalancePaymentConfirmation.scss";
@@ -91,7 +91,6 @@ class BalancePaymentConfirmation extends Component{
     for( let key in this.imageObj ) {
       let image_data = Object.assign( {}, this.imageObj[key] );
       image_data.upload$ = null;
-      image_data.stop$ = null;
       image_list.push( image_data );
     }
     this.setState({ image_list: image_list });
@@ -109,49 +108,84 @@ class BalancePaymentConfirmation extends Component{
         form_data.append( 'image', image_data.blob, image_data.name );
         form_data.append( 'scrf_token', biqConfig.api.csrf_token );
 
-        this.imageObj[key].stop$ = new Subject();
-        const progressSubscriber = new Subject();
+        this.imageObj[key].progressSubscriber$ = new Subject();
+
         this.imageObj[key].upload$ = rxAjax({
           url: 'https://www.biqdev.com/demo/wallet/upload.php',
           method: 'POST',
           crossDomain: true,
           withCredentials: true,
           body: form_data,
-          progressSubscriber
-        });
+          progressSubscriber: this.imageObj[key].progressSubscriber$
+        })
+          .pipe(switchMap());
 
-        this.imageObj[key].status = 0;
-
-        progressSubscriber
-          .pipe(
-            takeUntil( this.imageObj[key].stop$.pipe( merge( this.stop$ ) ) ),
-            merge(this.imageObj[key].upload$),
-            catchError( err => of(err.currentTarget) )
-          )
-          .subscribe(
-            data => {
-
-              if ( data.type === 'progress' ) {
-                let upload_progress = Math.floor(data.loaded / data.total * 100 );
-                this.imageObj[key].progress = upload_progress;
-              }else if ( !biqHelper.utils.isNull( data.status) ) {
-                this.imageObj[key].status = data.status;
-
-                if ( !biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
-                  this._uploadErrorAdd( { title: 'Gagal', notice: data.response.response_code.message } );
-                }
-
-              }
-
-              this._updateImageList();
-
-            }
-          );
+        this._uploadImageSubscribe( key );
 
       }
     }
 
   }
+
+  _uploadImageSubscribe = ( key )=> {
+    this.imageObj[key].status = 0;
+    this.imageObj[key].progressSubscriber = this.imageObj[key].progressSubscriber$
+      .pipe(
+        takeUntil( this.stop$  ),
+        merge(this.imageObj[key].upload$),
+        catchError( err => of(err.currentTarget) )
+      )
+      .subscribe(
+        data => {
+          this._uploadImageSubscribeHandler( data, key );
+        }
+      );
+  };
+
+  _uploadImageSubscribeHandler = ( data, key )=> {
+    if ( biqHelper.utils.isNull( data ) ) return;
+
+    try {
+
+      if ( data.type === 'progress' ) {
+        this.imageObj[key].progress = Math.floor(data.loaded / data.total * 100 );
+      }else if ( !biqHelper.utils.isNull( data.status) ) {
+        this.imageObj[key].status = data.status;
+
+        if ( !biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
+          console.log(data);
+          this._uploadErrorAdd( { title: 'Gagal', notice: data.response.response_code.message } );
+        }
+
+      }
+
+      this._updateImageList();
+    } catch ( e ) {
+      console.error( `Error on image upload subscriber: ${ e.message }` );
+    }
+  };
+
+  _uploadImageUnsubscribe = ( name ) => {
+    this.imageObj[name].progressSubscriber.unsubscribe();
+    console.log('unsubscribe');
+  };
+
+  _uploadImageAction = ( name ) => {
+    let status = this.imageObj[name].status;
+
+    if ( status === 0 ) {
+      this._uploadImageUnsubscribe( name );
+      this.imageObj[name].status = 400;
+
+      this._updateImageList();
+    }
+
+    else if ( status !== 0 && !biqHelper.utils.httpResponseIsSuccess( status ) ) {
+      console.log('subscribe');
+      this._uploadImageSubscribe( name );
+    }
+
+  };
 
   uploadErrors = [];
 
@@ -321,7 +355,7 @@ class BalancePaymentConfirmation extends Component{
 
                             </div>
 
-                            <Button className={`action${ action_icon }`}>&nbsp;</Button>
+                            <Button className={`action${ action_icon }`} onClick={ ()=> this._uploadImageAction( el.name ) }>&nbsp;</Button>
 
                           </div>
                         )

@@ -191,9 +191,7 @@ class DropPhotoUpload extends Component {
                   dispatch( UserActions.userProfileUpdate( { key: 'photo', value: data.response.data.value } ) );
                 } else {
                   let response = data.status !== 0 ? data.response
-                    : {
-                      response_code: { status: 400, message: 'Ada masalah koneksi, harap periksa koneksi internet anda.'}
-                    };
+                    : biqConfig.api.error_response_fake;
                   this.setState( { img_is_uploading: false, server_response: response, img_upload_progress: 0 });
                 }
               }

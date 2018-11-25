@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
+import { Subject, of } from 'rxjs';
+import {ajax as rxAjax} from 'rxjs/ajax';
+import {takeUntil, catchError, switchMap} from 'rxjs/operators'
 
 import {Button} from '../../../Widgets/material-ui';
 
@@ -39,8 +42,11 @@ import iconMandiriKlikPay from "../../../../images/icons/payment/mandiri-e@3x.pn
 
 import iconCimbClickSingle from "../../../../images/icons/payment/cimb-klik-singgle@3x.png";
 import iconCimbClick from "../../../../images/icons/payment/cimb-klik@3x.png";
+import biqConfig from "../../../../providers/biqConfig";
 
 class BalancePaymentMethod extends Component {
+
+  stop$ = new Subject();
 
   constructor( props ) {
     super(props);
@@ -59,6 +65,46 @@ class BalancePaymentMethod extends Component {
       dispatch( balanceActions.balanceMethodSet( type ) );
     });
   };
+
+  componentDidMount() {
+    let ajax$ = rxAjax({
+      url: `${biqConfig.api.url_base}/api/wallet/list_payment_method`,
+      method: 'POST',
+      crossDomain: true,
+      withCredentials: true,
+      body: Object.assign( {}, biqConfig.api.data_auth )
+    })
+      .pipe(
+        takeUntil(this.stop$),
+        catchError( err=> of( err.xhr ) )
+      );
+
+    ajax$
+      .subscribe(
+        response => {
+
+          if ( biqHelper.utils.httpResponseIsSuccess( response.status ) ) {
+            let data = response.data;
+          }
+/*
+          data_json: "{"admin": 0, "admin_label": [{"label": "Konfirmasi Otomatis"}, {"label": "Verifikasi Realtime"}, {"label": "Bebas Biaya Administrasi"}]}"
+          id: "4"
+          images: "b2c_assets/images/stdlogo1-dokuwallet.jpg"
+          keterangan: "<ul class="byr-txt"><li><i class="fa fa-check"></i><span>Konfirmasi Otomatis</span></li><li><i class="fa fa-check"></i><span>Verifikasi Realtime</span></li><li><i class="fa fa-check"></i><span>Bebas Biaya Administrasi</span></li></ul>"
+          payment_channel: "midtrans"
+          payment_method: "doku-wallet"
+          payment_method_label: "Doku Wallet"
+          status: "1"*/
+
+        }
+      );
+
+  }
+
+  componentWillUnmount() {
+    this.stop$.next();
+    this.stop$.complete();
+  }
 
   render() {
 

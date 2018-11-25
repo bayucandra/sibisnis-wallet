@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Subject, of, Observable} from 'rxjs';
-import { takeUntil, catchError} from 'rxjs/operators'
+import {takeUntil, catchError, map} from 'rxjs/operators'
 import {ajax as rxAjax} from 'rxjs/ajax'
 
 import "./BalancePaymentConfirmation.scss";
@@ -115,7 +115,7 @@ class BalancePaymentConfirmation extends Component{
         form_data.append( 'image', image_data.blob, image_data.name );
         form_data.append( 'scrf_token', biqConfig.api.csrf_token );
 
-        this.imageObj[key].ajax$ = Observable.create( ( observer )=>{
+        this.imageObj[key].ajax$ = Observable.create( observer =>{
           let ajax$ = rxAjax({
             url: 'https://www.biqdev.com/demo/wallet/upload.php',
             method: 'POST',
@@ -131,7 +131,8 @@ class BalancePaymentConfirmation extends Component{
         } )
           .pipe(
             takeUntil( this.stop$ ),
-            catchError( err => of(err.target) )
+            catchError( err => of(err.target) ),
+            map( res => res )
           );
 
         this._uploadImageSubscribe( key );
@@ -145,33 +146,34 @@ class BalancePaymentConfirmation extends Component{
     this.imageObj[key].status = 0;
     this.imageObj[key].ajaxSubscribe = this.imageObj[key].ajax$
       .subscribe(
-        data => {
-          this._uploadImageSubscribeHandler( data, key );
-        }
+        response => {
+
+          console.log(response);
+
+          try {
+            if ( response.type === 'progress' ) {
+              this.imageObj[key].progress = Math.floor(response.loaded / response.total * 100 );
+            }else if ( !biqHelper.utils.isNull( response.status) ) {
+              this.imageObj[key].status = response.status;
+              console.warn(this.imageObj[key].status);
+
+              if ( !biqHelper.utils.httpResponseIsSuccess( response.status ) ) {
+                let message = response.status === 0 ? `Upload file <b>"${key}"</b> Gagal, Harap periksa koneksi anda.` : biqHelper.JSON.pathValueGet(response.response, 'response_code.message');
+                this._uploadErrorAdd( { title: 'Gagal', notice: message } );
+                this.imageObj[key].progress = 0;
+              }
+
+            }
+
+            this._updateImageList();
+          } catch ( e ) {
+            console.error( `Error on image upload subscriber: ${ e.message }` );
+          }
+
+        },
+        err => console.log(err),
+        complete => console.log(complete)
       );
-  };
-
-  _uploadImageSubscribeHandler = ( data, key )=> {
-    if ( biqHelper.utils.isNull( data ) ) return;
-
-    try {
-      if ( data.type === 'progress' ) {
-        this.imageObj[key].progress = Math.floor(data.loaded / data.total * 100 );
-      }else if ( !biqHelper.utils.isNull( data.status) ) {
-        this.imageObj[key].status = data.status;
-
-        if ( !biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
-          let message = data.status === 0 ? `Upload file <b>"${key}"</b> Gagal, Harap periksa koneksi anda.` : biqHelper.JSON.pathValueGet(data.response, 'response_code.message');
-          this._uploadErrorAdd( { title: 'Gagal', notice: message } );
-          this.imageObj[key].progress = 0;
-        }
-
-      }
-
-      this._updateImageList();
-    } catch ( e ) {
-      console.error( `Error on image upload subscriber: ${ e.message }` );
-    }
   };
 
   _uploadImageUnsubscribe = ( name ) => {
@@ -355,6 +357,9 @@ class BalancePaymentConfirmation extends Component{
                         } else if ( biqHelper.utils.httpResponseIsError( el.status ) ) {
                           action_icon = ' action--retry';
                         }
+
+                        console.log(el.status);
+                        console.log(action_icon);
 
                         return (
                           <div className={`image-list__item${ idx=== 0 ? ' is-first' : '' }`} key={el.name}>

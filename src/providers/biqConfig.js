@@ -14,7 +14,10 @@ biqConfig.url_base = `${window.location.protocol}//${window.location.host}`;
 biqConfig.api = {
   url_base: `${window.location.protocol}//${window.location.host + path}`,
   data_package_name: {},
-  csrf_token: Date.now()
+  csrf_token: Date.now(),
+  error_response_fake: {
+    response_code: { status: 400, message: 'Ada masalah koneksi, harap periksa koneksi internet anda.'}
+  }
 };
 
 

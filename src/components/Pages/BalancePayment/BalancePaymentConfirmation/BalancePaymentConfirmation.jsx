@@ -27,7 +27,8 @@ class BalancePaymentConfirmation extends Component{
     modal_failed_text: { title: '', notice: '' },
     duplicate_file_name: '',
     image_list: [],
-    upload_errors: []
+    upload_errors: [],
+    has_upload_progress: false
   };
 
   stop$ = new Subject();
@@ -88,12 +89,18 @@ class BalancePaymentConfirmation extends Component{
 
   _updateImageList() {
     let image_list = [];
+    let has_upload_progress = false;
     for( let key in this.imageObj ) {
       let image_data = Object.assign( {}, this.imageObj[key] );
       image_data.upload$ = null;
       image_list.push( image_data );
+
+      let status = image_data.status;
+      if ( status === 0 || status === -1 ) has_upload_progress = true;
     }
     this.setState({ image_list: image_list });
+
+    this.setState( { has_upload_progress: has_upload_progress } );
   }
 
   _uploadImageList() {
@@ -257,6 +264,14 @@ class BalancePaymentConfirmation extends Component{
     this.setState( { modal_failed_is_open: false } );
   };
 
+  _submitClick = () => {
+    if( this.state.image_list.length < 1 || this.state.has_upload_progress ) return;
+
+    let { type, id, referrer } = biqHelper.JSON.pathValueGetMulti( this.props.match.params, [ 'type', 'id', 'referrer' ] );
+    let confirmed_url = `/balance/payment/status/${type}/${id}/${referrer}/confirmed`;
+    biqHelper.utils.clickTimeout(()=> this.props.history.push( confirmed_url ));
+  };
+
   componentDidMount() {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
@@ -385,7 +400,21 @@ class BalancePaymentConfirmation extends Component{
               }
 
               <input type="file" multiple={true} accept="image/*" style={{display: 'none'}} ref={this.inputRef} onChange={this._addPhotoUpload}/>
-              <Button className="add-photo-btn" onClick={this._addPhotoClick}>Tambahkan Foto</Button>
+
+              <Button className={`add-photo-btn${ this.state.image_list.length > 0 ? ' has-images' : '' }`} onClick={this._addPhotoClick}>Tambahkan Foto</Button>
+
+              {
+                this.state.image_list.length > 0 ?
+
+                <Button className={`save-btn${ this.state.has_upload_progress ? ' has-upload-progress' : '' }`} onClick={this._submitClick}>
+                  { this.state.has_upload_progress ? 'PROSES..' : 'SIMPAN' }
+                </Button>
+
+                  :
+
+                ''
+              }
+
             </div>
 
           </div>

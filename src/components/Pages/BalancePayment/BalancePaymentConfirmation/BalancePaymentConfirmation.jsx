@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Subject, of, Observable} from 'rxjs';
-import {takeUntil, catchError, map} from 'rxjs/operators'
+import {takeUntil, catchError, map, merge, switchMap} from 'rxjs/operators'
 import {ajax as rxAjax} from 'rxjs/ajax'
 
 import "./BalancePaymentConfirmation.scss";
@@ -109,34 +109,7 @@ class BalancePaymentConfirmation extends Component{
       let image_data = this.imageObj[key];
 
       if ( image_data.status === -1 ) {
-        let form_data = new FormData();
-        form_data.append('invoice_number', 'Test-1234');
-        form_data.append('memberid', '123456');
-        form_data.append( 'image', image_data.blob, image_data.name );
-        form_data.append( 'scrf_token', biqConfig.api.csrf_token );
-
-        this.imageObj[key].ajax$ = Observable.create( observer =>{
-          let ajax$ = rxAjax({
-            url: 'https://www.biqdev.com/demo/wallet/upload.php',
-            method: 'POST',
-            crossDomain: true,
-            withCredentials: true,
-            body: form_data,
-            progressSubscriber: observer
-          });
-
-          let subscriber = ajax$.subscribe();
-          return () => subscriber.unsubscribe();
-
-        } )
-          .pipe(
-            takeUntil( this.stop$ ),
-            catchError( err => of(err.target) ),
-            map( res => res )
-          );
-
         this._uploadImageSubscribe( key );
-
       }
     }
 
@@ -144,12 +117,32 @@ class BalancePaymentConfirmation extends Component{
 
   _uploadImageSubscribe = ( key )=> {
     this.imageObj[key].status = 0;
-    this.imageObj[key].ajaxSubscribe = this.imageObj[key].ajax$
+
+    let image_data = this.imageObj[key];
+    let form_data = new FormData();
+    form_data.append('invoice_number', 'Test-1234');
+    form_data.append('memberid', '123456');
+    form_data.append( 'image', image_data.blob, image_data.name );
+    form_data.append( 'scrf_token', biqConfig.api.csrf_token );
+
+    let progressSubscriber = new Subject();
+
+    this.imageObj[key].rxAjax$ = rxAjax({
+      url: 'https://www.biqdev.com/demo/wallet/upload.php',
+      method: 'POST',
+      crossDomain: true,
+      withCredentials: true,
+      body: form_data,
+      progressSubscriber
+    });
+
+    this.imageObj[key].ajaxSubscribe = progressSubscriber.pipe(
+      takeUntil( this.stop$ ),
+      merge(this.imageObj[key].rxAjax$),
+      catchError( err => of(err.target) )
+    )
       .subscribe(
         response => {
-
-          console.log(response);
-
           try {
             if ( response.type === 'progress' ) {
               this.imageObj[key].progress = Math.floor(response.loaded / response.total * 100 );
@@ -169,10 +162,7 @@ class BalancePaymentConfirmation extends Component{
           } catch ( e ) {
             console.error( `Error on image upload subscriber: ${ e.message }` );
           }
-
-        },
-        err => console.log(err),
-        complete => console.log(complete)
+        }
       );
   };
 
@@ -357,9 +347,6 @@ class BalancePaymentConfirmation extends Component{
                         } else if ( biqHelper.utils.httpResponseIsError( el.status ) ) {
                           action_icon = ' action--retry';
                         }
-
-                        console.log(el.status);
-                        console.log(action_icon);
 
                         return (
                           <div className={`image-list__item${ idx=== 0 ? ' is-first' : '' }`} key={el.name}>

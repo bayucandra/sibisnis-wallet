@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
 import { Subject, of } from 'rxjs';
 import {ajax as rxAjax} from 'rxjs/ajax';
-import {takeUntil, catchError, switchMap} from 'rxjs/operators'
+import {takeUntil, catchError} from 'rxjs/operators'
 
 import {Button} from '../../../Widgets/material-ui';
 

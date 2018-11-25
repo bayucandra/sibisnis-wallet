@@ -173,7 +173,7 @@ class DropPhotoUpload extends Component {
           .pipe(
             takeUntil( this.stop$ ),
             merge(request$),
-            catchError( err => of(err.currentTarget) )
+            catchError( err => of(err.target) )
           )
 
           .subscribe(

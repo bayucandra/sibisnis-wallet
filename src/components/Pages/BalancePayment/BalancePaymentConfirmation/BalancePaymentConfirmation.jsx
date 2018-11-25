@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Subject, of} from 'rxjs';
+import {Subject, of, Observable} from 'rxjs';
 import {merge, takeUntil, catchError, switchMap} from 'rxjs/operators'
 import {ajax as rxAjax} from 'rxjs/ajax'
 
@@ -108,17 +108,36 @@ class BalancePaymentConfirmation extends Component{
         form_data.append( 'image', image_data.blob, image_data.name );
         form_data.append( 'scrf_token', biqConfig.api.csrf_token );
 
-        this.imageObj[key].progressSubscriber$ = new Subject();
+        this.imageObj[key].ajax$ = Observable.create( ( observer )=>{
+          let ajax$ = rxAjax({
+            url: 'https://www.biqdev.com/demo/wallet/upload.php',
+            method: 'POST',
+            crossDomain: true,
+            withCredentials: true,
+            body: form_data,
+            progressSubscriber: observer
+          });
 
-        this.imageObj[key].upload$ = rxAjax({
-          url: 'https://www.biqdev.com/demo/wallet/upload.php',
-          method: 'POST',
-          crossDomain: true,
-          withCredentials: true,
-          body: form_data,
-          progressSubscriber: this.imageObj[key].progressSubscriber$
-        })
-          .pipe(switchMap());
+          let subscriber = ajax$.subscribe();
+          return () => subscriber.unsubscribe();
+
+        } );
+
+/*        Observable.create((observer) => {
+          const ajax$ = rxAjax({
+            url: 'https://www.biqdev.com/demo/wallet/upload.php',
+            method: 'POST',
+            crossDomain: true,
+            withCredentials: true,
+            body: form_data,
+            progressSubscriber: observer
+          });
+          const subscription = ajax$.subscribe()
+          return () => subscription.unsubscribe()
+        }).subscribe(
+          data => {
+            this._uploadImageSubscribeHandler( data, key );
+          });*/
 
         this._uploadImageSubscribe( key );
 
@@ -129,11 +148,9 @@ class BalancePaymentConfirmation extends Component{
 
   _uploadImageSubscribe = ( key )=> {
     this.imageObj[key].status = 0;
-    this.imageObj[key].progressSubscriber = this.imageObj[key].progressSubscriber$
+    this.imageObj[key].ajaxSubscribe = this.imageObj[key].ajax$
       .pipe(
-        takeUntil( this.stop$  ),
-        merge(this.imageObj[key].upload$),
-        catchError( err => of(err.currentTarget) )
+        catchError( err => of(err.target) )
       )
       .subscribe(
         data => {
@@ -153,7 +170,6 @@ class BalancePaymentConfirmation extends Component{
         this.imageObj[key].status = data.status;
 
         if ( !biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
-          console.log(data);
           this._uploadErrorAdd( { title: 'Gagal', notice: data.response.response_code.message } );
         }
 
@@ -166,8 +182,8 @@ class BalancePaymentConfirmation extends Component{
   };
 
   _uploadImageUnsubscribe = ( name ) => {
-    this.imageObj[name].progressSubscriber.unsubscribe();
-    console.log('unsubscribe');
+    if ( !this.imageObj[name].hasOwnProperty( 'ajaxSubscribe' ) ) return;
+    this.imageObj[name].ajaxSubscribe.unsubscribe();
   };
 
   _uploadImageAction = ( name ) => {
@@ -181,7 +197,6 @@ class BalancePaymentConfirmation extends Component{
     }
 
     else if ( status !== 0 && !biqHelper.utils.httpResponseIsSuccess( status ) ) {
-      console.log('subscribe');
       this._uploadImageSubscribe( name );
     }
 

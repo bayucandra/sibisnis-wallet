@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Subject, of, Observable} from 'rxjs';
-import {merge, takeUntil, catchError, switchMap} from 'rxjs/operators'
+import { takeUntil, catchError} from 'rxjs/operators'
 import {ajax as rxAjax} from 'rxjs/ajax'
 
 import "./BalancePaymentConfirmation.scss";
@@ -128,7 +128,11 @@ class BalancePaymentConfirmation extends Component{
           let subscriber = ajax$.subscribe();
           return () => subscriber.unsubscribe();
 
-        } );
+        } )
+          .pipe(
+            takeUntil( this.stop$ ),
+            catchError( err => of(err.target) )
+          );
 
 /*        Observable.create((observer) => {
           const ajax$ = rxAjax({
@@ -156,9 +160,6 @@ class BalancePaymentConfirmation extends Component{
   _uploadImageSubscribe = ( key )=> {
     this.imageObj[key].status = 0;
     this.imageObj[key].ajaxSubscribe = this.imageObj[key].ajax$
-      .pipe(
-        catchError( err => of(err.target) )
-      )
       .subscribe(
         data => {
           this._uploadImageSubscribeHandler( data, key );
@@ -170,14 +171,14 @@ class BalancePaymentConfirmation extends Component{
     if ( biqHelper.utils.isNull( data ) ) return;
 
     try {
-
       if ( data.type === 'progress' ) {
         this.imageObj[key].progress = Math.floor(data.loaded / data.total * 100 );
       }else if ( !biqHelper.utils.isNull( data.status) ) {
         this.imageObj[key].status = data.status;
 
         if ( !biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
-          this._uploadErrorAdd( { title: 'Gagal', notice: data.response.response_code.message } );
+          let message = data.status === 0 ? `Upload file <b>"${key}"</b> Gagal, Harap periksa koneksi anda.` : biqHelper.JSON.pathValueGet(data.response, 'response_code.message');
+          this._uploadErrorAdd( { title: 'Gagal', notice: message } );
         }
 
       }

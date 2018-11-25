@@ -4,11 +4,11 @@ import {withRouter} from 'react-router-dom';
 
 import {Button} from "../../../Widgets/material-ui";
 import biqHelper from "../../../../lib/biqHelper/index";
+import walletProvider from "../../../../providers/walletProvider";
 
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
 
 import "./BalanceTransactionInfo.scss";
-import walletProvider from "../../../../providers/walletProvider";
 
 class BalanceTransactionInfo extends Component {
 
@@ -37,6 +37,16 @@ class BalanceTransactionInfo extends Component {
     let data = is_submit && (param_invoice_id === '0')  ? biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.data, 'data' ) : biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.data, 'data');
     let invoice_id = biqHelper.JSON.pathValueGet( data, 'invoice_id' );
     let status = biqHelper.JSON.pathValueGet( data, 'status' );
+    let status_class = '';
+
+    switch( status ) {
+      case 3:
+        status_class = ' status--expired';
+        break;
+      case 5:
+        status_class = ' status--verification-process';
+        break;
+    }
 
     return (
       <div className={`balance-transaction-info${ this.props.balance.payment_info_is_visible_mobile ? ' is-visible-mobile' : '' }`}>
@@ -59,7 +69,7 @@ class BalanceTransactionInfo extends Component {
 
               <div className="info-section__row">
                 <div className="label">Status</div>
-                <div className={`status${ status === 3 ? ' status--expired' : '' }`}> { walletProvider.paymentStatusGet( status ) } </div>
+                <div className={`status${ status_class }`}> { walletProvider.paymentStatusGet( status ) } </div>
               </div>
             </>
             :

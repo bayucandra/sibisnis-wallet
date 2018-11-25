@@ -42,13 +42,33 @@ const paymentStatus = ( id ) => {
   if ( id === 1 ) {
 
     return of({
-      "response_code": { "status": 200, "message": '' },
+      "response_code": {"status": 200, "message": ''},
       "data": {
         "memberid": "ZON33693136",
         "tanggal": "2018-08-16 13:49:41",
         "nominal": "10000",
         "bank": "bank-tf-mandiri",
         "status": 3,
+        "lst_nominal": "0",
+        "date_valid": null,
+        "opr": "otomatic",
+        "invoice_id": 115763,
+        "nominal_origin": 10161,
+        "expired": moment().subtract(3, 'minutes').format('YYYY-MM-DD HH:mm:ss')
+      }
+
+    }).pipe(delay(2000));
+
+  } else if( id === 2){
+
+    return of({
+      "response_code": {"status": 200, "message": ''},
+      "data": {
+        "memberid": "ZON33693136",
+        "tanggal": "2018-08-16 13:49:41",
+        "nominal": "10000",
+        "bank": "bank-tf-mandiri",
+        "status": 5,
         "lst_nominal": "0",
         "date_valid": null,
         "opr": "otomatic",

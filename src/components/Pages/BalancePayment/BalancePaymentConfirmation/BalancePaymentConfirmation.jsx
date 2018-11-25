@@ -134,22 +134,6 @@ class BalancePaymentConfirmation extends Component{
             catchError( err => of(err.target) )
           );
 
-/*        Observable.create((observer) => {
-          const ajax$ = rxAjax({
-            url: 'https://www.biqdev.com/demo/wallet/upload.php',
-            method: 'POST',
-            crossDomain: true,
-            withCredentials: true,
-            body: form_data,
-            progressSubscriber: observer
-          });
-          const subscription = ajax$.subscribe()
-          return () => subscription.unsubscribe()
-        }).subscribe(
-          data => {
-            this._uploadImageSubscribeHandler( data, key );
-          });*/
-
         this._uploadImageSubscribe( key );
 
       }
@@ -179,6 +163,7 @@ class BalancePaymentConfirmation extends Component{
         if ( !biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
           let message = data.status === 0 ? `Upload file <b>"${key}"</b> Gagal, Harap periksa koneksi anda.` : biqHelper.JSON.pathValueGet(data.response, 'response_code.message');
           this._uploadErrorAdd( { title: 'Gagal', notice: message } );
+          this.imageObj[key].progress = 0;
         }
 
       }
@@ -200,11 +185,13 @@ class BalancePaymentConfirmation extends Component{
     if ( status === 0 ) {
       this._uploadImageUnsubscribe( name );
       this.imageObj[name].status = 400;
+      this.imageObj[name].progress = 0;//reset progress
 
       this._updateImageList();
-    }
 
-    else if ( status !== 0 && !biqHelper.utils.httpResponseIsSuccess( status ) ) {
+    } else if ( status !== 0 && !biqHelper.utils.httpResponseIsSuccess( status ) ) {
+
+      this.imageObj[name].progress = 0;//reset progress
       this._uploadImageSubscribe( name );
     }
 
@@ -242,6 +229,10 @@ class BalancePaymentConfirmation extends Component{
   };
 
   _uploadErrorClose = ( id ) => {
+    biqHelper.utils.clickTimeout(()=> this._uploadErrorCloseActual( id ));
+  };
+
+  _uploadErrorCloseActual = ( id ) => {
     let upload_error_item = this.uploadErrors.filter( (el)=>{
       return el.id === id;
     } );
@@ -442,4 +433,10 @@ class BalancePaymentConfirmation extends Component{
 
 }
 
-export default connect( null ) (BalancePaymentConfirmation);
+const mapStateToProps = state => {
+  return {
+    balance: state.balance
+  }
+};
+
+export default connect( mapStateToProps ) (BalancePaymentConfirmation);

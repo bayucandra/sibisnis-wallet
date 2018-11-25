@@ -1,0 +1,52 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .balance-payment-confirmed {
+    padding: 0 15px;
+
+    &__header {
+      height: auto;
+      margin-top: 40px;
+      background: none;
+
+      .nav-back {
+
+        &__btn {
+          $design-with-diff: (50px-24px)/2;
+          margin: 0 (5px - $design-with-diff) 0 (5px - $design-with-diff);
+        }
+
+        &__text {
+          font-size: 20px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: #ffffff;
+        }//&__text
+
+      }//.nav-back
+
+    }//&__header
+
+    &__body {
+      margin-top: 31px;
+      background: none;
+    }//&__body
+
+    &__main-panel {
+      flex: 619 1 1px;
+      min-height: 506px;
+
+      border-radius: 5px;
+      box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+      background-color: #ffffff;
+    }//&__main-panel
+
+    &__spacer {
+      flex: 50 1 1px;
+    }//&__spacer
+
+  }//.balance-payment-confirmed
+
+}//@media

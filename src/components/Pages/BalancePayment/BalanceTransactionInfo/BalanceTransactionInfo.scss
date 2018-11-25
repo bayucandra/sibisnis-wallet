@@ -84,7 +84,12 @@
 
         &--expired {
           background-color: map-get($colors, very-light-pink-three);
-        }
+        }//&--expired
+
+        &--verification-process {
+          color: map-get($colors, pure-blue);
+          background-color: map-get($colors, pale-lilac);
+        }//&--verification-process
 
       }//.status
 

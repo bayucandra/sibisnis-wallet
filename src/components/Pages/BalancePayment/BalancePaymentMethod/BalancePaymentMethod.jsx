@@ -48,9 +48,9 @@ class BalancePaymentMethod extends Component {
 
   stop$ = new Subject();
 
-  constructor( props ) {
-    super(props);
-  }
+  state = {
+    payment_methods: []
+  };
 
   _paymentInfoVisibilityToggle = () => {
     biqHelper.utils.clickTimeout( () => {
@@ -81,20 +81,23 @@ class BalancePaymentMethod extends Component {
 
     ajax$
       .subscribe(
-        response => {
+        res => {
 
-          if ( biqHelper.utils.httpResponseIsSuccess( response.status ) ) {
-            let data = response.data;
+          if ( biqHelper.utils.httpResponseIsSuccess( res.status ) ) {
+            let data = res.response.data;
+            this.setState( { payment_methods: data } );
           }
-/*
-          data_json: "{"admin": 0, "admin_label": [{"label": "Konfirmasi Otomatis"}, {"label": "Verifikasi Realtime"}, {"label": "Bebas Biaya Administrasi"}]}"
-          id: "4"
-          images: "b2c_assets/images/stdlogo1-dokuwallet.jpg"
-          keterangan: "<ul class="byr-txt"><li><i class="fa fa-check"></i><span>Konfirmasi Otomatis</span></li><li><i class="fa fa-check"></i><span>Verifikasi Realtime</span></li><li><i class="fa fa-check"></i><span>Bebas Biaya Administrasi</span></li></ul>"
-          payment_channel: "midtrans"
-          payment_method: "doku-wallet"
-          payment_method_label: "Doku Wallet"
-          status: "1"*/
+
+          // doku-wallet; alfamart; rekening-va; bank-tf-bri; bank-tf-bni; visa-mastercard; bank-tf-mandiri; bri-epay; klikpay-bca; kartu-kredit; mandiri-clickpay; cimb;
+          /*
+                    data_json: "{"bank_name": "BRI", "account_name": "A.N. PT. Apta Media Indonesia", "account_number": "2120.01.000202.305", "kategori_payment": "bank_transfer"}"
+                    id: "14"
+                    images: "b2c_assets/images/stdlogo1-bri.jpg"
+                    keterangan: "<div style="text-align:center;"><h1>2120.01.000202.305</h1><h4>A.N. PT. Apta Media Indonesia</h4></div>"
+                    payment_channel: "manual_transfer"
+                    payment_method: "bank-tf-bri"
+                    payment_method_label: "Transfer BRI"
+                    status: "0"*/
 
         }
       );
@@ -128,114 +131,89 @@ class BalancePaymentMethod extends Component {
 
           <section className="balance-payment-method__method-list">
 
-            <Button className="payment-method-item is-first" onClick={() => { this._paymentMethodSelect( 'bank-transfer' ) }}>
-              <div className="payment-method-item__inner">
-                <div className="label">
-                  <div>Transfer Bank</div>
-                  <div className="icon-desktop visible-md-up">
-                    <img src={iconBankBri} alt={"Bank BRI"}/>
-                    <img src={iconBankBca} alt={"Bank BCA"}/>
-                    <img src={iconBankMandiri} alt={"Bank Mandiri"}/>
-                    <img src={iconBankBni} alt={"Bank BNI"}/>
-                  </div>
-                </div>
-                <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${iconBankMethod} )`, backgroundSize: 'auto 27px' }}/>
-              </div>
-            </Button>
+            {
 
-            <Button className="payment-method-item">
-              <div className="payment-method-item__inner">
-                <div className="label">
-                  <div>ATM / Bank Transfer</div>
-                  <div className="icon-desktop visible-md-up">
-                    <img src={iconAtmPrima} alt={"Atm Prima"}/>
-                    <img src={iconAtmAlto} alt={"Atm Alto"}/>
-                    <img src={iconAtmBersama} alt={"Atm Bersama"}/>
-                  </div>
-                </div>
-                <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${iconAtm} )`, backgroundSize: 'auto 21px' }}/>
-              </div>
-            </Button>
+              this.state.payment_methods.map(( el )=>{
 
-            <Button className="payment-method-item">
-              <div className="payment-method-item__inner">
-                <div className="label">
-                  <div>Kartu Kredit</div>
-                  <div className="icon-desktop visible-md-up">
-                    <img src={iconCreditCardMastercard} alt={"Kartu kredit Mastercard"}/>
-                  </div>
-                </div>
-                <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${iconCreditCard} )`, backgroundSize: 'auto 16px' }}/>
-              </div>
-            </Button>
+                let icon_desktop = null;
+                let icon_mobile = null;
 
-            <Button className="payment-method-item">
-              <div className="payment-method-item__inner">
-                <div className="label">
-                  <div>Indomaret</div>
-                  <div className="icon-desktop visible-md-up">
-                    <img src={iconIndomaret} alt={"Indomaret"}/>
-                  </div>
-                </div>
-                <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${iconIndomaret} )`, backgroundSize: 'auto 30px' }}/>
-              </div>
-            </Button>
+                switch( el.payment_method ) {
+                  case 'doku-wallet':
+                    break;
 
-            <Button className="payment-method-item">
-              <div className="payment-method-item__inner">
+                  case 'alfamart':
+                    icon_desktop = (
+                      <>
+                        <img src={iconIndomaret} alt={"Indomaret"}/>
+                      </>
+                    );
+                    icon_mobile = iconIndomaret;
+                    break;
 
-                <div className="label">
-                  <div>Klik BCA</div>
-                  <div className="icon-desktop visible-md-up">
-                    <img src={iconKlikBca} alt={"Klik BCA"}/>
-                  </div>
-                </div>
+                  case 'rekening-va':
+                    break;
 
-                <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${iconKlikBcaSingle} )`, backgroundSize: 'auto 23px' }}/>
-              </div>
-            </Button>
+                  case 'visa-mastercard':
+                    icon_desktop = <img src={iconCreditCardMastercard} alt={"Kartu kredit Mastercard"}/>;
+                    icon_mobile = iconCreditCard;
+                    break;
 
-            <Button className="payment-method-item">
-              <div className="payment-method-item__inner">
+                  case 'bri-epay':
+                    break;
 
-                <div className="label">
-                  <div>BCA KlikPay</div>
-                  <div className="icon-desktop visible-md-up">
-                    <img src={iconBcaKlikPay} alt={"BCA Click Pay"}/>
-                  </div>
-                </div>
+                  case 'klikpay-bca':
+                    icon_desktop = <img src={iconBcaKlikPay} alt={"BCA Click Pay"}/>;
+                    icon_mobile = iconBcaKlikPaySingle;
+                    break;
 
-                <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${iconBcaKlikPaySingle} )`, backgroundSize: 'auto 12px' }}/>
-              </div>
-            </Button>
+                  case 'kartu-kredit':
+                    icon_desktop = <img src={iconCreditCardMastercard} alt={"Kartu kredit Mastercard"}/>;
+                    icon_mobile = iconCreditCard;
+                    break;
 
-            <Button className="payment-method-item">
-              <div className="payment-method-item__inner">
+                  case 'mandiri-clickpay':
+                    icon_desktop = <img src={iconMandiriKlikPay} alt={"BCA Click Pay"}/>;
+                    icon_mobile = iconMandiriKlikPaySingle;
+                    break;
 
-                <div className="label">
-                  <div>Mandiri ClickPay</div>
-                  <div className="icon-desktop visible-md-up">
-                    <img src={iconMandiriKlikPay} alt={"BCA Click Pay"}/>
-                  </div>
-                </div>
+                  case 'cimb':
+                    icon_desktop = <img src={iconCimbClick} alt={"CIMB Click"}/>;
+                    icon_mobile = iconCimbClickSingle;
+                    break;
 
-                <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${iconMandiriKlikPaySingle} )`, backgroundSize: 'auto 23px' }}/>
-              </div>
-            </Button>
+                  case 'bank-tf-bri':
+                  case 'bank-tf-bni':
+                  case 'bank-tf-mandiri':
+                    icon_desktop = (
+                      <>
+                        <img src={iconBankBri} alt={"Bank BRI"}/>
+                        <img src={iconBankBca} alt={"Bank BCA"}/>
+                        <img src={iconBankMandiri} alt={"Bank Mandiri"}/>
+                        <img src={iconBankBni} alt={"Bank BNI"}/>
+                      </>
+                    );
+                    icon_mobile = iconBankMethod;
+                    break;
+                }
 
-            <Button className="payment-method-item">
-              <div className="payment-method-item__inner">
+                return (
+                  <Button className="payment-method-item is-first" onClick={() => { this._paymentMethodSelect( el.payment_method ) }} key={el.payment_method}>
+                    <div className="payment-method-item__inner">
+                      <div className="label">
+                        <div>{el.payment_method_label}</div>
+                        <div className="icon-desktop visible-md-up">
+                          { icon_desktop }
+                        </div>
+                      </div>
+                      <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${icon_mobile} )`, backgroundSize: 'auto 27px' }}/>
+                    </div>
+                  </Button>
+                );
 
-                <div className="label">
-                  <div>CIMB Clicks</div>
-                  <div className='icon-desktop visible-md-up'>
-                    <img src={iconCimbClick} alt={"CIMB Click"}/>
-                  </div>
-                </div>
+              })
 
-                <div className="icon-mobile hidden-md-up" style={{ backgroundImage: `url( ${iconCimbClickSingle} )`, backgroundSize: 'auto 13px' }}/>
-              </div>
-            </Button>
+            }
 
           </section>
 

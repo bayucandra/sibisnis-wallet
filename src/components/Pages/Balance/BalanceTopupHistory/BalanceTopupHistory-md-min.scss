@@ -92,10 +92,13 @@
 
       .history-item {
         margin: 0;
-        padding:0;
         border: 0;
         border-radius: 0;
         box-shadow: 0 0.5px 0 0 map-get($colors, gray-87);
+
+        &__inner {
+          padding:0;
+        }//&__inner
 
         .row-inner {
           min-height: 45px;

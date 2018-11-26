@@ -142,15 +142,15 @@ class BalancePaymentConfirmation extends Component{
       catchError( err => of(err.target) )
     )
       .subscribe(
-        response => {
+        res => {
           try {
-            if ( response.type === 'progress' ) {
-              this.imageObj[key].progress = Math.floor(response.loaded / response.total * 100 );
-            }else if ( !biqHelper.utils.isNull( response.status) ) {
-              this.imageObj[key].status = response.status;
+            if ( res.type === 'progress' ) {
+              this.imageObj[key].progress = Math.floor(res.loaded / res.total * 100 );
+            }else if ( !biqHelper.utils.isNull( res.status) ) {
+              this.imageObj[key].status = res.status;
 
-              if ( !biqHelper.utils.httpResponseIsSuccess( response.status ) ) {
-                let message = response.status === 0 ? `Upload file <b>"${key}"</b> Gagal, Harap periksa koneksi anda.` : biqHelper.JSON.pathValueGet(response.response, 'response_code.message');
+              if ( !biqHelper.utils.httpResponseIsSuccess( res.status ) ) {
+                let message = res.status === 0 ? `Upload file <b>"${key}"</b> Gagal, Harap periksa koneksi anda.` : biqHelper.JSON.pathValueGet(res.response, 'response_code.message');
                 this._uploadErrorAdd( { title: 'Gagal', notice: message } );
                 this.imageObj[key].progress = 0;
               }

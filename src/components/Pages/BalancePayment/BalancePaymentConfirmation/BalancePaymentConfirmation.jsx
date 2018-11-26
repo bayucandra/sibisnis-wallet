@@ -148,7 +148,6 @@ class BalancePaymentConfirmation extends Component{
               this.imageObj[key].progress = Math.floor(response.loaded / response.total * 100 );
             }else if ( !biqHelper.utils.isNull( response.status) ) {
               this.imageObj[key].status = response.status;
-              console.warn(this.imageObj[key].status);
 
               if ( !biqHelper.utils.httpResponseIsSuccess( response.status ) ) {
                 let message = response.status === 0 ? `Upload file <b>"${key}"</b> Gagal, Harap periksa koneksi anda.` : biqHelper.JSON.pathValueGet(response.response, 'response_code.message');

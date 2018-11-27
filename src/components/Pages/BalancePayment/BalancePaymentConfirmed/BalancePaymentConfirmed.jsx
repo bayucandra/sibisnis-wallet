@@ -32,7 +32,7 @@ class BalancePaymentConfirmed extends Component {
         && biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.data, 'data.status' ) === '5' )
           dispatch(balanceActions.balancePaymentTransactionFetch(3));
 
-    }, 4000);
+    }, 5000);
   };
 
   _backBtnClick = () => {
@@ -42,6 +42,8 @@ class BalancePaymentConfirmed extends Component {
   render() {
 
     if( this.props.balance.payment_transaction.is_fetching ) return <div/>;
+
+    let is_failed = biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.data, 'data.status' ) === '2';
 
     return (
       <div className="balance-payment-confirmed">
@@ -65,16 +67,24 @@ class BalancePaymentConfirmed extends Component {
 
             <div className="notice-block">
               <div className="title">
-                Proses Verifikasi
+                { !is_failed ? 'Proses Verifikasi' : 'Tidak ditemukan Pembayaran' }
               </div>
 
               <div className="description">
-                Saat ini kami sedang melakukan pengecekan bukti transfer yang anda sampaikan, mohon ditunggu beberapa
-                saat lagi
+                {
+                  !is_failed ?
+
+                  `Saat ini kami sedang melakukan pengecekan bukti transfer yang anda sampaikan, mohon ditunggu beberapa
+                  saat lagi`
+
+                    :
+
+                  `Kami telah melakukan verifikasi bukti transfer anda dan tidak ditemukan adanya pembayaran`
+                }
               </div>
 
               {
-                biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.data, 'data.status' ) === '2' ?
+                is_failed ?
 
                 <div className="icon-not-found"/>
 

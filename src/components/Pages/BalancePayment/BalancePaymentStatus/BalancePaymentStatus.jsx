@@ -190,7 +190,7 @@ class BalancePaymentStatus extends Component {
 
         <div className="balance-payment-status__header">
           {
-            data.status === 3 ?
+            data.status === '3' ?
 
               <div className="nav-back">
                 <Button className="nav-back__btn" onClick={()=> biqHelper.utils.clickTimeout( () => this.props.history.push('/balance/topup-history') )}>&nbsp;</Button>
@@ -208,7 +208,7 @@ class BalancePaymentStatus extends Component {
 
           <div className="balance-payment-status__main-panel">
             {
-              data.status !== 3 ?
+              data.status !== '3' ?
                 <div className="expiration-notice">
 
                   <div className="expiration-notice__icon"/>
@@ -233,7 +233,7 @@ class BalancePaymentStatus extends Component {
             }
 
             {
-              data.status === 3 ?
+              data.status === '3' ?
                 <div style={{ height: '10px' }} className={"visible-md-up"}/>
                 :
                 ''
@@ -261,13 +261,13 @@ class BalancePaymentStatus extends Component {
                 <div className="bank-account-holder">{ bank_record.account_name }</div>
               </div>
 
-              <div className={`payment-detail__row${ data.status !== 3 ? ' bill-amount-row' : ' bill-amount-row-expired' } is-last`}>
+              <div className={`payment-detail__row${ data.status !== '3' ? ' bill-amount-row' : ' bill-amount-row-expired' } is-last`}>
                 <div className="label">Total Tagihan</div>
                 <div className="bill-amount"><span>{ amount_arr[0] }</span><span>{ amount_arr[1] }</span></div>
               </div>
 
               {
-                data.status !== 3 ?
+                data.status !== '3' ?
                   <div className="payment-detail__row-notice">
                     Pastikan total transfer anda tepat hingga 3 digit terakhir, sehingga pembayaran anda akan divalidasi dalam waktu secepatnya
                   </div>
@@ -277,7 +277,7 @@ class BalancePaymentStatus extends Component {
             </div>
 
             {
-              data.status !== 3 ?
+              data.status !== '3' ?
               <div className="notice-bottom">
                 Setelah pembayaran diterima, otomatis saldo anda akan bertambah sesuai jumlah transfer hingga 3 digit terakhir, namun anda juga bisa melaporkan jika anda sudah transfer
               </div>
@@ -290,7 +290,7 @@ class BalancePaymentStatus extends Component {
             }
 
             {
-              data.status === 3 ?
+              data.status === '3' ?
                 <div className="customer-service-block">
                   <div className="title">Anda butuh info lebih lanjut?</div>
                   <div className="phone">
@@ -305,7 +305,7 @@ class BalancePaymentStatus extends Component {
             }
 
             {
-              data.status !== 3 ?
+              data.status !== '3' ?
 
                 <div className="confirmation-block">
                   <div className="header">

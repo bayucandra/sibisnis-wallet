@@ -40,10 +40,13 @@ class BalanceTransactionInfo extends Component {
     let status_class = '';
 
     switch( status ) {
-      case 3:
+      case '2':
+        status_class = ' status--canceled';
+        break;
+      case '3':
         status_class = ' status--expired';
         break;
-      case 5:
+      case '5':
         status_class = ' status--verification-process';
         break;
     }

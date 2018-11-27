@@ -17,7 +17,23 @@ class BalancePaymentConfirmed extends Component {
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
     dispatch( balanceActions.balancePaymentTransactionFetch(2) );
+
+    this._sseHandler();
+
   }
+
+  _sseHandler = () => {
+    setTimeout( () => {
+      let {dispatch} = this.props;
+
+      console.log('sse handler');
+
+      if ( this.props.balance.payment_transaction.is_fetched
+        && biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.data, 'data.status' ) === '5' )
+          dispatch(balanceActions.balancePaymentTransactionFetch(3));
+
+    }, 4000);
+  };
 
   _backBtnClick = () => {
     biqHelper.utils.clickTimeout( () => this.props.history.push('/balance/topup-history') );
@@ -47,15 +63,27 @@ class BalancePaymentConfirmed extends Component {
 
           <div className="balance-payment-confirmed__main-panel">
 
-            <div className="title">
-              Proses Verifikasi
-            </div>
+            <div className="notice-block">
+              <div className="title">
+                Proses Verifikasi
+              </div>
 
-            <div className="notice">
-              Saat ini kami sedang melakukan pengecekan bukti transfer yang anda sampaikan, mohon ditunggu beberapa saat lagi
-            </div>
+              <div className="description">
+                Saat ini kami sedang melakukan pengecekan bukti transfer yang anda sampaikan, mohon ditunggu beberapa
+                saat lagi
+              </div>
 
-            <div className="icon"/>
+              {
+                biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.data, 'data.status' ) === '2' ?
+
+                <div className="icon-not-found"/>
+
+                  :
+
+                <div className="icon-waiting"/>
+
+              }
+            </div>
 
             <div className="cs-title">Anda butuh info lebih lanjut?</div>
 

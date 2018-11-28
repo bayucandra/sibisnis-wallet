@@ -88,20 +88,10 @@ class BalancePaymentMethod extends Component {
             this.setState( { payment_methods: data } );
           }
 
-          // doku-wallet; alfamart; rekening-va; bank-tf-bri; bank-tf-bni; visa-mastercard; bank-tf-mandiri; bri-epay; klikpay-bca; kartu-kredit; mandiri-clickpay; cimb;
-          /*
-                    data_json: "{"bank_name": "BRI", "account_name": "A.N. PT. Apta Media Indonesia", "account_number": "2120.01.000202.305", "kategori_payment": "bank_transfer"}"
-                    id: "14"
-                    images: "b2c_assets/images/stdlogo1-bri.jpg"
-                    keterangan: "<div style="text-align:center;"><h1>2120.01.000202.305</h1><h4>A.N. PT. Apta Media Indonesia</h4></div>"
-                    payment_channel: "manual_transfer"
-                    payment_method: "bank-tf-bri"
-                    payment_method_label: "Transfer BRI"
-                    status: "0"*/
-
         }
       );
 
+    if( biqHelper.utils.isNull( this.props.balance.nominal_value ) ) this.props.history.push('/balance');
   }
 
   componentWillUnmount() {

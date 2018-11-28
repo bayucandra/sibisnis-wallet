@@ -96,22 +96,22 @@ class WalletProvider {
               switch( el.payment_method ) {
                 case 'bank-tf-mandiri':
                   icons = {
-                    main: { name: 'mandiri-1', size_default: [ 51, 27 ] }
+                    main: { name: 'mandiri-1', size_default: [ 51, 27 ], size_topup_select: [51, 27] }
                   };
                   break;
                 case 'bank-tf-bni':
                   icons = {
-                    main: { name: 'bni-1', size_default: [43,13] }
+                    main: { name: 'bni-1', size_default: [43,13], size_topup_select: [43, 13] }
                   };
                   break;
                 case 'bank-tf-bca':
                   icons = {
-                    main: { name: 'bca-1', size_default: [41,13] }
+                    main: { name: 'bca-1', size_default: [41,13], size_topup_select: [41, 13] }
                   };
                   break;
                 case 'bank-tf-bri':
                   icons = {
-                    main: { name: 'bri-1', size_default: [60,14] }
+                    main: { name: 'bri-1', size_default: [60,14], size_topup_select: [60, 14] }
                   };
                   break;
               }

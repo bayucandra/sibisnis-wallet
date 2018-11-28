@@ -10,11 +10,8 @@ import balanceActions from "../../../../redux/actions/pages/balanceActions";
 
 import "./BalancePaymentBank.scss";
 
-import iconMandiri from "../../../../images/icons/payment/mandiri-1@3x.png";
-import iconBni from "../../../../images/icons/payment/bni-1@3x.png";
-import iconBca from "../../../../images/icons/payment/bca-1@3x.png";
-import iconBri from "../../../../images/icons/payment/bri-1@3x.png";
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
+import walletProvider from "../../../../providers/walletProvider";
 
 class BalancePaymentBank extends Component {
 
@@ -49,20 +46,22 @@ class BalancePaymentBank extends Component {
     });
   };
 
-  componentDidUpdate(){
+  componentDidMount() {
+    if ( this.props.is_app_initialized ) {
+      this.setState({ user_email_copied: true });
+      this.setState({ user_email: this.props.user_profile.email });
+    }
+
+    if( biqHelper.utils.isNull( this.props.balance.nominal_value ) ) this.props.history.push('/balance');
+  }
+
+  componentDidUpdate( prevProps, prevState, snapshot ){
 
     if ( this.props.is_app_initialized && !this.state.user_email_copied ) {
       this.setState({ user_email_copied: true });
       this.setState({ user_email: this.props.user_profile.email });
     }
 
-  }
-
-  componentDidMount() {
-    if ( this.props.is_app_initialized ) {
-      this.setState({ user_email_copied: true });
-      this.setState({ user_email: this.props.user_profile.email });
-    }
   }
 
   render() {
@@ -100,19 +99,19 @@ class BalancePaymentBank extends Component {
               <div className="bank-destination__row">
 
                 {
-                  [
-                    {method: 'bank-tf-mandiri', label: 'Mandiri', icon: iconMandiri, icon_width: '51px', icon_height: '27px'},
-                    {method: 'bank-tf-bni', label: 'BNI', icon: iconBni, icon_width: '43px', icon_height: '13px'},
-                    {method: 'bank-tf-bca', label: 'BCA', icon: iconBca, icon_width: '41px', icon_height: '13px'},
-                    {method: 'bank-tf-bri', label: 'BRI', icon: iconBri, icon_width: '60px', icon_height: '14px'},
-                  ]
+                  walletProvider.bankListGet()
                     .map((el) => {
+                      let icon = walletProvider.bankIconGet( el.payment_method, 'main' );
+                      let bank_record = walletProvider.bankByMethodAbreviation( el.payment_method );
+                      let icon_width = bank_record.icons.main.size_topup_select[0];
+                      let icon_height = bank_record.icons.main.size_topup_select[1];
+
                       return (
-                        <Button className={`bank-select${ this._bankSelectedClassGen( el.method ) }`} onClick={ () => this._bankSelectClick( el.method )} key={el.method}>
+                        <Button className={`bank-select${ this._bankSelectedClassGen( el.payment_method ) }`} onClick={ () => this._bankSelectClick( el.payment_method )} key={el.payment_method}>
                           <div className="bank-select__radio-circle"/>
-                          <div className="bank-select__label">{el.label}</div>
+                          <div className="bank-select__label">{el.bank_name}</div>
                           <div className="bank-select__spacer"/>
-                          <div className="bank-select__icon" style={{ backgroundImage: `url(${el.icon})`, width: el.icon_width, height: el.icon_height }}/>
+                          <div className="bank-select__icon" style={{ backgroundImage: `url(${icon})`, width: icon_width, height: icon_height }}/>
                         </Button>
                       )
                     })

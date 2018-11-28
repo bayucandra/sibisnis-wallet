@@ -27,7 +27,7 @@ class BalancePaymentConfirmed extends Component {
       let {dispatch} = this.props;
 
       if ( this.props.balance.payment_transaction.is_fetched
-        && biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.data, 'data.status' ) === '5' )
+        && biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.server_response, 'data.status' ) === '5' )
           dispatch(balanceActions.balancePaymentTransactionFetch(3));
 
     }, 5000);
@@ -41,7 +41,7 @@ class BalancePaymentConfirmed extends Component {
 
     if( this.props.balance.payment_transaction.is_fetching ) return <div/>;
 
-    let is_failed = biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.data, 'data.status' ) === '2';
+    let is_failed = biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.server_response, 'data.status' ) === '2';
 
     return (
       <div className="balance-payment-confirmed">

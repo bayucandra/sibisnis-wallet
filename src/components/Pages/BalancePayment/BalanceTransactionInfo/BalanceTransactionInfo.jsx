@@ -25,16 +25,16 @@ class BalanceTransactionInfo extends Component {
     let param_invoice_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
 
     let has_transaction = ( is_submit && this.props.balance.payment_bank_submit.is_submitted === true
-                            && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.data, 'response_code.status' ) )
+                            && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.server_response, 'response_code.status' ) )
                           )
                           || ( is_submit && param_invoice_id !== '0'
-                              && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.data, 'response_code.status') )
+                              && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'response_code.status') )
                           )
                           || ( !is_submit && this.props.balance.payment_transaction.is_fetched === true
-                            && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.data, 'response_code.status') )
+                            && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'response_code.status') )
                           );
 
-    let data = is_submit && (param_invoice_id === '0')  ? biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.data, 'data' ) : biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.data, 'data');
+    let data = is_submit && (param_invoice_id === '0')  ? biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.server_response, 'data' ) : biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'data');
     let invoice_id = biqHelper.JSON.pathValueGet( data, 'invoice_id' );
     let status = biqHelper.JSON.pathValueGet( data, 'status' );
     let status_class = '';

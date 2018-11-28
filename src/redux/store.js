@@ -13,7 +13,7 @@ export const store = createStore(
   rootReducer,
   compose(
     applyMiddleware(epicMiddleware),
-    window.devToolsExtension ? window.devToolsExtension() : f => f
+    window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
   )
 );
 

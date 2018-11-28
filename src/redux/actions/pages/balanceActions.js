@@ -27,9 +27,10 @@ import ActionTypes from "../../action-types";
   }
 
 
-  function balancePaymentBankSubmit() {
+  function balancePaymentBankSubmit( payload ) {
     return {
-      type: ActionTypes.balance.PAYMENT_BANK_SUBMIT
+      type: ActionTypes.balance.PAYMENT_BANK_SUBMIT,
+      payload
     }
   }
   function balancePaymentBankSubmitted( data ) {

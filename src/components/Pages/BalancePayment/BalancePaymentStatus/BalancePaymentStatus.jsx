@@ -28,7 +28,9 @@ class BalancePaymentStatus extends Component {
     modal_is_open: true,
     count_down: {
       hours: 0, minutes: 0, seconds: 0
-    }
+    },
+    modal_err_is_open: true,
+    error: { title: 'Gagal', notice: '' }
   };
 
   _modalClose = () => {
@@ -36,6 +38,10 @@ class BalancePaymentStatus extends Component {
       let param_referrer_encoded = atob( decodeURIComponent( biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer') ) );
       setTimeout(() => this.props.history.push( param_referrer_encoded ), 250);
     } );
+  };
+
+  _modalErrorClose = () => {
+    this.setState( { modal_err_is_open: false } );
   };
 
   _paymentConfirmClick = ( param_type, deposit_id, param_referrer ) => {
@@ -54,7 +60,7 @@ class BalancePaymentStatus extends Component {
 
     let param_deposit_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
     if ( !is_submit || ( is_submit && param_deposit_id !== '0') ) {
-      dispatch( balanceActions.balancePaymentTransactionFetch() );
+      dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id ) );
     }
 
     this.setState({is_ready: true});
@@ -67,7 +73,7 @@ class BalancePaymentStatus extends Component {
     let is_fetched_current = this.props.balance.payment_transaction.is_fetched;
     let is_fetched_next = nextProp.balance.payment_transaction.is_fetched;
 
-    let data_source_next = nextProp.balance.payment_transaction.data;
+    let data_source_next = nextProp.balance.payment_transaction.server_response;
     let data_next = biqHelper.JSON.pathValueGet( data_source_next, 'data' );
     let status_next = biqHelper.JSON.pathValueGet( data_next, 'status' );
 
@@ -91,31 +97,34 @@ class BalancePaymentStatus extends Component {
       return false;
     }
 
-    if ( nextState.should_fetch ) {
+    let param_deposit_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    if ( nextState.should_fetch ) {//Should fetch after counter done etc.
       this.setState({ should_fetch: false });
-      dispatch( balanceActions.balancePaymentTransactionFetch(1) );
+      dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id_current ) );
       return false;
     }
 
     let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
-    let is_submit_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'type' ) === 'submit';
-    let param_deposit_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
-    let param_deposit_id_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'id' );
 
+    let is_submitting_current = this.props.balance.payment_bank_submit.is_submitting;
+    let submit_http_status = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.server_response, 'status' );
+    let is_submitted_next = nextProp.balance.payment_bank_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
 
-    dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
-    if ( (is_submit_current && !is_submit_next) || ( is_submit_current && is_submit_next && param_deposit_id_current === '0' && param_deposit_id_next !== '0' ) ) {
-      dispatch( balanceActions.balancePaymentTransactionFetch() );
+    if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {//REDIRECT AFTER SUBMIT DONE=========
+      let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
+      let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.server_response, 'response.data.id_deposit' );
+      this.props.history.replace(`/balance/payment/status/submit/${deposit_id_submit}/${param_referrer}`);
       return false;
     }
 
-    let is_submitting_current = this.props.balance.payment_bank_submit.is_submitting;
-    let is_submitted_next = nextProp.balance.payment_bank_submit.is_submitted;
-    let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.data, 'data.deposit_id' );
-
-    if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {
-      let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-      this.props.history.replace(`/balance/payment/status/submit/${deposit_id_submit}/${param_referrer}`);
+    let is_submit_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'type' ) === 'submit';
+    let param_deposit_id_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'id' );
+    dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
+    if (
+      (is_submit_current && !is_submit_next) ||
+      ( is_submit_current && is_submit_next && param_deposit_id_current === '0' && param_deposit_id_next !== '0' )//FETCH AFTER SUBMIT DONE - REDIRECT====================
+    ) {
+      dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id_next ) );
       return false;
     }
 
@@ -159,12 +168,31 @@ class BalancePaymentStatus extends Component {
     if ( !is_submit && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
     //END LOADING PROCEDURE**********
 
-    let data_source = is_submit && (param_deposit_id === '0') ? this.props.balance.payment_bank_submit.data : this.props.balance.payment_transaction.data;
-    let data = data_source.data;
-    let response_code = data_source.response_code;
+    let response = is_submit && (param_deposit_id === '0') ?
+                      biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.server_response, 'response' )
+                        :
+                      biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'response');
 
+    let data = biqHelper.JSON.pathValueGet( response, 'data' );
+
+    let response_code = biqHelper.JSON.pathValueGet( response, 'response_code' );
     if ( this.state.is_ready && biqHelper.utils.isNull(data) ) {//is_ready to ensure that procedure on componentDidMount has ben ran
       return <Redirect to={'/balance/topup-history'}/>;
+    }
+
+    let response_status = biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.server_response, 'status' );
+    if ( !biqHelper.utils.isNull( response_status ) && !biqHelper.utils.httpResponseIsSuccess(response_status) ) {
+      return (
+        <Modal
+          open={this.state.modal_err_is_open}
+          onClose={this._modalErrorClose}>
+
+          <div className="modal-inner">
+            <ModalNotice modalClose={this._modalErrorClose} title="Error" notice={<span>Error <b>{response.status}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.</span>}/>
+          </div>
+
+        </Modal>
+      )
     }
 
     if ( biqHelper.utils.isNull(data) ) return <div/>;

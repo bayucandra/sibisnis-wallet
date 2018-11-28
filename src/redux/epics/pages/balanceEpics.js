@@ -1,14 +1,13 @@
 import { ofType } from 'redux-observable';
-import { ajax as rxAjax } from 'rxjs/ajax';
 import { of } from 'rxjs';
-import {switchMap, delay, map, takeUntil, filter } from 'rxjs/operators';
-import * as moment from 'moment';
+import { ajax as rxAjax } from 'rxjs/ajax';
+import {switchMap, map, takeUntil, filter, catchError } from 'rxjs/operators';
 
 import actionTypes from "../../action-types";
 import balanceActions from "../../actions/pages/balanceActions";
 import biqConfig from "../../../providers/biqConfig";
 
-const paymentSubmitAjax = () => of({
+/*const paymentSubmitAjax = () => of({
   "response_code": { "status": 200, "message": '' },
   "data": {
     "memberid": "ZON33693136",
@@ -23,21 +22,36 @@ const paymentSubmitAjax = () => of({
     "nominal_origin": 10161,
     "expired": moment().add(40, 'seconds').format('YYYY-MM-DD HH:mm:ss')
   }
-}).pipe(delay(2000));
+}).pipe(delay(2000));*/
 
 const paymentBankSubmit = action$ => action$.pipe(
     ofType(actionTypes.balance.PAYMENT_BANK_SUBMIT),
     switchMap(
-      action => paymentSubmitAjax().pipe(
-        map( response => balanceActions.balancePaymentBankSubmitted( response )),
+      action => rxAjax({
+        url: `${biqConfig.api.url_base}/api/wallet/add`,
+        method: 'POST',
+        crossDomain: true,
+        withCredentials: true,
+        body: Object.assign( action.payload, biqConfig.api.data_auth )
+      }).pipe(
+
+        map( res => balanceActions.balancePaymentBankSubmitted( res )),
+
+        catchError( err => of ({
+          type: actionTypes.balance.PAYMENT_BANK_SUBMITTED,
+          payload: err.xhr,
+          error: true
+        }) ),
+
         takeUntil( action$.pipe(
           filter( action => action.type === actionTypes.balance.PAYMENT_BANK_CANCELED )
         ) )
+
       )
     )
   );
 
-
+/*
 const paymentStatus = ( id ) => {
 
   if ( id === 1 ) {
@@ -62,7 +76,7 @@ const paymentStatus = ( id ) => {
 
   }
 
-};;
+};*/
 
 const paymentTransactionFetch = action$ => action$.pipe(
     ofType(actionTypes.balance.PAYMENT_TRANSACTION_FETCH),
@@ -74,10 +88,19 @@ const paymentTransactionFetch = action$ => action$.pipe(
         withCredentials: true,
         body: Object.assign( { id: action.payload.deposit_id }, biqConfig.api.data_auth )
       }).pipe(
-          map( res => balanceActions.balancePaymentTransactionFetched( res.response ) ),
+
+          map( res => balanceActions.balancePaymentTransactionFetched( res ) ),
+
           takeUntil(action$.pipe(
             filter(action => action.type === actionTypes.balance.PAYMENT_TRANSACTION_CANCELED)
-          ))
+          )),
+
+          catchError( err => of ({
+            type: actionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
+            payload: err.xhr,
+            error: true
+          }) )
+
       )
     )
   );

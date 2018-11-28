@@ -44,6 +44,7 @@ class BiqHelperJSON {
     let path_valid = true;
 
     let cur_path = Object.assign( {}, json_obj );
+    if ( biqHelperUtils.isNull( cur_path ) ) return true;
     for ( let i=0; i < json_path_split.length; i++ ) {
       if ( cur_path.hasOwnProperty( json_path_split[i] ) ) {
         cur_path = cur_path[json_path_split[i]];

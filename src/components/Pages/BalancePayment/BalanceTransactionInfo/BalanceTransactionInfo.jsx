@@ -51,6 +51,10 @@ class BalanceTransactionInfo extends Component {
         break;
     }
 
+    let is_fetched = this.props.balance.payment_transaction.is_fetched;
+    let nominal_fetched = biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.server_response, 'response.data.nominal' );
+    let nominal = is_fetched ? nominal_fetched : this.props.balance.nominal_value;
+
     return (
       <div className={`balance-transaction-info${ this.props.balance.payment_info_is_visible_mobile ? ' is-visible-mobile' : '' }`}>
 
@@ -90,7 +94,7 @@ class BalanceTransactionInfo extends Component {
 
           <div className="info-section__nominal">
             <div className="label">Request Topup :</div>
-            <div className="value">{biqHelper.utils.numberFormat(this.props.balance.nominal_value, 'Rp ')}</div>
+            <div className="value">{biqHelper.utils.numberFormat(nominal, 'Rp ')}</div>
           </div>
 
         </div>

@@ -15,6 +15,7 @@ import biqConfig from "../../../../providers/biqConfig";
 import HeaderMenuMobile from "../../../Shared/HeaderMenuMobile/HeaderMenuMobile";
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 import ModalNotice from "../../../Widgets/ModalNotice/ModalNotice";
+import balanceActions from "../../../../redux/actions/pages/balanceActions";
 
 class BalancePaymentConfirmation extends Component{
 
@@ -120,15 +121,15 @@ class BalancePaymentConfirmation extends Component{
 
     let image_data = this.imageObj[key];
     let form_data = new FormData();
-    form_data.append('invoice_number', 'Test-1234');
-    form_data.append('memberid', '123456');
+    form_data.append('invoice_number', biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'response.data.invoice_id'));
+    form_data.append('memberid', biqHelper.JSON.pathValueGet( this.props.user, 'profile.memberid' ));
     form_data.append( 'image', image_data.blob, image_data.name );
     form_data.append( 'scrf_token', biqConfig.api.csrf_token );
 
     let progressSubscriber = new Subject();
 
     this.imageObj[key].rxAjax$ = rxAjax({
-      url: 'https://www.biqdev.com/demo/wallet/upload.php',
+      url: `${biqConfig.api.url_base}/api/wallet/konfirmasi_pembayaran`,
       method: 'POST',
       crossDomain: true,
       withCredentials: true,
@@ -258,6 +259,9 @@ class BalancePaymentConfirmation extends Component{
   componentDidMount() {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
+
+    let param_deposit_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id ) );
   }
 
   componentWillUnmount() {
@@ -266,6 +270,18 @@ class BalancePaymentConfirmation extends Component{
   }
 
   render() {
+    let dummy_header= (
+      <div className="balance-payment-status">
+
+        <div className="balance-payment-status__header">
+          <div className="title">Silahkan memproses pembayaran Anda</div>
+          <HeaderMenuMobile forceVisible={true}/>
+        </div>
+
+      </div>
+    );
+
+    if ( this.props.balance.payment_transaction.is_fetching ) return dummy_header;
 
     return (
       <div className="balance-payment-confirmation">
@@ -426,7 +442,8 @@ class BalancePaymentConfirmation extends Component{
 
 const mapStateToProps = state => {
   return {
-    balance: state.balance
+    balance: state.balance,
+    user: state.user
   }
 };
 

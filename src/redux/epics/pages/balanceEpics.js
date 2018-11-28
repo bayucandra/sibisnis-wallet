@@ -28,7 +28,7 @@ const paymentBankSubmit = action$ => action$.pipe(
     ofType(actionTypes.balance.PAYMENT_BANK_SUBMIT),
     switchMap(
       action => paymentSubmitAjax().pipe(
-        map( response => balanceActions.balancePaymentBankSubmited( response )),
+        map( response => balanceActions.balancePaymentBankSubmitted( response )),
         takeUntil( action$.pipe(
           filter( action => action.type === actionTypes.balance.PAYMENT_BANK_CANCELED )
         ) )

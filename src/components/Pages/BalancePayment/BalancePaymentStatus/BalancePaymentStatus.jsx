@@ -72,7 +72,7 @@ class BalancePaymentStatus extends Component {
     let data_next = biqHelper.JSON.pathValueGet( data_source_next, 'data' );
     let status_next = biqHelper.JSON.pathValueGet( data_next, 'status' );
 
-    if ( !is_fetched_current && is_fetched_next && !biqHelper.utils.isNull(data_next) && status_next === 1 ) {
+    if ( !is_fetched_current && is_fetched_next && !biqHelper.utils.isNull(data_next) && status_next === '1' ) {
       this.count_down_obj = biqHelper.moment.countDown({
         compared_dt: moment( data_next.expired ).valueOf(),
         current_dt: biqHelper.moment.now().valueOf(),
@@ -116,7 +116,7 @@ class BalancePaymentStatus extends Component {
 
     if ( is_submit_current && param_invoice_id_current === '0' && is_submitting_current && is_submitted_next ) {
       let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-      this.props.history.push(`/balance/payment/status/submit/${invoice_id_submit}/${param_referrer}`);
+      this.props.history.replace(`/balance/payment/status/submit/${invoice_id_submit}/${param_referrer}`);
       return false;
     }
 
@@ -125,6 +125,10 @@ class BalancePaymentStatus extends Component {
 
   componentWillUnmount() {
     if ( !biqHelper.utils.isNull( this.count_down_obj ) && typeof this.count_down_obj.stop === 'function') this.count_down_obj.stop();
+
+    let {dispatch} = this.props;
+    dispatch( balanceActions.balancePaymentBankReset() );
+    dispatch( balanceActions.balancePaymentTransactionReset() );
   }
 
   render() {

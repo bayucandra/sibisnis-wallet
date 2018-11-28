@@ -26,8 +26,6 @@ class BalancePaymentConfirmed extends Component {
     setTimeout( () => {
       let {dispatch} = this.props;
 
-      console.log('sse handler');
-
       if ( this.props.balance.payment_transaction.is_fetched
         && biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.data, 'data.status' ) === '5' )
           dispatch(balanceActions.balancePaymentTransactionFetch(3));

@@ -113,7 +113,7 @@ class BalancePaymentMethod extends Component {
 
     if ( !biqHelper.utils.isNull( this.props.balance.payment_method ) ) {
       switch( this.props.balance.payment_method ) {
-        case 'bank-transfer':
+        case 'manual_transfer':
           return <Redirect to="/balance/payment/bank-transfer"/>
       }
     }
@@ -182,9 +182,7 @@ class BalancePaymentMethod extends Component {
                     icon_mobile = iconCimbClickSingle;
                     break;
 
-                  case 'bank-tf-bri':
-                  case 'bank-tf-bni':
-                  case 'bank-tf-mandiri':
+                  case 'manual_transfer':
                     icon_desktop = (
                       <>
                         <img src={iconBankBri} alt={"Bank BRI"}/>

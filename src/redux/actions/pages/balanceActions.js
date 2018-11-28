@@ -32,11 +32,16 @@ import ActionTypes from "../../action-types";
       type: ActionTypes.balance.PAYMENT_BANK_SUBMIT
     }
   }
-  function balancePaymentBankSubmited( data ) {
+  function balancePaymentBankSubmitted( data ) {
     return {
       type: ActionTypes.balance.PAYMENT_BANK_SUBMITTED,
       payload: data
-    }
+    };
+  }
+  function balancePaymentBankReset() {
+    return {
+      type: ActionTypes.balance.PAYMENT_BANK_RESET
+    };
   }
 
 
@@ -52,6 +57,11 @@ import ActionTypes from "../../action-types";
       payload: data
     }
   }
+  function balancePaymentTransactionReset() {
+    return {
+      type: ActionTypes.balance.PAYMENT_TRANSACTION_RESET
+    }
+  }
 
 const actions = {
   balanceNominalSet,
@@ -60,8 +70,10 @@ const actions = {
   balancePaymentInfoVisibility,
   balancePaymentTransactionFetch,
   balancePaymentTransactionFetched,
+  balancePaymentTransactionReset,
   balancePaymentBankSubmit,
-  balancePaymentBankSubmited
+  balancePaymentBankSubmitted,
+  balancePaymentBankReset
 };
 
 export default actions;

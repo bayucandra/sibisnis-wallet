@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {Redirect} from 'react-router-dom';
-import Countdown from 'react-countdown-now';
 import * as moment from 'moment';
 import Modal from "@material-ui/core/Modal";
 import {Button} from "../../../Widgets/material-ui";
@@ -39,9 +38,9 @@ class BalancePaymentStatus extends Component {
     } );
   };
 
-  _paymentConfirmClick = ( param_type, invoice_id, param_referrer ) => {
+  _paymentConfirmClick = ( param_type, deposit_id, param_referrer ) => {
     biqHelper.utils.clickTimeout(()=> {
-      let confirm_url = `/balance/payment/status/${param_type}/${invoice_id}/${param_referrer}/confirm`;
+      let confirm_url = `/balance/payment/status/${param_type}/${deposit_id}/${param_referrer}/confirm`;
       this.props.history.push(confirm_url);
     });
   };
@@ -53,8 +52,8 @@ class BalancePaymentStatus extends Component {
 
     let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
 
-    let param_invoice_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
-    if ( !is_submit || ( is_submit && param_invoice_id !== '0') ) {
+    let param_deposit_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    if ( !is_submit || ( is_submit && param_deposit_id !== '0') ) {
       dispatch( balanceActions.balancePaymentTransactionFetch() );
     }
 
@@ -100,23 +99,23 @@ class BalancePaymentStatus extends Component {
 
     let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
     let is_submit_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'type' ) === 'submit';
-    let param_invoice_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
-    let param_invoice_id_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'id' );
+    let param_deposit_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    let param_deposit_id_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'id' );
 
 
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
-    if ( (is_submit_current && !is_submit_next) || ( is_submit_current && is_submit_next && param_invoice_id_current === '0' && param_invoice_id_next !== '0' ) ) {
+    if ( (is_submit_current && !is_submit_next) || ( is_submit_current && is_submit_next && param_deposit_id_current === '0' && param_deposit_id_next !== '0' ) ) {
       dispatch( balanceActions.balancePaymentTransactionFetch() );
       return false;
     }
 
     let is_submitting_current = this.props.balance.payment_bank_submit.is_submitting;
     let is_submitted_next = nextProp.balance.payment_bank_submit.is_submitted;
-    let invoice_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.data, 'data.invoice_id' );
+    let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.data, 'data.deposit_id' );
 
-    if ( is_submit_current && param_invoice_id_current === '0' && is_submitting_current && is_submitted_next ) {
+    if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {
       let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-      this.props.history.replace(`/balance/payment/status/submit/${invoice_id_submit}/${param_referrer}`);
+      this.props.history.replace(`/balance/payment/status/submit/${deposit_id_submit}/${param_referrer}`);
       return false;
     }
 
@@ -134,7 +133,7 @@ class BalancePaymentStatus extends Component {
   render() {
     let param_type = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' );
     let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-    let param_invoice_id = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
+    let param_deposit_id = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
     let is_submit = param_type === 'submit';
 
     //BEGIN LOADING PROCEDURE===
@@ -153,14 +152,14 @@ class BalancePaymentStatus extends Component {
       return dummy_header;
     }
 
-    if ( is_submit && param_invoice_id !== '0' && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
+    if ( is_submit && param_deposit_id !== '0' && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
 
-    if ( is_submit && param_invoice_id === '0' && this.props.balance.payment_bank_submit.is_submitted ) return dummy_header;
+    if ( is_submit && param_deposit_id === '0' && this.props.balance.payment_bank_submit.is_submitted ) return dummy_header;
 
     if ( !is_submit && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
     //END LOADING PROCEDURE**********
 
-    let data_source = is_submit && (param_invoice_id === '0') ? this.props.balance.payment_bank_submit.data : this.props.balance.payment_transaction.data;
+    let data_source = is_submit && (param_deposit_id === '0') ? this.props.balance.payment_bank_submit.data : this.props.balance.payment_transaction.data;
     let data = data_source.data;
     let response_code = data_source.response_code;
 
@@ -317,7 +316,7 @@ class BalancePaymentStatus extends Component {
                     <div className="title">Sudah transfer?</div>
                   </div>
                   <div className="action">
-                    <Button className="confirmation-btn" onClick={ () => this._paymentConfirmClick( param_type, param_invoice_id, param_referrer ) }>
+                    <Button className="confirmation-btn" onClick={ () => this._paymentConfirmClick( param_type, param_deposit_id, param_referrer ) }>
                       Konfirmasi transfer
                     </Button>
                   </div>

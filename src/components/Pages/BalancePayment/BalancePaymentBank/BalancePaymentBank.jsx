@@ -52,7 +52,10 @@ class BalancePaymentBank extends Component {
       this.setState({ user_email: this.props.user_profile.email });
     }
 
-    if( biqHelper.utils.isNull( this.props.balance.nominal_value ) || this.props.balance.nominal_value < 10000 ) this.props.history.push('/balance');
+    if( biqHelper.utils.isNull( this.props.balance.nominal_value )
+      || this.props.balance.nominal_value < 10000
+      || this.props.balance.payment_method !== 'manual_transfer'
+    ) this.props.history.push('/balance');
   }
 
   componentDidUpdate( prevProps, prevState, snapshot ){

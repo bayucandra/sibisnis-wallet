@@ -45,10 +45,10 @@ import ActionTypes from "../../action-types";
   }
 
 
-  function balancePaymentTransactionFetch( invoice_id ) {
+  function balancePaymentTransactionFetch( deposit_id ) {
     return {
       type: ActionTypes.balance.PAYMENT_TRANSACTION_FETCH,
-      payload: invoice_id
+      payload: { deposit_id }
     }
   }
   function balancePaymentTransactionFetched( data ) {

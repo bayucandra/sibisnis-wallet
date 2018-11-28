@@ -91,7 +91,7 @@ class BalancePaymentMethod extends Component {
         }
       );
 
-    if( biqHelper.utils.isNull( this.props.balance.nominal_value ) ) this.props.history.push('/balance');
+    if( biqHelper.utils.isNull( this.props.balance.nominal_value ) || this.props.balance.nominal_value < 10000 ) this.props.history.push('/balance');
   }
 
   componentWillUnmount() {

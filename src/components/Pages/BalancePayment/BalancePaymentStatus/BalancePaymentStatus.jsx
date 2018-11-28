@@ -41,7 +41,10 @@ class BalancePaymentStatus extends Component {
   };
 
   _modalErrorClose = () => {
-    this.setState( { modal_err_is_open: false } );
+    this.setState( { modal_err_is_open: false }, ()=>{
+      let param_referrer_encoded = atob( decodeURIComponent( biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer') ) );
+      setTimeout( ()=> this.props.history.push(param_referrer_encoded), 250 );
+    } );
   };
 
   _paymentConfirmClick = ( param_type, deposit_id, param_referrer ) => {
@@ -145,6 +148,21 @@ class BalancePaymentStatus extends Component {
     let param_deposit_id = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
     let is_submit = param_type === 'submit';
 
+    let response_status = biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.server_response, 'status' );
+    if ( !biqHelper.utils.isNull( response_status ) && !biqHelper.utils.httpResponseIsSuccess(response_status) ) {
+      return (
+        <Modal
+          open={this.state.modal_err_is_open}
+          onClose={this._modalErrorClose}>
+
+          <div className="modal-inner">
+            <ModalNotice modalClose={this._modalErrorClose} title="Error" notice={<span>Error <b>{response_status}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.</span>}/>
+          </div>
+
+        </Modal>
+      )
+    }
+
     //BEGIN LOADING PROCEDURE===
     let dummy_header= (
       <div className="balance-payment-status">
@@ -178,21 +196,6 @@ class BalancePaymentStatus extends Component {
     let response_code = biqHelper.JSON.pathValueGet( response, 'response_code' );
     if ( this.state.is_ready && biqHelper.utils.isNull(data) ) {//is_ready to ensure that procedure on componentDidMount has ben ran
       return <Redirect to={'/balance/topup-history'}/>;
-    }
-
-    let response_status = biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.server_response, 'status' );
-    if ( !biqHelper.utils.isNull( response_status ) && !biqHelper.utils.httpResponseIsSuccess(response_status) ) {
-      return (
-        <Modal
-          open={this.state.modal_err_is_open}
-          onClose={this._modalErrorClose}>
-
-          <div className="modal-inner">
-            <ModalNotice modalClose={this._modalErrorClose} title="Error" notice={<span>Error <b>{response.status}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.</span>}/>
-          </div>
-
-        </Modal>
-      )
     }
 
     if ( biqHelper.utils.isNull(data) ) return <div/>;

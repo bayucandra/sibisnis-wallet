@@ -35,17 +35,17 @@ const paymentBankSubmit = action$ => action$.pipe(
         body: Object.assign( action.payload, biqConfig.api.data_auth )
       }).pipe(
 
-        map( res => balanceActions.balancePaymentBankSubmitted( res )),
-
-        catchError( err => of ({
-          type: actionTypes.balance.PAYMENT_BANK_SUBMITTED,
-          payload: err.xhr,
-          error: true
-        }) ),
+        map( res => balanceActions.balancePaymentBankSubmitted( { status: res.status, response: res.response } )),
 
         takeUntil( action$.pipe(
           filter( action => action.type === actionTypes.balance.PAYMENT_BANK_CANCELED )
-        ) )
+        ) ),
+
+        catchError( err => of ({
+          type: actionTypes.balance.PAYMENT_BANK_SUBMITTED,
+          payload: { status: err.xhr.status, response: err.xhr.response },
+          error: true
+        }) )
 
       )
     )
@@ -89,7 +89,7 @@ const paymentTransactionFetch = action$ => action$.pipe(
         body: Object.assign( { id: action.payload.deposit_id }, biqConfig.api.data_auth )
       }).pipe(
 
-          map( res => balanceActions.balancePaymentTransactionFetched( res ) ),
+          map( res => balanceActions.balancePaymentTransactionFetched( { status: res.status, response: res.response } ) ),
 
           takeUntil(action$.pipe(
             filter(action => action.type === actionTypes.balance.PAYMENT_TRANSACTION_CANCELED)

@@ -52,7 +52,7 @@
   "static/media/AddressInputDialog.scss": "./static/media/close-black.0dea4053.svg",
   "static/media/BalanceProfileVerification.scss": "./static/media/ic-check.a91bcfe3.svg",
   "static/media/BalancePaymentConfirmed.scss": "./static/media/ilu-sad.b84bf552.svg",
-  "static/media/BalancePaymentConfirmation.scss": "./static/media/ico-refresh.9b9e3734.svg",
+  "static/media/BalancePaymentConfirmation.scss": "./static/media/ico-batal.6853885e.svg",
   "static/media/BalancePaymentMethod.scss": "./static/media/right-thema.c2dead55.svg",
   "static/media/BalanceTransactionInfo.scss": "./static/media/close-blue.e7d10810.svg",
   "static/media/atm@3x.png": "./static/media/atm@3x.046a32c8.png",
@@ -62,6 +62,6 @@
   "static/css/main.a530c13b.chunk.css.map": "./static/css/main.a530c13b.chunk.css.map",
   "static/css/1.304d7c0f.chunk.css.map": "./static/css/1.304d7c0f.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.a8cfb39c666092b3e3302a9aa1f62728.js": "./precache-manifest.a8cfb39c666092b3e3302a9aa1f62728.js",
+  "precache-manifest.784aa754adc1af65e008a4b505b9522f.js": "./precache-manifest.784aa754adc1af65e008a4b505b9522f.js",
   "service-worker.js": "./service-worker.js"
 }

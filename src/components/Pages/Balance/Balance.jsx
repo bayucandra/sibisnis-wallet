@@ -4,8 +4,8 @@ import { Route, withRouter, Switch } from 'react-router-dom';
 
 import SideNavMain from "../../Shared/SideNavMain/SideNavMain";
 import BalanceProfileVerification from "./BalanceProfileVerification";
-import BalanceTopupHistory from "./BalanceTopupHistory";
-import BalanceTopup from "./BalanceTopup/BalanceTopup";
+import BalanceTopupHistory from "./BalanceTopUpHistory";
+import BalanceTopup from "./BalanceTopUp/BalanceTopUp";
 
 import "./Balance.scss";
 

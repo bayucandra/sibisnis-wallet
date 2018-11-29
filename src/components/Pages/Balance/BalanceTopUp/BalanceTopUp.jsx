@@ -12,9 +12,9 @@ import appActions from "../../../../redux/actions/global/appActions";
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
 import biqHelper from "../../../../lib/biqHelper";
 
-import "./BalanceTopup.scss";
+import "./BalanceTopUp.scss";
 
-class BalanceTopup extends Component {
+class BalanceTopUp extends Component {
 
   state = {
     active_tab: 'pick_nominal',
@@ -150,4 +150,4 @@ const mapStateToProps = state => {
   }
 };
 
-export default withRouter( connect(mapStateToProps) (BalanceTopup) );
+export default withRouter( connect(mapStateToProps) (BalanceTopUp) );

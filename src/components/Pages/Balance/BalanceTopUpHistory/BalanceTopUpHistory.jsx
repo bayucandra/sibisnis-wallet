@@ -5,15 +5,16 @@ import {IconButton} from '@material-ui/core';
 import {Button} from '../../../Widgets/material-ui';
 
 import appActions from "../../../../redux/actions/global/appActions";
+import balanceActions from "../../../../redux/actions/pages/balanceActions";
 import biqHelper from "../../../../lib/biqHelper";
 
-import "./BalanceTopupHistory.scss";
+import "./BalanceTopUpHistory.scss";
 import iconCloseWhite from "../../../../images/icons/close-white.svg";
 import walletProvider from "../../../../providers/walletProvider";
 
 import * as moment from 'moment';
 
-class BalanceTopupHistory extends Component {
+class BalanceTopUpHistory extends Component {
 
   state = {
     data: [
@@ -82,6 +83,9 @@ class BalanceTopupHistory extends Component {
   componentDidMount() {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
+
+    dispatch( balanceActions.balanceTopUpHistoryFetch() );
+
   }
 
   render() {
@@ -161,4 +165,12 @@ class BalanceTopupHistory extends Component {
 
 }
 
-export default withRouter( connect(null) (BalanceTopupHistory) );
+const mapStateToProps = state => {
+
+  return {
+    balance: state.balance
+  };
+
+};
+
+export default withRouter( connect( mapStateToProps ) (BalanceTopUpHistory) );

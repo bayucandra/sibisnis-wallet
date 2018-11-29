@@ -27,16 +27,18 @@ import ActionTypes from "../../action-types";
   }
 
 
+
+
   function balancePaymentBankSubmit( payload ) {
     return {
       type: ActionTypes.balance.PAYMENT_BANK_SUBMIT,
       payload
     }
   }
-  function balancePaymentBankSubmitted( data ) {
+  function balancePaymentBankSubmitted( server_response ) {
     return {
       type: ActionTypes.balance.PAYMENT_BANK_SUBMITTED,
-      payload: data
+      payload: server_response
     };
   }
   function balancePaymentBankReset() {
@@ -44,6 +46,13 @@ import ActionTypes from "../../action-types";
       type: ActionTypes.balance.PAYMENT_BANK_RESET
     };
   }
+  function balancePaymentBankCancel() {
+    return {
+      type: ActionTypes.balance.PAYMENT_BANK_CANCELED
+    }
+  }
+
+
 
 
   function balancePaymentTransactionFetch( deposit_id ) {
@@ -52,10 +61,10 @@ import ActionTypes from "../../action-types";
       payload: { deposit_id }
     }
   }
-  function balancePaymentTransactionFetched( data ) {
+  function balancePaymentTransactionFetched( server_response ) {
     return {
       type: ActionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
-      payload: data
+      payload: server_response
     }
   }
   function balancePaymentTransactionReset() {
@@ -63,18 +72,52 @@ import ActionTypes from "../../action-types";
       type: ActionTypes.balance.PAYMENT_TRANSACTION_RESET
     }
   }
+  function balancePaymentTransactionCancel() {
+    return {
+      type: ActionTypes.balance.PAYMENT_TRANSACTION_CANCELED
+    }
+  }
+
+
+
+
+  function balanceTopUpHistoryFetch() {
+    return {
+      type: ActionTypes.balance.TOP_UP_HISTORY_FETCH
+    }
+  }
+  function balanceTopUpHistoryFetched( server_response ) {
+    return {
+      type: ActionTypes.balance.TOP_UP_HISTORY_FETCHED,
+      payload: server_response
+    }
+  }
+  function balanceTopUpHistoryCancel() {
+    return {
+      type: ActionTypes.balance.TOP_UP_HISTORY_CANCELED
+    }
+  }
+
 
 const actions = {
   balanceNominalSet,
   balanceMethodSet,
   balanceMethodReset,
   balancePaymentInfoVisibility,
+
   balancePaymentTransactionFetch,
   balancePaymentTransactionFetched,
   balancePaymentTransactionReset,
+  balancePaymentTransactionCancel,
+
   balancePaymentBankSubmit,
   balancePaymentBankSubmitted,
-  balancePaymentBankReset
+  balancePaymentBankReset,
+  balancePaymentBankCancel,
+
+  balanceTopUpHistoryFetch,
+  balanceTopUpHistoryFetched,
+  balanceTopUpHistoryCancel
 };
 
 export default actions;

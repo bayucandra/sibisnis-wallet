@@ -138,6 +138,9 @@ class BalancePaymentStatus extends Component {
     if ( !biqHelper.utils.isNull( this.count_down_obj ) && typeof this.count_down_obj.stop === 'function') this.count_down_obj.stop();
 
     let {dispatch} = this.props;
+    dispatch( balanceActions.balancePaymentBankCancel() );
+    dispatch( balanceActions.balancePaymentTransactionCancel() );
+
     dispatch( balanceActions.balancePaymentBankReset() );
     dispatch( balanceActions.balancePaymentTransactionReset() );
   }

@@ -15,6 +15,12 @@ let state_default = {
     is_fetching: false,
     is_fetched: false,
     server_response: {}
+  },
+
+  top_up_history: {
+    is_fetching: false,
+    is_fetched: false,
+    server_response: {}
   }
 
 };
@@ -42,6 +48,8 @@ export default ( state = state_default, action ) => {
       return Object.assign( {}, state, new_state );
 
 
+
+
     case ActionTypes.balance.PAYMENT_TRANSACTION_FETCH:
       new_state = {
         payment_transaction : Object.assign( {}, state_default.payment_transaction, { is_fetching: true, is_fetched: false } )
@@ -56,6 +64,8 @@ export default ( state = state_default, action ) => {
       new_state = { payment_transaction: Object.assign( {}, state_default.payment_transaction ) };
       return Object.assign( {}, state, new_state );
 
+
+
     case ActionTypes.balance.PAYMENT_BANK_SUBMIT:
       new_state = { payment_bank_submit: Object.assign({}, state_default.payment_bank_submit, { is_submitting: true, is_submitted: false }) };
       return Object.assign( {}, state, new_state );
@@ -67,6 +77,17 @@ export default ( state = state_default, action ) => {
     case ActionTypes.balance.PAYMENT_BANK_RESET:
       new_state = { payment_bank_submit: Object.assign( {}, state_default.payment_bank_submit ) };
       return Object.assign( {}, state, new_state );
+
+
+
+    case ActionTypes.balance.TOP_UP_HISTORY_FETCH:
+      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: true, is_fetched: false } ) };
+      return Object.assign( {}, state, new_state );
+    case ActionTypes.balance.TOP_UP_HISTORY_FETCHED:
+      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: false, is_fetched: true, server_response: action.payload } ) };
+      return Object.assign( {}, state, new_state );
+
+
 
     default:
       return state;

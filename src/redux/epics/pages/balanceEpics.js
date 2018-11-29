@@ -33,21 +33,21 @@ const paymentBankSubmit = action$ => action$.pipe(
         crossDomain: true,
         withCredentials: true,
         body: Object.assign( action.payload, biqConfig.api.data_auth )
-      }).pipe(
+      })
+        .pipe(
 
-        map( res => balanceActions.balancePaymentBankSubmitted( { status: res.status, response: res.response } )),
+          map( res => balanceActions.balancePaymentBankSubmitted( { status: res.status, response: res.response } )),
 
-        takeUntil( action$.pipe(
-          filter( action => action.type === actionTypes.balance.PAYMENT_BANK_CANCELED )
-        ) ),
+          takeUntil( action$.pipe(
+            filter( action => action.type === actionTypes.balance.PAYMENT_BANK_CANCELED )
+          ) ),
 
-        catchError( err => of ({
-          type: actionTypes.balance.PAYMENT_BANK_SUBMITTED,
-          payload: { status: err.xhr.status, response: err.xhr.response },
-          error: true
-        }) )
+          catchError( err => of ({
+            type: actionTypes.balance.PAYMENT_BANK_SUBMITTED,
+            payload: { status: err.xhr.status, response: err.xhr.response }
+          }) )
 
-      )
+        )
     )
   );
 
@@ -87,25 +87,52 @@ const paymentTransactionFetch = action$ => action$.pipe(
         crossDomain: true,
         withCredentials: true,
         body: Object.assign( { id: action.payload.deposit_id }, biqConfig.api.data_auth )
-      }).pipe(
+      })
+        .pipe(
 
-          map( res => balanceActions.balancePaymentTransactionFetched( { status: res.status, response: res.response } ) ),
+            map( res => balanceActions.balancePaymentTransactionFetched( { status: res.status, response: res.response } ) ),
 
-          takeUntil(action$.pipe(
-            filter(action => action.type === actionTypes.balance.PAYMENT_TRANSACTION_CANCELED)
-          )),
+            takeUntil(action$.pipe(
+              filter(action => action.type === actionTypes.balance.PAYMENT_TRANSACTION_CANCELED)
+            )),
 
-          catchError( err => of ({
-            type: actionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
-            payload: err.xhr,
-            error: true
-          }) )
+            catchError( err => of ({
+              type: actionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
+              payload: err.xhr
+            }) )
 
-      )
+        )
     )
   );
 
+const topUpHistoryFetch = action$ => action$.pipe(
+  ofType( actionTypes.balance.TOP_UP_HISTORY_FETCH ),
+  switchMap(
+    action => rxAjax({
+      url: `${biqConfig.api.url_base}/api/wallet/list_deposit`,
+      method: 'POST',
+      crossDomain: true,
+      withCredentials: true,
+      body: Object.assign( {}, biqConfig.api.data_auth )
+    })
+      .pipe(
+        map( res => balanceActions.balanceTopUpHistoryFetched( { status: res.status, response: res.response } ) ),
+
+        takeUntil( action$.pipe(
+          filter( action => action.type === actionTypes.balance.TOP_UP_HISTORY_CANCELED )
+        ) ),
+
+        catchError( err => of ({
+          type: actionTypes.balance.TOP_UP_HISTORY_FETCHED,
+          payload: err.xhr
+        }) )
+
+      )
+  )
+);
+
 export default [
   paymentBankSubmit,
-  paymentTransactionFetch
+  paymentTransactionFetch,
+  topUpHistoryFetch
 ]

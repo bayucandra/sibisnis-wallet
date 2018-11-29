@@ -100,6 +100,20 @@ input[type="text"], input[type="password"], input[type="number"] {
 
 }//input[type="text"], input[type="number"]
 
+
+
+input[type="number"] {
+
+  &.no-spinner {
+    -moz-appearance:textfield;
+    &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+  }//&.no-spinner
+
+}//input[type="number"]
+
 .custom-card-styles {
   border-radius: 0px !important;
   box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11) !important;

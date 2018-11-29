@@ -13,6 +13,8 @@ import balanceActions from "../../../../redux/actions/pages/balanceActions";
 import biqHelper from "../../../../lib/biqHelper";
 
 import "./BalanceTopUp.scss";
+import Modal from "@material-ui/core/Modal/Modal";
+import ModalNotice from "../../../Widgets/ModalNotice/ModalNotice";
 
 class BalanceTopUp extends Component {
 
@@ -21,7 +23,8 @@ class BalanceTopUp extends Component {
     pick_nominal: {},
     custom_nominal: {
       input_value: 0
-    }
+    },
+    modal_err_is_open: false
   };
 
   nominal_list = [
@@ -50,13 +53,33 @@ class BalanceTopUp extends Component {
 
   _historyBtn = <Button className="history-btn-mobile" onClick={this._historyBtnClick}>History</Button>;
 
-  _nominalClick = nominal => {
+  _nominalSelect = nominal => {
     let {dispatch} = this.props;
     biqHelper.utils.clickTimeout( () => {
       dispatch( balanceActions.balanceNominalSet( nominal ) );
       dispatch( balanceActions.balanceMethodReset() );
       this.props.history.push('/balance/payment');
     } );
+  };
+
+  _customNominalSet = () => {
+
+    let nominal = biqHelper.string.toInt( this.state.custom_nominal.input_value );
+    if ( nominal < 10000 ) {
+      this._modalErrorOpen();
+      return;
+    }
+
+    this._nominalSelect( nominal );
+
+  };
+
+  _modalErrorClose = () => {
+    this.setState( { modal_err_is_open: false } );
+  };
+
+  _modalErrorOpen = () => {
+    this.setState( {modal_err_is_open: true} );
   };
 
   componentDidMount() {
@@ -99,7 +122,7 @@ class BalanceTopUp extends Component {
             <section className="tab-panel__pick-nominal">
               { this.nominal_list.map( ( el, idx, arr ) => {
                 return (
-                  <Button className={`nominal-item${ idx === ( arr.length-1 ) ? ' is-last' : '' }`} onClick={ () => this._nominalClick( el.amount )} key={el.amount}>
+                  <Button className={`nominal-item${ idx === ( arr.length-1 ) ? ' is-last' : '' }`} onClick={ () => this._nominalSelect( el.amount )} key={el.amount}>
                     <div className="nominal-item__inner">
                       <NumberFormat displayType={'text'} value={el.amount} prefix={'Rp '}
                                     renderText={value => <div className="nominal-item__number hidden-md-up">{value}</div>} thousandSeparator={'.'} decimalSeparator={','}/>
@@ -118,11 +141,11 @@ class BalanceTopUp extends Component {
 
               <div className="input-wrapper">
                 <div className="input-nominal">
-                  <input type="text" value={this.state.custom_nominal.input_value}
+                  <input type="number" className="no-spinner" step="10000" min="10000" value={this.state.custom_nominal.input_value}
                          onChange={ e => this.setState(  {custom_nominal: Object.assign( {}, this.state.custom_nominal, { input_value: e.target.value } ) } ) }  />
                 </div>
 
-                <Button className="submit-btn visible-md-up">Lanjutkan</Button>
+                <Button className="submit-btn visible-md-up" onClick={this._customNominalSet}>Lanjutkan</Button>
               </div>
 
               <div className="input-notice">
@@ -135,6 +158,17 @@ class BalanceTopUp extends Component {
 
           }
         </div>
+
+
+        <Modal
+          open={this.state.modal_err_is_open}
+          onClose={this._modalErrorClose}>
+
+          <div className="modal-inner">
+            <ModalNotice modalClose={this._modalErrorClose} title="Nominal tidak valid" notice="Pengisian saldo minimal adalah Rp 10.000."/>
+          </div>
+
+        </Modal>
 
       </div>
     );

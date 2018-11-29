@@ -8,6 +8,7 @@ import BalanceTopupHistory from "./BalanceTopUpHistory";
 import BalanceTopup from "./BalanceTopUp/BalanceTopUp";
 
 import "./Balance.scss";
+import appActions from "../../../redux/actions/global/appActions";
 
 class Balance extends Component {
 
@@ -17,6 +18,17 @@ class Balance extends Component {
     this.state = {
       is_verifying: false//Is in Balance verification progress
     };
+
+  }
+
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    let {dispatch} = this.props;
+    let should_loading_show = nextProps.balance.top_up_history.is_fetching;
+    let should_loading_hide = nextProps.balance.top_up_history.is_fetched;
+
+    if ( should_loading_show ) dispatch(appActions.appLoadingIndicatorShow());
+
+    if ( should_loading_hide ) dispatch(appActions.appLoadingIndicatorHide());
 
   }
 

@@ -81,9 +81,10 @@ import ActionTypes from "../../action-types";
 
 
 
-  function balanceTopUpHistoryFetch() {
+  function balanceTopUpHistoryFetch( memberid ) {
     return {
-      type: ActionTypes.balance.TOP_UP_HISTORY_FETCH
+      type: ActionTypes.balance.TOP_UP_HISTORY_FETCH,
+      payload: { memberid }
     }
   }
   function balanceTopUpHistoryFetched( server_response ) {

@@ -84,20 +84,41 @@ class BalanceTopUpHistory extends Component {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
-    dispatch( balanceActions.balanceTopUpHistoryFetch() );
+    if ( this.props.is_profile_parsed ) {
+      let memberid= biqHelper.JSON.pathValueGet( this.props, 'user_profile.memberid' );
+      dispatch( balanceActions.balanceTopUpHistoryFetch( memberid ) );
+    }
+
+  }
+
+  componentWillUpdate(nextProps, nextState, nextContext) {
+    let {dispatch} = this.props;
+
+    let memberid_current = biqHelper.JSON.pathValueGet( this.props, 'user_profile.memberid' );
+    let memberid_next = biqHelper.JSON.pathValueGet( nextProps, 'user_profile.memberid' );
+    if( memberid_current !== memberid_next ) dispatch( balanceActions.balanceTopUpHistoryFetch( memberid_next ) );
 
   }
 
   render() {
+
+    let nav_header_mobile = (
+      <nav className="nav-mobile hidden-md-up">
+        <div className="title">History Topup</div>
+        <IconButton className="close-btn" onClick={this._navBackClick}>
+          <img src={iconCloseWhite}/>
+        </IconButton>
+      </nav>
+    );
+
+    if ( this.props.balance.top_up_history.is_fetching ) return nav_header_mobile;
+
+    let data = biqHelper.JSON.pathValueGet( this.props.balance.top_up_history.server_response, 'response.data' );
+
     return (
       <div className="balance-topup-history">
 
-        <nav className="nav-mobile hidden-md-up">
-          <div className="title">History Topup</div>
-          <IconButton className="close-btn" onClick={this._navBackClick}>
-            <img src={iconCloseWhite}/>
-          </IconButton>
-        </nav>
+        {nav_header_mobile}
 
         <nav className="nav-desktop visible-md-up">
 
@@ -118,45 +139,54 @@ class BalanceTopUpHistory extends Component {
             <div className="biq-col-spacer-right"/>
           </div>
 
-          {this.state.data.map( ( el )=>{
-            return (
-              <Button className="history-item" key={el.id} onClick={ () => this._recordClick( el.id ) }>
+          {
+            this.props.balance.top_up_history.is_fetched && !biqHelper.utils.isNull( data ) && data.length ?
 
-                <div className="history-item__inner">
+              data.map( ( el )=>{
+                return (
+                  <Button className="history-item" key={el.id} onClick={ () => this._recordClick( el.id ) }>
 
-                  <div className="row-inner">
-                    <div className="biq-col-spacer-left visible-md-up"/>
-                    <div className="biq-col biq-col--date visible-md-up">
-                      { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
-                    </div>
-                    <div className="biq-col biq-col--method">
-                      { walletProvider.bankByMethodAbreviation(el.bank).bank_name }
-                    </div>
-                    <div className="biq-col biq-col--amount">
-                      { biqHelper.utils.numberFormat(el.nominal, 'Rp ') }
-                    </div>
-                    <div className="biq-col biq-col--status visible-md-up">
-                      <div className={`status-box${ el.status === '2' || el.status === '3' ? ' is-failed' : '' }`}>
+                    <div className="history-item__inner">
+
+                      <div className="row-inner">
+                        <div className="biq-col-spacer-left visible-md-up"/>
+                        <div className="biq-col biq-col--date visible-md-up">
+                          { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
+                        </div>
+                        <div className="biq-col biq-col--method">
+                          { walletProvider.bankByMethodAbreviation(el.bank).bank_name }
+                        </div>
+                        <div className="biq-col biq-col--amount">
+                          { biqHelper.utils.numberFormat(el.nominal, 'Rp ') }
+                        </div>
+                        <div className="biq-col biq-col--status visible-md-up">
+                          <div className={`status-box${ el.status === '2' || el.status === '3' ? ' is-failed' : '' }`}>
+                            { walletProvider.paymentStatusGet( el.status ) }
+                          </div>
+                        </div>
+                        <div className="biq-col-spacer-right visible-md-up"/>
+                      </div>
+
+
+                      <div className={ `transfer-status-mobile hidden-md-up${ el.status === '2' || el.status === '3' ? ' is-failed' : '' }` }>
                         { walletProvider.paymentStatusGet( el.status ) }
                       </div>
+
+                      <div className="date-mobile hidden-md-up">
+                        { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
+                      </div>
+
                     </div>
-                    <div className="biq-col-spacer-right visible-md-up"/>
-                  </div>
 
+                  </Button>
+                );
+              })
 
-                  <div className={ `transfer-status-mobile hidden-md-up${ el.status === '2' || el.status === '3' ? ' is-failed' : '' }` }>
-                    { walletProvider.paymentStatusGet( el.status ) }
-                  </div>
+                :
 
-                  <div className="date-mobile hidden-md-up">
-                    { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
-                  </div>
+              ''
 
-                </div>
-
-              </Button>
-            );
-          } )}
+          }
         </div>
 
       </div>
@@ -168,6 +198,8 @@ class BalanceTopUpHistory extends Component {
 const mapStateToProps = state => {
 
   return {
+    is_profile_parsed: state.user.is_profile_parsed,
+    user_profile: state.user.profile,
     balance: state.balance
   };
 

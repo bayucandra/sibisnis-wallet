@@ -33,10 +33,17 @@ class Balance extends Component {
   }
 
   render() {
+    let is_loading = this.props.balance.top_up_history.is_fetching;
+
     return (
       <div className={`main-wrapper${!this.props.header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper l-balance`}>
         <div className="biq-wrapper__inner l-balance__inner">
-          <SideNavMain cssClasses={"visible-md-up"} />
+          {
+            !is_loading ?
+            <SideNavMain cssClasses={"visible-md-up"}/>
+              :
+            ''
+          }
 
           <Switch>
             <Route path="/balance/profile-verification" component={BalanceProfileVerification} />

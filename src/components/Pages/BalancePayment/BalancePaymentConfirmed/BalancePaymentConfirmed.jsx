@@ -16,10 +16,20 @@ class BalancePaymentConfirmed extends Component {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
-    dispatch( balanceActions.balancePaymentTransactionFetch(2) );
+    let param_deposit_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    dispatch( balanceActions.balancePaymentTransactionFetch(param_deposit_id) );
 
     this._sseHandler();
 
+  }
+
+  componentWillUnmount() {
+    let {dispatch} = this.props;
+    dispatch( balanceActions.balancePaymentBankCancel() );
+    dispatch( balanceActions.balancePaymentTransactionCancel() );
+
+    dispatch( balanceActions.balancePaymentBankReset() );
+    dispatch( balanceActions.balancePaymentTransactionReset() );
   }
 
   _sseHandler = () => {

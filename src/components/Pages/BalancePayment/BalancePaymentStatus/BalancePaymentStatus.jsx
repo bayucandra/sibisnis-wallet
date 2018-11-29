@@ -47,9 +47,9 @@ class BalancePaymentStatus extends Component {
     } );
   };
 
-  _paymentConfirmClick = ( param_type, deposit_id, param_referrer ) => {
+  _paymentConfirmClick = ( param_type, param_deposit_id, param_referrer ) => {
     biqHelper.utils.clickTimeout(()=> {
-      let confirm_url = `/balance/payment/status/${param_type}/${deposit_id}/${param_referrer}/confirm`;
+      let confirm_url = `/balance/payment/status/${param_type}/${param_deposit_id}/${param_referrer}/confirm`;
       this.props.history.push(confirm_url);
     });
   };
@@ -77,12 +77,12 @@ class BalancePaymentStatus extends Component {
     let is_fetched_next = nextProp.balance.payment_transaction.is_fetched;
 
     let data_source_next = nextProp.balance.payment_transaction.server_response;
-    let data_next = biqHelper.JSON.pathValueGet( data_source_next, 'data' );
+    let data_next = biqHelper.JSON.pathValueGet( data_source_next, 'response.data' );
     let status_next = biqHelper.JSON.pathValueGet( data_next, 'status' );
 
     if ( !is_fetched_current && is_fetched_next && !biqHelper.utils.isNull(data_next) && status_next === '1' ) {
       this.count_down_obj = biqHelper.moment.countDown({
-        compared_dt: moment( data_next.expired ).valueOf(),
+        compared_dt: moment( data_next.expired_at ).valueOf(),
         current_dt: biqHelper.moment.now().valueOf(),
         callback_update: ( duration )=> {
           let counter_obj = {
@@ -216,6 +216,10 @@ class BalancePaymentStatus extends Component {
         </Modal>
       )
     }
+
+    let transaction_status = biqHelper.JSON.pathValueGet( data, 'status' );
+    let confirmed_url = `/balance/payment/status/${param_type}/${param_deposit_id}/${param_referrer}/confirmed`;
+    if ( transaction_status === '5' ) return <Redirect to={confirmed_url}/>;
 
     let bank_record = walletProvider.bankByMethodAbreviation(data.bank);
     let bank_icon_size = bank_record.icons.main.size_default;

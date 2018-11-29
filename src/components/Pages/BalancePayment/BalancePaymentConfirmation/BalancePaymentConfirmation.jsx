@@ -16,6 +16,7 @@ import HeaderMenuMobile from "../../../Shared/HeaderMenuMobile/HeaderMenuMobile"
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 import ModalNotice from "../../../Widgets/ModalNotice/ModalNotice";
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
+import {Redirect} from "react-router-dom";
 
 class BalancePaymentConfirmation extends Component{
 
@@ -121,7 +122,7 @@ class BalancePaymentConfirmation extends Component{
 
     let image_data = this.imageObj[key];
     let form_data = new FormData();
-    form_data.append('invoice_number', biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'response.data.invoice_id'));
+    form_data.append('invoice_number', biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'response.data.invoice_number'));
     form_data.append('memberid', biqHelper.JSON.pathValueGet( this.props.user, 'profile.memberid' ));
     form_data.append( 'image', image_data.blob, image_data.name );
     form_data.append( 'scrf_token', biqConfig.api.csrf_token );
@@ -267,9 +268,18 @@ class BalancePaymentConfirmation extends Component{
   componentWillUnmount() {
     this.stop$.next();
     this.stop$.complete();
+
+    let {dispatch} = this.props;
+
+    dispatch( balanceActions.balancePaymentBankCancel() );
+    dispatch( balanceActions.balancePaymentTransactionCancel() );
+
+    dispatch( balanceActions.balancePaymentBankReset() );
+    dispatch( balanceActions.balancePaymentTransactionReset() );
   }
 
   render() {
+
     let dummy_header= (
       <div className="balance-payment-status">
 

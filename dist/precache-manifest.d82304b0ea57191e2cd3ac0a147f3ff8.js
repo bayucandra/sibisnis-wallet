@@ -4,8 +4,8 @@ self.__precacheManifest = [
     "url": "./static/media/transfer-bank@3x.cbf34e2f.png"
   },
   {
-    "revision": "03ac52555aa171063efe",
-    "url": "./static/css/main.d73aed45.chunk.css"
+    "revision": "676c7be7a962835454de",
+    "url": "./static/css/main.8ecbd3df.chunk.css"
   },
   {
     "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
@@ -164,8 +164,8 @@ self.__precacheManifest = [
     "url": "./static/media/close-white.eeab2228.svg"
   },
   {
-    "revision": "03ac52555aa171063efe",
-    "url": "./static/js/main.03ac5255.chunk.js"
+    "revision": "676c7be7a962835454de",
+    "url": "./static/js/main.676c7be7.chunk.js"
   },
   {
     "revision": "3461f4ef739a853da034fe1767d690e6",
@@ -328,7 +328,7 @@ self.__precacheManifest = [
     "url": "./static/css/1.304d7c0f.chunk.css"
   },
   {
-    "revision": "06c0692622c4baf4d0d8ed60d9f21b90",
+    "revision": "143fde40367fd8b2601ff5df6327b01d",
     "url": "./index.html"
   }
 ];

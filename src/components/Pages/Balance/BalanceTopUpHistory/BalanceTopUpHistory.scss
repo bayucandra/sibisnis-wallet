@@ -108,6 +108,11 @@
       &.is-failed {
         color: map-get( $colors, lightish-red );
       }//&.is-failed
+
+      &.is-waiting-verification {
+        color: map-get($colors, orangey-yellow);
+      }//&.is-waiting-verification
+
     }//.transfer-status-mobile
 
     .date-mobile {

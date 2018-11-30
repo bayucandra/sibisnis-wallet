@@ -122,6 +122,10 @@
             color: map-get($colors, dark-sky-blue);
             user-select: none;
 
+            &.is-waiting-confirmation {
+              font-weight: 600;
+            }//&.is-waiting-confirmation
+
             &.is-failed {
               border: solid 0.5px map-get($colors, lightish-red);
               color: map-get($colors, lightish-red);

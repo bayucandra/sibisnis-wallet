@@ -80,6 +80,32 @@ class BalanceTopUpHistory extends Component {
 
   };
 
+  _statusClassGet = status => {
+    let ret = '';
+
+    switch ( status ) {
+      case '1':
+        ret = ' is-waiting-confirmation';
+        break;
+
+      case '2':
+      case '3':
+        ret = ' is-failed';
+        break;
+
+      case '4':
+        ret = ' is-success';
+        break;
+
+      case '5':
+        ret = ' is-waiting-verification';
+        break;
+    }
+
+    return ret;
+
+  };
+
   componentDidMount() {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
@@ -160,7 +186,7 @@ class BalanceTopUpHistory extends Component {
                           { biqHelper.utils.numberFormat(el.nominal, 'Rp ') }
                         </div>
                         <div className="biq-col biq-col--status visible-md-up">
-                          <div className={`status-box${ el.status === '2' || el.status === '3' ? ' is-failed' : '' }`}>
+                          <div className={`status-box${ this._statusClassGet( el.status ) }`}>
                             { walletProvider.paymentStatusGet( el.status ) }
                           </div>
                         </div>
@@ -168,7 +194,7 @@ class BalanceTopUpHistory extends Component {
                       </div>
 
 
-                      <div className={ `transfer-status-mobile hidden-md-up${ el.status === '2' || el.status === '3' ? ' is-failed' : '' }` }>
+                      <div className={ `transfer-status-mobile hidden-md-up${ this._statusClassGet( el.status ) }` }>
                         { walletProvider.paymentStatusGet( el.status ) }
                       </div>
 

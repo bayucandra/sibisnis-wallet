@@ -245,6 +245,7 @@ class BalancePaymentConfirmation extends Component{
   };
 
   _addPhotoClick = () => {
+    if ( this.state.has_upload_progress || this.state.image_list.length >= 4 ) return;
     biqHelper.utils.clickTimeout( ()=>{
       this.inputRef.current.click();
     } );
@@ -419,7 +420,7 @@ class BalancePaymentConfirmation extends Component{
 
               <input type="file" multiple={true} accept="image/*" style={{display: 'none'}} ref={this.inputRef} onChange={this._addPhotoUpload}/>
 
-              <Button className={`add-photo-btn${ this.state.image_list.length > 0 ? ' has-images' : '' }`} onClick={this._addPhotoClick}>Tambahkan Foto</Button>
+              <Button className={`add-photo-btn${ this.state.image_list.length > 0 ? ' has-images' : '' }${ this.state.has_upload_progress || this.state.image_list.length >= 4 ? ' has-upload-progress' : '' }`} onClick={this._addPhotoClick}>Tambahkan Foto</Button>
 
               {
                 this.state.image_list.length > 0 ?

@@ -322,7 +322,7 @@
           font-size: 13px;
           font-weight: bold;
           letter-spacing: 0.3px;
-          color: rgba( map-get($colors,dark-mint), 0.6 );
+          color: map-get($colors,dark-mint);
 
           &:before {
             content: '+';
@@ -331,6 +331,10 @@
           }//&:before
 
         }//&.has-images
+
+        &.has-upload-progress {
+          opacity: 0.6;
+        }//&.is-loading
 
       }//.add-photo-btn
 

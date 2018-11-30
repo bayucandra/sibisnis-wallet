@@ -4,6 +4,8 @@ import {withRouter} from 'react-router-dom';
 import {IconButton} from '@material-ui/core';
 import {Button} from '../../../Widgets/material-ui';
 
+import $ from 'jquery';
+
 import appActions from "../../../../redux/actions/global/appActions";
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
 import biqHelper from "../../../../lib/biqHelper";
@@ -16,53 +18,18 @@ import * as moment from 'moment';
 
 class BalanceTopUpHistory extends Component {
 
-  state = {
-    data: [
-      {
-        "id": "1",
-        "bank": "bank-tf-bni",
-        "nominal": "10000",
-        "status": "1",
-        "tanggal": "2018-08-15 13:38:24"
-      },
-      {
-        "id": "2",
-        "bank": "bank-tf-mandiri",
-        "nominal": "10000",
-        "status": "1",
-        "tanggal": "2018-08-15 14:24:22"
-      },
-      {
-        "id": "3",
-        "bank": "bank-tf-bri",
-        "nominal": "10000",
-        "status": "2",
-        "tanggal": "2018-08-16 17:18:22"
-      },
-      {
-        "id": "4",
-        "bank": "bank-tf-bni",
-        "nominal": "10000",
-        "status": "1",
-        "tanggal": "2018-08-18 10:05:22"
-      },
-      {
-        "id": "5",
-        "bank": "bank-tf-bri",
-        "nominal": "10000",
-        "status": "1",
-        "tanggal": "2018-08-25 21:15:22"
-      },
-      {
-        "id": "6",
-        "bank": "bank-tf-mandiri",
-        "nominal": "10000",
-        "status": "3",
-        "tanggal": "2018-08-28 07:20:22"
-      }
+  panel_body_ref = React.createRef();
 
-    ]
+  state = {
+    panel_body_has_scroll: false
   };
+
+  constructor( props ) {
+    super(props);
+
+    biqHelper.jquery.init($);
+
+  }
 
   _navBackClick = () => {
     biqHelper.utils.clickTimeout(()=>{
@@ -126,6 +93,22 @@ class BalanceTopUpHistory extends Component {
 
   }
 
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if ( prevProps.balance.top_up_history.is_fetching && this.props.balance.top_up_history.is_fetched ) {
+
+      let panel_body_has_scroll = $(this.panel_body_ref.current).biqHasScroll( { v_padding: 20 } );
+
+      if ( panel_body_has_scroll.y === true && this.state.panel_body_has_scroll === false ) {
+        this.setState( { panel_body_has_scroll: true } );
+      }
+
+      if ( panel_body_has_scroll.y === false && this.state.panel_body_has_scroll === true ) {
+        this.setState( { panel_body_has_scroll: false } );
+      }
+
+    }
+  }
+
   render() {
 
     let nav_header_mobile = (
@@ -156,7 +139,7 @@ class BalanceTopUpHistory extends Component {
 
         <div className="history-panel">
 
-          <div className="header visible-md-up">
+          <div className="history-panel__header visible-md-up">
             <div className="biq-col-spacer-left"/>
             <div className="biq-col biq-col--date">Tanggal</div>
             <div className="biq-col biq-col--method">Metode Transfer</div>
@@ -165,54 +148,57 @@ class BalanceTopUpHistory extends Component {
             <div className="biq-col-spacer-right"/>
           </div>
 
-          {
-            this.props.balance.top_up_history.is_fetched && !biqHelper.utils.isNull( data ) && data.length ?
+          <div className={`history-panel__body${ this.state.panel_body_has_scroll ? ' has-scroll' : '' }`} ref={this.panel_body_ref}>
+            {
+              this.props.balance.top_up_history.is_fetched && !biqHelper.utils.isNull( data ) && data.length ?
 
-              data.map( ( el )=>{
-                return (
-                  <Button className="history-item" key={el.id} onClick={ () => this._recordClick( el.id ) }>
+                data.map( ( el )=>{
+                  return (
+                    <Button className="history-item" key={el.id} onClick={ () => this._recordClick( el.id ) }>
 
-                    <div className="history-item__inner">
+                      <div className="history-item__inner">
 
-                      <div className="row-inner">
-                        <div className="biq-col-spacer-left visible-md-up"/>
-                        <div className="biq-col biq-col--date visible-md-up">
+                        <div className="row-inner">
+                          <div className="biq-col-spacer-left visible-md-up"/>
+                          <div className="biq-col biq-col--date visible-md-up">
+                            { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
+                          </div>
+                          <div className="biq-col biq-col--method">
+                            { walletProvider.bankByMethodAbreviation(el.bank).bank_name }
+                          </div>
+                          <div className="biq-col biq-col--amount">
+                            { biqHelper.utils.numberFormat(el.nominal, 'Rp ') }
+                          </div>
+                          <div className="biq-col biq-col--status visible-md-up">
+                            <div className={`status-box${ this._statusClassGet( el.status ) }`}>
+                              { walletProvider.paymentStatusGet( el.status ) }
+                            </div>
+                          </div>
+                          <div className="biq-col-spacer-right visible-md-up"/>
+                        </div>
+
+
+                        <div className={ `transfer-status-mobile hidden-md-up${ this._statusClassGet( el.status ) }` }>
+                          { walletProvider.paymentStatusGet( el.status ) }
+                        </div>
+
+                        <div className="date-mobile hidden-md-up">
                           { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
                         </div>
-                        <div className="biq-col biq-col--method">
-                          { walletProvider.bankByMethodAbreviation(el.bank).bank_name }
-                        </div>
-                        <div className="biq-col biq-col--amount">
-                          { biqHelper.utils.numberFormat(el.nominal, 'Rp ') }
-                        </div>
-                        <div className="biq-col biq-col--status visible-md-up">
-                          <div className={`status-box${ this._statusClassGet( el.status ) }`}>
-                            { walletProvider.paymentStatusGet( el.status ) }
-                          </div>
-                        </div>
-                        <div className="biq-col-spacer-right visible-md-up"/>
+
                       </div>
 
+                    </Button>
+                  );
+                })
 
-                      <div className={ `transfer-status-mobile hidden-md-up${ this._statusClassGet( el.status ) }` }>
-                        { walletProvider.paymentStatusGet( el.status ) }
-                      </div>
+                  :
 
-                      <div className="date-mobile hidden-md-up">
-                        { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
-                      </div>
+                ''
 
-                    </div>
+            }
+          </div>
 
-                  </Button>
-                );
-              })
-
-                :
-
-              ''
-
-          }
         </div>
 
       </div>

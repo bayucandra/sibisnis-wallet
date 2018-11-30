@@ -21,18 +21,10 @@ import iconBankBca from "../../../../images/icons/payment/bank-bca@3x.png";
 import iconBankMandiri from "../../../../images/icons/payment/bank-mandiri@3x.png";
 import iconBankBni from "../../../../images/icons/payment/bank-bni@3x.png";
 
-import iconAtm from "../../../../images/icons/payment/atm@3x.png";
-import iconAtmPrima from "../../../../images/icons/payment/prima-card@3x.png";
-import iconAtmAlto from "../../../../images/icons/payment/alto-card@3x.png";
-import iconAtmBersama from "../../../../images/icons/payment/atm-bersama@3x.png";
-
 import iconCreditCard from "../../../../images/icons/payment/kartu-kredit@3x.png";
 import iconCreditCardMastercard from "../../../../images/icons/payment/master-card@3x.png";
 
 import iconIndomaret from "../../../../images/icons/payment/indomaret@3x.png";
-
-import iconKlikBcaSingle from "../../../../images/icons/payment/klikbca-singgle@3x.png";
-import iconKlikBca from "../../../../images/icons/payment/klik-bca@3x.png";
 
 import iconBcaKlikPaySingle from "../../../../images/icons/payment/bcaklikpay-single@3x.png";
 import iconBcaKlikPay from "../../../../images/icons/payment/bca-klikpay@3x.png";

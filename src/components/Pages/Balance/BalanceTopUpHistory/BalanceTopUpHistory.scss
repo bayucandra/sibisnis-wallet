@@ -39,12 +39,20 @@
     flex: 1 1 auto;
     display: flex;
     flex-direction: column;
-    padding-bottom: 20px;
-    overflow-y:auto;
 
-    > * {
-      flex: none;
-    }// > *
+    &__body {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      padding-bottom: 20px;
+      overflow-y:auto;
+      border-radius: 5px;
+
+      > * {
+        flex: none;
+      }// > *
+
+    }//&__body
 
   }//.history-panel
 

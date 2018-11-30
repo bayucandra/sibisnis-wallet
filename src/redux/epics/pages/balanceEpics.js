@@ -113,7 +113,7 @@ const topUpHistoryFetch = action$ => action$.pipe(
       method: 'POST',
       crossDomain: true,
       withCredentials: true,
-      body: Object.assign( { memberid: action.payload.memberid }, biqConfig.api.data_auth )
+      body: Object.assign( { memberid: action.payload.memberid, limit: 10, offset: 0 }, biqConfig.api.data_auth )
     })
       .pipe(
         map( res => balanceActions.balanceTopUpHistoryFetched( { status: res.status, response: res.response } ) ),

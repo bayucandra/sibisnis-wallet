@@ -35,10 +35,15 @@ class BalancePaymentConfirmation extends Component{
 
   stop$ = new Subject();
 
-  _backBtnClick = ()=> {
+  _backToHistory = ()=> {
+    let back_url = '/balance/topup-history';
+    biqHelper.utils.clickTimeout( () => this.props.history.push(back_url) );
+  };
+
+  _backToStatus = () => {
     let { type, id, referrer } = biqHelper.JSON.pathValueGetMulti( this.props.match.params, [ 'type', 'id', 'referrer' ] );
     let back_url = `/balance/payment/status/${type}/${id}/${referrer}`;
-    biqHelper.utils.clickTimeout( () => this.props.history.push(back_url) )
+    biqHelper.utils.clickTimeout( () => this.props.history.push(back_url) );
   };
 
   _addPhotoUpload = ( e ) => {
@@ -279,6 +284,8 @@ class BalancePaymentConfirmation extends Component{
   }
 
   render() {
+    let param_type = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' );
+    let is_submit = param_type === 'submit';
 
     let dummy_header= (
       <div className="balance-payment-status">
@@ -298,13 +305,15 @@ class BalancePaymentConfirmation extends Component{
 
         <div className="balance-payment-confirmation__header">
 
-          <div className="nav-back hidden-md-up">
-            <Button className="nav-back__btn" onClick={ this._backBtnClick }>&nbsp;</Button>
-            <div className="nav-back__text">Kembali</div>
+          <div className={`nav-back${ is_submit ? ' hidden-md-up' : '' }`}>
+            <Button className="nav-back__btn" onClick={ this._backToHistory }>&nbsp;</Button>
+            <div className="nav-back__text hidden-md-up">
+              { is_submit ? 'Kembali' : 'Status pembayaran'}
+            </div>
           </div>
 
           <div className="title visible-md-up">
-            Silahkan memproses pembayaran Anda
+            { is_submit ? 'Silahkan memproses pembayaran Anda' : 'Status pembayaran'}
           </div>
 
           <HeaderMenuMobile forceVisible={true}/>
@@ -345,7 +354,7 @@ class BalancePaymentConfirmation extends Component{
             }
 
             <div className="top-nav visible-md-up">
-              <Button className="back-btn" onClick={ this._backBtnClick }>
+              <Button className="back-btn" onClick={ this._backToStatus }>
                 <div className="icon"/>
                 <div className="label">Kembali</div>
               </Button>

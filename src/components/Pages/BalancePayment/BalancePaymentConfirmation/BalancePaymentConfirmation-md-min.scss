@@ -8,6 +8,16 @@
       background: none;
       margin: 38px 0 0;
 
+      .nav-back {
+        flex: none;
+
+        &__btn {
+          $design-with-diff: (50px-24px)/2;
+          margin: (-$design-with-diff) ( 5px - $design-with-diff ) (-$design-with-diff) ( -$design-with-diff );
+        }//&__btn
+
+      }//.nav-back
+
       .title {
         font-size: 20px;
         font-weight: normal;

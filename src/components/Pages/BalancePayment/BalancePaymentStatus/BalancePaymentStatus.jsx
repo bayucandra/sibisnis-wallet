@@ -231,7 +231,7 @@ class BalancePaymentStatus extends Component {
 
         <div className="balance-payment-status__header">
           {
-            data.status === '3' ?
+            data.status === '3' || !is_submit ?
 
               <div className="nav-back">
                 <Button className="nav-back__btn" onClick={()=> biqHelper.utils.clickTimeout( () => this.props.history.push('/balance/topup-history') )}>&nbsp;</Button>

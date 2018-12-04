@@ -138,7 +138,7 @@ class BiqHelperScrollPagination {
       xhrFields: {
         withCredentials: true
       },
-      success: function (response) {
+      success: response => {
         let data = [];
 
         if( typeof this.config.response_key === 'string' ) {
@@ -159,7 +159,7 @@ class BiqHelperScrollPagination {
         if ( typeof this.config.data_map === 'function' ) {
           data = data.map( this.config.data_map );
           this.angularServices.$q.all( data )//support promise map
-            .then(function( res ){
+            .then(  res => {
 
               this.requestParse({
                 data: res,
@@ -167,7 +167,7 @@ class BiqHelperScrollPagination {
                 render_immediately: params.render_immediately
               });
 
-            }.bind(this));
+            });
         } else {
           this.requestParse({
             data: data,
@@ -195,7 +195,7 @@ class BiqHelperScrollPagination {
             this.loadMore({render_immediately: true});
           }
         }
-      }.bind(this)
+      }
     };
 
     if( this.config.type === 'POST' ) {

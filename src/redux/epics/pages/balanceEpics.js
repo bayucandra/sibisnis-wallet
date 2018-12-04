@@ -104,7 +104,7 @@ const paymentTransactionFetch = action$ => action$.pipe(
         )
     )
   );
-
+/*
 const topUpHistoryFetch = action$ => action$.pipe(
   ofType( actionTypes.balance.TOP_UP_HISTORY_FETCH ),
   switchMap(
@@ -129,10 +129,9 @@ const topUpHistoryFetch = action$ => action$.pipe(
 
       )
   )
-);
+);*/
 
 export default [
   paymentBankSubmit,
-  paymentTransactionFetch,
-  topUpHistoryFetch
+  paymentTransactionFetch
 ]

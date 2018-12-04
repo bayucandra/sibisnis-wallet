@@ -81,21 +81,20 @@ import ActionTypes from "../../action-types";
 
 
 
-  function balanceTopUpHistoryFetch( memberid ) {
+  function balanceTopUpHistoryFetch() {
     return {
-      type: ActionTypes.balance.TOP_UP_HISTORY_FETCH,
-      payload: { memberid }
+      type: ActionTypes.balance.TOP_UP_HISTORY_FETCH
     }
   }
-  function balanceTopUpHistoryFetched( server_response ) {
+  function balanceTopUpHistoryFetched( data ) {//data from scroll pagination
     return {
       type: ActionTypes.balance.TOP_UP_HISTORY_FETCHED,
-      payload: server_response
+      payload: data
     }
   }
-  function balanceTopUpHistoryCancel() {
+  function balanceTopUpHistoryReset() {
     return {
-      type: ActionTypes.balance.TOP_UP_HISTORY_CANCELED
+      type: ActionTypes.balance.TOP_UP_HISTORY_RESET
     }
   }
 
@@ -118,7 +117,7 @@ const actions = {
 
   balanceTopUpHistoryFetch,
   balanceTopUpHistoryFetched,
-  balanceTopUpHistoryCancel
+  balanceTopUpHistoryReset
 };
 
 export default actions;

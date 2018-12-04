@@ -21,7 +21,7 @@ class Balance extends Component {
 
   }
 
-  componentWillUpdate(nextProps, nextState, nextContext) {
+/*  componentWillUpdate(nextProps, nextState, nextContext) {
     let {dispatch} = this.props;
     let should_loading_show = nextProps.balance.top_up_history.is_fetching;
     let should_loading_hide = nextProps.balance.top_up_history.is_fetched;
@@ -30,20 +30,15 @@ class Balance extends Component {
 
     if ( should_loading_hide ) dispatch(appActions.appLoadingIndicatorHide());
 
-  }
+  }*/
 
   render() {
-    let is_loading = this.props.balance.top_up_history.is_fetching;
 
     return (
       <div className={`main-wrapper${!this.props.header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper l-balance`}>
         <div className="biq-wrapper__inner l-balance__inner">
-          {
-            !is_loading ?
-            <SideNavMain cssClasses={"visible-md-up"}/>
-              :
-            ''
-          }
+
+          <SideNavMain cssClasses={"visible-md-up"}/>
 
           <Switch>
             <Route path="/balance/profile-verification" component={BalanceProfileVerification} />

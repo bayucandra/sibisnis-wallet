@@ -79,10 +79,11 @@ class BalancePaymentStatus extends Component {
     let data_source_next = nextProp.balance.payment_transaction.server_response;
     let data_next = biqHelper.JSON.pathValueGet( data_source_next, 'response.data' );
     let status_next = biqHelper.JSON.pathValueGet( data_next, 'status' );
-
     if ( !is_fetched_current && is_fetched_next && !biqHelper.utils.isNull(data_next) && status_next === '1' ) {
+      let expiration_date = data_next.expired_at.split('+')[0];
+
       this.count_down_obj = biqHelper.moment.countDown({
-        compared_dt: moment( data_next.expired_at ).valueOf(),
+        compared_dt: moment( expiration_date ).valueOf(),
         current_dt: biqHelper.moment.now().valueOf(),
         callback_update: ( duration )=> {
           let counter_obj = {

@@ -20,7 +20,7 @@ let state_default = {
   top_up_history: {
     is_fetching: false,
     is_fetched: false,
-    server_response: {}
+    data: {}
   }
 
 };
@@ -81,10 +81,14 @@ export default ( state = state_default, action ) => {
 
 
     case ActionTypes.balance.TOP_UP_HISTORY_FETCH:
-      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: true, is_fetched: false } ) };
+      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: true, is_fetched: false, data: state.top_up_history.data } ) };
       return Object.assign( {}, state, new_state );
     case ActionTypes.balance.TOP_UP_HISTORY_FETCHED:
-      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: false, is_fetched: true, server_response: action.payload } ) };
+      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: false, is_fetched: true, data: action.payload.data } ) };
+      return Object.assign( {}, state, new_state );
+
+    case ActionTypes.balance.TOP_UP_HISTORY_RESET:
+      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history ) };
       return Object.assign( {}, state, new_state );
 
 

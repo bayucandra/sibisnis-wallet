@@ -15,14 +15,12 @@ import iconCloseWhite from "../../../../images/icons/close-white.svg";
 import walletProvider from "../../../../providers/walletProvider";
 
 import * as moment from 'moment';
+import ScrollPagination from "../../../Widgets/ScrollPagination/ScrollPagination";
+import biqConfig from "../../../../providers/biqConfig";
 
 class BalanceTopUpHistory extends Component {
 
   panel_body_ref = React.createRef();
-
-  state = {
-    panel_body_has_scroll: false
-  };
 
   constructor( props ) {
     super(props);
@@ -73,40 +71,49 @@ class BalanceTopUpHistory extends Component {
 
   };
 
+  _onFetch = () => {
+    let {dispatch} = this.props;
+    dispatch( balanceActions.balanceTopUpHistoryFetch() );
+  };
+
+  _onFetched = obj => {
+    let {dispatch} = this.props;
+    dispatch( balanceActions.balanceTopUpHistoryFetched( { data: obj.data_all } ) );
+  };
+
   componentDidMount() {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
     if ( this.props.is_profile_parsed ) {
       let memberid= biqHelper.JSON.pathValueGet( this.props, 'user_profile.memberid' );
-      dispatch( balanceActions.balanceTopUpHistoryFetch( memberid ) );
     }
-
-  }
-
-  componentWillUpdate(nextProps, nextState, nextContext) {
-    let {dispatch} = this.props;
-
-    let memberid_current = biqHelper.JSON.pathValueGet( this.props, 'user_profile.memberid' );
-    let memberid_next = biqHelper.JSON.pathValueGet( nextProps, 'user_profile.memberid' );
-    if( memberid_current !== memberid_next ) dispatch( balanceActions.balanceTopUpHistoryFetch( memberid_next ) );
 
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-    if ( prevProps.balance.top_up_history.is_fetching && this.props.balance.top_up_history.is_fetched ) {
 
-      let panel_body_has_scroll = $(this.panel_body_ref.current).biqHasScroll( { v_padding: 20 } );
+    let memberid_current = biqHelper.JSON.pathValueGet( this.props, 'user_profile.memberid' );
+    let memberid_prev = biqHelper.JSON.pathValueGet( prevProps, 'user_profile.memberid' );
 
-      if ( panel_body_has_scroll.y === true && this.state.panel_body_has_scroll === false ) {
-        this.setState( { panel_body_has_scroll: true } );
+    if( !biqHelper.utils.isNull( this.panel_body_ref.current )) {
+      let scroll_pagination_instance = this.panel_body_ref.current;
+      if (
+        memberid_current !== memberid_prev
+        && typeof scroll_pagination_instance.loadMore === 'function'
+      ) {
+        scroll_pagination_instance.loadMore();
       }
-
-      if ( panel_body_has_scroll.y === false && this.state.panel_body_has_scroll === true ) {
-        this.setState( { panel_body_has_scroll: false } );
-      }
-
     }
+
+  }
+
+  componentWillUnmount() {
+
+    this.panel_body_ref.current.stop();
+
+    let {dispatch} = this.props;
+    dispatch( balanceActions.balanceTopUpHistoryReset() );
   }
 
   render() {
@@ -120,9 +127,13 @@ class BalanceTopUpHistory extends Component {
       </nav>
     );
 
-    if ( this.props.balance.top_up_history.is_fetching ) return nav_header_mobile;
+    let data = this.props.balance.top_up_history.data;
 
-    let data = biqHelper.JSON.pathValueGet( this.props.balance.top_up_history.server_response, 'response.data' );
+    let scroll_pagination_config= {
+      url: `${biqConfig.api.url_base}/api/wallet/list_deposit`,
+      method: 'POST',
+      data: Object.assign( { memberid: this.props.user_profile.memberid }, biqConfig.api.data_auth )
+    };
 
     return (
       <div className="balance-topup-history">
@@ -148,9 +159,10 @@ class BalanceTopUpHistory extends Component {
             <div className="biq-col-spacer-right"/>
           </div>
 
-          <div className={`history-panel__body${ this.state.panel_body_has_scroll ? ' has-scroll' : '' }`} ref={this.panel_body_ref}>
+          <ScrollPagination className={`history-panel__body`} ref={this.panel_body_ref}
+              biqConfig={scroll_pagination_config} onFetch={this._onFetch} onFetched={ this._onFetched }>
             {
-              this.props.balance.top_up_history.is_fetched && !biqHelper.utils.isNull( data ) && data.length ?
+              !biqHelper.utils.isNull( data ) && data.length &&
 
                 data.map( ( el )=>{
                   return (
@@ -192,12 +204,8 @@ class BalanceTopUpHistory extends Component {
                   );
                 })
 
-                  :
-
-                ''
-
             }
-          </div>
+          </ScrollPagination>
 
         </div>
 

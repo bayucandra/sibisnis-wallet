@@ -62,7 +62,7 @@ class App extends Component {
     // addressProvider.provinsi$().subscribe();
     // addressProvider.kabupaten$().subscribe();
 
-/*      forkJoin(
+      forkJoin(
         addressProvider.provinsi$(),
         addressProvider.kabupaten$(),
         walletProvider.paymentStatus$(),
@@ -71,7 +71,7 @@ class App extends Component {
         this.setState( { initialized: true }, ()=>{
           this.forceUpdate();
         } );
-      });*/
+      });
     //END INITIALIZE LOCAL DATA************
 
   }

@@ -21,10 +21,10 @@ const appReducers = combineReducers({
 });
 
 const rootReducer = (state, action) => {
-  if (action.type === ActionTypes.app.STATES_RESET) {
+/*  if (action.type === ActionTypes.app.STATES_RESET) {
     if ( process.env.NODE_ENV === 'development' ) console.warn('Resetting state===============');
-    state = undefined
-  }
+    state = {}
+  }*/
 
   return appReducers(state, action)
 };

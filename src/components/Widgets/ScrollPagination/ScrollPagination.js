@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { connect } from 'react-redux';
 import $ from 'jquery';
 import { Subject, of } from 'rxjs';
 import {ajax as rxAjax} from 'rxjs/ajax';
@@ -13,27 +12,28 @@ class ScrollPagination extends Component{
     has_scroll: false
   };
 
-  _scroll_state = {
+  _scroll_state_default = {
     page_current: 0,
     end_of_page: false
   };
+
+  _scroll_state = {};
 
   dom_scroller = React.createRef();
 
   _stop$ = new Subject();
   _is_prop_valid = true;
 
-  _config = {
-    method: 'GET',
-    scroll_bottom_space: 50,
-    query_params: { limit: 'limit', offset: 'offset' },
-    data: {},//Data to be post or get
-    null_check_reinit: {},//reinitializing on value changes to the props attached
-    limit: 10,
-    response_field: 'data'
-  };
-
   _data = [];
+
+  _ajax_subscribe = null;
+
+  constructor( props ) {
+    super(props);
+    this._scrollStateReset();
+  }
+
+  _scrollStateReset = () => Object.assign( this._scroll_state, this._scroll_state_default );
 
   _onScroll = e => {
     if ( !this._is_prop_valid ) {
@@ -44,27 +44,42 @@ class ScrollPagination extends Component{
     if ( this.state.is_loading ) return;
 
     let wrapper_el = $(e.target);
-    let should_load_more = wrapper_el.scrollTop() + wrapper_el.height() >= (wrapper_el[0].scrollHeight - this._config.scroll_bottom_space);
+    let should_load_more = wrapper_el.scrollTop() + wrapper_el.height() >= (wrapper_el[0].scrollHeight - this.props.biqScrollBottomSpace);
 
     if ( should_load_more ) this.loadMore();
 
   };
 
-  loadMore = () => {
+  loadInit = ( p_obj ) => {
+    this._scrollStateReset();
+    this.loadMore(p_obj);
+  };
 
-    if ( this.state.is_loading || this.state.end_of_page ) return;
+  loadMore = ( p_obj ) => {
+
+    let params = {
+      force_load: false
+    };
+    Object.assign( params, p_obj );
+
+    if (
+      ( this.state.is_loading && !params.force_load )
+      || this.state.end_of_page
+    ) return;
+
+    if ( params.force_load ) this._ajax_subscribe.unsubscribe();
 
     this._scroll_state.page_current++;
 
     let data = {};
-    data[this._config.query_params.limit] = this._config.limit;
-    data[this._config.query_params.offset] = (this._scroll_state.page_current - 1) * this._config.limit;
+    data[this.props.biqQueryParams.limit] = this.props.biqLimit;
+    data[this.props.biqQueryParams.offset] = (this._scroll_state.page_current - 1) * this.props.biqLimit;
 
-    Object.assign(data, this._config.data);
+    Object.assign(data, this.props.biqData);
 
     let ajax$ = rxAjax({
-      url: this._config.url,
-      method: this._config.method,
+      url: this.props.biqUrl,
+      method: this.props.biqMethod,
       crossDomain: true,
       withCredentials: true,
       body: data
@@ -74,7 +89,7 @@ class ScrollPagination extends Component{
       if ( typeof this.props.onFetch === 'function' ) this.props.onFetch();
     });
 
-    ajax$
+    this._ajax_subscribe = ajax$
       .pipe(
         takeUntil(this._stop$),
         catchError(err => of(err.xhr))
@@ -83,7 +98,7 @@ class ScrollPagination extends Component{
 
         if ( biqHelper.utils.httpResponseIsSuccess( res.status ) ) {
 
-          let res_data = res.response[ this._config.response_field ];
+          let res_data = res.response[ this.props.responseField ];
 
           if ( res_data.length === 0 ) this.setState( {end_of_page: true} );
 
@@ -120,37 +135,25 @@ class ScrollPagination extends Component{
   };
 
   componentDidMount() {
-    const required_props = [ 'url' ];
+    const required_props = [ 'biqUrl' ];
 
     let is_valid = true;
 
-    if ( biqHelper.utils.isNull( this.props.biqConfig ) ) {
-      is_valid = false;
-      console.error('Error: Config not found');
-    }
-
     for( let i=0; i < required_props.length; i++ ) {
       let required_prop = required_props[i];
-      if ( !this.props.biqConfig.hasOwnProperty( required_prop ) ) is_valid = false;
+      if ( !this.props.hasOwnProperty( required_prop ) ) is_valid = false;
     }
 
     if ( !is_valid ) {
-
       this._is_prop_valid = false;
       console.error( 'Error: Missing required props!!!' );
-
+    } else {
+      this.loadInit();
     }
 
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
-
-    if( this._is_prop_valid ){
-
-      Object.assign(this._config, this.props.biqConfig);
-
-      // if ( this.props.hasOwnProperty( 'biqApi' ) ) this.props.biqApi
-    }
 
     if ( prevState.is_loading && !this.props.is_loading ) {
       let has_scroll = $(this.dom_scroller.current).biqHasScroll();
@@ -166,6 +169,10 @@ class ScrollPagination extends Component{
 
   }
 
+  componentWillUnmount() {
+    this.stop();
+  }
+
   render() {
 
     return (
@@ -179,5 +186,16 @@ class ScrollPagination extends Component{
   }
 
 }
+
+ScrollPagination.defaultProps = {
+
+  biqMethod: 'GET',
+  biqScrollBottomSpace: 50,
+  biqQueryParams: { limit: 'limit', offset: 'offset' },
+  biqData: {},//Data to be post or get
+  biqLimit: 10,
+  responseField: 'data'
+
+};
 
 export default ScrollPagination;

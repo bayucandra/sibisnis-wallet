@@ -85,10 +85,6 @@ class BalanceTopUpHistory extends Component {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
-    if ( this.props.is_profile_parsed ) {
-      let memberid= biqHelper.JSON.pathValueGet( this.props, 'user_profile.memberid' );
-    }
-
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
@@ -96,21 +92,19 @@ class BalanceTopUpHistory extends Component {
     let memberid_current = biqHelper.JSON.pathValueGet( this.props, 'user_profile.memberid' );
     let memberid_prev = biqHelper.JSON.pathValueGet( prevProps, 'user_profile.memberid' );
 
-    if( !biqHelper.utils.isNull( this.panel_body_ref.current )) {
-      let scroll_pagination_instance = this.panel_body_ref.current;
+    let scroll_pagination_instance = this.panel_body_ref.current;
+    if( !biqHelper.utils.isNull( scroll_pagination_instance )) {
       if (
         memberid_current !== memberid_prev
-        && typeof scroll_pagination_instance.loadMore === 'function'
+        && typeof scroll_pagination_instance.loadInit === 'function'
       ) {
-        scroll_pagination_instance.loadMore();
+        scroll_pagination_instance.loadInit({force_load: true});
       }
     }
 
   }
 
   componentWillUnmount() {
-
-    this.panel_body_ref.current.stop();
 
     let {dispatch} = this.props;
     dispatch( balanceActions.balanceTopUpHistoryReset() );
@@ -128,12 +122,6 @@ class BalanceTopUpHistory extends Component {
     );
 
     let data = this.props.balance.top_up_history.data;
-
-    let scroll_pagination_config= {
-      url: `${biqConfig.api.url_base}/api/wallet/list_deposit`,
-      method: 'POST',
-      data: Object.assign( { memberid: this.props.user_profile.memberid }, biqConfig.api.data_auth )
-    };
 
     return (
       <div className="balance-topup-history">
@@ -160,7 +148,9 @@ class BalanceTopUpHistory extends Component {
           </div>
 
           <ScrollPagination className={`history-panel__body`} ref={this.panel_body_ref}
-              biqConfig={scroll_pagination_config} onFetch={this._onFetch} onFetched={ this._onFetched }>
+              biqUrl={`${biqConfig.api.url_base}/api/wallet/list_deposit`} biqMethod={'POST'}
+              biqData={ Object.assign( { memberid: this.props.user_profile.memberid }, biqConfig.api.data_auth ) }
+              onFetch={this._onFetch} onFetched={ this._onFetched }>
             {
               !biqHelper.utils.isNull( data ) && data.length &&
 

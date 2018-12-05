@@ -1,9 +1,10 @@
 @media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
 
-  .balance-payment-confirmed {
+  .balance-payment-done {
     padding: 0 15px;
 
     $design-diff: (50px-24px)/2;
+
     &__header {
       height: auto;
       margin-top: 40px - $design-diff;
@@ -31,20 +32,45 @@
 
     &__body {
       margin-top: 32px - $design-diff;
-      background: none;
+      background: transparent;
+      overflow:visible;
     }//&__body
 
     &__main-panel {
       flex: 619 1 1px;
       min-height: 506px;
+      margin-bottom: 20px;
 
       border-radius: 5px;
       box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
       background-color: #ffffff;
 
-      .notice-block {
+      .notice {
         margin-top: 90px;
-      }//.notice-waiting-block
+
+        &__description {
+          width: auto;
+          margin-top: 11px;
+        }//&__description
+
+      }//.notice
+
+      .icon {
+        margin-top: 40px;
+      }//.icon
+
+      .cs-title {
+        margin-top: 63px;
+      }//.cs-title
+
+      .cs-contact {
+
+        &__text {
+          line-height: normal;
+          letter-spacing: 0.5px;
+        }//&__text
+
+      }//.cs-contact
 
     }//&__main-panel
 
@@ -52,6 +78,6 @@
       flex: 50 1 1px;
     }//&__spacer
 
-  }//.balance-payment-confirmed
+  }//.balance-payment-done
 
 }//@media

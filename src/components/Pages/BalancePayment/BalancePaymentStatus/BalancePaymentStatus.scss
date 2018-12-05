@@ -39,9 +39,9 @@
       &__btn {
         height: 50px;
         min-width: 0;
-        $design-with-diff: (50px-24px)/2;
+        $design-diff: (50px-24px)/2;
         width: 50px;
-        margin: 0 (20px-$design-with-diff) 0 (15px-$design-with-diff);
+        margin: 0 (20px-$design-diff) 0 (15px-$design-diff);
         background: url( '../../../../images/icons/back-white.svg' ) no-repeat center;
         border-radius: 10px;
         color: #FFFFFF;

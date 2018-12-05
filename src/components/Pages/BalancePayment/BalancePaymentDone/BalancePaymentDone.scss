@@ -1,0 +1,154 @@
+@import "../../../../styles/variables";
+
+.balance-payment-done {
+  flex: 1 1 auto !important;
+  display: flex;
+  flex-direction: column;
+
+  > * {
+    flex: none;
+  }//> *
+
+  &__header {
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background-color: map-get($colors, dark-aqua);
+
+    .nav-back {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+      height: 100%;
+
+      &__btn {
+        height: 50px;
+        min-width: 0;
+        $design-diff: (50px-24px)/2;
+        width: 50px;
+        margin: 0 (20px-$design-diff) 0 (15px-$design-diff);
+        background: url( '../../../../images/icons/back-white.svg' ) no-repeat center;
+        border-radius: 10px;
+        color: #FFFFFF;
+
+        &:hover {
+          background-color: transparent;
+        }//&:hover
+
+      }//&:before
+
+      &__text{
+        font-size: 16px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.3px;
+        color: #ffffff;
+      }//&__text
+
+    }//.nav-back
+
+  }//&__header
+
+  &__body {
+    flex: 1 1 auto;
+    display: flex;
+    align-items: flex-start;
+    overflow-y: auto;
+    background: #ffffff;
+  }//&__body
+
+  &__main-panel {
+    flex: 1 1 1px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .notice {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 60px;
+
+      &__title {
+        font-size: 18px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        text-align: center;
+        color: map-get($colors, charcoal-grey);
+      }//&__title
+
+      &__description {
+        width: 260px;
+        margin-top: 10px;
+
+        font-size: 13px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.77;
+        letter-spacing: 0.2px;
+        text-align: center;
+        color: map-get($colors, steel-grey);
+      }//&__description
+
+    }//.notice
+
+    .icon {
+      width: 70px;
+      height: 70px;
+      margin-top: 35px;
+
+      background: url('../../../../images/icons/accept.svg') no-repeat center;
+    }//.icon
+
+    .cs-title {
+      margin-top: 79px;
+
+      font-size: 15px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.6;
+      letter-spacing: 0.4px;
+      text-align: center;
+      color: map-get($colors, charcoal-grey);
+    }//.cs-title
+
+    .cs-contact {
+      display: flex;
+      align-items: center;
+      margin-top: 10px;
+      margin-bottom: 20px;
+
+      &__icon {
+        width: 26px;
+        height: 26px;
+        background: url('../../../../images/icons/call-center.svg') no-repeat center;
+      }//&__icon
+
+      &__text {
+        margin-left: 14px;
+
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.71;
+        letter-spacing: 0.4px;
+        text-align: center;
+        color: map-get($colors, charcoal-grey);
+      }//&__text
+
+    }//.cs-contact
+
+  }//&__main-panel
+
+}//.balance-payment-done
+
+@import "BalancePaymentDone-md-min";

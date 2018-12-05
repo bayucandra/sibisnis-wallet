@@ -21,10 +21,10 @@
       }//.title
 
       .nav-back {
-        $design-with-diff: (50px-24px)/2;
+        $design-diff: (50px-24px)/2;
 
         &__btn {
-          margin: (-$design-with-diff) (5px-$design-with-diff) (-$design-with-diff) (-15px);
+          margin: (-$design-diff) (5px-$design-diff) (-$design-diff) (-15px);
         }//&__btn
 
         &__text {

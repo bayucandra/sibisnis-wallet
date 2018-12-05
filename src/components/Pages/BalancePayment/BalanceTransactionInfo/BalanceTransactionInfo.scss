@@ -97,6 +97,11 @@
           background-color: map-get($colors, pale-lilac);
         }//&--verification-process
 
+        &--success {
+          color: map-get( $colors, blue-green2 );
+          background-color: rgba( map-get( $colors, blue-green2 ), 0.1 );
+        }//&--success
+
       }//.status
 
     }//&__row

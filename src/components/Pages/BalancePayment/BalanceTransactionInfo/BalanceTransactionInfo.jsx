@@ -53,6 +53,9 @@ class BalanceTransactionInfo extends Component {
       case '3':
         status_class = ' status--expired';
         break;
+      case '4':
+        status_class = ' status--success';
+        break;
       case '5':
         status_class = ' status--verification-process';
         break;

@@ -4,16 +4,16 @@
     padding: 0 15px;
 
     &__header {
+      $design-diff: (50px-24px)/2;
       height: auto;
       background: none;
-      margin: 38px 0 0;
+      margin: (40px - $design-diff) 0 0;
 
       .nav-back {
         flex: none;
 
         &__btn {
-          $design-with-diff: (50px-24px)/2;
-          margin: (-$design-with-diff) ( 5px - $design-with-diff ) (-$design-with-diff) ( -$design-with-diff );
+          margin: (-$design-diff) ( 5px - $design-diff ) (-$design-diff) ( -$design-diff );
         }//&__btn
 
       }//.nav-back

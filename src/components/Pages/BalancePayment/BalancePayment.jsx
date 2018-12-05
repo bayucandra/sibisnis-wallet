@@ -9,6 +9,7 @@ import BalancePaymentBank from "./BalancePaymentBank";
 import BalancePaymentStatus from "./BalancePaymentStatus";
 import BalancePaymentConfirmation from "./BalancePaymentConfirmation";
 import BalancePaymentConfirmed from "./BalancePaymentConfirmed";
+import BalancePaymentDone from "./BalancePaymentDone";
 
 import "./BalancePayment.scss";
 
@@ -49,6 +50,7 @@ class BalancePayment extends Component {
               <Route path="/balance/payment/method" component={BalancePaymentMethod}/>
               <Route path="/balance/payment/bank-transfer" component={BalancePaymentBank}/>
               {/*<Route path="/balance/payment/status/:type/:id/:referrer" render={ props => (<BalancePaymentStatus {...props}/>)}/>*/}
+              <Route path="/balance/payment/status/:type/:id/:referrer/done" component={BalancePaymentDone}/>
               <Route path="/balance/payment/status/:type/:id/:referrer/confirmed" component={BalancePaymentConfirmed}/>
               <Route path="/balance/payment/status/:type/:id/:referrer/confirm" component={BalancePaymentConfirmation}/>
               <Route path="/balance/payment/status/:type/:id/:referrer" component={BalancePaymentStatus}/>

@@ -12,6 +12,21 @@ import balanceActions from "../../../../redux/actions/pages/balanceActions";
 
 class BalancePaymentConfirmed extends Component {
 
+  _sseHandler = () => {
+    setTimeout( () => {
+      let {dispatch} = this.props;
+
+      if ( this.props.balance.payment_transaction.is_fetched
+        && biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.server_response, 'data.status' ) === '5' )
+        dispatch(balanceActions.balancePaymentTransactionFetch(3));
+
+    }, 5000);
+  };
+
+  _backBtnClick = () => {
+    biqHelper.utils.clickTimeout( () => this.props.history.push('/balance/topup-history') );
+  };
+
   componentDidMount() {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
@@ -31,21 +46,6 @@ class BalancePaymentConfirmed extends Component {
     dispatch( balanceActions.balancePaymentBankReset() );
     dispatch( balanceActions.balancePaymentTransactionReset() );
   }
-
-  _sseHandler = () => {
-    setTimeout( () => {
-      let {dispatch} = this.props;
-
-      if ( this.props.balance.payment_transaction.is_fetched
-        && biqHelper.JSON.pathValueGet( this.props.balance.payment_transaction.server_response, 'data.status' ) === '5' )
-          dispatch(balanceActions.balancePaymentTransactionFetch(3));
-
-    }, 5000);
-  };
-
-  _backBtnClick = () => {
-    biqHelper.utils.clickTimeout( () => this.props.history.push('/balance/topup-history') );
-  };
 
   render() {
 

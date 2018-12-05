@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
@@ -545,4 +544,8 @@ class AddressInputDialog extends React.Component {
 }
 
 
-export default withStyles(styles, { withTheme: true })(AddressInputDialog) ;
+export default withRouter(
+  connect( null ) (
+    withStyles(styles, { withTheme: true }) (AddressInputDialog )
+  )
+) ;

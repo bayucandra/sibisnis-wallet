@@ -68,7 +68,6 @@ class App extends Component {
         walletProvider.paymentStatus$(),
         walletProvider.bankList$()
       ).subscribe( res =>{
-        console.log(res);
         this.setState( { initialized: true } );
       });
     //END INITIALIZE LOCAL DATA************

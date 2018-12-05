@@ -61,16 +61,17 @@ class App extends Component {
     //BEGIN INITIALIZE LOCAL DATA===========
     // addressProvider.provinsi$().subscribe();
     // addressProvider.kabupaten$().subscribe();
-    forkJoin(
-      addressProvider.provinsi$(),
-      addressProvider.kabupaten$(),
-      walletProvider.paymentStatus$(),
-      walletProvider.bankList$()
-    ).subscribe( res =>{
-      this.setState( { initialized: true }, ()=>{
-        this.forceUpdate();
-      } );
-    });
+
+/*      forkJoin(
+        addressProvider.provinsi$(),
+        addressProvider.kabupaten$(),
+        walletProvider.paymentStatus$(),
+        walletProvider.bankList$()
+      ).subscribe( res =>{
+        this.setState( { initialized: true }, ()=>{
+          this.forceUpdate();
+        } );
+      });*/
     //END INITIALIZE LOCAL DATA************
 
   }
@@ -79,6 +80,13 @@ class App extends Component {
     let {dispatch} = this.props;
     if ( this.props.location !== nextProps.location ) {
       dispatch( appActions.appRouterChange( { header_mobile_show : true, header_menu_mobile_show: true } ) );//default should always true, it will be overridden at page/component part if it should be false
+    }
+
+    if ( nextProps.is_app_initialized && !nextProps.is_logged_in ) {
+      biqHelper.localStorage.clear();
+      dispatch( appActions.appStatesReset() );
+      dispatch( appActions.appRedirectToAgen() );
+      return false;
     }
 
     return true;
@@ -92,12 +100,6 @@ class App extends Component {
   }
 
   render() {
-    const {dispatch} = this.props;
-    if ( this.props.is_app_initialized && !this.props.is_logged_in ) {
-      biqHelper.localStorage.clear();
-      dispatch( appActions.appStatesReset() );
-      dispatch( appActions.appRedirectToAgen() );
-    }
 
     return (
         <React.Fragment>

@@ -10,6 +10,7 @@ let state_default = {
   is_app_initialized: false
   , is_es_initialized: false
   , is_logged_in: false
+  , should_redirect_to_agen: false
   , header_mobile_show: true
   , header_menu_mobile_show: true
   , loading_indicator_show: false
@@ -71,6 +72,10 @@ export default ( state = state_default, action ) => {
 
     case ActionTypes.app.LOADING_INDICATOR_HIDE:
       new_state = { loading_indicator_show: false };
+      return Object.assign( {}, state, new_state );
+
+    case ActionTypes.app.REDIRECT_TO_AGEN:
+      new_state = { should_redirect_to_agen: true };
       return Object.assign( {}, state, new_state );
 
     default:

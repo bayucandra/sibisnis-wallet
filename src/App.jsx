@@ -88,6 +88,7 @@ class App extends Component {
     // window.scrollTo(0,0);
     let body = $('html, body');
     body.stop().animate({scrollTop:0}, 500, 'swing');
+    if( this.props.should_redirect_to_agen ) window.location = biqConfig.agen.url_base + '/#/login/default';
   }
 
   render() {
@@ -95,7 +96,7 @@ class App extends Component {
     if ( this.props.is_app_initialized && !this.props.is_logged_in ) {
       biqHelper.localStorage.clear();
       dispatch( appActions.appStatesReset() );
-      window.location = biqConfig.agen.url_base + '/#/login/default';
+      dispatch( appActions.appRedirectToAgen() );
     }
 
     return (
@@ -124,12 +125,13 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ( store ) => {
+const mapStateToProps = ( state ) => {
   return {
-    is_app_initialized: store.app.is_app_initialized,
-    is_logged_in: store.app.is_logged_in,
-    window_size: store.app.window_size,
-    loading_indicator_show: store.app.loading_indicator_show
+    is_app_initialized: state.app.is_app_initialized,
+    should_redirect_to_agen: state.app.should_redirect_to_agen,
+    is_logged_in: state.app.is_logged_in,
+    window_size: state.app.window_size,
+    loading_indicator_show: state.app.loading_indicator_show
   }
 };
 

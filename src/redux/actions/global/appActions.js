@@ -54,10 +54,17 @@ import ActionTypes from "../../action-types/index";
     }
   }
 
+  function appRedirectToAgen() {
+    return {
+      type: ActionTypes.app.REDIRECT_TO_AGEN
+    }
+  }
+
   const actions = {
     appInit,
     appSseAgenInit,
     appLogout,
+    appRedirectToAgen,
     appStatesReset,
     appWindowResize,
     appRouterChange,

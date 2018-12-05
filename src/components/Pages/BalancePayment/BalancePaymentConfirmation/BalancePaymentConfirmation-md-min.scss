@@ -7,7 +7,7 @@
       $design-diff: (50px-24px)/2;
       height: auto;
       background: none;
-      margin: (40px - $design-diff) 0 0;
+      margin: 40px 0 0;
 
       .nav-back {
         flex: none;
@@ -31,15 +31,16 @@
     }//&__header
 
     &__body {
-      margin-top: 31px;
+      margin-top: 32px;
       background: none;
+      overflow: visible;
     }//&__body
 
     &__main-panel {
       position: relative;
       flex: 619 1 1px;
       min-height: 501px;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
       border-radius: 5px;
       box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
       background-color: #ffffff;

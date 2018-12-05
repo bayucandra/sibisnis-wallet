@@ -3,9 +3,11 @@
   .balance-payment-status {
     padding: 0 15px;
 
+    $design-diff: (50px-24px)/2;
+
     &__header {
       height: auto;
-      margin: 38px 0 0;
+      margin: 40px 0 0;
       background: none;
 
       .title {
@@ -21,10 +23,9 @@
       }//.title
 
       .nav-back {
-        $design-diff: (50px-24px)/2;
 
         &__btn {
-          margin: (-$design-diff) (5px-$design-diff) (-$design-diff) (-15px);
+          margin: (-$design-diff) ( 5px - $design-diff ) (-$design-diff) ( -$design-diff );
         }//&__btn
 
         &__text {

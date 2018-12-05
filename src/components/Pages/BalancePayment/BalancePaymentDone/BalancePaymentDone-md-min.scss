@@ -7,13 +7,13 @@
 
     &__header {
       height: auto;
-      margin-top: 40px - $design-diff;
+      margin-top: 40px;
       background: none;
 
       .nav-back {
 
         &__btn {
-          margin: 0 (5px - $design-diff) 0 (5px - $design-diff);
+          margin: (-$design-diff) ( 5px - $design-diff ) (-$design-diff) ( -$design-diff );
         }
 
         &__text {
@@ -31,7 +31,7 @@
     }//&__header
 
     &__body {
-      margin-top: 32px - $design-diff;
+      margin-top: 32px;
       background: transparent;
       overflow:visible;
     }//&__body

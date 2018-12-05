@@ -12,6 +12,7 @@ class LoadingIndicatorBar extends React.Component {
     let barStyle = {};
     if ( !biqHelper.utils.isNull( this.props.barStyle ) ) barStyle = this.props.barStyle;
 
+    Object.assign( wrapperStyle, this.props.style )
 
     return (
       <section className={`widget-loading-indicator-bar${ !biqHelper.utils.isNull( this.props.className ) ? ' ' + this.props.className : '' }` } style={wrapperStyle}>

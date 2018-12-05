@@ -35,12 +35,13 @@ class WalletProvider {
             if ( data.hasOwnProperty('data') ) biqHelper.localStorage.set( ls_key, data.data );
 
             observer.next( data.data );
+            observer.complete();
           }
         );
       } else {
-        observer.next( deposit_ls );
+        observer.next( deposit_ls )
+        observer.complete();
       }
-      observer.complete();
 
     } );
   }
@@ -122,12 +123,13 @@ class WalletProvider {
             if ( data.hasOwnProperty('data') ) biqHelper.localStorage.set( ls_key, bank_list_data );
 
             observer.next( data.data );
+            observer.complete();
           }
         );
       } else {
         observer.next( bank_list_ls );
+        observer.complete();
       }
-      observer.complete();
 
     } );
   }

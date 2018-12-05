@@ -68,9 +68,8 @@ class App extends Component {
         walletProvider.paymentStatus$(),
         walletProvider.bankList$()
       ).subscribe( res =>{
-        this.setState( { initialized: true }, ()=>{
-          this.forceUpdate();
-        } );
+        console.log(res);
+        this.setState( { initialized: true } );
       });
     //END INITIALIZE LOCAL DATA************
 
@@ -100,6 +99,7 @@ class App extends Component {
   }
 
   render() {
+    if ( !this.state.initialized ) return <LoadingIndicatorBar className={"loading-indicator-main"} style={{ top: '5px' }} barStyle={{background: '#1c94fc'}}/>;
 
     return (
         <React.Fragment>
@@ -107,10 +107,7 @@ class App extends Component {
           <Header/>
 
           {
-            this.props.loading_indicator_show ?
-              <LoadingIndicatorBar className={"loading-indicator-main"} barStyle={{background: '#1c94fc'}}/>
-              :
-              ''
+            this.props.loading_indicator_show && <LoadingIndicatorBar className={"loading-indicator-main"} barStyle={{background: '#1c94fc'}}/>
           }
 
           <Switch>

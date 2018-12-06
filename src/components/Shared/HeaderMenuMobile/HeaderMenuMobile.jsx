@@ -1,12 +1,18 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 
-import "./HeaderMenuMobile.scss";
+import appActions from "../../../redux/actions/global/appActions";
+
 import IconButton from "@material-ui/core/IconButton";
 import menuIcon from "../../../images/icons/menu.svg";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import Divider from "@material-ui/core/Divider";
+import biqHelper from "../../../lib/biqHelper";
+
+import "./HeaderMenuMobile.scss";
+import biqConfig from "../../../providers/biqConfig";
 
 class HeaderMenuMobile extends  Component {
 
@@ -14,12 +20,23 @@ class HeaderMenuMobile extends  Component {
     anchorEl: null
   };
 
-  onMenuOpen = (event) => {
-    this.setState({ anchorEl: event.currentTarget });
+  _onMenuOpen = e => {
+    this.setState({ anchorEl: e.currentTarget });
   };
 
-  onMenuClose = () => {
+  _onMenuClose = () => {
     this.setState({ anchorEl: null });
+  };
+
+  _switchClick = () => {
+    biqHelper.utils.clickTimeout( () => {
+      window.location = biqConfig.agen.url_base;
+    } );
+  };
+
+  _logoutClick = () => {
+    let {dispatch} = this.props;
+    dispatch( appActions.appLogout() );
   };
 
   render() {
@@ -36,7 +53,7 @@ class HeaderMenuMobile extends  Component {
           aria-label="More"
           aria-owns={anchorEl ? 'long-menu' : null}
           aria-haspopup="true"
-          onClick={this.onMenuOpen}
+          onClick={this._onMenuOpen}
         >
           <img src={menuIcon} className="icon" />
         </IconButton>
@@ -44,17 +61,16 @@ class HeaderMenuMobile extends  Component {
         <Menu
           anchorEl={anchorEl}
           open={Boolean(anchorEl)}
-          onClose={this.onMenuClose}
+          onClose={this._onMenuClose}
+          className="header-menu-panel"
         >
-          <MenuItem>
-            <span  className="switch-to-desktop-text">Switch ke dashboard transaksi</span>
-          </MenuItem>
+
+          <MenuItem className="switch" onClick={this._switchClick}>Switch ke dashboard transaksi</MenuItem>
 
           <Divider/>
 
-          <MenuItem>
-            <span className="logout-text">Logout</span>
-          </MenuItem>
+          <MenuItem className="logout" onClick={this._logoutClick}>Logout</MenuItem>
+
         </Menu>
 
       </div>
@@ -73,4 +89,4 @@ const mapStateToProps = state => {
 
 };
 
-export default connect( mapStateToProps ) ( HeaderMenuMobile );
+export default withRouter( connect( mapStateToProps ) ( HeaderMenuMobile ) );

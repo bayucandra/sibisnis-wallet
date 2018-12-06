@@ -87,13 +87,31 @@
 
 }//.header-main
 
-.switch-to-desktop-text {
-  padding: 5px 9px 3px 4px;
-}
+.header-menu-panel {
 
-.logout-text{
-  padding: 3px 0px 7px 4px;
-}
+  ul {
+    padding: 5px 0;
+  }
+
+  li {
+    font-size: 16px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    color: map-get($colors, charcoal-grey);
+  }
+
+  .switch {
+    padding: 15px 20px;
+  }//.switch-to-dashboard
+
+  .logout{
+    padding: 15px 20px;
+  }//.logout
+
+}//.header-menu-panel
 
 @media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
 

@@ -56,6 +56,11 @@ const THEME = createMuiTheme({
       root: {
 
       }
+    },
+    MuiMenuItem: {
+      root: {
+        height: 'auto'
+      }
     }
   }
 

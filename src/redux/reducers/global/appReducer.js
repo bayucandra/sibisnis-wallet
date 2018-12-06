@@ -9,6 +9,8 @@ let window_el = $(window);
 let state_default = {
   is_app_initialized: false
   , is_es_initialized: false
+  , is_logging_out: false
+  , logout_response: {}
   , is_logged_in: false
   , should_redirect_to_agen: false
   , header_mobile_show: true
@@ -37,7 +39,7 @@ export default ( state = state_default, action ) => {
 
       new_state = { is_app_initialized: true, is_logged_in: false };
       new_state.is_logged_in = is_logged_in === true || is_logged_in === 'true';
-      return Object.assign( {}, state, new_state );
+      break;
 
     case ActionTypes.app.SSE_AGEN_INIT:
       new_state = { is_es_initialized: false };
@@ -50,37 +52,43 @@ export default ( state = state_default, action ) => {
           console.error( 'ERROR::ActionTypes.app.SSE_AGEN_INIT: ' + e.message );
         }
       }
-      return Object.assign({}, state, new_state);
-      //END OF: case ActionTypes.app.SSE_AGEN_INIT
+      break;
 
     case ActionTypes.app.ROUTER_CHANGE:
       //payload key should match to the state_default key
-      return Object.assign({}, state, action.payload);
+      new_state = action.payload;
+      break;
 
     case ActionTypes.app.LOGOUT:
-      new_state = { is_logged_in: false };
-      return Object.assign({}, state, new_state);
-      //END OF: ActionTypes.app.LOGOUT
+      new_state = { is_logging_out: true };
+      break;
+
+    case ActionTypes.app.LOGGING_OUT:
+      new_state = {logout_response: action.payload};
+      break;
+
+    case ActionTypes.app.LOGGED_OUT:
+      new_state = { is_logged_in: false, is_logging_out: false };
+      break;
 
     case ActionTypes.app.WINDOW_RESIZE:
       new_state = { window_size: action.payload };
-      return Object.assign( {}, state, new_state );
+      break;
 
     case ActionTypes.app.LOADING_INDICATOR_SHOW:
       new_state = { loading_indicator_show: true };
-      return Object.assign( {}, state, new_state );
+      break;
 
     case ActionTypes.app.LOADING_INDICATOR_HIDE:
       new_state = { loading_indicator_show: false };
-      return Object.assign( {}, state, new_state );
+      break;
 
     case ActionTypes.app.REDIRECT_TO_AGEN:
       new_state = { should_redirect_to_agen: true };
-      return Object.assign( {}, state, new_state );
-
-    default:
-      return state;
+      break;
 
   }//switch
+
+  return Object.assign( {}, state, new_state );
 
 };

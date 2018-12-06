@@ -25,6 +25,19 @@ import ActionTypes from "../../action-types/index";
     }
   }
 
+  function appLoggingOut( res ) {
+    return {
+      type: ActionTypes.app.LOGGING_OUT,
+      payload: res
+    }
+  }
+
+  function appLoggedOut( res ) {
+    return {
+      type: ActionTypes.app.LOGGED_OUT
+    }
+  }
+
   /**
    * Reset all APP states after logout succeed
    */
@@ -64,6 +77,8 @@ import ActionTypes from "../../action-types/index";
     appInit,
     appSseAgenInit,
     appLogout,
+    appLoggingOut,
+    appLoggedOut,
     appRedirectToAgen,
     appStatesReset,
     appWindowResize,

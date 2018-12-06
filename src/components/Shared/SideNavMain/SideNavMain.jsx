@@ -77,7 +77,9 @@ class SideNavMain extends Component {
   };
 
   onProfileSettingClick = () => {
-    this.props.history.push('/dashboard/detail-profile');
+    biqHelper.utils.clickTimeout( () => {
+      this.props.history.push('/profile');
+    } );
   };
 
   // Will navigate to add balance pages
@@ -151,31 +153,37 @@ class SideNavMain extends Component {
 
     cssClasses = biqHelper.utils.isNull(cssClasses) ? '' : ` ${cssClasses}`;
 
+    let profile_detail_btn_class = this.props.location.pathname === '/profile' ? ' is-active' : '';
+
     return (
       <>
 
         <div className= {`side-nav-main${cssClasses}`}>
 
           <div className="profile">
-            <ReactTooltip className="custom-tooltip-profile" place="left" type="dark" effect="solid" />
-            <div data-tip='Profile anda' className="profile-settings-icon-container icon-touch-area-container-50 ripple icon-background" onClick={this.onProfileSettingClick.bind(this)}>
-              <img src={profileSettings} alt="profile-settings-icon" className="profile-settings-icon" />
-            </div>
+
+            <ReactTooltip className="profile-tool-top" place="left" type="dark" effect="solid" />
+
+            <Button className={ `profile-detail-btn${profile_detail_btn_class}` } onClick={this.onProfileSettingClick} data-tip="Profile anda"/>
+
             {!biqHelper.utils.isNull( user ) ?
               this._profileInfoRender()
               :
               <ProfileInfoLoader />
             }
+
             {!biqHelper.utils.isNull( user )?
               this._balanceRender()
               :
               <BalanceLoader />
             }
+
             <div className="balance">
               <Button className="balance__btn balance__btn--add" onClick={this.onTambahClick.bind(this)}>Tambah</Button>
               <div className="balance__divider visible-md-up" />
               <Button className="balance__btn balance__btn--withdraw">Tarik</Button>
             </div>
+
           </div>
 
           <div className="profile-nav-container">

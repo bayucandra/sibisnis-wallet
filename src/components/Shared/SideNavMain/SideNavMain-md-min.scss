@@ -1,0 +1,105 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .side-nav-main {
+    flex: none;
+    width: 247px;
+    min-height: 499px;
+  }//.side-nav-main
+
+  .profile {
+    flex: none;
+  }//.profile
+
+
+  .profile-detail-btn {
+    top: 7px;
+  }//.profile-detail-btn
+
+  .profile-info {
+    margin-top: 30px;
+
+    &__img {
+      height: 60px;
+    }
+
+  }//.profile-info
+
+  .balance {
+    flex-direction: row;
+
+    &__btn {
+      flex: 1 0 0;
+      text-decoration: underline;
+      width: auto;
+      height: auto;
+      border-radius: 2px;
+      background: none;
+      transition: opacity 250ms ease-in-out;
+
+      &:hover {
+        background-color: transparent;
+        text-decoration: underline;
+        opacity: 0.6;
+      }//&:hover
+
+      &--add {
+        justify-content: flex-end;
+        padding-right: 20px;
+      }
+
+      &--withdraw {
+        margin-top: 0;
+        justify-content: flex-start;
+        padding-left: 20px;
+      }
+
+    }//&__btn
+
+  }//.balance
+
+  .profile-nav-container {
+    margin-top: 10px;
+
+    .profile-nav-list-container .profile-nav-list-item {
+      height:48px !important;
+      border-top:0px !important;
+
+      &.is-active {
+        border-left:3px solid $dark-sky-blue;
+
+        .profile-nav-btn__text{
+          font-weight: bold;
+          color: $dark-sky-blue;
+        }//.profile-nav-btn__text
+
+      }//&.is-active
+
+    }
+
+    .profile-nav-btn {
+      padding: 0px;
+      // margin-left:-4px;
+
+      &__icon{
+        padding:0px;
+        margin-right: 15px !important;
+      }
+
+      &__text{
+        @include text-setup($steel-grey, 13px);
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+      }
+
+      &__navicon {
+        display: none;
+      }//&__navicon
+
+    }//.profile-nav-btn
+
+  }//.profile-nav-container
+
+}//@media

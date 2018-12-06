@@ -1,0 +1,28 @@
+@import '../../../styles/mixins';
+@import '../../../styles/variables';
+
+.l-profile {
+
+  .detail-profile-container {
+    .detail-profile-header {
+      padding: 20px 15px 10px 15px;
+
+      &__title {
+        display: none;
+      }
+    }
+
+    .detail-profile-list {
+      .detail-profile-list-item {
+        border-top: solid 0.5px #dedede;
+
+        &:nth-child(1) {
+          border-top: 0px;
+        }
+      }
+    }
+  }
+
+}//.l-profile
+
+@import "./Profile-md-min";

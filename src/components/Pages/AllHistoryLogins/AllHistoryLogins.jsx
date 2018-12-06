@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Custom Components
-import HistoryLogin from './../../DashboardLayout/Dashboard/HistoryLogin/HistoryLogin';
+import HistoryLogin from '../Dashboard/HistoryLogin/HistoryLogin';
 import PageBackButton from './../../Shared/PageBackButton/PageBackButton';
 
 // Custom Libraries

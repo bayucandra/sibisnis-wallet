@@ -1,0 +1,30 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-profile {
+
+    &__panel {
+      margin-left: 29px;
+    }//&__body
+
+    .detail-profile-container {
+
+      .detail-profile-header {
+        padding: 21px 20px 20px 20px;
+
+        &__title {
+          @include text-setup(#404852, 16px);
+          display: block;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          margin-left: 10px;
+        }
+      }
+
+    }
+
+  }//.l-profile
+
+}//@media

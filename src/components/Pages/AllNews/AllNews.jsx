@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // Custom Components
-import LatestNews from './../../DashboardLayout/Dashboard/LatestNews/LatestNews';
+import LatestNews from '../Dashboard/LatestNews/LatestNews';
 import PageBackButton from './../../Shared/PageBackButton/PageBackButton';
 
 // Custom Libraries

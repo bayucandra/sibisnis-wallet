@@ -14,7 +14,8 @@ import walletProvider from "./providers/walletProvider";
 import {fromEvent, forkJoin} from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import $ from 'jquery';
-import DashboardLayout from "./components/DashboardLayout/DashboardLayout";
+import Dashboard from "./components/Pages/Dashboard/Dashboard";
+import Profile from "./components/Pages/Profile";
 import Balance from "./components/Pages/Balance";
 import BalancePayment from "./components/Pages/BalancePayment/BalancePayment";
 import AllNews from "./components/Pages/AllNews/AllNews";
@@ -132,7 +133,7 @@ class App extends Component {
         let notice = `${response_status}, ${ response_text }`;
 
         notice = biqHelper.utils.isNullSome( response_status, response_text ) ? 'Error logout tidak diketahui' : notice;
-        this.setState( {
+        this.setState({
           modal_notice_text: {
             title: 'Gagal logout',
             notice: notice
@@ -168,7 +169,8 @@ class App extends Component {
           <Switch>
             <Route path="/balance/payment" component={BalancePayment}/>
             <Route path="/balance" component={Balance}/>
-            <Route path="/dashboard" component={DashboardLayout} />
+            <Route path="/dashboard" component={Dashboard} />
+            <Route path="/profile" component={Profile} />
             <Route path="/all-news" component={AllNews} />
             <Route path="/all-history-logins" component={AllHistorLogins} />
             <Redirect from="/" to="/dashboard" />

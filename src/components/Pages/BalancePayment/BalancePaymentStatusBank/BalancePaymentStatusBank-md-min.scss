@@ -1,6 +1,6 @@
 @media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
 
-  .balance-payment-status {
+  .balance-payment-status-bank {
     padding: 0 15px;
 
     $design-diff: (50px-24px)/2;
@@ -173,6 +173,6 @@
       flex: 50 1 1px;
     }//&__divider
 
-  }//.balance-payment-status
+  }//.balance-payment-status-bank
 
 }//@media

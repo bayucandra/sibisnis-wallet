@@ -6,7 +6,7 @@ import appActions from "../../../redux/actions/global/appActions";
 
 import BalancePaymentMethod from "./BalancePaymentMethod";
 import BalancePaymentBank from "./BalancePaymentBank";
-import BalancePaymentStatus from "./BalancePaymentStatus";
+import BalancePaymentStatusBank from "./BalancePaymentStatusBank";
 import BalancePaymentConfirmation from "./BalancePaymentConfirmation";
 import BalancePaymentConfirmed from "./BalancePaymentConfirmed";
 import BalancePaymentDone from "./BalancePaymentDone";
@@ -20,15 +20,28 @@ class BalancePayment extends Component {
     dispatch( appActions.appRouterChange({ header_menu_mobile_show: false }) );
   }
 
-  componentWillUpdate(nextProps, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+
     let {dispatch} = this.props;
     if (
-      ( nextProps.balance.payment_bank_submit.is_submitting || nextProps.balance.payment_transaction.is_fetching )
-    ) dispatch(appActions.appLoadingIndicatorShow());
+        nextProps.balance.payment_bank_submit.is_submitting
+
+        || ( !this.props.balance.payment_transaction.is_fetching && nextProps.balance.payment_transaction.is_fetching )
+    ) {
+      dispatch(appActions.appLoadingIndicatorShow());
+      return false;
+    }
+
     if (
       (nextProps.balance.payment_bank_submit.is_submitted && !nextProps.balance.payment_transaction.is_fetching)
-      || ( nextProps.balance.payment_transaction.is_fetched && !nextProps.balance.payment_bank_submit.is_submitting )
-    ) dispatch(appActions.appLoadingIndicatorHide());
+      || ( !this.props.balance.payment_transaction.is_fetched && nextProps.balance.payment_transaction.is_fetched && !nextProps.balance.payment_bank_submit.is_submitting )
+    ) {
+      dispatch(appActions.appLoadingIndicatorHide());
+      return false;
+    }
+
+
+    return true;
   }
 
   render() {
@@ -53,7 +66,7 @@ class BalancePayment extends Component {
               <Route path="/balance/payment/status/:type/:id/:referrer/done" component={BalancePaymentDone}/>
               <Route path="/balance/payment/status/:type/:id/:referrer/confirmed" component={BalancePaymentConfirmed}/>
               <Route path="/balance/payment/status/:type/:id/:referrer/confirm" component={BalancePaymentConfirmation}/>
-              <Route path="/balance/payment/status/:type/:id/:referrer" component={BalancePaymentStatus}/>
+              <Route path="/balance/payment/status/:type/:id/:referrer" component={BalancePaymentStatusBank}/>
               <Redirect from="/balance/payment" to="/balance/payment/method"/>
             </Switch>
 

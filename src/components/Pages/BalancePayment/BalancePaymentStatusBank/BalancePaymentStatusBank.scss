@@ -1,5 +1,5 @@
 @import "../../../../styles/variables";
-.balance-payment-status {
+.balance-payment-status-bank {
   flex: 1 1 auto !important;
   display: flex;
   flex-direction: column;
@@ -454,6 +454,6 @@
 
   }//&__main-panel
 
-}//.balance-payment-status
+}//.balance-payment-status-bank
 
-@import "./BalancePaymentStatus-md-min";
+@import "BalancePaymentStatusBank-md-min";

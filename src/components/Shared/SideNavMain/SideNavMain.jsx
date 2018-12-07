@@ -164,7 +164,7 @@ class SideNavMain extends Component {
 
             <ReactTooltip className="profile-tool-top" place="left" type="dark" effect="solid" />
 
-            <Button className={ `profile-detail-btn${profile_detail_btn_class}` } onClick={this.onProfileSettingClick} data-tip="Profile anda"/>
+            <Button className={ `profile-detail-btn${profile_detail_btn_class}` } onClick={this.onProfileSettingClick} data-tip="Profile anda">&nbsp;</Button>
 
             {!biqHelper.utils.isNull( user ) ?
               this._profileInfoRender()

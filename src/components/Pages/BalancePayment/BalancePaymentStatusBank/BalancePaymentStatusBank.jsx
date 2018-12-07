@@ -23,7 +23,6 @@ class BalancePaymentStatusBank extends Component {
   count_down_obj = null;
 
   state = {
-    should_fetch: false,
     modal_is_open: true,
     count_down: {
       hours: 0, minutes: 0, seconds: 0
@@ -107,13 +106,13 @@ class BalancePaymentStatusBank extends Component {
 
     let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
 
-    let is_submitting_current = this.props.balance.payment_bank_submit.is_submitting;
-    let submit_http_status = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.server_response, 'status' );
-    let is_submitted_next = nextProp.balance.payment_bank_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
+    let is_submitting_current = this.props.balance.payment_submit.is_submitting;
+    let submit_http_status = biqHelper.JSON.pathValueGet( nextProp.balance.payment_submit.server_response, 'status' );
+    let is_submitted_next = nextProp.balance.payment_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
 
     if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {//REDIRECT AFTER SUBMIT DONE=========
       let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-      let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.server_response, 'response.data.id_deposit' );
+      let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_submit.server_response, 'response.data.id_deposit' );
       this.props.history.replace(`/balance/payment/status/submit/${deposit_id_submit}/${param_referrer}`);
       return false;
     }
@@ -154,7 +153,7 @@ class BalancePaymentStatusBank extends Component {
     let param_deposit_id = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
     let is_submit = param_type === 'submit';
 
-    let response_status = biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.server_response, 'status' );
+    let response_status = biqHelper.JSON.pathValueGet( this.props.balance.payment_submit.server_response, 'status' );
     if ( !biqHelper.utils.isNull( response_status ) && !biqHelper.utils.httpResponseIsSuccess(response_status) ) {
       return (
         <Modal
@@ -181,19 +180,19 @@ class BalancePaymentStatusBank extends Component {
       </div>
       );
 
-    if ( is_submit && this.props.balance.payment_bank_submit.is_submitting ){
+    if ( is_submit && this.props.balance.payment_submit.is_submitting ){
       return dummy_header;
     }
 
     if ( is_submit && param_deposit_id !== '0' && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
 
-    if ( is_submit && param_deposit_id === '0' && this.props.balance.payment_bank_submit.is_submitted ) return dummy_header;
+    if ( is_submit && param_deposit_id === '0' && this.props.balance.payment_submit.is_submitted ) return dummy_header;
 
     if ( !is_submit && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
     //END LOADING PROCEDURE**********
 
     let source = is_submit && (param_deposit_id === '0') ?
-                this.props.balance.payment_bank_submit : this.props.balance.payment_transaction;
+                this.props.balance.payment_submit : this.props.balance.payment_transaction;
 
     let response = biqHelper.JSON.pathValueGet( source, 'server_response.response' );
 

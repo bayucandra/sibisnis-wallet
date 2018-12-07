@@ -5,7 +5,7 @@ let state_default = {
   payment_method: null,//bank-transfer, atm, credit-card, indomaret, klik-bca,  bca-klikpay, mandiri-clickpay, cimb-clicks
   payment_info_is_visible_mobile: false,
 
-  payment_bank_submit: {
+  payment_submit: {
     is_submitting: false,
     is_submitted: false,
     server_response: {}
@@ -66,16 +66,16 @@ export default ( state = state_default, action ) => {
 
 
 
-    case ActionTypes.balance.PAYMENT_BANK_SUBMIT:
-      new_state = { payment_bank_submit: Object.assign({}, state_default.payment_bank_submit, { is_submitting: true, is_submitted: false }) };
+    case ActionTypes.balance.PAYMENT_SUBMIT:
+      new_state = { payment_submit: Object.assign({}, state_default.payment_submit, { is_submitting: true, is_submitted: false }) };
       return Object.assign( {}, state, new_state );
-    case ActionTypes.balance.PAYMENT_BANK_SUBMITTED:
+    case ActionTypes.balance.PAYMENT_SUBMITTED:
       new_state = {
-        payment_bank_submit: Object.assign({}, state_default.payment_bank_submit, { is_submitting: false, is_submitted: true, server_response: action.payload })
+        payment_submit: Object.assign({}, state_default.payment_submit, { is_submitting: false, is_submitted: true, server_response: action.payload })
       };
       return Object.assign( {}, state, new_state );
     case ActionTypes.balance.PAYMENT_BANK_RESET:
-      new_state = { payment_bank_submit: Object.assign( {}, state_default.payment_bank_submit ) };
+      new_state = { payment_submit: Object.assign( {}, state_default.payment_submit ) };
       return Object.assign( {}, state, new_state );
 
 

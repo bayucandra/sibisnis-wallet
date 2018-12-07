@@ -24,7 +24,7 @@ class BalancePayment extends Component {
 
     let {dispatch} = this.props;
     if (
-        nextProps.balance.payment_bank_submit.is_submitting
+        nextProps.balance.payment_submit.is_submitting
 
         || ( !this.props.balance.payment_transaction.is_fetching && nextProps.balance.payment_transaction.is_fetching )
     ) {
@@ -33,8 +33,8 @@ class BalancePayment extends Component {
     }
 
     if (
-      (nextProps.balance.payment_bank_submit.is_submitted && !nextProps.balance.payment_transaction.is_fetching)
-      || ( !this.props.balance.payment_transaction.is_fetched && nextProps.balance.payment_transaction.is_fetched && !nextProps.balance.payment_bank_submit.is_submitting )
+      (nextProps.balance.payment_submit.is_submitted && !nextProps.balance.payment_transaction.is_fetching)
+      || ( !this.props.balance.payment_transaction.is_fetched && nextProps.balance.payment_transaction.is_fetched && !nextProps.balance.payment_submit.is_submitting )
     ) {
       dispatch(appActions.appLoadingIndicatorHide());
       return false;
@@ -46,7 +46,7 @@ class BalancePayment extends Component {
 
   render() {
 
-    let is_loading = this.props.balance.payment_bank_submit.is_submitting || this.props.balance.payment_transaction.is_fetching;
+    let is_loading = this.props.balance.payment_submit.is_submitting || this.props.balance.payment_transaction.is_fetching;
 
     return (
         <div className={`main-wrapper${!this.props.header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper biq-wrapper--md-no-side-padding balance-payment`}>

@@ -1,4 +1,3 @@
-/*
 import React, { Component } from 'react';
 import biqHelper from "../../../../lib/biqHelper";
 import * as moment from "moment";
@@ -8,7 +7,9 @@ import appActions from "../../../../redux/actions/global/appActions";
 
 class BalancePaymentStatus extends Component {
 
-
+  state = {
+    should_fetch: false
+  };
 
   componentDidMount() {
 
@@ -64,13 +65,13 @@ class BalancePaymentStatus extends Component {
 
     let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
 
-    let is_submitting_current = this.props.balance.payment_bank_submit.is_submitting;
-    let submit_http_status = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.server_response, 'status' );
-    let is_submitted_next = nextProp.balance.payment_bank_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
+    let is_submitting_current = this.props.balance.payment_submit.is_submitting;
+    let submit_http_status = biqHelper.JSON.pathValueGet( nextProp.balance.payment_submit.server_response, 'status' );
+    let is_submitted_next = nextProp.balance.payment_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
 
     if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {//REDIRECT AFTER SUBMIT DONE=========
       let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-      let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_bank_submit.server_response, 'response.data.id_deposit' );
+      let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_submit.server_response, 'response.data.id_deposit' );
       this.props.history.replace(`/balance/payment/status/submit/${deposit_id_submit}/${param_referrer}`);
       return false;
     }
@@ -105,4 +106,4 @@ class BalancePaymentStatus extends Component {
 
 }
 
-export default BalancePaymentStatus;*/
+export default BalancePaymentStatus;

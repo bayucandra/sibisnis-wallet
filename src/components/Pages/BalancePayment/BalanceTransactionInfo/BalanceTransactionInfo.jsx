@@ -24,8 +24,8 @@ class BalanceTransactionInfo extends Component {
     let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
     let param_invoice_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
 
-    let has_transaction = ( is_submit && this.props.balance.payment_bank_submit.is_submitted === true
-                            && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet( this.props.balance.payment_bank_submit.server_response, 'status' ) )
+    let has_transaction = ( is_submit && this.props.balance.payment_submit.is_submitted === true
+                            && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet( this.props.balance.payment_submit.server_response, 'status' ) )
                           )
                           || ( is_submit && param_invoice_id !== '0'
                               && biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'status') )
@@ -36,7 +36,7 @@ class BalanceTransactionInfo extends Component {
 
 
     let server_response = is_submit && (param_invoice_id === '0')  ?
-                  this.props.balance.payment_bank_submit.server_response
+                  this.props.balance.payment_submit.server_response
                     :
                   this.props.balance.payment_transaction.server_response;
 

@@ -31,13 +31,13 @@ import ActionTypes from "../../action-types";
 
   function balancePaymentBankSubmit( payload ) {
     return {
-      type: ActionTypes.balance.PAYMENT_BANK_SUBMIT,
+      type: ActionTypes.balance.PAYMENT_SUBMIT,
       payload
     }
   }
   function balancePaymentBankSubmitted( server_response ) {
     return {
-      type: ActionTypes.balance.PAYMENT_BANK_SUBMITTED,
+      type: ActionTypes.balance.PAYMENT_SUBMITTED,
       payload: server_response
     };
   }

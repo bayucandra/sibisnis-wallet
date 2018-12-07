@@ -8,7 +8,7 @@ import balanceActions from "../../actions/pages/balanceActions";
 import biqConfig from "../../../providers/biqConfig";
 
 const paymentBankSubmit = action$ => action$.pipe(
-    ofType(actionTypes.balance.PAYMENT_BANK_SUBMIT),
+    ofType(actionTypes.balance.PAYMENT_SUBMIT),
     switchMap(
       action => rxAjax({
         url: `${biqConfig.api.url_base}/api/wallet/add`,
@@ -26,7 +26,7 @@ const paymentBankSubmit = action$ => action$.pipe(
           ) ),
 
           catchError( err => of ({
-            type: actionTypes.balance.PAYMENT_BANK_SUBMITTED,
+            type: actionTypes.balance.PAYMENT_SUBMITTED,
             payload: { status: err.xhr.status, response: err.xhr.response }
           }) )
 

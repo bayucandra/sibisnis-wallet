@@ -19,7 +19,7 @@ const paymentBankSubmit = action$ => action$.pipe(
       })
         .pipe(
 
-          map( res => balanceActions.balancePaymentBankSubmitted( { status: res.status, response: res.response } )),
+          map( res => balanceActions.balancePaymentSubmitted( { status: res.status, response: res.response } )),
 
           takeUntil( action$.pipe(
             filter( action => action.type === actionTypes.balance.PAYMENT_BANK_CANCELED )

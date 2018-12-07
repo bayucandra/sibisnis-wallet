@@ -59,7 +59,7 @@ class BalancePaymentBank extends Component {
 
     biqHelper.utils.clickTimeout(()=>{
       let {dispatch, balance} = this.props;
-      dispatch( balanceActions.balancePaymentBankSubmit({
+      dispatch( balanceActions.balancePaymentSubmit({
         nominal: balance.nominal_value,
         payment_method: this.state.bank_selected.payment_method,
         va_number: this.state.bank_selected.account_number,

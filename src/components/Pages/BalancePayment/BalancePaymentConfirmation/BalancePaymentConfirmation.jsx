@@ -277,10 +277,10 @@ class BalancePaymentConfirmation extends Component{
 
     let {dispatch} = this.props;
 
-    dispatch( balanceActions.balancePaymentBankCancel() );
+    dispatch( balanceActions.balancePaymentCancel() );
     dispatch( balanceActions.balancePaymentTransactionCancel() );
 
-    dispatch( balanceActions.balancePaymentBankReset() );
+    dispatch( balanceActions.balancePaymentReset() );
     dispatch( balanceActions.balancePaymentTransactionReset() );
   }
 

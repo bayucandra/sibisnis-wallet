@@ -29,26 +29,26 @@ import ActionTypes from "../../action-types";
 
 
 
-  function balancePaymentBankSubmit( payload ) {
+  function balancePaymentSubmit( payload ) {
     return {
       type: ActionTypes.balance.PAYMENT_SUBMIT,
       payload
     }
   }
-  function balancePaymentBankSubmitted( server_response ) {
+  function balancePaymentSubmitted( server_response ) {
     return {
       type: ActionTypes.balance.PAYMENT_SUBMITTED,
       payload: server_response
     };
   }
-  function balancePaymentBankReset() {
+  function balancePaymentReset() {
     return {
-      type: ActionTypes.balance.PAYMENT_BANK_RESET
+      type: ActionTypes.balance.PAYMENT_RESET
     };
   }
-  function balancePaymentBankCancel() {
+  function balancePaymentCancel() {
     return {
-      type: ActionTypes.balance.PAYMENT_BANK_CANCELED
+      type: ActionTypes.balance.PAYMENT_CANCELED
     }
   }
 
@@ -110,10 +110,10 @@ const actions = {
   balancePaymentTransactionReset,
   balancePaymentTransactionCancel,
 
-  balancePaymentBankSubmit,
-  balancePaymentBankSubmitted,
-  balancePaymentBankReset,
-  balancePaymentBankCancel,
+  balancePaymentSubmit,
+  balancePaymentSubmitted,
+  balancePaymentReset,
+  balancePaymentCancel,
 
   balanceTopUpHistoryFetch,
   balanceTopUpHistoryFetched,

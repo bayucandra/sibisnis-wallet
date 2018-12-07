@@ -6,7 +6,7 @@ import appActions from "../../../redux/actions/global/appActions";
 
 import BalancePaymentMethod from "./BalancePaymentMethod";
 import BalancePaymentBank from "./BalancePaymentBank";
-import BalancePaymentStatusBank from "./BalancePaymentStatusBank";
+import BalancePaymentStatus from "./BalancePaymentStatus";
 import BalancePaymentConfirmation from "./BalancePaymentConfirmation";
 import BalancePaymentConfirmed from "./BalancePaymentConfirmed";
 import BalancePaymentDone from "./BalancePaymentDone";
@@ -66,7 +66,7 @@ class BalancePayment extends Component {
               <Route path="/balance/payment/status/:type/:id/:referrer/done" component={BalancePaymentDone}/>
               <Route path="/balance/payment/status/:type/:id/:referrer/confirmed" component={BalancePaymentConfirmed}/>
               <Route path="/balance/payment/status/:type/:id/:referrer/confirm" component={BalancePaymentConfirmation}/>
-              <Route path="/balance/payment/status/:type/:id/:referrer" component={BalancePaymentStatusBank}/>
+              <Route path="/balance/payment/status/:type/:id/:referrer" component={BalancePaymentStatus}/>
               <Redirect from="/balance/payment" to="/balance/payment/method"/>
             </Switch>
 

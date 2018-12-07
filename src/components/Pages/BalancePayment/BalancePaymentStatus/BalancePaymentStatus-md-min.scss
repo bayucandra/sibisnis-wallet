@@ -1,0 +1,56 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .balance-payment-status {
+    padding: 0 15px;
+
+    $design-diff: (50px-24px)/2;
+
+    &__header {
+      height: auto;
+      margin: 40px 0 0;
+      background: none;
+
+      .title {
+        margin: 0;
+
+        font-size: 20px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: #ffffff;
+      }//.title
+
+      .nav-back {
+
+        &__btn {
+          margin: (-$design-diff) ( 5px - $design-diff ) (-$design-diff) ( -$design-diff );
+        }//&__btn
+
+        &__text {
+          font-size: 20px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: #ffffff;
+        }//&__text
+
+      }//.nav-back
+
+    }//&__header
+
+    &__body {
+      margin-top: 31px;
+      overflow: visible;
+    }//&__body
+
+    &__spacer {
+      flex: 50 1 1px;
+    }//&__divider
+
+  }//.balance-payment-status
+
+}//@media

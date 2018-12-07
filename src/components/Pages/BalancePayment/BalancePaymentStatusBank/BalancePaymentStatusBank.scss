@@ -1,79 +1,6 @@
 @import "../../../../styles/variables";
+
 .balance-payment-status-bank {
-  flex: 1 1 auto !important;
-  display: flex;
-  flex-direction: column;
-
-  > * {
-    flex: none;
-  }//> *
-
-  &__header {
-    display: flex;
-    align-items: center;
-    height: 50px;
-    background-color: map-get($colors, dark-aqua);
-
-    .title {
-      flex: 1 1 auto;
-      margin: 0 45px 0 20px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      font-size: 16px;
-      font-weight: 600;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: 0.3px;
-      color: #ffffff;
-    }//.title
-
-    .nav-back {
-      flex: 1 1 auto;
-      display: flex;
-      align-items: center;
-      height: 100%;
-
-      &__btn {
-        height: 50px;
-        min-width: 0;
-        $design-diff: (50px-24px)/2;
-        width: 50px;
-        margin: 0 (20px-$design-diff) 0 (15px-$design-diff);
-        background: url( '../../../../images/icons/back-white.svg' ) no-repeat center;
-        border-radius: 10px;
-        color: #FFFFFF;
-
-        &:hover {
-          background-color: transparent;
-        }//&:hover
-
-      }//&:before
-
-      &__text{
-        font-size: 16px;
-        font-weight: 600;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: normal;
-        letter-spacing: 0.3px;
-        color: #ffffff;
-      }//&__text
-
-    }//.nav-back
-
-  }//&__header
-
-  &__body {
-    flex: 1 1 auto;
-    display: flex;
-    align-items: flex-start;
-    overflow-y: auto;
-  }//&__body
-
-  &__main-panel {
     flex: 1 1 1px;
     display: flex;
     flex-direction: column;
@@ -452,8 +379,6 @@
 
     }//.add-deposit-block
 
-  }//&__main-panel
-
-}//.balance-payment-status-bank
+  }//.balance-payment-status-bank
 
 @import "BalancePaymentStatusBank-md-min";

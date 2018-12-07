@@ -29,16 +29,22 @@ class BalancePayment extends Component {
 
         || ( !this.props.balance.payment_transaction.is_fetching && nextProps.balance.payment_transaction.is_fetching )
     ) {
-      dispatch(appActions.appLoadingIndicatorShow());
-      return false;
+
+      if ( !this.props.app.loading_indicator_show ) {
+        dispatch(appActions.appLoadingIndicatorShow());
+        return false;
+      }
+
     }
 
     if (
       (nextProps.balance.payment_submit.is_submitted && !nextProps.balance.payment_transaction.is_fetching)
       || ( !this.props.balance.payment_transaction.is_fetched && nextProps.balance.payment_transaction.is_fetched && !nextProps.balance.payment_submit.is_submitting )
     ) {
-      dispatch(appActions.appLoadingIndicatorHide());
-      return false;
+      if( this.props.app.loading_indicator_show ) {
+        dispatch(appActions.appLoadingIndicatorHide());
+        return false;
+      }
     }
 
 
@@ -82,6 +88,7 @@ class BalancePayment extends Component {
 
 const mapStateToProps = state => {
   return {
+    app: state.app,
     balance: state.balance,
     header_mobile_show: state.app.header_mobile_show
   };

@@ -29,10 +29,11 @@ import ActionTypes from "../../action-types";
 
 
 
-  function balancePaymentSubmit( payload ) {
+  function balancePaymentSubmit( payload, option = {} ) {
     return {
       type: ActionTypes.balance.PAYMENT_SUBMIT,
-      payload
+      payload,
+      option
     }
   }
   function balancePaymentSubmitted( server_response ) {

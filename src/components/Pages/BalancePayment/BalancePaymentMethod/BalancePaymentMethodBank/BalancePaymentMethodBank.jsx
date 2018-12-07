@@ -59,12 +59,19 @@ class BalancePaymentMethodBank extends Component {
 
     biqHelper.utils.clickTimeout(()=>{
       let {dispatch, balance} = this.props;
-      dispatch( balanceActions.balancePaymentSubmit({
-        nominal: balance.nominal_value,
-        payment_method: this.state.bank_selected.payment_method,
-        va_number: this.state.bank_selected.account_number,
-        kode_unik: biqHelper.number.random( 1, 999 )
-      }) );
+      dispatch(
+        balanceActions.balancePaymentSubmit(
+        {
+            nominal: balance.nominal_value,
+            payment_method: this.state.bank_selected.payment_method,
+            va_number: this.state.bank_selected.account_number,
+            kode_unik: biqHelper.number.random( 1, 999 )
+          },
+          {
+            method: 'manual_transfer'
+          }
+        )
+      );
 
       this.props.history.push( `/balance/payment/status/submit/0/${encodeURIComponent( btoa('/balance/payment/bank-transfer') )}` );
 

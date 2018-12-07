@@ -5,32 +5,52 @@ import {switchMap, map, takeUntil, filter, catchError } from 'rxjs/operators';
 
 import actionTypes from "../../action-types";
 import balanceActions from "../../actions/pages/balanceActions";
-import biqConfig from "../../../providers/biqConfig";
+import biqConfig from "providers/biqConfig";
+import biqHelper from "../../../lib/biqHelper";
 
 const paymentBankSubmit = action$ => action$.pipe(
     ofType(actionTypes.balance.PAYMENT_SUBMIT),
     switchMap(
-      action => rxAjax({
-        url: `${biqConfig.api.url_base}/api/wallet/add`,
-        method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
-        body: Object.assign( action.payload, biqConfig.api.data_auth )
-      })
-        .pipe(
+      action => {
+        let url = biqConfig.api.url_base;
 
-          map( res => balanceActions.balancePaymentSubmitted( { status: res.status, response: res.response } )),
+        let payment_method = biqHelper.JSON.pathValueGet( action, 'option.method' );
 
-          takeUntil( action$.pipe(
-            filter( action => action.type === actionTypes.balance.PAYMENT_BANK_CANCELED )
-          ) ),
+        switch( payment_method ) {
 
-          catchError( err => of ({
-            type: actionTypes.balance.PAYMENT_SUBMITTED,
-            payload: { status: err.xhr.status, response: err.xhr.response }
-          }) )
+          case 'manual_transfer':
+            url += '/api/wallet/add';
+            break;
 
-        )
+          default:
+            url += '';
+            break;
+
+        }
+
+        let ajax$ = rxAjax({
+          url: url,
+          method: 'POST',
+          crossDomain: true,
+          withCredentials: true,
+          body: Object.assign(action.payload, biqConfig.api.data_auth)
+        });
+
+        return ajax$
+          .pipe(
+            map(res => balanceActions.balancePaymentSubmitted({status: res.status, response: res.response})),
+
+            takeUntil(action$.pipe(
+              filter(action => action.type === actionTypes.balance.PAYMENT_CANCELED)
+            )),
+
+            catchError(err => of({
+              type: actionTypes.balance.PAYMENT_SUBMITTED,
+              payload: {status: err.xhr.status, response: err.xhr.response}
+            }))
+          )
+      }
+
     )
   );
 

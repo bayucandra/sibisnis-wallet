@@ -74,7 +74,7 @@ export default ( state = state_default, action ) => {
         payment_submit: Object.assign({}, state_default.payment_submit, { is_submitting: false, is_submitted: true, server_response: action.payload })
       };
       return Object.assign( {}, state, new_state );
-    case ActionTypes.balance.PAYMENT_BANK_RESET:
+    case ActionTypes.balance.PAYMENT_RESET:
       new_state = { payment_submit: Object.assign( {}, state_default.payment_submit ) };
       return Object.assign( {}, state, new_state );
 

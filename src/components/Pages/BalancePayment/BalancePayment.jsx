@@ -5,7 +5,8 @@ import {Switch, Route, Redirect} from 'react-router-dom';
 import appActions from "../../../redux/actions/global/appActions";
 
 import BalancePaymentMethod from "./BalancePaymentMethod";
-import BalancePaymentBank from "./BalancePaymentBank";
+import BalancePaymentMethodIndomaret from "./BalancePaymentMethod/BalancePaymentMethodIndomaret";
+import BalancePaymentMethodBank from "./BalancePaymentMethod/BalancePaymentMethodBank";
 import BalancePaymentStatus from "./BalancePaymentStatus";
 import BalancePaymentConfirmation from "./BalancePaymentConfirmation";
 import BalancePaymentConfirmed from "./BalancePaymentConfirmed";
@@ -61,7 +62,8 @@ class BalancePayment extends Component {
 
             <Switch>
               <Route path="/balance/payment/method" component={BalancePaymentMethod}/>
-              <Route path="/balance/payment/bank-transfer" component={BalancePaymentBank}/>
+              <Route path="/balance/payment/indomaret" component={BalancePaymentMethodIndomaret}/>
+              <Route path="/balance/payment/bank-transfer" component={BalancePaymentMethodBank}/>
               {/*<Route path="/balance/payment/status/:type/:id/:referrer" render={ props => (<BalancePaymentStatus {...props}/>)}/>*/}
               <Route path="/balance/payment/status/:type/:id/:referrer/done" component={BalancePaymentDone}/>
               <Route path="/balance/payment/status/:type/:id/:referrer/confirmed" component={BalancePaymentConfirmed}/>

@@ -14,7 +14,7 @@ import {Button} from "../../../Widgets/material-ui";
 import ModalNotice from "../../../Widgets/ModalNotice/ModalNotice";
 import HeaderMenuMobile from "../../../Shared/HeaderMenuMobile/HeaderMenuMobile";
 
-import BalancePaymentStatusBank from "../BalancePaymentStatusBank/BalancePaymentStatusBank";
+import BalancePaymentStatusBank from "./BalancePaymentStatusBank/BalancePaymentStatusBank";
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 
 import "./BalancePaymentStatus.scss";

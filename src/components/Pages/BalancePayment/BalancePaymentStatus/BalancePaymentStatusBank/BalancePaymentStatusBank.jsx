@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Button} from "../../../Widgets/material-ui";
+import {Button} from "../../../../Widgets/material-ui";
 
-import biqHelper from "../../../../lib/biqHelper";
+import biqHelper from "../../../../../lib/biqHelper";
 
-import walletProvider from "../../../../providers/walletProvider";
+import walletProvider from "../../../../../providers/walletProvider";
 
 import "./BalancePaymentStatusBank.scss";
 

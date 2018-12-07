@@ -1,0 +1,113 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+  .balance-payment-indomaret {
+    align-items: normal;
+    padding: 0 15px;
+
+    &__header {
+      margin-top: 38px;
+
+      font-size: 20px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+    }//&__header
+
+    &__body {
+      align-items: flex-start;
+      margin-top: 31px;
+      overflow: visible;
+    }//&__body
+
+    &__main-panel {
+      flex: 619 1 1px;
+      max-width: 619px;
+      padding: 0 40px;
+      margin-bottom: 50px;
+      border-radius: 3px;
+      box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+
+      .top-nav {
+        margin-top: 39px;
+
+        .back-btn {
+          &:before {
+            margin-right: 6px;
+          }//&:before
+        }//.back-btn
+
+        .divider {
+          width: 0.5px;
+          height: 20px;
+          margin: 0 20px;
+          border-left: solid 0.5px map-get( $colors, very-light-pink-two );
+        }//.divider
+
+        .title {
+          font-size: 16px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get($colors, charcoal-grey);
+        }//.title
+
+      }//.top-nav
+
+      .notice-top {
+        margin-top: 29px;
+
+        ul {
+          margin: 20px 0;
+          padding-left: 40px;
+          padding-right: 20px;
+
+          li:nth-child(n+2) {
+            margin-top: 10px;
+          }//li:nth-child(n+2)
+
+        }//ul
+
+      }//.notice-top
+
+
+      .email-notification {
+        margin-top: 40px;
+
+        &__title {
+          font-size: 14px;
+          letter-spacing: 0.4px;
+        }//&__title
+
+        &__notice {
+          font-size: 12px;;
+          line-height: normal;
+          letter-spacing: 0.3px;
+        }//&__notice
+
+      }//.email-notification
+
+      .action {
+        margin-top: 20px;
+        margin-bottom: 30px;
+
+        .submit-btn {
+          flex: none;
+          width: 200px;
+          height: 60px;
+        }//.submit-btn
+
+      }//.action
+
+    }//&__main-panel
+
+    &__spacer {
+      flex: 50 1 1px;
+    }//&__spacer
+
+  }//.balance-payment-indomaret
+
+}//@media

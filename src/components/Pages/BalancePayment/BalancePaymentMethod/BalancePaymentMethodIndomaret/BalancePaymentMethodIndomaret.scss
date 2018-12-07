@@ -1,0 +1,236 @@
+@import "../../../../../styles/variables";
+
+.balance-payment-indomaret {
+  display: flex;
+  flex-direction: column;
+
+  &__body {
+    display: flex;
+  }//&__body
+
+  &__main-panel {
+    flex: 1 1 0;
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+
+    .top-nav {
+      display: flex;
+      align-items: center;
+      margin-top: 15px;
+
+      .back-btn {
+        display: flex;
+        align-items: center;
+
+        font-size: 13px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.3px;
+        color: map-get($colors, charcoal-grey);
+
+        &:hover {
+          background-color: transparent;
+        }//&:hover
+
+        &:before {
+          content: ' ';
+          display: block;
+          width: 24px; height: 24px;
+          margin-right: 7px;
+          background: url('../../../../../images/icons/back-blue-new.svg') no-repeat center;
+        }//&:before
+
+      }//.back-btn
+
+      .divider {
+
+      }
+
+    }//header-nav
+
+    .notice-top {
+      margin-top: 19px;
+      border-radius: 3px;
+      border: solid 0.5px map-get( $colors, duck-egg-blue );
+      background-color: map-get($colors, duck-egg-blue-light);
+
+      ul {
+        margin: 15px 0;
+        padding-left: 35px;
+        padding-right: 15px;
+
+        li {
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.62;
+          letter-spacing: 0.4px;
+          color: map-get($colors, charcoal-grey);
+        }//li
+
+        li:nth-child(n+2) {
+          margin-top: 15px;
+        }//li:nth-child(n+2)
+
+      }//ul
+
+    }//.notice-top
+
+    .detail-payment {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+
+      &__title {
+        font-size: 15px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: map-get($colors, charcoal-grey);
+      }//&__title
+
+      &__panel {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        background-color: #ffffff;
+      }//&__panel
+
+      .biq-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+        padding: 0 15px;
+        box-sizing: border-box;
+        border-style: solid;
+        border-width: 0 0.5px;
+        border-color: map-get( $colors, gray-87 );
+        box-shadow: 0 0.5px 0 0 map-get($colors, gray-87);
+
+        font-size: 14px;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, charcoal-grey);
+
+        .label {
+          font-weight: 600;
+        }//.label
+
+        .value {
+          font-weight: 300;
+        }//.value
+
+        &:first-child {
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          border-top: solid 0.5px map-get( $colors, gray-87 );
+        }//&.is-first
+
+        &--total {
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          background-color: map-get($colors, pale-grey-two);
+          border-top: solid 0.5px map-get( $colors, gray-87 );
+          border-bottom: solid 0.5px map-get( $colors, gray-87 );
+
+          .value {
+            font-weight: 600;
+          }//.value
+
+        }//&--total
+
+      }//&__row
+
+    }//.detail-payment
+
+    .email-notification {
+      display: flex;
+      flex-direction: column;
+      margin-top: 30px;
+
+      &__title {
+        font-size: 15px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: map-get($colors, charcoal-grey);
+      }//&__title
+
+      &__notice {
+        margin-top: 5px;
+
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.71;
+        letter-spacing: 0.4px;
+        color: map-get($colors, charcoal-grey);
+      }//&__notice
+
+      &__input {
+        height: 50px;
+        margin-top: 15px;
+        padding: 0 20px;
+        border-radius: 3px;
+        background-color: #ffffff;
+        border: solid 0.5px map-get( $colors, cool-grey );
+
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: map-get($colors, charcoal-grey);
+      }//&__input
+
+    }//.email-notification
+
+    .action {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 30px;
+      margin-bottom: 100px;
+
+      .submit-btn {
+        position: relative;
+        flex: 1 1 1px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        border-radius: 3px;
+        background-color: map-get($colors, dark-mint);
+
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        text-align: center;
+        color: #ffffff;
+      }//.submit-btn
+
+    }//.action
+
+  }//&__main-panel
+
+
+}//.balance-payment-indomaret
+
+@import "./BalancePaymentMethodIndomaret-md-min";

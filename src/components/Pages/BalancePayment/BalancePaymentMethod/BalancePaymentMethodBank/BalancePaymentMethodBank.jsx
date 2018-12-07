@@ -116,7 +116,7 @@ class BalancePaymentMethodBank extends Component {
 
     if( biqHelper.utils.isNull( this.props.balance.nominal_value )
       || this.props.balance.nominal_value < 10000
-      || this.props.balance.payment_method !== 'manual_transfer'
+      || this.props.balance.payment_method_selected !== 'manual_transfer'
     ) return <Redirect to="/balance"/>;
 
     return (

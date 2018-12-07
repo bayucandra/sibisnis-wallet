@@ -58,42 +58,26 @@ class BalancePaymentMethod extends Component {
   };
 
   componentDidMount() {
-    let ajax$ = rxAjax({
-      url: `${biqConfig.api.url_base}/api/wallet/list_payment_method`,
-      method: 'POST',
-      crossDomain: true,
-      withCredentials: true,
-      body: Object.assign( {}, biqConfig.api.data_auth )
-    })
-      .pipe(
-        takeUntil(this.stop$),
-        catchError( err=> of( err.xhr ) )
-      );
+    let {dispatch} = this.props;
 
-    ajax$
-      .subscribe(
-        res => {
+    dispatch( balanceActions.balanceMethodFetch() );
 
-          if ( biqHelper.utils.httpResponseIsSuccess( res.status ) ) {
-            let data = res.response.data;
-            this.setState( { payment_methods: data } );
-          }
-
-        }
-      );
-
-    if( biqHelper.utils.isNull( this.props.balance.nominal_value ) || this.props.balance.nominal_value < 10000 ) this.props.history.push('/balance');
+    if( biqHelper.utils.isNull( this.props.balance.nominal_value ) || this.props.balance.nominal_value < 10000 )
+      this.props.history.push('/balance');
   }
 
   componentWillUnmount() {
+    let {dispatch} = this.props;
+    dispatch( balanceActions.balanceMethodFetchCanceled() );
+
     this.stop$.next();
     this.stop$.complete();
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
 
-    if ( !biqHelper.utils.isNull( this.props.balance.payment_method ) ) {
-      switch( this.props.balance.payment_method ) {
+    if ( !biqHelper.utils.isNull( this.props.balance.payment_method_selected ) ) {
+      switch( this.props.balance.payment_method_selected ) {
 
         case 'manual_transfer':
           this.props.history.push('/balance/payment/bank-transfer');
@@ -110,6 +94,11 @@ class BalancePaymentMethod extends Component {
 
   render() {
 
+    if ( this.props.balance.payment_methods.is_fetching ) return null;
+
+    let payment_methods = biqHelper.JSON.pathValueGet( this.props.balance.payment_methods.server_response, 'response.data' );
+    payment_methods = biqHelper.utils.isNull( payment_methods ) ? [] : payment_methods;
+
     return (
       <div className="balance-payment-method">
 
@@ -125,7 +114,7 @@ class BalancePaymentMethod extends Component {
 
             {
 
-              this.state.payment_methods.map(( el, idx )=>{
+              payment_methods.map(( el, idx )=>{
 
                 let icon_desktop = null;
                 let icon_mobile = null;

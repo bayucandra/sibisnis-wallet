@@ -8,6 +8,33 @@ import balanceActions from "../../actions/pages/balanceActions";
 import biqConfig from "providers/biqConfig";
 import biqHelper from "../../../lib/biqHelper";
 
+const paymentMethodFetch = action$ => action$.pipe(
+  ofType(actionTypes.balance.PAYMENT_METHOD_FETCH),
+  switchMap(
+    action => rxAjax({
+      url: `${biqConfig.api.url_base}/api/wallet/list_payment_method`,
+      method: 'POST',
+      crossDomain: true,
+      withCredentials: true,
+      body: Object.assign( {}, biqConfig.api.data_auth )
+    })
+      .pipe(
+
+        map( res => balanceActions.balanceMethodFetched( { status: res.status, response: res.response } ) ),
+
+        takeUntil( action$.pipe(
+          filter( action => action.type === actionTypes.balance.PAYMENT_METHOD_FETCH_CANCELED )
+        ) ),
+
+        catchError( err => of({
+          type: actionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
+          payload: err.xhr
+        }) )
+
+      )
+  )
+);
+
 const paymentBankSubmit = action$ => action$.pipe(
     ofType(actionTypes.balance.PAYMENT_SUBMIT),
     switchMap(
@@ -82,6 +109,7 @@ const paymentTransactionFetch = action$ => action$.pipe(
   );
 
 export default [
+  paymentMethodFetch,
   paymentBankSubmit,
   paymentTransactionFetch
 ]

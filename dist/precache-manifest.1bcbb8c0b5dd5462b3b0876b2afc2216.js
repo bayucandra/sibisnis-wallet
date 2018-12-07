@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "./static/media/mandiri-e@3x.dc3b76eb.png"
   },
   {
-    "revision": "01d4c3a15c35fb264aee",
+    "revision": "b3803f1d07f29108c24f",
     "url": "./static/css/main.52800809.chunk.css"
   },
   {
@@ -168,8 +168,8 @@ self.__precacheManifest = [
     "url": "./static/media/mandiriklikpay-single@3x.3461f4ef.png"
   },
   {
-    "revision": "01d4c3a15c35fb264aee",
-    "url": "./static/js/main.01d4c3a1.chunk.js"
+    "revision": "b3803f1d07f29108c24f",
+    "url": "./static/js/main.b3803f1d.chunk.js"
   },
   {
     "revision": "c78576480aa7fa37d42b8fef4b144df5",
@@ -284,12 +284,12 @@ self.__precacheManifest = [
     "url": "./static/media/call-center.4a870804.svg"
   },
   {
-    "revision": "704c45a71ef31ef81d959d548927622e",
-    "url": "./static/media/help.704c45a7.svg"
-  },
-  {
     "revision": "6bb145cf900d083c03a22edffc464a92",
     "url": "./static/media/warning-1.6bb145cf.svg"
+  },
+  {
+    "revision": "704c45a71ef31ef81d959d548927622e",
+    "url": "./static/media/help.704c45a7.svg"
   },
   {
     "revision": "5b98f8d8b26e2d847737266348bc8dbf",
@@ -336,7 +336,7 @@ self.__precacheManifest = [
     "url": "./static/css/1.b40fd7cc.chunk.css"
   },
   {
-    "revision": "36bb8faefaf066538cd48899fcbd26b9",
+    "revision": "5871fde95312514ee5c92d028186ed41",
     "url": "./index.html"
   }
 ];

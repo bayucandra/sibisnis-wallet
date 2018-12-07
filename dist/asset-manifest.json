@@ -1,7 +1,7 @@
 {
   "main.css": "./static/css/main.52800809.chunk.css",
-  "main.js": "./static/js/main.01d4c3a1.chunk.js",
-  "main.js.map": "./static/js/main.01d4c3a1.chunk.js.map",
+  "main.js": "./static/js/main.b3803f1d.chunk.js",
+  "main.js.map": "./static/js/main.b3803f1d.chunk.js.map",
   "static/css/1.b40fd7cc.chunk.css": "./static/css/1.b40fd7cc.chunk.css",
   "static/js/1.1aae3c33.chunk.js": "./static/js/1.1aae3c33.chunk.js",
   "static/js/1.1aae3c33.chunk.js.map": "./static/js/1.1aae3c33.chunk.js.map",
@@ -57,12 +57,12 @@
   "static/media/BalancePaymentMethod.scss": "./static/media/right-thema.c2dead55.svg",
   "static/media/BalanceTransactionInfo.scss": "./static/media/close-blue.e7d10810.svg",
   "static/media/BalancePaymentMethodBank.scss": "./static/media/radio-active.6bba1781.svg",
-  "static/media/BalancePaymentStatusBank.scss": "./static/media/warning-1.6bb145cf.svg",
+  "static/media/BalancePaymentStatusBank.scss": "./static/media/help.704c45a7.svg",
   "static/media/BalancePaymentConfirmed.scss": "./static/media/ilu-sad.a63b1b86.svg",
   "static/media/BalancePayment.scss": "./static/media/oval-2.4bacff9e.svg",
   "static/css/main.52800809.chunk.css.map": "./static/css/main.52800809.chunk.css.map",
   "static/css/1.b40fd7cc.chunk.css.map": "./static/css/1.b40fd7cc.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.c87d79cf1291273d302333b5b995f48b.js": "./precache-manifest.c87d79cf1291273d302333b5b995f48b.js",
+  "precache-manifest.1bcbb8c0b5dd5462b3b0876b2afc2216.js": "./precache-manifest.1bcbb8c0b5dd5462b3b0876b2afc2216.js",
   "service-worker.js": "./service-worker.js"
 }

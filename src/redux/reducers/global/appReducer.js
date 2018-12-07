@@ -87,6 +87,9 @@ export default ( state = state_default, action ) => {
       new_state = { should_redirect_to_agen: true };
       break;
 
+    default:
+      return state;
+
   }//switch
 
   return Object.assign( {}, state, new_state );

@@ -7,6 +7,23 @@ import ActionTypes from "../../action-types";
     }
   }
 
+  function balanceMethodFetch() {
+    return {
+      type: ActionTypes.balance.PAYMENT_METHOD_FETCH
+    }
+  }
+  function balanceMethodFetched( server_response ) {
+    return {
+      type: ActionTypes.balance.PAYMENT_METHOD_FETCHED,
+      payload: server_response
+    }
+  }
+  function balanceMethodFetchCanceled() {
+    return {
+      type: ActionTypes.balance.PAYMENT_METHOD_FETCH_CANCELED
+    }
+  }
+
   function balanceMethodSet( method ) {
     return {
       type: ActionTypes.balance.PAYMENT_METHOD_SET,
@@ -102,6 +119,9 @@ import ActionTypes from "../../action-types";
 
 const actions = {
   balanceNominalSet,
+  balanceMethodFetch,
+  balanceMethodFetched,
+  balanceMethodFetchCanceled,
   balanceMethodSet,
   balanceMethodReset,
   balancePaymentInfoVisibility,

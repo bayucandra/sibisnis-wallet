@@ -60,15 +60,48 @@ class BalancePaymentStatus extends Component {
 
   }
 
-  shouldComponentUpdate(nextProp, nextState, nextContext) {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
     let {dispatch} = this.props;
 
     let is_fetched_current = this.props.balance.payment_transaction.is_fetched;
-    let is_fetched_next = nextProp.balance.payment_transaction.is_fetched;
+    let is_fetched_next = nextProps.balance.payment_transaction.is_fetched;
 
-    let data_source_next = nextProp.balance.payment_transaction.server_response;
+    let data_source_next = nextProps.balance.payment_transaction.server_response;
     let data_next = biqHelper.JSON.pathValueGet( data_source_next, 'response.data' );
     let status_next = biqHelper.JSON.pathValueGet( data_next, 'status' );
+
+
+    let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
+
+    let is_submitting_current = this.props.balance.payment_submit.is_submitting;
+    let submit_http_status = biqHelper.JSON.pathValueGet( nextProps.balance.payment_submit.server_response, 'status' );
+    let is_submitted_next = nextProps.balance.payment_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
+    let param_deposit_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+
+    //REDIRECT AFTER SUBMIT DONE===========
+    if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {
+      let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
+      let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProps.balance.payment_submit.server_response, 'response.data.id_deposit' );
+      this.props.history.replace(`/balance/payment/status/submit/${deposit_id_submit}/${param_referrer}`);
+      return false;
+    }
+
+
+
+    let is_submit_next = biqHelper.JSON.pathValueGet( nextProps.match.params, 'type' ) === 'submit';
+    let param_deposit_id_next = biqHelper.JSON.pathValueGet( nextProps.match.params, 'id' );
+    //FETCH AFTER SUBMIT DONE - REDIRECT====================
+    if (
+      (is_submit_current && !is_submit_next) ||
+      ( is_submit_current && is_submit_next && param_deposit_id_current === '0' && param_deposit_id_next !== '0' )
+    ) {
+      dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id_next ) );
+      return false;
+    }
+
+
+
+    //START COUNTER===========
     if ( !is_fetched_current && is_fetched_next && !biqHelper.utils.isNull(data_next) && status_next === '1' ) {
       let expiration_date = data_next.expired_at.split('+')[0];
 
@@ -91,39 +124,14 @@ class BalancePaymentStatus extends Component {
       // return false;
     }
 
-    let param_deposit_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
-    if ( nextState.should_fetch ) {//Should fetch after counter done etc.
+    if ( nextState.should_fetch ) {//Should fetch after counter done.
       this.setState({ should_fetch: false });
       dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id_current ) );
-      return false;
+      // return false;
     }
 
-    let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
-
-    let is_submitting_current = this.props.balance.payment_submit.is_submitting;
-    let submit_http_status = biqHelper.JSON.pathValueGet( nextProp.balance.payment_submit.server_response, 'status' );
-    let is_submitted_next = nextProp.balance.payment_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
-
-    if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {//REDIRECT AFTER SUBMIT DONE=========
-      let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-      let deposit_id_submit = biqHelper.JSON.pathValueGet( nextProp.balance.payment_submit.server_response, 'response.data.id_deposit' );
-      this.props.history.replace(`/balance/payment/status/submit/${deposit_id_submit}/${param_referrer}`);
-      return false;
-    }
-
-    let is_submit_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'type' ) === 'submit';
-    let param_deposit_id_next = biqHelper.JSON.pathValueGet( nextProp.match.params, 'id' );
-
-    if ( nextProp.header_mobile_show === true ) {
+    if ( nextProps.header_mobile_show === true ) {
       dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
-      return false;
-    }
-
-    if (
-      (is_submit_current && !is_submit_next) ||
-      ( is_submit_current && is_submit_next && param_deposit_id_current === '0' && param_deposit_id_next !== '0' )//FETCH AFTER SUBMIT DONE - REDIRECT====================
-    ) {
-      dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id_next ) );
       return false;
     }
 

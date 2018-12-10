@@ -15,6 +15,7 @@ import ModalNotice from "../../../Widgets/ModalNotice/ModalNotice";
 import HeaderMenuMobile from "../../../Shared/HeaderMenuMobile/HeaderMenuMobile";
 
 import BalancePaymentStatusBank from "./BalancePaymentStatusBank/BalancePaymentStatusBank";
+import BalancePaymentStatusIndomaret from "./BalancePaymentStatusIndomaret/BalancePaymentStatusIndomaret";
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 
 import "./BalancePaymentStatus.scss";
@@ -51,12 +52,12 @@ class BalancePaymentStatus extends Component {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
-    let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
+    // let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
 
     let param_deposit_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
-    if ( !is_submit || ( is_submit && param_deposit_id !== '0') ) {
+    // if ( !is_submit || ( is_submit && param_deposit_id !== '0') ) {
       dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id ) );
-    }
+    // }
 
   }
 
@@ -71,13 +72,13 @@ class BalancePaymentStatus extends Component {
     let status_next = biqHelper.JSON.pathValueGet( data_next, 'status' );
 
 
-    let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
+    // let is_submit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
 
-    let is_submitting_current = this.props.balance.payment_submit.is_submitting;
-    let submit_http_status = biqHelper.JSON.pathValueGet( nextProps.balance.payment_submit.server_response, 'status' );
-    let is_submitted_next = nextProps.balance.payment_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
+    // let is_submitting_current = this.props.balance.payment_submit.is_submitting;
+    // let submit_http_status = biqHelper.JSON.pathValueGet( nextProps.balance.payment_submit.server_response, 'status' );
+    // let is_submitted_next = nextProps.balance.payment_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
     let param_deposit_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
-
+/*
     //REDIRECT AFTER SUBMIT DONE===========
     if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {
       let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
@@ -97,7 +98,7 @@ class BalancePaymentStatus extends Component {
     ) {
       dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id_next ) );
       return false;
-    }
+    }*/
 
 
 
@@ -127,7 +128,7 @@ class BalancePaymentStatus extends Component {
     if ( nextState.should_fetch ) {//Should fetch after counter done.
       this.setState({ should_fetch: false });
       dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id_current ) );
-      // return false;
+      return false;
     }
 
     if ( nextProps.header_mobile_show === true ) {
@@ -187,15 +188,16 @@ class BalancePaymentStatus extends Component {
       return dummy_header;
     }
 
-    if ( is_submit && param_deposit_id !== '0' && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
+    // if ( is_submit && param_deposit_id !== '0' && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
 
-    if ( is_submit && param_deposit_id === '0' && this.props.balance.payment_submit.is_submitted ) return dummy_header;
+    // if ( is_submit && param_deposit_id === '0' && this.props.balance.payment_submit.is_submitted ) return dummy_header;
 
     if ( !is_submit && this.props.balance.payment_transaction.is_fetching ) return dummy_header;
     //END LOADING PROCEDURE**********
-
+/*
     let source = is_submit && (param_deposit_id === '0') ?
-      this.props.balance.payment_submit : this.props.balance.payment_transaction;
+      this.props.balance.payment_submit : this.props.balance.payment_transaction;*/
+    let source = this.props.balance.payment_transaction;
 
     let response = biqHelper.JSON.pathValueGet( source, 'server_response.response' );
     let data = biqHelper.JSON.pathValueGet( response, 'data' );
@@ -231,6 +233,12 @@ class BalancePaymentStatus extends Component {
     switch ( data.payment_channel ) {
       case 'manual_transfer':
         StatusPanel = BalancePaymentStatusBank;
+        break;
+
+      case 'indomaret':
+        StatusPanel = BalancePaymentStatusIndomaret;
+        break;
+
     }
 
     return (

@@ -73,8 +73,6 @@ class BalancePaymentMethodBank extends Component {
         )
       );
 
-      this.props.history.push( `/balance/payment/status/submit/0/${encodeURIComponent( btoa('/balance/payment/bank-transfer') )}` );
-
     });
   };
 
@@ -112,7 +110,48 @@ class BalancePaymentMethodBank extends Component {
 
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    let {dispatch} = this.props;
+
+    if ( nextProps.balance.payment_submit.is_submitted ) {
+
+      let server_response_next = nextProps.balance.payment_submit.server_response;
+      let response_status_next  = server_response_next.status;
+
+      if ( biqHelper.utils.httpResponseIsError( response_status_next ) ) {
+        dispatch( balanceActions.balancePaymentReset() );
+
+        this._modalErrorOpen({
+          title: 'Error',
+          notice: <span>Error <b>{response_status_next}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.</span>
+        });
+
+        return false;
+      }
+
+      let response_next = biqHelper.JSON.pathValueGet( server_response_next, 'response' );
+      let response_code_next = biqHelper.JSON.pathValueGet( response_next, 'response_code' );
+      let id_deposit_next = biqHelper.JSON.pathValueGet( response_next, 'data.id_deposit' );
+      if ( biqHelper.utils.httpResponseIsSuccess( response_code_next.status ) && !biqHelper.utils.isNull( id_deposit_next ) ){
+        this.props.history.push( `/balance/payment/status/submit/${id_deposit_next}/${encodeURIComponent( btoa('/balance/payment/bank-transfer') )}` );
+        return false;
+      } else {
+        dispatch( balanceActions.balancePaymentReset() );
+        this._modalErrorOpen({
+          title: 'Gagal',
+          notice: response_code_next.message
+        });
+        return false;
+      }
+
+    }
+
+    return true;
+  }
+
   render() {
+
+    if ( this.props.balance.payment_submit.is_submitting ) return <div/>;
 
     if( biqHelper.utils.isNull( this.props.balance.nominal_value )
       || this.props.balance.nominal_value < 10000
@@ -232,7 +271,7 @@ class BalancePaymentMethodBank extends Component {
           </div>
 
 
-          <div className="balance-payment-bank__spacer"/>
+          <div className="balance-payment-bank__spacer visible-md-up"/>
 
 
           <BalanceTransactionInfo/>

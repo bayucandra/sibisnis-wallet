@@ -12,6 +12,9 @@ import BalanceTransactionInfo from "../../BalanceTransactionInfo/BalanceTransact
 import "./BalancePaymentMethodIndomaret.scss";
 
 import iconIndomaret from "images/icons/payment/indomaret@3x.png";
+import Modal from "@material-ui/core/Modal/Modal";
+import ModalNotice from "../../../../Widgets/ModalNotice/ModalNotice";
+import {Redirect} from "react-router-dom";
 
 class BalancePaymentMethodIndomaret extends Component {
 
@@ -31,7 +34,50 @@ class BalancePaymentMethodIndomaret extends Component {
   };
 
   _submitBtnClick = () => {
+    let is_email_valid = !biqHelper.utils.isNull( this.state.user_email );
 
+    if ( !is_email_valid ) {
+      this._modalErrorOpen( { title: 'Periksa input', notice: 'Harap mengisi alamat email.' } );
+      return;
+    }
+
+    let is_nominal_valid = !biqHelper.utils.isNull( this.props.balance.nominal_value ) && this.props.balance.nominal_value >= 10000;
+    if( !is_nominal_valid ){
+      this._modalErrorOpen( { title: 'Kesalahan system ', notice: 'Ada kesalahan system, harap mengulang proses topup.' } );
+      return;
+    }
+
+    biqHelper.utils.clickTimeout(()=>{
+      let {dispatch, balance} = this.props;
+      dispatch(
+        balanceActions.balancePaymentSubmit(
+          {
+          },
+          {
+            method: 'indomaret'
+          }
+        )
+      );
+    });
+
+  };
+
+  _modalErrorClose = () => {
+    this.setState( { modal_err_is_open: false } );
+  };
+
+  _modalErrorOpen = ( p_obj ) => {
+
+    let params = {
+      title: 'Gagal',
+      notice: ''
+    };
+
+    Object.assign( params, p_obj );
+
+    this.setState( {  error: params } );
+
+    this.setState( { modal_err_is_open: true } );
   };
 
   componentDidMount() {
@@ -50,7 +96,53 @@ class BalancePaymentMethodIndomaret extends Component {
 
   }
 
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    let {dispatch} = this.props;
+
+    if ( nextProps.balance.payment_submit.is_submitted ) {
+
+      let server_response_next = nextProps.balance.payment_submit.server_response;
+      let response_status_next  = server_response_next.status;
+
+      if ( biqHelper.utils.httpResponseIsError( response_status_next ) ) {
+        dispatch( balanceActions.balancePaymentReset() );
+
+        this._modalErrorOpen({
+          title: 'Error',
+          notice: <span>Error <b>{response_status_next}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.</span>
+        });
+
+        return false;
+      }
+
+      let response_next = biqHelper.JSON.pathValueGet( server_response_next, 'response' );
+      let response_code_next = biqHelper.JSON.pathValueGet( response_next, 'response_code' );
+      let id_deposit_next = biqHelper.JSON.pathValueGet( response_next, 'data.id_deposit' );
+      if ( biqHelper.utils.httpResponseIsSuccess( response_code_next.status ) && !biqHelper.utils.isNull( id_deposit_next ) ){
+        this.props.history.push( `/balance/payment/status/submit/${id_deposit_next}/${encodeURIComponent( btoa('/balance/payment/bank-transfer') )}` );
+        return false;
+      } else {
+        dispatch( balanceActions.balancePaymentReset() );
+        this._modalErrorOpen({
+          title: 'Gagal',
+          notice: response_code_next.message
+        });
+        return false;
+      }
+
+    }
+
+    return true;
+  }
+
   render() {
+
+    if ( this.props.balance.payment_submit.is_submitting ) return <div/>;
+
+    if( biqHelper.utils.isNull( this.props.balance.nominal_value )
+      || this.props.balance.nominal_value < 10000
+      || this.props.balance.payment_method_selected !== 'indomaret'
+    ) return <Redirect to="/balance"/>;
 
     return (
       <div className="balance-payment-indomaret">
@@ -147,6 +239,17 @@ class BalancePaymentMethodIndomaret extends Component {
 
 
         </div>
+
+
+        <Modal
+          open={this.state.modal_err_is_open}
+          onClose={this._modalErrorClose}>
+
+          <div className="modal-inner">
+            <ModalNotice modalClose={this._modalErrorClose} title={this.state.error.title} notice={this.state.error.notice}/>
+          </div>
+
+        </Modal>
 
       </div>
     );

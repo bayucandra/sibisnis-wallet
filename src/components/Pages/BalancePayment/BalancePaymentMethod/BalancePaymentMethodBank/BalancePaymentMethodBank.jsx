@@ -42,8 +42,6 @@ class BalancePaymentMethodBank extends Component {
   };
 
   _submitBtnClick = () => {
-
-    let is_nominal_valid = !biqHelper.utils.isNull( this.props.balance.nominal_value ) && this.props.balance.nominal_value >= 10000;
     let is_bank_valid = !biqHelper.utils.isNull(this.state.bank_selected) && this.state.bank_selected.hasOwnProperty( 'payment_method' ) && this.state.bank_selected.hasOwnProperty( 'account_number' );
     let is_email_valid = !biqHelper.utils.isNull( this.state.user_email );
 
@@ -52,6 +50,7 @@ class BalancePaymentMethodBank extends Component {
       return;
     }
 
+    let is_nominal_valid = !biqHelper.utils.isNull( this.props.balance.nominal_value ) && this.props.balance.nominal_value >= 10000;
     if( !is_nominal_valid ){
       this._modalErrorOpen( { title: 'Kesalahan system ', notice: 'Ada kesalahan system, harap mengulang proses topup.' } );
       return;

@@ -35,11 +35,11 @@ class BalanceTopUpHistory extends Component {
     });
   };
 
-  _recordClick = ( deposit_id ) => {
+  _recordClick = ( id_deposit ) => {
 
     biqHelper.utils.clickTimeout( ()=>{
       let referrer = encodeURIComponent( btoa( this.props.location.pathname ) );
-      let url = `/balance/payment/status/history/${deposit_id}/${referrer}`;
+      let url = `/balance/payment/status/history/${id_deposit}/${referrer}`;
       this.props.history.push( url );
     } );
 
@@ -163,7 +163,7 @@ class BalanceTopUpHistory extends Component {
                         <div className="row-inner">
                           <div className="biq-col-spacer-left visible-md-up"/>
                           <div className="biq-col biq-col--date visible-md-up">
-                            { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
+                            { moment( el.tanggal ).format( 'D MMM YYYY , HH:mm' ) }
                           </div>
                           <div className="biq-col biq-col--method">
                             { walletProvider.bankByMethodAbreviation(el.bank).bank_name }
@@ -185,7 +185,7 @@ class BalanceTopUpHistory extends Component {
                         </div>
 
                         <div className="date-mobile hidden-md-up">
-                          { moment( el.tanggal ).format( 'D MMM YYYY , HH:MM' ) }
+                          { moment( el.tanggal ).format( 'D MMM YYYY , HH:mm' ) }
                         </div>
 
                       </div>

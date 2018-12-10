@@ -11,9 +11,9 @@ import "./BalancePaymentStatusBank.scss";
 
 class BalancePaymentStatusBank extends Component {
 
-  _paymentConfirmClick = ( param_type, param_deposit_id, param_referrer ) => {
+  _paymentConfirmClick = ( param_type, param_id_deposit, param_referrer ) => {
     biqHelper.utils.clickTimeout(()=> {
-      let confirm_url = `/balance/payment/status/${param_type}/${param_deposit_id}/${param_referrer}/confirm`;
+      let confirm_url = `/balance/payment/status/${param_type}/${param_id_deposit}/${param_referrer}/confirm`;
       this.props.history.push(confirm_url);
     });
   };
@@ -21,7 +21,7 @@ class BalancePaymentStatusBank extends Component {
   render() {
     let param_type = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' );
     let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-    let param_deposit_id = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
+    let param_id_deposit = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
 
     let data = this.props.biqData;
 
@@ -139,7 +139,7 @@ class BalancePaymentStatusBank extends Component {
                     <div className="title">Sudah transfer?</div>
                   </div>
                   <div className="action">
-                    <Button className="confirmation-btn" onClick={ () => this._paymentConfirmClick( param_type, param_deposit_id, param_referrer ) }>
+                    <Button className="confirmation-btn" onClick={ () => this._paymentConfirmClick( param_type, param_id_deposit, param_referrer ) }>
                       Konfirmasi transfer
                     </Button>
                   </div>

@@ -60,6 +60,7 @@
 
     .tab-panel {
       flex: none;
+      overflow: visible;
 
       &__pick-nominal {
         margin-top: 30px;

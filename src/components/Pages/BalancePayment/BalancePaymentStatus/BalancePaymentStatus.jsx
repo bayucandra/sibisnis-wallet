@@ -54,9 +54,9 @@ class BalancePaymentStatus extends Component {
 
     // let is_submit = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' ) === 'submit';
 
-    let param_deposit_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    let param_id_deposit = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
     // if ( !is_submit || ( is_submit && param_deposit_id !== '0') ) {
-      dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id ) );
+      dispatch( balanceActions.balancePaymentTransactionFetch( param_id_deposit ) );
     // }
 
   }
@@ -77,7 +77,7 @@ class BalancePaymentStatus extends Component {
     // let is_submitting_current = this.props.balance.payment_submit.is_submitting;
     // let submit_http_status = biqHelper.JSON.pathValueGet( nextProps.balance.payment_submit.server_response, 'status' );
     // let is_submitted_next = nextProps.balance.payment_submit.is_submitted && biqHelper.utils.httpResponseIsSuccess( submit_http_status );
-    let param_deposit_id_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    let param_id_deposit_current = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
 /*
     //REDIRECT AFTER SUBMIT DONE===========
     if ( is_submit_current && param_deposit_id_current === '0' && is_submitting_current && is_submitted_next ) {
@@ -127,7 +127,7 @@ class BalancePaymentStatus extends Component {
 
     if ( nextState.should_fetch ) {//Should fetch after counter done.
       this.setState({ should_fetch: false });
-      dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id_current ) );
+      dispatch( balanceActions.balancePaymentTransactionFetch( param_id_deposit_current ) );
       return false;
     }
 
@@ -154,7 +154,7 @@ class BalancePaymentStatus extends Component {
   render() {
     let param_type = biqHelper.JSON.pathValueGet( this.props.match.params, 'type' );
     let param_referrer = biqHelper.JSON.pathValueGet(this.props.match.params, 'referrer');
-    let param_deposit_id = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
+    let param_id_deposit = biqHelper.JSON.pathValueGet(this.props.match.params, 'id');
     let is_submit = param_type === 'submit';
 
     let response_status = biqHelper.JSON.pathValueGet( this.props.balance.payment_submit.server_response, 'status' );
@@ -209,7 +209,6 @@ class BalancePaymentStatus extends Component {
       return <Redirect to={'/balance/topup-history'}/>;
     }
 
-
     if ( is_submit && biqHelper.utils.httpResponseIsError( biqHelper.JSON.pathValueGet( response_code, 'status' ) ) ) {
       return (
         <Modal
@@ -225,7 +224,7 @@ class BalancePaymentStatus extends Component {
     }
 
     let transaction_status = biqHelper.JSON.pathValueGet( data, 'status' );
-    let confirmed_url = `/balance/payment/status/${param_type}/${param_deposit_id}/${param_referrer}/confirmed`;
+    let confirmed_url = `/balance/payment/status/${param_type}/${param_id_deposit}/${param_referrer}/confirmed`;
     if ( transaction_status === '5' ) return <Redirect to={confirmed_url}/>;
 
 

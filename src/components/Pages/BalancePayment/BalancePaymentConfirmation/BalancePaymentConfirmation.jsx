@@ -267,8 +267,8 @@ class BalancePaymentConfirmation extends Component{
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
-    let param_deposit_id = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
-    dispatch( balanceActions.balancePaymentTransactionFetch( param_deposit_id ) );
+    let param_id_deposit = biqHelper.JSON.pathValueGet( this.props.match.params, 'id' );
+    dispatch( balanceActions.balancePaymentTransactionFetch( param_id_deposit ) );
   }
 
   componentWillUnmount() {

@@ -49,6 +49,7 @@ const THEME = createMuiTheme({
         "textTransform": "none",
         "padding" : 0,
         "minHeight" : 0,
+        "minWidth" : 0,
         "component" : "div"
       },
     },

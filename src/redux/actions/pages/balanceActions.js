@@ -73,10 +73,10 @@ import ActionTypes from "../../action-types";
 
 
 
-  function balancePaymentTransactionFetch( deposit_id ) {
+  function balancePaymentTransactionFetch( id_deposit ) {
     return {
       type: ActionTypes.balance.PAYMENT_TRANSACTION_FETCH,
-      payload: { deposit_id }
+      payload: { id_deposit }
     }
   }
   function balancePaymentTransactionFetched( server_response ) {

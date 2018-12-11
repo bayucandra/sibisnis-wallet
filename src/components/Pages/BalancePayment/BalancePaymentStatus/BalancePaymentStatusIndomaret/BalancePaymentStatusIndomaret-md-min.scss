@@ -9,10 +9,7 @@
 
     .expiration-notice {
       margin: 30px 30px 0;
-
-      &__icon {
-        margin-left: 20px;
-      }//&__icon
+      padding: 19px 20px;
 
       &__time {
         flex: 1 1 auto;
@@ -23,14 +20,129 @@
           flex: 1 1 auto;
         }//.notice
 
-        .time {
-          margin-right: 20px;
-        }//.time
-
       }//&__time
 
     }//.expiration-notice
 
-  }//.balance-payment-status-bank
+    .barcode {
+      margin: 30px 32px 0;
+    }//.barcode
+
+    .guide {
+      margin: 32px 30px 0;
+    }//.guide
+
+    .detail-payment {
+      display: flex;
+      flex-direction: column;
+      margin: 30px 30px 0;
+
+      &__title {
+        margin-left: 10px;
+
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, charcoal-grey);
+      }//&__title
+
+      &__panel {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        background-color: #ffffff;
+      }//&__panel
+
+      .biq-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 63px;
+        padding: 0 20px;
+        box-sizing: border-box;
+        border-style: solid;
+        border-width: 0 0.5px;
+        border-color: map-get( $colors, blue-grey-two );
+        border-bottom: solid 0.5px map-get( $colors, gray-87 );
+
+        .label {
+          font-size: 16px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get($colors, charcoal-grey);
+        }//.label
+
+        .value {
+          font-size: 15px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get($colors, charcoal-grey);
+
+          img {
+            display: block;
+          }//img
+
+          &--total {
+            font-size: 15px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.4px;
+            color: map-get($colors, charcoal-grey);
+          }//&--total
+
+        }//.value
+
+        &:first-child {
+          border-top-left-radius: 5px;
+          border-top-right-radius: 5px;
+          border-top: solid 0.5px map-get( $colors, blue-grey-two );
+        }//&.is-first
+
+        &--total {
+          height: 67px;
+          align-items: flex-start;
+          border-bottom-left-radius: 5px;
+          border-bottom-right-radius: 5px;
+          //background-color: map-get($colors, pale-grey-two);
+          border-bottom: solid 0.5px map-get( $colors, blue-grey-two );
+
+          .label {
+            margin-top: 21px;
+          }//.label
+
+          .value {
+            margin-top: 23px;
+            font-weight: 600;
+          }//.value
+
+        }//&--total
+
+      }//&__row
+
+    }//.detail-payment
+
+    .action-footer {
+      justify-content: flex-end;
+
+      .back-to-home-btn {
+        flex: none;
+        width: 200px;
+        margin: 30px 30px 42px;
+      }//.back-to-home-btn
+
+    }//.action-footer
+
+  }//.balance-payment-status-indomaret
 
 }//@media

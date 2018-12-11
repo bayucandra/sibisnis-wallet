@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 import * as JsBarcode from 'jsbarcode';
 
 import biqHelper from "../../../../../lib/biqHelper";
@@ -28,6 +29,12 @@ class BalancePaymentStatusIndomaret extends Component {
     } );
   };
 
+  _backToHome = () => {
+    biqHelper.utils.clickTimeout( () => {
+      this.props.history.push( '/' );
+    } );
+  };
+
   componentDidUpdate(prevProps, prevState, snapshot) {
     JsBarcode( '#indomaret-barcode', this.props.biqData.kode_bayar, {
       format: 'CODE128',
@@ -50,7 +57,7 @@ class BalancePaymentStatusIndomaret extends Component {
 
               <div className="expiration-notice__time">
 
-                <div className="notice">Silakan selesaikan pembayaran Anda di Indomaret sebelum</div>
+                <div className="notice">Batas Waktu Pembayaran</div>
 
                 <div className="time">
                   <span>{this.props.countDown.hours}</span> jam &nbsp;<div>:</div> &nbsp;<span>{this.props.countDown.minutes}</span> menit &nbsp;<div>:</div> &nbsp;<span>{this.props.countDown.seconds}</span> detik
@@ -100,9 +107,42 @@ class BalancePaymentStatusIndomaret extends Component {
 
         </div>
 
-        <div className="action-footer">
-          <Button className="back-to-home-btn">Kembali ke Home</Button>
+
+        <div className="detail-payment visible-md-up">
+
+          <div className="detail-payment__title">Detail Pembayaran</div>
+
+          <div className="detail-payment__panel">
+
+            <div className="biq-row">
+              <div className="label">Metode bayar</div>
+              <div className="value"><img src={iconIndomaret} alt={"Indomaret"} style={{ width: '70px' }}/></div>
+            </div>
+
+            <div className="biq-row">
+              <div className="label">Sub Total</div>
+              <div className="value">{ biqHelper.utils.numberFormat( 200000, 'Rp ' ) }</div>
+            </div>
+
+            <div className="biq-row">
+              <div className="label">Biaya Layanan</div>
+              <div className="value">{ biqHelper.utils.numberFormat( 7800, 'Rp ' ) }</div>
+            </div>
+
+            <div className="biq-row biq-row--total">
+              <div className="label">Total</div>
+              <div className="value">{ biqHelper.utils.numberFormat( (200000 + 7800), 'Rp ' ) }</div>
+            </div>
+
+          </div>
+
         </div>
+
+        <div className="action-footer">
+          <Button className="back-to-home-btn" onClick={this._backToHome}>Kembali ke Home</Button>
+        </div>
+
+
         {
           this.state.detail_order_show_mobile && biqHelper.mediaQuery.isMobile() &&
           <BiqModal>
@@ -157,4 +197,4 @@ class BalancePaymentStatusIndomaret extends Component {
 
 }
 
-export default BalancePaymentStatusIndomaret;
+export default withRouter(BalancePaymentStatusIndomaret);

@@ -38,7 +38,7 @@
 
       .time {
         display: block;
-        margin-top: 5px;
+        margin-top: 4px;
 
         font-size: 14px;
         font-weight: 300;
@@ -159,13 +159,14 @@
     &__image {
       #indomaret-barcode {
         display: block !important;
+        margin: 0 -10px -10px;
       }
     }//&__image
 
   }//.barcode
 
   .guide {
-    margin: (32px - 10px) 35px 0;
+    margin: 32px 35px 0;
 
     &__title {
       font-size: 15px;

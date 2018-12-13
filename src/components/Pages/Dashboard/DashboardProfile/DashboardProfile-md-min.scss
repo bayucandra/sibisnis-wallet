@@ -1,0 +1,23 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .dashboard-profile {
+    position: relative;
+    top: auto; right: auto; bottom: auto; left: auto;
+    display: flex;
+
+
+    .profile-data {
+
+      .record-item {
+
+        > [class*="MuiTouchRipple-root-"] {
+          display: none!important;
+        }//> [class*="MuiTouchRipple-root-"]
+
+      }//&.record-item
+
+    }//.profile-data
+
+  }//.dashboard-profile
+
+}//@media

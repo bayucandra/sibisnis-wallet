@@ -1,0 +1,23 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ){
+  .l-dashboard {
+
+    &__inner {
+      flex: none;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }//&__inner
+
+    .side-nav-main {
+      flex: none;
+    }//.side-nav-main
+
+    &__panel {
+      flex: 1 1 auto;
+      display: block;
+      margin-left:29px;
+    }
+
+  }//.l-dashboard
+
+}//@media

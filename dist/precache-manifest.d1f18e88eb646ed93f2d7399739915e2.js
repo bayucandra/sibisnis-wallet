@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "dc3b76ebf1fc5539282ab35fb4a36ab6",
-    "url": "./static/media/mandiri-e@3x.dc3b76eb.png"
+    "revision": "c41c2502180f63ce383b6e3cc042617a",
+    "url": "./static/media/Nunito-Light.c41c2502.ttf"
   },
   {
-    "revision": "3e5a6f27c44df40dcc89",
-    "url": "./static/css/main.d41f0219.chunk.css"
+    "revision": "993e1d7a100744016d57",
+    "url": "./static/css/main.33b0e104.chunk.css"
   },
   {
-    "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
-    "url": "./static/media/oval-2.4bacff9e.svg"
+    "revision": "c6fbefa06248ba0dce0e4a4fdd4961c3",
+    "url": "./static/media/ico-oval-1.c6fbefa0.svg"
   },
   {
-    "revision": "cb2864a97a97fbf5cfd8",
-    "url": "./static/js/1.cb2864a9.chunk.js"
+    "revision": "50a4ac71a43b244b9efb",
+    "url": "./static/js/1.50a4ac71.chunk.js"
   },
   {
     "revision": "4a686d48d5a089750c49",
@@ -70,22 +70,6 @@ self.__precacheManifest = [
   {
     "revision": "474b16f24945b914203a95bad1906a1d",
     "url": "./static/media/logout.474b16f2.svg"
-  },
-  {
-    "revision": "9aa4efd935efd20a12fe25c377b7e103",
-    "url": "./static/media/ico-dashboard.9aa4efd9.svg"
-  },
-  {
-    "revision": "738bcd808df95659388c4dd2b81a2a0f",
-    "url": "./static/media/ico-mutasi.738bcd80.svg"
-  },
-  {
-    "revision": "839c8ce0dc00ed2ccda96d4ed64fd650",
-    "url": "./static/media/transfer-saldo.839c8ce0.svg"
-  },
-  {
-    "revision": "787475500b19b30ca2e8d4ff9531c5a2",
-    "url": "./static/media/litle-right.78747550.svg"
   },
   {
     "revision": "f4630a9e263c27d2bca1bb7125c7cbc7",
@@ -168,8 +152,8 @@ self.__precacheManifest = [
     "url": "./static/media/mandiriklikpay-single@3x.3461f4ef.png"
   },
   {
-    "revision": "3e5a6f27c44df40dcc89",
-    "url": "./static/js/main.3e5a6f27.chunk.js"
+    "revision": "dc3b76ebf1fc5539282ab35fb4a36ab6",
+    "url": "./static/media/mandiri-e@3x.dc3b76eb.png"
   },
   {
     "revision": "c78576480aa7fa37d42b8fef4b144df5",
@@ -188,8 +172,8 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-LightItalic.42441320.ttf"
   },
   {
-    "revision": "c41c2502180f63ce383b6e3cc042617a",
-    "url": "./static/media/Nunito-Light.c41c2502.ttf"
+    "revision": "993e1d7a100744016d57",
+    "url": "./static/js/main.993e1d7a.chunk.js"
   },
   {
     "revision": "713ac08dfb7141494d4a69f344ff69fd",
@@ -232,6 +216,10 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-Regular.65bb0a15.ttf"
   },
   {
+    "revision": "787475500b19b30ca2e8d4ff9531c5a2",
+    "url": "./static/media/litle-right.78747550.svg"
+  },
+  {
     "revision": "3a4a29a3ab1b5f6b2636eac812deb862",
     "url": "./static/media/profile-settings.3a4a29a3.svg"
   },
@@ -244,6 +232,30 @@ self.__precacheManifest = [
     "url": "./static/media/profile-active.a52cfd1b.svg"
   },
   {
+    "revision": "9aa4efd935efd20a12fe25c377b7e103",
+    "url": "./static/media/ico-dashboard.9aa4efd9.svg"
+  },
+  {
+    "revision": "738bcd808df95659388c4dd2b81a2a0f",
+    "url": "./static/media/ico-mutasi.738bcd80.svg"
+  },
+  {
+    "revision": "839c8ce0dc00ed2ccda96d4ed64fd650",
+    "url": "./static/media/transfer-saldo.839c8ce0.svg"
+  },
+  {
+    "revision": "805e99d2210f832a808c98dc1334e743",
+    "url": "./static/media/back-white.805e99d2.svg"
+  },
+  {
+    "revision": "67ca5818c5b82d542efce4b9c35b1933",
+    "url": "./static/media/ico-identitas.67ca5818.svg"
+  },
+  {
+    "revision": "b44b0d30b24a6e7cc8dea8d204e6b6dd",
+    "url": "./static/media/ico-warning-red.b44b0d30.svg"
+  },
+  {
     "revision": "4ce7e79825241165247918d8a62b7353",
     "url": "./static/media/gagal.4ce7e798.svg"
   },
@@ -254,10 +266,6 @@ self.__precacheManifest = [
   {
     "revision": "a91bcfe3b592825205e93fb27ca629f8",
     "url": "./static/media/ic-check.a91bcfe3.svg"
-  },
-  {
-    "revision": "805e99d2210f832a808c98dc1334e743",
-    "url": "./static/media/back-white.805e99d2.svg"
   },
   {
     "revision": "c78576480aa7fa37d42b8fef4b144df5",
@@ -280,20 +288,16 @@ self.__precacheManifest = [
     "url": "./static/media/radio-active.6bba1781.svg"
   },
   {
-    "revision": "4a870804b7e0013b3b3e8969a9686845",
-    "url": "./static/media/call-center.4a870804.svg"
-  },
-  {
     "revision": "6bb145cf900d083c03a22edffc464a92",
     "url": "./static/media/warning-1.6bb145cf.svg"
   },
   {
-    "revision": "704c45a71ef31ef81d959d548927622e",
-    "url": "./static/media/help.704c45a7.svg"
+    "revision": "4a870804b7e0013b3b3e8969a9686845",
+    "url": "./static/media/call-center.4a870804.svg"
   },
   {
-    "revision": "5b98f8d8b26e2d847737266348bc8dbf",
-    "url": "./static/media/icon-white-cancel.5b98f8d8.svg"
+    "revision": "704c45a71ef31ef81d959d548927622e",
+    "url": "./static/media/help.704c45a7.svg"
   },
   {
     "revision": "b68ea91968c5cabad02499fe19cc6c87",
@@ -304,16 +308,20 @@ self.__precacheManifest = [
     "url": "./static/media/ico-jpeg.96535000.svg"
   },
   {
-    "revision": "2094b2895f607b569d711e9c2169e164",
-    "url": "./static/media/ico-upload-sukses.2094b289.svg"
+    "revision": "5b98f8d8b26e2d847737266348bc8dbf",
+    "url": "./static/media/icon-white-cancel.5b98f8d8.svg"
+  },
+  {
+    "revision": "6853885ef7793b5aeaa2b6f6e9ed4d91",
+    "url": "./static/media/ico-batal.6853885e.svg"
   },
   {
     "revision": "9b9e37343ac46cf1d6deabe8750b9a23",
     "url": "./static/media/ico-refresh.9b9e3734.svg"
   },
   {
-    "revision": "6853885ef7793b5aeaa2b6f6e9ed4d91",
-    "url": "./static/media/ico-batal.6853885e.svg"
+    "revision": "2094b2895f607b569d711e9c2169e164",
+    "url": "./static/media/ico-upload-sukses.2094b289.svg"
   },
   {
     "revision": "f05d9c358064833bb953629f57f5d1c5",
@@ -328,15 +336,15 @@ self.__precacheManifest = [
     "url": "./static/media/accept.466b8083.svg"
   },
   {
-    "revision": "c6fbefa06248ba0dce0e4a4fdd4961c3",
-    "url": "./static/media/ico-oval-1.c6fbefa0.svg"
+    "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
+    "url": "./static/media/oval-2.4bacff9e.svg"
   },
   {
-    "revision": "cb2864a97a97fbf5cfd8",
-    "url": "./static/css/1.e15facf6.chunk.css"
+    "revision": "50a4ac71a43b244b9efb",
+    "url": "./static/css/1.e169f12e.chunk.css"
   },
   {
-    "revision": "da722718d19a05288aac39bb017d84fe",
+    "revision": "71b4a2c1e2b32352a16479c2ac87bb1c",
     "url": "./index.html"
   }
 ];

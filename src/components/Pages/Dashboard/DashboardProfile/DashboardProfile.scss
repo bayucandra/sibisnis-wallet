@@ -1,0 +1,173 @@
+@import "../../../../styles/variables";
+
+.dashboard-profile {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: #FFFFFF;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.11), 0 1px 3px 0 rgba(0, 0, 0, 0.11);
+
+  .account-security-level {
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 25px;
+    border-bottom: 0.5px solid map-get( $colors, gray-87 );
+
+    .title {
+      display: flex;
+      justify-content: center;
+      margin-top: 30px;
+
+      font-size: 16px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: map-get($colors, charcoal-grey);
+    }//.title
+
+    .level-bar {
+      display: flex;
+      align-items: center;
+      margin: 30px 20px 0;
+
+      .indicator {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: flex-start;
+        height: 12px;
+        border-radius: 200px;
+        background-color: map-get($colors, whitegrey);
+
+        .bar {
+          height: 12px;
+          border-radius: 200px;
+          background-color: map-get($colors, frog-green);
+          transition: width 200ms ease-in-out;
+        }//.bar
+
+      }//.indicator
+
+      .description {
+        flex: none;
+        margin-left: 15px;
+
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        text-align: right;
+        color: map-get($colors, pumpkin);
+      }//.description
+
+    }//.level-bar
+
+  }//.account-security-level
+
+  .account-security-info {
+    margin-top: 20px;
+
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.53;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: map-get($colors, charcoal-grey);
+  }//.account-security-info
+
+  .profile-data {
+    display: flex;
+    flex-direction: column;
+    margin-top: 24px;
+
+
+    .record-item {
+      border-bottom: 0.5px solid map-get( $colors, gray-87 );
+      border-radius: 0;
+
+      &:hover {
+        background: transparent;
+      }//&:hover
+
+      &__inner {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 62px;
+        padding: 0 20px;
+
+        > * {
+          flex: none;
+        }//> *
+
+        .icon {
+          width: 30px; height: 30px;
+          background: map-get($colors, pale-grey-three) no-repeat center;
+          background-size: contain;
+          border-radius: 15px;
+
+          $icons: ( phone: 'nomor-hp', email: 'email', profile-name: 'nama-lengkap', address: 'ico-alamat', identity: 'ico-identitas' );
+
+          @each $key, $val in $icons {
+            &--#{$key} {
+              background-image: url('../../../../images/icons/#{$val}.svg');
+            }
+          }
+
+        }//.icon
+
+        .label {
+          flex: 1 1 1px;
+          margin-left: 15px;
+
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+          color: map-get($colors, charcoal-grey);
+        }//.label
+
+        .icon-indicator {
+          width: 25px;
+          height: 25px;
+          background: url('../../../../images/icons/ico-warning-red.svg') no-repeat center;
+          background-size: contain;
+
+          &--verified {
+            width: 22px;
+            height: 22px;
+            margin-right: 2px;
+            background-image: url('../../../../images/icons/ico-terverifikasi.svg');
+          }//&--verified
+
+        }//.icon-indicator
+
+      }//&__inner
+
+
+      &:last-child {
+        border-bottom: 0;
+
+        &__inner {
+          padding-bottom: 76px - 62px;
+        }//&__inner
+
+      }//.record-mobile
+
+    }//.record-item
+
+
+  }//.profile-data
+
+}//.dashboard-profile
+
+@import "./DashboardProfile-md-min";

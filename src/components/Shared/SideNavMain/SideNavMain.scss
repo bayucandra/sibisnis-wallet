@@ -39,18 +39,29 @@
 
 }//.profile-detail-btn
 
-.profile-nav-container {
-  .profile-nav-list-container {
-    padding: 0px;
-    .profile-nav-list-item {
-      padding:0px;
-      height:55px;
-      border-top: solid 0.5px #dedede;
-    }
+.profile-tool-top {
+  font-size: 13px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: 0.3px;
+  background-color: rgb(64, 72, 82);
+  opacity: 1;
+  padding: 0;
+  width: 115px;
+  height: 39px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:after {
+    border-left-color: #404852;
+    border-left-style: solid;
+    border-left-width: 6px;
   }
-}
 
-
+}//.profile-tool-top
 
 .profile-info {
   display: flex;
@@ -182,28 +193,73 @@
 
 }//.profile-nav-btn
 
-.profile-tool-top {
-  font-size: 13px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: 0.3px;
-  background-color: rgb(64, 72, 82);
-  opacity: 1;
-  padding: 0;
-  width: 115px;
-  height: 39px;
+.nav-btn-wrapper {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
 
-  &:after {
-    border-left-color: #404852;
-    border-left-style: solid;
-    border-left-width: 6px;
-  }
+  .nav-btn {
+    display: flex;
+    justify-content: flex-start;
+    height: 55px;
+    padding: 0 15px 0 20px;
+    border-top: 1px solid map-get( $colors, gray-87 );
+    border-radius: 0;
 
-}
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    color: map-get($colors, steel-grey);
+
+    &--transfer-saldo {
+      padding-bottom: 64px - 55px;
+    }//&--transfer-saldo
+
+    &__inner {
+      flex: 1 1 auto;
+      display: flex;
+      align-items: center;
+
+      .icon {
+        width: 24px; height: 24px;
+        background: transparent no-repeat center;
+
+        &--home {
+          background-image: url('../../../images/icons/ico-dashboard.svg');
+        }//&--home
+
+        &--mutasi {
+          background-image: url('../../../images/icons/ico-mutasi.svg');
+        }//&--mutasi
+
+        &--transfer-saldo {
+          background-image: url('../../../images/icons/transfer-saldo.svg');
+        }//&--transfer-saldo
+
+      }//.icon
+
+      .label {
+        margin-left: 15px;
+      }//.label
+
+      .arrow {
+        flex: 1 1 1px;
+        height: 25px;
+        background: url('../../../images/icons/litle-right.svg') no-repeat center right;
+      }//.arrow
+
+    }//&__inner
+
+    &.is-active {
+      font-weight: bold;
+      color: map-get($colors, dark-sky-blue);
+
+    }//&.is-active
+
+  }//.nav-btn
+
+}//.nav-btn
 
 @import "./SideNavMain-md-min";

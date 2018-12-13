@@ -3,7 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 // Custom Components
-import SideNavMain from '../../Shared/SideNavMain/SideNavMain';
+import {Button} from "components/Widgets/material-ui";
+import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
 
 // Custom CSS
 import './Dashboard.scss';
@@ -12,10 +13,25 @@ import HistoryLogin from "./HistoryLogin/HistoryLogin";
 import LatestNews from "./LatestNews/LatestNews";
 import {getHistoryLoginList} from "../../../redux/actions/pages/historyLoginActions";
 import {getNewsList} from "../../../redux/actions/pages/newsActions";
+import DashboardProfile from "./DashboardProfile/DashboardProfile";
+import biqHelper from "../../../lib/biqHelper";
+import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
 
 class Dashboard extends Component {
 
-  state = {};
+  state = {
+    is_panel_mobile_visible: false
+  };
+
+  panelMobileToggle = () => {
+    this.setState( { is_panel_mobile_visible: !this.state.is_panel_mobile_visible } );
+  };
+
+  _panelMobileToggle = () => {
+    biqHelper.utils.clickTimeout( () => {
+      this.panelMobileToggle();
+    } );
+  };
 
   componentDidMount() {
     this.props.getHistoryLoginList();
@@ -30,13 +46,22 @@ class Dashboard extends Component {
 
         <div className="biq-wrapper__inner l-dashboard__inner">
 
-          <SideNavMain />
+          <SideNavMain dashboardPanelMobileToggle={this.panelMobileToggle}/>
 
-          <div className="l-dashboard__panel">
+          <div className={`l-dashboard__panel${ this.state.is_panel_mobile_visible ? ' is-visible-mobile' : '' }`}>
 
-            <ProfileProgress />
-            <HistoryLogin historyLoginList={historyLoginList} />
-            <LatestNews newsList={newsList} />
+            <div className="l-dashboard__panel__header hidden-md-up">
+              <Button className="back-btn" onClick={this._panelMobileToggle}>&nbsp;</Button>
+              <div className="label">Dashboard</div>
+              <HeaderMenuMobile forceVisible={true}/>
+            </div>
+
+            <div className="l-dashboard__panel__body">
+              {/*<ProfileProgress />*/}
+              <DashboardProfile/>
+              <HistoryLogin historyLoginList={historyLoginList} />
+              <LatestNews newsList={newsList} />
+            </div>
 
           </div>
 

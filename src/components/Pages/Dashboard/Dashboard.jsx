@@ -8,7 +8,6 @@ import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
 
 // Custom CSS
 import './Dashboard.scss';
-import ProfileProgress from "./ProfileProgress/ProfileProgress";
 import HistoryLogin from "./HistoryLogin/HistoryLogin";
 import LatestNews from "./LatestNews/LatestNews";
 import {getHistoryLoginList} from "../../../redux/actions/pages/historyLoginActions";
@@ -42,7 +41,7 @@ class Dashboard extends Component {
     const { historyLoginList, newsList } = this.props;
 
     return (
-      <div className="main-wrapper biq-wrapper l-dashboard">
+      <div className="main-wrapper biq-wrapper biq-wrapper--md-no-side-padding l-dashboard">
 
         <div className="biq-wrapper__inner l-dashboard__inner">
 
@@ -57,7 +56,6 @@ class Dashboard extends Component {
             </div>
 
             <div className="l-dashboard__panel__body">
-              {/*<ProfileProgress />*/}
               <DashboardProfile/>
               <HistoryLogin historyLoginList={historyLoginList} />
               <LatestNews newsList={newsList} />

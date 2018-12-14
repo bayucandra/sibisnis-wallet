@@ -79,8 +79,9 @@ class SideNavMain extends Component {
     } );
   };
 
-  onProfileImageClick(image) {
-    if ( biqHelper.utils.isNull( image )) {
+  _onProfileImageClick = () => {
+    let {photo} = this.props.user.profile;
+    if ( biqHelper.utils.isNull( photo )) {
       this.modalSetActiveComponent( PhotoUpload );
       this.setState({ modal_is_open: true });
     } else {
@@ -113,7 +114,7 @@ class SideNavMain extends Component {
       <div className="profile-info">
         <div className="profile-info__img"
              style={{ 'backgroundImage': "url(" + ( profileImageUrl ) + ")" }}
-             onClick={this.onProfileImageClick.bind(this, !biqHelper.utils.isNull( photo ) ? photo : null)}>
+             onClick={ this._onProfileImageClick }>
         </div>
         <div className="profile-info__name">{ biqHelper.utils.isNull( nama ) ? 'N/A': nama }</div>
         <div className="profile-info__email">{ biqHelper.utils.isNull( email ) ? 'N/A': email }</div>

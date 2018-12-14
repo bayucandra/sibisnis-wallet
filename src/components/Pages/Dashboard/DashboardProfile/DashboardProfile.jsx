@@ -1,10 +1,38 @@
 import React, {Component} from 'react';
+import { connect } from 'react-redux';
 
 import {Button} from "components/Widgets/material-ui";
 
 import "./DashboardProfile.scss";
+import biqHelper from "../../../../lib/biqHelper";
+
+import EmailVerificationForm from "./EmailVerificationForm/EmailVerificationForm";
+
 
 class DashboardProfile extends Component {
+
+  state = {
+    email_verification: {
+      desktop: false,
+      mobile: false
+    }
+  };
+
+  _emailVerificationDekstopToggle = () => {
+    if ( biqHelper.mediaQuery.isMobile() ) return;
+
+    biqHelper.utils.clickTimeout( () => {
+
+      this.setState({
+        email_verification: {
+          desktop: !this.state.email_verification.desktop,
+          mobile: false
+        }
+      });
+
+    });
+
+  };
 
   render() {
     let profile_completeness_full = 5;
@@ -39,41 +67,82 @@ class DashboardProfile extends Component {
 
           <Button className="record-item">
             <div className="record-item__inner">
-              <div className="icon icon--phone"/>
-              <div className="label">Verifikasi Nomor Handphone Anda</div>
-              <div className="icon-indicator icon-indicator--verified"/>
+
+              <div className="action">
+                <div className="icon icon--phone"/>
+                <div className="label">Verifikasi Nomor Handphone Anda</div>
+                <div className="icon-indicator icon-indicator--verified hidden-md-up"/>
+
+                <div className="icon-verified-desktop visible-md-up"/>
+              </div>
+
             </div>
           </Button>
 
           <Button className="record-item">
             <div className="record-item__inner">
-              <div className="icon icon--email"/>
-              <div className="label">Verifikasi Email Anda</div>
-              <div className="icon-indicator icon-indicator--verified"/>
+
+              <div className="action">
+                <div className="icon icon--email"/>
+                <div className="label">Verifikasi Email Anda</div>
+                <div className="icon-indicator icon-indicator--verified hidden-md-up"/>
+
+                {
+                  this.props.user_profile.verifications.email === 1 ?
+
+                  <div className="icon-verified-desktop visible-md-up"/>
+
+                    :
+
+                  <Button className={`action-btn-desktop visible-md-up${ this.state.email_verification.desktop ? ' action-btn-desktop--close' : '' }`} onClick={this._emailVerificationDekstopToggle}>
+                    { this.state.email_verification.desktop ? 'Tutup' : 'Lengkapi Sekarang' }
+                  </Button>
+                }
+
+              </div>
+
+              <EmailVerificationForm isVisible={this.state.email_verification.desktop}/>
+
+            </div>
+
+          </Button>
+
+          <Button className="record-item">
+            <div className="record-item__inner">
+
+              <div className="action">
+                <div className="icon icon--profile-name"/>
+                <div className="label">Upload foto profil Anda</div>
+                <div className="icon-indicator hidden-md-up"/>
+                <Button className={`action-btn-desktop visible-md-up`} onClick={this._emailVerificationDekstopToggle}>
+                  Upload Sekarang
+                </Button>
+              </div>
+
             </div>
           </Button>
 
           <Button className="record-item">
             <div className="record-item__inner">
-              <div className="icon icon--profile-name"/>
-              <div className="label">Upload foto profil Anda</div>
-              <div className="icon-indicator"/>
+
+              <div className="action">
+                <div className="icon icon--address"/>
+                <div className="label">Lengkapi Data Alamat Anda</div>
+                <div className="icon-indicator hidden-md-up"/>
+              </div>
+
             </div>
           </Button>
 
           <Button className="record-item">
             <div className="record-item__inner">
-              <div className="icon icon--address"/>
-              <div className="label">Lengkapi Data Alamat Anda</div>
-              <div className="icon-indicator"/>
-            </div>
-          </Button>
 
-          <Button className="record-item">
-            <div className="record-item__inner">
-              <div className="icon icon--identity"/>
-              <div className="label">Lengkapi Info Data Identitas Anda</div>
-              <div className="icon-indicator"/>
+              <div className="action">
+                <div className="icon icon--identity"/>
+                <div className="label">Lengkapi Info Data Identitas Anda</div>
+                <div className="icon-indicator hidden-md-up"/>
+              </div>
+
             </div>
           </Button>
 
@@ -86,4 +155,12 @@ class DashboardProfile extends Component {
 
 }
 
-export default DashboardProfile;
+const mapStateToProps = state => {
+
+  return {
+    user_profile: state.user.profile
+  };
+
+};
+
+export default connect( mapStateToProps ) ( DashboardProfile );

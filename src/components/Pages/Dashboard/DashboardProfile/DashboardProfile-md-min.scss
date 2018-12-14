@@ -1,18 +1,96 @@
 @media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
 
   .dashboard-profile {
-    position: relative;
-    top: auto; right: auto; bottom: auto; left: auto;
-    display: flex;
-
+    border-radius: 5px;
+    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+    background-color: #ffffff;
 
     .profile-data {
 
       .record-item {
+        border-bottom-color: map-get( $colors, very-light-pink-five );
+        cursor: auto;
+
+        .action {
+            height: 70px;
+            padding: 0 30px;
+
+            .icon {
+              width: 40px;
+              height: 40px;
+              border-radius: 20px;
+            }//.icon
+
+            .label {
+              margin-left: 20px;
+            }//.label
+
+          }//&__inner
 
         > [class*="MuiTouchRipple-root-"] {
           display: none!important;
         }//> [class*="MuiTouchRipple-root-"]
+
+        .icon-verified-desktop {
+          display: flex;
+          align-items: center;
+
+          &:before {
+            content: ' ';
+            display: block;
+            width: 32px; height: 32px;
+            background: url('../../../../images/icons/ico-terverifikasi.svg') no-repeat center;
+          }//&:before
+
+          &:after {
+            content: 'Sudah Terverifikasi';
+            display: block;
+            margin-left: 18px;
+            margin-right: 3px;
+
+            font-size: 13px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.3px;
+            text-align: right;
+            color: map-get($colors, charcoal-grey);
+          }//&:after
+
+        }//.icon-verified-desktop
+
+        .action-btn-desktop {
+          width: 170px;
+          height: 40px;
+          border: 0.5px solid map-get( $colors, dark-sky-blue );
+          box-sizing: border-box;
+          border-radius: 200px;
+          background-color: #ffffff;
+
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          text-align: center;
+          color: map-get($colors, dark-sky-blue);
+
+          &:hover {
+            border-width: 1.5px;
+          }//&:hover
+
+          &--close {
+            width: 130px;
+            border-color: transparent;
+          }//&--close
+
+        }//.action-btn-desktop
+
+        &:last-child {
+          padding-bottom: 95px - 70px;
+        }//&:last-child
 
       }//&.record-item
 

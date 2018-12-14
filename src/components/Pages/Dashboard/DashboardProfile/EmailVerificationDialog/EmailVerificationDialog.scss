@@ -1,0 +1,83 @@
+@import "../../../../../styles/variables";
+
+.email-verification-dialog {
+  position: relative;
+  flex: 1 1 1px;
+  min-height: 50px;
+  margin: 0 10px;
+  padding: 0 20px;
+  border-radius: 2px;
+  background-color: #ffffff;
+  pointer-events: auto;
+
+  .input-form {
+    display: flex;
+    flex-direction: column;
+    margin: 70px 0 30px;
+  }//.input-form
+
+  .email-input {
+    flex: 1 1 auto;
+    margin: 0;
+
+    label {
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: map-get($colors, steel-grey);
+
+      transform: translate(0, 1.5px) scale(1);
+    }//label
+
+    input[type="text"]:disabled {
+      padding: 5px 0;
+      font-size: 15px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      color: map-get($colors, charcoal-grey);
+    }//input[type="text"]:disabled
+
+    [class*="MuiInput-formControl"] {
+      &:before {
+        border-bottom: 1px solid map-get( $colors, very-light-pink ) !important;
+      }//&:before
+    }//[class*="MuiInput-formControl"]
+
+    [class*="MuiFormHelperText-disabled-"] {
+      margin-top: 5px;
+
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: map-get($colors, steel-grey);
+    }//[class*="MuiFormHelperText-disabled-"]
+
+  }//.email-input
+
+  .send-btn {
+    height: 50px;
+    margin-top: 30px;
+    border-radius: 3px;
+    box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
+    background-color: map-get($colors, dark-mint);
+
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: #ffffff;
+  }//.send-btn
+
+}//.email-verification-dialog

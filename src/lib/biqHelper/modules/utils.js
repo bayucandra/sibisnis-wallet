@@ -52,12 +52,18 @@ class BiqHelperUtils {
     return val;
   }
 
-  modalTopRatio( opt = { box_selector: '', top_space: 0, bottom_space: 0 } ) {
+  modalTopRatio( opt = { box_selector: '', box_el: null, top_space: 0, bottom_space: 0 } ) {
 
-    if ( opt.box_selector === '' ) return 0;
+    if ( opt.box_selector === '' && !opt.box_el instanceof $ ) return 0;
 
     let screen_height = $(window).outerHeight();
-    let box_el = $( opt.box_selector );
+    let box_el = null;
+
+    if ( opt.box_el !== null && opt.box_el instanceof $) {
+      box_el = opt.box_el;
+    } else {
+      box_el = $( opt.box_selector );
+    }
 
     if ( !box_el.length ) return 0;
 

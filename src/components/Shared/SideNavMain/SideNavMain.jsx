@@ -35,7 +35,7 @@ import biqConfig from "../../../providers/biqConfig";
 import { ProfileInfoLoader, BalanceLoader } from '../../Loaders/ProfileLoader/ProfileLoader';
 
 import './SideNavMain.scss';
-import '../../../components/Shared/Modal/Modal.scss';
+import '../../../styles/components/_modal.scss';
 
 
 class SideNavMain extends Component {

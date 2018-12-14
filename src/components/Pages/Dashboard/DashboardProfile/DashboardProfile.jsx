@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import {Button} from "components/Widgets/material-ui";
+import { Modal } from '@material-ui/core';
+import { Button } from "components/Widgets/material-ui";
 
-import "./DashboardProfile.scss";
 import biqHelper from "../../../../lib/biqHelper";
 
+import "./DashboardProfile.scss";
+import "styles/components/_modal.scss";
+
 import EmailVerificationForm from "./EmailVerificationForm/EmailVerificationForm";
+import EmailVerificationDialog from "./EmailVerificationDialog/EmailVerificationDialog";
 
 
 class DashboardProfile extends Component {
@@ -32,6 +36,17 @@ class DashboardProfile extends Component {
 
     });
 
+  };
+
+  _emailVerificationMobileOpen = () => {
+    if ( this.props.user_profile.verifications.email === 1 ) return;
+    if ( biqHelper.mediaQuery.isMobile() ) {
+      this.setState({ email_verification: { desktop: false, mobile: true } });
+    }
+  };
+
+  _emailVerificationMobileClose = () => {
+    this.setState({ email_verification: { desktop: false, mobile: false } });
   };
 
   render() {
@@ -79,7 +94,7 @@ class DashboardProfile extends Component {
             </div>
           </Button>
 
-          <Button className="record-item">
+          <Button className="record-item" onClick={ this._emailVerificationMobileOpen }>
             <div className="record-item__inner">
 
               <div className="action">
@@ -114,7 +129,7 @@ class DashboardProfile extends Component {
                 <div className="icon icon--profile-name"/>
                 <div className="label">Upload foto profil Anda</div>
                 <div className="icon-indicator hidden-md-up"/>
-                <Button className={`action-btn-desktop visible-md-up`} onClick={this._emailVerificationDekstopToggle}>
+                <Button className={`action-btn-desktop visible-md-up`} onClick={null}>
                   Upload Sekarang
                 </Button>
               </div>
@@ -148,6 +163,19 @@ class DashboardProfile extends Component {
 
 
         </div>
+
+        <Modal
+          open={this.state.email_verification.mobile}
+          onClose={this._emailVerificationMobileClose}
+        >
+
+          <div className="modal-inner">
+
+            <EmailVerificationDialog emailVerificationMobileClose={this._emailVerificationMobileClose}/>
+
+          </div>
+
+        </Modal>
 
       </div>
     );

@@ -5,44 +5,19 @@ import {switchMap, delay, map, takeUntil, filter, catchError} from 'rxjs/operato
 
 import actionTypes from "redux/action-types";
 import dashboardActions from "redux/actions/pages/dashboardActions";
+import biqConfig from "../../../providers/biqConfig";
 
 const dashboardEmailVerificationSubmit = action$ => action$.pipe(
   ofType( actionTypes.dashboard.EMAIL_VERIFICATION_SUBMIT ),
   switchMap(
     action => {
-      let ajax$ = of({
-
-        status: 200,
-        response: {
-          "response_code": {
-            "status": 200,
-            "message": "Success"
-          },
-          "data": {
-            "header_message": "Link verifikasi email telah terkirim",
-            "body_message": "Kami telah mengirim link verifikasi email ke anggriawan@sibisnis.com. Silahkan periksa inbox Anda. dan ikuti petunjuk di email tersebut."
-          },
-          "draw": 1544082917,
-          "limit": 1,
-          "offset": 0,
-          "recordsTotal": 1,
-          "recordsFiltered": 1
-        }
-
-      }).pipe( delay(2000) );
-
-      ajax$ = throwError({
-        xhr: {
-          status: 404,
-          response: {
-            "response_code": {
-              "status": 404,
-              "message": "Http not found"
-            },
-            "data": null
-          }
-        }
-      }).pipe(delay(2000));
+      let ajax$ = rxAjax({
+        url: `${biqConfig.api.url_base}/api/wallet/verifikasi_email`,
+        method: 'POST',
+        crossDomain: true,
+        withCredentials: true,
+        body: Object.assign({}, biqConfig.api.data_auth)
+      });
 
       return ajax$.pipe(
 

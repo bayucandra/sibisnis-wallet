@@ -1,5 +1,5 @@
 import { ofType } from 'redux-observable';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
 import {switchMap, delay, map, takeUntil, filter, catchError} from 'rxjs/operators';
 
@@ -30,6 +30,19 @@ const dashboardEmailVerificationSubmit = action$ => action$.pipe(
         }
 
       }).pipe( delay(2000) );
+
+      ajax$ = throwError({
+        xhr: {
+          status: 404,
+          response: {
+            "response_code": {
+              "status": 404,
+              "message": "Http not found"
+            },
+            "data": null
+          }
+        }
+      }).pipe(delay(2000));
 
       return ajax$.pipe(
 

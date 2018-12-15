@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
+import dashboardActions from "redux/actions/pages/dashboardActions";
+
 import { Modal } from '@material-ui/core';
 import { Button } from "components/Widgets/material-ui";
 
@@ -39,7 +41,7 @@ class DashboardProfile extends Component {
   };
 
   _emailVerificationMobileOpen = () => {
-    if ( this.props.user_profile.verifications.email === 1 ) return;
+    // if ( this.props.user_profile.verifications.email === 1 ) return;//TODO: Uncoment this while done with development
     if ( biqHelper.mediaQuery.isMobile() ) {
       this.setState({ email_verification: { desktop: false, mobile: true } });
     }
@@ -103,7 +105,7 @@ class DashboardProfile extends Component {
                 <div className="icon-indicator icon-indicator--verified hidden-md-up"/>
 
                 {
-                  this.props.user_profile.verifications.email === 1 ?
+                  this.props.user_profile.verifications.email !== 1 ?
 
                   <div className="icon-verified-desktop visible-md-up"/>
 

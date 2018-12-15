@@ -17,33 +17,52 @@ class EmailVerificationForm extends Component {
 
   state = {
     modal_is_open: false,
-    server_response: {}
+    response_noticed: false,
+    error: {
+      title: 'Gagal',
+      notice: ''
+    }
   };
 
-  _modalOpen = () => {
+  _modalOpen = ( p_obj ) => {
+
+    let params = {
+      title: 'Gagal',
+      notice: ''
+    };
+
+    Object.assign( params, p_obj );
+
+    this.setState( {  error: params } );
+
     this.setState( { modal_is_open: true } );
   };
 
   _modalClose = () => {
-    this.setState( { modal_is_open: false } );
+    biqHelper.utils.clickTimeout( () => {
+      this.setState( { modal_is_open: false } );
+    } );
   };
 
   _onSubmitClick = () => {
     if ( this.props.dashboard.email_verification.is_submitting ) return;
     let {dispatch} = this.props;
-    dispatch( dashboardActions.dashboardEmailVerificationSubmit() );
+    this.setState({ response_noticed: false }, () => {
+      dispatch( dashboardActions.dashboardEmailVerificationReset() );
+      dispatch( dashboardActions.dashboardEmailVerificationSubmit() );
+    });
   };
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    let {dispatch} = this.props;
-
     let response_status = biqHelper.JSON.pathValueGet( nextProps.dashboard.email_verification.response, 'response.response_code.status' );
     let response_is_error = biqHelper.utils.httpResponseIsError( response_status );
 
-    if ( response_is_error ) {
-      this.setState( { server_response: Object.assign( {}, nextProps.dashboard.email_verification.response ) } );
-      dispatch( dashboardActions.dashboardEmailVerificationReset() );
-      this._modalOpen();
+    if ( response_is_error && !this.state.response_noticed && !biqHelper.mediaQuery.isMobile() ) {
+      this.setState( { response_noticed: true } );
+
+      let modal_notice = biqHelper.JSON.pathValueGet( this.state.server_response, 'response.response_code.message' );
+      modal_notice = biqHelper.utils.isNull( modal_notice ) ? `Error: ${ response_status }` : modal_notice;
+      this._modalOpen({ title: 'Gagal', notice: modal_notice });
       return false;
     }
 
@@ -51,6 +70,9 @@ class EmailVerificationForm extends Component {
   }
 
   render() {
+    let is_submitted = this.props.dashboard.email_verification.is_submitted;
+    let response_status = biqHelper.JSON.pathValueGet( this.props.dashboard.email_verification.response, 'response.response_code.status' );
+    let response_is_success = biqHelper.utils.httpResponseIsSuccess( response_status );
 
     return (
       <>
@@ -58,7 +80,7 @@ class EmailVerificationForm extends Component {
         <div className={`email-verification-form visible-md-up${ this.props.isVisible ? ' is-visible' : '' }`}>
 
           {
-            !this.props.dashboard.email_verification.is_submitted ?
+            !( is_submitted && response_is_success ) ?
 
             <div className={`form-input`}>
               <TextField
@@ -88,9 +110,9 @@ class EmailVerificationForm extends Component {
               <div className="icon"/>
 
               <div className="right-col">
-                <div className="title">Link Verifikasi Email telah terkirim</div>
+                <div className="title">{ biqHelper.JSON.pathValueGet( this.props.dashboard.email_verification.response, 'response.data.header_message' ) }</div>
                 <div className="notice">
-                  Kami telah mengirim link verifikasi ke { this.props.user_profile.email } , Silahkan mengklik link verifikasi tersebut untuk memverifikasi email Anda.
+                  { biqHelper.JSON.pathValueGet( this.props.dashboard.email_verification.response, 'response.data.body_message' ) }
                 </div>
                 <div className="right-col__action">
                   <div className="right-col__action__notice">Belum menerima link verifikasi?</div>
@@ -112,7 +134,9 @@ class EmailVerificationForm extends Component {
           onClose={this._modalClose}>
 
           <div className="modal-inner">
-            <ModalNotice modalClose={this._modalClose} title="Gagal" notice={biqHelper.JSON.pathValueGet( this.state.server_response, 'response.response_code.message' )}/>
+            <ModalNotice modalClose={this._modalClose}
+              title={this.state.error.title}
+              notice={this.state.error.notice}/>
           </div>
 
         </Modal>
@@ -127,7 +151,7 @@ class EmailVerificationForm extends Component {
 const mapStateToProps = state => {
 
   return {
-    user_profile : state.user.profile,
+    user_profile: state.user.profile,
     dashboard: state.dashboard
   };
 

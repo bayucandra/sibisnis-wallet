@@ -1,45 +1,45 @@
-import ActionTypes from "../../action-types";
+import actionTypes from "redux/action-types";
 
   function balanceNominalSet( nominal ) {
     return {
-      type: ActionTypes.balance.NOMINAL_SET,
+      type: actionTypes.balance.NOMINAL_SET,
       payload: nominal
     }
   }
 
   function balanceMethodFetch() {
     return {
-      type: ActionTypes.balance.PAYMENT_METHOD_FETCH
+      type: actionTypes.balance.PAYMENT_METHOD_FETCH
     }
   }
   function balanceMethodFetched( server_response ) {
     return {
-      type: ActionTypes.balance.PAYMENT_METHOD_FETCHED,
+      type: actionTypes.balance.PAYMENT_METHOD_FETCHED,
       payload: server_response
     }
   }
   function balanceMethodFetchCanceled() {
     return {
-      type: ActionTypes.balance.PAYMENT_METHOD_FETCH_CANCELED
+      type: actionTypes.balance.PAYMENT_METHOD_FETCH_CANCELED
     }
   }
 
   function balanceMethodSet( method ) {
     return {
-      type: ActionTypes.balance.PAYMENT_METHOD_SET,
+      type: actionTypes.balance.PAYMENT_METHOD_SET,
       payload: method
     };
   }
 
   function balanceMethodReset() {
     return {
-      type: ActionTypes.balance.PAYMENT_METHOD_RESET
+      type: actionTypes.balance.PAYMENT_METHOD_RESET
     }
   }
 
   function balancePaymentInfoVisibility() {
     return {
-      type: ActionTypes.balance.PAYMENT_INFO_VISIBILITY
+      type: actionTypes.balance.PAYMENT_INFO_VISIBILITY
     }
   }
 
@@ -48,25 +48,25 @@ import ActionTypes from "../../action-types";
 
   function balancePaymentSubmit( payload, option = {} ) {
     return {
-      type: ActionTypes.balance.PAYMENT_SUBMIT,
+      type: actionTypes.balance.PAYMENT_SUBMIT,
       payload,
       option
     }
   }
   function balancePaymentSubmitted( server_response ) {
     return {
-      type: ActionTypes.balance.PAYMENT_SUBMITTED,
+      type: actionTypes.balance.PAYMENT_SUBMITTED,
       payload: server_response
     };
   }
   function balancePaymentReset() {
     return {
-      type: ActionTypes.balance.PAYMENT_RESET
+      type: actionTypes.balance.PAYMENT_RESET
     };
   }
   function balancePaymentCancel() {
     return {
-      type: ActionTypes.balance.PAYMENT_CANCELED
+      type: actionTypes.balance.PAYMENT_CANCELED
     }
   }
 
@@ -75,24 +75,24 @@ import ActionTypes from "../../action-types";
 
   function balancePaymentTransactionFetch( id_deposit ) {
     return {
-      type: ActionTypes.balance.PAYMENT_TRANSACTION_FETCH,
+      type: actionTypes.balance.PAYMENT_TRANSACTION_FETCH,
       payload: { id_deposit }
     }
   }
   function balancePaymentTransactionFetched( server_response ) {
     return {
-      type: ActionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
+      type: actionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
       payload: server_response
     }
   }
   function balancePaymentTransactionReset() {
     return {
-      type: ActionTypes.balance.PAYMENT_TRANSACTION_RESET
+      type: actionTypes.balance.PAYMENT_TRANSACTION_RESET
     }
   }
   function balancePaymentTransactionCancel() {
     return {
-      type: ActionTypes.balance.PAYMENT_TRANSACTION_CANCELED
+      type: actionTypes.balance.PAYMENT_TRANSACTION_CANCELED
     }
   }
 
@@ -101,23 +101,23 @@ import ActionTypes from "../../action-types";
 
   function balanceTopUpHistoryFetch() {
     return {
-      type: ActionTypes.balance.TOP_UP_HISTORY_FETCH
+      type: actionTypes.balance.TOP_UP_HISTORY_FETCH
     }
   }
   function balanceTopUpHistoryFetched( data ) {//data from scroll pagination
     return {
-      type: ActionTypes.balance.TOP_UP_HISTORY_FETCHED,
+      type: actionTypes.balance.TOP_UP_HISTORY_FETCHED,
       payload: data
     }
   }
   function balanceTopUpHistoryReset() {
     return {
-      type: ActionTypes.balance.TOP_UP_HISTORY_RESET
+      type: actionTypes.balance.TOP_UP_HISTORY_RESET
     }
   }
 
 
-const actions = {
+export default {
   balanceNominalSet,
   balanceMethodFetch,
   balanceMethodFetched,
@@ -140,5 +140,3 @@ const actions = {
   balanceTopUpHistoryFetched,
   balanceTopUpHistoryReset
 };
-
-export default actions;

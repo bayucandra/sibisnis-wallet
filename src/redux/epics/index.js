@@ -1,17 +1,19 @@
 import { combineEpics } from 'redux-observable';
 
-import AppEpics from './global/AppEpics';
-import UserEpics from './UserEpics';
+import appEpics from "./global/appEpics";
+import UserEpics from "./UserEpics";
+import dashboardEpics from "./pages/dashboardEpics";
 import * as HistoryLoginEpics from './HistoryLoginEpics';
 import * as NewsEpics from './NewsEpics';
 
 import balanceEpics from "./pages/balanceEpics";
 
 let epics_arr = [
-  ...AppEpics,
+  ...appEpics,
+  ...balanceEpics,
+  ...dashboardEpics,
   ...UserEpics,
-  ...[HistoryLoginEpics.getHistoryList, NewsEpics.getNewsList],
-  ...balanceEpics
+  ...[HistoryLoginEpics.getHistoryList, NewsEpics.getNewsList]
 ];
 
 

@@ -127,6 +127,7 @@ class App extends Component {
         biqHelper.utils.httpResponseIsError(
           biqHelper.JSON.pathValueGet( this.props.app.logout_response, 'status' )
         )
+        && !this.state.modal_is_open
       ) {
         let response_status = biqHelper.JSON.pathValueGet( this.props.app.logout_response, 'response.response_code.status' );
         let response_text = biqHelper.JSON.pathValueGet( this.props.app.logout_response, 'response.response_code.message' );

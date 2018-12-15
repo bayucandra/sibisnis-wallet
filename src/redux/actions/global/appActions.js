@@ -1,40 +1,40 @@
-import ActionTypes from "../../action-types/index";
+import actionTypes from "../../action-types/index";
 
   function appInit() {
     return {
-      type: ActionTypes.app.INIT
+      type: actionTypes.app.INIT
     }
   }
 
   function appSseAgenInit() {
     return {
-      type: ActionTypes.app.SSE_AGEN_INIT
+      type: actionTypes.app.SSE_AGEN_INIT
     }
   }
 
   function appRouterChange( new_route_state ) {
     return {
-      type: ActionTypes.app.ROUTER_CHANGE,
+      type: actionTypes.app.ROUTER_CHANGE,
       payload: new_route_state
     }
   }
 
   function appLogout() {
     return {
-      type: ActionTypes.app.LOGOUT
+      type: actionTypes.app.LOGOUT
     }
   }
 
   function appLoggingOut( res ) {
     return {
-      type: ActionTypes.app.LOGGING_OUT,
+      type: actionTypes.app.LOGGING_OUT,
       payload: res
     }
   }
 
   function appLoggedOut( res ) {
     return {
-      type: ActionTypes.app.LOGGED_OUT
+      type: actionTypes.app.LOGGED_OUT
     }
   }
 
@@ -44,32 +44,32 @@ import ActionTypes from "../../action-types/index";
 
   function appStatesReset() {
       return {
-        type: ActionTypes.app.STATES_RESET
+        type: actionTypes.app.STATES_RESET
       }
   }
 
   function appWindowResize( window_sizes ) {
     return {
-      type: ActionTypes.app.WINDOW_RESIZE,
+      type: actionTypes.app.WINDOW_RESIZE,
       payload: window_sizes
     }
   }
 
   function appLoadingIndicatorShow() {
     return {
-      type: ActionTypes.app.LOADING_INDICATOR_SHOW
+      type: actionTypes.app.LOADING_INDICATOR_SHOW
     }
   }
 
   function appLoadingIndicatorHide() {
     return {
-      type: ActionTypes.app.LOADING_INDICATOR_HIDE
+      type: actionTypes.app.LOADING_INDICATOR_HIDE
     }
   }
 
   function appRedirectToAgen() {
     return {
-      type: ActionTypes.app.REDIRECT_TO_AGEN
+      type: actionTypes.app.REDIRECT_TO_AGEN
     }
   }
 

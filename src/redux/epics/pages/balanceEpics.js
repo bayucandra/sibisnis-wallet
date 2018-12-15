@@ -5,10 +5,10 @@ import {switchMap, map, takeUntil, filter, catchError, delay} from 'rxjs/operato
 
 import * as moment from 'moment';
 
-import actionTypes from "../../action-types";
-import balanceActions from "../../actions/pages/balanceActions";
+import actionTypes from "redux/action-types";
+import balanceActions from "redux/actions/pages/balanceActions";
 import biqConfig from "providers/biqConfig";
-import biqHelper from "../../../lib/biqHelper";
+import biqHelper from "lib/biqHelper";
 
 const paymentMethodFetch = action$ => action$.pipe(
   ofType(actionTypes.balance.PAYMENT_METHOD_FETCH),
@@ -65,7 +65,7 @@ const paymentBankSubmit = action$ => action$.pipe(
 
       if (payment_method === 'indomaret') {//TODO: For development purpose only, remove soon when the API is ready
         ajax$ = of({
-          status: '200',
+          status: 200,
           response: {
             "response_code": {
               "status": 200,
@@ -124,8 +124,8 @@ const paymentTransactionFetch = action$ => action$.pipe(
       });
 
       if (action.payload.id_deposit === '-1') {//TODO: for development purpose only(dummy data), remove very soon
-        console.log('is dummy data');
         ajax$ = of({
+          status: 200,
           response: {
             "response_code": {"status": 200, "message": "Success"},
             "data": {

@@ -1,4 +1,4 @@
-import ActionTypes from "../../action-types";
+import actionTypes from "../../action-types";
 import biqHelper from "../../../lib/biqHelper";
 // import biqConfig from "../../providers/biqConfig";
 import esProvider from "../../../providers/esProvider";
@@ -24,7 +24,7 @@ export default ( state = state_default, action ) => {
 
   switch ( action.type ) {
 
-    case ActionTypes.app.INIT:
+    case actionTypes.app.INIT:
       let is_logged_in_agen = biqHelper.localStorage.get( 'is_logged_in', false, 'zonatikAgen' );
       let is_logged_in_dealer = biqHelper.localStorage.get( 'is_logged_in', false, 'zonatikDealer' );
 
@@ -41,7 +41,7 @@ export default ( state = state_default, action ) => {
       new_state.is_logged_in = is_logged_in === true || is_logged_in === 'true';
       break;
 
-    case ActionTypes.app.SSE_AGEN_INIT:
+    case actionTypes.app.SSE_AGEN_INIT:
       new_state = { is_es_initialized: false };
       if ( biqHelper.utils.isNull( esProvider.state.es ) ) {
         try {
@@ -49,41 +49,41 @@ export default ( state = state_default, action ) => {
           new_state.is_es_initialized = true;
         } catch(e) {
           new_state.is_es_initialized = false;
-          console.error( 'ERROR::ActionTypes.app.SSE_AGEN_INIT: ' + e.message );
+          console.error( 'ERROR::actionTypes.app.SSE_AGEN_INIT: ' + e.message );
         }
       }
       break;
 
-    case ActionTypes.app.ROUTER_CHANGE:
+    case actionTypes.app.ROUTER_CHANGE:
       //payload key should match to the state_default key
       new_state = action.payload;
       break;
 
-    case ActionTypes.app.LOGOUT:
+    case actionTypes.app.LOGOUT:
       new_state = { is_logging_out: true };
       break;
 
-    case ActionTypes.app.LOGGING_OUT:
+    case actionTypes.app.LOGGING_OUT:
       new_state = {logout_response: action.payload};
       break;
 
-    case ActionTypes.app.LOGGED_OUT:
+    case actionTypes.app.LOGGED_OUT:
       new_state = { is_logged_in: false, is_logging_out: false };
       break;
 
-    case ActionTypes.app.WINDOW_RESIZE:
+    case actionTypes.app.WINDOW_RESIZE:
       new_state = { window_size: action.payload };
       break;
 
-    case ActionTypes.app.LOADING_INDICATOR_SHOW:
+    case actionTypes.app.LOADING_INDICATOR_SHOW:
       new_state = { loading_indicator_show: true };
       break;
 
-    case ActionTypes.app.LOADING_INDICATOR_HIDE:
+    case actionTypes.app.LOADING_INDICATOR_HIDE:
       new_state = { loading_indicator_show: false };
       break;
 
-    case ActionTypes.app.REDIRECT_TO_AGEN:
+    case actionTypes.app.REDIRECT_TO_AGEN:
       new_state = { should_redirect_to_agen: true };
       break;
 

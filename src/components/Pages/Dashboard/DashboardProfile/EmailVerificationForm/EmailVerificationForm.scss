@@ -6,7 +6,7 @@
   margin: 0 30px;
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   border-radius: 5px;
   border: 0.5px solid map-get( $colors, very-light-pink );
   background-color: map-get($colors, light-grey-8);
@@ -42,70 +42,164 @@
     border-color: transparent transparent map-get( $colors, light-grey-8 );
   }//&:before
 
-  .email-input {
-    flex: 1 1 auto;
-    margin: 0;
+  .form-input {
+    display: flex;
+    align-items: center;
 
-    label {
-      font-size: 12px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: 0.4px;
-      color: map-get($colors, steel-grey);
+    .email-input {
+      flex: 1 1 auto;
+      margin: 0;
 
-      transform: translate(0, 1.5px) scale(1);
-    }//label
+      label {
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, steel-grey);
 
-    input[type="text"]:disabled {
-      padding: 5px 0;
-      font-size: 15px;
-      font-weight: normal;
+        transform: translate(0, 1.5px) scale(1);
+      }//label
+
+      input[type="text"]:disabled {
+        padding: 5px 0;
+        font-size: 15px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: map-get($colors, charcoal-grey);
+      }//input[type="text"]:disabled
+
+      [class*="MuiInput-formControl"] {
+        &:before {
+          border-bottom: 1px solid map-get( $colors, very-light-pink ) !important;
+        }//&:before
+      }//[class*="MuiInput-formControl"]
+
+      [class*="MuiFormHelperText-disabled-"] {
+        margin-top: 5px;
+
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, steel-grey);
+      }//[class*="MuiFormHelperText-disabled-"]
+
+    }//.email-input
+
+    .send-btn {
+      flex: none;
+      width: 130px;
+      height: 45px;
+      margin-left: 20px;
+      border-radius: 3px;
+      box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
+      background-color: map-get($colors, dark-mint);
+
+      font-size: 14px;
+      font-weight: bold;
       font-style: normal;
       font-stretch: normal;
       line-height: normal;
       letter-spacing: 0.5px;
-      color: map-get($colors, charcoal-grey);
-    }//input[type="text"]:disabled
+      text-align: center;
+      color: #ffffff;
 
-    [class*="MuiInput-formControl"] {
-      &:before {
-        border-bottom: 1px solid map-get( $colors, very-light-pink ) !important;
-      }//&:before
-    }//[class*="MuiInput-formControl"]
+      &.is-submitting {
+        opacity: 0.5;
+      }//&.is-submitting
 
-    [class*="MuiFormHelperText-disabled-"] {
-      margin-top: 5px;
+    }//.send-btn
 
-      font-size: 12px;
-      font-weight: normal;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: 0.4px;
-      color: map-get($colors, steel-grey);
-    }//[class*="MuiFormHelperText-disabled-"]
+  }//.form-input
 
-  }//.email-input
 
-  .send-btn {
-    flex: none;
-    width: 130px;
-    height: 45px;
-    margin-left: 20px;
-    border-radius: 3px;
-    box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
-    background-color: map-get($colors, dark-mint);
 
-    font-size: 14px;
-    font-weight: bold;
-    font-style: normal;
-    font-stretch: normal;
-    line-height: normal;
-    letter-spacing: 0.5px;
-    text-align: center;
-    color: #ffffff;
-  }//.send-btn
+  .form-submitted {
+    flex: 1 1 1px;
+    display: flex;
+    margin: 0 (25px - 30px) 0 45px - 30px;
+
+    .icon {
+      flex: none;
+      width: 56px; height: 48px;
+      margin-top: 33px - 15px;
+      background: url('../../../../../images/icons/kirim-email.svg') no-repeat center;
+      background-size: contain;
+    }//.icon
+
+    .right-col {
+      flex: 1 1 1px;
+      display: flex;
+      flex-direction: column;
+      margin-left: 46px;
+
+      .title {
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, charcoal-grey);
+      }//.title
+
+      .notice {
+        font-size: 13px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: 1.77;
+        letter-spacing: 0.2px;
+        color: map-get($colors, steel-grey);
+      }//.notice
+
+      .right-col__action {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        margin-top: 23px;
+
+        &__notice {
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.2px;
+          text-align: center;
+          color: map-get($colors, steel-grey);
+        }//&__notice
+
+        &__btn {
+          width: 165px;
+          height: 32px;
+          margin-left: 10px;
+          border-radius: 2px;
+          background-color: rgba( #000000, 0.02 );
+
+          font-size: 13px;
+          font-weight: 600;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+          text-align: center;
+          color: map-get($colors, dark-sky-blue);
+        }//&__btn
+
+      }//.action
+
+    }//.notice-and-action
+
+  }//.form-input
+
+
 
 }//.email-verification-form

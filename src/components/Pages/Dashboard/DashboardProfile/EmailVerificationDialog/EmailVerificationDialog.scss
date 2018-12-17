@@ -77,6 +77,11 @@
       letter-spacing: 0.5px;
       text-align: center;
       color: #ffffff;
+
+      &.is-submitting {
+        opacity: 0.5;
+      }//&.is-submitting
+
     }//.send-btn
 
   }//.form-input

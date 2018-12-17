@@ -1,13 +1,15 @@
 // Node Modules
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+
+import appActions from "redux/actions/global/appActions";
 
 // Custom Components
-import DropPhotoUpload from '../DropPhotoUpload/DropPhotoUpload';
 
 // Custom Libraries
 import { modalToggle,cameraCaptureFileUpload } from '../../../lib/utilities';//TODO: Delete soon
 import { modalTypes } from '../../../lib/constants';//TODO: Delete soon
-import biqHelper from "../../../lib/biqHelper/index";
+import biqHelper from "../../../lib/biqHelper";
 
 // Local Images
 import fileIconBlue from '../../../images/icons/ico-file-blue.svg';
@@ -16,7 +18,7 @@ import WebcamCapture from '../WebcamCapture/WebcamCapture';
 
 // Custom CSS
 import './PhotoUpload.scss';
-import closeIconBlack from "../../../images/icons/ico-close-black.svg";
+import {Button} from "../../Widgets/material-ui";
 /*
 const UploadButton = (props) => {
   const { id, icon, label, onClick } = props
@@ -50,8 +52,10 @@ class PhotoUpload extends Component {
 
   toggleDragPhotoUpload = () =>{
     // this.setState({ dragPhotoUpload: true });
-    this.props.modalSetActiveComponent( DropPhotoUpload );
-  }
+    // this.props.modalSetActiveComponent( DropPhotoUpload );
+    let {dispatch} = this.props;
+    dispatch( appActions.appProfilePhotoDialogOpen( 'upload-dialog' ) );
+  };
 
   toggleCameraCapture = (id) => {
     if (navigator.getUserMedia) {
@@ -96,9 +100,7 @@ class PhotoUpload extends Component {
   }
 
   _modalClose = ()=>{
-    biqHelper.utils.clickTimeout({
-      callback: this.props.modalClose
-    });
+    biqHelper.utils.clickTimeout(()=>this.props.modalClose() );
   };
 
   render() {
@@ -108,11 +110,7 @@ class PhotoUpload extends Component {
         <>
           <div className="photo-upload-container" style={{marginTop: this.state.modalPosTop}}>
 
-            <div className="modal-close-block">
-              <div className="close-icon icon-touch-area-container-50 ripple" onClick={this._modalClose}>
-                <img src={closeIconBlack} alt="close-icon-black" />
-              </div>
-            </div>
+            <Button className="modal-close-btn" onClick={this._modalClose} >&nbsp;</Button>
 
             <div className="photo-upload-header">
               <div className="photo-upload-header__title">Anda belum memiliki photo profile</div>
@@ -151,4 +149,4 @@ class PhotoUpload extends Component {
   }
 }
 
-export default PhotoUpload;
+export default connect( null ) ( PhotoUpload );

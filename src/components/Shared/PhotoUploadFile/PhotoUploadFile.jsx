@@ -26,11 +26,10 @@ import imgUploadSukses from '../../../images/icons/upload-sukses.svg';
 import imgUploadGagal from '../../../images/icons/upload-gagal.svg';
 
 // Custom CSS
-import './DropPhotoUpload.scss';
-import closeIconBlack from "../../../images/icons/ico-close-black.svg";
+import './PhotoUploadFile.scss';
 import biqConfig from "../../../providers/biqConfig";
 
-class DropPhotoUpload extends Component {
+class PhotoUploadFile extends Component {
 
   stop$ = new Subject();
 
@@ -142,7 +141,7 @@ class DropPhotoUpload extends Component {
 
     if ( !this.state.img_is_set ) return;
     if ( this._imgIsUploadedSuccess() ) {
-      this.props.modalClose();
+      this._modalClose();
       return;
     }
 
@@ -265,6 +264,10 @@ class DropPhotoUpload extends Component {
     return top_pos;
   }
 
+  _modalClose = ()=>{
+    biqHelper.utils.clickTimeout(()=>this.props.modalClose() );
+  };
+
   componentDidMount(){
     let top_pos = this._modalPosTopGen();
     this.setState( {modalPosTop : top_pos } );
@@ -287,11 +290,7 @@ class DropPhotoUpload extends Component {
     return (
       <div className="drop-photo-upload-container" style={{ marginTop: this.state.modalPosTop }}>
 
-        <div className="modal-close-block">
-          <div className="close-icon icon-touch-area-container-50 ripple" onClick={this.props.modalClose}>
-            <img src={closeIconBlack} alt="close-icon-black" />
-          </div>
-        </div>
+        <Button className="modal-close-btn" onClick={this._modalClose} >&nbsp;</Button>
 
         <div className="drop-photo-upload-header">
           <div className="drop-photo-upload-header__title hidden-md-up hidden-md-up--block">Tambahkan foto dari galeri</div>
@@ -337,4 +336,4 @@ class DropPhotoUpload extends Component {
 }
 
 
-export default withRouter( connect( null)(DropPhotoUpload) );
+export default withRouter( connect( null)(PhotoUploadFile) );

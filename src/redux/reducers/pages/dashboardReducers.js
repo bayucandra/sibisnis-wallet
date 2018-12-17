@@ -40,6 +40,9 @@ export default ( state = state_default, action ) => {
       };
       break;
 
+    default:
+      return state;
+
   }
 
   return Object.assign( {}, state, new_state )

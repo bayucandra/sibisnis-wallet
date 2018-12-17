@@ -1,13 +1,6 @@
 @import '../mixins';
 @import '../variables';
 
-.modal-close-block{
-  position: absolute;
-  opacity: 0.2;
-  right: 1px;
-  top: 1px;
-}
-
 .modal-inner {
   position: absolute;
   top: 0; right: 0; bottom: 0; left: 0;
@@ -29,18 +22,19 @@
   opacity: 0.2;
   background: url('../../images/icons/close-black.svg') no-repeat center;
 
-  &:hover {
-    opacity: 0.8;
-  }//&:hover
-
 }//.modal-close
 
 @include media-query(md){
-  .modal-close-block{
-    right: 6px !important;
-    top: 5px !important;
-    &:hover{
-      opacity: 1 !important;
-    }
-  }
+
+  .modal-close-btn {
+    $design-diff: 50px - 24px;
+    position: absolute;
+    top: 20px - ( $design-diff/2 );
+    right: 20px - ( $design-diff/2 );
+
+    &:hover {
+      opacity: 0.8;
+    }//&:hover
+
+  }//.modal-close
 }

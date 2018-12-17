@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import dashboardActions from "redux/actions/pages/dashboardActions";
-
 import { Modal } from '@material-ui/core';
 import { Button } from "components/Widgets/material-ui";
 
@@ -11,8 +9,9 @@ import biqHelper from "../../../../lib/biqHelper";
 import "./DashboardProfile.scss";
 import "styles/components/_modal.scss";
 
-import EmailVerificationForm from "./EmailVerificationForm/EmailVerificationForm";
-import EmailVerificationDialog from "./EmailVerificationDialog/EmailVerificationDialog";
+import EmailVerificationForm from "./EmailVerificationForm";
+import EmailVerificationDialog from "./EmailVerificationDialog";
+import ProfileUploadForm from "./ProfileUploadForm/ProfileUploadForm";
 
 
 class DashboardProfile extends Component {
@@ -21,11 +20,12 @@ class DashboardProfile extends Component {
     email_verification: {
       desktop: false,
       mobile: false
-    }
+    },
+    profile_upload_desktop: false//Mobile version placed on redux
   };
 
   _emailVerificationDekstopToggle = () => {
-    if ( biqHelper.mediaQuery.isMobile() ) return;
+    // if ( biqHelper.mediaQuery.isMobile() ) return;
 
     biqHelper.utils.clickTimeout( () => {
 
@@ -41,14 +41,18 @@ class DashboardProfile extends Component {
   };
 
   _emailVerificationMobileOpen = () => {
-    // if ( this.props.user_profile.verifications.email === 1 ) return;//TODO: Uncoment this while done with development
-    if ( biqHelper.mediaQuery.isMobile() ) {
-      this.setState({ email_verification: { desktop: false, mobile: true } });
-    }
+    if ( this.props.user_profile.verifications.email === 1 ) return;
+    if ( !biqHelper.mediaQuery.isMobile() ) return;
+
+    this.setState({ email_verification: { desktop: false, mobile: true } });
   };
 
   _emailVerificationMobileClose = () => {
     this.setState({ email_verification: { desktop: false, mobile: false } });
+  };
+
+  _profileVerificationDesktopToggle = () => {
+    biqHelper.utils.clickTimeout( () => this.setState( { profile_upload_desktop: !this.state.profile_upload_desktop } ) );
   };
 
   render() {
@@ -131,10 +135,12 @@ class DashboardProfile extends Component {
                 <div className="icon icon--profile-name"/>
                 <div className="label">Upload foto profil Anda</div>
                 <div className="icon-indicator hidden-md-up"/>
-                <Button className={`action-btn-desktop visible-md-up`} onClick={null}>
-                  Upload Sekarang
+                <Button className={`action-btn-desktop visible-md-up${ this.state.profile_upload_desktop ? ' action-btn-desktop--close' : '' }`} onClick={this._profileVerificationDesktopToggle}>
+                  { this.state.profile_upload_desktop ? 'Tutup' : 'Upload Sekarang' }
                 </Button>
               </div>
+
+              <ProfileUploadForm isVisible={this.state.profile_upload_desktop}/>
 
             </div>
           </Button>

@@ -4,14 +4,17 @@ import {connect} from 'react-redux';
 
 import dashboardActions from 'redux/actions/pages/dashboardActions';
 
+import biqHelper from "../../../../../lib/biqHelper";
+
 import { TextField } from '@material-ui/core';
 import { Button } from "components/Widgets/material-ui";
 
-import "./EmailVerificationForm.scss";
 import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar";
 import Modal from "@material-ui/core/Modal/Modal";
 import ModalNotice from "../../../../Widgets/ModalNotice/ModalNotice";
-import biqHelper from "../../../../../lib/biqHelper";
+import FormWrapper from "../FormWrapper";
+
+import "./EmailVerificationForm.scss";
 
 class EmailVerificationForm extends Component {
 
@@ -77,7 +80,7 @@ class EmailVerificationForm extends Component {
     return (
       <>
 
-        <div className={`email-verification-form visible-md-up${ this.props.isVisible ? ' is-visible' : '' }`}>
+        <FormWrapper className={`email-verification-form`} isVisible={this.props.isVisible}>
 
           {
             !( is_submitted && response_is_success ) ?
@@ -125,7 +128,7 @@ class EmailVerificationForm extends Component {
 
           }
 
-        </div>
+        </FormWrapper>
 
 
 

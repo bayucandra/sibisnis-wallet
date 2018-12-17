@@ -73,6 +73,19 @@ import actionTypes from "../../action-types/index";
     }
   }
 
+  function appProfilePhotoDialogOpen( dialog_mode = 'select-dialog' ) {
+    return {
+      type: actionTypes.app.PROFILE_PHOTO_DIALOG_OPEN,
+      payload: dialog_mode
+    }
+  }
+
+  function appProfilePhotoDialogClose() {
+    return {
+      type: actionTypes.app.PROFILE_PHOTO_DIALOG_CLOSE
+    }
+  }
+
   const actions = {
     appInit,
     appSseAgenInit,
@@ -84,7 +97,9 @@ import actionTypes from "../../action-types/index";
     appWindowResize,
     appRouterChange,
     appLoadingIndicatorShow,
-    appLoadingIndicatorHide
+    appLoadingIndicatorHide,
+    appProfilePhotoDialogOpen,
+    appProfilePhotoDialogClose
   };
 
 export default actions;

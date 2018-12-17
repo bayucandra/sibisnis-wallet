@@ -7,6 +7,8 @@ import ReactTooltip from 'react-tooltip';
 import {List, ListItem, ListItemIcon} from '@material-ui/core';
 import {Button} from "components/Widgets/material-ui";
 
+import appActions from "redux/actions/global/appActions";
+
 /**External libraries*/
 import NumberFormat from 'react-number-format';
 import Modal from '@material-ui/core/Modal';
@@ -14,8 +16,6 @@ import Modal from '@material-ui/core/Modal';
 /**
  * Custom Icons
  */
-import rightArrow from '../../../images/icons/litle-right.svg';
-import profileSettings from '../../../images/icons/profile-settings.svg';
 import avatarPlacerholderBlank from '../../../images/avatar-placeholder-blank.svg';
 
 /**
@@ -36,6 +36,7 @@ import { ProfileInfoLoader, BalanceLoader } from '../../Loaders/ProfileLoader/Pr
 
 import './SideNavMain.scss';
 import '../../../styles/components/_modal.scss';
+import PhotoUploadFile from "../PhotoUploadFile/PhotoUploadFile";
 
 
 class SideNavMain extends Component {
@@ -43,10 +44,6 @@ class SideNavMain extends Component {
   state = {
     modal_is_open: false,
     modal_active_component: PhotoUpload
-  };
-
-  modalSetActiveComponent = ( component ) => {
-    this.setState({ modal_active_component: component });
   };
 
   onProfileSettingClick = () => {
@@ -80,19 +77,13 @@ class SideNavMain extends Component {
   };
 
   _onProfileImageClick = () => {
-    let {photo} = this.props.user.profile;
-    if ( biqHelper.utils.isNull( photo )) {
-      this.modalSetActiveComponent( PhotoUpload );
-      this.setState({ modal_is_open: true });
-    } else {
-      this.modalSetActiveComponent( ProfileImagePreview );
-      this.setState({ modal_is_open: true });
-    }
+    let {dispatch} = this.props;
+    dispatch( appActions.appProfilePhotoDialogOpen('select-dialog') );
   };
 
   _balanceRender() {
 
-    const {saldo} = this.props.user.profile;
+    const {saldo} = this.props.user_profile;
     biqHelper.utils.assignDefault( saldo, 'N/A' );
     return (
       <div className="balance-info">
@@ -104,7 +95,7 @@ class SideNavMain extends Component {
   }
 
   _profileInfoRender() {
-    const { nama, email, photo } = this.props.user.profile;
+    const { nama, email, photo } = this.props.user_profile;
 
     let profileImageUrl = !biqHelper.utils.isNull( photo ) ?
         `${biqConfig.profile_photo_url_base}/${encodeURI( photo )}` :
@@ -124,11 +115,13 @@ class SideNavMain extends Component {
   };
 
   modalClose = () => {
-    this.setState({ modal_is_open: false });
+    let {dispatch} = this.props;
+    dispatch( appActions.appProfilePhotoDialogClose() );
+    this.forceUpdate();
   };
 
   render() {
-    const {user} = this.props;
+    const {user_profile} = this.props;
     let {cssClasses} = this.props;
     let ModalActiveComponent = this.state.modal_active_component;
 
@@ -151,13 +144,13 @@ class SideNavMain extends Component {
 
             <Button className={ `profile-detail-btn${profile_detail_btn_class}` } onClick={this.onProfileSettingClick} data-tip="Profile anda">&nbsp;</Button>
 
-            {!biqHelper.utils.isNull( user ) ?
+            {!biqHelper.utils.isNull( user_profile ) ?
               this._profileInfoRender()
               :
               <ProfileInfoLoader />
             }
 
-            {!biqHelper.utils.isNull( user )?
+            {!biqHelper.utils.isNull( user_profile )?
               this._balanceRender()
               :
               <BalanceLoader />
@@ -204,11 +197,24 @@ class SideNavMain extends Component {
         <Modal
           aria-labelledby="modal-upload"
           aria-describedby="modal-upload-desc"
-          open={this.state.modal_is_open}
+          open={this.props.profile_photo_dialog.is_open}
           onClose={this.modalClose}>
 
-            <div className="modal-inner">
-              <ModalActiveComponent modalSetActiveComponent={this.modalSetActiveComponent} modalClose={this.modalClose}/>
+            <div className="modal-inner tst">
+              {
+                this.props.profile_photo_dialog.mode === 'select-dialog' ?
+                  (
+                    biqHelper.utils.isNull( this.props.user_profile.photo ) ?
+
+                      <PhotoUpload modalClose={this.modalClose}/>
+                        :
+                      <ProfileImagePreview modalClose={this.modalClose}/>
+                  )
+                    :
+
+                  <PhotoUploadFile modalClose={this.modalClose}/>
+
+              }
             </div>
 
         </Modal>
@@ -219,9 +225,10 @@ class SideNavMain extends Component {
 
 }//class Profile
 
-const mapStateToProps = (store) => {
+const mapStateToProps = state => {
   return {
-    user: store.user
+    user_profile: state.user.profile,
+    profile_photo_dialog: state.app.profile_photo_dialog
   }
 };
 

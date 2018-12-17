@@ -1,46 +1,6 @@
 @import "../../../../../styles/variables";
 
 .email-verification-form {
-  max-height: 0;
-  padding: 0 30px;
-  margin: 0 30px;
-  position: relative;
-  display: flex;
-  align-items: flex-start;
-  border-radius: 5px;
-  border: 0.5px solid map-get( $colors, very-light-pink );
-  background-color: map-get($colors, light-grey-8);
-  opacity: 0;
-  transition: max-height 250ms ease-in-out, opacity 300ms ease-in-out;
-  overflow: hidden;
-
-  &.is-visible {
-    max-height: 130px;
-    margin-bottom: 15px;
-    padding: 15px 30px;
-    opacity: 1;
-    overflow: visible;
-  }//&.is-visible
-
-  &:before {
-    content: ' ';
-    position: absolute;
-    top: -12px; right: 55px;
-    width: 0; height: 0;
-    border-style: solid;
-    border-width: 0 11px 12px;
-    border-color: transparent transparent map-get( $colors, very-light-pink );
-  }//&:after
-
-  &:after {
-    content: ' ';
-    position: absolute;
-    top: -11px; right: 56px;
-    width: 0; height: 0;
-    border-style: solid;
-    border-width: 0 10px 11px;
-    border-color: transparent transparent map-get( $colors, light-grey-8 );
-  }//&:before
 
   .form-input {
     display: flex;

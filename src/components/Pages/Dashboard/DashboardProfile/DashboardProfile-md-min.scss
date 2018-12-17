@@ -27,9 +27,9 @@
 
           }//&__inner
 
-        > [class*="MuiTouchRipple-root-"] {
+        > *:last-child {//Ripple
           display: none!important;
-        }//> [class*="MuiTouchRipple-root-"]
+        }//> *:last-child
 
         .icon-verified-desktop {
           display: flex;

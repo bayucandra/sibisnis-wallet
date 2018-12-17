@@ -1,17 +1,19 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
-import { Modal } from '@material-ui/core';
-import { Button } from "components/Widgets/material-ui";
-
+import appActions from "../../../../redux/actions/global/appActions";
 import biqHelper from "../../../../lib/biqHelper";
 
-import "./DashboardProfile.scss";
-import "styles/components/_modal.scss";
+import { Modal } from '@material-ui/core';
+import { Button } from "components/Widgets/material-ui";
 
 import EmailVerificationForm from "./EmailVerificationForm";
 import EmailVerificationDialog from "./EmailVerificationDialog";
 import ProfileUploadForm from "./ProfileUploadForm/ProfileUploadForm";
+
+
+import "styles/components/_modal.scss";
+import "./DashboardProfile.scss";
 
 
 class DashboardProfile extends Component {
@@ -51,8 +53,18 @@ class DashboardProfile extends Component {
     this.setState({ email_verification: { desktop: false, mobile: false } });
   };
 
-  _profileVerificationDesktopToggle = () => {
+  _photoProfileVerificationDesktopToggle = () => {
     biqHelper.utils.clickTimeout( () => this.setState( { profile_upload_desktop: !this.state.profile_upload_desktop } ) );
+  };
+
+  _photoProfileVerificationMobileOpen = () => {
+    if ( !biqHelper.utils.isNull(this.props.user_profile.photo) ) return;
+    if (!biqHelper.mediaQuery.isMobile()) return;
+
+    let {dispatch} = this.props;
+    biqHelper.utils.clickTimeout( () => {
+      dispatch( appActions.appDialogProfilePhotoOpen('select-dialog') );
+    } );
   };
 
   render() {
@@ -128,7 +140,7 @@ class DashboardProfile extends Component {
 
           </Button>
 
-          <Button className="record-item">
+          <Button className="record-item" onClick={this._photoProfileVerificationMobileOpen}>
             <div className="record-item__inner">
 
               <div className="action">
@@ -143,7 +155,7 @@ class DashboardProfile extends Component {
                       :
                     <Button
                       className={`action-btn-desktop visible-md-up${this.state.profile_upload_desktop ? ' action-btn-desktop--close' : ''}`}
-                      onClick={this._profileVerificationDesktopToggle}>
+                      onClick={this._photoProfileVerificationDesktopToggle}>
                       {this.state.profile_upload_desktop ? 'Tutup' : 'Upload Sekarang'}
                     </Button>
                 }

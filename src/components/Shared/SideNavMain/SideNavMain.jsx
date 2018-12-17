@@ -3,40 +3,23 @@ import { matchPath, withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 
-/**React Material Compoenents*/
-import {List, ListItem, ListItemIcon} from '@material-ui/core';
 import {Button} from "components/Widgets/material-ui";
 
 import appActions from "redux/actions/global/appActions";
 
-/**External libraries*/
 import NumberFormat from 'react-number-format';
-import Modal from '@material-ui/core/Modal';
-
-/**
- * Custom Icons
- */
-import avatarPlacerholderBlank from '../../../images/avatar-placeholder-blank.svg';
-
-/**
- * Custom Components
- */
-import ProfileImagePreview from './ProfileImagePreview/ProfileImagePreview';
-import PhotoUpload from "../PhotoUpload/PhotoUpload";
-
-/**
- * Custom Libraries
- */
-
 import biqHelper from "../../../lib/biqHelper/index";
 import biqConfig from "../../../providers/biqConfig";
+
+import avatarPlacerholderBlank from '../../../images/avatar-placeholder-blank.svg';
+
+import PhotoUpload from "../../Dialogs/DialogProfilePhoto/PhotoUpload/PhotoUpload";
 
 // Loaders
 import { ProfileInfoLoader, BalanceLoader } from '../../Loaders/ProfileLoader/ProfileLoader';
 
 import './SideNavMain.scss';
 import '../../../styles/components/_modal.scss';
-import PhotoUploadFile from "../PhotoUploadFile/PhotoUploadFile";
 
 
 class SideNavMain extends Component {
@@ -78,7 +61,7 @@ class SideNavMain extends Component {
 
   _onProfileImageClick = () => {
     let {dispatch} = this.props;
-    dispatch( appActions.appProfilePhotoDialogOpen('select-dialog') );
+    dispatch( appActions.appDialogProfilePhotoOpen('select-dialog') );
   };
 
   _balanceRender() {
@@ -114,16 +97,9 @@ class SideNavMain extends Component {
     )
   };
 
-  modalClose = () => {
-    let {dispatch} = this.props;
-    dispatch( appActions.appProfilePhotoDialogClose() );
-    this.forceUpdate();
-  };
-
   render() {
     const {user_profile} = this.props;
     let {cssClasses} = this.props;
-    let ModalActiveComponent = this.state.modal_active_component;
 
     cssClasses = biqHelper.utils.isNull(cssClasses) ? '' : ` ${cssClasses}`;
 
@@ -134,92 +110,64 @@ class SideNavMain extends Component {
     let is_transfer_saldo_page = false;
 
     return (
-      <>
 
-        <div className= {`side-nav-main${cssClasses}`}>
+      <div className= {`side-nav-main${cssClasses}`}>
 
-          <div className="profile">
+        <div className="profile">
 
-            <ReactTooltip className="profile-tool-top" place="left" type="dark" effect="solid" />
+          <ReactTooltip className="profile-tool-top" place="left" type="dark" effect="solid" />
 
-            <Button className={ `profile-detail-btn${profile_detail_btn_class}` } onClick={this.onProfileSettingClick} data-tip="Profile anda">&nbsp;</Button>
+          <Button className={ `profile-detail-btn${profile_detail_btn_class}` } onClick={this.onProfileSettingClick} data-tip="Profile anda">&nbsp;</Button>
 
-            {!biqHelper.utils.isNull( user_profile ) ?
-              this._profileInfoRender()
-              :
-              <ProfileInfoLoader />
-            }
+          {!biqHelper.utils.isNull( user_profile ) ?
+            this._profileInfoRender()
+            :
+            <ProfileInfoLoader />
+          }
 
-            {!biqHelper.utils.isNull( user_profile )?
-              this._balanceRender()
-              :
-              <BalanceLoader />
-            }
+          {!biqHelper.utils.isNull( user_profile )?
+            this._balanceRender()
+            :
+            <BalanceLoader />
+          }
 
-            <div className="balance">
-              <Button className="balance__btn balance__btn--add" onClick={() => this._onNavigationClick('/balance')}>Tambah</Button>
-              <div className="balance__divider visible-md-up" />
-              <Button className="balance__btn balance__btn--withdraw">Tarik</Button>
-            </div>
-
-          </div>
-
-          <div className="nav-btn-wrapper">
-
-            <Button className={ `nav-btn${ is_desktop_page ? ' is-active' : '' }` } onClick={ this._onDashboardBtnClick }>
-              <div className="nav-btn__inner">
-                <div className="icon icon--home"/>
-                <div className="label">Dashboard</div>
-                <div className="arrow hidden-md-up"/>
-              </div>
-            </Button>
-
-            <Button className={ `nav-btn${ is_mutasi_saldo_page ? ' is-active' : '' }` } onClick={ () => this._onNavigationClick('/balance-mutation') }>
-              <div className="nav-btn__inner">
-                <div className="icon icon--mutasi"/>
-                <div className="label">Mutasi Saldo</div>
-                <div className="arrow hidden-md-up"/>
-              </div>
-            </Button>
-
-            <Button className={ `nav-btn nav-btn--transfer-saldo${ is_transfer_saldo_page ? ' is-active' : '' }` }  onClick={ () => this._onNavigationClick('/dashboard') }>
-              <div className="nav-btn__inner">
-                <div className="icon icon--transfer-saldo"/>
-                <div className="label">Transfer Saldo</div>
-                <div className="arrow hidden-md-up"/>
-              </div>
-            </Button>
-
+          <div className="balance">
+            <Button className="balance__btn balance__btn--add" onClick={() => this._onNavigationClick('/balance')}>Tambah</Button>
+            <div className="balance__divider visible-md-up" />
+            <Button className="balance__btn balance__btn--withdraw">Tarik</Button>
           </div>
 
         </div>
 
-        <Modal
-          aria-labelledby="modal-upload"
-          aria-describedby="modal-upload-desc"
-          open={this.props.profile_photo_dialog.is_open}
-          onClose={this.modalClose}>
+        <div className="nav-btn-wrapper">
 
-            <div className="modal-inner tst">
-              {
-                this.props.profile_photo_dialog.mode === 'select-dialog' ?
-                  (
-                    biqHelper.utils.isNull( this.props.user_profile.photo ) ?
-
-                      <PhotoUpload modalClose={this.modalClose}/>
-                        :
-                      <ProfileImagePreview modalClose={this.modalClose}/>
-                  )
-                    :
-
-                  <PhotoUploadFile modalClose={this.modalClose}/>
-
-              }
+          <Button className={ `nav-btn${ is_desktop_page ? ' is-active' : '' }` } onClick={ this._onDashboardBtnClick }>
+            <div className="nav-btn__inner">
+              <div className="icon icon--home"/>
+              <div className="label">Dashboard</div>
+              <div className="arrow hidden-md-up"/>
             </div>
+          </Button>
 
-        </Modal>
+          <Button className={ `nav-btn${ is_mutasi_saldo_page ? ' is-active' : '' }` } onClick={ () => this._onNavigationClick('/balance-mutation') }>
+            <div className="nav-btn__inner">
+              <div className="icon icon--mutasi"/>
+              <div className="label">Mutasi Saldo</div>
+              <div className="arrow hidden-md-up"/>
+            </div>
+          </Button>
 
-      </>
+          <Button className={ `nav-btn nav-btn--transfer-saldo${ is_transfer_saldo_page ? ' is-active' : '' }` }  onClick={ () => this._onNavigationClick('/dashboard') }>
+            <div className="nav-btn__inner">
+              <div className="icon icon--transfer-saldo"/>
+              <div className="label">Transfer Saldo</div>
+              <div className="arrow hidden-md-up"/>
+            </div>
+          </Button>
+
+        </div>
+
+      </div>
     )
   }//render()
 
@@ -227,8 +175,7 @@ class SideNavMain extends Component {
 
 const mapStateToProps = state => {
   return {
-    user_profile: state.user.profile,
-    profile_photo_dialog: state.app.profile_photo_dialog
+    user_profile: state.user.profile
   }
 };
 

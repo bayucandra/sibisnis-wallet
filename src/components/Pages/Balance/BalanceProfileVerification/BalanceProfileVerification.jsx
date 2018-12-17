@@ -2,19 +2,18 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {Button} from "../../../Widgets/material-ui";
+import biqHelper from "lib/biqHelper";
+
+import appActions from "redux/actions/global/appActions";
+
+import {Button} from "components/Widgets/material-ui";
 import Modal from "@material-ui/core/Modal";
 
-import PhotoUpload from "../../../Shared/PhotoUpload/PhotoUpload";
-import AddressInputDialog from "../../../Shared/AddressInputDialog/AddressInputDialog";
-
-import biqHelper from "../../../../lib/biqHelper";
+import HeaderMobileGeneral from "components/Shared/HeaderMobileGeneral";
+import PhotoUpload from "components/Dialogs/DialogProfilePhoto/PhotoUpload/PhotoUpload";
+import AddressInputDialog from "components/Dialogs/DialogAddressInput/DialogAddressInput";
 
 import "./BalanceProfileVerification.scss";
-import HeaderMobileGeneral from "../../../Shared/HeaderMobileGeneral";
-import appActions from "../../../../redux/actions/global/appActions";
-
-
 
 class BalanceProfileVerification extends Component {
 
@@ -36,18 +35,11 @@ class BalanceProfileVerification extends Component {
   };
 
   _onPhotoSet = () => {
-    if ( !biqHelper.utils.isNull( this.props.user_profile.photo ) ) {
-      this.forceUpdate();
-      return;
-    }
-    biqHelper.utils.clickTimeout({
-      callback: this._onPhotoSetActual
-    });
-  };
 
-  _onPhotoSetActual = () => {
-    this._modalSetActiveComponent(PhotoUpload);
-    this._modalOpen();
+    biqHelper.utils.clickTimeout(()=>{
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogProfilePhotoOpen('select-dialog') );
+    });
   };
 
   _onAddressSet = () => {

@@ -1,4 +1,8 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
+
+import biqHelper from "../../../../../lib/biqHelper";
+import appActions from "../../../../../redux/actions/global/appActions";
 
 import {Button} from "components/Widgets/material-ui";
 
@@ -7,6 +11,13 @@ import FormWrapper from "../FormWrapper/FormWrapper";
 import "./ProfileUploadForm.scss";
 
 class ProfileUploadForm extends Component {
+
+  _uploadProfileClick = () => {
+    let {dispatch} = this.props;
+    biqHelper.utils.clickTimeout( () => {
+      dispatch( appActions.appDialogProfilePhotoOpen('select-dialog') );
+    } );
+  };
 
   render() {
     return (
@@ -22,7 +33,7 @@ class ProfileUploadForm extends Component {
             File foto maksimal berukuran 5 MB. File harus bertipe JPEG, PNG atau GIF.
           </div>
 
-          <Button className={`upload-btn`}>
+          <Button className={`upload-btn`} onClick={this._uploadProfileClick}>
             Pilih Foto Anda
           </Button>
 
@@ -34,4 +45,4 @@ class ProfileUploadForm extends Component {
 
 }
 
-export default ProfileUploadForm;
+export default connect( null )(ProfileUploadForm);

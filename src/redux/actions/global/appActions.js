@@ -73,18 +73,26 @@ import actionTypes from "../../action-types/index";
     }
   }
 
-  function appProfilePhotoDialogOpen( dialog_mode = 'select-dialog' ) {
+  function appDialogProfilePhotoOpen( dialog_mode = 'select-dialog' ) {
     return {
-      type: actionTypes.app.PROFILE_PHOTO_DIALOG_OPEN,
+      type: actionTypes.app.DIALOG_PROFILE_PHOTO_OPEN,
       payload: dialog_mode
     }
   }
 
-  function appProfilePhotoDialogClose() {
-    return {
-      type: actionTypes.app.PROFILE_PHOTO_DIALOG_CLOSE
-    }
+  function appDialogProfilePhotoClose() {
+    return { type: actionTypes.app.DIALOG_PROFILE_PHOTO_CLOSE }
   }
+
+  function appDialogAddressOpen() {
+    return { type: actionTypes.app.DIALOG_ADDRESS_INPUT_OPEN }
+  }
+
+  function appDialogAddressClose() {
+    return { type: actionTypes.app.DIALOG_ADDRESS_INPUT_CLOSE }
+  }
+  
+  
 
   const actions = {
     appInit,
@@ -98,8 +106,10 @@ import actionTypes from "../../action-types/index";
     appRouterChange,
     appLoadingIndicatorShow,
     appLoadingIndicatorHide,
-    appProfilePhotoDialogOpen,
-    appProfilePhotoDialogClose
+    appDialogProfilePhotoOpen,
+    appDialogProfilePhotoClose,
+    appDialogAddressOpen,
+    appDialogAddressClose
   };
 
 export default actions;

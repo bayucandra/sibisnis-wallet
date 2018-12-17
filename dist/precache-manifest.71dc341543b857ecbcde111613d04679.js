@@ -4,16 +4,16 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-SemiBold.713ac08d.ttf"
   },
   {
-    "revision": "b7ce05a9db830dc63923",
-    "url": "./static/css/main.ed30c697.chunk.css"
+    "revision": "b41e4db9da5202761a72",
+    "url": "./static/css/main.f6a51b67.chunk.css"
   },
   {
     "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
     "url": "./static/media/oval-2.4bacff9e.svg"
   },
   {
-    "revision": "2f278475ad77f229e14b",
-    "url": "./static/js/1.2f278475.chunk.js"
+    "revision": "49d6943cb7836fc21d92",
+    "url": "./static/js/1.49d6943c.chunk.js"
   },
   {
     "revision": "4a686d48d5a089750c49",
@@ -22,10 +22,6 @@ self.__precacheManifest = [
   {
     "revision": "15636369c63fb655612fcfd26b01a610",
     "url": "./static/media/indomaret@3x.15636369.png"
-  },
-  {
-    "revision": "0dea40537bf38032e642366accfcfe28",
-    "url": "./static/media/ico-close-black.0dea4053.svg"
   },
   {
     "revision": "706c529db35347dbde4b025a9a43a9c5",
@@ -48,36 +44,16 @@ self.__precacheManifest = [
     "url": "./static/media/avatar-placeholder-blank.f4630a9e.svg"
   },
   {
-    "revision": "4a04bb6272b3ced88435949069336469",
-    "url": "./static/media/s-litle-right.4a04bb62.svg"
-  },
-  {
-    "revision": "c78576480aa7fa37d42b8fef4b144df5",
-    "url": "./static/media/ico-back-blue.c7857648.svg"
-  },
-  {
-    "revision": "2b660c8b2cced4d4f2af52841b4b3e4b",
-    "url": "./static/media/ico-upload-mobile.2b660c8b.svg"
-  },
-  {
-    "revision": "19926ea46f8ed33d96cea93fc427da61",
-    "url": "./static/media/ico-upload-desktop.19926ea4.svg"
-  },
-  {
-    "revision": "569e39df8a5c3799d00a9e36d132fa69",
-    "url": "./static/media/upload-sukses.569e39df.svg"
-  },
-  {
-    "revision": "f7b7d67495d57408545c5293985e5b15",
-    "url": "./static/media/upload-gagal.f7b7d674.svg"
-  },
-  {
     "revision": "a4411f0f25559e310abe29f81115328b",
     "url": "./static/media/ico-file-blue.a4411f0f.svg"
   },
   {
     "revision": "2cfa045c8e7d9e6693693f3740cea339",
     "url": "./static/media/ico-camera-blue.2cfa045c.svg"
+  },
+  {
+    "revision": "0dea40537bf38032e642366accfcfe28",
+    "url": "./static/media/ico-close-black.0dea4053.svg"
   },
   {
     "revision": "f3d4eb57c182f0e8ceb0dce7de9a78ee",
@@ -156,6 +132,30 @@ self.__precacheManifest = [
     "url": "./static/media/back-blue.c7857648.svg"
   },
   {
+    "revision": "4a04bb6272b3ced88435949069336469",
+    "url": "./static/media/s-litle-right.4a04bb62.svg"
+  },
+  {
+    "revision": "c78576480aa7fa37d42b8fef4b144df5",
+    "url": "./static/media/ico-back-blue.c7857648.svg"
+  },
+  {
+    "revision": "2b660c8b2cced4d4f2af52841b4b3e4b",
+    "url": "./static/media/ico-upload-mobile.2b660c8b.svg"
+  },
+  {
+    "revision": "19926ea46f8ed33d96cea93fc427da61",
+    "url": "./static/media/ico-upload-desktop.19926ea4.svg"
+  },
+  {
+    "revision": "569e39df8a5c3799d00a9e36d132fa69",
+    "url": "./static/media/upload-sukses.569e39df.svg"
+  },
+  {
+    "revision": "f7b7d67495d57408545c5293985e5b15",
+    "url": "./static/media/upload-gagal.f7b7d674.svg"
+  },
+  {
     "revision": "592f55ff60492e54ca877f588bb8d52e",
     "url": "./static/media/Nunito-ExtraLightItalic.592f55ff.ttf"
   },
@@ -172,8 +172,8 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-Light.c41c2502.ttf"
   },
   {
-    "revision": "b7ce05a9db830dc63923",
-    "url": "./static/js/main.b7ce05a9.chunk.js"
+    "revision": "b41e4db9da5202761a72",
+    "url": "./static/js/main.b41e4db9.chunk.js"
   },
   {
     "revision": "1b31a5055cad7ed13ad2c1bc423adec6",
@@ -212,14 +212,6 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-Regular.65bb0a15.ttf"
   },
   {
-    "revision": "787475500b19b30ca2e8d4ff9531c5a2",
-    "url": "./static/media/litle-right.78747550.svg"
-  },
-  {
-    "revision": "3a4a29a3ab1b5f6b2636eac812deb862",
-    "url": "./static/media/profile-settings.3a4a29a3.svg"
-  },
-  {
     "revision": "3a4a29a3ab1b5f6b2636eac812deb862",
     "url": "./static/media/profile.3a4a29a3.svg"
   },
@@ -240,6 +232,10 @@ self.__precacheManifest = [
     "url": "./static/media/transfer-saldo.839c8ce0.svg"
   },
   {
+    "revision": "787475500b19b30ca2e8d4ff9531c5a2",
+    "url": "./static/media/litle-right.78747550.svg"
+  },
+  {
     "revision": "805e99d2210f832a808c98dc1334e743",
     "url": "./static/media/back-white.805e99d2.svg"
   },
@@ -256,12 +252,12 @@ self.__precacheManifest = [
     "url": "./static/media/ico-terverifikasi.dec9dea0.svg"
   },
   {
-    "revision": "51720f470a2d829070cd5b720bdbee8b",
-    "url": "./static/media/kirim-email.51720f47.svg"
-  },
-  {
     "revision": "4ce7e79825241165247918d8a62b7353",
     "url": "./static/media/gagal.4ce7e798.svg"
+  },
+  {
+    "revision": "51720f470a2d829070cd5b720bdbee8b",
+    "url": "./static/media/kirim-email.51720f47.svg"
   },
   {
     "revision": "a91bcfe3b592825205e93fb27ca629f8",
@@ -340,11 +336,11 @@ self.__precacheManifest = [
     "url": "./static/media/ico-oval-1.c6fbefa0.svg"
   },
   {
-    "revision": "2f278475ad77f229e14b",
-    "url": "./static/css/1.922d823f.chunk.css"
+    "revision": "49d6943cb7836fc21d92",
+    "url": "./static/css/1.c27d65ad.chunk.css"
   },
   {
-    "revision": "75f58d5e5409ac9b01d6ba24ba9372a4",
+    "revision": "6f23f363c7a4590696719e0daa99c945",
     "url": "./index.html"
   }
 ];

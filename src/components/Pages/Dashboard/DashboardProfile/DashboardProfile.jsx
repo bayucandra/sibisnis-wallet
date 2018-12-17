@@ -106,10 +106,10 @@ class DashboardProfile extends Component {
               <div className="action">
                 <div className="icon icon--email"/>
                 <div className="label">Verifikasi Email Anda</div>
-                <div className="icon-indicator icon-indicator--verified hidden-md-up"/>
+                <div className={`icon-indicator${ this.props.user_profile.verifications.email === 1 ? ' icon-indicator--verified' : '' } hidden-md-up`}/>
 
                 {
-                  this.props.user_profile.verifications.email !== 1 ?
+                  this.props.user_profile.verifications.email === 1 ?
 
                   <div className="icon-verified-desktop visible-md-up"/>
 
@@ -134,10 +134,20 @@ class DashboardProfile extends Component {
               <div className="action">
                 <div className="icon icon--profile-name"/>
                 <div className="label">Upload foto profil Anda</div>
-                <div className="icon-indicator hidden-md-up"/>
-                <Button className={`action-btn-desktop visible-md-up${ this.state.profile_upload_desktop ? ' action-btn-desktop--close' : '' }`} onClick={this._profileVerificationDesktopToggle}>
-                  { this.state.profile_upload_desktop ? 'Tutup' : 'Upload Sekarang' }
-                </Button>
+                <div className={ `icon-indicator${ !biqHelper.utils.isNull(this.props.user_profile.photo) ? ' icon-indicator--verified' : '' } hidden-md-up` }/>
+
+                {
+                  !biqHelper.utils.isNull(this.props.user_profile.photo) ?
+
+                    <div className="icon-verified-desktop visible-md-up"/>
+                      :
+                    <Button
+                      className={`action-btn-desktop visible-md-up${this.state.profile_upload_desktop ? ' action-btn-desktop--close' : ''}`}
+                      onClick={this._profileVerificationDesktopToggle}>
+                      {this.state.profile_upload_desktop ? 'Tutup' : 'Upload Sekarang'}
+                    </Button>
+                }
+
               </div>
 
               <ProfileUploadForm isVisible={this.state.profile_upload_desktop}/>

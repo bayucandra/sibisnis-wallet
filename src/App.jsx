@@ -4,7 +4,7 @@ import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 
 import Header from "./components/Shared/Header/Header";
 import appActions from "./redux/actions/global/appActions";
-import UserActions from "./redux/actions/global/userActions";
+import userActions from "./redux/actions/global/userActions";
 import esProvider from "./providers/esProvider";
 import biqHelper from "./lib/biqHelper/index";
 import biqConfig from "./providers/biqConfig";
@@ -25,6 +25,7 @@ import LoadingIndicatorBar from "./components/Widgets/LoadingIndicatorBar/Loadin
 import "./App.scss";
 import Modal from "@material-ui/core/Modal/Modal";
 import ModalNotice from "./components/Widgets/ModalNotice/ModalNotice";
+import DialogProfilePhoto from "./components/Dialogs/DialogProfilePhoto/DialogProfilePhoto";
 
 
 class App extends Component {
@@ -52,7 +53,7 @@ class App extends Component {
 
     dispatch(appActions.appInit());
     dispatch(appActions.appSseAgenInit());
-    dispatch(UserActions.userProfileGet());
+    dispatch(userActions.userProfileGet());
 
     if ( process.env.NODE_ENV === 'production' ) {
       esProvider.addEventListener('login', (e) => {
@@ -110,7 +111,9 @@ class App extends Component {
     // window.scrollTo(0,0);
     let {dispatch} = this.props;
     let body = $('html, body');
-    body.stop().animate({scrollTop:0}, 500, 'swing');
+    if (prevProps.location.pathname !== this.props.location.pathname)
+      body.stop().animate({scrollTop:0}, 500, 'swing');
+
     if( this.props.app.should_redirect_to_agen ) window.location = biqConfig.agen.url_base + '/#/login/default';
 
     if( this.props.app.is_logging_out ) {
@@ -187,6 +190,8 @@ class App extends Component {
             </div>
 
           </Modal>
+
+          <DialogProfilePhoto/>
 
         </React.Fragment>
     )

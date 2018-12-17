@@ -17,7 +17,7 @@ let state_default = {
   , header_menu_mobile_show: true
   , loading_indicator_show: false
   , window_size: { width: window_el.outerWidth(), height: window_el.outerHeight() }
-  , profile_photo_dialog: {
+  , dialog_profile_photo: {
     is_open: false,
     mode: 'select-dialog'//select-dialog || upload-dialog
   }
@@ -91,9 +91,9 @@ export default ( state = state_default, action ) => {
       new_state = { should_redirect_to_agen: true };
       break;
 
-    case actionTypes.app.PROFILE_PHOTO_DIALOG_OPEN:
+    case actionTypes.app.DIALOG_PROFILE_PHOTO_OPEN:
       new_state = {
-        profile_photo_dialog: {
+        dialog_profile_photo: {
           is_open: true,
           mode: action.payload
         }
@@ -101,9 +101,9 @@ export default ( state = state_default, action ) => {
       };
       break;
 
-    case actionTypes.app.PROFILE_PHOTO_DIALOG_CLOSE:
+    case actionTypes.app.DIALOG_PROFILE_PHOTO_CLOSE:
       new_state = {
-        profile_photo_dialog: Object.assign( {}, state_default.profile_photo_dialog )
+        dialog_profile_photo: Object.assign( {}, state_default.dialog_profile_photo )
       };
       break;
 

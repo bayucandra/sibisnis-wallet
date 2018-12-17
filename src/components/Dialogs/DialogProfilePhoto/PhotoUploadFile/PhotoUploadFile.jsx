@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
-import {Button} from '../../Widgets/material-ui';
+import {Button} from '../../../Widgets/material-ui';
 
 import { Observable, Subject, of } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
@@ -13,21 +13,21 @@ import PhotoCrop from '../PhotoCrop/PhotoCrop';
 // import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';//TODO: deprecated and delete soon
 
 // Custom Libraries
-import biqHelper from "../../../lib/biqHelper/index";
+import biqHelper from "lib/biqHelper";
 
 // Redux
-import UserActions from '../../../redux/actions/global/userActions';
+import userActions from '../../../../redux/actions/global/userActions';
 import { connect } from 'react-redux';
 
 // Local Images
-import uploadIconMobile from '../../../images/icons/ico-upload-mobile.svg';
-import uploadIconDesktop from '../../../images/icons/ico-upload-desktop.svg';
-import imgUploadSukses from '../../../images/icons/upload-sukses.svg';
-import imgUploadGagal from '../../../images/icons/upload-gagal.svg';
+import uploadIconMobile from '../../../../images/icons/ico-upload-mobile.svg';
+import uploadIconDesktop from '../../../../images/icons/ico-upload-desktop.svg';
+import imgUploadSukses from '../../../../images/icons/upload-sukses.svg';
+import imgUploadGagal from '../../../../images/icons/upload-gagal.svg';
 
 // Custom CSS
 import './PhotoUploadFile.scss';
-import biqConfig from "../../../providers/biqConfig";
+import biqConfig from "providers/biqConfig";
 
 class PhotoUploadFile extends Component {
 
@@ -187,7 +187,7 @@ class PhotoUploadFile extends Component {
                 this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
 
                 if ( biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
-                  dispatch( UserActions.userProfileUpdate( { key: 'photo', value: data.response.data.value } ) );
+                  dispatch( userActions.userProfileUpdate( { key: 'photo', value: data.response.data.value } ) );
                 } else {
                   let response = data.status !== 0 ? data.response
                     : biqConfig.api.error_response_fake;

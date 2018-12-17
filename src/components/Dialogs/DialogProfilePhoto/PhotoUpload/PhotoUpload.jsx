@@ -7,18 +7,19 @@ import appActions from "redux/actions/global/appActions";
 // Custom Components
 
 // Custom Libraries
-import { modalToggle,cameraCaptureFileUpload } from '../../../lib/utilities';//TODO: Delete soon
-import { modalTypes } from '../../../lib/constants';//TODO: Delete soon
-import biqHelper from "../../../lib/biqHelper";
+import { modalToggle,cameraCaptureFileUpload } from 'lib/utilities';//TODO: Delete soon
+import { modalTypes } from 'lib/constants';//TODO: Delete soon
+import biqHelper from "lib/biqHelper";
+
+import {Button} from "components/Widgets/material-ui";
 
 // Local Images
-import fileIconBlue from '../../../images/icons/ico-file-blue.svg';
-import cameraIconBlue from '../../../images/icons/ico-camera-blue.svg';
-import WebcamCapture from '../WebcamCapture/WebcamCapture';
+import fileIconBlue from 'images/icons/ico-file-blue.svg';
+import cameraIconBlue from 'images/icons/ico-camera-blue.svg';
+import WebcamCapture from 'components/Shared/WebcamCapture/WebcamCapture';
 
 // Custom CSS
 import './PhotoUpload.scss';
-import {Button} from "../../Widgets/material-ui";
 /*
 const UploadButton = (props) => {
   const { id, icon, label, onClick } = props
@@ -54,7 +55,7 @@ class PhotoUpload extends Component {
     // this.setState({ dragPhotoUpload: true });
     // this.props.modalSetActiveComponent( DropPhotoUpload );
     let {dispatch} = this.props;
-    dispatch( appActions.appProfilePhotoDialogOpen( 'upload-dialog' ) );
+    dispatch( appActions.appDialogProfilePhotoOpen( 'upload-dialog' ) );
   };
 
   toggleCameraCapture = (id) => {

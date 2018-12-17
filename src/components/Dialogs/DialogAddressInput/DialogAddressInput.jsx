@@ -21,10 +21,10 @@ import addressProvider from "../../../providers/addressProvider";
 import LoadingIndicatorBar from "../../Widgets/LoadingIndicatorBar";
 import ModalNotice from "../../Widgets/ModalNotice/ModalNotice";
 
-import "./AddressInputDialog.scss";
+import "./DialogAddressInput.scss";
 import "../../../styles/_components.scss";
 import biqConfig from "../../../providers/biqConfig";
-import UserActions from "../../../redux/actions/global/userActions";
+import userActions from "../../../redux/actions/global/userActions";
 
 const styles = theme => ({
   root: {
@@ -168,7 +168,7 @@ const components = {
   DropdownIndicator
 };
 
-class AddressInputDialog extends React.Component {
+class DialogAddressInput extends React.Component {
   state = {
     provinsi_selected: null,
     provinsi_is_loading: false,
@@ -373,7 +373,7 @@ class AddressInputDialog extends React.Component {
         .subscribe( res => {
           let status_title = 'Sukses';
           if ( biqHelper.utils.httpResponseIsSuccess( res.response_code.status ) ) {
-            dispatch( UserActions.userProfileUpdate( { key: 'alamat', value: res.data.alamat } ) );
+            dispatch( userActions.userProfileUpdate( { key: 'alamat', value: res.data.alamat } ) );
             this._modalClose();
           } else {
             status_title = 'Gagal'
@@ -546,6 +546,6 @@ class AddressInputDialog extends React.Component {
 
 export default withRouter(
   connect( null ) (
-    withStyles(styles, { withTheme: true }) (AddressInputDialog )
+    withStyles(styles, { withTheme: true }) (DialogAddressInput )
   )
 ) ;

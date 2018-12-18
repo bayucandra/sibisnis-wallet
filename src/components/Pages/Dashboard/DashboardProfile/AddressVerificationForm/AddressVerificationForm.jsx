@@ -315,7 +315,8 @@ class AddressVerificationForm extends Component {
 
     if(biqHelper.utils.isNull(this.state.kelurahan_selected)) return;
 
-    $('.address-input-dialog .alamat textarea').focus();
+    let address_input_el = $('.address-verification-form .alamat textarea');
+    address_input_el.focus();
   };
 
   _addressInputDesktopToggle = ()=>{

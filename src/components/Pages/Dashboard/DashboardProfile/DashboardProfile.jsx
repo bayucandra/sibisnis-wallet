@@ -176,7 +176,7 @@ class DashboardProfile extends Component {
 
               </div>
 
-              <ProfileUploadForm isVisible={this.state.profile_upload_desktop}/>
+              <ProfileUploadForm isVisible={this.state.profile_upload_desktop && biqHelper.utils.isNull(this.props.user_profile.photo)}/>
 
             </div>
           </Button>

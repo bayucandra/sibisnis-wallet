@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
+
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {Subject} from 'rxjs';
+import {Subject, throwError} from 'rxjs';
 import {ajax as rxAjax} from 'rxjs/ajax';
 import {takeUntil, map} from 'rxjs/operators';
 
@@ -21,10 +22,12 @@ import addressProvider from "providers/addressProvider";
 import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar";
 import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
 
-import "./DialogAddressInput.scss";
-import "styles/components/_loading-indicator.scss";
 import biqConfig from "providers/biqConfig";
 import userActions from "redux/actions/global/userActions";
+
+import FormWrapper from "../FormWrapper";
+
+import "./AddressVerificationForm.scss";
 
 const styles = theme => ({
   root: {
@@ -69,7 +72,11 @@ function Control(props) {
   return (
     <TextField
       fullWidth
-      className="mui-text-field mui-text-field--no-label"
+      className="mui-text-field"
+      label={props.selectProps.placeholder}
+      InputLabelProps= {{
+        shrink: props.isFocused || props.selectProps.menuIsOpen || !biqHelper.utils.isNull( biqHelper.JSON.pathValueGet(props.selectProps, 'value.label') )
+      }}
 
       InputProps={{
         inputComponent,
@@ -102,15 +109,7 @@ function Option(props) {
 }
 
 function Placeholder(props) {
-  return (
-    <Typography
-      color="textSecondary"
-      className={"input-place-holder"}
-      {...props.innerProps}
-    >
-      {props.children}
-    </Typography>
-  );
+  return null;
 }
 
 function SingleValue(props) {
@@ -168,7 +167,8 @@ const components = {
   DropdownIndicator
 };
 
-class DialogAddressInput extends React.Component {
+class AddressVerificationForm extends Component {
+
   state = {
     provinsi_selected: null,
     provinsi_is_loading: false,
@@ -195,7 +195,7 @@ class DialogAddressInput extends React.Component {
       status_title: 'Gagal',
       response_code: { status:200, message: '' }
     },
-    modal_child_is_open: false
+    modal_notice_is_open: false
   };
 
 
@@ -255,7 +255,9 @@ class DialogAddressInput extends React.Component {
 
       this.setState({ kabupaten_data: address_mapped });
       this.setState( { kabupaten_is_loading: false } );
-      $('.select-dropdown--kabupaten .mui-text-field__input input[type="text"]').focus();
+      let input_field = $('.select-dropdown--kabupaten .mui-text-field__input input[type="text"]');
+
+      input_field.focus();
     } );
 
   };
@@ -328,16 +330,16 @@ class DialogAddressInput extends React.Component {
     return biqHelper.utils.modalTopRatio( ratio_opt );
   }
 
-  _modalClose = ()=>{
-    biqHelper.utils.clickTimeout(()=>this.props.modalClose());
+  _addressInputDesktopToggle = ()=>{
+    biqHelper.utils.clickTimeout(()=>this.props.addressInputDesktopToggle());
   };
 
-  _modalChildOpen = () => {
-    this.setState({modal_child_is_open: true});
+  _modalNoticeOpen = () => {
+    this.setState({modal_notice_is_open: true});
   };
 
-  _modalChildClose = () =>  {
-    this.setState({modal_child_is_open: false});
+  _modalNoticeClose = () =>  {
+    this.setState({modal_notice_is_open: false});
   };
 
   _onSubmit = () => {
@@ -359,31 +361,72 @@ class DialogAddressInput extends React.Component {
       };
 
       this.setState({is_submitting: true});
-      rxAjax({
+      let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/address/edit`,
         method: 'POST',
         crossDomain: true,
         withCredentials: true,
         body: Object.assign( data, biqConfig.api.data_auth )
-      })
-        .pipe(
+      });
+/*
+      ajax$ = throwError({
+        xhr: {
+          status: 404,
+          response: {
+            "response_code": {
+              "status": 404,
+              "message": "There is error on database process."
+            },
+            "data": null
+          }
+        }
+      });*/
+
+      ajax$.pipe(
           takeUntil( this.stop$ ),
           map( e => e.response )
         )
-        .subscribe( res => {
-          let status_title = 'Sukses';
-          if ( biqHelper.utils.httpResponseIsSuccess( res.response_code.status ) ) {
-            dispatch( userActions.userProfileUpdate( { key: 'alamat', value: res.data.alamat } ) );
-            this._modalClose();
-          } else {
-            status_title = 'Gagal';
-            alert( `Error: ${res.response_code.message}` );
+        .subscribe(
+
+          res => {
+            let status_title = 'Sukses';
+            if ( biqHelper.utils.httpResponseIsSuccess( res.response_code.status ) ) {
+              dispatch( userActions.userProfileUpdate( { key: 'alamat', value: res.data.alamat } ) );
+              this._addressInputDesktopToggle();
+            } else {
+              let error_message = biqHelper.JSON.pathValueGet( res, 'response.response_code.message' );
+              error_message = biqHelper.utils.isNull( error_message ) ? res.status : error_message;
+
+              this.setState({
+                submit_response: Object.assign(
+                  {},
+                  this.state.submit_response, { status_title: 'Gagal', response_code: {message: error_message} }
+                )
+              });
+              this._modalNoticeOpen();
+
+            }
+
+            this.setState( { submit_response: Object.assign( {}, this.state.submit_response, { status_title: status_title }, res ) } );
+
+            this.setState({is_submitting: false});
+          },
+
+          err => {
+            let error_message = biqHelper.JSON.pathValueGet( err, 'xhr.response.response_code.message' );
+            error_message = biqHelper.utils.isNull( error_message ) ? err.xhr.status : error_message;
+
+            this.setState({
+              submit_response: Object.assign(
+                {},
+                this.state.submit_response, { status_title: 'Gagal', response_code: {message: error_message} }
+              )
+            });
+            this._modalNoticeOpen();
+            this.setState({is_submitting: false});
           }
 
-          this.setState( { submit_response: Object.assign( {}, this.state.submit_response, { status_title: status_title }, res ) } );
-
-          this.setState({is_submitting: false});
-        } );
+        );
 
     } else {
       this.setState( {
@@ -392,7 +435,7 @@ class DialogAddressInput extends React.Component {
           this.state.submit_response, { status_title: 'Input tidak valid', response_code: { message: 'Harap periksa kembali data yang anda input.' } }
         )
       } );
-      this._modalChildOpen();
+      this._modalNoticeOpen();
     }
   };
 
@@ -404,9 +447,9 @@ class DialogAddressInput extends React.Component {
     addressProvider.provinsi$()
       .subscribe( data => {
         let provinsi_mapped = data.map( response =>({
-            label: biqHelper.string.capitalize(response.nama_provinsi),
-            value: {label: response.nama_provinsi, id: response.id_provinsi}
-          }));
+          label: biqHelper.string.capitalize(response.nama_provinsi),
+          value: {label: response.nama_provinsi, id: response.id_provinsi}
+        }));
 
         this.setState({ provinsi_data: provinsi_mapped });
         this.setState( { provinsi_is_loading: false } );
@@ -446,13 +489,8 @@ class DialogAddressInput extends React.Component {
     let kelurahan_is_disabled = this.state.kelurahan_is_loading || biqHelper.utils.isNull(this.state.kecamatan_selected);
 
     return (
-      <div className={`address-input-dialog ${classes.root}`} style={{ marginTop: this.state.modalPosTop }}>
-
-        <div className="address-input-dialog__title">Alamat</div>
-
-        <Button className="address-input-dialog__close-btn" onClick={this._modalClose}>&nbsp;</Button>
-
-        <div className="address-input-dialog__body">
+      <>
+        <FormWrapper className="address-verification-form" isVisible={this.props.isVisible}>
 
           <Select
             className={"select-dropdown"}
@@ -512,40 +550,40 @@ class DialogAddressInput extends React.Component {
 
           <TextField
             fullWidth multiline={true}
-            placeholder="Alamat"
-            className="mui-text-area mui-text-area--no-label alamat"
+            label="Alamat"
+            className="mui-text-area alamat"
             value={this.state.alamat}
             onChange={ e => this.setState({ alamat : e.target.value }) }/>
 
-        </div>
-
-        <div className="address-input-dialog__footer-action">
-
-          <Button className="cancel-btn" onClick={this._modalClose}>BATAL</Button>
-          <Button className="submit-btn" onClick={this._onSubmit}>Simpan</Button>
-
-        </div>
-
-        { this.state.is_submitting ? <LoadingIndicatorBar/> : '' }
-
-        <Modal
-          open={this.state.modal_child_is_open}
-          onClose={this._modalChildClose}>
-
-          <div className="modal-inner">
-            <ModalNotice modalClose={this._modalChildClose} title={this.state.submit_response.status_title} notice={this.state.submit_response.response_code.message}/>
+          <div className="action-footer">
+            <Button className={`submit-btn${this.state.is_submitting ? ' is-submitting' : ''}`} onClick={this._onSubmit}>Simpan</Button>
           </div>
 
-        </Modal>
+          { this.state.is_submitting && <LoadingIndicatorBar/>}
 
-      </div>
+
+
+
+          <Modal
+            open={this.state.modal_notice_is_open}
+            onClose={this._modalNoticeClose}>
+
+            <div className="modal-inner">
+              <ModalNotice modalClose={this._modalNoticeClose} title={this.state.submit_response.status_title} notice={this.state.submit_response.response_code.message}/>
+            </div>
+
+          </Modal>
+
+
+        </FormWrapper>
+      </>
     );
   }
+
 }
 
-
 export default withRouter(
-  connect( null ) (
-    withStyles(styles, { withTheme: true }) (DialogAddressInput )
+  connect() (
+    withStyles( styles, {withTheme: true} ) ( AddressVerificationForm )
   )
-) ;
+);

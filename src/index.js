@@ -58,12 +58,22 @@ const THEME = createMuiTheme({
 
       }
     },
+
     MuiMenuItem: {
       root: {
         height: 'auto'
       }
+    },
+
+    MuiFormLabel: {
+      focused: {
+        "&$focused": {
+          color: "#4a90e2"
+        }
+      }
     }
-  }
+
+  }//overrides
 
 });
 

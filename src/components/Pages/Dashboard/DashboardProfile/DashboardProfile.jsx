@@ -14,6 +14,7 @@ import ProfileUploadForm from "./ProfileUploadForm/ProfileUploadForm";
 
 import "styles/components/_modal.scss";
 import "./DashboardProfile.scss";
+import AddressVerificationForm from "./AddressVerificationForm/AddressVerificationForm";
 
 
 class DashboardProfile extends Component {
@@ -23,7 +24,8 @@ class DashboardProfile extends Component {
       desktop: false,
       mobile: false
     },
-    profile_upload_desktop: false//Mobile version placed on redux
+    profile_upload_desktop: false,//This is for desktop, Mobile version placed on redux
+    address_input_desktop: false//This is for desktop, Mobile version placed on redux
   };
 
   _emailVerificationDekstopToggle = () => {
@@ -65,6 +67,10 @@ class DashboardProfile extends Component {
     biqHelper.utils.clickTimeout( () => {
       dispatch( appActions.appDialogProfilePhotoOpen('select-dialog') );
     } );
+  };
+
+  _addressInputDesktopToggle = () => {
+    biqHelper.utils.clickTimeout( () => this.setState( { address_input_desktop: !this.state.address_input_desktop } ) );
   };
 
   render() {
@@ -156,7 +162,7 @@ class DashboardProfile extends Component {
                     <Button
                       className={`action-btn-desktop visible-md-up${this.state.profile_upload_desktop ? ' action-btn-desktop--close' : ''}`}
                       onClick={this._photoProfileVerificationDesktopToggle}>
-                      {this.state.profile_upload_desktop ? 'Tutup' : 'Upload Sekarang'}
+                      {this.state.profile_upload_desktop ? 'Batal' : 'Upload Sekarang'}
                     </Button>
                 }
 
@@ -173,8 +179,22 @@ class DashboardProfile extends Component {
               <div className="action">
                 <div className="icon icon--address"/>
                 <div className="label">Lengkapi Data Alamat Anda</div>
-                <div className="icon-indicator hidden-md-up"/>
+                <div className={ `icon-indicator${ !biqHelper.utils.isNull(this.props.user_profile.alamat) ? ' icon-indicator--verified' : '' } hidden-md-up` }/>
+
+                {
+                  !biqHelper.utils.isNull(this.props.user_profile.alamat) ?
+
+                    <div className="icon-verified-desktop visible-md-up"/>
+                    :
+                    <Button
+                      className={`action-btn-desktop visible-md-up${this.state.address_input_desktop ? ' action-btn-desktop--close' : ''}`}
+                      onClick={this._addressInputDesktopToggle}>
+                      {this.state.address_input_desktop ? 'Batal' : 'Lengkapi Sekarang'}
+                    </Button>
+                }
               </div>
+
+              <AddressVerificationForm isVisible={this.state.address_input_desktop} addressInputDesktopToggle={this._addressInputDesktopToggle}/>
 
             </div>
           </Button>

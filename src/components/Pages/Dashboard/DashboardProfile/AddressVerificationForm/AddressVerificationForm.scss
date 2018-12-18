@@ -1,0 +1,96 @@
+@import "../../../../../styles/variables";
+@import "../../../../../styles/mui";
+
+.address-verification-form {
+  display: flex;
+  flex-direction: column;
+  align-items: normal;
+
+  &.is-visible {
+    max-height: 500px;
+    padding: 23px 30px 25px;
+  }//&.is-visible
+
+  .select-dropdown {
+    padding-bottom: 28px;
+
+    &.is-disabled {
+      opacity: 0.4;
+    }//&.is-disabled
+
+    .mui-text-field {
+
+      &__display {
+        font-size: 15px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: map-get($colors, charcoal-grey);
+      }//&__display
+
+    }//.input-control
+
+    .input-place-holder {
+      position: absolute;
+      top: 50%;
+      left: 2px;
+      transform: translateY( -50% );
+
+      font-size: 0.875rem;
+      font-family: "NunitoSans", sans-serif;
+      font-weight: 400;
+      line-height: 1.5;
+    }//.input-place-holder
+
+    .loading-indicator {
+      position: relative;
+      height: 100%;
+      width: 30px;
+    }//.loading-indicator
+
+    .dropdown-indicator {
+      width: 0; height: 0;
+      border-width: 5px 5px 0;
+      border-style: solid;
+      border-color: map-get( $colors, very-light-pink ) transparent transparent;
+    }//.dropdown-indicator
+
+  }//.select-dropdown
+
+  .action-footer {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 41px;
+
+    .submit-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 160px;
+      height: 45px;
+      border-radius: 5px;
+      box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
+      background-color: map-get($colors, dark-mint);
+
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      text-align: center;
+      color: #ffffff;
+
+      &.is-submitting {
+        opacity: 0.5;
+      }//&.is-submitting
+
+    }//.submit-btn
+
+  }//.action-footer
+
+
+
+}//.address-verification-form

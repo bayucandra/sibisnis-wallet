@@ -1,6 +1,14 @@
 .mui-text-field {
 
-  > div:first-child {
+  > label:first-child {
+    font-weight: normal;
+    color: lighten( black, 60 );
+  }
+
+  > div:nth-child(2) {
+    &:before {
+      border-bottom: 1px solid map-get( $colors, very-light-pink );
+    }//&:before
     &:after {
       border-bottom: solid 2px map-get($colors, dark-sky-blue);
     }//&:after
@@ -20,11 +28,32 @@
     color: rgba(0, 0, 0, 0.87);
   }//&__input
 
+  &--no-label {
+
+    > div:first-child {
+      &:before {
+        border-bottom: 1px solid map-get( $colors, very-light-pink );
+      }//&:before
+      &:after {
+        border-bottom: solid 2px map-get($colors, dark-sky-blue);
+      }//&:after
+    }//> div:first-child
+
+  }//&--no-label
+
 }//.mui-text-field
 
 .mui-text-area {
 
-  > div:first-child {
+  > label:first-child {
+    font-weight: normal;
+    color: lighten( black, 60 );
+  }
+
+  > div:nth-child(2) {
+    &:before {
+      border-bottom: 1px solid map-get( $colors, very-light-pink );
+    }//&:before
     &:after {
       border-bottom: solid 2px map-get($colors, dark-sky-blue);
     }//&:after
@@ -48,5 +77,18 @@
     }//&::placeholder
 
   }//textarea
+
+  &--no-label {
+
+    > div:first-child {
+      &:before {
+        border-bottom: 1px solid map-get( $colors, very-light-pink );
+      }//&:before
+      &:after {
+        border-bottom: solid 2px map-get($colors, dark-sky-blue);
+      }//&:after
+    }//> div:first-child
+
+  }//&--no-label
 
 }//.mui-text-area

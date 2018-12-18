@@ -2,6 +2,10 @@
 
 .email-verification-form {
 
+  &.is-visible {
+    max-height: 200px;
+  }//&.is-visible
+
   .form-input {
     display: flex;
     align-items: center;

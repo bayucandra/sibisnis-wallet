@@ -68,11 +68,15 @@ class ProfileImagePreview extends Component {
     this.setState( {modalPosTop : top_pos } );
   }
 
-  componentDidUpdate(prevProp, prevState) {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+
     let top_pos = this._modalPosTopGen();
-    if ( prevState.modalPosTop !== top_pos ) {
+    if ( this.state.modalPosTop !== top_pos ) {
       this.setState( { modalPosTop: top_pos } );
+      return false;
     }
+
+    return true;
   }
 
   render() {

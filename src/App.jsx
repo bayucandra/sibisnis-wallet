@@ -2,6 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {Redirect, Route, Switch, withRouter} from 'react-router-dom';
 
+import {fromEvent, forkJoin} from 'rxjs';
+import { debounceTime, map } from 'rxjs/operators';
+import $ from 'jquery';
+
 import Header from "./components/Shared/Header/Header";
 import appActions from "./redux/actions/global/appActions";
 import userActions from "./redux/actions/global/userActions";
@@ -11,9 +15,8 @@ import biqConfig from "./providers/biqConfig";
 import addressProvider from "./providers/addressProvider";
 import walletProvider from "./providers/walletProvider";
 
-import {fromEvent, forkJoin} from 'rxjs';
-import { debounceTime, map } from 'rxjs/operators';
-import $ from 'jquery';
+import Modal from "@material-ui/core/Modal/Modal";
+
 import Dashboard from "./components/Pages/Dashboard/Dashboard";
 import Profile from "./components/Pages/Profile";
 import Balance from "./components/Pages/Balance";
@@ -22,11 +25,11 @@ import AllNews from "./components/Pages/AllNews/AllNews";
 import AllHistorLogins from "./components/Pages/AllHistoryLogins/AllHistoryLogins";
 import LoadingIndicatorBar from "./components/Widgets/LoadingIndicatorBar/LoadingIndicatorBar";
 
-import "./App.scss";
-import Modal from "@material-ui/core/Modal/Modal";
 import ModalNotice from "./components/Widgets/ModalNotice/ModalNotice";
-import DialogProfilePhoto from "./components/Dialogs/DialogProfilePhoto/DialogProfilePhoto";
+import DialogProfilePhoto from "./components/Dialogs/DialogProfilePhoto";
+import DialogAddressInput from "components/Dialogs/DialogAddressInput";
 
+import "./App.scss";
 
 class App extends Component {
 
@@ -191,7 +194,10 @@ class App extends Component {
 
           </Modal>
 
+
           <DialogProfilePhoto/>
+          <DialogAddressInput/>
+
 
         </React.Fragment>
     )

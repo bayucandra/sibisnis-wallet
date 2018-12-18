@@ -1,13 +1,18 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 
-import {Subject} from 'rxjs';
+import {Subject, throwError} from 'rxjs';
 import {ajax as rxAjax} from 'rxjs/ajax';
 import {takeUntil, map} from 'rxjs/operators';
 
+import biqConfig from "providers/biqConfig";
+
+import userActions from "redux/actions/global/userActions";
+import appActions from "redux/actions/global/appActions";
+
 import Select from 'react-select';
-import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Paper from '@material-ui/core/Paper';
@@ -21,10 +26,8 @@ import addressProvider from "providers/addressProvider";
 import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar";
 import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
 
-import "./DialogAddressInput.scss";
 import "styles/components/_loading-indicator.scss";
-import biqConfig from "providers/biqConfig";
-import userActions from "redux/actions/global/userActions";
+import "./DialogAddressInput.scss";
 
 const styles = theme => ({
   root: {
@@ -195,11 +198,13 @@ class DialogAddressInput extends React.Component {
       status_title: 'Gagal',
       response_code: { status:200, message: '' }
     },
-    modal_child_is_open: false
+    modal_notice_is_open: false
   };
 
 
   stop$ = new Subject();
+
+  dialogRef = React.createRef();
 
   _selectOptionChange = name => value => {
 
@@ -329,15 +334,18 @@ class DialogAddressInput extends React.Component {
   }
 
   _modalClose = ()=>{
-    biqHelper.utils.clickTimeout(()=>this.props.modalClose());
+    biqHelper.utils.clickTimeout(() => {
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogAddressClose() );
+    });
   };
 
-  _modalChildOpen = () => {
-    this.setState({modal_child_is_open: true});
+  _modalNoticeOpen = () => {
+    this.setState({modal_notice_is_open: true});
   };
 
-  _modalChildClose = () =>  {
-    this.setState({modal_child_is_open: false});
+  _modalNoticeClose = () =>  {
+    this.setState({modal_notice_is_open: false});
   };
 
   _onSubmit = () => {
@@ -359,31 +367,62 @@ class DialogAddressInput extends React.Component {
       };
 
       this.setState({is_submitting: true});
-      rxAjax({
+      let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/address/edit`,
         method: 'POST',
         crossDomain: true,
         withCredentials: true,
         body: Object.assign( data, biqConfig.api.data_auth )
-      })
-        .pipe(
+      });
+
+/*      ajax$ = throwError({
+        xhr: {
+          status: 404,
+          response: {
+            "response_code": {
+              "status": 404,
+              "message": "There is error on database process."
+            },
+            "data": null
+          }
+        }
+      });*/
+
+      ajax$.pipe(
           takeUntil( this.stop$ ),
           map( e => e.response )
         )
-        .subscribe( res => {
-          let status_title = 'Sukses';
-          if ( biqHelper.utils.httpResponseIsSuccess( res.response_code.status ) ) {
-            dispatch( userActions.userProfileUpdate( { key: 'alamat', value: res.data.alamat } ) );
-            this._modalClose();
-          } else {
-            status_title = 'Gagal';
-            alert( `Error: ${res.response_code.message}` );
+
+        .subscribe(
+
+          res => {
+
+            if ( biqHelper.utils.httpResponseIsSuccess( res.response_code.status ) ) {
+              dispatch( userActions.userProfileUpdate( { alamat: res.data.alamat } ) );
+              this._modalClose();
+            }
+
+            // this.setState( { submit_response: Object.assign( {}, this.state.submit_response, { status_title: status_title }, res ) } );
+
+            this.setState({is_submitting: false});
+          },
+
+          err => {
+            let error_message = biqHelper.JSON.pathValueGet( err, 'xhr.response.response_code.message' );
+            error_message = biqHelper.utils.isNull( error_message ) ? err.xhr.status : error_message;
+
+            this.setState({
+              submit_response: Object.assign(
+                {},
+                this.state.submit_response, { status_title: 'Gagal', response_code: {message: error_message} }
+              )
+            });
+            this._modalNoticeOpen();
+            this.setState({is_submitting: false});
           }
 
-          this.setState( { submit_response: Object.assign( {}, this.state.submit_response, { status_title: status_title }, res ) } );
 
-          this.setState({is_submitting: false});
-        } );
+        );
 
     } else {
       this.setState( {
@@ -392,13 +431,11 @@ class DialogAddressInput extends React.Component {
           this.state.submit_response, { status_title: 'Input tidak valid', response_code: { message: 'Harap periksa kembali data yang anda input.' } }
         )
       } );
-      this._modalChildOpen();
+      this._modalNoticeOpen();
     }
   };
 
   componentDidMount(){
-    let top_pos = this._modalPosTopGen();
-    this.setState( {modalPosTop : top_pos } );
 
     this.setState( { provinsi_is_loading: true } );
     addressProvider.provinsi$()
@@ -414,13 +451,23 @@ class DialogAddressInput extends React.Component {
 
     addressProvider.kecamatan$().subscribe();
 
+
+    setTimeout(()=>{
+      let top_pos = this._modalPosTopGen();
+      this.setState( { modalPosTop: top_pos } );
+    },100);
+
   }
 
-  componentDidUpdate(prevProp, prevState){
-    let top_pos = this._modalPosTopGen();
-    if ( prevState.modalPosTop !== top_pos ) {
-      this.setState( { modalPosTop: top_pos } );
-    }
+  componentDidUpdate(prevProp, prevState, snapshot){
+
+    setTimeout(()=>{
+      let top_pos = this._modalPosTopGen();
+      if ( prevState.modalPosTop !== top_pos ) {
+        this.setState( { modalPosTop: top_pos } );
+      }
+    },100);
+
   }
 
   componentWillUnmount() {
@@ -446,106 +493,123 @@ class DialogAddressInput extends React.Component {
     let kelurahan_is_disabled = this.state.kelurahan_is_loading || biqHelper.utils.isNull(this.state.kecamatan_selected);
 
     return (
-      <div className={`address-input-dialog ${classes.root}`} style={{ marginTop: this.state.modalPosTop }}>
+      <Modal
+        open={this.props.dialog_address_input.is_open}
+        onClose={this._modalClose}>
 
-        <div className="address-input-dialog__title">Alamat</div>
+        <div className="modal-inner">
 
-        <Button className="address-input-dialog__close-btn" onClick={this._modalClose}>&nbsp;</Button>
 
-        <div className="address-input-dialog__body">
+          <div className={`address-input-dialog ${classes.root}`} ref={this.dialogRef} style={{ marginTop: this.state.modalPosTop }}>
 
-          <Select
-            className={"select-dropdown"}
-            classes={classes}
-            styles={selectStyles}
-            options={this.state.provinsi_data}
-            noOptionsMessage={() => "Provinsi tidak ditemukan"}
-            components={components}
-            value={this.state.provinsi_selected}
-            onChange={this._selectOptionChange('provinsi')}
-            placeholder="Provinsi"
-            isDisabled={this.state.provinsi_is_loading}
-            isLoading={this.state.provinsi_is_loading}
-          />
+            <Button className="modal-close-btn" onClick={this._modalClose} >&nbsp;</Button>
 
-          <Select
-            className={`select-dropdown select-dropdown--kabupaten${kabupaten_is_disabled ? ' is-disabled' : ''}`}
-            classes={classes}
-            styles={selectStyles}
-            options={this.state.kabupaten_data}
-            noOptionsMessage={() => "Kabupaten/kota tidak ditemukan"}
-            components={components}
-            value={this.state.kabupaten_selected}
-            onChange={this._selectOptionChange('kabupaten')}
-            placeholder="Kota/Kabupaten"
-            isDisabled={kabupaten_is_disabled}
-            isLoading={this.state.kabupaten_is_loading}
-          />
+            <div className="address-input-dialog__title">Alamat</div>
 
-          <Select
-            className={`select-dropdown select-dropdown--kecamatan${kecamatan_is_disabled ? ' is-disabled' : ''}`}
-            classes={classes}
-            styles={selectStyles}
-            options={this.state.kecamatan_data}
-            noOptionsMessage={() => "Kecamatan tidak ditemukan"}
-            components={components}
-            value={this.state.kecamatan_selected}
-            onChange={this._selectOptionChange('kecamatan')}
-            placeholder="Kecamatan"
-            isDisabled={kecamatan_is_disabled}
-            isLoading={this.state.kecamatan_is_loading}
-          />
+            <div className="address-input-dialog__body">
 
-          <Select
-            className={`select-dropdown select-dropdown--kelurahan${kelurahan_is_disabled ? ' is-disabled' : ''}`}
-            classes={classes}
-            styles={selectStyles}
-            options={this.state.kelurahan_data}
-            noOptionsMessage={() => "Kelurahan/desa tidak ditemukan"}
-            components={components}
-            value={this.state.kelurahan_selected}
-            onChange={this._selectOptionChange('kelurahan')}
-            placeholder="Kelurahan/Desa"
-            isDisabled={kelurahan_is_disabled}
-            isLoading={this.state.kelurahan_is_loading}
-          />
+              <Select
+                className={"select-dropdown"}
+                classes={classes}
+                styles={selectStyles}
+                options={this.state.provinsi_data}
+                noOptionsMessage={() => "Provinsi tidak ditemukan"}
+                components={components}
+                value={this.state.provinsi_selected}
+                onChange={this._selectOptionChange('provinsi')}
+                placeholder="Provinsi"
+                isDisabled={this.state.provinsi_is_loading}
+                isLoading={this.state.provinsi_is_loading}
+              />
 
-          <TextField
-            fullWidth multiline={true}
-            placeholder="Alamat"
-            className="mui-text-area mui-text-area--no-label alamat"
-            value={this.state.alamat}
-            onChange={ e => this.setState({ alamat : e.target.value }) }/>
+              <Select
+                className={`select-dropdown select-dropdown--kabupaten${kabupaten_is_disabled ? ' is-disabled' : ''}`}
+                classes={classes}
+                styles={selectStyles}
+                options={this.state.kabupaten_data}
+                noOptionsMessage={() => "Kabupaten/kota tidak ditemukan"}
+                components={components}
+                value={this.state.kabupaten_selected}
+                onChange={this._selectOptionChange('kabupaten')}
+                placeholder="Kota/Kabupaten"
+                isDisabled={kabupaten_is_disabled}
+                isLoading={this.state.kabupaten_is_loading}
+              />
 
-        </div>
+              <Select
+                className={`select-dropdown select-dropdown--kecamatan${kecamatan_is_disabled ? ' is-disabled' : ''}`}
+                classes={classes}
+                styles={selectStyles}
+                options={this.state.kecamatan_data}
+                noOptionsMessage={() => "Kecamatan tidak ditemukan"}
+                components={components}
+                value={this.state.kecamatan_selected}
+                onChange={this._selectOptionChange('kecamatan')}
+                placeholder="Kecamatan"
+                isDisabled={kecamatan_is_disabled}
+                isLoading={this.state.kecamatan_is_loading}
+              />
 
-        <div className="address-input-dialog__footer-action">
+              <Select
+                className={`select-dropdown select-dropdown--kelurahan${kelurahan_is_disabled ? ' is-disabled' : ''}`}
+                classes={classes}
+                styles={selectStyles}
+                options={this.state.kelurahan_data}
+                noOptionsMessage={() => "Kelurahan/desa tidak ditemukan"}
+                components={components}
+                value={this.state.kelurahan_selected}
+                onChange={this._selectOptionChange('kelurahan')}
+                placeholder="Kelurahan/Desa"
+                isDisabled={kelurahan_is_disabled}
+                isLoading={this.state.kelurahan_is_loading}
+              />
 
-          <Button className="cancel-btn" onClick={this._modalClose}>BATAL</Button>
-          <Button className="submit-btn" onClick={this._onSubmit}>Simpan</Button>
+              <TextField
+                fullWidth multiline={true}
+                placeholder="Alamat"
+                className="mui-text-area mui-text-area--no-label alamat"
+                value={this.state.alamat}
+                onChange={ e => this.setState({ alamat : e.target.value }) }/>
 
-        </div>
+            </div>
 
-        { this.state.is_submitting ? <LoadingIndicatorBar/> : '' }
+            <div className="address-input-dialog__footer-action">
 
-        <Modal
-          open={this.state.modal_child_is_open}
-          onClose={this._modalChildClose}>
+              <Button className="cancel-btn" onClick={this._modalClose}>BATAL</Button>
+              <Button className="submit-btn" onClick={this._onSubmit}>Simpan</Button>
 
-          <div className="modal-inner">
-            <ModalNotice modalClose={this._modalChildClose} title={this.state.submit_response.status_title} notice={this.state.submit_response.response_code.message}/>
+            </div>
+
+            { this.state.is_submitting ? <LoadingIndicatorBar/> : '' }
+
+            <Modal
+              open={this.state.modal_notice_is_open}
+              onClose={this._modalNoticeClose}>
+
+              <div className="modal-inner">
+                <ModalNotice modalClose={this._modalNoticeClose} title={this.state.submit_response.status_title} notice={this.state.submit_response.response_code.message}/>
+              </div>
+
+            </Modal>
+
           </div>
 
-        </Modal>
 
-      </div>
+        </div>
+
+      </Modal>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    dialog_address_input: state.app.dialog_address_input
+  }
+};
 
 export default withRouter(
-  connect( null ) (
+  connect( mapStateToProps ) (
     withStyles(styles, { withTheme: true }) (DialogAddressInput )
   )
 ) ;

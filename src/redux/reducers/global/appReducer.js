@@ -21,6 +21,9 @@ let state_default = {
     is_open: false,
     mode: 'select-dialog'//select-dialog || upload-dialog
   }
+  , dialog_address_input: {
+    is_open: false
+  }
 };
 
 export default ( state = state_default, action ) => {
@@ -91,6 +94,8 @@ export default ( state = state_default, action ) => {
       new_state = { should_redirect_to_agen: true };
       break;
 
+
+
     case actionTypes.app.DIALOG_PROFILE_PHOTO_OPEN:
       new_state = {
         dialog_profile_photo: {
@@ -100,10 +105,21 @@ export default ( state = state_default, action ) => {
 
       };
       break;
-
     case actionTypes.app.DIALOG_PROFILE_PHOTO_CLOSE:
       new_state = {
         dialog_profile_photo: Object.assign( {}, state_default.dialog_profile_photo )
+      };
+      break;
+
+
+    case actionTypes.app.DIALOG_ADDRESS_INPUT_OPEN:
+      new_state = {
+        dialog_address_input: Object.assign( {}, state_default.dialog_address_input, { is_open: true } )
+      };
+      break;
+    case actionTypes.app.DIALOG_ADDRESS_INPUT_CLOSE:
+      new_state = {
+        dialog_address_input: Object.assign( {}, state_default.dialog_address_input )
       };
       break;
 

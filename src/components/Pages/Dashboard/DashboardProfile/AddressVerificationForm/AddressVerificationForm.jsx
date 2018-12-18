@@ -188,8 +188,6 @@ class AddressVerificationForm extends Component {
 
     alamat: '',
 
-    modalPosTop: 0,
-
     is_submitting: false,
     submit_response: {
       status_title: 'Gagal',
@@ -320,16 +318,6 @@ class AddressVerificationForm extends Component {
     $('.address-input-dialog .alamat textarea').focus();
   };
 
-  _modalPosTopGen() {
-    let ratio_opt = { box_selector: '.address-input-dialog', top_space: 260, bottom_space: 329};
-    if ( biqHelper.mediaQuery.isMobile() ) {
-      ratio_opt.top_space = 63;
-      ratio_opt.bottom_space = 62;
-    }
-
-    return biqHelper.utils.modalTopRatio( ratio_opt );
-  }
-
   _addressInputDesktopToggle = ()=>{
     biqHelper.utils.clickTimeout(()=>this.props.addressInputDesktopToggle());
   };
@@ -389,25 +377,13 @@ class AddressVerificationForm extends Component {
         .subscribe(
 
           res => {
-            let status_title = 'Sukses';
+
             if ( biqHelper.utils.httpResponseIsSuccess( res.response_code.status ) ) {
-              dispatch( userActions.userProfileUpdate( { key: 'alamat', value: res.data.alamat } ) );
+              dispatch( userActions.userProfileUpdate( {alamat: res.data.alamat} ) );
               this._addressInputDesktopToggle();
-            } else {
-              let error_message = biqHelper.JSON.pathValueGet( res, 'response.response_code.message' );
-              error_message = biqHelper.utils.isNull( error_message ) ? res.status : error_message;
-
-              this.setState({
-                submit_response: Object.assign(
-                  {},
-                  this.state.submit_response, { status_title: 'Gagal', response_code: {message: error_message} }
-                )
-              });
-              this._modalNoticeOpen();
-
             }
 
-            this.setState( { submit_response: Object.assign( {}, this.state.submit_response, { status_title: status_title }, res ) } );
+            // this.setState( { submit_response: Object.assign( {}, this.state.submit_response, { status_title: status_title }, res ) } );
 
             this.setState({is_submitting: false});
           },
@@ -440,8 +416,6 @@ class AddressVerificationForm extends Component {
   };
 
   componentDidMount(){
-    let top_pos = this._modalPosTopGen();
-    this.setState( {modalPosTop : top_pos } );
 
     this.setState( { provinsi_is_loading: true } );
     addressProvider.provinsi$()
@@ -457,13 +431,6 @@ class AddressVerificationForm extends Component {
 
     addressProvider.kecamatan$().subscribe();
 
-  }
-
-  componentDidUpdate(prevProp, prevState){
-    let top_pos = this._modalPosTopGen();
-    if ( prevState.modalPosTop !== top_pos ) {
-      this.setState( { modalPosTop: top_pos } );
-    }
   }
 
   componentWillUnmount() {

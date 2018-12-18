@@ -28,9 +28,8 @@ class DashboardProfile extends Component {
     address_input_desktop: false//This is for desktop, Mobile version placed on redux
   };
 
-  _emailVerificationDekstopToggle = () => {
-    // if ( biqHelper.mediaQuery.isMobile() ) return;
 
+  _emailVerificationDekstopToggle = () => {
     biqHelper.utils.clickTimeout( () => {
 
       this.setState({
@@ -43,22 +42,20 @@ class DashboardProfile extends Component {
     });
 
   };
-
   _emailVerificationMobileOpen = () => {
     if ( this.props.user_profile.verifications.email === 1 ) return;
     if ( !biqHelper.mediaQuery.isMobile() ) return;
 
     this.setState({ email_verification: { desktop: false, mobile: true } });
   };
-
   _emailVerificationMobileClose = () => {
     this.setState({ email_verification: { desktop: false, mobile: false } });
   };
 
+
   _photoProfileVerificationDesktopToggle = () => {
     biqHelper.utils.clickTimeout( () => this.setState( { profile_upload_desktop: !this.state.profile_upload_desktop } ) );
   };
-
   _photoProfileVerificationMobileOpen = () => {
     if ( !biqHelper.utils.isNull(this.props.user_profile.photo) ) return;
     if (!biqHelper.mediaQuery.isMobile()) return;
@@ -69,9 +66,20 @@ class DashboardProfile extends Component {
     } );
   };
 
+
   _addressInputDesktopToggle = () => {
     biqHelper.utils.clickTimeout( () => this.setState( { address_input_desktop: !this.state.address_input_desktop } ) );
   };
+  _addressInputMobileOpen = () => {
+    if( !biqHelper.utils.isNull( this.props.user_profile.alamat ) ) return;
+    if( !biqHelper.mediaQuery.isMobile() ) return;
+
+    biqHelper.utils.clickTimeout( () => {
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogAddressOpen() );
+    } );
+  };
+
 
   render() {
     let profile_completeness_full = 5;
@@ -173,7 +181,7 @@ class DashboardProfile extends Component {
             </div>
           </Button>
 
-          <Button className="record-item">
+          <Button className="record-item" onClick={this._addressInputMobileOpen}>
             <div className="record-item__inner">
 
               <div className="action">

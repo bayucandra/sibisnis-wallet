@@ -23,16 +23,10 @@ class BalanceProfileVerification extends Component {
     super(props);
 
     this.state = {
-      is_ready: false,
-      modal_is_open: false,
-      modal_active_component: PhotoUpload
+      is_ready: false
     };
 
   }
-
-  _modalSetActiveComponent = ( component ) => {
-    this.setState({ modal_active_component: component });
-  };
 
   _onPhotoSet = () => {
 
@@ -43,20 +37,10 @@ class BalanceProfileVerification extends Component {
   };
 
   _onAddressSet = () => {
-    biqHelper.utils.clickTimeout({
-      callback: ()=>{
-        this._modalSetActiveComponent(AddressInputDialog);
-        this._modalOpen();
-      }
+    biqHelper.utils.clickTimeout(()=>{
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogAddressOpen() );
     });
-  };
-
-  _modalOpen = () => {
-    this.setState({ modal_is_open: true });
-  };
-
-  _modalClose = () => {
-    this.setState({ modal_is_open: false });
   };
 
   _continueTopupBalance = () => {
@@ -75,6 +59,7 @@ class BalanceProfileVerification extends Component {
       if ( this.stop ) return;
       this.setState( { is_ready: true });
     }, 300 );
+
   }
 
   componentWillUnmount() {
@@ -84,7 +69,6 @@ class BalanceProfileVerification extends Component {
   render() {
     let is_photo_set = !biqHelper.utils.isNull(this.props.user_profile.photo);
     let is_address_set = !biqHelper.utils.isNull(this.props.user_profile.alamat);
-    let ModalActiveComponent = this.state.modal_active_component;
 
     return (
       <div className="balance-profile-verification">
@@ -157,16 +141,6 @@ class BalanceProfileVerification extends Component {
 
 
         </div>
-
-        <Modal
-          open={this.state.modal_is_open}
-          onClose={this._modalClose}>
-
-          <div className="modal-inner">
-            <ModalActiveComponent modalSetActiveComponent={this._modalSetActiveComponent} modalClose={this._modalClose}/>
-          </div>
-
-        </Modal>
 
       </div>
     );

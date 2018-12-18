@@ -24,7 +24,7 @@ class ModalNotice extends Component {
     this.setState( {modalPosTop : top_pos } );
   }
 
-  componentDidUpdate(prevProp, prevState){
+  componentDidUpdate(prevProp, prevState, snapshot){
     let top_pos = this._modalPosTopGen();
     if ( prevState.modalPosTop !== top_pos ) {
       this.setState( { modalPosTop: top_pos } );

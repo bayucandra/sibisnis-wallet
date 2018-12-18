@@ -187,7 +187,7 @@ class PhotoUploadFile extends Component {
                 this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
 
                 if ( biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
-                  dispatch( userActions.userProfileUpdate( { key: 'photo', value: data.response.data.value } ) );
+                  dispatch( userActions.userProfileUpdate( { photo: data.response.data.value } ) );
                 } else {
                   let response = data.status !== 0 ? data.response
                     : biqConfig.api.error_response_fake;

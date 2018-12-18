@@ -13,7 +13,7 @@ function userProfileGet() {
 
 }
 
-function userProfileUpdate( p_obj ) {//{ key:'', value: ''}
+function userProfileUpdate( p_obj ) {//{ key: value} ( single pair only )
   return {
     type: actionTypes.user.PROFILE_UPDATE,
     payload: p_obj

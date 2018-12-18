@@ -14,15 +14,20 @@ export default (state = initialState, action = {}) => {
     case actionTypes.user.PROFILE_GET:
       new_state = { is_profile_parsed: true, profile: action.payload };
       // new_state.profile.photo = null;
-      return Object.assign({}, state, new_state);
+      break;
 
     case actionTypes.user.PROFILE_UPDATE:
-      new_state = Object.assign( {}, {profile: state.profile} );
-      new_state.profile[action.payload.key] = action.payload.value;
+      new_state = {
+        profile: Object.assign( {}, state.profile, action.payload )
+      };
+
       biqHelper.localStorage.set( 'user_data', new_state.profile );
-      return Object.assign({}, state, new_state);
+      break;
 
     default:
       return state;
   }
+
+  return Object.assign({}, state, new_state);
+
 }

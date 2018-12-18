@@ -11,6 +11,7 @@
   border: solid 0.5px map-get( $colors, very-light-pink );
   background-color: map-get( $colors, light-grey-8 );
   pointer-events: auto;
+  transition: all 200ms ease-in-out;
 
   &__close-btn {
     $size-diff: 32px - 24px;

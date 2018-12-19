@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Subject, of } from 'rxjs';
-import {takeUntil, timeout, delay} from 'rxjs/operators';
+import {takeUntil, delay, tap, switchMap} from 'rxjs/operators';
+import $ from 'jquery';
 
 import appActions from "../../../../redux/actions/global/appActions";
 import biqHelper from "../../../../lib/biqHelper";
@@ -21,14 +22,18 @@ import AddressVerificationForm from "./AddressVerificationForm/AddressVerificati
 
 class DashboardProfile extends Component {
 
+  wrapperRef = React.createRef();
+
   stop$ = new Subject();
 
   state = {
+    is_visible: false,
     user_verifications: {
       phone: true, email: false, photo: false, address: false,
       // identity: false
     },
     profile_completeness: 100,
+    profile_completeness_delay_is_set: false,
     email_verification: {
       desktop: false,
       mobile: false
@@ -115,29 +120,91 @@ class DashboardProfile extends Component {
     
   };
 
-  _profileCompletenessLevelUpdate = ( delay_time = 800 ) => {
+  _profileCompletenessLevelUpdate$ = new Subject()
+    .pipe(
+      takeUntil( this.stop$ ),
+      switchMap(
+        (data={}) => {
+          let params = { delay_time: 800 };
+          Object.assign(params, data);
 
-    of(1)
-      .pipe(
-        delay(delay_time),
-        takeUntil( this.stop$ )
+          return of( params )
+            .pipe(
+              takeUntil( this.stop$ ),
+              delay( params.delay_time ),
+              tap( () => {
+                let is_changed = this.state.profile_completeness !== this._profileCompletenessLevelGet();
+                if(is_changed)
+                  this.setState({
+                    profile_completeness: this._profileCompletenessLevelGet()
+                  });
+              } )
+            );
+        }
       )
-      .subscribe(()=>{
-        let is_changed = this.state.profile_completeness !== this._profileCompletenessLevelGet();
+    );
 
-        if(is_changed)
-          this.setState({
-            profile_completeness: this._profileCompletenessLevelGet()
-          });
+  _wrapperVisibility$ = new Subject()
+    .pipe(
 
-      });
+      takeUntil( this.stop$ ),
 
-  };
+      switchMap(
+
+        (data = {}) => {
+          let params = {
+            is_visible: false,
+            delay_time: 800
+          };
+          Object.assign( params, data );
+
+          return of( params )
+
+            .pipe(
+
+              takeUntil( this.stop$ ),
+
+              delay(params.delay_time),
+
+              tap(()=>{
+                let is_changed = this.state.is_visible !== params.is_visible;
+
+                if( is_changed ) {
+                  this.setState({is_visible: params.is_visible, profile_completeness: 0} );
+                }
+              })
+
+            )
+        }
+
+      )
+
+    );
 
   componentDidMount() {
     let user_verifications = this._userVerificationsGen( this.props );
     this.setState( { user_verifications } );
-    this._profileCompletenessLevelUpdate();
+
+    this._profileCompletenessLevelUpdate$.subscribe(data => {
+      if ( data.visibility_refresh ) {
+        if (this.state.is_visible && this.state.profile_completeness === 100) {
+          this._wrapperVisibility$.next({is_visible: false, delay_time: 600});
+        } else if (!this.state.visible && this.state.profile_completeness < 100) {
+          this._wrapperVisibility$.next({is_visible: true, delay_time: 600});
+        }
+      }
+    });
+
+    this._wrapperVisibility$.subscribe(data=>{
+      this._profileCompletenessLevelUpdate$.next({is_init: true});
+    });
+
+    setTimeout( ()=> {
+      if (this._profileCompletenessLevelGet() < 100) {
+        this._wrapperVisibility$.next({ is_visible: true, delay_time: 1000});
+      }
+    }, 100 );
+
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -152,11 +219,10 @@ class DashboardProfile extends Component {
     }
 
     let profile_completeness_changed = nextState.profile_completeness !== this._profileCompletenessLevelGet();
-    if( profile_completeness_changed ) {
-      this._profileCompletenessLevelUpdate();
+    if (profile_completeness_changed && this.state.is_visible) {
+      this._profileCompletenessLevelUpdate$.next({ visibility_refresh: true });
       return false;
     }
-
 
     return true;
   }
@@ -169,7 +235,7 @@ class DashboardProfile extends Component {
   render() {
 
     return (
-      <div className={`dashboard-profile${ this.state.profile_completeness < 100 ? ' is-visible' : '' }`}>
+      <div className={`dashboard-profile${ this.state.is_visible ? ' is-visible' : '' }`} ref={ this.wrapperRef }>
 
         <div className="account-security-level">
 

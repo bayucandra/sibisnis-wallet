@@ -127,21 +127,20 @@ class PhotoUploadFile extends Component {
 
   };
 
-  _imageUpload() {
-    biqHelper.utils.clickTimeout({
-      callback: () => {
+  _imageUpload = () => {
+    biqHelper.utils.clickTimeout(() => {
         this._imageUploadActual();
-      }
     });
-  }
+  };
 
   _imageUploadActual() {
-
-    let {dispatch} = this.props;
 
     if ( !this.state.img_is_set ) return;
     if ( this._imgIsUploadedSuccess() ) {
       this._modalClose();
+      setTimeout( ()=>{
+        this._onDoneClick();
+      }, 200 );
       return;
     }
 
@@ -187,7 +186,6 @@ class PhotoUploadFile extends Component {
                 this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
 
                 if ( biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
-                  dispatch( userActions.userProfileUpdate( { photo: data.response.data.value } ) );
                 } else {
                   let response = data.status !== 0 ? data.response
                     : biqConfig.api.error_response_fake;
@@ -203,6 +201,11 @@ class PhotoUploadFile extends Component {
 
   };
 
+  _onDoneClick = () => {
+    let {dispatch} = this.props;
+    dispatch( userActions.userProfileUpdate( { photo: this.state.server_response.data.value } ) );
+  }
+;
   _imgIsUploadedError() {
     if ( this.state.img_is_uploading ) return false;
     if ( biqHelper.utils.isNull( this.state.server_response )

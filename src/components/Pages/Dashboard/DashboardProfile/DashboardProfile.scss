@@ -14,14 +14,6 @@
   background: #FFFFFF;
   transition: all 250ms ease-in-out, opacity 350ms ease-in-out;
 
-  &.is-visible {
-    opacity: 1;
-    max-height: 550px;
-    margin-bottom: 45px;
-    overflow: visible;
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.11), 0 1px 3px 0 rgba(0, 0, 0, 0.11);
-  }//&.is-collapsed
-
   .account-security-level {
     display: flex;
     flex-direction: column;
@@ -56,10 +48,10 @@
         background-color: map-get($colors, whitegrey);
 
         .bar {
+          display: none;
           height: 12px;
           border-radius: 200px;
           background-color: map-get($colors, frog-green);
-          transition: width 200ms ease-in-out;
         }//.bar
 
       }//.indicator
@@ -194,6 +186,32 @@
     bottom: 0;
     left:0;
   }
+
+  &.is-visible {
+    opacity: 1;
+    max-height: 550px;
+    margin-bottom: 45px;
+    overflow: visible;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.11), 0 1px 3px 0 rgba(0, 0, 0, 0.11);
+
+    .account-security-level {
+
+      .level-bar {
+
+        .indicator {
+
+          .bar {
+            display: flex;
+            transition: width 200ms ease-in-out;
+          }
+
+        }
+
+      }//.level-bar
+
+    }//.account-security-level
+
+  }//&.is-collapsed
 
 }//.dashboard-profile
 

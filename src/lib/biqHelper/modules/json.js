@@ -106,7 +106,16 @@ class BiqHelperJSON {
 
   }
 
-}
+  isEqual( a, b ) {
+    try {
+      return JSON.stringify(a) === JSON.stringify(b)
+    } catch(e){
+      console.error( e.message );
+      return false;
+    }
+  }
+
+}//class BiqhelperJSON
 
 export { BiqHelperJSON }
 

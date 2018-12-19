@@ -1,11 +1,11 @@
 import { ofType } from 'redux-observable';
-import { of, throwError } from 'rxjs';
+import { of } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
-import {switchMap, delay, map, takeUntil, filter, catchError} from 'rxjs/operators';
+import {switchMap, map, takeUntil, filter, catchError} from 'rxjs/operators';
 
 import actionTypes from "redux/action-types";
 import dashboardActions from "redux/actions/pages/dashboardActions";
-import biqConfig from "../../../providers/biqConfig";
+import biqConfig from "providers/biqConfig";
 
 const dashboardEmailVerificationSubmit = action$ => action$.pipe(
   ofType( actionTypes.dashboard.EMAIL_VERIFICATION_SUBMIT ),

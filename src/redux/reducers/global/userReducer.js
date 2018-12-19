@@ -1,5 +1,5 @@
-import actionTypes from '../../action-types/index';
-import biqHelper from "../../../lib/biqHelper/index";
+import actionTypes from 'redux/action-types/index';
+import biqHelper from "lib/biqHelper/index";
 
 const initialState = {
   is_profile_parsed: false,

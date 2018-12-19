@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { Subject, of } from 'rxjs';
+import {takeUntil, timeout, delay} from 'rxjs/operators';
 
 import appActions from "../../../../redux/actions/global/appActions";
 import biqHelper from "../../../../lib/biqHelper";
@@ -19,7 +21,13 @@ import AddressVerificationForm from "./AddressVerificationForm/AddressVerificati
 
 class DashboardProfile extends Component {
 
+  stop$ = new Subject();
+
   state = {
+    user_verifications: {
+      phone: true, email: false, photo: false, address: false, identity: false
+    },
+    profile_completeness: 0,
     email_verification: {
       desktop: false,
       mobile: false
@@ -43,7 +51,7 @@ class DashboardProfile extends Component {
 
   };
   _emailVerificationMobileOpen = () => {
-    if ( this.props.user_profile.verifications.email === 1 ) return;
+    if ( this.state.user_verifications.email ) return;
     if ( !biqHelper.mediaQuery.isMobile() ) return;
 
     this.setState({ email_verification: { desktop: false, mobile: true } });
@@ -57,7 +65,7 @@ class DashboardProfile extends Component {
     biqHelper.utils.clickTimeout( () => this.setState( { profile_upload_desktop: !this.state.profile_upload_desktop } ) );
   };
   _photoProfileVerificationMobileOpen = () => {
-    if ( !biqHelper.utils.isNull(this.props.user_profile.photo) ) return;
+    if ( this.state.user_verifications.photo ) return;
     if (!biqHelper.mediaQuery.isMobile()) return;
 
     let {dispatch} = this.props;
@@ -71,7 +79,7 @@ class DashboardProfile extends Component {
     biqHelper.utils.clickTimeout( () => this.setState( { address_input_desktop: !this.state.address_input_desktop } ) );
   };
   _addressInputMobileOpen = () => {
-    if( !biqHelper.utils.isNull( this.props.user_profile.alamat ) ) return;
+    if( this.state.user_verifications.address ) return;
     if( !biqHelper.mediaQuery.isMobile() ) return;
 
     biqHelper.utils.clickTimeout( () => {
@@ -80,11 +88,89 @@ class DashboardProfile extends Component {
     } );
   };
 
+  _userVerificationsGen = ( props ) => {
+    return {
+      phone: props.user_profile.verifications.phone === 1,
+      email: props.user_profile.verifications.email === 1,
+      photo : !biqHelper.utils.isNull( props.user_profile.photo ),
+      address: !biqHelper.utils.isNull( props.user_profile.alamat ),
+      identity: false
+    };
+  };
+  
+  _profileCompletenessLevelGet = () => {
+
+    let profile_completeness_total = 0;
+    let profile_completeness = 0;
+
+    for( let key in this.state.user_verifications ) {
+      profile_completeness_total++;
+      if ( this.state.user_verifications[key] === true ) {
+        profile_completeness++;
+      }
+    }
+
+    return profile_completeness / profile_completeness_total * 100;
+    
+  };
+
+  _profileCompletenessLevelUpdate = ( delay_time = 800 ) => {
+
+    of(1)
+      .pipe(
+        delay(delay_time),
+        takeUntil( this.stop$ )
+      )
+      .subscribe(()=>{
+        let is_changed = this.state.profile_completeness !== this._profileCompletenessLevelGet();
+
+        if(is_changed)
+          this.setState({
+            profile_completeness: this._profileCompletenessLevelGet()
+          });
+
+      });
+
+  };
+
+  componentDidMount() {
+    let user_verifications = this._userVerificationsGen( this.props );
+    this.setState( { user_verifications } );
+    this._profileCompletenessLevelUpdate();
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+
+    let user_verifications = this._userVerificationsGen(nextProps);
+
+    let verifications_is_changed = !biqHelper.JSON.isEqual( user_verifications, this.state.user_verifications );
+
+    if ( verifications_is_changed ) {
+      this.setState( { user_verifications } );
+      return false;
+    }
+
+    let profile_completeness_changed = nextState.profile_completeness !== this._profileCompletenessLevelGet();
+    if( profile_completeness_changed ) {
+      this._profileCompletenessLevelUpdate();
+      return false;
+    }
+
+
+    return true;
+  }
+
+  componentWillUnmount() {
+    this.stop$.next();
+    this.stop$.complete();
+  }
 
   render() {
-    let profile_completeness_full = 5;
+
+    /*let profile_completeness_full = 5;
     let profile_completeness = 3;
     let security_level_percent = profile_completeness / profile_completeness_full * 100;
+*/
 
     return (
       <div className={`dashboard-profile${ this.props.profileMobileVisible ? ' is-mobile-visible' : '' }`}>
@@ -96,7 +182,7 @@ class DashboardProfile extends Component {
           <div className="level-bar">
 
             <div className="indicator">
-              <div className="bar" style={ { width: `${security_level_percent}%` } }/>
+              <div className="bar" style={ { width: `${this.state.profile_completeness}%` } }/>
             </div>
 
             <div className="description">LEMAH</div>
@@ -118,9 +204,16 @@ class DashboardProfile extends Component {
               <div className="action">
                 <div className="icon icon--phone"/>
                 <div className="label">Verifikasi Nomor Handphone Anda</div>
-                <div className="icon-indicator icon-indicator--verified hidden-md-up"/>
+                <div className={`icon-indicator${ this.state.user_verifications.phone ? ' icon-indicator--verified' : ''} hidden-md-up`}/>
 
-                <div className="icon-verified-desktop visible-md-up"/>
+                {
+                  this.state.user_verifications.phone ?
+                    <div className="icon-verified-desktop visible-md-up"/>
+                      :
+                    <Button className={`action-btn-desktop visible-md-up`}>
+                      Lengkapi Sekarang
+                    </Button>
+                }
               </div>
 
             </div>
@@ -132,10 +225,10 @@ class DashboardProfile extends Component {
               <div className="action">
                 <div className="icon icon--email"/>
                 <div className="label">Verifikasi Email Anda</div>
-                <div className={`icon-indicator${ this.props.user_profile.verifications.email === 1 ? ' icon-indicator--verified' : '' } hidden-md-up`}/>
+                <div className={`icon-indicator${ this.state.user_verifications.email ? ' icon-indicator--verified' : '' } hidden-md-up`}/>
 
                 {
-                  this.props.user_profile.verifications.email === 1 ?
+                  this.state.user_verifications.email ?
 
                   <div className="icon-verified-desktop visible-md-up"/>
 
@@ -148,7 +241,7 @@ class DashboardProfile extends Component {
 
               </div>
 
-              <EmailVerificationForm isVisible={this.state.email_verification.desktop}/>
+              <EmailVerificationForm isVisible={this.state.email_verification.desktop && !this.state.user_verifications.email}/>
 
             </div>
 
@@ -160,10 +253,10 @@ class DashboardProfile extends Component {
               <div className="action">
                 <div className="icon icon--profile-name"/>
                 <div className="label">Upload foto profil Anda</div>
-                <div className={ `icon-indicator${ !biqHelper.utils.isNull(this.props.user_profile.photo) ? ' icon-indicator--verified' : '' } hidden-md-up` }/>
+                <div className={ `icon-indicator${ this.state.user_verifications.photo ? ' icon-indicator--verified' : '' } hidden-md-up` }/>
 
                 {
-                  !biqHelper.utils.isNull(this.props.user_profile.photo) ?
+                  this.state.user_verifications.photo ?
 
                     <div className="icon-verified-desktop visible-md-up"/>
                       :
@@ -176,7 +269,7 @@ class DashboardProfile extends Component {
 
               </div>
 
-              <ProfileUploadForm isVisible={this.state.profile_upload_desktop && biqHelper.utils.isNull(this.props.user_profile.photo)}/>
+              <ProfileUploadForm isVisible={this.state.profile_upload_desktop && !this.state.user_verifications.photo}/>
 
             </div>
           </Button>
@@ -187,10 +280,10 @@ class DashboardProfile extends Component {
               <div className="action">
                 <div className="icon icon--address"/>
                 <div className="label">Lengkapi Data Alamat Anda</div>
-                <div className={ `icon-indicator${ !biqHelper.utils.isNull(this.props.user_profile.alamat) ? ' icon-indicator--verified' : '' } hidden-md-up` }/>
+                <div className={ `icon-indicator${ this.state.user_verifications.address ? ' icon-indicator--verified' : '' } hidden-md-up` }/>
 
                 {
-                  !biqHelper.utils.isNull(this.props.user_profile.alamat) ?
+                  this.state.user_verifications.address ?
 
                     <div className="icon-verified-desktop visible-md-up"/>
                     :
@@ -202,7 +295,7 @@ class DashboardProfile extends Component {
                 }
               </div>
 
-              <AddressVerificationForm isVisible={this.state.address_input_desktop} addressInputDesktopToggle={this._addressInputDesktopToggle}/>
+              <AddressVerificationForm isVisible={this.state.address_input_desktop && !this.state.user_verifications.address} addressInputDesktopToggle={this._addressInputDesktopToggle}/>
 
             </div>
           </Button>

@@ -1,5 +1,5 @@
-import actionTypes from "../../action-types";
-import biqHelper from "../../../lib/biqHelper";
+import actionTypes from "redux/action-types";
+import biqHelper from "lib/biqHelper";
 // import biqConfig from "../../providers/biqConfig";
 import esProvider from "../../../providers/esProvider";
 
@@ -18,8 +18,8 @@ let state_default = {
   , loading_indicator_show: false
   , window_size: { width: window_el.outerWidth(), height: window_el.outerHeight() }
   , dialog_profile_photo: {
-    is_open: false,
-    mode: 'select-dialog'//select-dialog || upload-dialog
+    is_open: false
+    , mode: 'select-dialog'//select-dialog || upload-dialog
   }
   , dialog_address_input: {
     is_open: false

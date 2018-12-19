@@ -129,7 +129,7 @@ class BalanceProfileVerification extends Component {
 
                   <div className={"action-btn-group"}>
                     <Button className={"balance-topup-btn"} onClick={this._continueTopupBalance}>Tambah deposit sekarang</Button>
-                    <Button className={"complete-identity-btn"}>Lengkapi identitas</Button>
+                    {/*<Button className={"complete-identity-btn"}>Lengkapi identitas</Button>*/}
                   </div>
 
                 </div>

@@ -5,8 +5,22 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  max-height: 0;
+  padding:0;
+  overflow: hidden;
+  opacity: 0;
+
   background: #FFFFFF;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.11), 0 1px 3px 0 rgba(0, 0, 0, 0.11);
+  transition: all 250ms ease-in-out, opacity 350ms ease-in-out;
+
+  &.is-visible {
+    opacity: 1;
+    max-height: 550px;
+    margin-bottom: 45px;
+    overflow: visible;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.11), 0 1px 3px 0 rgba(0, 0, 0, 0.11);
+  }//&.is-collapsed
 
   .account-security-level {
     display: flex;

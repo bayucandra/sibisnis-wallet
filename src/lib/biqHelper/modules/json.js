@@ -106,13 +106,22 @@ class BiqHelperJSON {
 
   }
 
-  isEqual( a, b ) {
+  isEqualShallow( a, b ) {
+    let ret = true;
     try {
-      return JSON.stringify(a) === JSON.stringify(b)
+      for( let key in a ) {
+        if( a[key] !== b[key] ) ret =false;
+      }
+
+      for( let key in b ) {
+        if( b[key] !== a[key] ) ret = false;
+      }
+
     } catch(e){
       console.error( e.message );
-      return false;
+      ret = false;
     }
+    return ret;
   }
 
 }//class BiqhelperJSON

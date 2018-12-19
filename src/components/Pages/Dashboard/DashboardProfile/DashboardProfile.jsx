@@ -25,9 +25,10 @@ class DashboardProfile extends Component {
 
   state = {
     user_verifications: {
-      phone: true, email: false, photo: false, address: false, identity: false
+      phone: true, email: false, photo: false, address: false,
+      // identity: false
     },
-    profile_completeness: 0,
+    profile_completeness: 100,
     email_verification: {
       desktop: false,
       mobile: false
@@ -94,7 +95,7 @@ class DashboardProfile extends Component {
       email: props.user_profile.verifications.email === 1,
       photo : !biqHelper.utils.isNull( props.user_profile.photo ),
       address: !biqHelper.utils.isNull( props.user_profile.alamat ),
-      identity: false
+      // identity: false
     };
   };
   
@@ -143,7 +144,7 @@ class DashboardProfile extends Component {
 
     let user_verifications = this._userVerificationsGen(nextProps);
 
-    let verifications_is_changed = !biqHelper.JSON.isEqual( user_verifications, this.state.user_verifications );
+    let verifications_is_changed = !biqHelper.JSON.isEqualShallow( user_verifications, this.state.user_verifications );
 
     if ( verifications_is_changed ) {
       this.setState( { user_verifications } );
@@ -167,13 +168,8 @@ class DashboardProfile extends Component {
 
   render() {
 
-    /*let profile_completeness_full = 5;
-    let profile_completeness = 3;
-    let security_level_percent = profile_completeness / profile_completeness_full * 100;
-*/
-
     return (
-      <div className={`dashboard-profile${ this.props.profileMobileVisible ? ' is-mobile-visible' : '' }`}>
+      <div className={`dashboard-profile${ this.state.profile_completeness < 100 ? ' is-visible' : '' }`}>
 
         <div className="account-security-level">
 
@@ -300,6 +296,7 @@ class DashboardProfile extends Component {
             </div>
           </Button>
 
+{/*
           <Button className="record-item">
             <div className="record-item__inner">
 
@@ -311,6 +308,7 @@ class DashboardProfile extends Component {
 
             </div>
           </Button>
+*/}
 
 
         </div>

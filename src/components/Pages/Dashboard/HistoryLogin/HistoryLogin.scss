@@ -1,9 +1,8 @@
 @import '../../../../styles/mixins';
 @import '../../../../styles/variables';
 .history-login-container {
-  margin-top: 45px;
   .history-login-header-container{
-    padding:0px;
+    padding: 0;
     .history-login-header {
       display: flex;
       align-items: center;
@@ -84,7 +83,6 @@
 @include media-query(md) {
 
   .history-login-container{
-    margin-top:30px !important;
     .history-login-header{
       height:63px !important;
       margin-left:30px !important;

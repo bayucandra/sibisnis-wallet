@@ -2,28 +2,90 @@
 
   .l-profile {
 
+    &__inner {
+      align-items: flex-start;
+    }//&__inner
+
     &__panel {
       margin-left: 29px;
-    }//&__body
 
-    .detail-profile-container {
+      &__body {
+        border-radius: 5px;
+        box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+        background-color: #ffffff;
+        flex: none;
 
-      .detail-profile-header {
-        padding: 21px 20px 20px 20px;
-
-        &__title {
-          @include text-setup(#404852, 16px);
-          display: block;
-          font-weight: bold;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: 0.4px;
-          margin-left: 10px;
+        > * {
+          flex: none;
         }
-      }
 
-    }
+        .notice-top {
+          margin: 30px 20px 0;
+
+          &__text {
+            margin-left: 20px;
+          }//&__text
+
+        }//.notice-top
+
+        .profile {
+          margin-top: 20px;
+
+          &__item {
+            padding-bottom: 20px;
+            cursor: auto;
+
+            > *:last-child {
+              display: none!important;
+            }// > *:last-child
+
+            &__inner {
+
+              .icon {
+                width: 40px;
+                height: 40px;
+                margin: 27px 0 0 31px;
+                border-radius: 20px;
+              }//.icon
+
+              .detail {
+                max-width: 400px;
+                margin: 37px 0 0 22px;
+              }//.detail
+
+              .action-btn {
+                position: relative;
+                top: auto; right: auto;
+                display: inline-flex;
+                width: auto;
+                min-width: 106px;
+                height: 40px;
+                margin: 30px 30px 0 0;
+                padding: 0 24px;
+                border-radius: 200px;
+                border: 0.5px solid map-get( $colors, dark-sky-blue );
+                background: none;
+                cursor: pointer;
+
+                font-size: 13px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.5px;
+                text-align: center;
+                color: map-get($colors, dark-sky-blue);
+              }//.action-btn
+
+            }//&__inner
+
+          }//&__item
+
+        }//.profile
+
+      }//&__body
+
+    }//&__body
 
   }//.l-profile
 

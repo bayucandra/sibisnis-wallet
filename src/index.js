@@ -16,8 +16,6 @@ import { Provider } from 'react-redux';
 import { store } from './redux/store';
 // Redux
 
-import 'react-image-crop/dist/ReactCrop.css';
-
 // import biqPolyfill from './lib/biqPolyfill/biqPolyfill';//TODO: Deprecated, remove later when sure babel polyfill handle all ES5
 import "@babel/polyfill";
 import "moment/locale/id";

@@ -22,7 +22,6 @@
     "react-cropper": "^1.0.1",
     "react-dom": "^16.3.2",
     "react-dropzone": "^4.2.11",
-    "react-image-crop": "^4.0.1",
     "react-jss": "^8.6.1",
     "react-number-format": "^3.6.2",
     "react-redux": "^5.0.7",

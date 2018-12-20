@@ -3,25 +3,251 @@
 
 .l-profile {
 
-  .detail-profile-container {
-    .detail-profile-header {
-      padding: 20px 15px 10px 15px;
+  &__inner {
+    flex: 1 1 auto;
+    align-items: normal;
+  }//&__inner
 
-      &__title {
-        display: none;
-      }
-    }
+  &__panel {
+    flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 
-    .detail-profile-list {
-      .detail-profile-list-item {
-        border-top: solid 0.5px #dedede;
+    &__header {
+      flex: none;
+      display: flex;
+      align-items: center;
+      height: 50px;
+      background-color: map-get($colors, dark-aqua);
 
-        &:nth-child(1) {
-          border-top: 0px;
-        }
-      }
-    }
-  }
+      .back-btn {
+        flex: none;
+        $design-diff: 50px - 24px;
+        width: 24px + $design-diff;
+        height: 24px + $design-diff;
+        margin: 0 ( 20px - ( $design-diff/2 ) ) 0 ( 15px - ( $design-diff/2 ) );
+        color: #FFFFFF;
+        background: url('../../../images/icons/back-white.svg') no-repeat center;
+      }//.back-btn
+
+      .label {
+        flex: 1 1 auto;
+        font-size: 16px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.3px;
+        color: #FFFFFF;
+      }//.label
+
+    }//&__header
+
+    &__body {
+      flex: 1 1 1px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      background-color: #FFFFFF;
+      overflow-y: auto;
+
+      > * {
+        flex: none;
+      }// > *
+
+      .title {
+        margin: 21px 0 0 30px;
+
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, charcoal-grey);
+      }//.title
+
+      .notice-top {
+        display: flex;
+        align-items: flex-start;
+        margin: 20px 15px 0;
+        padding: 15px;
+        border: 0.5px solid map-get( $colors, pale-salmon );
+        background-color: map-get($colors, very-light-pink-six);
+
+        &__icon {
+          flex: none;
+          width: 18px;
+          height: 18px;
+          background: url('../../../images/icons/help-red.svg') no-repeat center;
+        }//&__icon
+
+        &__text {
+          margin-left: 15px;
+
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get($colors, brick);
+        }//&__text
+
+      }//.notice-top
+
+      .profile {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        margin-top: 10px;
+
+        &__item {
+          box-shadow: 0 0.5px 0 0 rgba(222, 222, 222, 0.7);
+
+          &:last-child {
+            box-shadow: none;
+          }//&:last-child
+
+          &:hover {
+            background: none;
+          }//&:hover
+
+          &.is-set {
+
+            > *:last-child {
+              display: none!important;
+            }// > *:last-child
+
+          }//&.is-set
+
+          &__inner {
+            flex: 1 1 1px;
+            position: relative;
+            display: flex;
+            padding-bottom: 15px;
+
+            .icon {
+              flex: none;
+              position: relative;
+              width: 30px;
+              height: 30px;
+              margin: 15px 0 0 15px;
+              border-radius: 15px;
+              background: map-get( $colors, pale-grey-three ) no-repeat center;
+              background-size: contain;
+
+              &--profile {
+                background-image: url('../../../images/icons/nama-lengkap.svg');
+              }//&--profile
+
+              &--phone {
+                background-image: url('../../../images/icons/nomor-hp.svg');
+              }//&--phone
+
+              &--email {
+                background-image: url('../../../images/icons/email.svg');
+              }//&--email
+
+              &--address {
+                background-image: url('../../../images/icons/ico-alamat.svg');
+              }//&--address
+
+              &--identity {
+                background-image: url('../../../images/icons/ico-identitas.svg');
+              }//&--identity
+
+              &--password {
+                background-image: url('../../../images/icons/ico-password.svg');
+              }//&--password
+
+              &.has-warning {
+                &:before {
+                  content: ' ';
+                  position: absolute;
+                  top: -5px;
+                  right: -13px;
+                  width: 28px;
+                  height: 28px;
+                  background: url('../../../images/icons/ico-warning-red.svg') no-repeat center;
+                  background-size: contain;
+                }//&:before
+              }//&.has-warning
+
+            }//.icon
+
+            .detail {
+              display: flex;
+              flex-direction: column;
+              max-width: 260px;
+              margin: 15px 0 0 15px;
+
+              &__label {
+                font-size: 14px;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.5px;
+                color: map-get($colors, charcoal-grey);
+              }//&__label
+
+              &__value {
+                margin-top: 5px;
+
+                font-size: 14px;
+                font-weight: 600;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: normal;
+                letter-spacing: 0.5px;
+                color: map-get($colors, turquoise-blue);
+              }//&__value
+
+              &__description {
+                margin-top: 9px;
+
+                font-size: 13px;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 1.69;
+                letter-spacing: 0.5px;
+                color: map-get($colors, steel-grey);
+              }//&__description
+
+            }//.detail
+
+            .flex-spacer {
+              flex: 1 1 1px;
+            }//.flex-spacer
+
+            .action-btn {
+              display: none;
+              position: absolute;
+              top: 8px; right: 2px;
+              width: 50px;
+              height: 50px;
+              color: black;
+              border-radius: 10px;
+              background: url('../../../images/icons/ico-edit-versi-2.svg') no-repeat center;
+
+              &.is-edit {
+                display: inline-flex;
+              }//&.is-edit
+
+            }//.edit-btn
+
+          }//&__inner
+
+        }//&__item
+
+      }//.profile
+
+    }//&__body
+
+  }//&__panel
 
 }//.l-profile
 

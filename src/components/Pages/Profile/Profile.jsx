@@ -1,151 +1,268 @@
-// Node Modules
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
 
-// React Material
-import Card from '@material-ui/core/Card';
+import {Button} from "components/Widgets/material-ui";
 
-// Custom Components
-import DetailProfileListItem from './DetailProfileListItem/DetailProfileListItem';
-import NotificationBanner from '../../Shared/NotificationBanner/NotificationBanner';
-
-// Custom Libraries
-import { navigationStatus } from "../../../lib/utilities";
-
-// Local Images
-import emailIcon from '../../../images/icons/profile-verification-icons/email.svg';
-import phoneIcon from '../../../images/icons/profile-verification-icons/nomor-hp.svg';
-import profileIcon from '../../../images/icons/profile-verification-icons/nama-lengkap.svg';
-import locationIcon from '../../../images/icons/profile-verification-icons/ico-alamat.svg';
-import cardIcon from '../../../images/icons/profile-verification-icons/ico-identitas.svg';
-import passwordIcon from '../../../images/icons/profile-verification-icons/ico-password.svg';
-
-// Custom CSS
-import './Profile.scss';
 import SideNavMain from "../../Shared/SideNavMain/SideNavMain";
+import appActions from "../../../redux/actions/global/appActions";
+
+import './Profile.scss';
+import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
+import biqHelper from "../../../lib/biqHelper";
 
 class Profile extends Component {
 
   state = {
-      itemListingData: [
-        {
-          id: 'name',
-          icon: profileIcon,
-          title: 'Nama Lengkap',
-          value: 'Bapak Dwinawan Hari Wijaya',
-          status: true,
-          description: 'Nama lengkap adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda',
-          edit: false
-        },
-        {
-          id: 'phone',
-          icon: phoneIcon,
-          title: 'Nomor Handphone',
-          value: '',
-          status: false,
-          description: 'Nomor handphone sangat penting digunakan untuk proses pengiriman token, Saat Anda melakukan transaksi',
-          edit: false
-        },
-        {
-          id: 'email',
-          icon: emailIcon,
-          title: 'Email',
-          status: true,
-          value: "dwinaxxxxx@gmail.com",
-          description: "Email sangat penting digunakan untuk proses pengiriman invoice dan cara pembayaran, Saat Anda melakukan transaksi",
-          edit: false
-        },
-        {
-          id: 'location',
-          icon: locationIcon,
-          title: "Alamat",
-          value: "",
-          status: false,
-          description: "Alamat Anda adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda",
-          edit: true
-        },
-        {
-          id: 'identity',
-          icon: cardIcon,
-          title: "Identitas",
-          value: "",
-          status: false,
-          description: "Data Identitas Anda sangat penting digunakan untuk melakukan verifikasi pembayaran dalam jumlah yang besar.",
-          edit: true
-        },
-        {
-          id: 'password',
-          icon: passwordIcon,
-          title: "Password",
-          value: "",
-          status: true,
-          description: "Untuk keamanan akun anda lakukan penggantian password secara berkala, gunakan kombinasi huruf angka dan karakter.",
-          edit: true
-        }
-      ],
-      notificationBannerStatus: 0
+    user_verifications: {
+      phone: true, email: false, photo: false, address: false,
+      // identity: false
+    }
+  };
+
+  _userVerificationsGen = ( props ) => {
+    return {
+      phone: props.user_profile.verifications.phone === 1,
+      email: props.user_profile.verifications.email === 1,
+      photo : !biqHelper.utils.isNull( props.user_profile.photo ),
+      address: !biqHelper.utils.isNull( props.user_profile.alamat ),
+      // identity: false
     };
-
-  setNotificationBannerStatus = () => {
-    let warning = 0;
-    this.state.itemListingData.forEach((item) => {
-      if (!item.status) {
-        warning++;
-      }
-    });
-
-    this.setState({ notificationBannerStatus: warning });
   };
 
-  onActionClick = (action,type) =>{
-    console.log(`${action} ${type}`);
+  componentDidMount() {
+
+    let user_verifications = this._userVerificationsGen( this.props );
+    this.setState( { user_verifications } );
+
+    let {dispatch} = this.props;
+    dispatch(appActions.appRouterChange({header_mobile_show: false}));
+
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+
+    let user_verifications = this._userVerificationsGen(nextProps);
+
+    let verifications_is_changed = !biqHelper.JSON.isEqualShallow(user_verifications, this.state.user_verifications);
+
+    if (verifications_is_changed) {
+      this.setState({user_verifications});
+      return false;
+    }
+
+    return true;
   };
-
-  componentWillMount() {
-    navigationStatus.next({ navigationState: 'Detail Profile' });
-  }
-
-  componentDidMount(){
-    this.setNotificationBannerStatus();
-  }
 
   render() {
-    const { itemListingData, notificationBannerStatus } = this.state;
 
     return (
-      <div className="main-wrapper biq-wrapper l-profile">
+      <div className="main-wrapper main-wrapper--mobile-no-header biq-wrapper biq-wrapper--md-no-side-padding l-profile">
 
         <div className="biq-wrapper__inner l-profile__inner">
 
           <SideNavMain cssClasses={"visible-md-up"}/>
 
           <div className="l-profile__panel">
-            <Card className="custom-card-styles">
-              <div className="detail-profile-container">
-                <div className="detail-profile-header">
-                  <div className="detail-profile-header__title">Detail Profile</div>
-                  {notificationBannerStatus > 0 ?
-                    <NotificationBanner type="help" message="Untuk meningkat keamanan akun anda silahkan lengkapi profile yang bertanda warning" /> : null
-                  }
+
+            <div className="l-profile__panel__header hidden-md-up">
+
+              <Button className="back-btn">&nbsp;</Button>
+
+              <div className="label">Detail Profile</div>
+
+              <HeaderMenuMobile/>
+
+            </div>
+
+            <div className="l-profile__panel__body">
+
+              <div className="title visible-md-up">Detail Profile</div>
+
+              <div className="notice-top">
+
+                <div className="notice-top__icon"/>
+
+                <div className="notice-top__text">
+                  Untuk meningkat keamanan akun anda silahkan lengkapi profile yang bertanda warning
                 </div>
-                <div className="detail-profile-list">
-                  {itemListingData.map((item, index) => {
-                    return (
-                      <DetailProfileListItem
-                        key={index}
-                        id={item.id}
-                        icon={item.icon}
-                        title={item.title}
-                        value={item.value}
-                        status={item.status}
-                        description={item.description}
-                        edit={item.edit}
-                        onActionClick={this.onActionClick.bind(this)}
-                      />
-                    )
-                  })}
-                </div>
+
               </div>
-            </Card>
+
+
+
+
+              <div className="profile">
+
+
+                <Button className="profile__item is-set">
+
+                  <div className="profile__item__inner">
+
+                    <div className="icon icon--profile"/>
+
+                    <div className="detail">
+
+                      <div className="detail__label">Nama Lengkap</div>
+                      <div className="detail__value">{ this.props.user_profile.nama }</div>
+
+                      <div className="detail__description">
+                        Nama lengkap adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </Button>
+
+                <Button className="profile__item">
+
+                  <div className="profile__item__inner">
+
+                    <div className={`icon icon--phone${ !this.state.user_verifications.phone ? ' has-warning' : '' }`}/>
+
+                    <div className="detail">
+
+                      <div className="detail__label">Nomor Handphone</div>
+                      <div className="detail__value">{this.props.user_profile.kontak}</div>
+
+                      <div className="detail__description">
+                        Nomor handphone sangat penting digunakan untuk proses pengiriman token, Saat Anda melakukan transaksi
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                </Button>
+
+
+                <Button className="profile__item">
+
+                  <div className="profile__item__inner">
+
+                    <div className={`icon icon--email${ !this.state.user_verifications.email ? ' has-warning' : '' }`}/>
+
+                    <div className="detail">
+
+                      <div className="detail__label">Email</div>
+                      <div className="detail__value">{ this.props.user_profile.email }</div>
+
+                      <div className="detail__description">
+                        Email sangat penting digunakan untuk proses pengiriman invoice dan cara pembayaran, Saat Anda melakukan transaksi
+                      </div>
+
+                    </div>
+
+                    <div className="flex-spacer"/>
+
+                    {
+                      !this.state.user_verifications.email ?
+                        <Button className="action-btn">
+                          <span className="visible-md-up">Lengkapi Sekarang</span>
+                        </Button>
+                          :
+                        null
+                    }
+
+                  </div>
+
+                </Button>
+
+                <Button className="profile__item">
+
+                  <div className="profile__item__inner">
+
+                    <div className="icon icon--address has-warning"/>
+
+                    <div className="detail">
+
+                      <div className="detail__label">Alamat</div>
+
+                      <div className="detail__description">
+                        Alamat Anda adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda
+                      </div>
+
+                    </div>
+
+                    <div className="flex-spacer"/>
+
+                    <Button className={`action-btn${ this.state.user_verifications.address ? ' is-edit' : '' }`}>
+                      <span className="visible-md-up">
+                      {
+                        !this.state.user_verifications.address ?
+                          'Lengkapi Sekarang'
+                            :
+                          'Ubah'
+                      }
+                      </span>
+                    </Button>
+
+                  </div>
+
+                </Button>
+
+
+{/*
+                <Button className="profile__item">
+
+                  <div className="profile__item__inner">
+
+                    <div className="icon icon--identity has-warning"/>
+
+                    <div className="detail">
+
+                      <div className="detail__label">Identitas</div>
+
+                      <div className="detail__description">
+                        Data Identitas Anda sangat penting digunakan untuk melakukan verifikasi pembayaran dalam jumlah yang besar.
+                      </div>
+
+                    </div>
+
+                    <div className="flex-spacer"/>
+
+                    <Button className="action-btn">&nbsp;</Button>
+
+                  </div>
+
+                </Button>
+*/}
+
+
+                <Button className="profile__item is-set">
+
+                  <div className="profile__item__inner">
+
+                    <div className="icon icon--password"/>
+
+                    <div className="detail">
+
+                      <div className="detail__label">Password</div>
+
+                      <div className="detail__description">
+                        Untuk keamanan akun anda lakukan penggantian password secara berkala, gunakan kombinasi huruf angka dan karakter
+                      </div>
+
+                    </div>
+
+                    <div className="flex-spacer"/>
+
+                    <Button className="action-btn is-edit">
+                      <span className="visible-md-up">Ubah</span>
+                    </Button>
+
+                  </div>
+
+                </Button>
+
+
+              </div>
+
+
+
+            </div>
+
           </div>
 
         </div>
@@ -157,4 +274,10 @@ class Profile extends Component {
 
 }
 
-export default Profile;
+const mapStateToProps = state => {
+  return {
+    user_profile: state.user.profile
+  };
+};
+
+export default connect( mapStateToProps ) (Profile);

@@ -1,11 +1,11 @@
 @import './variables.scss';
 
-@mixin text-setup($color,$size){
+@mixin text-setup($color,$size){//TODO: Delete later
   color:$color;
   font-size: $size;
 }
 
-@mixin media-query($mq-breakpoint, $mq-breakpoints: $bp-mobile-first) {
+@mixin media-query($mq-breakpoint, $mq-breakpoints: $bp-mobile-first) {//TODO: Delete later
   // If $mq-breakpoint is a key that exists in
   // $mq-breakpoints, get and use the value
   @if map-has-key($mq-breakpoints, $mq-breakpoint) {

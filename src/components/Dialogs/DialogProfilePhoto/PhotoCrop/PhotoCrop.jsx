@@ -1,6 +1,5 @@
  // Node Modules
 import React, { Component } from 'react';
-// import ReactCrop, {makeAspectCrop} from 'react-image-crop';//TODO: plan to uninstall soon
 import ReactCrop from 'react-cropper';
 import 'cropperjs/dist/cropper.css'
 

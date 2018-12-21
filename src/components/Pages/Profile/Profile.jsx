@@ -11,6 +11,7 @@ import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
 import EmailVerificationForm from "../Dashboard/DashboardProfile/EmailVerificationForm";
 
 import './Profile.scss';
+import AddressVerificationForm from "../Dashboard/DashboardProfile/AddressVerificationForm/AddressVerificationForm";
 
 class Profile extends Component {
 
@@ -19,7 +20,8 @@ class Profile extends Component {
       phone: true, email: false, photo: false, address: false,
       // identity: false
     },
-    email_verification: false
+    email_verification: false,
+    address_input_desktop: false
   };
 
 
@@ -41,10 +43,28 @@ class Profile extends Component {
     });
   };
 
-  _onEmailBtnClick = () => {//For desktop Button
-    if ( !this.state.user_verifications.email && !biqHelper.mediaQuery.isMobile() )
-      biqHelper.utils.clickTimeout( () => this._emailVerificationDekstopToggle() );
+
+
+  _addressInputDesktopToggle = () => {
+    biqHelper.utils.clickTimeout( () => this.setState( { address_input_desktop: !this.state.address_input_desktop } ) );
   };
+  _addressInputMobileOpen = () => {
+    if( this.state.user_verifications.address || !biqHelper.mediaQuery.isMobile() ) return;
+
+    biqHelper.utils.clickTimeout( () => {
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogAddressOpen() );
+    } );
+  };
+  _addressActionClick = () => {
+    if ( !this.state.user_verifications.address || biqHelper.mediaQuery.isDesktop() ) {
+      this._addressInputDesktopToggle();
+    } else {
+      this._addressInputMobileOpen();
+    }
+  };
+
+
 
   _userVerificationsGen = ( props ) => {
     return {
@@ -82,6 +102,8 @@ class Profile extends Component {
 
   render() {
 
+    let profile_has_issue = false;
+
     return (
       <div className="main-wrapper main-wrapper--mobile-no-header biq-wrapper biq-wrapper--md-no-side-padding l-profile">
 
@@ -105,15 +127,19 @@ class Profile extends Component {
 
               <div className="title visible-md-up">Detail Profile</div>
 
-              <div className="notice-top">
+              {
+                profile_has_issue &&
 
-                <div className="notice-top__icon"/>
+                <div className="notice-top">
 
-                <div className="notice-top__text">
-                  Untuk meningkat keamanan akun anda silahkan lengkapi profile yang bertanda warning
+                  <div className="notice-top__icon"/>
+
+                  <div className="notice-top__text">
+                    Untuk meningkat keamanan akun anda silahkan lengkapi profile yang bertanda warning
+                  </div>
+
                 </div>
-
-              </div>
+              }
 
 
 
@@ -195,7 +221,7 @@ class Profile extends Component {
 
                       {
                         !this.state.user_verifications.email ?
-                          <Button className={`action-btn${ this.state.email_verification ? ' is-panel-open' : '' }`} onClick={this._onEmailBtnClick}>
+                          <Button className={`action-btn${ this.state.email_verification ? ' is-panel-open' : '' }`} onClick={this._emailVerificationDekstopToggle}>
                             <span className="visible-md-up">
                               { this.state.email_verification ? 'Tutup' : 'Lengkapi Sekarang' }
                             </span>
@@ -232,18 +258,29 @@ class Profile extends Component {
 
                       <div className="flex-spacer"/>
 
-                      <Button className={`action-btn${ this.state.user_verifications.address ? ' is-edit' : '' }`}>
+                      <Button className={`action-btn${ this.state.user_verifications.address ? ' is-edit' : '' }${ this.state.address_input_desktop ? ' is-panel-open' : '' }`}
+                            onClick={this._addressActionClick}>
+
                         <span className="visible-md-up">
-                        {
-                          !this.state.user_verifications.address ?
-                            'Lengkapi Sekarang'
-                              :
-                            'Ubah'
-                        }
+                          {
+                            !this.state.user_verifications.address ?
+
+                              !this.state.address_input_desktop ?
+                                'Lengkapi Sekarang'
+                                  :
+                                'Tutup'
+
+                                :
+
+                              'Ubah'
+                          }
                         </span>
+
                       </Button>
 
                     </div>
+
+                    <AddressVerificationForm isVisible={this.state.address_input_desktop} addressInputDesktopToggle={this._addressInputDesktopToggle}/>
 
                   </div>
 

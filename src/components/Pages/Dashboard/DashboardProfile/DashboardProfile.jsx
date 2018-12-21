@@ -75,8 +75,7 @@ class DashboardProfile extends Component {
     biqHelper.utils.clickTimeout( () => this.setState( { address_input_desktop: !this.state.address_input_desktop } ) );
   };
   _addressInputMobileOpen = () => {
-    if( this.state.user_verifications.address ) return;
-    if( !biqHelper.mediaQuery.isMobile() ) return;
+    if( this.state.user_verifications.address || !biqHelper.mediaQuery.isMobile() ) return;
 
     biqHelper.utils.clickTimeout( () => {
       let {dispatch} = this.props;

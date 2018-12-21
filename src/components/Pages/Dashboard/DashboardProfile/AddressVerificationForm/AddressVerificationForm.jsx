@@ -527,7 +527,7 @@ class AddressVerificationForm extends Component {
             <Button className={`submit-btn${this.state.is_submitting ? ' is-submitting' : ''}`} onClick={this._onSubmit}>Simpan</Button>
           </div>
 
-          { this.state.is_submitting && <LoadingIndicatorBar/>}
+          <LoadingIndicatorBar isVisible={this.state.is_submitting}/>
 
 
 

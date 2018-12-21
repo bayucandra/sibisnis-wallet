@@ -49,19 +49,18 @@ class Profile extends Component {
     biqHelper.utils.clickTimeout( () => this.setState( { address_input_desktop: !this.state.address_input_desktop } ) );
   };
   _addressInputMobileOpen = () => {
-    if( this.state.user_verifications.address || !biqHelper.mediaQuery.isMobile() ) return;
-
     biqHelper.utils.clickTimeout( () => {
       let {dispatch} = this.props;
       dispatch( appActions.appDialogAddressOpen() );
     } );
   };
   _addressActionClick = () => {
-    if ( !this.state.user_verifications.address || biqHelper.mediaQuery.isDesktop() ) {
+    if ( !biqHelper.mediaQuery.isMobile() ) {
       this._addressInputDesktopToggle();
     } else {
       this._addressInputMobileOpen();
     }
+
   };
 
 
@@ -238,13 +237,13 @@ class Profile extends Component {
 
                 </Button>
 
-                <Button className="profile__item">
+                <Button className={`profile__item${ this.state.user_verifications.email ? ' is-set' : '' }`}>
 
                   <div className="profile__item__inner">
 
                     <div className="action">
 
-                      <div className="icon icon--address has-warning"/>
+                      <div className={`icon icon--address${ !this.state.user_verifications.email ? ' has-warning' : '' }`}/>
 
                       <div className="detail">
 

@@ -100,7 +100,7 @@ class EmailVerificationForm extends Component {
               </Button>
 
 
-              { this.props.dashboard.email_verification.is_submitting && <LoadingIndicatorBar/>}
+              <LoadingIndicatorBar isVisible={this.props.dashboard.email_verification.is_submitting}/>
 
             </div>
 

@@ -14,11 +14,23 @@ class LoadingIndicatorBar extends React.Component {
 
     Object.assign( wrapperStyle, this.props.style )
 
+    let is_visible = biqHelper.utils.isNull(this.props.isVisible) ? true : this.props.isVisible;
+
     return (
-      <section className={`widget-loading-indicator-bar${ !biqHelper.utils.isNull( this.props.className ) ? ' ' + this.props.className : '' }` } style={wrapperStyle}>
+
+      is_visible ?
+
+      <section
+        className={`widget-loading-indicator-bar${!biqHelper.utils.isNull(this.props.className) ? ' ' + this.props.className : ''}`}
+        style={wrapperStyle}>
         <div className="widget-loading-indicator-bar__bar-1" style={barStyle}/>
         <div className="widget-loading-indicator-bar__bar-2" style={barStyle}/>
       </section>
+
+        :
+
+      null
+
     );
 
   }

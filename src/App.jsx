@@ -28,6 +28,7 @@ import LoadingIndicatorBar from "./components/Widgets/LoadingIndicatorBar/Loadin
 import ModalNotice from "./components/Widgets/ModalNotice/ModalNotice";
 import DialogProfilePhoto from "./components/Dialogs/DialogProfilePhoto";
 import DialogAddressInput from "components/Dialogs/DialogAddressInput";
+import DialogEmailVerification from "./components/Dialogs/DialogEmailVerification";
 
 import "./App.scss";
 
@@ -195,6 +196,7 @@ class App extends Component {
           </Modal>
 
 
+          <DialogEmailVerification/>
           <DialogProfilePhoto/>
           <DialogAddressInput/>
 

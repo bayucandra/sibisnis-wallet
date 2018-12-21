@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
+import appActions from "../../../redux/actions/global/appActions";
+import biqHelper from "../../../lib/biqHelper";
+
 import {Button} from "components/Widgets/material-ui";
 
 import SideNavMain from "../../Shared/SideNavMain/SideNavMain";
-import appActions from "../../../redux/actions/global/appActions";
+import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
+import EmailVerificationForm from "../Dashboard/DashboardProfile/EmailVerificationForm";
 
 import './Profile.scss';
-import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
-import biqHelper from "../../../lib/biqHelper";
 
 class Profile extends Component {
 
@@ -16,7 +18,32 @@ class Profile extends Component {
     user_verifications: {
       phone: true, email: false, photo: false, address: false,
       // identity: false
-    }
+    },
+    email_verification: false
+  };
+
+
+  _emailVerificationDekstopToggle = () => {
+    biqHelper.utils.clickTimeout( () => {
+
+      this.setState({
+        email_verification: !this.state.email_verification
+      });
+
+    });
+
+  };
+  _emailVerificationMobileOpen = () => {
+    if ( this.state.user_verifications.email || !biqHelper.mediaQuery.isMobile() ) return;
+    biqHelper.utils.clickTimeout( () => {
+      let {dispatch} = this.props;
+      dispatch(appActions.appDialogEmailOpen());
+    });
+  };
+
+  _onEmailBtnClick = () => {//For desktop Button
+    if ( !this.state.user_verifications.email && !biqHelper.mediaQuery.isMobile() )
+      biqHelper.utils.clickTimeout( () => this._emailVerificationDekstopToggle() );
   };
 
   _userVerificationsGen = ( props ) => {
@@ -98,15 +125,19 @@ class Profile extends Component {
 
                   <div className="profile__item__inner">
 
-                    <div className="icon icon--profile"/>
+                    <div className="action">
 
-                    <div className="detail">
+                      <div className="icon icon--profile"/>
 
-                      <div className="detail__label">Nama Lengkap</div>
-                      <div className="detail__value">{ this.props.user_profile.nama }</div>
+                      <div className="detail">
 
-                      <div className="detail__description">
-                        Nama lengkap adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda
+                        <div className="detail__label">Nama Lengkap</div>
+                        <div className="detail__value">{ this.props.user_profile.nama }</div>
+
+                        <div className="detail__description">
+                          Nama lengkap adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda
+                        </div>
+
                       </div>
 
                     </div>
@@ -115,19 +146,23 @@ class Profile extends Component {
 
                 </Button>
 
-                <Button className="profile__item">
+                <Button className={`profile__item${ this.state.user_verifications.phone ? ' is-set' : '' }`}>
 
                   <div className="profile__item__inner">
 
-                    <div className={`icon icon--phone${ !this.state.user_verifications.phone ? ' has-warning' : '' }`}/>
+                    <div className="action">
 
-                    <div className="detail">
+                      <div className={`icon icon--phone${ !this.state.user_verifications.phone ? ' has-warning' : '' }`}/>
 
-                      <div className="detail__label">Nomor Handphone</div>
-                      <div className="detail__value">{this.props.user_profile.kontak}</div>
+                      <div className="detail">
 
-                      <div className="detail__description">
-                        Nomor handphone sangat penting digunakan untuk proses pengiriman token, Saat Anda melakukan transaksi
+                        <div className="detail__label">Nomor Handphone</div>
+                        <div className="detail__value">{this.props.user_profile.kontak}</div>
+
+                        <div className="detail__description">
+                          Nomor handphone sangat penting digunakan untuk proses pengiriman token, Saat Anda melakukan transaksi
+                        </div>
+
                       </div>
 
                     </div>
@@ -137,66 +172,78 @@ class Profile extends Component {
                 </Button>
 
 
-                <Button className="profile__item">
+                <Button className={`profile__item${ this.state.user_verifications.email ? ' is-set' : '' }`} onClick={this._emailVerificationMobileOpen}>
 
                   <div className="profile__item__inner">
 
-                    <div className={`icon icon--email${ !this.state.user_verifications.email ? ' has-warning' : '' }`}/>
+                    <div className="action">
 
-                    <div className="detail">
+                      <div className={`icon icon--email${ !this.state.user_verifications.email ? ' has-warning' : '' }`}/>
 
-                      <div className="detail__label">Email</div>
-                      <div className="detail__value">{ this.props.user_profile.email }</div>
+                      <div className="detail">
 
-                      <div className="detail__description">
-                        Email sangat penting digunakan untuk proses pengiriman invoice dan cara pembayaran, Saat Anda melakukan transaksi
+                        <div className="detail__label">Email</div>
+                        <div className="detail__value">{ this.props.user_profile.email }</div>
+
+                        <div className="detail__description">
+                          Email sangat penting digunakan untuk proses pengiriman invoice dan cara pembayaran, Saat Anda melakukan transaksi
+                        </div>
+
                       </div>
 
-                    </div>
+                      <div className="flex-spacer"/>
 
-                    <div className="flex-spacer"/>
-
-                    {
-                      !this.state.user_verifications.email ?
-                        <Button className="action-btn">
-                          <span className="visible-md-up">Lengkapi Sekarang</span>
-                        </Button>
-                          :
-                        null
-                    }
-
-                  </div>
-
-                </Button>
-
-                <Button className="profile__item">
-
-                  <div className="profile__item__inner">
-
-                    <div className="icon icon--address has-warning"/>
-
-                    <div className="detail">
-
-                      <div className="detail__label">Alamat</div>
-
-                      <div className="detail__description">
-                        Alamat Anda adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda
-                      </div>
-
-                    </div>
-
-                    <div className="flex-spacer"/>
-
-                    <Button className={`action-btn${ this.state.user_verifications.address ? ' is-edit' : '' }`}>
-                      <span className="visible-md-up">
                       {
-                        !this.state.user_verifications.address ?
-                          'Lengkapi Sekarang'
+                        !this.state.user_verifications.email ?
+                          <Button className={`action-btn${ this.state.email_verification ? ' is-panel-open' : '' }`} onClick={this._onEmailBtnClick}>
+                            <span className="visible-md-up">
+                              { this.state.email_verification ? 'Tutup' : 'Lengkapi Sekarang' }
+                            </span>
+                          </Button>
                             :
-                          'Ubah'
+                          null
                       }
-                      </span>
-                    </Button>
+
+                    </div>
+
+                    <EmailVerificationForm isVisible={this.state.email_verification}/>
+
+                  </div>
+
+                </Button>
+
+                <Button className="profile__item">
+
+                  <div className="profile__item__inner">
+
+                    <div className="action">
+
+                      <div className="icon icon--address has-warning"/>
+
+                      <div className="detail">
+
+                        <div className="detail__label">Alamat</div>
+
+                        <div className="detail__description">
+                          Alamat Anda adalah info yang penting untuk memperlancar proses verifikasi untuk setiap transaksi saldo Anda
+                        </div>
+
+                      </div>
+
+                      <div className="flex-spacer"/>
+
+                      <Button className={`action-btn${ this.state.user_verifications.address ? ' is-edit' : '' }`}>
+                        <span className="visible-md-up">
+                        {
+                          !this.state.user_verifications.address ?
+                            'Lengkapi Sekarang'
+                              :
+                            'Ubah'
+                        }
+                        </span>
+                      </Button>
+
+                    </div>
 
                   </div>
 
@@ -234,23 +281,27 @@ class Profile extends Component {
 
                   <div className="profile__item__inner">
 
-                    <div className="icon icon--password"/>
+                    <div className="action">
 
-                    <div className="detail">
+                      <div className="icon icon--password"/>
 
-                      <div className="detail__label">Password</div>
+                      <div className="detail">
 
-                      <div className="detail__description">
-                        Untuk keamanan akun anda lakukan penggantian password secara berkala, gunakan kombinasi huruf angka dan karakter
+                        <div className="detail__label">Password</div>
+
+                        <div className="detail__description">
+                          Untuk keamanan akun anda lakukan penggantian password secara berkala, gunakan kombinasi huruf angka dan karakter
+                        </div>
+
                       </div>
 
+                      <div className="flex-spacer"/>
+
+                      <Button className="action-btn is-edit">
+                        <span className="visible-md-up">Ubah</span>
+                      </Button>
+
                     </div>
-
-                    <div className="flex-spacer"/>
-
-                    <Button className="action-btn is-edit">
-                      <span className="visible-md-up">Ubah</span>
-                    </Button>
 
                   </div>
 

@@ -11,7 +11,6 @@ import { Modal } from '@material-ui/core';
 import { Button } from "components/Widgets/material-ui";
 
 import EmailVerificationForm from "./EmailVerificationForm";
-import EmailVerificationDialog from "./EmailVerificationDialog";
 import ProfileUploadForm from "./ProfileUploadForm/ProfileUploadForm";
 
 
@@ -34,10 +33,7 @@ class DashboardProfile extends Component {
     },
     profile_completeness: 100,
     profile_completeness_delay_is_set: false,
-    email_verification: {
-      desktop: false,
-      mobile: false
-    },
+    email_verification: false,
     profile_upload_desktop: false,//This is for desktop, Mobile version placed on redux
     address_input_desktop: false//This is for desktop, Mobile version placed on redux
   };
@@ -47,23 +43,17 @@ class DashboardProfile extends Component {
     biqHelper.utils.clickTimeout( () => {
 
       this.setState({
-        email_verification: {
-          desktop: !this.state.email_verification.desktop,
-          mobile: false
-        }
+        email_verification: !this.state.email_verification
       });
 
     });
 
   };
   _emailVerificationMobileOpen = () => {
-    if ( this.state.user_verifications.email ) return;
-    if ( !biqHelper.mediaQuery.isMobile() ) return;
+    if ( this.state.user_verifications.email || !biqHelper.mediaQuery.isMobile() ) return;
 
-    this.setState({ email_verification: { desktop: false, mobile: true } });
-  };
-  _emailVerificationMobileClose = () => {
-    this.setState({ email_verification: { desktop: false, mobile: false } });
+    let {dispatch} = this.props;
+    dispatch( appActions.appDialogEmailOpen() );
   };
 
 
@@ -296,14 +286,14 @@ class DashboardProfile extends Component {
 
                     :
 
-                  <Button className={`action-btn-desktop visible-md-up${ this.state.email_verification.desktop ? ' action-btn-desktop--close' : '' }`} onClick={this._emailVerificationDekstopToggle}>
-                    { this.state.email_verification.desktop ? 'Tutup' : 'Lengkapi Sekarang' }
+                  <Button className={`action-btn-desktop visible-md-up${ this.state.email_verification ? ' action-btn-desktop--close' : '' }`} onClick={this._emailVerificationDekstopToggle}>
+                    { this.state.email_verification ? 'Tutup' : 'Lengkapi Sekarang' }
                   </Button>
                 }
 
               </div>
 
-              <EmailVerificationForm isVisible={this.state.email_verification.desktop && !this.state.user_verifications.email}/>
+              <EmailVerificationForm isVisible={this.state.email_verification && !this.state.user_verifications.email}/>
 
             </div>
 
@@ -378,19 +368,6 @@ class DashboardProfile extends Component {
 
 
         </div>
-
-        <Modal
-          open={this.state.email_verification.mobile}
-          onClose={this._emailVerificationMobileClose}
-        >
-
-          <div className="modal-inner">
-
-            <EmailVerificationDialog emailVerificationMobileClose={this._emailVerificationMobileClose}/>
-
-          </div>
-
-        </Modal>
 
       </div>
     );

@@ -79,7 +79,6 @@ import actionTypes from "../../action-types/index";
       payload: dialog_mode
     }
   }
-
   function appDialogProfilePhotoClose() {
     return { type: actionTypes.app.DIALOG_PROFILE_PHOTO_CLOSE }
   }
@@ -87,9 +86,15 @@ import actionTypes from "../../action-types/index";
   function appDialogAddressOpen() {
     return { type: actionTypes.app.DIALOG_ADDRESS_INPUT_OPEN }
   }
-
   function appDialogAddressClose() {
     return { type: actionTypes.app.DIALOG_ADDRESS_INPUT_CLOSE }
+  }
+
+  function appDialogEmailOpen() {
+    return { type: actionTypes.app.DIALOG_EMAIL_INPUT_OPEN }
+  }
+  function appDialogEmailClose() {
+    return { type: actionTypes.app.DIALOG_EMAIL_INPUT_CLOSE }
   }
   
   
@@ -109,7 +114,9 @@ import actionTypes from "../../action-types/index";
     appDialogProfilePhotoOpen,
     appDialogProfilePhotoClose,
     appDialogAddressOpen,
-    appDialogAddressClose
+    appDialogAddressClose,
+    appDialogEmailOpen,
+    appDialogEmailClose
   };
 
 export default actions;

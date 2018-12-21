@@ -24,6 +24,9 @@ let state_default = {
   , dialog_address_input: {
     is_open: false
   }
+  , dialog_email_input: {
+    is_open: false
+  }
 };
 
 export default ( state = state_default, action ) => {
@@ -122,6 +125,19 @@ export default ( state = state_default, action ) => {
         dialog_address_input: Object.assign( {}, state_default.dialog_address_input )
       };
       break;
+
+
+    case actionTypes.app.DIALOG_EMAIL_INPUT_OPEN:
+      new_state = {
+        dialog_email_input: Object.assign( {}, state_default.dialog_email_input, { is_open: true } )
+      };
+      break;
+    case actionTypes.app.DIALOG_EMAIL_INPUT_CLOSE:
+      new_state = {
+        dialog_email_input: Object.assign( {}, state_default.dialog_email_input )
+      };
+      break;
+
 
     default:
       return state;

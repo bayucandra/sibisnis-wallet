@@ -124,120 +124,126 @@
 
           &__inner {
             flex: 1 1 1px;
-            position: relative;
             display: flex;
-            padding-bottom: 15px;
+            flex-direction: column;
 
-            .icon {
-              flex: none;
+            .action {
               position: relative;
-              width: 30px;
-              height: 30px;
-              margin: 15px 0 0 15px;
-              border-radius: 15px;
-              background: map-get( $colors, pale-grey-three ) no-repeat center;
-              background-size: contain;
-
-              &--profile {
-                background-image: url('../../../images/icons/nama-lengkap.svg');
-              }//&--profile
-
-              &--phone {
-                background-image: url('../../../images/icons/nomor-hp.svg');
-              }//&--phone
-
-              &--email {
-                background-image: url('../../../images/icons/email.svg');
-              }//&--email
-
-              &--address {
-                background-image: url('../../../images/icons/ico-alamat.svg');
-              }//&--address
-
-              &--identity {
-                background-image: url('../../../images/icons/ico-identitas.svg');
-              }//&--identity
-
-              &--password {
-                background-image: url('../../../images/icons/ico-password.svg');
-              }//&--password
-
-              &.has-warning {
-                &:before {
-                  content: ' ';
-                  position: absolute;
-                  top: -5px;
-                  right: -13px;
-                  width: 28px;
-                  height: 28px;
-                  background: url('../../../images/icons/ico-warning-red.svg') no-repeat center;
-                  background-size: contain;
-                }//&:before
-              }//&.has-warning
-
-            }//.icon
-
-            .detail {
               display: flex;
-              flex-direction: column;
-              max-width: 260px;
-              margin: 15px 0 0 15px;
+              padding-bottom: 15px;
 
-              &__label {
-                font-size: 14px;
-                font-weight: bold;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: normal;
-                letter-spacing: 0.5px;
-                color: map-get($colors, charcoal-grey);
-              }//&__label
+              .icon {
+                flex: none;
+                position: relative;
+                width: 30px;
+                height: 30px;
+                margin: 15px 0 0 15px;
+                border-radius: 15px;
+                background: map-get( $colors, pale-grey-three ) no-repeat center;
+                background-size: contain;
 
-              &__value {
-                margin-top: 5px;
+                &--profile {
+                  background-image: url('../../../images/icons/nama-lengkap.svg');
+                }//&--profile
 
-                font-size: 14px;
-                font-weight: 600;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: normal;
-                letter-spacing: 0.5px;
-                color: map-get($colors, turquoise-blue);
-              }//&__value
+                &--phone {
+                  background-image: url('../../../images/icons/nomor-hp.svg');
+                }//&--phone
 
-              &__description {
-                margin-top: 9px;
+                &--email {
+                  background-image: url('../../../images/icons/email.svg');
+                }//&--email
 
-                font-size: 13px;
-                font-weight: normal;
-                font-style: normal;
-                font-stretch: normal;
-                line-height: 1.69;
-                letter-spacing: 0.5px;
-                color: map-get($colors, steel-grey);
-              }//&__description
+                &--address {
+                  background-image: url('../../../images/icons/ico-alamat.svg');
+                }//&--address
 
-            }//.detail
+                &--identity {
+                  background-image: url('../../../images/icons/ico-identitas.svg');
+                }//&--identity
 
-            .flex-spacer {
-              flex: 1 1 1px;
-            }//.flex-spacer
+                &--password {
+                  background-image: url('../../../images/icons/ico-password.svg');
+                }//&--password
 
-            .action-btn {
-              display: none;
-              position: absolute;
-              top: 8px; right: 2px;
-              width: 50px;
-              height: 50px;
-              color: black;
-              border-radius: 10px;
-              background: url('../../../images/icons/ico-edit-versi-2.svg') no-repeat center;
+                &.has-warning {
+                  &:before {
+                    content: ' ';
+                    position: absolute;
+                    top: -5px;
+                    right: -13px;
+                    width: 28px;
+                    height: 28px;
+                    background: url('../../../images/icons/ico-warning-red.svg') no-repeat center;
+                    background-size: contain;
+                  }//&:before
+                }//&.has-warning
 
-              &.is-edit {
-                display: inline-flex;
-              }//&.is-edit
+              }//.icon
 
-            }//.edit-btn
+              .detail {
+                display: flex;
+                flex-direction: column;
+                max-width: 260px;
+                margin: 15px 0 0 15px;
+
+                &__label {
+                  font-size: 14px;
+                  font-weight: bold;
+                  font-style: normal;
+                  font-stretch: normal;
+                  line-height: normal;
+                  letter-spacing: 0.5px;
+                  color: map-get($colors, charcoal-grey);
+                }//&__label
+
+                &__value {
+                  margin-top: 5px;
+
+                  font-size: 14px;
+                  font-weight: 600;
+                  font-style: normal;
+                  font-stretch: normal;
+                  line-height: normal;
+                  letter-spacing: 0.5px;
+                  color: map-get($colors, turquoise-blue);
+                }//&__value
+
+                &__description {
+                  margin-top: 9px;
+
+                  font-size: 13px;
+                  font-weight: normal;
+                  font-style: normal;
+                  font-stretch: normal;
+                  line-height: 1.69;
+                  letter-spacing: 0.5px;
+                  color: map-get($colors, steel-grey);
+                }//&__description
+
+              }//.detail
+
+              .flex-spacer {
+                flex: 1 1 1px;
+              }//.flex-spacer
+
+              .action-btn {
+                display: none;
+                position: absolute;
+                top: 8px; right: 2px;
+                width: 50px;
+                height: 50px;
+                color: black;
+                border-radius: 10px;
+                background: url('../../../images/icons/ico-edit-versi-2.svg') no-repeat center;
+
+                &.is-edit {
+                  display: inline-flex;
+                }//&.is-edit
+
+              }//.edit-btn
+
+            }//.action
 
           }//&__inner
 

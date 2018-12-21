@@ -103,6 +103,10 @@ class Profile extends Component {
 
     let profile_has_issue = false;
 
+    for( let key in this.state.user_verifications ) {
+      if (this.state.user_verifications[key]=== false) profile_has_issue = true;
+    }
+
     return (
       <div className="main-wrapper main-wrapper--mobile-no-header biq-wrapper biq-wrapper--md-no-side-padding l-profile">
 
@@ -243,7 +247,7 @@ class Profile extends Component {
 
                     <div className="action">
 
-                      <div className={`icon icon--address${ !this.state.user_verifications.email ? ' has-warning' : '' }`}/>
+                      <div className={`icon icon--address${ !this.state.user_verifications.address ? ' has-warning' : '' }`}/>
 
                       <div className="detail">
 

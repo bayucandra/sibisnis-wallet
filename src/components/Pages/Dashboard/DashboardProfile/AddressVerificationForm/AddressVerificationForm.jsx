@@ -227,7 +227,14 @@ class AddressVerificationForm extends Component {
 
   };
 
-  _provinsiChange = () => {
+  _provinsiChange = ( p_obj = {} ) => {
+
+    let params = {
+        callback: null,
+        callback_params: null
+      };
+
+    Object.assign( params, p_obj );
 
     this.setState({ kabupaten_selected: null });
     this.setState({ kabupaten_data: [] });
@@ -251,16 +258,28 @@ class AddressVerificationForm extends Component {
           value: { label: el.nama, id: el.id_kotakab }
         }) );
 
-      this.setState({ kabupaten_data: address_mapped });
+      this.setState({ kabupaten_data: address_mapped }, () => {
+        if ( typeof params.callback === 'function') {
+          params.callback( params.callback_params );
+        }
+      });
       this.setState( { kabupaten_is_loading: false } );
       let input_field = $('.select-dropdown--kabupaten .mui-text-field__input input[type="text"]');
 
       input_field.focus();
+
     } );
 
   };
 
-  _kabupatenChange = () => {
+  _kabupatenChange = ( p_obj ) => {
+
+    let params = {
+      callback: null,
+      callback_params: null
+    };
+
+    Object.assign( params, p_obj );
 
     this.setState({ kecamatan_selected: null });
     this.setState({ kecamatan_data: [] });
@@ -281,7 +300,12 @@ class AddressVerificationForm extends Component {
           value: { label: el.nama, id: el.id_kecamatan }
         }) );
 
-      this.setState({ kecamatan_data: address_mapped });
+      this.setState({ kecamatan_data: address_mapped }, () => {
+        if ( typeof params.callback === 'function') {
+          params.callback( params.callback_params );
+        }
+      } );
+
       this.setState( { kecamatan_is_loading: false } );
       $('.select-dropdown--kecamatan .mui-text-field__input input[type="text"]').focus();
 
@@ -289,7 +313,14 @@ class AddressVerificationForm extends Component {
 
   };
 
-  _kecamatanChange = () => {
+  _kecamatanChange = ( p_obj ) => {
+
+    let params = {
+      callback: null,
+      callback_params: null
+    };
+
+    Object.assign( params, p_obj );
 
     if(biqHelper.utils.isNull(this.state.kecamatan_selected)) return;
 
@@ -303,7 +334,11 @@ class AddressVerificationForm extends Component {
             value: { label: el.nama, id: el.id_kelurahan }
           }) );
 
-        this.setState({ kelurahan_data: address_mapped });
+        this.setState({ kelurahan_data: address_mapped }, () => {
+          if ( typeof params.callback === 'function') {
+            params.callback( params.callback_params );
+          }
+        });
         this.setState( { kelurahan_is_loading: false } );
         $('.select-dropdown--kelurahan .mui-text-field__input input[type="text"]').focus();
 
@@ -311,12 +346,24 @@ class AddressVerificationForm extends Component {
 
   };
 
-  _kelurahanChange = () => {
+  _kelurahanChange = ( p_obj ) => {
+
+    let params = {
+      callback: null,
+      callback_params: null
+    };
+
+    Object.assign( params, p_obj );
 
     if(biqHelper.utils.isNull(this.state.kelurahan_selected)) return;
 
     let address_input_el = $('.address-verification-form .alamat textarea');
     address_input_el.focus();
+
+    if ( typeof params.callback === 'function') {
+      params.callback( params.callback_params );
+    }
+
   };
 
   _addressInputDesktopToggle = ()=>{
@@ -416,6 +463,57 @@ class AddressVerificationForm extends Component {
     }
   };
 
+  _loadSavedAddress = ( p_ls ) => {
+    if ( p_ls === 'alamat' ) {
+      let alamat_ls = this.props.user_profile.alamat;
+      if ( !biqHelper.utils.isNull( alamat_ls ) ) {
+        this.setState( { alamat : alamat_ls } );
+      }
+      return;
+    }
+
+    let address_keys = [
+      {ls: 'prov', data: 'provinsi_data', selected: 'provinsi_selected'},
+      {ls: 'kab', data: 'kabupaten_data', selected: 'kabupaten_selected'},
+      {ls: 'kec', data: 'kecamatan_data', selected: 'kecamatan_selected' },
+      {ls: 'kelurahan', data: 'kelurahan_data', selected: 'kelurahan_selected'} ];
+
+    let key = address_keys.filter( el => el.ls === p_ls )[0];
+
+    let ls_val = this.props.user_profile[key.ls];
+    if ( !biqHelper.utils.isNull( ls_val ) ) {
+      ls_val = ls_val.toLowerCase();
+      let option_data = this.state[key.data];
+      let option_select = option_data.filter( el => el.label.toLowerCase() === ls_val )[0];
+      let state = {};
+      state[key.selected] = option_select;
+      this.setState( state, () => {
+
+        switch ( p_ls ) {
+
+          case 'prov':
+            this._provinsiChange( { callback: this._loadSavedAddress, callback_params: 'kab' } );
+            break;
+
+          case 'kab':
+            this._kabupatenChange( { callback: this._loadSavedAddress, callback_params: 'kec' } );
+            break;
+
+          case 'kec':
+            this._kecamatanChange( { callback: this._loadSavedAddress, callback_params: 'kelurahan' } );
+            break;
+
+          case 'kelurahan':
+            this._kelurahanChange({ callback: this._loadSavedAddress, callback_params: 'alamat' });
+            break;
+
+        }
+
+      } );
+    }
+
+  };
+
   componentDidMount(){
 
     this.setState( { provinsi_is_loading: true } );
@@ -432,11 +530,21 @@ class AddressVerificationForm extends Component {
 
     addressProvider.kecamatan$().subscribe();
 
+    setTimeout( () => {
+      this._loadSavedAddress( 'prov' );
+    }, 100);
+
   }
 
   componentWillUnmount() {
     this.stop$.next();
     this.stop$.complete();
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    if ( prevProps.isVisible && !this.props.isVisible && !this.state.is_submitting ) {
+      this._loadSavedAddress('prov');
+    }
   }
 
   render() {
@@ -550,8 +658,16 @@ class AddressVerificationForm extends Component {
 
 }
 
+const mapStateToProps = state => {
+
+  return {
+    user_profile: state.user.profile
+  }
+
+};
+
 export default withRouter(
-  connect() (
+  connect( mapStateToProps ) (
     withStyles( styles, {withTheme: true} ) ( AddressVerificationForm )
   )
 );

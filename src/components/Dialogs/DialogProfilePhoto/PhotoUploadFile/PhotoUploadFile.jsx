@@ -8,26 +8,20 @@ import { Observable, Subject, of } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
 import { merge, catchError, takeUntil } from 'rxjs/operators';
 
-// Custom Components
 import PhotoCrop from '../PhotoCrop/PhotoCrop';
-// import UploadProgressButton from './../../Shared/UploadProgressButton/UploadProgressButton';//TODO: deprecated and delete soon
 
-// Custom Libraries
+import biqConfig from "providers/biqConfig";
 import biqHelper from "lib/biqHelper";
 
-// Redux
 import userActions from '../../../../redux/actions/global/userActions';
 import { connect } from 'react-redux';
 
-// Local Images
 import uploadIconMobile from '../../../../images/icons/ico-upload-mobile.svg';
 import uploadIconDesktop from '../../../../images/icons/ico-upload-desktop.svg';
 import imgUploadSukses from '../../../../images/icons/upload-sukses.svg';
 import imgUploadGagal from '../../../../images/icons/upload-gagal.svg';
 
-// Custom CSS
 import './PhotoUploadFile.scss';
-import biqConfig from "providers/biqConfig";
 
 class PhotoUploadFile extends Component {
 

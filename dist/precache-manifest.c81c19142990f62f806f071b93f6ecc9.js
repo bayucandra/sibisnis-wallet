@@ -1,19 +1,19 @@
 self.__precacheManifest = [
   {
-    "revision": "7726e581d53ee89148d110321729344f",
-    "url": "./static/media/Nunito-Italic.7726e581.ttf"
+    "revision": "4ce7e79825241165247918d8a62b7353",
+    "url": "./static/media/gagal.4ce7e798.svg"
   },
   {
-    "revision": "64455e99174db238b804",
-    "url": "./static/css/main.4e99ab1b.chunk.css"
+    "revision": "b1708721ff197d5fc8fe",
+    "url": "./static/css/main.4b9bdf59.chunk.css"
   },
   {
-    "revision": "c6fbefa06248ba0dce0e4a4fdd4961c3",
-    "url": "./static/media/ico-oval-1.c6fbefa0.svg"
+    "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
+    "url": "./static/media/oval-2.4bacff9e.svg"
   },
   {
-    "revision": "646a42ef0aefe6cc2b73",
-    "url": "./static/js/1.646a42ef.chunk.js"
+    "revision": "a7a46df2278042416009",
+    "url": "./static/js/1.a7a46df2.chunk.js"
   },
   {
     "revision": "4a686d48d5a089750c49",
@@ -50,22 +50,6 @@ self.__precacheManifest = [
   {
     "revision": "2cfa045c8e7d9e6693693f3740cea339",
     "url": "./static/media/ico-camera-blue.2cfa045c.svg"
-  },
-  {
-    "revision": "0dea40537bf38032e642366accfcfe28",
-    "url": "./static/media/ico-close-black.0dea4053.svg"
-  },
-  {
-    "revision": "f3d4eb57c182f0e8ceb0dce7de9a78ee",
-    "url": "./static/media/ico-camera-white.f3d4eb57.svg"
-  },
-  {
-    "revision": "09d1921949de7d1f50d885decc02b1f4",
-    "url": "./static/media/ico-camera-finish.09d19219.svg"
-  },
-  {
-    "revision": "5fcf24ff60bec6839631b5f5258f3be8",
-    "url": "./static/media/ico-upload-reset.5fcf24ff.svg"
   },
   {
     "revision": "dc6e22839b7abc5648cca9f7cbb81c44",
@@ -120,12 +104,12 @@ self.__precacheManifest = [
     "url": "./static/media/upload-gagal.f7b7d674.svg"
   },
   {
-    "revision": "26a1ec90be635d027479741f815494cb",
-    "url": "./static/media/Nunito-ExtraLight.26a1ec90.ttf"
-  },
-  {
     "revision": "592f55ff60492e54ca877f588bb8d52e",
     "url": "./static/media/Nunito-ExtraLightItalic.592f55ff.ttf"
+  },
+  {
+    "revision": "26a1ec90be635d027479741f815494cb",
+    "url": "./static/media/Nunito-ExtraLight.26a1ec90.ttf"
   },
   {
     "revision": "424413200c2a4c02e03d6edf064960aa",
@@ -168,12 +152,16 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-Black.76e62b37.ttf"
   },
   {
-    "revision": "64455e99174db238b804",
-    "url": "./static/js/main.64455e99.chunk.js"
+    "revision": "7726e581d53ee89148d110321729344f",
+    "url": "./static/media/Nunito-Italic.7726e581.ttf"
   },
   {
     "revision": "65bb0a158ee1967292ee4d11079d45ae",
     "url": "./static/media/Nunito-Regular.65bb0a15.ttf"
+  },
+  {
+    "revision": "b1708721ff197d5fc8fe",
+    "url": "./static/js/main.b1708721.chunk.js"
   },
   {
     "revision": "3a4a29a3ab1b5f6b2636eac812deb862",
@@ -202,10 +190,6 @@ self.__precacheManifest = [
   {
     "revision": "805e99d2210f832a808c98dc1334e743",
     "url": "./static/media/back-white.805e99d2.svg"
-  },
-  {
-    "revision": "4ce7e79825241165247918d8a62b7353",
-    "url": "./static/media/gagal.4ce7e798.svg"
   },
   {
     "revision": "51720f470a2d829070cd5b720bdbee8b",
@@ -288,20 +272,20 @@ self.__precacheManifest = [
     "url": "./static/media/help.704c45a7.svg"
   },
   {
-    "revision": "5b98f8d8b26e2d847737266348bc8dbf",
-    "url": "./static/media/icon-white-cancel.5b98f8d8.svg"
-  },
-  {
     "revision": "b68ea91968c5cabad02499fe19cc6c87",
     "url": "./static/media/icon-white-close.b68ea919.svg"
   },
   {
-    "revision": "9653500007188c37fbc6ec934079f668",
-    "url": "./static/media/ico-jpeg.96535000.svg"
+    "revision": "5b98f8d8b26e2d847737266348bc8dbf",
+    "url": "./static/media/icon-white-cancel.5b98f8d8.svg"
   },
   {
     "revision": "6853885ef7793b5aeaa2b6f6e9ed4d91",
     "url": "./static/media/ico-batal.6853885e.svg"
+  },
+  {
+    "revision": "9653500007188c37fbc6ec934079f668",
+    "url": "./static/media/ico-jpeg.96535000.svg"
   },
   {
     "revision": "9b9e37343ac46cf1d6deabe8750b9a23",
@@ -324,15 +308,15 @@ self.__precacheManifest = [
     "url": "./static/media/accept.466b8083.svg"
   },
   {
-    "revision": "4bacff9eca20eb12e12a0aec5dd5c0af",
-    "url": "./static/media/oval-2.4bacff9e.svg"
+    "revision": "c6fbefa06248ba0dce0e4a4fdd4961c3",
+    "url": "./static/media/ico-oval-1.c6fbefa0.svg"
   },
   {
-    "revision": "646a42ef0aefe6cc2b73",
-    "url": "./static/css/1.3b8183d5.chunk.css"
+    "revision": "a7a46df2278042416009",
+    "url": "./static/css/1.cc30d217.chunk.css"
   },
   {
-    "revision": "410ddf50875910f82ba984601ae87fc8",
+    "revision": "df950ad2f19847246eda68de4caf69fa",
     "url": "./index.html"
   }
 ];

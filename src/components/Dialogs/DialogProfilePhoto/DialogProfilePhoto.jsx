@@ -7,6 +7,7 @@ import PhotoUpload from "./PhotoUpload/PhotoUpload";
 import ProfileImagePreview from "../../Shared/SideNavMain/ProfileImagePreview/ProfileImagePreview";
 import PhotoUploadFile from "./PhotoUploadFile/PhotoUploadFile";
 import appActions from "../../../redux/actions/global/appActions";
+import CameraCapture from "./CameraCapture/CameraCapture";
 
 
 class DialogProfilePhoto extends Component {
@@ -28,7 +29,9 @@ class DialogProfilePhoto extends Component {
 
         <div className="modal-inner tst">
           {
+
             this.props.dialog_profile_photo.mode === 'select-dialog' ?
+
               (
                 biqHelper.utils.isNull( this.props.user_profile.photo ) ?
 
@@ -36,9 +39,20 @@ class DialogProfilePhoto extends Component {
                   :
                   <ProfileImagePreview modalClose={this.modalClose}/>
               )
+
               :
 
-              <PhotoUploadFile modalClose={this.modalClose}/>
+              (
+                this.props.dialog_profile_photo.mode === 'upload-dialog'?
+                  <PhotoUploadFile modalClose={this.modalClose}/>
+                    :
+                  (
+                    this.props.dialog_profile_photo.mode === 'camera-dialog' ?
+                      <CameraCapture modalClose={this.modalClose}/>
+                        :
+                      null
+                  )
+              )
 
           }
         </div>

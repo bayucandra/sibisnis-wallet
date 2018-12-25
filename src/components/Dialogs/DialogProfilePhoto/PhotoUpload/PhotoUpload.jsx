@@ -1,75 +1,76 @@
-// Node Modules
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
 import appActions from "redux/actions/global/appActions";
 
-// Custom Components
-
-// Custom Libraries
-import { modalToggle,cameraCaptureFileUpload } from 'lib/utilities';//TODO: Delete soon
-import { modalTypes } from 'lib/constants';//TODO: Delete soon
 import biqHelper from "lib/biqHelper";
+
+import Modal from "@material-ui/core/Modal";
+import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
 
 import {Button} from "components/Widgets/material-ui";
 
 // Local Images
 import fileIconBlue from 'images/icons/ico-file-blue.svg';
 import cameraIconBlue from 'images/icons/ico-camera-blue.svg';
-import WebcamCapture from 'components/Shared/WebcamCapture/WebcamCapture';
 
-// Custom CSS
-import './PhotoUpload.scss';
-/*
-const UploadButton = (props) => {
-  const { id, icon, label, onClick } = props
-  return (
-    <div className="upload-button-container">
-      <label htmlFor={id} className="upload-button ripple" onClick={onClick(id)}>
-        <div className="upload-button__icon">
-          <img src={icon} alt="icon-button" />
-        </div>
-        <div className="upload-button__label">
-          {label}
-        </div>
-      </label>
-      {id === "camera" ?
-        <input type="file" accept="image/!*;capture=camera" capture="camera" id={id} className="upload-file-input" />
-        :
-        <input type="file" id={id} className="upload-file-input" />
-      }
-    </div>
-  )
-}*/
+import "./PhotoUpload.scss";
+import "styles/components/_modal.scss";
+
 class PhotoUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dragPhotoUpload: false,
-      cameraCapture: false,
-      modalPosTop: 0
+      modalPosTop: 0,
+      modal_notice: {
+        is_open: false,
+        text: {
+          title: 'Error',
+          notice: ''
+        }
+      }
     };
   }
 
-  toggleDragPhotoUpload = () =>{
-    // this.setState({ dragPhotoUpload: true });
-    // this.props.modalSetActiveComponent( DropPhotoUpload );
+  _modalNoticeOpen = ( p_obj_notice = {} ) => {
+    let params = {
+      title: 'Error',
+      notice: ''
+    };
+
+    Object.assign( params, p_obj_notice );
+
+    this.setState( { modal_notice: {
+        is_open: true,
+        text: params
+      } } );
+
+  };
+
+  _modalNoticeClose = () => {
+    this.setState( { modal_notice: Object.assign( {}, this.state.modal_notice, { is_open: false } ) } );
+  };
+
+  _fromFile = () =>{
     let {dispatch} = this.props;
     dispatch( appActions.appDialogProfilePhotoOpen( 'upload-dialog' ) );
   };
 
-  toggleCameraCapture = (id) => {
-    if (navigator.getUserMedia) {
-      modalToggle.next({ status: true, type: modalTypes.webCameraCapture });
+  _fromCamera = () => {
+    biqHelper.utils.clickTimeout( () => this._fromCameraActual() );
+  };
+
+  _fromCameraActual = () => {
+    let {dispatch} = this.props;
+    let is_supported = 'mediaDevices' in navigator;
+    if (is_supported) {
+      dispatch( appActions.appDialogProfilePhotoOpen( 'camera-dialog' ) );
     } else {
-      alert('getUserMedia() is not supported by your browser');
+      this._modalNoticeOpen({ title: 'Error', notice: 'Maaf, browser anda tidak mendukung fitur kamera.' });
     }
   };
 
-  onCameraCapture = (image) =>{
-  };
-
-  modalPosTopGen() {
+  _modalPosTopGen = () => {
     let ratio_opt = { box_selector: '.photo-upload-container', top_space: 155, bottom_space: 459};
     if ( biqHelper.mediaQuery.isMobile() ) {
       ratio_opt.top_space = 97;
@@ -78,23 +79,15 @@ class PhotoUpload extends Component {
     let top_pos;
     top_pos = biqHelper.utils.modalTopRatio(ratio_opt);
     return top_pos;
-  }
+  };
 
   componentDidMount(){
-    let top_pos = this.modalPosTopGen();
+    let top_pos = this._modalPosTopGen();
     this.setState( {modalPosTop : top_pos } );
-
-    cameraCaptureFileUpload.subscribe(
-      (data)=>{
-        if(data.status){
-          this.toggleDragPhotoUpload();
-        }
-      }
-    )
   }
 
-  componentDidUpdate(prevProp, prevState){
-    let top_pos = this.modalPosTopGen();
+  componentDidUpdate(prevProp, prevState, snapshot){
+    let top_pos = this._modalPosTopGen();
     if ( prevState.modalPosTop !== top_pos ) {
       this.setState( { modalPosTop: top_pos } );
     }
@@ -106,46 +99,58 @@ class PhotoUpload extends Component {
 
   render() {
 
-    const { dragPhotoUpload, cameraCapture } = this.state;
     return (
-        <>
-          <div className="photo-upload-container" style={{marginTop: this.state.modalPosTop}}>
+      <div className="photo-upload-container" style={{marginTop: this.state.modalPosTop}}>
 
-            <Button className="modal-close-btn" onClick={this._modalClose} >&nbsp;</Button>
+        <Button className="modal-close-btn" onClick={this._modalClose} >&nbsp;</Button>
 
-            <div className="photo-upload-header">
-              <div className="photo-upload-header__title">Anda belum memiliki photo profile</div>
-              <div className="photo-upload-header__description">Untuk keperluan validasi, silahkan tambahkan foto profile terkini anda</div>
-            </div>
-            <div className="photo-upload-button">
-              <div className="photo-upload-button__file">
-                <div className="upload-button-container">
-                  <label htmlFor="file" className="upload-button ripple" onClick={this.toggleDragPhotoUpload}>
-                    <div className="upload-button__icon">
-                      <img src={fileIconBlue} alt="icon-button" />
-                    </div>
-                    <div className="upload-button__label">
-                      Ambil dari direktori
-                    </div>
-                  </label>
+        <div className="photo-upload-header">
+          <div className="photo-upload-header__title">Anda belum memiliki photo profile</div>
+          <div className="photo-upload-header__description">Untuk keperluan validasi, silahkan tambahkan foto profile terkini anda</div>
+        </div>
+
+        <div className="photo-upload-button">
+          <div className="photo-upload-button__file">
+            <div className="upload-button-container">
+              <label htmlFor="file" className="upload-button ripple" onClick={this._fromFile}>
+                <div className="upload-button__icon">
+                  <img src={fileIconBlue} alt="icon-button" />
                 </div>
-              </div>
-              <div className="photo-upload-button__Camera">
-                {cameraCapture ? <WebcamCapture onCameraCapture={this.onCameraCapture} /> : null}
-                <div className="upload-button-container">
-                  <label htmlFor="file" className="upload-button ripple" onClick={this.toggleCameraCapture.bind(this)}>
-                    <div className="upload-button__icon">
-                      <img src={cameraIconBlue} alt="icon-button" />
-                    </div>
-                    <div className="upload-button__label">
-                      Ambil dari Kamera
-                    </div>
-                  </label>
+                <div className="upload-button__label">
+                  Ambil dari direktori
                 </div>
-              </div>
+              </label>
             </div>
           </div>
-        </>
+
+          <div className="photo-upload-button__Camera">
+            <div className="upload-button-container">
+              <label htmlFor="file" className="upload-button ripple" onClick={this._fromCamera}>
+                <div className="upload-button__icon">
+                  <img src={cameraIconBlue} alt="icon-button" />
+                </div>
+                <div className="upload-button__label">
+                  Ambil dari Kamera
+                </div>
+              </label>
+            </div>
+          </div>
+
+        </div>
+
+        <Modal
+          open={this.state.modal_notice.is_open}
+          onClose={this._modalNoticeClose}>
+
+          <div className="modal-inner">
+            <ModalNotice modalClose={this._modalNoticeClose}
+                 title={this.state.modal_notice.text.title}
+                 notice={this.state.modal_notice.text.notice}/>
+          </div>
+
+        </Modal>
+
+      </div>
     )
   }
 }

@@ -12,8 +12,9 @@ import rightArrowIcon from '../../../../images/icons/s-litle-right.svg'
 import backBlueIcon from '../../../../images/icons/ico-back-blue.svg'
 
 // Custom Libraries
-import {modalToggle, cameraCaptureFileUpload} from '../../../../lib/utilities';
-import {modalTypes} from '../../../../lib/constants';
+import {modalToggle, cameraCaptureFileUpload} from '../../../../lib/utilities';//TODO: Delete soon
+import {modalTypes} from '../../../../lib/constants';//TODO: Delete soon
+
 import biqHelper from "../../../../lib/biqHelper/index";
 
 // Custom CSS

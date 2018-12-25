@@ -8,18 +8,18 @@ import {Button} from "components/Widgets/material-ui";
 import appActions from "redux/actions/global/appActions";
 
 import NumberFormat from 'react-number-format';
-import biqHelper from "../../../lib/biqHelper/index";
-import biqConfig from "../../../providers/biqConfig";
+import biqHelper from "lib/biqHelper/index";
+import biqConfig from "providers/biqConfig";
 
-import avatarPlacerholderBlank from '../../../images/avatar-placeholder-blank.svg';
+import avatarPlacerholderBlank from 'images/avatar-placeholder-blank.svg';
 
-import PhotoUpload from "../../Dialogs/DialogProfilePhoto/PhotoUpload/PhotoUpload";
+import PhotoUpload from "components/Dialogs/DialogProfilePhoto/PhotoUpload/PhotoUpload";
 
 // Loaders
-import { ProfileInfoLoader, BalanceLoader } from '../../Loaders/ProfileLoader/ProfileLoader';
+import { ProfileInfoLoader, BalanceLoader } from 'components/Loaders/ProfileLoader/ProfileLoader';
 
 import './SideNavMain.scss';
-import '../../../styles/components/_modal.scss';
+import 'styles/components/_modal.scss';
 
 
 class SideNavMain extends Component {

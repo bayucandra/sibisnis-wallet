@@ -37,7 +37,7 @@
     "rxjs": "^6.2.0"
   },
   "scripts": {
-    "start-js": "HOST='newzonatik.com' PORT=80 SSL_KEY_PATH='~/www/sibisnis-wallet/_ssl/newzonatik.com.key' SSL_CERT_PATH='~/www/sibisnis-wallet/_ssl/newzonatik.com.crt' react-scripts start",
+    "start-js": "HOST='newzonatik.com' HTTPS=true PORT=443 SSL_KEY_PATH='~/www/sibisnis-wallet/_ssl/newzonatik.com.key' SSL_CERT_PATH='~/www/sibisnis-wallet/_ssl/newzonatik.com.crt' react-scripts start",
     "start": "npm-run-all -p start-js",
     "build-js": "react-scripts build",
     "build": "npm-run-all build-js && rm -rf dist && mv build dist && rm -rf dist/agen",

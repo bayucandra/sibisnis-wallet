@@ -1,0 +1,21 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .camera-capture-dialog {
+    flex: none;
+    width: 500px;
+
+    &__header {
+      height: 70px;
+    }//&__header
+
+    &__body {
+      min-height: 360px;
+    }//&__body
+
+    &__footer {
+      height: 90px;
+    }//&__footer
+
+  }//.camera-capture-dialog
+
+}

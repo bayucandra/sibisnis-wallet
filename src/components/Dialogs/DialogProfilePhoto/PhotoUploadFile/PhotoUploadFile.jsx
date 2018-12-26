@@ -132,9 +132,6 @@ class PhotoUploadFile extends Component {
     if ( !this.state.img_is_set ) return;
     if ( this._imgIsUploadedSuccess() ) {
       this._modalClose();
-      setTimeout( ()=>{
-        this._onDoneClick();
-      }, 200 );
       return;
     }
 
@@ -170,18 +167,18 @@ class PhotoUploadFile extends Component {
 
           .subscribe(
 
-            data =>{
-              if ( data.type === 'progress' ) {
-                let upload_progress = Math.floor(data.loaded / data.total * 100 );
+            res =>{
+              if ( res.type === 'progress' ) {
+                let upload_progress = Math.floor(res.loaded / res.total * 100 );
                 this.setState( { img_upload_progress: upload_progress } );
               }
 
-              if ( !biqHelper.utils.isNull( data.status) ) {
-                this.setState( { img_is_uploading: false, server_response: data.response, img_upload_progress: 0 } );
+              if ( !biqHelper.utils.isNull( res.status) ) {
+                this.setState( { img_is_uploading: false, server_response: res.response, img_upload_progress: 0 } );
 
-                if ( biqHelper.utils.httpResponseIsSuccess( data.status ) ) {
+                if ( biqHelper.utils.httpResponseIsSuccess( res.status ) ) {
                 } else {
-                  let response = data.status !== 0 ? data.response
+                  let response = res.status !== 0 ? res.response
                     : biqConfig.api.error_response_fake;
                   this.setState( { img_is_uploading: false, server_response: response, img_upload_progress: 0 });
                 }
@@ -198,8 +195,8 @@ class PhotoUploadFile extends Component {
   _onDoneClick = () => {
     let {dispatch} = this.props;
     dispatch( userActions.userProfileUpdate( { photo: this.state.server_response.data.value } ) );
-  }
-;
+  };
+
   _imgIsUploadedError() {
     if ( this.state.img_is_uploading ) return false;
     if ( biqHelper.utils.isNull( this.state.server_response )
@@ -280,6 +277,12 @@ class PhotoUploadFile extends Component {
   componentWillUnmount() {
     this.stop$.next();
     this.stop$.complete();
+
+    if ( this._imgIsUploadedSuccess() ) {
+      setTimeout( ()=>{
+        this._onDoneClick();
+      }, 300 );
+    }
   }
 
   render() {
@@ -314,7 +317,7 @@ class PhotoUploadFile extends Component {
 
         <div className="image-actions-container">
 
-          <Button className={ `upload-photo-btn${ !this.state.img_is_set ? ' is-disabled' : '' }` } onClick={this._imageUpload.bind(this)}>
+          <Button className={ `upload-photo-btn${ !this.state.img_is_set ? ' is-disabled' : '' }` } onClick={this._imageUpload}>
             <div className={"progress-bar" + (this.state.img_is_uploading ? ' is-visible' : '')} style={{ "width" : `${ this.state.img_upload_progress }%` }}/>
             <div className="upload-photo-btn__inner">
               {this._buttonUploadInner()}

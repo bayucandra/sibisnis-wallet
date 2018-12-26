@@ -96,6 +96,16 @@ import actionTypes from "../../action-types/index";
   function appDialogEmailClose() {
     return { type: actionTypes.app.DIALOG_EMAIL_INPUT_CLOSE }
   }
+
+  function appDialogNoticeOpen( content_obj ) {
+    return {
+      type: actionTypes.app.DIALOG_NOTICE_OPEN,
+      payload: content_obj
+    }
+  }
+  function appDialogNoticeClose() {
+    return { type: actionTypes.app.DIALOG_NOTICE_CLOSE }
+  }
   
   
 
@@ -116,7 +126,9 @@ import actionTypes from "../../action-types/index";
     appDialogAddressOpen,
     appDialogAddressClose,
     appDialogEmailOpen,
-    appDialogEmailClose
+    appDialogEmailClose,
+    appDialogNoticeOpen,
+    appDialogNoticeClose
   };
 
 export default actions;

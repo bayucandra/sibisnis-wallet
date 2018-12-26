@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { Subject, of } from 'rxjs';
-import {ajax as rxAjax} from 'rxjs/ajax';
-import {takeUntil, catchError} from 'rxjs/operators'
+import { Subject } from 'rxjs';
 
 import {Button} from 'components/Widgets/material-ui';
 

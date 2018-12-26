@@ -16,7 +16,6 @@ import HeaderMenuMobile from "../../../Shared/HeaderMenuMobile/HeaderMenuMobile"
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 import ModalNotice from "../../../Widgets/ModalNotice/ModalNotice";
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
-import {Redirect} from "react-router-dom";
 
 class BalancePaymentConfirmation extends Component{
 

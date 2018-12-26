@@ -31,6 +31,7 @@ import DialogAddressInput from "components/Dialogs/DialogAddressInput";
 import DialogEmailVerification from "./components/Dialogs/DialogEmailVerification";
 
 import "./App.scss";
+import DialogModalNotice from "./components/Dialogs/DialogModalNotice";
 
 class App extends Component {
 
@@ -199,6 +200,7 @@ class App extends Component {
           <DialogEmailVerification/>
           <DialogProfilePhoto/>
           <DialogAddressInput/>
+          <DialogModalNotice/>
 
 
         </React.Fragment>

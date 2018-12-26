@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import Modal from "@material-ui/core/Modal/Modal";
 import biqHelper from "../../../lib/biqHelper";
 import PhotoUpload from "./PhotoUpload/PhotoUpload";
-import ProfileImagePreview from "../../Shared/SideNavMain/ProfileImagePreview/ProfileImagePreview";
+import ProfileImagePreview from "./ProfileImagePreview/ProfileImagePreview";
 import PhotoUploadFile from "./PhotoUploadFile/PhotoUploadFile";
 import appActions from "../../../redux/actions/global/appActions";
 import CameraCapture from "./CameraCapture/CameraCapture";

@@ -15,13 +15,15 @@ import backBlueIcon from '../../../../images/icons/ico-back-blue.svg'
 import {modalToggle, cameraCaptureFileUpload} from '../../../../lib/utilities';//TODO: Delete soon
 import {modalTypes} from '../../../../lib/constants';//TODO: Delete soon
 
-import biqHelper from "../../../../lib/biqHelper/index";
+import biqHelper from "../../../../lib/biqHelper";
 
 // Custom CSS
 import './ProfileImagePreview.scss';
 import biqConfig from "../../../../providers/biqConfig";
+import appActions from "../../../../redux/actions/global/appActions";
 
 class ProfileImagePreview extends Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -31,29 +33,47 @@ class ProfileImagePreview extends Component {
     };
   }
 
+  _modalClose = () => {
+    let {dispatch} = this.props;
+    dispatch( appActions.appDialogProfilePhotoClose() );
+  };
+
   onMenuOpen = (event) => {
     this.setState({ anchorEl: event.currentTarget });
-  }
+  };
 
   onMenuClose = () => {
     this.setState({ anchorEl: null, menuExpand:false });
   };
 
-  onExpandMenu = (status) => {
-    this.setState({ menuExpand: status })
-  }
+  onExpandMenu = () => {
+    this.setState({ menuExpand: true })
+  };
 
-  getImageFromGallery = () => {
-    modalToggle.next({ status: true, type: modalTypes.imageUpload });
-    setTimeout(() => {
-      cameraCaptureFileUpload.next({ status: true });
-    }, 0);
-  }
+  onCollapseMenu = () => {
+    this.setState({ menuExpand: false })
+  };
 
-  getImageFromCamera = () => {
-    modalToggle.next({ status: true, type: modalTypes.webCameraCapture })
-  }
+  _fromFile = () => {
+    biqHelper.utils.clickTimeout( () => {
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogProfilePhotoOpen( 'upload-dialog' ) );
+    } );
+  };
 
+  _fromCamera = () => {
+    biqHelper.utils.clickTimeout( () => this._fromCameraActual() );
+  };
+
+  _fromCameraActual = () => {
+    let {dispatch} = this.props;
+    let is_supported = 'mediaDevices' in navigator;
+    if (is_supported) {
+      dispatch( appActions.appDialogProfilePhotoOpen( 'camera-dialog' ) );
+    } else {
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Error', notice: 'Maaf, browser anda tidak mendukung fitur kamera.' } ) );
+    }
+  };
   _modalPosTopGen() {
     let ratio_opt = { box_selector: '.profile-image-preview', top_space: 184, bottom_space: 240};
     if ( biqHelper.mediaQuery.isMobile() ) {
@@ -87,7 +107,7 @@ class ProfileImagePreview extends Component {
       <div className="profile-image-preview" style={{ marginTop: this.state.modalPosTop }} >
 
         <div className={"profile-image-preview__inner"}
-             onClick={this.onMenuClose.bind(this)}>
+             onClick={this.onMenuClose}>
           <img alt={"Profile picture"} src={`${biqConfig.profile_photo_url_base}/${ encodeURI(photo) }`}/>
         </div>
 
@@ -100,7 +120,7 @@ class ProfileImagePreview extends Component {
               aria-label="More"
               aria-owns={anchorEl ? 'long-menu' : null}
               aria-haspopup="true"
-              onClick={this.onMenuOpen.bind(this)}
+              onClick={this.onMenuOpen}
             >
               <img src={menuIcon}
                 className="menu-btn ripple" />
@@ -112,33 +132,45 @@ class ProfileImagePreview extends Component {
 
         {this.state.anchorEl ?
           <div className="custom-menu">
-            {!this.state.menuExpand ?
-              <div>
-                <div className="custom-menu-item ripple" onClick={this.onExpandMenu.bind(this,true)}>
+            {
+              !this.state.menuExpand ?
+
+              <>
+
+                <div className="custom-menu-item ripple" onClick={this.onExpandMenu}>
                   <div className="custom-menu-item__text">
                     <span>Ganti Gambar</span>
                     <img src={rightArrowIcon} alt="" />
                   </div>
                 </div>
-                <div className="custom-menu-item ripple" onClick={this.onMenuClose.bind(this)}>
+
+                <div className="custom-menu-item ripple" onClick={this._modalClose}>
                   <div className="custom-menu-item__text">Tutup</div>
                 </div>
-              </div>
-              :
-              <div>
-                <div className="custom-menu-item expand ripple" onClick={this.onExpandMenu.bind(this,false)}>
+
+              </>
+
+                :
+
+              <>
+
+                <div className="custom-menu-item expand ripple" onClick={this.onCollapseMenu}>
                   <div className="custom-menu-item__text">
                     <img src={backBlueIcon} alt="" />
                     <span className="active">Ganti Gambar</span>
                   </div>
                 </div>
-                <div className="custom-menu-item expand ripple" onClick={this.getImageFromGallery.bind(this)}>
+
+                <div className="custom-menu-item expand ripple" onClick={this._fromFile}>
                   <div className="custom-menu-item__text">Ambil dari galeri</div>
                 </div>
-                <div className="custom-menu-item expand ripple" onClick={this.getImageFromCamera.bind(this)}>
+
+                <div className="custom-menu-item expand ripple" onClick={this._fromCamera}>
                   <div className="custom-menu-item__text">Ambil dari kamera</div>
                 </div>
-              </div>
+
+              </>
+
             }
           </div> : ''}
       </div>

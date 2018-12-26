@@ -5,12 +5,8 @@ import appActions from "redux/actions/global/appActions";
 
 import biqHelper from "lib/biqHelper";
 
-import Modal from "@material-ui/core/Modal";
-import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
-
 import {Button} from "components/Widgets/material-ui";
 
-// Local Images
 import fileIconBlue from 'images/icons/ico-file-blue.svg';
 import cameraIconBlue from 'images/icons/ico-camera-blue.svg';
 
@@ -21,35 +17,9 @@ class PhotoUpload extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalPosTop: 0,
-      modal_notice: {
-        is_open: false,
-        text: {
-          title: 'Error',
-          notice: ''
-        }
-      }
+      modalPosTop: 0
     };
   }
-
-  _modalNoticeOpen = ( p_obj_notice = {} ) => {
-    let params = {
-      title: 'Error',
-      notice: ''
-    };
-
-    Object.assign( params, p_obj_notice );
-
-    this.setState( { modal_notice: {
-        is_open: true,
-        text: params
-      } } );
-
-  };
-
-  _modalNoticeClose = () => {
-    this.setState( { modal_notice: Object.assign( {}, this.state.modal_notice, { is_open: false } ) } );
-  };
 
   _fromFile = () =>{
     let {dispatch} = this.props;
@@ -66,7 +36,7 @@ class PhotoUpload extends Component {
     if (is_supported) {
       dispatch( appActions.appDialogProfilePhotoOpen( 'camera-dialog' ) );
     } else {
-      this._modalNoticeOpen({ title: 'Error', notice: 'Maaf, browser anda tidak mendukung fitur kamera.' });
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Error', notice: 'Maaf, browser anda tidak mendukung fitur kamera.' } ) );
     }
   };
 
@@ -137,18 +107,6 @@ class PhotoUpload extends Component {
           </div>
 
         </div>
-
-        <Modal
-          open={this.state.modal_notice.is_open}
-          onClose={this._modalNoticeClose}>
-
-          <div className="modal-inner">
-            <ModalNotice modalClose={this._modalNoticeClose}
-                 title={this.state.modal_notice.text.title}
-                 notice={this.state.modal_notice.text.notice}/>
-          </div>
-
-        </Modal>
 
       </div>
     )

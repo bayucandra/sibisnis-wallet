@@ -1,3 +1,5 @@
+import {interval} from 'rxjs';
+
 import $ from 'jquery';
 
 import biqHelperString from "./string";
@@ -47,6 +49,29 @@ class BiqHelperUtils {
     return is_null;
   }
 
+  untillNotNull( p_obj ) {
+    let params = {
+      val: null,
+      callback: null,
+      callback_params: null,
+      limit: 100
+    };
+
+    params = p_obj;//Pass by reference not using Object.assign
+    if ( !params.hasOwnProperty('limit') ) params.limit = 100;
+
+    let interval$ = interval( 100 );
+    let repeat = 0;
+    let interval_subscribe = interval$.subscribe( () => {
+      if ( !this.isNull( params.val ) || repeat === params.limit ) {
+        params.callback( params.callback_params );
+        interval_subscribe.unsubscribe();
+      }
+      repeat++;
+    } );
+
+  }
+
   assignDefault( val, def = null ){
     val = !this.isNull(val) ? val : def;
     return val;
@@ -74,6 +99,20 @@ class BiqHelperUtils {
 
     let top_space = Math.ceil( top_ratio * vertical_space_left );
     return top_space;
+  }
+
+  browserDetect( ua_str ) {
+    let ua = ua_str.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
+    let browser = null;
+
+    if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11\./i)) {
+      browser = "msie";
+    }
+    else {
+      browser = ua[1];
+    }
+
+    return browser;
   }
 
   urlParamsGet( sParam ) {

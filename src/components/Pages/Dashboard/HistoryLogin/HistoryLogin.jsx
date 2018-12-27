@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
+
+import dashboardActions from "redux/actions/pages/dashboardActions";
+
+import biqHelper from "lib/biqHelper";
 
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 
-import CustomAccordian from '../../../Shared/CustomAccordian/CustomAccordian';
+import CustomAccordian from 'components/Shared/CustomAccordian/CustomAccordian';
 import { HistoryLoginMobileLoader, HistoryLoginDesktopLoader } from './HistoryLoginLoader/HistoryLoginLoader';
 
-// Custom CSS
 import './HistoryLogin.scss';
 
 const HistoryList = (props) => {
@@ -31,27 +35,23 @@ const HistoryList = (props) => {
 }
 
 class HistoryLogin extends Component {
-  constructor(props, context) {
-    super(props, context);
-    this.state = {
-      historyList : null
-    }
-  }
 
   viewAllHistoryLogin = () => {
     this.props.history.push('/all-history-logins');
-  }
+  };
 
-  componentWillMount() {
-    this.setState({historyList:this.props.historyLoginList});
-  }
-
-  componentWillReceiveProps(nextProps) {
-    this.setState({historyList:nextProps.historyLoginList});
+  componentDidMount() {
+    let {dispatch} = this.props;
+    dispatch( dashboardActions.dashboardLoginHistoryFetch( { memberid: "ZON40434359" } ) );
+    // dispatch( dashboardActions.dashboardLoginHistoryFetch( { memberid: this.props.user_profile.memberid } ) );
   }
 
   render() {
-    const { historyList } = this.state;
+    let is_fetched = this.props.login_history.is_fetched;
+    let is_success = biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet( this.props.login_history.server_response, 'status' ) );
+
+    let data = biqHelper.JSON.pathValueGet( this.props.login_history.server_response, 'response.data' );
+
     return (
       <div className={this.props.viewAll ? "history-login-container all-history-login" : "history-login-container"}>
         <Card className="custom-card-styles">
@@ -62,22 +62,37 @@ class HistoryLogin extends Component {
             </div>
           </CardContent>
           <div className="history-login-list-container">
-            {historyList ?
-              historyList.map((history, index) => {
+            {
+              is_fetched && is_success ?
+
+              data.map((el) => {
+                let id = el.id;
+                let date_access = el.date_access;
+                let country = el.data.location.country;
+                let ip = el.data.location.ip;
+                let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
                 return (
                   <CustomAccordian
+                    key={id}
                     title="Tanggal"
-                    date={history.date}
-                    key={index}
-                    accordianBody={<HistoryList country={history.country} ip={history.ip} browser={history.browser} />} />
+                    date={date_access}
+                    accordianBody={<HistoryList country={country} ip={ip} browser={browser} />} />
                 );
               })
-              : <HistoryLoginMobileLoader />
+
+                :
+
+              <HistoryLoginMobileLoader />
+
             }
+
           </div>
 
           <div className="history-login-list-container-desktop">
-            {historyList ?
+
+            {
+              is_fetched && is_success ?
+
               <table className="history-login-list-table">
                 <thead>
                   <tr>
@@ -88,21 +103,33 @@ class HistoryLogin extends Component {
                   </tr>
                 </thead>
                 <tbody>
-                  {historyList.map((history, index) => {
+
+                  {data.map((el) => {
+                    let id = el.id;
+                    let date_access = el.date_access;
+                    let country = el.data.location.country;
+                    let ip = el.data.location.ip;
+                    let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
                     return (
-                      <tr className="history-login-list-body__item" key={index}>
-                        <td className="history-login-list-table__body-column-date">{history.date}</td>
-                        <td className="history-login-list-table__body-column-country">{history.country}</td>
-                        <td className="history-login-list-table__body-column-ip">{history.ip}</td>
-                        <td className="history-login-list-table__body-column-browser">{history.browser}</td>
+                      <tr className="history-login-list-body__item" key={id}>
+                        <td className="history-login-list-table__body-column-date">{date_access}</td>
+                        <td className="history-login-list-table__body-column-country">{country}</td>
+                        <td className="history-login-list-table__body-column-ip">{ip}</td>
+                        <td className="history-login-list-table__body-column-browser">{browser}</td>
                       </tr>
                     )
                   })
                   }
+
                 </tbody>
               </table>
-              : <HistoryLoginDesktopLoader />
+
+                :
+
+              <HistoryLoginDesktopLoader />
+
             }
+
           </div>
         </Card>
       </div>
@@ -110,4 +137,11 @@ class HistoryLogin extends Component {
   }
 }
 
-export default withRouter(HistoryLogin);
+const mapStateToProps = state => {
+  return {
+    user_profile: state.user.profile,
+    login_history : state.dashboard.login_history
+  }
+};
+
+export default withRouter( connect( mapStateToProps ) (HistoryLogin));

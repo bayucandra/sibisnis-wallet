@@ -6,7 +6,15 @@ let state_default = {
     is_submitted: false,
     response: {}
   },
-  is_panel_mobile_visible : false
+
+  is_panel_mobile_visible : false,
+
+  login_history: {
+    is_fetching: false,
+    is_fetched: false,
+    server_response: {}
+  }
+
 };
 
 export default ( state = state_default, action ) => {
@@ -45,6 +53,22 @@ export default ( state = state_default, action ) => {
       let value = action.payload === null ? !state.is_panel_mobile_visible : action.payload;
       new_state = {
         is_panel_mobile_visible: value
+      };
+      break;
+
+
+    case actionTypes.dashboard.LOGIN_HISTORY_FETCH:
+      new_state = {
+        login_history: Object.assign( {}, state_default.login_history, { is_fetching: true } )
+      };
+      break;
+    case actionTypes.dashboard.LOGIN_HISTORY_FETCHED:
+      new_state = {
+        login_history: Object.assign(
+          {},
+          state_default.login_history,
+          { is_fetched: true, server_response: action.payload }
+          )
       };
       break;
 

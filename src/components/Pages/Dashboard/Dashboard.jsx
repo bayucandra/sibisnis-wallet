@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import dashboardActions from "redux/actions/pages/dashboardActions";
+import newsActions from "redux/actions/pages/newsActions";
 
 import biqHelper from "lib/biqHelper";
 
@@ -10,8 +11,6 @@ import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
 
 import HistoryLogin from "./HistoryLogin/HistoryLogin";
 import LatestNews from "./LatestNews/LatestNews";
-import historyLoginActions from "../../../redux/actions/pages/historyLoginActions";
-import newsActions from "../../../redux/actions/pages/newsActions";
 import DashboardProfile from "./DashboardProfile/DashboardProfile";
 import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
 
@@ -28,7 +27,6 @@ class Dashboard extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( historyLoginActions.getHistoryLoginList() );
     dispatch( newsActions.getNewsList() );
   }
 

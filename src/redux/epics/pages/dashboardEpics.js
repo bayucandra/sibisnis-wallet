@@ -38,6 +38,42 @@ const dashboardEmailVerificationSubmit = action$ => action$.pipe(
   )
 );
 
+const dashboardLoginHistoryFetch = action$ =>
+  action$.pipe(
+    ofType( actionTypes.dashboard.LOGIN_HISTORY_FETCH ),
+
+    switchMap(
+      action => {
+        let ajax$ = rxAjax({
+          url: `${biqConfig.api.url_base}/api/wallet/history_login`,
+          method: 'POST',
+          crossDomain: true,
+          withCredentials: true,
+          body: Object.assign({ memberid: action.payload.memberid, action: 'login' }, biqConfig.api.data_auth)
+        });
+
+        return ajax$.pipe(
+
+          map( res => dashboardActions.dashboardLoginHistoryFetched( res ) ),
+
+          takeUntil( action$.pipe(
+            filter( action => action.type === actionTypes.dashboard.LOGIN_HISTORY_CANCELED )
+          ) ),
+
+          catchError( err => of({
+            type: actionTypes.dashboard.LOGIN_HISTORY_FETCHED,
+            payload: { status: err.xhr.status, response: err.xhr.response }
+          }) )
+
+        );//return ajax$
+
+      }//action =>
+
+    )//switchMap()
+
+  );
+
 export default [
-  dashboardEmailVerificationSubmit
+  dashboardEmailVerificationSubmit,
+  dashboardLoginHistoryFetch
 ];

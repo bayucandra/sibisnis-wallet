@@ -12,8 +12,6 @@ import "./BalancePaymentMethodBank.scss";
 
 import BalanceTransactionInfo from "../../BalanceTransactionInfo/BalanceTransactionInfo";
 import walletProvider from "providers/walletProvider";
-import Modal from "@material-ui/core/Modal/Modal";
-import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
 import appActions from "../../../../../redux/actions/global/appActions";
 
 class BalancePaymentMethodBank extends Component {
@@ -85,7 +83,6 @@ class BalancePaymentMethodBank extends Component {
     Object.assign( params, p_obj );
 
     let {dispatch} = this.props;
-    console.log(params);
     dispatch( appActions.appDialogNoticeOpen( params ) );
   };
 

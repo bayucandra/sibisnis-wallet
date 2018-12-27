@@ -6,10 +6,10 @@ function dashboardEmailVerificationSubmit() {
   }
 }
 
-function dashboardEmailVerificationSubmitted( data ) {
+function dashboardEmailVerificationSubmitted( response ) {
   return {
     type: actionTypes.dashboard.EMAIL_VERIFICATION_SUBMITTED,
-    payload: data
+    payload: response
   }
 }
 
@@ -28,9 +28,30 @@ function dashboardPanelMobileVisibility( is_visible = null) {
 
 }
 
+function dashboardLoginHistoryFetch( data ) {
+  return {
+    type: actionTypes.dashboard.LOGIN_HISTORY_FETCH,
+    payload: data
+  }
+}
+function dashboardLoginHistoryFetched( response ) {
+  return {
+    type: actionTypes.dashboard.LOGIN_HISTORY_FETCHED,
+    payload: response
+  }
+}
+function dashboardLoginHistoryCanceled() {
+  return {
+    type: actionTypes.dashboard.LOGIN_HISTORY_CANCELED
+  }
+}
+
 export default {
   dashboardEmailVerificationSubmit,
   dashboardEmailVerificationSubmitted,
   dashboardEmailVerificationReset,
-  dashboardPanelMobileVisibility
+  dashboardPanelMobileVisibility,
+  dashboardLoginHistoryFetch,
+  dashboardLoginHistoryFetched,
+  dashboardLoginHistoryCanceled
 }

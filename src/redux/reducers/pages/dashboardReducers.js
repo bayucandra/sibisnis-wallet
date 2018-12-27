@@ -5,7 +5,8 @@ let state_default = {
     is_submitting: false,
     is_submitted: false,
     response: {}
-  }
+  },
+  is_panel_mobile_visible : false
 };
 
 export default ( state = state_default, action ) => {
@@ -37,6 +38,13 @@ export default ( state = state_default, action ) => {
     case actionTypes.dashboard.EMAIL_VERIFICATION_RESET:
       new_state = {
         email_verification: Object.assign( {}, state_default.email_verification )
+      };
+      break;
+
+    case actionTypes.dashboard.PANEL_MOBILE_VISIBILITY:
+      let value = action.payload === null ? !state.is_panel_mobile_visible : action.payload;
+      new_state = {
+        is_panel_mobile_visible: value
       };
       break;
 

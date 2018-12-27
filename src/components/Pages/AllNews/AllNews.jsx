@@ -9,7 +9,7 @@ import PageBackButton from './../../Shared/PageBackButton/PageBackButton';
 import { navigationStatus } from './../../../lib/utilities';
 
 // Redux
-import { getNewsList } from '../../../redux/actions/pages/newsActions';
+import newsActions from '../../../redux/actions/pages/newsActions';
 import {connect} from 'react-redux';
 
 // Custom CSS
@@ -23,9 +23,10 @@ class AllNews extends Component {
   componentWillMount() {
     navigationStatus.next({
       navigationLink: 'Berita Terbaru'
-    })
+    });
 
-    this.props.getNewsList();
+    let {dispatch} = this.props;
+    dispatch( newsActions.getNewsList() );
   }
 
   render() {
@@ -43,11 +44,7 @@ const mapStateToProps = (store) => {
   return {
     newsList: store.news.newsList
   }
-}
-
-const mapDispatchToProps = {
-  getNewsList
-}
+};
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllNews);
+export default connect(mapStateToProps)(AllNews);

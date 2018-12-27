@@ -6,18 +6,16 @@ import { Subject, of } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
 import { takeUntil, catchError } from 'rxjs/operators';
 
-import $ from 'jquery';
-
 import appActions from "redux/actions/global/appActions";
 import userActions from "redux/actions/global/userActions";
 
 import biqHelper from "lib/biqHelper";
+import biqConfig from "../../../../providers/biqConfig";
 
 import {Button} from "components/Widgets/material-ui";
+import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar";
 
 import "./CameraCapture.scss";
-import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar";
-import biqConfig from "../../../../providers/biqConfig";
 
 class CameraCapture extends Component {
 

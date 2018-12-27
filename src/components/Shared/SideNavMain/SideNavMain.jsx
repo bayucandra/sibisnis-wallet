@@ -20,6 +20,7 @@ import { ProfileInfoLoader, BalanceLoader } from 'components/Loaders/ProfileLoad
 
 import './SideNavMain.scss';
 import 'styles/components/_modal.scss';
+import dashboardActions from "../../../redux/actions/pages/dashboardActions";
 
 
 class SideNavMain extends Component {
@@ -52,9 +53,8 @@ class SideNavMain extends Component {
         this._onNavigationClick('/dashboard');
       }
 
-      if (typeof this.props.dashboardPanelMobileToggle === 'function') {
-        this.props.dashboardPanelMobileToggle();
-      }
+      let {dispatch} = this.props;
+      dispatch( dashboardActions.dashboardPanelMobileVisibility( true ) );
 
     } );
   };

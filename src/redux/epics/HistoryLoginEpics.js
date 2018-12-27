@@ -1,8 +1,8 @@
 import * as Types from './../../lib/actionTypes';
 import * as ApiStubs from './../../lib/apiStubs';
-import * as HistoryLoginActions from '../actions/pages/historyLoginActions';
-import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent} from 'rxjs';
-import {  mergeMap, filter, map, mapTo,flatMap,  delay, catchError } from 'rxjs/operators';
+import historyLoginActions from '../actions/pages/historyLoginActions';
+import { from } from 'rxjs';
+import {  mergeMap,flatMap,  catchError } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
 export const getHistoryList = action$ => {
@@ -12,7 +12,7 @@ export const getHistoryList = action$ => {
     mergeMap(action => {
       return from(ApiStubs.getHistory()).pipe(
         flatMap(response => {
-          return [HistoryLoginActions.setHistoryLoginList(response.data)]
+          return [historyLoginActions.setHistoryLoginList(response.data)]
         }),
         catchError(err=>{
           console.error(err)

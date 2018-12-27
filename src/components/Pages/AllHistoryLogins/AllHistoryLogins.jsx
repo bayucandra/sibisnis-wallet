@@ -10,7 +10,7 @@ import { navigationStatus } from './../../../lib/utilities';
 
 // Redux
 import { connect } from 'react-redux';
-import { getHistoryLoginList } from '../../../redux/actions/pages/historyLoginActions';
+import historyLoginActions from '../../../redux/actions/pages/historyLoginActions';
 import './AllHistoryLogins.scss';
 class AllHistoryLogins extends Component {
   constructor(props) {
@@ -22,7 +22,8 @@ class AllHistoryLogins extends Component {
     navigationStatus.next({
       navigationLink: 'History Login'
     });
-    this.props.getHistoryLoginList();
+    let {dispatch} = this.props;
+    dispatch( historyLoginActions.getHistoryLoginList() );
   }
 
   render() {
@@ -40,10 +41,7 @@ const mapStateToProps = (store) => {
   return {
     historyLoginList: store.historyLogin.historyLoginList
   }
-}
+};
 
-const mapDispatchToProps = {
-  getHistoryLoginList
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(AllHistoryLogins);
+export default connect(mapStateToProps)(AllHistoryLogins);

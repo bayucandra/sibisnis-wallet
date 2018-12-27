@@ -1,15 +1,20 @@
 import * as Types from '../../../lib/actionTypes';
 
-export const getHistoryLoginList = () => {
+function getHistoryLoginList() {
   return {
     type: Types.GET_HISTORY_LOGINS_LIST,
     payload: null
   };
-};
+}
 
-export const setHistoryLoginList = (historyLoginList) => {
+function setHistoryLoginList(historyLoginList) {
   return {
     type: Types.SET_HISTORY_LOGINS_LIST,
     payload: historyLoginList
   };
+}
+
+export default {
+  getHistoryLoginList,
+  setHistoryLoginList
 }

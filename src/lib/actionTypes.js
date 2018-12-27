@@ -1,4 +1,5 @@
 // User Action Types
+//TODO: DELETE ALL OF THIS LATER
 
 // History Login Action Types
 export const GET_HISTORY_LOGINS_LIST = 'GET_HISTORY_LOGINS_LIST';

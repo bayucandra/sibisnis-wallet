@@ -19,8 +19,18 @@ function dashboardEmailVerificationReset() {
   }
 }
 
+function dashboardPanelMobileVisibility( is_visible = null) {
+
+  return {
+    type: actionTypes.dashboard.PANEL_MOBILE_VISIBILITY,
+    payload: is_visible
+  }
+
+}
+
 export default {
   dashboardEmailVerificationSubmit,
   dashboardEmailVerificationSubmitted,
-  dashboardEmailVerificationReset
+  dashboardEmailVerificationReset,
+  dashboardPanelMobileVisibility
 }

@@ -1,9 +1,8 @@
 import * as Types from './../../lib/actionTypes';
 import * as ApiStubs from './../../lib/apiStubs';
-import * as NewsActions from '../actions/pages/newsActions';
-import { Observable, Subject, asapScheduler, pipe, of, from, interval, merge, fromEvent} from 'rxjs';
-import {  mergeMap, filter, map, mapTo,flatMap,  delay, catchError } from 'rxjs/operators';
-import { ajax } from 'rxjs/ajax';
+import newsActions from '../actions/pages/newsActions';
+import { from} from 'rxjs';
+import {  mergeMap, flatMap } from 'rxjs/operators';
 import { ofType } from 'redux-observable';
 
 export const getNewsList = action$ => {
@@ -13,7 +12,7 @@ export const getNewsList = action$ => {
     mergeMap(action => {
       return from(ApiStubs.getNews()).pipe(
         flatMap(response => {
-          return [NewsActions.setNewsList(response.data)]
+          return [newsActions.setNewsList(response.data)]
         })
       )
     })

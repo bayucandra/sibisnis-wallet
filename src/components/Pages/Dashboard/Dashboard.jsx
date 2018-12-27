@@ -1,40 +1,35 @@
-// Node Modules
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-// Custom Components
+import dashboardActions from "redux/actions/pages/dashboardActions";
+
+import biqHelper from "lib/biqHelper";
+
 import {Button} from "components/Widgets/material-ui";
 import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
 
-// Custom CSS
-import './Dashboard.scss';
 import HistoryLogin from "./HistoryLogin/HistoryLogin";
 import LatestNews from "./LatestNews/LatestNews";
-import {getHistoryLoginList} from "../../../redux/actions/pages/historyLoginActions";
-import {getNewsList} from "../../../redux/actions/pages/newsActions";
+import historyLoginActions from "../../../redux/actions/pages/historyLoginActions";
+import newsActions from "../../../redux/actions/pages/newsActions";
 import DashboardProfile from "./DashboardProfile/DashboardProfile";
-import biqHelper from "../../../lib/biqHelper";
 import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
+
+import './Dashboard.scss';
 
 class Dashboard extends Component {
 
-  state = {
-    is_panel_mobile_visible: false
-  };
-
-  panelMobileToggle = () => {
-    this.setState( { is_panel_mobile_visible: !this.state.is_panel_mobile_visible } );
-  };
-
   _panelMobileToggle = () => {
     biqHelper.utils.clickTimeout( () => {
-      this.panelMobileToggle();
+      let {dispatch} = this.props;
+      dispatch( dashboardActions.dashboardPanelMobileVisibility() );
     } );
   };
 
   componentDidMount() {
-    this.props.getHistoryLoginList();
-    this.props.getNewsList();
+    let {dispatch} = this.props;
+    dispatch( historyLoginActions.getHistoryLoginList() );
+    dispatch( newsActions.getNewsList() );
   }
 
   render() {
@@ -45,9 +40,9 @@ class Dashboard extends Component {
 
         <div className="biq-wrapper__inner l-dashboard__inner">
 
-          <SideNavMain dashboardPanelMobileToggle={this.panelMobileToggle}/>
+          <SideNavMain/>
 
-          <div className={`l-dashboard__panel${ this.state.is_panel_mobile_visible ? ' is-visible-mobile' : '' }`}>
+          <div className={`l-dashboard__panel${ this.props.dashboard.is_panel_mobile_visible ? ' is-visible-mobile' : '' }`}>
 
             <div className="l-dashboard__panel__header hidden-md-up">
               <Button className="back-btn" onClick={this._panelMobileToggle}>&nbsp;</Button>
@@ -70,17 +65,12 @@ class Dashboard extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = state => {
   return {
-    historyLoginList: store.historyLogin.historyLoginList,
-    newsList: store.news.newsList,
+    dashboard: state.dashboard,
+    historyLoginList: state.historyLogin.historyLoginList,
+    newsList: state.news.newsList,
   }
 };
 
-
-const mapDispatchToProps = {
-  getHistoryLoginList,
-  getNewsList
-};
-
-export default connect( mapStateToProps, mapDispatchToProps )(Dashboard);
+export default connect( mapStateToProps )(Dashboard);

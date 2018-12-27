@@ -1,15 +1,20 @@
-import * as Types from '../../../lib/actionTypes';
+import * as Types from '../../../lib/actionTypes';//TODO: Delete later
 
-export const getNewsList = () => {
+function getNewsList() {
   return {
     type: Types.GET_NEWS_LIST,
     payload: null
   };
 }
 
-export const setNewsList = (newsList) => {
+function setNewsList(newsList) {
   return {
     type: Types.SET_NEWS_LIST,
     payload: newsList
   };
+}
+
+export default {
+  getNewsList,
+  setNewsList
 }

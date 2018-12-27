@@ -8,7 +8,6 @@ import BalanceTopupHistory from "./BalanceTopUpHistory";
 import BalanceTopup from "./BalanceTopUp/BalanceTopUp";
 
 import "./Balance.scss";
-import appActions from "../../../redux/actions/global/appActions";
 
 class Balance extends Component {
 

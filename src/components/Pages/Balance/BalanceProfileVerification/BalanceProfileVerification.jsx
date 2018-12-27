@@ -7,11 +7,8 @@ import biqHelper from "lib/biqHelper";
 import appActions from "redux/actions/global/appActions";
 
 import {Button} from "components/Widgets/material-ui";
-import Modal from "@material-ui/core/Modal";
 
 import HeaderMobileGeneral from "components/Shared/HeaderMobileGeneral";
-import PhotoUpload from "components/Dialogs/DialogProfilePhoto/PhotoUpload/PhotoUpload";
-import AddressInputDialog from "components/Dialogs/DialogAddressInput/DialogAddressInput";
 
 import "./BalanceProfileVerification.scss";
 

@@ -19,11 +19,3 @@ export const navigationStatus = new Subject();
  * }
  */
 export const modalToggle = new Subject();//TODO: Plan to delete this
-
-/**
- * Sample Data
- * data = {
- *  status
- * }
- */
-export const cameraCaptureFileUpload = new Subject();

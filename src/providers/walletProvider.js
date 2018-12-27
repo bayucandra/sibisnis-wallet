@@ -115,6 +115,7 @@ class WalletProvider {
                     main: { name: 'bri-1', size_default: [60,14], size_topup_select: [60, 14] }
                   };
                   break;
+                default:
               }
 
               el.icons = icons;
@@ -153,7 +154,7 @@ class WalletProvider {
       }
       return false;
     });
-    return ret.length === 1 ? ret [0] : {};
+    return ret.length === 1 ? ret[0] : {};
   }
 
   bankIconGet( abbreviation, type ) {

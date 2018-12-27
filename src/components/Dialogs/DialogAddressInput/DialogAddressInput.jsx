@@ -3,7 +3,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import { withStyles } from '@material-ui/core/styles';
 
-import {Subject, throwError} from 'rxjs';
+import {Subject} from 'rxjs';
 import {ajax as rxAjax} from 'rxjs/ajax';
 import {takeUntil, map} from 'rxjs/operators';
 
@@ -227,6 +227,7 @@ class DialogAddressInput extends React.Component {
         case "kelurahan":
           this._kelurahanChange();
           break;
+        default:
 
       }
 

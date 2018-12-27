@@ -238,6 +238,8 @@ class BalancePaymentStatus extends Component {
         StatusPanel = BalancePaymentStatusIndomaret;
         break;
 
+      default:
+
     }
 
     return (

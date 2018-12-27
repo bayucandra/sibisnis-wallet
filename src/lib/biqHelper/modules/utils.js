@@ -239,6 +239,7 @@ class BiqHelperUtils {
       return x !== 0 || 1 / x === 1 / y;
     } else {
       // Step 6.a: NaN == NaN
+      // eslint-disable-next-line
       return x !== x && y !== y;
     }
   };

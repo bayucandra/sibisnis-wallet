@@ -2,12 +2,10 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Subject, of } from 'rxjs';
 import {takeUntil, delay, tap, switchMap} from 'rxjs/operators';
-import $ from 'jquery';
 
 import appActions from "../../../../redux/actions/global/appActions";
 import biqHelper from "../../../../lib/biqHelper";
 
-import { Modal } from '@material-ui/core';
 import { Button } from "components/Widgets/material-ui";
 
 import EmailVerificationForm from "./EmailVerificationForm";

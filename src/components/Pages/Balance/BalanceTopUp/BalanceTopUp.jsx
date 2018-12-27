@@ -37,10 +37,6 @@ class BalanceTopUp extends Component {
     { amount: 1000000, text: "Satu juta rupiah" }
   ];
 
-  constructor( props ) {
-    super(props);
-  }
-
   _tabChange = ( tab_state ) => {
     this.setState( { active_tab: tab_state } );
   };

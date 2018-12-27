@@ -48,7 +48,7 @@ class BalancePaymentMethodIndomaret extends Component {
     }
 
     biqHelper.utils.clickTimeout(()=>{
-      let {dispatch, balance} = this.props;
+      let {dispatch} = this.props;
       dispatch(
         balanceActions.balancePaymentSubmit(
           {

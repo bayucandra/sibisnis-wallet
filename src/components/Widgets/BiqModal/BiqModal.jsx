@@ -1,5 +1,5 @@
 import ReactDOM from 'react-dom';
-import React, {Component} from 'react';
+import {Component} from 'react';
 
 const modalRoot = document.getElementById('biq-modal');
 

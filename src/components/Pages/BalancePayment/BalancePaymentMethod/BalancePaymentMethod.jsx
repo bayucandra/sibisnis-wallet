@@ -31,7 +31,6 @@ import iconMandiriKlikPay from "images/icons/payment/mandiri-e@3x.png";
 
 import iconCimbClickSingle from "images/icons/payment/cimb-klik-singgle@3x.png";
 import iconCimbClick from "images/icons/payment/cimb-klik@3x.png";
-import biqConfig from "providers/biqConfig";
 
 class BalancePaymentMethod extends Component {
 
@@ -84,6 +83,8 @@ class BalancePaymentMethod extends Component {
         case 'indomaret':
           this.props.history.push('/balance/payment/indomaret');
           break;
+
+        default:
 
       }
     }
@@ -180,6 +181,8 @@ class BalancePaymentMethod extends Component {
                     icon_mobile = iconBankMethod;
                     icon_mobile_width = '213px';
                     break;
+
+                  default:
                 }
 
                 return (

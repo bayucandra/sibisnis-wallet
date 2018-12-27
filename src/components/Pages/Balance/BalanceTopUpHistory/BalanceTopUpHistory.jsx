@@ -65,6 +65,7 @@ class BalanceTopUpHistory extends Component {
       case '5':
         ret = ' is-waiting-verification';
         break;
+      default:
     }
 
     return ret;
@@ -116,7 +117,7 @@ class BalanceTopUpHistory extends Component {
       <nav className="nav-mobile hidden-md-up">
         <div className="title">History Topup</div>
         <IconButton className="close-btn" onClick={this._navBackClick}>
-          <img src={iconCloseWhite}/>
+          <img src={iconCloseWhite} alt="Icon Close"/>
         </IconButton>
       </nav>
     );

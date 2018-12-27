@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Subject, of, Observable} from 'rxjs';
-import {takeUntil, catchError, map, merge, switchMap} from 'rxjs/operators'
+import {Subject, of} from 'rxjs';
+import {takeUntil, catchError, merge} from 'rxjs/operators'
 import {ajax as rxAjax} from 'rxjs/ajax'
 
 import "./BalancePaymentConfirmation.scss";

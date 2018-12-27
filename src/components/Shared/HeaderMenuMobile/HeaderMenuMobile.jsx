@@ -55,7 +55,7 @@ class HeaderMenuMobile extends  Component {
           aria-haspopup="true"
           onClick={this._onMenuOpen}
         >
-          <img src={menuIcon} className="icon" />
+          <img src={menuIcon} className="icon" alt="Menu Icon" />
         </IconButton>
 
         <Menu

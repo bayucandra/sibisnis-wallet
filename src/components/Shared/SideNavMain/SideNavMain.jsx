@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { matchPath, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 import ReactTooltip from 'react-tooltip';
 

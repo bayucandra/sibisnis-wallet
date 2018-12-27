@@ -11,10 +11,6 @@ import menuIcon from '../../../../images/icons/menu.svg';
 import rightArrowIcon from '../../../../images/icons/s-litle-right.svg'
 import backBlueIcon from '../../../../images/icons/ico-back-blue.svg'
 
-// Custom Libraries
-import {modalToggle, cameraCaptureFileUpload} from '../../../../lib/utilities';//TODO: Delete soon
-import {modalTypes} from '../../../../lib/constants';//TODO: Delete soon
-
 import biqHelper from "../../../../lib/biqHelper";
 
 // Custom CSS
@@ -108,7 +104,7 @@ class ProfileImagePreview extends Component {
 
         <div className={"profile-image-preview__inner"}
              onClick={this.onMenuClose}>
-          <img alt={"Profile picture"} src={`${biqConfig.profile_photo_url_base}/${ encodeURI(photo) }`}/>
+          <img alt={"User Profile"} src={`${biqConfig.profile_photo_url_base}/${ encodeURI(photo) }`}/>
         </div>
 
         <div className="menu">
@@ -122,7 +118,7 @@ class ProfileImagePreview extends Component {
               aria-haspopup="true"
               onClick={this.onMenuOpen}
             >
-              <img src={menuIcon}
+              <img src={menuIcon} alt="Menu Button"
                 className="menu-btn ripple" />
             </IconButton>
 

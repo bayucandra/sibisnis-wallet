@@ -16,6 +16,8 @@ class BiqHelperNumber {
       case 'ceil':
         ret = Math.ceil( ret );
         break;
+
+      default:
     }
 
     return ret ;

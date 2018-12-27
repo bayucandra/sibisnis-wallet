@@ -179,7 +179,7 @@ class CameraCapture extends Component {
             !this.state.camera.is_captured ?
               <ReactWebcam audio={false} screenshotFormat="image/png" ref={this._setRef} />
                 :
-              <img src={ this.state.camera.img_data } ref={this.refImgCaptured} alt={'Image captured'}/>
+              <img src={ this.state.camera.img_data } ref={this.refImgCaptured} alt={'Captured'}/>
           }
 
         </div>

@@ -5,6 +5,7 @@ import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
 import { MuiThemeProvider, createMuiTheme, createGenerateClassName, jssPreset } from '@material-ui/core/styles';
 
+import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import App from './App';
 // import registerServiceWorker from './registerServiceWorker';

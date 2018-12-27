@@ -59,6 +59,7 @@ class BalanceTransactionInfo extends Component {
       case '5':
         status_class = ' status--verification-process';
         break;
+      default:
     }
 
     let is_fetched = this.props.balance.payment_transaction.is_fetched;

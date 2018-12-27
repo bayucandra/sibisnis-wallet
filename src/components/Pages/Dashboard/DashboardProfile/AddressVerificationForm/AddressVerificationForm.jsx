@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
-import {Subject, throwError} from 'rxjs';
+import {Subject} from 'rxjs';
 import {ajax as rxAjax} from 'rxjs/ajax';
 import {takeUntil, map} from 'rxjs/operators';
 
@@ -221,6 +221,7 @@ class AddressVerificationForm extends Component {
           this._kelurahanChange();
           break;
 
+        default:
       }
 
     } );
@@ -506,6 +507,8 @@ class AddressVerificationForm extends Component {
           case 'kelurahan':
             this._kelurahanChange({ callback: this._loadSavedAddress, callback_params: 'alamat' });
             break;
+
+          default:
 
         }
 

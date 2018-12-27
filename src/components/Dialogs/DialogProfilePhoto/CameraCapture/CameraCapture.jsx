@@ -92,7 +92,7 @@ class CameraCapture extends Component {
     img_canvas_el.width = img_el.width;
     img_canvas_el.height = capture_height;
     let ctx = img_canvas_el.getContext('2d');
-    ctx.drawImage(img_el, 0, 0, img_canvas_el.width, capture_height );
+    ctx.drawImage(img_el, 0, 0 );
 
     img_canvas_el.toBlob( blob => {
 

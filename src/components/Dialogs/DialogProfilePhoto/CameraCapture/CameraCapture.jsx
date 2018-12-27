@@ -86,11 +86,13 @@ class CameraCapture extends Component {
 
     let img_el = this.refImgCaptured.current;
 
+    let capture_height = biqHelper.mediaQuery.isMobile() ? 260 : 360;
+
     let img_canvas_el = document.createElement('canvas');
     img_canvas_el.width = img_el.width;
-    img_canvas_el.height = img_el.height;
+    img_canvas_el.height = capture_height;
     let ctx = img_canvas_el.getContext('2d');
-    ctx.drawImage(img_el, 0, 0);
+    ctx.drawImage(img_el, 0, 0, img_canvas_el.width, capture_height );
 
     img_canvas_el.toBlob( blob => {
 
@@ -159,6 +161,7 @@ class CameraCapture extends Component {
   }
 
   render() {
+
     return (
       <div className="camera-capture-dialog" style={{ marginTop: this.state.modalPosTop }}>
 
@@ -176,7 +179,7 @@ class CameraCapture extends Component {
 
           {
             !this.state.camera.is_captured ?
-              <ReactWebcam audio={false} screenshotFormat="image/png" ref={this._setRef}/>
+              <ReactWebcam audio={false} screenshotFormat="image/png" ref={this._setRef} />
                 :
               <img src={ this.state.camera.img_data } ref={this.refImgCaptured} alt={'Image captured'}/>
           }

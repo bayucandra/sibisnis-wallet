@@ -54,12 +54,13 @@
   &__body {
     display: block;
     text-align: center;
-    min-height: 260px;
+    max-width: 500px;
+    height: 260px;
     background: map-get( $colors, very-light-pink-eight );
+    overflow: hidden;
 
     video, img {
       width: 100%;
-      max-width: 500px;
       height: auto;
     }
 

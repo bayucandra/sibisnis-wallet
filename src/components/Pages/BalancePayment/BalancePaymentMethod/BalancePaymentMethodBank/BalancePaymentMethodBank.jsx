@@ -14,6 +14,7 @@ import BalanceTransactionInfo from "../../BalanceTransactionInfo/BalanceTransact
 import walletProvider from "providers/walletProvider";
 import Modal from "@material-ui/core/Modal/Modal";
 import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
+import appActions from "../../../../../redux/actions/global/appActions";
 
 class BalancePaymentMethodBank extends Component {
 
@@ -21,7 +22,6 @@ class BalancePaymentMethodBank extends Component {
     bank_selected: null,
     user_email: '',
     is_user_email_copied: false,
-    modal_err_is_open: false,
     error: { title: 'Gagal', notice: '' }
   };
 
@@ -75,10 +75,6 @@ class BalancePaymentMethodBank extends Component {
     });
   };
 
-  _modalErrorClose = () => {
-    this.setState( { modal_err_is_open: false } );
-  };
-
   _modalErrorOpen = ( p_obj ) => {
 
     let params = {
@@ -88,9 +84,9 @@ class BalancePaymentMethodBank extends Component {
 
     Object.assign( params, p_obj );
 
-    this.setState( {  error: params } );
-
-    this.setState( { modal_err_is_open: true } );
+    let {dispatch} = this.props;
+    console.log(params);
+    dispatch( appActions.appDialogNoticeOpen( params ) );
   };
 
   componentDidMount() {
@@ -122,7 +118,7 @@ class BalancePaymentMethodBank extends Component {
 
         this._modalErrorOpen({
           title: 'Error',
-          notice: <span>Error <b>{response_status_next}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.</span>
+          notice: `Error <b>${response_status_next}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.`
         });
 
         return false;
@@ -277,17 +273,6 @@ class BalancePaymentMethodBank extends Component {
 
 
         </div>
-
-
-        <Modal
-          open={this.state.modal_err_is_open}
-          onClose={this._modalErrorClose}>
-
-          <div className="modal-inner">
-            <ModalNotice modalClose={this._modalErrorClose} title={this.state.error.title} notice={this.state.error.notice}/>
-          </div>
-
-        </Modal>
 
       </div>
     );

@@ -165,7 +165,9 @@ class BalancePaymentStatus extends Component {
           onClose={this._modalErrorClose}>
 
           <div className="modal-inner">
-            <ModalNotice modalClose={this._modalErrorClose} title="Error" notice={<span>Error <b>{response_status}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.</span>}/>
+            <ModalNotice
+                modalClose={this._modalErrorClose} title="Error"
+                notice={ `Error <b>${response_status}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.`}/>
           </div>
 
         </Modal>

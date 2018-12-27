@@ -109,7 +109,7 @@ class BalancePaymentMethodIndomaret extends Component {
 
         this._modalErrorOpen({
           title: 'Error',
-          notice: <span>Error <b>{response_status_next}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.</span>
+          notice: `Error <b>${response_status_next}</b>, harap periksa koneksi anda atau mencoba kembali dari awal.`
         });
 
         return false;

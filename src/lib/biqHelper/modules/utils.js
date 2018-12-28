@@ -102,14 +102,19 @@ class BiqHelperUtils {
   }
 
   browserDetect( ua_str ) {
-    let ua = ua_str.match(/(opera|chrome|safari|firefox|msie)\/?\s*(\.?\d+(\.\d+)*)/i);
-    let browser = null;
+    let browser = 'Unknown';
 
-    if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11\./i)) {
-      browser = "msie";
-    }
-    else {
-      browser = ua[1];
+    try {
+      let ua = ua_str.match(/(opera|chrome|safari|firefox|msie|postmanruntime)\/?\s*(\.?\d+(\.\d+)*)/i);
+
+      if (navigator.userAgent.match(/Edge/i) || navigator.userAgent.match(/Trident.*rv[ :]*11\./i)) {
+        browser = "msie";
+      } else {
+        browser = ua[1];
+      }
+    } catch( e ) {
+      console.error( `There was error when detecting browser: ${e.message}` );
+      console.warn( `User-Agent: : ${ua_str}` );
     }
 
     return browser;

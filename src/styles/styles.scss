@@ -1,9 +1,7 @@
 @import './fonts';
 @import './mixins';
 @import './responsive-utils';
-$layout-width: (
-        short: 1000px, extra: 1200px, full: 1440px
-);
+@import './variables';
 
 html, body, #root {
   height: 100%;
@@ -75,7 +73,7 @@ table {
     box-sizing: border-box;
     @media screen and (min-width: map-get($bp-mobile-first, lg)) {
       padding: 0 0;
-      width: map-get($layout-width, short);
+      width: map-get($layout-width, normal);
     }
   }
 }

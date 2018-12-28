@@ -6,7 +6,7 @@ import {fromEvent, forkJoin} from 'rxjs';
 import { debounceTime, map } from 'rxjs/operators';
 import $ from 'jquery';
 
-import Header from "./components/Shared/Header/Header";
+import Header from "components/Shared/Header/Header";
 import appActions from "./redux/actions/global/appActions";
 import userActions from "./redux/actions/global/userActions";
 import esProvider from "./providers/esProvider";
@@ -16,22 +16,22 @@ import addressProvider from "./providers/addressProvider";
 import walletProvider from "./providers/walletProvider";
 
 import Modal from "@material-ui/core/Modal/Modal";
+import DialogModalNotice from "components/Dialogs/DialogModalNotice";
 
-import Dashboard from "./components/Pages/Dashboard/Dashboard";
-import Profile from "./components/Pages/Profile";
-import Balance from "./components/Pages/Balance";
-import BalancePayment from "./components/Pages/BalancePayment/BalancePayment";
-import AllNews from "./components/Pages/AllNews/AllNews";
-import AllHistorLogins from "./components/Pages/AllHistoryLogins/AllHistoryLogins";
-import LoadingIndicatorBar from "./components/Widgets/LoadingIndicatorBar/LoadingIndicatorBar";
+import Dashboard from "components/Pages/Dashboard/Dashboard";
+import Profile from "components/Pages/Profile";
+import Balance from "components/Pages/Balance";
+import BalancePayment from "components/Pages/BalancePayment/BalancePayment";
+import AllNews from "components/Pages/AllNews/AllNews";
+import LoginHistory from "components/Pages/LoginHistory";
+import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar/LoadingIndicatorBar";
 
-import ModalNotice from "./components/Widgets/ModalNotice/ModalNotice";
-import DialogProfilePhoto from "./components/Dialogs/DialogProfilePhoto";
+import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
+import DialogProfilePhoto from "components/Dialogs/DialogProfilePhoto";
 import DialogAddressInput from "components/Dialogs/DialogAddressInput";
-import DialogEmailVerification from "./components/Dialogs/DialogEmailVerification";
+import DialogEmailVerification from "components/Dialogs/DialogEmailVerification";
 
 import "./App.scss";
-import DialogModalNotice from "./components/Dialogs/DialogModalNotice";
 
 class App extends Component {
 
@@ -181,7 +181,7 @@ class App extends Component {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/profile" component={Profile} />
             <Route path="/all-news" component={AllNews} />
-            <Route path="/all-history-logins" component={AllHistorLogins} />
+            <Route path="/login-history" component={LoginHistory} />
             <Redirect from="/" to="/dashboard" />
           </Switch>
 

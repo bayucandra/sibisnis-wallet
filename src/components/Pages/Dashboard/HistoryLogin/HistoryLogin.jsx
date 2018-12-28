@@ -36,9 +36,9 @@ const HistoryList = (props) => {
 
 class HistoryLogin extends Component {
 
-  viewAllHistoryLogin = () => {
+  _loginHistoryPage = () => {
     biqHelper.utils.clickTimeout( () => {
-      this.props.history.push('/all-history-logins');
+      this.props.history.push('/login-history');
     } );
   };
 
@@ -60,7 +60,7 @@ class HistoryLogin extends Component {
           <div className="history-login-header-container">
             <div className="history-login-header">
               <div className="history-login-header__left">History Login</div>
-              <Button className="history-login-header__right" onClick={this.viewAllHistoryLogin}>Lihat Semua</Button>
+              <Button className="history-login-header__right" onClick={this._loginHistoryPage}>Lihat Semua</Button>
             </div>
           </div>
 

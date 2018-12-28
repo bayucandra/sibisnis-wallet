@@ -1,0 +1,15 @@
+@import "../../../styles/variables";
+.l-login-history {
+
+  &__inner {
+    max-width: map-get( $layout-width, short );
+
+    .header-desktop {
+      display: none;
+    }//.header-desktop
+
+  }
+
+}//.l-login-history
+
+@import "LoginHistory-md-min";

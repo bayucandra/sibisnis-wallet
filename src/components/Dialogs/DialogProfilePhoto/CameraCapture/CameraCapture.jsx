@@ -51,6 +51,12 @@ class CameraCapture extends Component {
   };
 
   _capture = () => {
+    biqHelper.utils.clickTimeout( () => {
+      this._captureActual()
+    } );
+  };
+
+  _captureActual = () => {
 
     try {
       let img_captured = this.refCamera.getScreenshot();
@@ -67,6 +73,12 @@ class CameraCapture extends Component {
   };
 
   _recapture = () => {
+    biqHelper.utils.clickTimeout( () => {
+      this._recaptureActual();
+    } );
+  };
+
+  _recaptureActual = () => {
     this.setState( {
       camera: {
         is_captured: false,

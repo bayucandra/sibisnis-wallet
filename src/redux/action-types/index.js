@@ -1,11 +1,15 @@
-import user from './pages/user-action-type'
 import app from './global/app-action-type';
-import balance from "./pages/balance-action-type";
+
 import dashboard from "./pages/dahsboard-action-type";
+import loginHistory from "./pages/login-history";
+import user from './pages/user-action-type'
+import balance from "./pages/balance-action-type";
+
 
 export default {
-  user,
   app,
-  balance,
-  dashboard
+  user,
+  dashboard,
+  loginHistory,
+  balance
 };

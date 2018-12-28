@@ -49,7 +49,15 @@ const dashboardLoginHistoryFetch = action$ =>
           method: 'POST',
           crossDomain: true,
           withCredentials: true,
-          body: Object.assign({ memberid: action.payload.memberid, action: 'login' }, biqConfig.api.data_auth)
+          body: Object.assign(
+            {
+              memberid: action.payload.memberid,
+              action: 'login',
+              limit: 100,
+              offset: 0
+            },
+            biqConfig.api.data_auth
+          )
         });
 
         return ajax$.pipe(

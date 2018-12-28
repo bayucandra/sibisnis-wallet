@@ -1,0 +1,45 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-login-history {
+    padding-top: 40px!important;
+
+    &__inner {
+
+      .header-desktop {
+        flex: 1 1 auto;
+        display: flex;
+        justify-content: flex-start;
+
+        .back-btn {
+          padding: 10px;
+          margin: -10px;
+
+          font-size: 16px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get($colors, brown-grey);
+
+          &:hover {
+            background: none;
+          }//&:hover
+
+          &:before {
+            content: ' ';
+            display: block;
+            width: 24px; height: 24px;
+            margin-right: 20px;
+            background: url('../../../images/icons/back-blue-new.svg') no-repeat center;
+          }//&before
+
+        }//.back-btn
+
+      }//.header-desktop
+
+    }//&__inner
+
+  }//.l-login-history
+
+}

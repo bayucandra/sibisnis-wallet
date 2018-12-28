@@ -1,6 +1,7 @@
 $font-family: 'NunitoSans',sans-serif;
 $bp-mobile-first: ( sm: 576px, md: 768px, lg: 992px, xl: 1200px);
 $bp-desktop-first: (xs: 575px, sm: 767px, md: 991px, lg: 1199px);
+$layout-width: ( short: 723px, normal: 1000px, extra: 1200px, full: 1440px );
 
 $zindex-raised-button: 100 !default;
 $zindex-raised-panel: 500 !default;
@@ -39,6 +40,7 @@ $colors: (
         battleship-grey:#747d84,
         battleship-grey-two: #6c737a,
         gray-87: #dedede,
+        brown-grey: #8f8f8f,
         pale-grey: #e3eaec,
         pale-grey-two: #f5f6f8,
         pale-grey-three: #f2f8ff,

@@ -1,0 +1,101 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .history-login-container{
+    border-radius: 5px;
+    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+
+    .history-login-header {
+      height:63px !important;
+      margin-left:30px !important;
+      margin-right:0px !important;
+
+      &__right {
+        height: 48px !important;
+        width: 151px !important;
+      }
+
+    }//.history-login-header
+
+  }//.history-login-container
+
+  .history-login-list-container {
+    display: none;
+  }
+
+  .history-login-list-container-desktop {
+    display: flex !important;
+    justify-content: center;
+    .history-login-list-table{
+      width:100%;
+      thead{
+        tr{
+          height: 48px;
+          background-color: #f8f8f8;
+          font-size: 13px;
+          font-weight: 600;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+          color: #404852;
+          .history-login-list-table__header-column:nth-child(1){
+            padding-left:30px;
+          }
+        }
+      }
+      tbody{
+        tr.history-login-list-body__item{
+          height: 45px;
+          border-top: solid 0.5px #dedede;
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+          color: map-get( $colors, charcoal-grey );
+          cursor: pointer;
+
+          &:hover {
+            opacity: 0.6;
+          }//&:hover
+
+          &:last-child {
+            height: 54px;
+          }//&:last-child
+
+          > td {
+            padding-top: 13px;
+            box-sizing: border-box;
+            vertical-align: top;
+          }//> td
+
+          .history-login-list-table__body-column-date{
+            width: 126px + 44px;
+            padding-left:30px;
+          }
+          .history-login-list-table__body-column-country{
+            width: 59px + 106px;
+          }
+          .history-login-list-table__body-column-ip{
+            width: 92px + 111px;
+          }
+          .history-login-list-table__body-column-browser{
+            width: 95px + 60px;
+          }
+        }
+      }
+    }
+  }
+
+  .all-history-login {
+    margin-top: 7px !important;
+    .history-login-header-container {
+      display: block !important;
+      .history-login-header__right {
+        display: none !important;
+      }
+    }
+  }
+
+}//@media

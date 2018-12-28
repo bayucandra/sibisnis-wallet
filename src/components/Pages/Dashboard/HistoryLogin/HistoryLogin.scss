@@ -1,8 +1,12 @@
-@import '../../../../styles/mixins';
 @import '../../../../styles/variables';
+
 .history-login-container {
+  background-color: #ffffff;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.11), 0 1px 3px 0 rgba(0, 0, 0, 0.11);
+
   .history-login-header-container{
     padding: 0;
+
     .history-login-header {
       display: flex;
       align-items: center;
@@ -10,8 +14,10 @@
       height:61px;
       margin-left: 20px;
       margin-right: 10px;
-      .history-login-header__left {
-        @include text-setup($charcoal-grey, 16px);
+
+      &__left {
+        font-size: 16px;
+        color: map-get( $colors, charcoal-grey );
         font-weight: 600;
         font-style: normal;
         font-stretch: normal;
@@ -19,8 +25,13 @@
         letter-spacing: 0.4px;
         text-align: left;
       }
-      .history-login-header__right {
-        @include text-setup($dark-sky-blue, 15px);
+
+      &__right {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+        color: map-get($colors, dark-sky-blue);
         font-weight: bold;
         font-style: normal;
         font-stretch: normal;
@@ -30,11 +41,15 @@
         width: 110px;
         height: 40px;
         cursor: pointer;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+
+        &:hover {
+          background: none;
+        }//&:hover
+
       }
+
     }
+
   }
 
 }
@@ -55,7 +70,8 @@
     border-top: solid 0.5px #dedede;
     padding-bottom: 10px;
     .history-list__title {
-      @include text-setup($charcoal-grey, 13px);
+      color: map-get( $colors, charcoal-grey );
+      font-size: 13px;
       font-weight: 600;
       font-style: normal;
       font-stretch: normal;
@@ -66,7 +82,8 @@
     }
 
     .history-list__name{
-      @include text-setup($charcoal-grey, 13px);
+      color: map-get( $colors, charcoal-grey );
+      font-size: 13px;
       font-weight: normal;
       font-style: normal;
       font-stretch: normal;
@@ -80,86 +97,4 @@
   display: none;
 }
 
-@include media-query(md) {
-
-  .history-login-container{
-    .history-login-header{
-      height:63px !important;
-      margin-left:30px !important;
-      margin-right:0px !important;
-      .history-login-header__right {
-        height: 48px !important;
-        width: 151px !important;
-      }
-    }
-  }
-  .history-login-list-container {
-    display: none;
-  }
-  .history-login-list-container-desktop {
-    display: flex !important;
-    justify-content: center;
-    .history-login-list-table{
-      width:100%;
-      thead{
-        tr{
-          height: 48px;
-          background-color: #f8f8f8;
-          font-family: NunitoSans;
-          font-size: 13px;
-          font-weight: 600;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: 0.3px;
-          color: #404852;
-          .history-login-list-table__header-column:nth-child(1){
-            padding-left:30px;
-          }
-        }
-      }
-      tbody{
-        tr.history-login-list-body__item{
-          height: 45px;
-          background-color: #ffffff;
-          background-color: var(--white);
-          border-top: solid 0.5px #dedede;
-          font-family: NunitoSans;
-          font-size: 13px;
-          font-weight: normal;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: normal;
-          letter-spacing: 0.3px;
-          color: #404852;
-          .history-login-list-table__body-column-date{
-            width: 135px;
-            padding-left:30px;
-            padding-right: 35px;
-          }
-          .history-login-list-table__body-column-country{
-            width: 59px;
-            padding-right: 106px;
-          }
-          .history-login-list-table__body-column-ip{
-            width: 92px;
-            padding-right: 111px;
-          }
-          .history-login-list-table__body-column-browser{
-
-          }
-        }
-      }
-    }
-  }
-
-  .all-history-login {
-    margin-top: 7px !important;
-    .history-login-header-container {
-      display: block !important;
-      .history-login-header__right {
-        display: none !important;
-      }
-    }
-  }
-}
+@import "HistoryLogin-md-min";

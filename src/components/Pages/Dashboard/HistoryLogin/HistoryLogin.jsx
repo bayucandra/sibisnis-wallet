@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
+import * as moment from 'moment';
 
 import dashboardActions from "redux/actions/pages/dashboardActions";
 
 import biqHelper from "lib/biqHelper";
 
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
+import {Button} from "components/Widgets/material-ui";
 
 import CustomAccordian from 'components/Shared/CustomAccordian/CustomAccordian';
 import { HistoryLoginMobileLoader, HistoryLoginDesktopLoader } from './HistoryLoginLoader/HistoryLoginLoader';
@@ -32,12 +32,14 @@ const HistoryList = (props) => {
       </div>
     </div>
   )
-}
+};
 
 class HistoryLogin extends Component {
 
   viewAllHistoryLogin = () => {
-    this.props.history.push('/all-history-logins');
+    biqHelper.utils.clickTimeout( () => {
+      this.props.history.push('/all-history-logins');
+    } );
   };
 
   componentDidMount() {
@@ -53,21 +55,22 @@ class HistoryLogin extends Component {
     let data = biqHelper.JSON.pathValueGet( this.props.login_history.server_response, 'response.data' );
 
     return (
-      <div className={this.props.viewAll ? "history-login-container all-history-login" : "history-login-container"}>
-        <Card className="custom-card-styles">
-          <CardContent className="history-login-header-container">
+      <div className={"history-login-container"}>
+
+          <div className="history-login-header-container">
             <div className="history-login-header">
               <div className="history-login-header__left">History Login</div>
-              <div className="history-login-header__right ripple opacity-background" onClick={this.viewAllHistoryLogin.bind(this)}>Lihat Semua</div>
+              <Button className="history-login-header__right" onClick={this.viewAllHistoryLogin}>Lihat Semua</Button>
             </div>
-          </CardContent>
+          </div>
+
           <div className="history-login-list-container">
             {
               is_fetched && is_success ?
 
               data.map((el) => {
                 let id = el.id;
-                let date_access = el.date_access;
+                let date_access = moment( el.date_access ).format('DD MMM YYYY , HH:mm');
                 let country = el.data.location.country;
                 let ip = el.data.location.ip;
                 let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
@@ -106,7 +109,7 @@ class HistoryLogin extends Component {
 
                   {data.map((el) => {
                     let id = el.id;
-                    let date_access = el.date_access;
+                    let date_access = moment( el.date_access ).format('DD MMM YYYY , HH:mm');
                     let country = el.data.location.country;
                     let ip = el.data.location.ip;
                     let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
@@ -131,7 +134,6 @@ class HistoryLogin extends Component {
             }
 
           </div>
-        </Card>
       </div>
     )
   }

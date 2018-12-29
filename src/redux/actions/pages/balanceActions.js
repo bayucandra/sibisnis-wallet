@@ -12,10 +12,10 @@ import actionTypes from "redux/action-types";
       type: actionTypes.balance.PAYMENT_METHOD_FETCH
     }
   }
-  function balanceMethodFetched( server_response ) {
+  function balanceMethodFetched( data ) {
     return {
       type: actionTypes.balance.PAYMENT_METHOD_FETCHED,
-      payload: server_response
+      payload: data
     }
   }
   function balanceMethodFetchCanceled() {

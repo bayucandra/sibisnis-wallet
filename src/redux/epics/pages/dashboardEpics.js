@@ -53,7 +53,7 @@ const dashboardLoginHistoryFetch = action$ =>
             {
               memberid: action.payload.memberid,
               action: 'login',
-              limit: 100,
+              limit: 5,
               offset: 0
             },
             biqConfig.api.data_auth

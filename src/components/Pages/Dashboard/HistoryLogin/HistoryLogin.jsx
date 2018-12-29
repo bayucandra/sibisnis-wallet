@@ -9,30 +9,10 @@ import biqHelper from "lib/biqHelper";
 
 import {Button} from "components/Widgets/material-ui";
 
-import CustomAccordian from 'components/Shared/CustomAccordian/CustomAccordian';
+import CustomAccordion, { HistoryList } from 'components/Shared/CustomAccordion/CustomAccordion';
 import { HistoryLoginMobileLoader, HistoryLoginDesktopLoader } from './HistoryLoginLoader/HistoryLoginLoader';
 
 import './HistoryLogin.scss';
-
-const HistoryList = (props) => {
-  const { country, ip, browser } = props;
-  return (
-    <div className="history-list-container">
-      <div className="history-list">
-        <div className="history-list__title">Negara</div>
-        <div className="history-list__name">{country}</div>
-      </div>
-      <div className="history-list">
-        <div className="history-list__title">IP</div>
-        <div className="history-list__name">{ip}</div>
-      </div>
-      <div className="history-list">
-        <div className="history-list__title">Browser</div>
-        <div className="history-list__name">{browser}</div>
-      </div>
-    </div>
-  )
-};
 
 class HistoryLogin extends Component {
 
@@ -44,8 +24,8 @@ class HistoryLogin extends Component {
 
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( dashboardActions.dashboardLoginHistoryFetch( { memberid: "ZON40434359" } ) );
-    // dispatch( dashboardActions.dashboardLoginHistoryFetch( { memberid: this.props.user_profile.memberid } ) );
+    // dispatch( dashboardActions.dashboardLoginHistoryFetch( { memberid: "ZON40434359" } ) );
+    dispatch( dashboardActions.dashboardLoginHistoryFetch( { memberid: this.props.user_profile.memberid } ) );
   }
 
   render() {
@@ -75,11 +55,11 @@ class HistoryLogin extends Component {
                 let ip = el.data.location.ip;
                 let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
                 return (
-                  <CustomAccordian
+                  <CustomAccordion
                     key={id}
                     title="Tanggal"
                     date={date_access}
-                    accordianBody={<HistoryList country={country} ip={ip} browser={browser} />} />
+                    accordionBody={<HistoryList country={country} ip={ip} browser={browser} />} />
                 );
               })
 

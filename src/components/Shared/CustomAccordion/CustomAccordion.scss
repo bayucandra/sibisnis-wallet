@@ -1,8 +1,8 @@
-@import '../../../styles/mixins.scss';
 @import '../../../styles/variables.scss';
 
-.custom-accordian-container{
-  .custom-accordian-container__title{
+.custom-accordion-container {
+
+  &__title{
     height: 54px;
     display: flex;
     align-items: center;
@@ -10,9 +10,12 @@
     padding-left: 20px;
     padding-right: 12px;
     border-top: solid 0.5px #dedede;
-    .custom-accordian-container__title-left{
-      .custom-accordian-container__title-left-name{
-        @include text-setup($charcoal-grey,13px);
+
+    &-left{
+
+      &-name{
+        font-size: 13px;
+        color: map-get( $colors, charcoal-grey );
         margin-right: 20px;
         font-weight: 600;
         font-style: normal;
@@ -20,8 +23,10 @@
         line-height: normal;
         letter-spacing: 0.3px;
       }
-      .custom-accordian-container__title-left-date{
-        @include text-setup($charcoal-grey,13px);
+
+      &-date{
+        font-size: 13px;
+        color: map-get( $colors, charcoal-grey );
         margin-right: 20px;
         font-weight: normal;
         font-style: normal;
@@ -33,9 +38,10 @@
     }
   }
 
-  .custom-accordian-container__body{
-    padding: 0px 20px;
+  &__body{
+    padding: 0 20px;
     background-color: #f7f7f7;
     box-shadow: inset 0 -1px 3px 0 rgba(0, 0, 0, 0.2), inset 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  }
-}
+  }//&__body
+
+}//.custom-accordion-container

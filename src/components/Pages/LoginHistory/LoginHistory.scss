@@ -2,13 +2,22 @@
 .l-login-history {
 
   &__inner {
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: flex-start;
     max-width: map-get( $layout-width, short );
+  }//&__inner
 
-    .header-desktop {
-      display: none;
-    }//.header-desktop
+  &__header-desktop {
+    display: none;
+  }//&__header-desktop
 
-  }
+  &__panel {
+    flex: 1 1 1px;
+    background: #FFFFFF;
+    overflow: auto;
+  }//&__panel
 
 }//.l-login-history
 

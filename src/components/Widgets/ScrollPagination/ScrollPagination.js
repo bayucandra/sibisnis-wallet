@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import $ from 'jquery';
 import { Subject, of } from 'rxjs';
 import {ajax as rxAjax} from 'rxjs/ajax';
 import {catchError, takeUntil} from 'rxjs/operators';
+
+import appActions from "redux/actions/global/appActions";
+
 import biqHelper from "../../../lib/biqHelper";
+
+import "./ScrollPagination.scss";
 
 class ScrollPagination extends Component{
 
@@ -31,6 +37,7 @@ class ScrollPagination extends Component{
   constructor( props ) {
     super(props);
     this._scrollStateReset();
+    biqHelper.jquery.init($);
   }
 
   _scrollStateReset = () => Object.assign( this._scroll_state, this._scroll_state_default );
@@ -104,18 +111,29 @@ class ScrollPagination extends Component{
 
           this.setState( { is_loading: false }, () => {
             this._data = this._data.concat( res_data );
-            if ( typeof this.props.onFetched === 'function' ) this.props.onFetched( {
-              data_all: this._data,
-              data_current: res_data,
-              status_current: res.status
-            } );
+
+            if ( typeof this.props.onFetched === 'function' )
+              this.props.onFetched( {
+                data_all: this._data,
+                data_current: res_data,
+                status_current: res.status
+              } );
+
           } );
 
         }
 
-        if ( biqHelper.utils.httpResponseIsError( res.status ) ) {
+        else if ( biqHelper.utils.httpResponseIsError( res.status ) ) {
           this._scroll_state.page_current--;
           this.setState( { is_loading: false } );
+        }
+
+        else {
+          this._scroll_state.page_current--;
+          this.setState( { is_loading: false } );
+
+          let {dispatch} = this.props;
+          dispatch( appActions.appDialogNoticeOpen( { title: 'Error', notice: 'Terjadi masalah saat menghubungkan ke server, harap periksa koneksi anda' } ) );
         }
 
       });
@@ -179,7 +197,7 @@ class ScrollPagination extends Component{
       <div className={`${this.props.className}${ this.state.has_scroll ? ' has-scroll' : '' }`} onScroll={this._onScroll} ref={this.dom_scroller}>
         {this.props.children}
         { this.state.is_loading && this._loadMoreTpl() }
-        <div style={{height:'50px', width: '100%'}}/>
+        <div className="scroll-pagination__spacer"/>
       </div>
     );
 
@@ -198,4 +216,4 @@ ScrollPagination.defaultProps = {
 
 };
 
-export default ScrollPagination;
+export default connect(null) (ScrollPagination);

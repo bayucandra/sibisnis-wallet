@@ -1,6 +1,6 @@
 import actionTypes from "redux/action-types";
 
-let state_default = {
+const state_default = {
   nominal_value: null,
   payment_method_selected: null,//bank-transfer, atm, credit-card, indomaret, klik-bca,  bca-klikpay, mandiri-clickpay, cimb-clicks
 
@@ -101,10 +101,10 @@ export default ( state = state_default, action ) => {
 
 
     case actionTypes.balance.TOP_UP_HISTORY_FETCH:
-      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: true, is_fetched: false, data: state.top_up_history.data } ) };
+      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: true, data: state.top_up_history.data } ) };
       break;
     case actionTypes.balance.TOP_UP_HISTORY_FETCHED:
-      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetching: false, is_fetched: true, data: action.payload.data } ) };
+      new_state = { top_up_history: Object.assign( {}, state_default.top_up_history, { is_fetched: true, data: action.payload.data } ) };
       break;
 
     case actionTypes.balance.TOP_UP_HISTORY_RESET:

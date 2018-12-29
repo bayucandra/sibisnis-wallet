@@ -4,8 +4,6 @@ import {withRouter} from 'react-router-dom';
 import {IconButton} from '@material-ui/core';
 import {Button} from '../../../Widgets/material-ui';
 
-import $ from 'jquery';
-
 import appActions from "../../../../redux/actions/global/appActions";
 import balanceActions from "../../../../redux/actions/pages/balanceActions";
 import biqHelper from "../../../../lib/biqHelper";
@@ -20,14 +18,7 @@ import biqConfig from "../../../../providers/biqConfig";
 
 class BalanceTopUpHistory extends Component {
 
-  panel_body_ref = React.createRef();
-
-  constructor( props ) {
-    super(props);
-
-    biqHelper.jquery.init($);
-
-  }
+  refPanelBody = React.createRef();
 
   _navBackClick = () => {
     biqHelper.utils.clickTimeout(()=>{
@@ -93,7 +84,7 @@ class BalanceTopUpHistory extends Component {
     let memberid_current = biqHelper.JSON.pathValueGet( this.props, 'user_profile.memberid' );
     let memberid_prev = biqHelper.JSON.pathValueGet( prevProps, 'user_profile.memberid' );
 
-    let scroll_pagination_instance = this.panel_body_ref.current;
+    let scroll_pagination_instance = this.refPanelBody.current;
     if( !biqHelper.utils.isNull( scroll_pagination_instance )) {
       if (
         memberid_current !== memberid_prev
@@ -148,7 +139,7 @@ class BalanceTopUpHistory extends Component {
             <div className="biq-col-spacer-right"/>
           </div>
 
-          <ScrollPagination className={`history-panel__body`} ref={this.panel_body_ref}
+          <ScrollPagination className={`history-panel__body`} ref={this.refPanelBody}
               biqUrl={`${biqConfig.api.url_base}/api/wallet/list_deposit`} biqMethod={'POST'}
               biqData={ Object.assign( { memberid: this.props.user_profile.memberid }, biqConfig.api.data_auth ) }
               onFetch={this._onFetch} onFetched={ this._onFetched }>

@@ -1,7 +1,7 @@
 {
-  "main.css": "./static/css/main.9238135b.chunk.css",
-  "main.js": "./static/js/main.16774b88.chunk.js",
-  "main.js.map": "./static/js/main.16774b88.chunk.js.map",
+  "main.css": "./static/css/main.6c07ec14.chunk.css",
+  "main.js": "./static/js/main.35998de6.chunk.js",
+  "main.js.map": "./static/js/main.35998de6.chunk.js.map",
   "static/css/1.f8228bd0.chunk.css": "./static/css/1.f8228bd0.chunk.css",
   "static/js/1.5a7569b3.chunk.js": "./static/js/1.5a7569b3.chunk.js",
   "static/js/1.5a7569b3.chunk.js.map": "./static/js/1.5a7569b3.chunk.js.map",
@@ -30,7 +30,7 @@
   "static/media/upload-gagal.svg": "./static/media/upload-gagal.f7b7d674.svg",
   "static/media/styles.scss": "./static/media/Nunito-Black.76e62b37.ttf",
   "static/media/ModalNotice.scss": "./static/media/gagal.4ce7e798.svg",
-  "static/media/SideNavMain.scss": "./static/media/transfer-saldo.839c8ce0.svg",
+  "static/media/SideNavMain.scss": "./static/media/litle-right.78747550.svg",
   "static/media/DialogEmailVerification.scss": "./static/media/kirim-email.51720f47.svg",
   "static/media/menu.svg": "./static/media/menu.706c529d.svg",
   "static/media/DashboardProfile.scss": "./static/media/ico-terverifikasi.dec9dea0.svg",
@@ -45,9 +45,9 @@
   "static/media/BalancePaymentConfirmed.scss": "./static/media/verifikasi.f05d9c35.svg",
   "static/media/BalancePayment.scss": "./static/media/oval-2.4bacff9e.svg",
   "static/media/CameraCapture.scss": "./static/media/ico-kamera-finish.09d19219.svg",
-  "static/css/main.9238135b.chunk.css.map": "./static/css/main.9238135b.chunk.css.map",
+  "static/css/main.6c07ec14.chunk.css.map": "./static/css/main.6c07ec14.chunk.css.map",
   "static/css/1.f8228bd0.chunk.css.map": "./static/css/1.f8228bd0.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.39489c77cf04ba2d5112983256b6fa5c.js": "./precache-manifest.39489c77cf04ba2d5112983256b6fa5c.js",
+  "precache-manifest.47e1a2830cf75be2420be1d311abccd5.js": "./precache-manifest.47e1a2830cf75be2420be1d311abccd5.js",
   "service-worker.js": "./service-worker.js"
 }

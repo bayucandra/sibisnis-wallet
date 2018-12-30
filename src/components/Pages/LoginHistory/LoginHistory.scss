@@ -15,8 +15,23 @@
 
   &__panel {
     flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
     background: #FFFFFF;
-    overflow: auto;
+
+    &__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow: auto;
+
+      > * {
+        flex: none;
+      }//> *
+
+    }//&__body
+
   }//&__panel
 
 }//.l-login-history

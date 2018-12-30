@@ -7,6 +7,7 @@ import iconMinus from './../../../images/icons/ico-minus.svg';
 
 // Custom CSS
 import './CustomAccordion.scss';
+import biqHelper from "../../../lib/biqHelper";
 
 class CustomAccordion extends Component {
 
@@ -22,9 +23,12 @@ class CustomAccordion extends Component {
   };
 
   render() {
-    const { title, date, accordionBody } = this.props;
+    const { title, date, accordionBody, className } = this.props;
+    const class_name = biqHelper.utils.isNull( className ) ? '' : ` ${className}`;
+
     return (
-      <div className="custom-accordion-container">
+
+      <div className={`custom-accordion-container${class_name}`}>
         <div className="custom-accordion-container__title ripple" onClick={this.accordinToggle.bind(this)}>
           <div className="custom-accordion-container__title-left">
             <span className="custom-accordion-container__title-left-name">{title}</span>

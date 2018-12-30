@@ -41,8 +41,126 @@
     }//&__header-desktop
 
     &__panel {
-      min-height: 600px;
-    }
+      flex: 1 1 auto;
+      border-radius: 5px;
+      margin-top: 20px;
+      box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+
+      &__header-title {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 63px;
+        padding: 30px;
+        box-sizing: border-box;
+
+        font-size: 16px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: var(--charcoal-grey);
+      }//&__header
+
+      $col-widths: ( spacer-start: 30px, date: 170px, country: 165px, ip: 203px, browser: 155px );
+
+      &__header-table {
+        display: flex;
+        align-items: center;
+        height: 48px;
+        background-color: map-get($colors, light-grey-7);
+
+        font-size: 13px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.3px;
+        color: map-get($colors, charcoal-grey);
+
+        .biq-col {
+
+          &--spacer-start {
+            flex: map-get( $col-widths, spacer-start ) 1 0;
+          }
+
+          &--date {
+            flex: map-get( $col-widths, date ) 1 0;
+          }
+
+          &--country {
+            flex: map-get( $col-widths, country ) 1 0;
+          }
+
+          &--ip {
+            flex: map-get( $col-widths, ip ) 1 0;
+          }
+
+          &--browser {
+            flex: map-get( $col-widths, browser ) 1 0;
+          }
+
+        }//.biq-col
+
+      }//&__header-table
+
+      &__body {
+        height: 500px;
+
+        .login-history-record {
+          display: flex;
+          align-items: center;
+          height: 45px;
+          box-sizing: border-box;
+          border-bottom: 0.5px solid map-get( $colors, gray-87 );
+          cursor: pointer;
+
+          font-size: 13px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.3px;
+          color: map-get($colors, charcoal-grey);
+
+          &:hover {
+            opacity: 0.6;
+          }
+
+          &.is-first {
+            border-top: 0.5px solid map-get( $colors, gray-87 );
+          }//&.is-first
+
+          .biq-col {
+
+            &--spacer-start {
+              flex: map-get( $col-widths, spacer-start ) 1 0;
+            }
+
+            &--date {
+              flex: map-get( $col-widths, date ) 1 0;
+            }
+
+            &--country {
+              flex: map-get( $col-widths, country ) 1 0;
+            }
+
+            &--ip {
+              flex: map-get( $col-widths, ip ) 1 0;
+            }
+
+            &--browser {
+              flex: map-get( $col-widths, browser ) 1 0;
+            }
+
+          }//.biq-col
+
+        }//.login-history-record
+
+      }//&__body
+
+    }//&__panel
 
   }//.l-login-history
 

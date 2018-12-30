@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { /*BrowserRouter as Router,*/ HashRouter /*, Route, Link*/ } from "react-router-dom";
 
 import JssProvider from 'react-jss/lib/JssProvider';
 import { create } from 'jss';
@@ -9,7 +10,6 @@ import 'normalize.css/normalize.css';
 import './styles/styles.scss';
 import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
-import { /*BrowserRouter as Router,*/ HashRouter /*, Route, Link*/ } from "react-router-dom";
 
 //import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';

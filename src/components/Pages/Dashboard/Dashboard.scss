@@ -14,6 +14,7 @@
 
   &__panel{
     display: none;
+    min-width: 0;
 
     @media screen and ( max-width: map-get( $bp-desktop-first, sm ) ) {
 
@@ -63,6 +64,7 @@
       display: flex;
       flex-direction: column;
       justify-content: flex-start;
+      padding-bottom: 50px;
       background-color: map-get($colors, pale-grey);
       overflow-y: auto;
     }//&__body

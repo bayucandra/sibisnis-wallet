@@ -13,6 +13,12 @@ let state_default = {
     is_fetching: false,
     is_fetched: false,
     server_response: {}
+  },
+
+  news: {
+    is_fetching: false,
+    is_fetched: false,
+    server_response: {}
   }
 
 };
@@ -65,12 +71,27 @@ export default ( state = state_default, action ) => {
     case actionTypes.dashboard.LOGIN_HISTORY_FETCHED:
       new_state = {
         login_history: Object.assign(
-          {},
-          state_default.login_history,
+          {}, state_default.login_history,
           { is_fetched: true, server_response: action.payload }
           )
       };
       break;
+
+
+    case actionTypes.dashboard.NEWS_FETCH:
+      new_state = {
+        news: Object.assign( {}, state_default.news, { is_fetching: true } )
+      };
+      break;
+    case actionTypes.dashboard.NEWS_FETCHED:
+      new_state = {
+        news: Object.assign(
+          {}, state_default.news,
+          { is_fetched: true, server_response: action.payload }
+          )
+      };
+      break;
+
 
     default:
       return state;

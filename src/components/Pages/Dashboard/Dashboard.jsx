@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import dashboardActions from "redux/actions/pages/dashboardActions";
-import newsActions from "redux/actions/pages/newsActions";
 
 import biqHelper from "lib/biqHelper";
 
@@ -10,7 +9,7 @@ import {Button} from "components/Widgets/material-ui";
 import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
 
 import HistoryLogin from "./HistoryLogin/HistoryLogin";
-import LatestNews from "./LatestNews/LatestNews";
+import DashboardNews from "./DashboardNews";
 import DashboardProfile from "./DashboardProfile/DashboardProfile";
 import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
 
@@ -25,13 +24,12 @@ class Dashboard extends Component {
     } );
   };
 
-  componentDidMount() {
+  componentWillUnmount() {
     let {dispatch} = this.props;
-    dispatch( newsActions.getNewsList() );
+    dispatch( dashboardActions.dashboardLoginHistoryCanceled() );
   }
 
   render() {
-    const { historyLoginList, newsList } = this.props;
 
     return (
       <div className="main-wrapper biq-wrapper biq-wrapper--md-no-side-padding l-dashboard">
@@ -50,8 +48,8 @@ class Dashboard extends Component {
 
             <div className="l-dashboard__panel__body">
               <DashboardProfile/>
-              <HistoryLogin historyLoginList={historyLoginList} />
-              <LatestNews newsList={newsList} />
+              <HistoryLogin/>
+              <DashboardNews />
             </div>
 
           </div>
@@ -65,9 +63,7 @@ class Dashboard extends Component {
 
 const mapStateToProps = state => {
   return {
-    dashboard: state.dashboard,
-    historyLoginList: state.historyLogin.historyLoginList,
-    newsList: state.news.newsList,
+    dashboard: state.dashboard
   }
 };
 

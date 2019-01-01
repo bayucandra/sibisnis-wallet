@@ -1,0 +1,193 @@
+@import "../../../../styles/variables";
+
+.dashboard-news {
+  margin-top: 45px;
+  box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+  background-color: #ffffff;
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    background-color: map-get($colors, off-white);
+
+    .title {
+      margin-left: 30px;
+
+      font-size: 16px;
+      font-weight: 600;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: map-get($colors, charcoal-grey);
+    }//.title
+
+    .all-news-btn {
+      width: 123px;
+      height: 48px;
+
+      font-size: 15px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: map-get($colors, dark-sky-blue);
+
+      &:hover {
+        background: transparent;
+      }
+
+    }//.all-news-btn
+
+  }//&__header
+
+
+  &__body {
+    display: flex;
+    flex-direction: column;
+
+    .news-record {
+      position: relative;
+      display: flex;
+      align-items: flex-start;
+      min-height: 149px;
+      border-top: 0.5px solid map-get( $colors, gray-87 );
+
+      &:hover {
+        background: transparent;
+      }//&:hover
+
+      &__inner {
+        flex: 1 1 1px;
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }//&__inner
+
+      &__top {
+        display: flex;
+        justify-content: space-between;
+        margin: 0 20px 0 30px;
+
+        .info {
+          display: flex;
+          flex-direction: column;
+          max-width: 80%;
+          margin-top: 22px;
+
+          &__title {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+
+            font-size: 16px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.5px;
+            color: map-get($colors, charcoal-grey);
+          }//&__title
+
+          &__date {
+            margin-top: 2px;
+
+            font-size: 12px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.2px;
+            color: map-get($colors, steel-grey);
+          }//&__date
+
+        }//.info
+
+        .type-tag {
+          margin-top: 21px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          min-width: 86px;
+          height: 25px;
+          padding: 0 5px;
+          border-radius: 3px;
+          background-color: rgba(map-get( $colors, dodger-blue ), 0.1);
+
+          font-size: 11px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: map-get($colors, charcoal-grey);
+        }//.type-tag
+
+      }//&__top
+
+      &__content {
+        width: 72%;
+        margin: 10px 30px 10px;
+        overflow: hidden;
+
+        font-size: 14px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        color: map-get($colors, charcoal-grey);
+      }//&__content
+
+      &.is-unread {
+
+        &:before {
+          content: ' ';
+          position: absolute;
+          top: 22px; left: 13px;
+          width: 7px;
+          height: 7px;
+          border-radius: 4px;
+          background-color: map-get($colors, strawberry);
+        }//&:before
+
+        .news-record {
+
+          &__top {
+
+            .info {
+
+              &__title {
+                font-size: 16px;
+                font-weight: bold;
+                letter-spacing: 0.4px;
+              }//&__title
+
+            }//.info
+
+          }//&__top
+
+          &__content {
+            font-size: 14px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.5px;
+            color: map-get($colors, charcoal-grey);
+          }//&__content
+
+        }//.news-record
+
+      }//&.is-unread
+
+    }//.news-record
+
+  }//&__body
+
+}//.dashboard-news
+
+@import "./DashboardNews-md-min";

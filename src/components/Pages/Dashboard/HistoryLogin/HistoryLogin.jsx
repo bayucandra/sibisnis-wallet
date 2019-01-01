@@ -48,7 +48,7 @@ class HistoryLogin extends Component {
             {
               is_fetched && is_success ?
 
-              data.map((el) => {
+              data.map( (el) => {
                 let id = el.id;
                 let date_access = moment( el.date_access ).format('DD MMM YYYY , HH:mm');
                 let country = el.data.location.country;

@@ -28,6 +28,7 @@ function dashboardPanelMobileVisibility( is_visible = null) {
 
 }
 
+
 function dashboardLoginHistoryFetch( data ) {
   return {
     type: actionTypes.dashboard.LOGIN_HISTORY_FETCH,
@@ -46,6 +47,26 @@ function dashboardLoginHistoryCanceled() {
   }
 }
 
+
+function dashboardNewsFetch( data ) {
+  return {
+    type: actionTypes.dashboard.NEWS_FETCH,
+    payload: data
+  }
+}
+function dashboardNewsFetched(response) {
+  return {
+    type: actionTypes.dashboard.NEWS_FETCHED,
+    payload: response
+  }
+}
+function dashboardNewsCanceled() {
+  return {
+    type: actionTypes.dashboard.NEWS_CANCELED
+  }
+}
+
+
 export default {
   dashboardEmailVerificationSubmit,
   dashboardEmailVerificationSubmitted,
@@ -53,5 +74,8 @@ export default {
   dashboardPanelMobileVisibility,
   dashboardLoginHistoryFetch,
   dashboardLoginHistoryFetched,
-  dashboardLoginHistoryCanceled
+  dashboardLoginHistoryCanceled,
+  dashboardNewsFetch,
+  dashboardNewsFetched,
+  dashboardNewsCanceled
 }

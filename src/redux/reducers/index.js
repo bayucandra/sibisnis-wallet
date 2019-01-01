@@ -10,21 +10,13 @@ import dashboard from "./pages/dashboardReducers";
 import balance from "./pages/balanceReducer";
 import loginHistory from "./pages/loginHistory";
 
-
-import historyLogin from './pages/historyLoginReducer';
-import news from './pages/newsReducers';
-
-
 const appReducers = combineReducers({
   app,
   user,
 
   dashboard,
   balance,
-  loginHistory,
-
-  historyLogin,
-  news
+  loginHistory
 });
 
 const rootReducer = (state, action) => {

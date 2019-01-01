@@ -1,0 +1,56 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .dashboard-news {
+    border-radius: 5px;
+
+    &__header {
+      border-top-left-radius: 5px;
+      border-top-right-radius: 5px;
+
+      .all-news-btn {
+        width: 151px;
+      }//.all-news-btn
+
+    }//&__header
+
+    &__body {
+
+      .news-record {
+        min-height: 129px;
+
+        &:hover {
+          opacity: 0.6;
+        }//&:hover
+
+        &__top {
+
+          .info {
+            margin-top: 21px;
+          }//.info
+
+          .type-tag {
+            margin-top: 20px;
+          }//type-tag
+
+        }//&__top
+
+        &__content {
+          width: 77%;
+        }//&__content
+
+
+        &.is-unread {
+
+          &:before {
+            top: 21px;
+          }//&:before
+
+        }//&.is-unread
+
+      }//.news-record
+
+    }//&__body
+
+  }//.dashboard-news
+
+}//@media

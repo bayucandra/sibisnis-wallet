@@ -1,8 +1,0 @@
-@import '../../../styles/mixins.scss';
-@import '../../../styles/variables.scss';
-@include media-query(md) {
-  #all-history-login-container {
-    width: 723px;
-    margin: 0 auto;
-  }
-}

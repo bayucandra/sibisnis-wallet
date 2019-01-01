@@ -81,7 +81,44 @@ const dashboardLoginHistoryFetch = action$ =>
 
   );
 
+const newsFetch = action$ =>
+  action$.pipe(
+    ofType( actionTypes.dashboard.NEWS_FETCH ),
+
+    switchMap(
+
+      action => {
+
+        let ajax$ = rxAjax({
+          url: `${biqConfig.api.url_base}/api/wallet/list_berita?limit=5&offset=0`,
+          method: 'GET',
+          crossDomain: true,
+          withCredentials: true
+        });
+
+        return ajax$.pipe(
+          map( res => dashboardActions.dashboardNewsFetched( res ) ),
+
+          takeUntil( action$.pipe(
+            filter( action => action.type === actionTypes.dashboard.NEWS_CANCELED )
+          ) ),
+
+          catchError( err => of({
+            type: actionTypes.dashboard.NEWS_FETCHED,
+            payload: { status: err.xhr.status, response: err.xhr.response }
+          }) )
+
+        );
+
+      }//action =>
+
+    )//switchMap
+
+
+  );
+
 export default [
   dashboardEmailVerificationSubmit,
-  dashboardLoginHistoryFetch
+  dashboardLoginHistoryFetch,
+  newsFetch
 ];

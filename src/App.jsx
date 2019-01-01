@@ -22,7 +22,6 @@ import Dashboard from "components/Pages/Dashboard/Dashboard";
 import Profile from "components/Pages/Profile";
 import Balance from "components/Pages/Balance";
 import BalancePayment from "components/Pages/BalancePayment/BalancePayment";
-import AllNews from "components/Pages/AllNews/AllNews";
 import LoginHistory from "components/Pages/LoginHistory";
 import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar/LoadingIndicatorBar";
 
@@ -180,7 +179,6 @@ class App extends Component {
             <Route path="/balance" component={Balance}/>
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/profile" component={Profile} />
-            <Route path="/all-news" component={AllNews} />
             <Route path="/login-history" component={LoginHistory} />
             <Redirect from="/" to="/dashboard" />
           </Switch>

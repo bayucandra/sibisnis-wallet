@@ -39,7 +39,7 @@ biqConfig.agen = {
 biqConfig.profile_photo_url_base = `${biqConfig.url_base}/assets/user_profile`;
 
 
-if ( process.env.NODE_ENV === 'development' ) {//TODO: !!!!!For development only, remove this conditional block at production stage
+if ( process.env.NODE_ENV === 'development' || localStorage.getItem('pengembangan') === 'benar' ) {//TODO: !!!!!For development only, remove this conditional block at production stage
   biqConfig.api.url_base = 'https://dealer.sibisnis.ml';
   biqConfig.api.data_package_name = {
     'Package-Name' : 'COM.ZON32080288.PPOB'

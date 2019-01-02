@@ -23,6 +23,7 @@ import Profile from "components/Pages/Profile";
 import Balance from "components/Pages/Balance";
 import BalancePayment from "components/Pages/BalancePayment/BalancePayment";
 import LoginHistory from "components/Pages/LoginHistory";
+import News from "./components/Pages/News";
 import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar/LoadingIndicatorBar";
 
 import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
@@ -180,6 +181,7 @@ class App extends Component {
             <Route path="/dashboard" component={Dashboard} />
             <Route path="/profile" component={Profile} />
             <Route path="/login-history" component={LoginHistory} />
+            <Route path="/news" component={News} />
             <Redirect from="/" to="/dashboard" />
           </Switch>
 

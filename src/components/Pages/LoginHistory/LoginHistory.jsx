@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import * as moment from "moment";
 
 import appActions from "redux/actions/global/appActions";
-import loginHistoryActions from "redux/actions/pages/loginHistory";
+import loginHistoryActions from "redux/actions/pages/loginHistoryActions";
 
 import biqHelper from "lib/biqHelper";
 import biqConfig from "providers/biqConfig";
@@ -67,6 +67,11 @@ class LoginHistory extends Component {
       }
     }
 
+  }
+
+  componentWillUnmount() {
+    let {dispatch} = this.props;
+    dispatch( loginHistoryActions.loginHistoryReset() );
   }
 
   render() {

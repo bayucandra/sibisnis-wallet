@@ -79,13 +79,19 @@ class ScrollPagination extends Component{
     this._scroll_state.page_current++;
 
     let data = {};
-    data[this.props.biqQueryParams.limit] = this.props.biqLimit;
-    data[this.props.biqQueryParams.offset] = (this._scroll_state.page_current - 1) * this.props.biqLimit;
+    let url = this.props.biqUrl;
 
-    Object.assign(data, this.props.biqData);
+    if ( this.props.biqMethod === 'POST' ) {
+      data[this.props.biqQueryParams.limit] = this.props.biqLimit;
+      data[this.props.biqQueryParams.offset] = (this._scroll_state.page_current - 1) * this.props.biqLimit;
+
+      Object.assign(data, this.props.biqData);
+    } else if( this.props.biqMethod === 'GET' ) {
+      url += `?${this.props.biqQueryParams.limit}=${this.props.biqLimit}&${this.props.biqQueryParams.offset}=${(this._scroll_state.page_current - 1) * this.props.biqLimit}`;
+    }
 
     let ajax$ = rxAjax({
-      url: this.props.biqUrl,
+      url: url,
       method: this.props.biqMethod,
       crossDomain: true,
       withCredentials: true,
@@ -126,6 +132,11 @@ class ScrollPagination extends Component{
         else if ( biqHelper.utils.httpResponseIsError( res.status ) ) {
           this._scroll_state.page_current--;
           this.setState( { is_loading: false } );
+
+          let error_msg = biqHelper.JSON.pathValueGet( res.response, 'response_code.message' );
+          error_msg = biqHelper.utils.isNull(error_msg) ? `Error: ${res.status}` : error_msg;
+          let {dispatch} = this.props;
+          dispatch( appActions.appDialogNoticeOpen( { title: 'Error', notice: error_msg } ) );
         }
 
         else {
@@ -146,7 +157,7 @@ class ScrollPagination extends Component{
 
   _loadMoreTpl = () => {
     return (
-      <div className="c-loading-indicator" style={{marginBottom: '-50px', position: 'relative', padding: '15px 0'}}>
+      <div className="c-loading-indicator" style={{height: '50px', marginBottom: '-50px', position: 'relative', padding: '15px 0'}}>
         <div className="c-loading-indicator__circle"/>
       </div>
     )

@@ -1,0 +1,5 @@
+export default {
+  FETCH: 'NEWS_FETCH',
+  FETCHED: 'NEWS_FETCHED',
+  RESET: 'NEWS_RESET'
+}

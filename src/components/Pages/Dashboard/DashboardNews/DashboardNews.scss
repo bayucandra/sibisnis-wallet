@@ -51,6 +51,7 @@
 
     .news-record {
       position: relative;
+      flex: none;
       display: flex;
       align-items: flex-start;
       min-height: 149px;
@@ -75,10 +76,13 @@
         .info {
           display: flex;
           flex-direction: column;
+          min-width: 0;
           max-width: 80%;
           margin-top: 22px;
 
           &__title {
+            min-width: 0;
+            margin-right: 5px;
             overflow: hidden;
             white-space: nowrap;
             text-overflow: ellipsis;
@@ -114,6 +118,7 @@
           min-width: 86px;
           height: 25px;
           padding: 0 5px;
+          box-sizing: border-box;
           border-radius: 3px;
           background-color: rgba(map-get( $colors, dodger-blue ), 0.1);
 

@@ -1,0 +1,175 @@
+@import "../../../styles/variables";
+
+.l-news {
+
+  &__inner {
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: flex-start;
+    max-width: map-get( $layout-width, short );
+  }//&__inner
+
+  &__panel {
+    flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    background: #FFFFFF;
+
+    &__body {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      overflow-y: auto;
+      overflow-x: hidden;
+
+      .news-record {
+        flex: none;
+        position: relative;
+        display: flex;
+        align-items: flex-start;
+        min-height: 149px;
+        border-top: 0.5px solid map-get( $colors, gray-87 );
+
+        &:hover {
+          background: transparent;
+        }//&:hover
+
+        &__inner {
+          flex: 1 1 1px;
+          display: flex;
+          flex-direction: column;
+          min-width: 0;
+        }//&__inner
+
+        &__top {
+          display: flex;
+          justify-content: space-between;
+          margin: 0 20px 0 30px;
+
+          .info {
+            display: flex;
+            flex-direction: column;
+            min-width: 0;
+            max-width: 80%;
+            margin-top: 22px;
+
+            &__title {
+              min-width: 0;
+              margin-right: 5px;
+              overflow: hidden;
+              white-space: nowrap;
+              text-overflow: ellipsis;
+
+              font-size: 16px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.5px;
+              color: map-get($colors, charcoal-grey);
+            }//&__title
+
+            &__date {
+              margin-top: 2px;
+
+              font-size: 12px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.2px;
+              color: map-get($colors, steel-grey);
+            }//&__date
+
+          }//.info
+
+          .type-tag {
+            margin-top: 21px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 86px;
+            height: 25px;
+            padding: 0 5px;
+            box-sizing: border-box;
+            border-radius: 3px;
+            background-color: rgba(map-get( $colors, dodger-blue ), 0.1);
+
+            font-size: 11px;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.5px;
+            color: map-get($colors, charcoal-grey);
+          }//.type-tag
+
+        }//&__top
+
+        &__content {
+          width: 72%;
+          margin: 10px 30px 10px;
+          overflow: hidden;
+
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          color: map-get($colors, charcoal-grey);
+        }//&__content
+
+        &.is-unread {
+
+          &:before {
+            content: ' ';
+            position: absolute;
+            top: 22px; left: 13px;
+            width: 7px;
+            height: 7px;
+            border-radius: 4px;
+            background-color: map-get($colors, strawberry);
+          }//&:before
+
+          .news-record {
+
+            &__top {
+
+              .info {
+
+                &__title {
+                  font-size: 16px;
+                  font-weight: bold;
+                  letter-spacing: 0.4px;
+                }//&__title
+
+              }//.info
+
+            }//&__top
+
+            &__content {
+              font-size: 14px;
+              font-weight: bold;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.5px;
+              color: map-get($colors, charcoal-grey);
+            }//&__content
+
+          }//.news-record
+
+        }//&.is-unread
+
+      }//.news-record
+
+    }//&__body
+
+  }//&__panel
+
+}//.l-news
+
+@import "News-md-min";

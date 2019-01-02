@@ -27,6 +27,7 @@ class Dashboard extends Component {
   componentWillUnmount() {
     let {dispatch} = this.props;
     dispatch( dashboardActions.dashboardLoginHistoryCanceled() );
+    dispatch( dashboardActions.dashboardNewsCanceled() );
   }
 
   render() {

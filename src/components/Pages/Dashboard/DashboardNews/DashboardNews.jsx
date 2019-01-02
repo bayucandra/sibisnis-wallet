@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from "react-redux";
+import {withRouter} from 'react-router-dom';
 import * as moment from 'moment';
 
 import dashboardActions from "redux/actions/pages/dashboardActions";
@@ -7,15 +8,19 @@ import dashboardActions from "redux/actions/pages/dashboardActions";
 import biqHelper from "lib/biqHelper";
 
 import {Button} from "components/Widgets/material-ui";
-import {LatestNewsLoader} from "components/Loaders/LatestNewsLoader/LatestNewsLoader";
+import LatestNewsLoader from "components/Loaders/LatestNewsLoader/LatestNewsLoader";
 
 import "./DashboardNews.scss";
 
 class DashboardNews extends Component {
 
+  onAllNewsClick = () => {
+    biqHelper.utils.clickTimeout( () => this.props.history.push('/news') );
+  };
+
   componentDidMount() {
     let {dispatch} = this.props;
-    dispatch( dashboardActions.dashboardNewsFetch( {} ) );
+    dispatch( dashboardActions.dashboardNewsFetch() );
   }
 
   render() {
@@ -30,7 +35,7 @@ class DashboardNews extends Component {
 
         <div className="dashboard-news__header">
           <div className="title">Berita Terbaru</div>
-          <Button className="all-news-btn">Lihat Semua</Button>
+          <Button className="all-news-btn" onClick={this.onAllNewsClick}>Lihat Semua</Button>
         </div>
 
         <div className="dashboard-news__body">
@@ -41,7 +46,7 @@ class DashboardNews extends Component {
 
               data.map( (el) => {
                 return (
-                  <Button className={`news-record${ el.status === "1" ? ' is-unread' : '' }`} key={el.id}>
+                  <Button className={`news-record${ el.status === 1 ? ' is-unread' : '' }`} key={el.id}>
                     <div className="news-record__inner">
 
                       <div className="news-record__top">
@@ -51,7 +56,7 @@ class DashboardNews extends Component {
                           <div className="info__date">{ moment(el.date_create).format( 'D MMMM YYYY' ) }</div>
                         </div>
 
-                        <div className="type-tag">Tips dan trik</div>
+                        <div className="type-tag">{  biqHelper.string.capitalize(el.tipe) }</div>
 
                       </div>
 
@@ -85,4 +90,4 @@ const mapStateToProps = state => {
 
 };
 
-export default connect( mapStateToProps ) (DashboardNews);
+export default withRouter( connect( mapStateToProps ) (DashboardNews) );

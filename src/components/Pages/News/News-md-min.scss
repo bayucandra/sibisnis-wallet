@@ -1,0 +1,112 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-news {
+    padding-top: 40px!important;
+
+    &__nav {
+      display: flex;
+
+      .back-btn {
+        padding: 10px;
+        margin: -10px;
+
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, brown-grey);
+
+        &:hover {
+          background: transparent;
+        }//&:hover
+
+        &:before {
+          content: ' ';
+          width: 24px;
+          height: 24px;
+          margin-right: 20px;
+          background: url('../../../images/icons/back-blue-new.svg') no-repeat center;
+        }//&:before
+
+        span:first-child {
+          display: block;
+        }//&:first-child
+
+      }//.back-btn
+
+    }//&__nav
+
+    &__panel {
+      flex: 1 1 auto;
+      margin-top: 20px;
+      border-radius: 5px;
+
+      &__header {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        height: 61px;
+        background-color: map-get($colors, off-white);
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+
+        .title {
+          margin-left: 30px;
+
+          font-size: 16px;
+          font-weight: 600;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.4px;
+          color: map-get($colors, charcoal-grey);
+        }//.title
+
+      }//&__header
+
+      &__body {
+        height: 550px;
+
+        .news-record {
+          min-height: 129px;
+
+          &:hover {
+            opacity: 0.6;
+          }//&:hover
+
+          &__top {
+
+            .info {
+              margin-top: 21px;
+            }//.info
+
+            .type-tag {
+              margin-top: 20px;
+            }//type-tag
+
+          }//&__top
+
+          &__content {
+            width: 77%;
+          }//&__content
+
+
+          &.is-unread {
+
+            &:before {
+              top: 21px;
+            }//&:before
+
+          }//&.is-unread
+
+        }//.news-record
+
+      }//&__body
+
+    }//&__panel
+
+  }//.l-news
+
+}//@media

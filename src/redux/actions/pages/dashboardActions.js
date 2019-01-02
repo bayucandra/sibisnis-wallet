@@ -48,10 +48,9 @@ function dashboardLoginHistoryCanceled() {
 }
 
 
-function dashboardNewsFetch( data ) {
+function dashboardNewsFetch() {
   return {
-    type: actionTypes.dashboard.NEWS_FETCH,
-    payload: data
+    type: actionTypes.dashboard.NEWS_FETCH
   }
 }
 function dashboardNewsFetched(response) {

@@ -12,7 +12,7 @@ const epicMiddleware = createEpicMiddleware();
 let compose_obj = process.env.NODE_ENV === 'development' ?
       compose(
         applyMiddleware(epicMiddleware),
-        // window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+        window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
       )
 
         :

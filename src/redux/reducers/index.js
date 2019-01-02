@@ -9,6 +9,7 @@ import user from './global/userReducer';
 import dashboard from "./pages/dashboardReducers";
 import balance from "./pages/balanceReducer";
 import loginHistory from "./pages/loginHistory";
+import news from "./pages/news";
 
 const appReducers = combineReducers({
   app,
@@ -16,7 +17,8 @@ const appReducers = combineReducers({
 
   dashboard,
   balance,
-  loginHistory
+  loginHistory,
+  news
 });
 
 const rootReducer = (state, action) => {

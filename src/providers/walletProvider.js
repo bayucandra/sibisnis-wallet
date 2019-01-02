@@ -148,6 +148,8 @@ class WalletProvider {
 
     let bank_list = this.bankListGet();
 
+    console.log(bank_list);
+
     let ret = bank_list.filter( el =>{
       if ( el.payment_method === abbreviation.trim() ) {
         return true;

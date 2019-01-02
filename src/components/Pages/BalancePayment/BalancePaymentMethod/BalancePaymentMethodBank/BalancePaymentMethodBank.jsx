@@ -187,8 +187,18 @@ class BalancePaymentMethodBank extends Component {
                     .map((el) => {
                       let icon = walletProvider.bankIconGet( el.payment_method, 'main' );
                       let bank_record = walletProvider.bankByMethodAbreviation( el.payment_method );
-                      let icon_width = bank_record.icons.main.size_topup_select[0];
-                      let icon_height = bank_record.icons.main.size_topup_select[1];
+                      let icon_width = 0;
+                      let icon_height = 0;
+
+                      let icon_size = biqHelper.JSON.pathValueGet( bank_record, 'icons.main.size_topup_select' );
+
+                      if (
+                        !biqHelper.utils.isNull( icon_size )
+                        && icon_size.length === 2
+                      ) {
+                        icon_width = icon_size[0];
+                        icon_height = icon_size[1];
+                      }
 
                       return (
                         <Button className={`bank-select${ this._bankSelectedClassGen( el.payment_method ) }`} onClick={ () => this._bankSelectClick( el )} key={el.payment_method}>

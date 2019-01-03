@@ -1,0 +1,119 @@
+@import "../../../../styles/variables";
+
+.l-news-detail {
+
+  &__inner {
+    flex: 1 1 auto;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: flex-start;
+    max-width: map-get( $layout-width, short );
+    padding-bottom: 20px;
+    background: #FFFFFF;
+  }//&__inner
+
+  &__nav {
+    display: flex;
+    justify-content: flex-start;
+
+    .back-btn {
+      display: flex;
+      $design-diff: 10px;
+      padding: 10px;
+      margin: (10px - $design-diff ) 0 (-$design-diff) ( 16px - $design-diff );
+
+      font-size: 16px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: rgba(0, 0, 0, 0.87);
+
+      &:hover {
+        background: transparent;
+      }//&:hover
+
+      &:before {
+        content: ' ';
+        display: block;
+        width: 24px;
+        height: 24px;
+        margin-right: 20px;
+        background: url('../../../../images/icons/back-blue-new.svg') no-repeat center;
+      }//&:before
+
+    }//.back-btn
+
+  }//&__nav
+
+  &__panel {
+    display: flex;
+    flex-direction: column;
+
+    &__header {
+      display: flex;
+      flex-direction: column;
+
+      .heading {
+        display: flex;
+        flex-direction: column;
+        padding: 0 20px;
+        box-sizing: border-box;
+
+        &__title {
+          margin-top: 20px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+
+          font-size: 20px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: 1.25;
+          letter-spacing: normal;
+          color: rgba(0, 0, 0, 0.87);
+        }//&__title
+
+        &__date-and-tag {
+          display: flex;
+          margin-top: 5px;
+
+          font-size: 14px;
+          font-weight: normal;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          color: rgba(0, 0, 0, 0.65);
+
+        }//&__date-and-tag
+
+      }//.heading
+
+      .image {
+        background: map-get( $colors, whitegrey ) no-repeat center;
+        background-size: cover;
+        height: 203px;
+        margin-top: 25px;
+      }//.image
+
+    }//&__header
+
+    &__body {
+      padding: 15px 20px 0;
+      box-sizing: border-box;
+
+      font-size: 18px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.39;
+      letter-spacing: normal;
+      color: rgba(0, 0, 0, 0.87);
+    }//&__body
+
+  }//&__panel
+
+}//.l-news-detail

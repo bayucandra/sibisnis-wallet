@@ -14,8 +14,15 @@ import "./DashboardNews.scss";
 
 class DashboardNews extends Component {
 
-  onAllNewsClick = () => {
+  _onAllNewsClick = () => {
     biqHelper.utils.clickTimeout( () => this.props.history.push('/news') );
+  };
+
+  _newsOnClick = id => {
+    biqHelper.utils.clickTimeout( () => {
+      let referrer = encodeURIComponent( btoa( this.props.location.pathname ) );
+      this.props.history.push( `/news/${id}/${referrer}` );
+    } );
   };
 
   componentDidMount() {
@@ -35,7 +42,7 @@ class DashboardNews extends Component {
 
         <div className="dashboard-news__header">
           <div className="title">Berita Terbaru</div>
-          <Button className="all-news-btn" onClick={this.onAllNewsClick}>Lihat Semua</Button>
+          <Button className="all-news-btn" onClick={this._onAllNewsClick}>Lihat Semua</Button>
         </div>
 
         <div className="dashboard-news__body">
@@ -46,7 +53,7 @@ class DashboardNews extends Component {
 
               data.map( (el) => {
                 return (
-                  <Button className={`news-record${ el.status === 1 ? ' is-unread' : '' }`} key={el.id}>
+                  <Button className={`news-record${ el.status === 1 ? ' is-unread' : '' }`} key={el.id} onClick={ () => this._newsOnClick( el.id ) }>
                     <div className="news-record__inner">
 
                       <div className="news-record__top">

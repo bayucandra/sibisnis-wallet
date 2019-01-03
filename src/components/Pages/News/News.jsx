@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {withRouter} from "react-router-dom";
 
 import appActions from "redux/actions/global/appActions";
 import newsActions from "redux/actions/pages/newsActions";
@@ -25,6 +24,13 @@ class News extends Component {
   _backBtnClick = () => {
     biqHelper.utils.clickTimeout( ()=>{
       this.props.history.push('/dashboard');
+    } );
+  };
+
+  _newsOnClick = id => {
+    biqHelper.utils.clickTimeout( () => {
+      let referrer = encodeURIComponent( btoa(this.props.location.pathname) );
+      this.props.history.push( `/news/${id}/${referrer}` );
     } );
   };
 
@@ -82,7 +88,7 @@ class News extends Component {
                   data.map( ( el, idx ) => {
 
                     return (
-                      <Button className={`news-record${idx === 0 ? ' is-first' : ''}`} key={el.id}>
+                      <Button className={`news-record${idx === 0 ? ' is-first' : ''}`} key={el.id} onClick={ () => this._newsOnClick( el.id ) }>
                         <div className="news-record__inner">
 
                           <div className="news-record__top">
@@ -128,4 +134,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter( connect(mapStateToProps) (News) );
+export default connect(mapStateToProps) (News);

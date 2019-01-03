@@ -35,7 +35,7 @@ export default ( state = state_default, action ) => {
         email_verification: Object.assign(
           {},
           state_default.email_verification,
-          { is_submitting: true, is_submitted: false }
+          { is_submitting: true }
           )
       };
       break;
@@ -45,7 +45,7 @@ export default ( state = state_default, action ) => {
         email_verification: Object.assign(
           {},
           state_default.email_verification,
-          { is_submitting: false, is_submitted: true, response: action.payload } )
+          { is_submitted: true, response: action.payload } )
       };
       break;
 

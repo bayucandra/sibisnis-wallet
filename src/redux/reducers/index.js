@@ -6,10 +6,11 @@ import actionTypes from "../../redux/action-types";
 import app from "./global/appReducer";
 import user from './global/userReducer';
 
-import dashboard from "./pages/dashboardReducers";
+import dashboard from "./pages/dashboardReducer";
 import balance from "./pages/balanceReducer";
-import loginHistory from "./pages/loginHistory";
-import news from "./pages/news";
+import loginHistory from "./pages/loginHistoryReducer";
+import news from "./pages/newsReducer";
+import newsDetail from "./pages/newsDetailReducer";
 
 const appReducers = combineReducers({
   app,
@@ -18,7 +19,8 @@ const appReducers = combineReducers({
   dashboard,
   balance,
   loginHistory,
-  news
+  news,
+  newsDetail
 });
 
 const rootReducer = (state, action) => {

@@ -51,10 +51,13 @@ class NewsDetail extends Component {
             <div className="l-news-detail__panel__header">
 
               <div className="heading">
-                <div className="heading__title">{ data.title }</div>
+                <div className="heading__title-and-tag">
+                  <div className="title">{ data.title }</div>
+                  <div className="tag visible-md-up">{ biqHelper.string.capitalize(data.tipe) }</div>
+                </div>
                 <div className="heading__date-and-tag">
                   <span className="date">{moment(data.date_create).format('D MMMM YYYY')}</span>
-                  <span className="tag"> | { biqHelper.string.capitalize(data.tipe) }</span>
+                  <span className="tag hidden-md-up"> | { biqHelper.string.capitalize(data.tipe) }</span>
                 </div>
               </div>
 

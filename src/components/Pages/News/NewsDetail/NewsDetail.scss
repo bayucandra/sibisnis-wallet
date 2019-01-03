@@ -8,7 +8,6 @@
     align-items: normal;
     justify-content: flex-start;
     max-width: map-get( $layout-width, short );
-    padding-bottom: 20px;
     background: #FFFFFF;
   }//&__inner
 
@@ -36,6 +35,7 @@
 
       &:before {
         content: ' ';
+        flex: none;
         display: block;
         width: 24px;
         height: 24px;
@@ -50,6 +50,8 @@
   &__panel {
     display: flex;
     flex-direction: column;
+    margin-top: 20px;
+    padding-bottom: 20px;
 
     &__header {
       display: flex;
@@ -61,19 +63,24 @@
         padding: 0 20px;
         box-sizing: border-box;
 
-        &__title {
-          margin-top: 20px;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
+        &__title-and-tag {
+          display: flex;
+          align-items: flex-start;
 
-          font-size: 20px;
-          font-weight: bold;
-          font-style: normal;
-          font-stretch: normal;
-          line-height: 1.25;
-          letter-spacing: normal;
-          color: rgba(0, 0, 0, 0.87);
+          .title {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            font-size: 20px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 1.25;
+            letter-spacing: normal;
+            color: rgba(0, 0, 0, 0.87);
+          }//.title
+
         }//&__title
 
         &__date-and-tag {
@@ -117,3 +124,5 @@
   }//&__panel
 
 }//.l-news-detail
+
+@import "./NewsDetail-md-min";

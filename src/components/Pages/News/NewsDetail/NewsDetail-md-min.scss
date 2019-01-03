@@ -1,0 +1,93 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-news-detail {
+    padding-top: 40px!important;
+
+    &__inner {
+      background: none;
+    }//&__inner
+
+    &__nav {
+
+      .back-btn {
+        margin-top: -10px;
+        margin-left: -10px;
+      }//.back-btn
+
+    }//&__nav
+
+    &__panel {
+      padding-bottom: 40px;
+      border-radius: 5px;
+      box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+      background: #FFFFFF;
+
+      &__header {
+        border-top-right-radius: 5px;
+        border-top-left-radius: 5px;
+
+        .image {
+          order: -1;
+          margin-top: 0;
+          height: 408px;
+          border-top-right-radius: 5px;
+          border-top-left-radius: 5px;
+        }//.image
+
+        .heading {
+          order: 0;
+          padding: 0 30px;
+
+          &__title-and-tag {
+            margin-top: 15px;
+
+            .title {
+              margin-right: 30px;
+              overflow: visible;
+              white-space: normal;
+              text-overflow: clip;
+
+              font-size: 25px;
+              font-weight: bold;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.6px;
+              color: rgba(0, 0, 0, 0.87);
+            }//.title
+
+            .tag {
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              min-width: 106px;
+              height: 28px;
+              padding: 0 5px;
+              box-sizing: border-box;
+              border-radius: 3px;
+              background-color: rgba( map-get($colors, dodger-blue), 0.1 );
+
+              font-size: 13px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.5px;
+              color: rgba(0, 0, 0, 0.87);
+            }//.tag
+
+          }//&__title
+
+        }//.heading
+
+      }//&__header
+
+      &__body {
+        padding: 15px 30px 0;
+      }//&__body
+
+    }//&__panel
+
+  }//.l-news-detail
+
+}//@media

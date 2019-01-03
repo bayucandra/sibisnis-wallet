@@ -48,7 +48,7 @@ class News extends Component {
 
   componentWillUnmount() {
     let {dispatch} = this.props;
-    // dispatch( newsActions.newsReset() );
+    dispatch( newsActions.newsReset() );
   }
 
   render() {

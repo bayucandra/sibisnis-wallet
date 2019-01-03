@@ -3,6 +3,7 @@ import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as moment from 'moment';
 
+import appActions from "../../../../redux/actions/global/appActions";
 import dashboardActions from "redux/actions/pages/dashboardActions";
 
 import biqHelper from "lib/biqHelper";
@@ -26,6 +27,16 @@ class HistoryLogin extends Component {
     let {dispatch} = this.props;
     // dispatch( dashboardActions.dashboardLoginHistoryFetch( { memberid: "ZON40434359" } ) );
     dispatch( dashboardActions.dashboardLoginHistoryFetch( { memberid: this.props.user_profile.memberid } ) );
+  }
+
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    let is_just_fetched = this.props.login_history.is_fetched && !prevProps.login_history.is_fetched;
+
+    let is_success = biqHelper.utils.httpResponseIsSuccess( biqHelper.JSON.pathValueGet( this.props.login_history.server_response, 'status' ) );
+    if ( !is_success && is_just_fetched ) {
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Error', notice: 'Terjadi masalah saat mengambil data "History Login"!' } ) );
+    }
   }
 
   render() {

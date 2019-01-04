@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-import biqHelper from "../../../../../lib/biqHelper";
-import appActions from "../../../../../redux/actions/global/appActions";
+import biqHelper from "../../../../lib/biqHelper";
+import appActions from "../../../../redux/actions/global/appActions";
 
-import {Button} from "components/Widgets/material-ui";
+import {Button} from "../../../Widgets/material-ui";
 
 import FormWrapper from "../FormWrapper/FormWrapper";
 

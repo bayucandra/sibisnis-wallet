@@ -1,7 +1,7 @@
 import React from 'react';
 
 import "./FormWrapper.scss";
-import biqHelper from "../../../../../lib/biqHelper";
+import biqHelper from "lib/biqHelper";
 
 export default ( props ) => {
   let class_props = !biqHelper.utils.isNull( props.className ) ? ` ${props.className}` : '';

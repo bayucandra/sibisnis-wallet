@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import biqHelper from "../../../lib/biqHelper";
+import biqHelper from "lib/biqHelper";
 
 class AlertBoxes {
 

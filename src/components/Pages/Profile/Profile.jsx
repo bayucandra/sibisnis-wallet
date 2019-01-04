@@ -8,10 +8,11 @@ import {Button} from "components/Widgets/material-ui";
 
 import SideNavMain from "../../Shared/SideNavMain/SideNavMain";
 import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
-import EmailVerificationForm from "../Dashboard/DashboardProfile/EmailVerificationForm";
+import EmailVerificationForm from "components/Shared/ProfileForms/EmailVerificationForm";
 
 import './Profile.scss';
-import AddressVerificationForm from "../Dashboard/DashboardProfile/AddressVerificationForm/AddressVerificationForm";
+import AddressVerificationForm from "components/Shared/ProfileForms/AddressVerificationForm/AddressVerificationForm";
+import PasswordSetForm from "../../Shared/ProfileForms/PasswordSetForm/PasswordSetForm";
 
 class Profile extends Component {
 
@@ -21,7 +22,8 @@ class Profile extends Component {
       // identity: false
     },
     email_verification: false,
-    address_input_desktop: false
+    address_input_desktop: false,
+    password_set: false
   };
 
 
@@ -63,6 +65,20 @@ class Profile extends Component {
 
   };
 
+
+  _passwordSetDesktopToggle = () => {
+    biqHelper.utils.clickTimeout( () => this.setState( { password_set : !this.state.password_set } ) );
+  };
+  _passwordSetMobileOpen = () => {
+
+  };
+  _passwordActionClick = () => {
+    if ( !biqHelper.mediaQuery.isMobile() ) {
+      this._passwordSetDesktopToggle();
+    } else {
+      this._passwordSetMobileOpen();
+    }
+  };
 
 
   _userVerificationsGen = ( props ) => {
@@ -329,7 +345,7 @@ class Profile extends Component {
 
                         <div className="detail__label">Password</div>
 
-                        <div className="detail__description">
+                        <div className={`detail__description`}>
                           Untuk keamanan akun anda lakukan penggantian password secara berkala, gunakan kombinasi huruf angka dan karakter
                         </div>
 
@@ -337,11 +353,21 @@ class Profile extends Component {
 
                       <div className="flex-spacer"/>
 
-                      <Button className="action-btn is-edit">
-                        <span className="visible-md-up">Ubah</span>
+                      <Button className={`action-btn is-edit${ this.state.password_set ? ' is-panel-open' : '' }`}
+                        onClick={this._passwordActionClick}>
+                        <span className="visible-md-up">
+                          {
+                            !this.state.password_set ?
+                              'Ubah'
+                              :
+                              'Tutup'
+                          }
+                        </span>
                       </Button>
 
                     </div>
+
+                    <PasswordSetForm isVisible={this.state.password_set}/>
 
                   </div>
 

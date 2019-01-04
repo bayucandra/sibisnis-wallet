@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 import {connect} from 'react-redux';
 
 import "./BalancePaymentConfirmed.scss";
-import appActions from "../../../../redux/actions/global/appActions";
-import {Button} from "../../../Widgets/material-ui";
-import HeaderMenuMobile from "../../../Shared/HeaderMenuMobile/HeaderMenuMobile";
-import biqHelper from "../../../../lib/biqHelper";
+import appActions from "redux/actions/global/appActions";
+import {Button} from "components/Widgets/material-ui";
+import HeaderMenuMobile from "components/Shared/HeaderMenuMobile/HeaderMenuMobile";
+import biqHelper from "lib/biqHelper";
 import BalanceTransactionInfo from "../BalanceTransactionInfo/BalanceTransactionInfo";
 
-import balanceActions from "../../../../redux/actions/pages/balanceActions";
+import balanceActions from "redux/actions/pages/balanceActions";
 
 class BalancePaymentConfirmed extends Component {
 

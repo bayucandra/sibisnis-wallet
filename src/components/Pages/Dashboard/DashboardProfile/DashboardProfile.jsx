@@ -3,18 +3,18 @@ import { connect } from 'react-redux';
 import { Subject, of } from 'rxjs';
 import {takeUntil, delay, tap, switchMap} from 'rxjs/operators';
 
-import appActions from "../../../../redux/actions/global/appActions";
-import biqHelper from "../../../../lib/biqHelper";
+import appActions from "redux/actions/global/appActions";
+import biqHelper from "lib/biqHelper";
 
 import { Button } from "components/Widgets/material-ui";
 
-import EmailVerificationForm from "./EmailVerificationForm";
-import ProfileUploadForm from "./ProfileUploadForm/ProfileUploadForm";
+import EmailVerificationForm from "components/Shared/ProfileForms/EmailVerificationForm";
+import ProfileUploadForm from "components/Shared/ProfileForms/ProfileUploadForm/ProfileUploadForm";
 
 
 import "styles/components/_modal.scss";
 import "./DashboardProfile.scss";
-import AddressVerificationForm from "./AddressVerificationForm/AddressVerificationForm";
+import AddressVerificationForm from "components/Shared/ProfileForms/AddressVerificationForm/AddressVerificationForm";
 
 
 class DashboardProfile extends Component {

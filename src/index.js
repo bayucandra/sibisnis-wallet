@@ -52,16 +52,15 @@ const THEME = createMuiTheme({
         "component" : "div"
       },
     },
+
     MuiTextField: {
       root: {
 
       }
     },
-
-    MuiMenuItem: {
-      root: {
-        height: 'auto'
-      }
+    MuiInputLabel: {
+      fontWeight: 'normal',
+      color: '#999999'
     },
 
     MuiFormLabel: {
@@ -69,6 +68,90 @@ const THEME = createMuiTheme({
         "&$focused": {
           color: "#4a90e2"
         }
+      },
+
+      root : {
+
+        fontWeight: 'normal',
+        color: '#999999',
+
+        "&$error" : {
+          fontWeight: 'normal',
+          color: '#999999'
+        }
+      }
+
+    },
+
+    MuiInput: {
+      input: {
+        display: 'flex',
+        padding: '0',
+        height: '30px',
+
+        fontSize: '15px',
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: '0.5px',
+        color: 'rgba(0, 0, 0, 0.87)',
+
+        '&::placeholder' : {
+          fontSize: '0.875rem',
+          fontFamily: '"NunitoSans", sans-serif',
+          fontWeight: '400',
+          lineHeight: '1.5'
+        }
+      },
+
+      underline: {
+        ':not($disabled)&:before': { //underline color when textfield is inactive
+          borderBottom: '1px solid #cccccc',
+        },
+        ':not($disabled):after': {
+          borderBottom: '2px solid #4a90e2'
+        },
+        '&$error:after' : {
+          transform: 'scaleX(0)'
+        },
+        '&$focused:after' : {
+          transform: 'scaleX(1)!important',
+          borderBottom: '2px solid #4a90e2'
+        }
+/*        '&:hover:not($disabled):before': { //underline color when hovered
+          backgroundColor: 'green',
+        },*/
+      },
+
+      error: {
+        underline: {
+          ':not($disabled)&:before': { //underline color when textfield is inactive
+            borderBottom: '1px solid #cccccc',
+          }
+
+        }
+      }
+    },
+
+    MuiFormHelperText: {
+      root: {
+        '&$error': {
+          marginTop: '4px',
+          fontSize: '12px',
+          fontWeight: 'normal',
+          fontStyle: 'normal',
+          fontStretch: 'normal',
+          lineHeight: 'normal',
+          letterSpacing: '0.4px',
+          color: '#ff233e'
+        }
+      }
+    },
+
+    MuiMenuItem: {
+      root: {
+        height: 'auto'
       }
     }
 

@@ -72,7 +72,7 @@ function Control(props) {
   return (
     <TextField
       fullWidth
-      className="mui-text-field mui-text-field--no-label"
+      className="mui-text-field"
 
       InputProps={{
         inputComponent,

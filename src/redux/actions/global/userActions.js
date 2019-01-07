@@ -12,7 +12,6 @@ function userProfileGet() {
   }
 
 }
-
 function userProfileUpdate( p_obj ) {//{ key: value} ( single pair only )
   return {
     type: actionTypes.user.PROFILE_UPDATE,
@@ -20,7 +19,32 @@ function userProfileUpdate( p_obj ) {//{ key: value} ( single pair only )
   }
 }
 
+
+function userUpdatePasswordSubmit( params ) {
+  return {
+    type: actionTypes.user.PASSWORD_UPDATE_SUBMIT,
+    payload: {params}
+  }
+}
+function userUpdatePasswordSubmitted( response ) {
+  return {
+    type: actionTypes.user.PASSWORD_UPDATE_SUBMITTED,
+    payload: response
+  }
+}
+function userUpdatePasswordCanceled() {
+  return {
+    type: actionTypes.user.PASSWORD_UPDATE_CANCELED
+  }
+}
+
+
 export default {
   userProfileGet,
-  userProfileUpdate
+  userProfileUpdate,
+
+  userUpdatePasswordSubmit,
+  userUpdatePasswordSubmitted,
+  userUpdatePasswordCanceled
+
 };

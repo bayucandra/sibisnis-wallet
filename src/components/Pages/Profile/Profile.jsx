@@ -23,7 +23,7 @@ class Profile extends Component {
     },
     email_verification: false,
     address_input_desktop: false,
-    password_set: true
+    password_set: false
   };
 
 

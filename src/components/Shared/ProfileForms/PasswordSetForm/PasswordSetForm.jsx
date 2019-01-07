@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import { connect } from 'react-redux';
 
 import appActions from "redux/actions/global/appActions";
+import userActions from "redux/actions/global/userActions";
 
 import {TextField} from '@material-ui/core';
 import {Button, PasswordField} from "components/Widgets/material-ui";
@@ -10,6 +11,7 @@ import FormWrapper from "../FormWrapper";
 
 import "./PasswordSetForm.scss";
 import biqHelper from "../../../../lib/biqHelper";
+import LoadingIndicatorBar from "../../../Widgets/LoadingIndicatorBar";
 
 class PasswordSetForm extends Component {
 
@@ -34,7 +36,8 @@ class PasswordSetForm extends Component {
       is_valid: false
     },
 
-    is_submitted: false
+    is_submitted: false,
+    is_response_notified: false
 
   };
 
@@ -50,9 +53,15 @@ class PasswordSetForm extends Component {
   };
 
   _onSubmit = () => {
+    biqHelper.utils.clickTimeout( () => {
+      this._onSubmitActual();
+    } );
+  };
+
+  _onSubmitActual = () => {
     let {dispatch} = this.props;
 
-    this.setState( { is_submitted: true } );
+    this.setState( { is_submitted: true, is_response_notified: false } );
 
     let op_empty = biqHelper.utils.isNull( this.state.old_password.value );
 
@@ -68,6 +77,12 @@ class PasswordSetForm extends Component {
     let is_ready_for_submit = !op_empty && np_valid && !cp_empty && !cp_not_equal && !otp_empty && otp_valid;
 
     if ( is_ready_for_submit ) {
+
+      dispatch( userActions.userUpdatePasswordSubmit({
+        memberid: this.props.user_profile.memberid,
+        password: this.state.new_password.value,
+        current_password: this.state.old_password.value
+      }) );
 
     } else {
 
@@ -91,12 +106,35 @@ class PasswordSetForm extends Component {
       else if ( otp_empty ) {
         alert_content.notice = 'Harap mengisi OTP yang bisa didapat dengan click tombol "Ambil OTP"';
       }
+      else if ( !otp_valid ) {
+        alert_content.notice = 'Kode OTP tidak valid';
+      }
 
       dispatch( appActions.appDialogNoticeOpen( alert_content ) );
 
     }
 
   };
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+
+    if ( nextProps.user_password_update.is_submitted && !biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update.status ) && !this.state.is_response_notified ) {
+
+      this.setState( { is_response_notified : true } );
+
+      let error_message = `Error: ${nextProps.user_password_update.status}`;
+      let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update.server_response, 'response.response_code.message' );
+      error_message = !biqHelper.utils.isNull( server_message ) ? server_message : error_message;
+
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal merubah password', notice: error_message } ) );
+
+      return false;
+
+    }
+
+    return true;
+  }
 
   render() {
 
@@ -178,6 +216,8 @@ class PasswordSetForm extends Component {
           <Button className={`submit-btn${ is_ready_for_submit ? ' is-ready' : '' }`} onClick={this._onSubmit}>Proses</Button>
         </div>
 
+        <LoadingIndicatorBar isVisible={this.props.user_password_update.is_submitting}/>
+
       </FormWrapper>
 
     );
@@ -185,4 +225,13 @@ class PasswordSetForm extends Component {
 
 }
 
-export default connect( null ) (PasswordSetForm);
+const mapStateToProps = state => {
+
+  return {
+    user_profile: state.user.profile,
+    user_password_update: state.user.password_update
+  };
+
+};
+
+export default connect( mapStateToProps ) (PasswordSetForm);

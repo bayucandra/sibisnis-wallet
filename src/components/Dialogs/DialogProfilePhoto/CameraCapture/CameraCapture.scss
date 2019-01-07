@@ -58,6 +58,7 @@
     height: 260px;
     background: map-get( $colors, very-light-pink-eight );
     overflow: hidden;
+    transform: scaleX( -1 );
 
     video, img {
       width: 100%;

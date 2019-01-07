@@ -1,5 +1,21 @@
 @import "variables";
 
+.mui-number-field {
+
+  &--no-spinner {
+
+    input[type="number"] {
+      -moz-appearance:textfield;
+      &::-webkit-inner-spin-button, &::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+    }//input[type="number"]
+
+  }//&--no-spinner
+
+}//.mui-text-field
+
 /*.mui-text-field {
 
   > label:first-child {

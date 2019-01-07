@@ -59,8 +59,10 @@ const THEME = createMuiTheme({
       }
     },
     MuiInputLabel: {
-      fontWeight: 'normal',
-      color: '#999999'
+      root: {
+        fontWeight: 'normal',
+        color: '#999999'
+      }
     },
 
     MuiFormLabel: {
@@ -135,7 +137,10 @@ const THEME = createMuiTheme({
     },
 
     MuiFormHelperText: {
+
       root: {
+        color: '#80858a',
+
         '&$error': {
           marginTop: '4px',
           fontSize: '12px',
@@ -146,7 +151,9 @@ const THEME = createMuiTheme({
           letterSpacing: '0.4px',
           color: '#ff233e'
         }
+
       }
+
     },
 
     MuiMenuItem: {

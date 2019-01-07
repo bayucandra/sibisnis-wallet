@@ -288,6 +288,36 @@ class BiqHelperUtils {
     }
   };
 
+  passwordTest( p_obj ){
+    let ret = {
+      has_number: { value: false, label: 'Angka' },
+      has_lower_case: { value: false, label: 'Huruf Kecil' },
+      has_upper_case: { value: false, label: 'Huruf Besar' },
+      has_special_char: { value: false, label: 'Karakter' },
+      is_valid_min_length: { value: false, label: 'Minimal 8 karakter' }
+    };
+
+    let params = {
+      val: '',
+      min_length: 8
+    };
+
+    Object.assign( params, p_obj );
+
+    let password = params.val;
+
+    ret.has_number.value = /\d/.test( password );
+    ret.has_lower_case.value = /[a-z]/.test( password );
+    ret.has_upper_case.value = /[A-Z]/.test( password );
+    // eslint-disable-next-line
+    ret.has_special_char.value = /[~!@#\$%\^&\*_\-\+=`\|\(\)\{\}\[\]:;"'<>,\.\?\/\\]/.test( password );
+    ret.is_valid_min_length.value = password.length >= params.min_length;
+    ret.is_valid_min_length.label = `Minimal ${params.min_length} karakter`;
+
+    return ret;
+
+  };
+
 }//class BiqHelperUtils
 
 export { BiqHelperUtils };

@@ -38,6 +38,18 @@ function userUpdatePasswordCanceled() {
   }
 }
 
+function userUpdatePasswordDialogOpen() {
+  return {
+    type: actionTypes.user.PASSWORD_UPDATE_DIALOG_OPEN
+  }
+}
+
+function userUpdatePasswordDialogClose() {
+  return {
+    type: actionTypes.user.PASSWORD_UPDATE_DIALOG_CLOSE
+  }
+}
+
 
 export default {
   userProfileGet,
@@ -45,6 +57,9 @@ export default {
 
   userUpdatePasswordSubmit,
   userUpdatePasswordSubmitted,
-  userUpdatePasswordCanceled
+  userUpdatePasswordCanceled,
+
+  userUpdatePasswordDialogOpen,
+  userUpdatePasswordDialogClose
 
 };

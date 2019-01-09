@@ -27,7 +27,7 @@ class DialogProfilePhoto extends Component {
         open={this.props.dialog_profile_photo.is_open}
         onClose={this.modalClose}>
 
-        <div className="modal-inner tst">
+        <div className="modal-inner">
           {
 
             this.props.dialog_profile_photo.mode === 'select-dialog' ?

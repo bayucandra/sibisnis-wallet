@@ -136,6 +136,11 @@ class PasswordSetForm extends Component {
     return true;
   }
 
+  componentWillUnmount() {
+    let {dispatch} = this.props;
+    dispatch( userActions.userUpdatePasswordCanceled() );
+  }
+
   render() {
 
     let op_empty = biqHelper.utils.isNull( this.state.old_password.value );

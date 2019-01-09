@@ -9,6 +9,9 @@ const state_default = {
     is_submitting: false,
     is_submitted: false,
     server_response: {}
+  },
+  password_update_dialog: {
+    is_open: false
   }
 };
 
@@ -39,6 +42,18 @@ export default (state = state_default, action = {}) => {
     case actionTypes.user.PASSWORD_UPDATE_SUBMITTED:
       new_state = {
         password_update: Object.assign( {}, state_default.password_update, { is_submitted: true, server_response: action.payload } )
+      };
+      break;
+
+    case actionTypes.user.PASSWORD_UPDATE_DIALOG_OPEN:
+      new_state = {
+        password_update_dialog: Object.assign( {}, state_default.password_update_dialog, { is_open: true } )
+      };
+      break;
+
+    case actionTypes.user.PASSWORD_UPDATE_DIALOG_CLOSE:
+      new_state = {
+        password_update_dialog: Object.assign( {}, state_default.password_update_dialog, { is_open: false } )
       };
       break;
 

@@ -82,6 +82,7 @@ class DashboardProfile extends Component {
   };
 
   _userVerificationsGen = ( props ) => {
+    console.log(props.user_profile.verifications);
     return {
       phone: props.user_profile.verifications.phone === 1,
       email: props.user_profile.verifications.email === 1,

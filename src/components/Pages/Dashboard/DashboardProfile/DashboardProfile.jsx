@@ -82,14 +82,21 @@ class DashboardProfile extends Component {
   };
 
   _userVerificationsGen = ( props ) => {
-    console.log(props.user_profile.verifications);
-    return {
-      phone: props.user_profile.verifications.phone === 1,
-      email: props.user_profile.verifications.email === 1,
+    console.log("value dari 'verifications'",props.user_profile.verifications);
+    console.log("Tipe dari 'verifications': ",typeof props.user_profile.verifications);
+    console.log("Tipe dari 'root': ", typeof props.user_profile);
+    console.log("==================");
+    let verifications = biqHelper.JSON.parse( props.user_profile.verifications );
+
+    let ret = {
+      phone: verifications.phone === 1,
+      email: verifications.email === 1,
       photo : !biqHelper.utils.isNull( props.user_profile.photo ),
       address: !biqHelper.utils.isNull( props.user_profile.alamat ),
       // identity: false
     };
+
+    return ret;
   };
   
   _profileCompletenessLevelGet = () => {
@@ -255,7 +262,7 @@ class DashboardProfile extends Component {
                 <div className="icon icon--phone"/>
                 <div className="label">Verifikasi Nomor Handphone Anda</div>
                 <div className={`icon-indicator${ this.state.user_verifications.phone ? ' icon-indicator--verified' : ''} hidden-md-up`}/>
-
+                <div style={{fontWeight: 'bold'}}>Value:{ this.state.user_verifications.phone.toString() }, typeof: { typeof this.state.user_verifications.phone }</div>
                 {
                   this.state.user_verifications.phone ?
                     <div className="icon-verified-desktop visible-md-up"/>
@@ -276,6 +283,7 @@ class DashboardProfile extends Component {
                 <div className="icon icon--email"/>
                 <div className="label">Verifikasi Email Anda</div>
                 <div className={`icon-indicator${ this.state.user_verifications.email ? ' icon-indicator--verified' : '' } hidden-md-up`}/>
+                <div style={{fontWeight: 'bold'}}>Value:{ this.state.user_verifications.email.toString() }, typeof: { typeof this.state.user_verifications.email }</div>
 
                 {
                   this.state.user_verifications.email ?
@@ -304,6 +312,7 @@ class DashboardProfile extends Component {
                 <div className="icon icon--profile-name"/>
                 <div className="label">Upload foto profil Anda</div>
                 <div className={ `icon-indicator${ this.state.user_verifications.photo ? ' icon-indicator--verified' : '' } hidden-md-up` }/>
+                <div style={{fontWeight: 'bold'}}>Value:{ this.state.user_verifications.photo.toString() }, typeof: { typeof this.state.user_verifications.photo }</div>
 
                 {
                   this.state.user_verifications.photo ?
@@ -331,6 +340,7 @@ class DashboardProfile extends Component {
                 <div className="icon icon--address"/>
                 <div className="label">Lengkapi Data Alamat Anda</div>
                 <div className={ `icon-indicator${ this.state.user_verifications.address ? ' icon-indicator--verified' : '' } hidden-md-up` }/>
+                <div style={{fontWeight: 'bold'}}>Value:{ this.state.user_verifications.address.toString() }, typeof: { typeof this.state.user_verifications.address }</div>
 
                 {
                   this.state.user_verifications.address ?

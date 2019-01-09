@@ -1,7 +1,7 @@
 {
   "main.css": "./static/css/main.4704238a.chunk.css",
-  "main.js": "./static/js/main.5d41f4bd.chunk.js",
-  "main.js.map": "./static/js/main.5d41f4bd.chunk.js.map",
+  "main.js": "./static/js/main.c30db283.chunk.js",
+  "main.js.map": "./static/js/main.c30db283.chunk.js.map",
   "static/css/1.341405c1.chunk.css": "./static/css/1.341405c1.chunk.css",
   "static/js/1.577118cb.chunk.js": "./static/js/1.577118cb.chunk.js",
   "static/js/1.577118cb.chunk.js.map": "./static/js/1.577118cb.chunk.js.map",
@@ -44,10 +44,10 @@
   "static/media/BalancePaymentConfirmation.scss": "./static/media/ico-upload-sukses.2094b289.svg",
   "static/media/BalancePaymentConfirmed.scss": "./static/media/verifikasi.f05d9c35.svg",
   "static/media/BalancePayment.scss": "./static/media/oval-2.4bacff9e.svg",
-  "static/media/CameraCapture.scss": "./static/media/upload-ulang.5fcf24ff.svg",
-  "static/css/1.341405c1.chunk.css.map": "./static/css/1.341405c1.chunk.css.map",
+  "static/media/CameraCapture.scss": "./static/media/ico-kamera-finish.09d19219.svg",
   "static/css/main.4704238a.chunk.css.map": "./static/css/main.4704238a.chunk.css.map",
+  "static/css/1.341405c1.chunk.css.map": "./static/css/1.341405c1.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.96cc9f281173b9ca69b11e94e3daac6b.js": "./precache-manifest.96cc9f281173b9ca69b11e94e3daac6b.js",
+  "precache-manifest.62aee9cf0158be7c068195c8edf07512.js": "./precache-manifest.62aee9cf0158be7c068195c8edf07512.js",
   "service-worker.js": "./service-worker.js"
 }

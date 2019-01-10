@@ -15,6 +15,8 @@ class DialogPasswordUpdate extends Component {
 
   state = {
 
+    modalPosTop: 0,
+
     old_password: {
       value: ''
     },
@@ -40,8 +42,10 @@ class DialogPasswordUpdate extends Component {
   };
 
   _modalClose = () => {
-    let {dispatch} = this.props;
-    dispatch( userActions.userUpdatePasswordDialogClose() );
+    biqHelper.utils.clickTimeout( () => {
+      let {dispatch} = this.props;
+      dispatch( userActions.userUpdatePasswordDialogClose() );
+    } );
   };
 
   _newPasswordTestGet = ( res ) => {
@@ -53,6 +57,16 @@ class DialogPasswordUpdate extends Component {
     if( this.state.new_password.is_valid !== is_valid )
       this.setState( { new_password: Object.assign( {}, this.state.new_password, { is_valid } ) } );
 
+  };
+
+  _onOtpRequest = () => {
+
+    if( this.props.user_password_update_otp.is_submitting ) return;
+
+    let {dispatch} = this.props;
+    biqHelper.utils.clickTimeout( () => {
+      dispatch( userActions.userUpdatePasswordOtpSubmit() );
+    } );
   };
 
   _onSubmit = () => {
@@ -120,21 +134,34 @@ class DialogPasswordUpdate extends Component {
 
   };
 
+  _modalPosTopGen() {
+    let ratio_opt = { box_selector: '.dialog-password-update__inner', top_space: 15, bottom_space: 15};
+    let top_pos = biqHelper.utils.modalTopRatio( ratio_opt );
+    return top_pos;
+  }
+
+  componentDidMount() {
+    setTimeout( ()=> {
+      let top_pos = this._modalPosTopGen();
+      this.setState( {modalPosTop : top_pos } );
+    } );
+  }
+
   shouldComponentUpdate(nextProps, nextState, nextContext) {
 
-    if ( nextProps.user_password_update.is_submitted && !biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update.status ) && !this.state.is_response_notified ) {
-
-      this.setState( { is_response_notified : true } );
-
-      let error_message = `Error: ${nextProps.user_password_update.status}`;
-      let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update.server_response, 'response.response_code.message' );
-      error_message = !biqHelper.utils.isNull( server_message ) ? server_message : error_message;
-
-      let {dispatch} = this.props;
-      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal merubah password', notice: error_message } ) );
-
+    let top_pos = this._modalPosTopGen();
+    if ( this.state.modalPosTop !== top_pos ) {
+      this.setState( { modalPosTop: top_pos } );
       return false;
+    }
 
+    let is_password_update_submitted =  !this.props.user_password_update.is_submitted && nextProps.user_password_update.is_submitted;
+
+    if (
+      is_password_update_submitted
+      && biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update.server_response.status )
+    ) {
+      this._modalClose();
     }
 
     return true;
@@ -178,13 +205,11 @@ class DialogPasswordUpdate extends Component {
 
         <div className="modal-inner dialog-password-update">
 
-          <div className="dialog-password-update__inner">
+          <div className="dialog-password-update__inner" style={{ marginTop: this.state.modalPosTop }}>
 
             <Button className="modal-close-btn" onClick={this._modalClose} >&nbsp;</Button>
 
             <form className="dialog-password-update__inner__body-form">
-
-
 
               <PasswordField
                 label="Password lama"
@@ -221,7 +246,7 @@ class DialogPasswordUpdate extends Component {
                 ) }
                 helperText={ cp_helper_text }/>
 
-              <Button className="otp-btn">Ambil OTP</Button>
+              <Button className="otp-btn" onClick={this._onOtpRequest}>Ambil OTP</Button>
 
               <TextField
                 className="mui-number-field mui-number-field--no-spinner otp-input"
@@ -234,7 +259,7 @@ class DialogPasswordUpdate extends Component {
 
               <Button className={`submit-btn${ is_ready_for_submit ? ' is-ready' : '' }`} onClick={this._onSubmit}>Proses</Button>
 
-              <LoadingIndicatorBar isVisible={this.props.user_password_update.is_submitting}/>
+              <LoadingIndicatorBar isVisible={this.props.user_password_update.is_submitting || this.props.user_password_update_otp.is_submitting}/>
 
             </form>
 
@@ -253,7 +278,8 @@ const mapStateToProps = state => {
   return {
     password_update_dialog: state.user.password_update_dialog,
     user_profile: state.user.profile,
-    user_password_update: state.user.password_update
+    user_password_update: state.user.password_update,
+    user_password_update_otp: state.user.password_update_otp
   }
 
 };

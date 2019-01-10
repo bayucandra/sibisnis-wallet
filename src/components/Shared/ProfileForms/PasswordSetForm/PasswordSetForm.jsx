@@ -172,7 +172,15 @@ class PasswordSetForm extends Component {
 
       return true;
     } else if ( is_otp_request_submitted && biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update_otp.server_response.status ) ) {
-      dispatch( appActions.appDialogNoticeOpen( { title: 'Berhasil', notice: 'OTP Berhasil dikirim', isSuccess: true } ) );
+
+      let success_message = 'OTP Berhasil dikirim';
+      let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update_otp.server_response, 'response.data.messages' );
+      success_message = !biqHelper.utils.isNull( server_message ) ? server_message : success_message;
+
+      let phone_number = biqHelper.JSON.pathValueGet( nextProps.user_password_update_otp.server_response, 'response.data.no_hp' );
+      success_message = !biqHelper.utils.isNull( phone_number ) ? `${success_message} ke nomor: ${ phone_number }` : success_message;
+
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Berhasil', notice: success_message, isSuccess: true } ) );
 
       return true;
     }
@@ -198,7 +206,11 @@ class PasswordSetForm extends Component {
       is_password_update_submitted
       && biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update.server_response.status )
     ) {
-      dispatch( appActions.appDialogNoticeOpen( { title: 'Berhasil', notice: 'Update Password Berhasil', isSuccess: true } ) );
+      let success_message = 'Update Password Berhasil';
+      let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update.server_response, 'response.response_code.message' );
+      success_message = !biqHelper.utils.isNull( server_message ) ? server_message : success_message;
+
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Berhasil', notice: success_message, isSuccess: true } ) );
       this.props.passwordSetDesktopClose();
 
       setTimeout(() => {

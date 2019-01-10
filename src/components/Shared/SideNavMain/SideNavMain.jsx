@@ -81,7 +81,7 @@ class SideNavMain extends Component {
     const { nama, email, aws_global_url, photo } = this.props.user_profile;
 
     let profileImageUrl = !biqHelper.utils.isNull( photo ) ?
-        `${aws_global_url}/${encodeURI( photo )}` :
+        `${aws_global_url}${encodeURI( photo )}` :
         avatarPlacerholderBlank;
 
     return (

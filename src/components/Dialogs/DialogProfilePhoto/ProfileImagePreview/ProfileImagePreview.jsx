@@ -104,7 +104,7 @@ class ProfileImagePreview extends Component {
 
         <div className={"profile-image-preview__inner"}
              onClick={this.onMenuClose}>
-          <img alt={"User Profile"} src={`${aws_global_url}/${ encodeURI(photo) }`}/>
+          <img alt={"User Profile"} src={`${aws_global_url}${ encodeURI(photo) }`}/>
         </div>
 
         <div className="menu">

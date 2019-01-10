@@ -91,9 +91,11 @@ class Profile extends Component {
 
 
   _userVerificationsGen = ( props ) => {
+    let verifications = biqHelper.JSON.parse( props.user_profile.verifications );
+
     return {
-      phone: props.user_profile.verifications.phone === 1,
-      email: props.user_profile.verifications.email === 1,
+      phone: verifications.phone === 1,
+      email: verifications.email === 1,
       photo : !biqHelper.utils.isNull( props.user_profile.photo ),
       address: !biqHelper.utils.isNull( props.user_profile.alamat ),
       // identity: false

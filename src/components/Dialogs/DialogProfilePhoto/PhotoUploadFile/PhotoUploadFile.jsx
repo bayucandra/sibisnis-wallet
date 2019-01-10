@@ -194,7 +194,7 @@ class PhotoUploadFile extends Component {
 
   _onDoneClick = () => {
     let {dispatch} = this.props;
-    dispatch( userActions.userProfileUpdate( { photo: this.state.server_response.data.value } ) );
+    dispatch( userActions.userProfileUpdate( { photo: this.state.server_response.data.path } ) );
   };
 
   _imgIsUploadedError() {

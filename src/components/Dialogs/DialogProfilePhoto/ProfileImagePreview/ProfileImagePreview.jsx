@@ -98,13 +98,13 @@ class ProfileImagePreview extends Component {
 
   render() {
     const { anchorEl } = this.state;
-    let { photo } = this.props.user_profile;
+    let { aws_global_url, photo } = this.props.user_profile;
     return (
       <div className="profile-image-preview" style={{ marginTop: this.state.modalPosTop }} >
 
         <div className={"profile-image-preview__inner"}
              onClick={this.onMenuClose}>
-          <img alt={"User Profile"} src={`${biqConfig.profile_photo_url_base}/${ encodeURI(photo) }`}/>
+          <img alt={"User Profile"} src={`${aws_global_url}/${ encodeURI(photo) }`}/>
         </div>
 
         <div className="menu">

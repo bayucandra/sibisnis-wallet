@@ -69,9 +69,11 @@ class Profile extends Component {
 
   };
 
-
+  _passwordSetDesktopClose = () => {
+    this.setState( { password_set: false } );
+  };
   _passwordSetDesktopToggle = () => {
-    biqHelper.utils.clickTimeout( () => this.setState( { password_set : !this.state.password_set } ) );
+    biqHelper.utils.clickTimeout( () => this.setState( { password_set: !this.state.password_set } ) );
   };
   _passwordSetMobileOpen = () => {
     biqHelper.utils.clickTimeout( () => {
@@ -374,7 +376,7 @@ class Profile extends Component {
 
                     </div>
 
-                    <PasswordSetForm isVisible={this.state.password_set}/>
+                    <PasswordSetForm isVisible={this.state.password_set} passwordSetDesktopClose={this._passwordSetDesktopClose}/>
 
                   </div>
 
@@ -391,7 +393,7 @@ class Profile extends Component {
 
         </div>
 
-        <DialogPasswordUpdate/>
+        { this.props.password_update_dialog.is_open && <DialogPasswordUpdate/>}
 
       </div>
     );
@@ -402,7 +404,8 @@ class Profile extends Component {
 
 const mapStateToProps = state => {
   return {
-    user_profile: state.user.profile
+    user_profile: state.user.profile,
+    password_update_dialog: state.user.password_update_dialog,
   };
 };
 

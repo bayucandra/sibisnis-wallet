@@ -15,6 +15,31 @@ import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar";
 
 class PasswordSetForm extends Component {
 
+  stateDefault = {
+
+    old_password: {
+      value: ''
+    },
+
+    new_password: {
+      value: '',
+      is_valid: false
+    },
+
+    confirmation_password: {
+      value: '',
+      is_valid: false
+    },
+
+    otp: {
+      value: '',
+      is_valid: false
+    },
+
+    is_submitted: false
+
+  };
+
   state = {
 
     old_password: {
@@ -36,9 +61,16 @@ class PasswordSetForm extends Component {
       is_valid: false
     },
 
-    is_submitted: false,
-    is_response_notified: false
+    is_submitted: false
 
+  };
+
+  _inputReset = () => {
+    for ( let key in this.stateDefault) {
+      let state = {};
+      state[key] = this.stateDefault[key];
+      this.setState( state )
+    }
   };
 
   _newPasswordTestGet = ( res ) => {
@@ -69,9 +101,8 @@ class PasswordSetForm extends Component {
   };
 
   _onSubmitActual = () => {
-    let {dispatch} = this.props;
 
-    this.setState( { is_submitted: true, is_response_notified: false } );
+    let {dispatch} = this.props;
 
     let op_empty = biqHelper.utils.isNull( this.state.old_password.value );
 
@@ -128,32 +159,56 @@ class PasswordSetForm extends Component {
   };
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
+    let {dispatch} = this.props;
 
-    if ( nextProps.user_password_update.is_submitted && !biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update.server_response.status ) && !this.state.is_response_notified ) {
 
-      this.setState( { is_response_notified : true } );
+    let is_otp_request_submitted = !this.props.user_password_update_otp.is_submitted && nextProps.user_password_update_otp.is_submitted;
+    if ( is_otp_request_submitted && biqHelper.utils.httpResponseIsError( nextProps.user_password_update_otp.server_response.status ) ) {
+      let error_message = `Error: ${nextProps.user_password_update_otp.status}`;
+      let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update_otp.server_response, 'response.response_code.message' );
+      error_message = !biqHelper.utils.isNull( server_message ) ? server_message : error_message;
+
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal Request OTP', notice: error_message } ) );
+
+      return true;
+    } else if ( is_otp_request_submitted && biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update_otp.server_response.status ) ) {
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Berhasil', notice: 'OTP Berhasil dikirim', isSuccess: true } ) );
+
+      return true;
+    }
+
+
+
+    let is_password_update_submitted =  !this.props.user_password_update.is_submitted && nextProps.user_password_update.is_submitted;
+
+    if (
+        is_password_update_submitted
+        && biqHelper.utils.httpResponseIsError( nextProps.user_password_update.server_response.status )
+    ) {
 
       let error_message = `Error: ${nextProps.user_password_update.status}`;
       let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update.server_response, 'response.response_code.message' );
       error_message = !biqHelper.utils.isNull( server_message ) ? server_message : error_message;
 
-      let {dispatch} = this.props;
       dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal merubah password', notice: error_message } ) );
 
       return true;
 
+    } else if (
+      is_password_update_submitted
+      && biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update.server_response.status )
+    ) {
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Berhasil', notice: 'Update Password Berhasil', isSuccess: true } ) );
+      this.props.passwordSetDesktopClose();
+
+      setTimeout(() => {
+        this._inputReset();
+      }, 300 );
+
+      return false;
     }
 
-    if ( !this.props.user_password_update_otp.is_submitted && nextProps.user_password_update_otp.is_submitted && !biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update_otp.server_response.status ) ) {
-      let error_message = `Error: ${nextProps.user_password_update_otp.status}`;
-      let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update_otp.server_response, 'response.response_code.message' );
-      error_message = !biqHelper.utils.isNull( server_message ) ? server_message : error_message;
 
-      let {dispatch} = this.props;
-      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal Request OTP', notice: error_message } ) );
-
-      return true;
-    }
 
     return true;
   }

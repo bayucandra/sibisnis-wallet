@@ -17,6 +17,13 @@
     margin-top: 40px;
     border-radius: 28px;
     background: #eb560d url('../../../images/icons/gagal.svg') no-repeat center;
+
+    &.is-success {
+      background-color: map-get($colors, dark-mint);
+      background-image: url('../../../images/icons/ic-check.svg');
+      background-size: 30px auto;
+    }//&--success
+
   }//.icon
 
   .title {

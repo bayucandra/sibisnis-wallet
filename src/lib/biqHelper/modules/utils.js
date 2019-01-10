@@ -206,11 +206,15 @@ class BiqHelperUtils {
   }
 
   httpResponseIsError( key ){
+    if ( this.isNull( key ) ) return false;
+
     key = biqHelperString.toInt( key );
     return key >= 400 && key < 600;
   };
 
   httpResponseIsSuccess( key ){
+    if ( this.isNull( key ) ) return false;
+
     key = biqHelperString.toInt( key );
     return key >= 200 && key < 300;
   };

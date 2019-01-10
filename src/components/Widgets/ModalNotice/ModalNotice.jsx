@@ -35,7 +35,7 @@ class ModalNotice extends Component {
 
     return (
       <section className="widget-modal-notice" style={{marginTop: this.state.modalPosTop}}>
-        <div className="icon"/>
+        <div className={`icon${ this.props.isSuccess ? ' is-success' : '' }`}/>
         <div className="title">{this.props.title}</div>
         <div className="notice" dangerouslySetInnerHTML={{__html: this.props.notice}}/>
         <Button className="close-btn" onClick={() => biqHelper.utils.clickTimeout(()=>this.props.modalClose())}>Tutup</Button>

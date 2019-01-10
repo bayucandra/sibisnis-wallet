@@ -62,8 +62,10 @@ class HistoryLogin extends Component {
               data.map( (el) => {
                 let id = el.id;
                 let date_access = moment( el.date_access ).format('DD MMM YYYY , HH:mm');
-                let country = el.data.location.country;
-                let ip = el.data.location.ip;
+
+                let location = biqHelper.utils.isNull(el.data.location) ? {} : el.data.location;
+                let country = location.country;
+                let ip = location.ip;
                 let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
                 return (
                   <CustomAccordion
@@ -101,8 +103,9 @@ class HistoryLogin extends Component {
                   {data.map((el) => {
                     let id = el.id;
                     let date_access = moment( el.date_access ).format('DD MMM YYYY , HH:mm');
-                    let country = el.data.location.country;
-                    let ip = el.data.location.ip;
+                    let location = biqHelper.utils.isNull(el.data.location) ? {} : el.data.location;
+                    let country = location.country;
+                    let ip = location.ip;
                     let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
                     return (
                       <tr className="history-login-list-body__item" key={id}>

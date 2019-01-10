@@ -14,6 +14,8 @@ class DialogModalNotice extends Component {
   };
 
   render() {
+    let is_success = this.props.dialog_notice.content.isSuccess === true;
+
     return (
 
       <Modal
@@ -22,8 +24,9 @@ class DialogModalNotice extends Component {
 
         <div className="modal-inner">
           <ModalNotice modalClose={this._modalClose}
-               title={this.props.dialog_notice.content.title}
-               notice={this.props.dialog_notice.content.notice}/>
+              title={this.props.dialog_notice.content.title}
+              notice={this.props.dialog_notice.content.notice}
+              isSuccess={is_success}/>
         </div>
 
       </Modal>

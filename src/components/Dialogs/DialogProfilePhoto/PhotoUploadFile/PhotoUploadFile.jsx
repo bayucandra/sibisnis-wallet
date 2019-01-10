@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import Dropzone from 'react-dropzone';
-import {Button} from '../../../Widgets/material-ui';
+import {Button} from 'components/Widgets/material-ui';
 
 import { Observable, Subject, of } from 'rxjs';
 import { ajax as rxAjax } from 'rxjs/ajax';
@@ -13,13 +13,13 @@ import PhotoCrop from '../PhotoCrop/PhotoCrop';
 import biqConfig from "providers/biqConfig";
 import biqHelper from "lib/biqHelper";
 
-import userActions from '../../../../redux/actions/global/userActions';
+import userActions from 'redux/actions/global/userActions';
 import { connect } from 'react-redux';
 
-import uploadIconMobile from '../../../../images/icons/ico-upload-mobile.svg';
-import uploadIconDesktop from '../../../../images/icons/ico-upload-desktop.svg';
-import imgUploadSukses from '../../../../images/icons/upload-sukses.svg';
-import imgUploadGagal from '../../../../images/icons/upload-gagal.svg';
+import uploadIconMobile from 'images/icons/ico-upload-mobile.svg';
+import uploadIconDesktop from 'images/icons/ico-upload-desktop.svg';
+import imgUploadSukses from 'images/icons/upload-sukses.svg';
+import imgUploadGagal from 'images/icons/upload-gagal.svg';
 
 import './PhotoUploadFile.scss';
 

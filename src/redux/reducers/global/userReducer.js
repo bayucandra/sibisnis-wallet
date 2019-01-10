@@ -12,6 +12,11 @@ const state_default = {
   },
   password_update_dialog: {
     is_open: false
+  },
+  password_update_otp: {
+    is_submitting: false,
+    is_submitted: false,
+    server_response: {}
   }
 };
 
@@ -34,6 +39,7 @@ export default (state = state_default, action = {}) => {
       break;
 
 
+
     case actionTypes.user.PASSWORD_UPDATE_SUBMIT:
       new_state = {
         password_update: Object.assign( {}, state_default.password_update, { is_submitting: true } )
@@ -44,6 +50,8 @@ export default (state = state_default, action = {}) => {
         password_update: Object.assign( {}, state_default.password_update, { is_submitted: true, server_response: action.payload } )
       };
       break;
+
+
 
     case actionTypes.user.PASSWORD_UPDATE_DIALOG_OPEN:
       new_state = {
@@ -56,6 +64,22 @@ export default (state = state_default, action = {}) => {
         password_update_dialog: Object.assign( {}, state_default.password_update_dialog, { is_open: false } )
       };
       break;
+
+
+
+    case actionTypes.user.PASSWORD_UPDATE_OTP_SUBMIT:
+      new_state = {
+        password_update_otp: Object.assign( {}, state_default.password_update_otp, { is_submitting: true } )
+      };
+      break;
+
+    case actionTypes.user.PASSWORD_UPDATE_OTP_SUBMITTED:
+      new_state = {
+        password_update_otp: Object.assign( {}, state_default.password_update_otp, { is_submitted: true, server_response: action.payload } )
+      };
+      break;
+
+
 
     default:
       return state;

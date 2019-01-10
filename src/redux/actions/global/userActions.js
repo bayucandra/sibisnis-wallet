@@ -20,6 +20,7 @@ function userProfileUpdate( p_obj ) {//{ key: value} ( single pair only )
 }
 
 
+
 function userUpdatePasswordSubmit( params ) {
   return {
     type: actionTypes.user.PASSWORD_UPDATE_SUBMIT,
@@ -38,15 +39,34 @@ function userUpdatePasswordCanceled() {
   }
 }
 
+
+
 function userUpdatePasswordDialogOpen() {
   return {
     type: actionTypes.user.PASSWORD_UPDATE_DIALOG_OPEN
   }
 }
-
 function userUpdatePasswordDialogClose() {
   return {
     type: actionTypes.user.PASSWORD_UPDATE_DIALOG_CLOSE
+  }
+}
+
+
+function userUpdatePasswordOtpSubmit() {
+  return {
+    type: actionTypes.user.PASSWORD_UPDATE_OTP_SUBMIT
+  }
+}
+function userUpdatePasswordOtpSubmitted( response ) {
+  return {
+    type: actionTypes.user.PASSWORD_UPDATE_OTP_SUBMITTED,
+    payload: response
+  }
+}
+function userUpdatePasswordOtpCanceled() {
+  return {
+    type: actionTypes.user.PASSWORD_UPDATE_OTP_CANCELED
   }
 }
 
@@ -58,6 +78,10 @@ export default {
   userUpdatePasswordSubmit,
   userUpdatePasswordSubmitted,
   userUpdatePasswordCanceled,
+
+  userUpdatePasswordOtpSubmit,
+  userUpdatePasswordOtpSubmitted,
+  userUpdatePasswordOtpCanceled,
 
   userUpdatePasswordDialogOpen,
   userUpdatePasswordDialogClose

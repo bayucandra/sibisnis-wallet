@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 
-import appActions from "../../../redux/actions/global/appActions";
-import biqHelper from "../../../lib/biqHelper";
+import appActions from "redux/actions/global/appActions";
+import userActions from "redux/actions/global/userActions";
+
+import biqHelper from "lib/biqHelper";
 
 import {Button} from "components/Widgets/material-ui";
 
-import SideNavMain from "../../Shared/SideNavMain/SideNavMain";
-import HeaderMenuMobile from "../../Shared/HeaderMenuMobile/HeaderMenuMobile";
+import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
+import HeaderMenuMobile from "components/Shared/HeaderMenuMobile/HeaderMenuMobile";
 import EmailVerificationForm from "components/Shared/ProfileForms/EmailVerificationForm";
 
-import './Profile.scss';
 import AddressVerificationForm from "components/Shared/ProfileForms/AddressVerificationForm/AddressVerificationForm";
-import PasswordSetForm from "../../Shared/ProfileForms/PasswordSetForm/PasswordSetForm";
+import PasswordSetForm from "components/Shared/ProfileForms/PasswordSetForm/PasswordSetForm";
+import DialogPasswordUpdate from "components/Dialogs/DialogPasswordUpdate/DialogPasswordUpdate";
+
+import './Profile.scss';
 
 class Profile extends Component {
 
@@ -70,7 +74,10 @@ class Profile extends Component {
     biqHelper.utils.clickTimeout( () => this.setState( { password_set : !this.state.password_set } ) );
   };
   _passwordSetMobileOpen = () => {
-
+    biqHelper.utils.clickTimeout( () => {
+      let {dispatch} = this.props;
+      dispatch( userActions.userUpdatePasswordDialogOpen() );
+    } );
   };
   _passwordActionClick = () => {
     if ( !biqHelper.mediaQuery.isMobile() ) {
@@ -383,6 +390,8 @@ class Profile extends Component {
           </div>
 
         </div>
+
+        <DialogPasswordUpdate/>
 
       </div>
     );

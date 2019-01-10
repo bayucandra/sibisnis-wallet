@@ -10,8 +10,8 @@ import {Button, PasswordField} from "components/Widgets/material-ui";
 import FormWrapper from "../FormWrapper";
 
 import "./PasswordSetForm.scss";
-import biqHelper from "../../../../lib/biqHelper";
-import LoadingIndicatorBar from "../../../Widgets/LoadingIndicatorBar";
+import biqHelper from "lib/biqHelper";
+import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar";
 
 class PasswordSetForm extends Component {
 
@@ -52,6 +52,16 @@ class PasswordSetForm extends Component {
 
   };
 
+  _onOtpRequest = () => {
+
+    if( this.props.user_password_update_otp.is_submitting ) return;
+
+    let {dispatch} = this.props;
+    biqHelper.utils.clickTimeout( () => {
+      dispatch( userActions.userUpdatePasswordOtpSubmit() );
+    } );
+  };
+
   _onSubmit = () => {
     biqHelper.utils.clickTimeout( () => {
       this._onSubmitActual();
@@ -81,7 +91,8 @@ class PasswordSetForm extends Component {
       dispatch( userActions.userUpdatePasswordSubmit({
         memberid: this.props.user_profile.memberid,
         password: this.state.new_password.value,
-        current_password: this.state.old_password.value
+        current_password: this.state.old_password.value,
+        otp: this.state.otp.value
       }) );
 
     } else {
@@ -118,7 +129,7 @@ class PasswordSetForm extends Component {
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
 
-    if ( nextProps.user_password_update.is_submitted && !biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update.status ) && !this.state.is_response_notified ) {
+    if ( nextProps.user_password_update.is_submitted && !biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update.server_response.status ) && !this.state.is_response_notified ) {
 
       this.setState( { is_response_notified : true } );
 
@@ -129,8 +140,19 @@ class PasswordSetForm extends Component {
       let {dispatch} = this.props;
       dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal merubah password', notice: error_message } ) );
 
-      return false;
+      return true;
 
+    }
+
+    if ( !this.props.user_password_update_otp.is_submitted && nextProps.user_password_update_otp.is_submitted && !biqHelper.utils.httpResponseIsSuccess( nextProps.user_password_update_otp.server_response.status ) ) {
+      let error_message = `Error: ${nextProps.user_password_update_otp.status}`;
+      let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update_otp.server_response, 'response.response_code.message' );
+      error_message = !biqHelper.utils.isNull( server_message ) ? server_message : error_message;
+
+      let {dispatch} = this.props;
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal Request OTP', notice: error_message } ) );
+
+      return true;
     }
 
     return true;
@@ -206,7 +228,7 @@ class PasswordSetForm extends Component {
           ) }
           helperText={ cp_helper_text }/>
 
-        <Button className="otp-btn">Ambil OTP</Button>
+        <Button className={`otp-btn${ this.props.user_password_update_otp.is_submitting ? ' is-disabled' : '' }`} onClick={this._onOtpRequest}>Ambil OTP</Button>
 
         <TextField
           className="mui-number-field mui-number-field--no-spinner otp-input"
@@ -221,7 +243,7 @@ class PasswordSetForm extends Component {
           <Button className={`submit-btn${ is_ready_for_submit ? ' is-ready' : '' }`} onClick={this._onSubmit}>Proses</Button>
         </div>
 
-        <LoadingIndicatorBar isVisible={this.props.user_password_update.is_submitting}/>
+        <LoadingIndicatorBar isVisible={this.props.user_password_update.is_submitting || this.props.user_password_update_otp.is_submitting}/>
 
       </FormWrapper>
 
@@ -234,7 +256,8 @@ const mapStateToProps = state => {
 
   return {
     user_profile: state.user.profile,
-    user_password_update: state.user.password_update
+    user_password_update: state.user.password_update,
+    user_password_update_otp: state.user.password_update_otp
   };
 
 };

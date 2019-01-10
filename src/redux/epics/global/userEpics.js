@@ -41,7 +41,39 @@ const userPasswordUpdateSubmit = action$ => action$.pipe(
 
 );
 
+const userPasswordUpdateOtp = action$ => action$.pipe(
+
+  ofType( actionTypes.user.PASSWORD_UPDATE_OTP_SUBMIT ),
+
+  switchMap(
+    action => {
+      let ajax$ = rxAjax({
+        url: `${biqConfig.api.url_base}/api/wallet/otp_password_wallet`,
+        method: 'POST',
+        crossDomain: true,
+        withCredentials: true,
+        body: Object.assign( {}, biqConfig.api.data_auth )
+      });
+
+      return ajax$.pipe(
+        map( res => userActions.userUpdatePasswordOtpSubmitted(res) ),
+        takeUntil( action$.pipe(
+          filter( action => action.type === actionTypes.user.PASSWORD_UPDATE_OTP_SUBMITTED )
+        ) ),
+        catchError( err => of({
+          type: actionTypes.user.PASSWORD_UPDATE_OTP_SUBMITTED,
+          payload: { status: err.xhr.status, response: err.xhr.response }
+        }) )
+      );
+
+    }
+
+  )//switchMap()
+
+);
+
 
 export default [
-  userPasswordUpdateSubmit
+  userPasswordUpdateSubmit,
+  userPasswordUpdateOtp
 ];

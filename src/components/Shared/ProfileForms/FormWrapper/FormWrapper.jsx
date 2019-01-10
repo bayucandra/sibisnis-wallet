@@ -6,8 +6,8 @@ import biqHelper from "lib/biqHelper";
 export default ( props ) => {
   let class_props = !biqHelper.utils.isNull( props.className ) ? ` ${props.className}` : '';
   return (
-    <div className={`dashboard-profile-form visible-md-up${ props.isVisible ? ' is-visible' : '' }${ class_props }`}>
+    <form className={`dashboard-profile-form visible-md-up${ props.isVisible ? ' is-visible' : '' }${ class_props }`}>
       { props.children }
-    </div>
+    </form>
   )
 }

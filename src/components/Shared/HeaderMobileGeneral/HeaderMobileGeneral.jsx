@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
-import { Button } from '../../Widgets/material-ui';
+import { Button } from 'components/Widgets/material-ui';
 
 import HeaderMenuMobile from "../HeaderMenuMobile";
-import biqHelper from "../../../lib/biqHelper";
+import biqHelper from "lib/biqHelper";
 
 import "./HeaderMobileGeneral.scss";
 
@@ -33,7 +33,7 @@ class HeaderMobileGeneral extends Component {
           <div className={`title${ !has_back_btn ? ' title--no-back-btn' : '' }`}>{this.props.headerTitle}</div>
         </div>
 
-        {!biqHelper.utils.isNull( this.props.headerButtonWidget ) ? this.props.headerButtonWidget : ''}
+        {this.props.headerButtonWidget}
 
         <div className="header-mobile-general__right">
           <HeaderMenuMobile/>
@@ -44,5 +44,11 @@ class HeaderMobileGeneral extends Component {
   }
 
 }
+
+HeaderMobileGeneral.defaultProps = {
+  hasBackBtn : true,
+  headerTitle: '',
+  headerButtonWidget: null
+};
 
 export default withRouter(HeaderMobileGeneral);

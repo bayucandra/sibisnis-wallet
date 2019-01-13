@@ -26,6 +26,7 @@ import LoginHistory from "components/Pages/LoginHistory";
 import News from "components/Pages/News";
 import NewsDetail from "components/Pages/News/NewsDetail";
 import LoadingIndicatorBar from "components/Widgets/LoadingIndicatorBar/LoadingIndicatorBar";
+import BalanceMutation from "components/Pages/BalanceMutation";
 
 import ModalNotice from "components/Widgets/ModalNotice/ModalNotice";
 import DialogProfilePhoto from "components/Dialogs/DialogProfilePhoto";
@@ -177,6 +178,7 @@ class App extends Component {
           }
 
           <Switch>
+            <Route path="/balance-mutation" component={BalanceMutation}/>
             <Route path="/balance/payment" component={BalancePayment}/>
             <Route path="/balance" component={Balance}/>
             <Route path="/dashboard" component={Dashboard} />

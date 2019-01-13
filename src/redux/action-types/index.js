@@ -1,11 +1,12 @@
-import app from './global/app-action-type';
-import user from './global/user-action-type'
+import app from './global/appActionType';
+import user from './global/userActionType'
 
 import dashboard from "./pages/dahsboardActionType";
 import loginHistory from "./pages/loginHistoryActionType";
 import news from "./pages/newsActionType";
 import newsDetail from "./pages/newsDetailActionType";
 import balance from "./pages/balanceActionType";
+import balanceMutation from "./pages/balanceMutationActionType";
 
 
 export default {
@@ -16,5 +17,6 @@ export default {
   loginHistory,
   news,
   newsDetail,
-  balance
+  balance,
+  balanceMutation
 };

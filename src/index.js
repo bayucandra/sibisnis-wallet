@@ -11,9 +11,7 @@ import './styles/styles.scss';
 import App from './App';
 // import registerServiceWorker from './registerServiceWorker';
 
-//import createHistory from 'history/createBrowserHistory';
 import { Provider } from 'react-redux';
-// import { ConnectedRouter, routerReducer, routerMiddleware, push } from 'react-router-redux';//Consider to uninstall later
 import { store } from './redux/store';
 // Redux
 

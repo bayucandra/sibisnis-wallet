@@ -1,0 +1,50 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-balance-mutation {
+
+    &__inner {
+      flex: none;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+    }//&__inner
+
+    .balance-mutation-panel {
+      margin-left: 29px;
+
+      &__body {
+        background: none;
+
+        .mutation-table-desktop {
+          border-radius: 5px;
+          box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+          background-color: #ffffff;
+
+          &__title {
+            margin: 21px 0 0 30px;
+
+            font-size: 16px;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.4px;
+            color: map-get($colors, charcoal-grey);
+          }//.title
+
+          &__header {
+            display: flex;
+            align-items: center;
+            height: 58px;
+            margin-top: 20px;
+            background-color: map-get($colors, light-grey-7);
+          }//&__header
+
+        }//.mutation-record
+      }//&__body
+
+    }//.balance-mutation-panel
+
+  }
+
+}

@@ -40,10 +40,17 @@ class News extends Component {
   };
 
   _onFetched = obj => {
-    this.setState({data_is_ready: true}, ()=> {
-      let {dispatch} = this.props;
+
+    let {dispatch} = this.props;
+
+    if ( !this.state.is_ready )
+      this.setState({data_is_ready: true}, ()=> {
+        dispatch(newsActions.newsFetched({data: obj.data_all}));
+      } );
+
+    else
       dispatch(newsActions.newsFetched({data: obj.data_all}));
-    } );
+
   };
 
   componentDidMount() {
@@ -79,8 +86,9 @@ class News extends Component {
             </div>
 
             <ScrollPagination className={ `l-news__panel__body` } biqLimit={15}
-                              biqUrl={`${biqConfig.api.url_base}/api/wallet/list_berita`} biqMethod={'GET'}
-                              onFetch={this._onFetch} onFetched={ this._onFetched }>
+                biqUrl={`${biqConfig.api.url_base}/api/wallet/list_berita`}
+                biqMethod={'GET'}
+                onFetch={this._onFetch} onFetched={ this._onFetched }>
 
               {
                 (!biqHelper.utils.isNull(data) && data.length > 0) || (this.state.data_is_ready && data.length === 0) ?

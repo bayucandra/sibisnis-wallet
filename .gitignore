@@ -9,6 +9,7 @@ _dev
 /node_modules
 /public/agen
 /public/dist
+/public/api
 
 # testing
 /coverage

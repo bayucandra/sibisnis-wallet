@@ -10,20 +10,20 @@ const state_default = {
 
 export default ( state = state_default, action ) => {
 
-  let news_state = {};
+  let new_state = {};
 
   switch ( action.type ) {
 
     case actionTypes.news.FETCH:
-      news_state = { news_list: Object.assign( {}, state_default.news_list, { is_fetching: true, data: state.news_list.data } ) };
+      new_state = { news_list: Object.assign( {}, state_default.news_list, { is_fetching: true, data: state.news_list.data } ) };
       break;
 
     case actionTypes.news.FETCHED:
-      news_state = { news_list: Object.assign( {}, state_default.news_list, { is_fetched: true, data: action.payload.data } ) };
+      new_state = { news_list: Object.assign( {}, state_default.news_list, { is_fetched: true, data: action.payload.data } ) };
       break;
 
     case actionTypes.news.RESET:
-      news_state = { news_list: Object.assign( {}, state_default.news_list ) };
+      new_state = { news_list: Object.assign( {}, state_default.news_list ) };
       break;
 
     default:
@@ -31,6 +31,6 @@ export default ( state = state_default, action ) => {
 
   }
 
-  return Object.assign( {}, state, news_state );
+  return Object.assign( {}, state, new_state );
 
 }

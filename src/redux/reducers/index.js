@@ -1,5 +1,4 @@
 import { combineReducers } from 'redux';
-// import { routerReducer } from 'react-router-redux'//TODO: Consider to uninstall later
 
 import actionTypes from "../../redux/action-types";
 
@@ -8,6 +7,7 @@ import user from './global/userReducer';
 
 import dashboard from "./pages/dashboardReducer";
 import balance from "./pages/balanceReducer";
+import balanceMutation from "./pages/balanceMutationReducer";
 import loginHistory from "./pages/loginHistoryReducer";
 import news from "./pages/newsReducer";
 import newsDetail from "./pages/newsDetailReducer";
@@ -18,6 +18,7 @@ const appReducers = combineReducers({
 
   dashboard,
   balance,
+  balanceMutation,
   loginHistory,
   news,
   newsDetail

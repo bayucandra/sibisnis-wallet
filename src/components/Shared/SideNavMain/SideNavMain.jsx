@@ -9,7 +9,6 @@ import appActions from "redux/actions/global/appActions";
 
 import NumberFormat from 'react-number-format';
 import biqHelper from "lib/biqHelper/index";
-import biqConfig from "providers/biqConfig";
 
 import avatarPlacerholderBlank from 'images/avatar-placeholder-blank.svg';
 

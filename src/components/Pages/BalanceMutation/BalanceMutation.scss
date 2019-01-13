@@ -1,0 +1,125 @@
+@import "../../../styles/variables";
+
+.l-balance-mutation {
+
+  &__inner {
+    flex: 1 1 1px;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: flex-start;
+  }//&__inner
+
+  .balance-mutation-panel {
+    flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+
+    &__body {
+      flex: 1 1 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: normal;
+      background: #FFFFFF;
+
+      .mutation-table-mobile {
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+
+        .biq-row-mobile {
+          flex: none;
+          display: flex;
+          justify-content: space-between;
+          height: 81px;
+          padding: 9.5px 15px;
+          box-sizing: border-box;
+          border-top: 1px solid map-get( $colors, very-light-pink-ten );
+
+          &.is-first {
+            margin-top: 10px;
+            border-top: 0;
+          }//&.is-first
+
+          .biq-col-left {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            margin-right: 30px;
+
+            .date {
+              font-size: 12px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.3px;
+              color: map-get($colors, wisteria);
+            }//.date
+
+            .description {
+              margin-top: 2px;
+              font-size: 16px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.4px;
+              color: rgba(0, 0, 0, 0.87);
+            }//.description
+
+          }//.biq-col-left
+
+          .biq-col-right {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+
+            .balance {
+              font-size: 12px;
+              font-weight: bold;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.3px;
+              text-align: right;
+              color: rgba(0, 0, 0, 0.6);
+            }//.balance
+
+            .mutation-amount {
+              margin-top: 2px;
+              font-size: 16px;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.4px;
+              text-align: right;
+              color: rgba(0, 0, 0, 0.87);
+            }//.mutation-amount
+
+          }//.biq-col-right
+
+        }//.biq-row-mobile
+
+      }//.mutation-table-mobile
+
+    }//&__body
+
+    &__footer {
+      flex: none;
+      display: flex;
+      height: 40px;
+      background: map-get( $colors, very-light-pink-five );
+      box-shadow: 0 -4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+
+      .pagination {
+
+      }//.pagination
+
+    }//&__footer
+
+  }//.balance-mutation-panel
+
+}//.l-balance-mutation
+
+@import "BalanceMutation-md-min";

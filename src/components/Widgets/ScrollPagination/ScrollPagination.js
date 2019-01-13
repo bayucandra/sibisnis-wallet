@@ -223,7 +223,9 @@ ScrollPagination.defaultProps = {
   biqQueryParams: { limit: 'limit', offset: 'offset' },
   biqData: {},//Data to be post or get
   biqLimit: 10,
-  responseField: 'data'
+  responseField: 'data',
+  onFetch: null,
+  onFetched: null
 
 };
 

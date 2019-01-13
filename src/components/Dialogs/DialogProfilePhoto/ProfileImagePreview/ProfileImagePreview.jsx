@@ -3,20 +3,17 @@ import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-// React Material
+import appActions from "../../../../redux/actions/global/appActions";
+
 import IconButton from '@material-ui/core/IconButton';
 
-// Local Images
 import menuIcon from '../../../../images/icons/menu.svg';
 import rightArrowIcon from '../../../../images/icons/s-litle-right.svg'
 import backBlueIcon from '../../../../images/icons/ico-back-blue.svg'
 
 import biqHelper from "../../../../lib/biqHelper";
 
-// Custom CSS
 import './ProfileImagePreview.scss';
-import biqConfig from "../../../../providers/biqConfig";
-import appActions from "../../../../redux/actions/global/appActions";
 
 class ProfileImagePreview extends Component {
 

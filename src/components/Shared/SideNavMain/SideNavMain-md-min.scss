@@ -4,83 +4,84 @@
     flex: none;
     width: 247px;
     min-height: 499px;
+
+    .profile {
+      flex: none;
+    }//.profile
+
+
+    .profile-detail-btn {
+      top: 7px;
+    }//.profile-detail-btn
+
+    .profile-info {
+      margin-top: 30px;
+
+      &__img {
+        height: 60px;
+      }
+
+    }//.profile-info
+
+    .balance {
+      flex-direction: row;
+
+      &__btn {
+        flex: 1 0 0;
+        text-decoration: underline;
+        width: auto;
+        height: auto;
+        border-radius: 2px;
+        background: none;
+        transition: opacity 250ms ease-in-out;
+
+        &:hover {
+          background-color: transparent;
+          text-decoration: none;
+        }//&:hover
+
+        &--add {
+          justify-content: flex-end;
+          padding-right: 20px;
+        }
+
+        &--withdraw {
+          margin-top: 0;
+          justify-content: flex-start;
+          padding-left: 20px;
+        }
+
+      }//&__btn
+
+    }//.balance
+
+    .nav-btn-wrapper{
+
+      .nav-btn {
+        border-top: 0;
+        height: 48px;
+
+        font-size: 13px;
+
+        &.is-active {
+          position: relative;
+
+          &:before {
+            content: ' ';
+            position: absolute;
+            left: 0; top: 0;
+            display: block;
+            width: 3px;
+            height: 100%;
+            background-color: map-get($colors, dark-sky-blue);
+          }//&:before
+
+        }//&.is-active
+
+      }//.nav-btn
+
+    }//.nav-btn-wrapper
+
   }//.side-nav-main
-
-  .profile {
-    flex: none;
-  }//.profile
-
-
-  .profile-detail-btn {
-    top: 7px;
-  }//.profile-detail-btn
-
-  .profile-info {
-    margin-top: 30px;
-
-    &__img {
-      height: 60px;
-    }
-
-  }//.profile-info
-
-  .balance {
-    flex-direction: row;
-
-    &__btn {
-      flex: 1 0 0;
-      text-decoration: underline;
-      width: auto;
-      height: auto;
-      border-radius: 2px;
-      background: none;
-      transition: opacity 250ms ease-in-out;
-
-      &:hover {
-        background-color: transparent;
-        text-decoration: none;
-      }//&:hover
-
-      &--add {
-        justify-content: flex-end;
-        padding-right: 20px;
-      }
-
-      &--withdraw {
-        margin-top: 0;
-        justify-content: flex-start;
-        padding-left: 20px;
-      }
-
-    }//&__btn
-
-  }//.balance
-
-  .nav-btn-wrapper{
-
-    .nav-btn {
-      border-top: 0;
-      height: 48px;
-
-      font-size: 13px;
-
-      &.is-active {
-        position: relative;
-
-        &:before {
-          content: ' ';
-          position: absolute;
-          left: 0; top: 0;
-          display: block;
-          width: 3px;
-          height: 100%;
-          background-color: map-get($colors, dark-sky-blue);
-        }//&:before
-
-      }//&.is-active
-
-    }//.nav-btn
-
-  }//.nav-btn-wrapper
 
 }//@media

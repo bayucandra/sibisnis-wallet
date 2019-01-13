@@ -33,7 +33,7 @@ class Dashboard extends Component {
   render() {
 
     return (
-      <div className="main-wrapper biq-wrapper biq-wrapper--md-no-side-padding l-dashboard">
+      <div className="main-wrapper biq-wrapper biq-wrapper--md-narrow-side-padding l-dashboard">
 
         <div className="biq-wrapper__inner l-dashboard__inner">
 

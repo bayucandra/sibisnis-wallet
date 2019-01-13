@@ -45,7 +45,7 @@ class BalanceMutation extends Component {
     let data = this.props.mutation_list.data;
 
     return (
-      <div className="main-wrapper main-wrapper--mobile-no-header biq-wrapper l-balance-mutation">
+      <div className="main-wrapper main-wrapper--mobile-no-header biq-wrapper biq-wrapper--md-narrow-side-padding l-balance-mutation">
 
         <div className="biq-wrapper__inner l-balance-mutation__inner">
 

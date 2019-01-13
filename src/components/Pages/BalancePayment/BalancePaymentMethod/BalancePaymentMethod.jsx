@@ -4,6 +4,7 @@ import { Subject } from 'rxjs';
 
 import {Button} from 'components/Widgets/material-ui';
 
+import appActions from "redux/actions/global/appActions";
 import balanceActions from "redux/actions/pages/balanceActions";
 
 import biqHelper from "lib/biqHelper";
@@ -63,14 +64,6 @@ class BalancePaymentMethod extends Component {
       this.props.history.push('/balance');
   }
 
-  componentWillUnmount() {
-    let {dispatch} = this.props;
-    dispatch( balanceActions.balanceMethodFetchCanceled() );
-
-    this.stop$.next();
-    this.stop$.complete();
-  }
-
   componentDidUpdate(prevProps, prevState, snapshot) {
 
     if ( !biqHelper.utils.isNull( this.props.balance.payment_method_selected ) ) {
@@ -89,6 +82,34 @@ class BalancePaymentMethod extends Component {
       }
     }
 
+  }
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    let {dispatch} = this.props;
+
+    let next_payment_methods_status = biqHelper.JSON.pathValueGet( nextProps.balance.payment_methods.server_response, 'status' );
+    let next_payment_methods_is_error = biqHelper.utils.httpResponseIsError( next_payment_methods_status );
+
+    if ( !this.props.balance.payment_methods.is_fetched && nextProps.balance.payment_methods.is_fetched && next_payment_methods_is_error ) {
+
+      this.props.history.goBack();
+
+      let error_msg = biqHelper.JSON.pathValueGet( nextProps.balance.payment_methods.server_response, 'response.response_code.message' );
+      error_msg = biqHelper.utils.isNull( error_msg ) ? `Error: ${ next_payment_methods_status }` : error_msg;
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal', notice: error_msg } ) );
+
+      return true;
+    }
+
+    return true;
+  }
+
+  componentWillUnmount() {
+    let {dispatch} = this.props;
+    dispatch( balanceActions.balanceMethodFetchCanceled() );
+
+    this.stop$.next();
+    this.stop$.complete();
   }
 
   render() {

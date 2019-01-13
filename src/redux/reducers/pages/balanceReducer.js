@@ -7,6 +7,7 @@ const state_default = {
   payment_methods: {
     is_fetching: false,
     is_fetched: false,
+    is_canceled: false,
     server_response: {}
   },
 
@@ -50,6 +51,11 @@ export default ( state = state_default, action ) => {
     case actionTypes.balance.PAYMENT_METHOD_FETCHED:
       new_state = {
         payment_methods: Object.assign( {}, state_default.payment_methods, { is_fetching: false, is_fetched: true, server_response: action.payload } )
+      };
+      break;
+    case actionTypes.balance.PAYMENT_METHOD_FETCH_CANCELED:
+      new_state = {
+        payment_methods: Object.assign( {}, state_default.payment_methods, { is_canceled: true } )
       };
       break;
 
@@ -115,7 +121,6 @@ export default ( state = state_default, action ) => {
       return state;
 
   }
-
 
   return Object.assign( {}, state, new_state );
 

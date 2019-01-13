@@ -21,15 +21,16 @@ const paymentMethodFetch = action$ => action$.pipe(
       body: Object.assign({}, biqConfig.api.data_auth)
     })
       .pipe(
-        map(res => balanceActions.balanceMethodFetched({status: res.status, response: res.response})),
+
+        map(res => balanceActions.balanceMethodFetched({status: res.status, response: res.response} ) ),
 
         takeUntil(action$.pipe(
           filter(action => action.type === actionTypes.balance.PAYMENT_METHOD_FETCH_CANCELED)
         )),
 
         catchError(err => of({
-          type: actionTypes.balance.PAYMENT_TRANSACTION_FETCHED,
-          payload: err.xhr
+          type: actionTypes.balance.PAYMENT_METHOD_FETCHED,
+          payload: {status: err.xhr.status, response: err.xhr.response}
         }))
       )
   )

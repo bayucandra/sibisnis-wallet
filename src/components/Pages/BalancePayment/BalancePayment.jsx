@@ -41,7 +41,9 @@ class BalancePayment extends Component {
     if (
       (nextProps.balance.payment_submit.is_submitted && !nextProps.balance.payment_transaction.is_fetching)
       || ( !this.props.balance.payment_transaction.is_fetched && nextProps.balance.payment_transaction.is_fetched && !nextProps.balance.payment_submit.is_submitting )
+
       || ( !this.props.balance.payment_methods.is_fetched && nextProps.balance.payment_methods.is_fetched )
+      || ( !this.props.balance.payment_methods.is_canceled && nextProps.balance.payment_methods.is_canceled )
     ) {
       if( this.props.app.loading_indicator_show ) {
         dispatch(appActions.appLoadingIndicatorHide());

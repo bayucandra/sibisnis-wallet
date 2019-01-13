@@ -135,7 +135,7 @@ class Profile extends Component {
     }
 
     return (
-      <div className="main-wrapper main-wrapper--mobile-no-header biq-wrapper biq-wrapper--md-no-side-padding l-profile">
+      <div className="main-wrapper main-wrapper--mobile-no-header biq-wrapper biq-wrapper--md-narrow-side-padding l-profile">
 
         <div className="biq-wrapper__inner l-profile__inner">
 

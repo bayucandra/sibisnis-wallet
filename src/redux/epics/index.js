@@ -5,6 +5,7 @@ import userEpics from "./global/userEpics";
 
 import dashboardEpics from "./pages/dashboardEpics";
 import balanceEpics from "./pages/balanceEpics";
+import balanceMutationEpic from "./pages/balanceMutationEpic";
 import newsDetailEpic from "./pages/newsDetailEpics";
 
 let epics_arr = [
@@ -13,6 +14,7 @@ let epics_arr = [
 
   ...dashboardEpics,
   ...balanceEpics,
+  ...balanceMutationEpic,
   ...newsDetailEpic
 ];
 

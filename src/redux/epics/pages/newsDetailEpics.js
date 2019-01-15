@@ -4,7 +4,6 @@ import {ajax as rxAjax} from 'rxjs/ajax';
 import {switchMap, map, takeUntil, filter, catchError} from "rxjs/operators";
 
 import actionTypes from "redux/action-types";
-import "redux/actions/pages/newsDetailActions";
 import biqConfig from "../../../providers/biqConfig";
 import newsDetailActions from "../../actions/pages/newsDetailActions";
 

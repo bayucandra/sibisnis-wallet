@@ -20,7 +20,26 @@ class Header extends Component {
 
   _switchClick = () => {
     biqHelper.utils.clickTimeout( () => {
-      window.location = biqConfig.agen.url_base;
+
+      switch( this.props.user_profile.kelompok ) {
+
+        case 'master':
+          window.location = `webmin.${biqConfig.url_base}`;
+          break;
+
+        case 'premium':
+          window.location = `${biqConfig.url_base}/dashboard`;
+          break;
+
+        case 'paket':
+          window.location = `${biqConfig.url_base}/agen`;
+          break;
+
+        default:
+          window.location = `${biqConfig.url_base}/agen`;
+
+      }
+
     } );
   };
 
@@ -74,7 +93,8 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     header_mobile_show: state.app.header_mobile_show,
-    should_redirect_to_agen: state.app.should_redirect_to_agen
+    should_redirect_to_agen: state.app.should_redirect_to_agen,
+    user_profile: state.user.profile
   }
 };
 

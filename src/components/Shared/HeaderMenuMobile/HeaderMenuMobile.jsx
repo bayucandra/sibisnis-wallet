@@ -30,7 +30,26 @@ class HeaderMenuMobile extends  Component {
 
   _switchClick = () => {
     biqHelper.utils.clickTimeout( () => {
-      window.location = biqConfig.agen.url_base;
+
+      switch( this.props.user_profile.kelompok ) {
+
+        case 'master':
+          window.location = `webmin.${biqConfig.url_base}`;
+          break;
+
+        case 'premium':
+          window.location = `${biqConfig.url_base}/dashboard`;
+          break;
+
+        case 'paket':
+          window.location = `${biqConfig.url_base}/agen`;
+          break;
+
+        default:
+          window.location = `${biqConfig.url_base}/agen`;
+
+      }
+
     } );
   };
 
@@ -84,7 +103,8 @@ class HeaderMenuMobile extends  Component {
 const mapStateToProps = state => {
 
   return {
-    header_menu_mobile_show: state.app.header_menu_mobile_show
+    header_menu_mobile_show: state.app.header_menu_mobile_show,
+    user_profile: state.user.profile
   };
 
 };

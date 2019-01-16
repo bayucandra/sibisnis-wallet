@@ -33,7 +33,7 @@ class HeaderMenuMobile extends  Component {
 
       let dst = `${biqConfig.url_base}/agen`;
 
-      switch( this.props.user_profile.kelompok ) {
+      switch( this.props.user_profile.kelompok.trim() ) {
 
         case 'master':
           dst = `${biqConfig.protocol}//webmin.${biqConfig.host}`;

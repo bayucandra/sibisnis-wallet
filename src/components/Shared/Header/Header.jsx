@@ -32,7 +32,6 @@ class Header extends Component {
 
         case 'premium':
           dst = `${biqConfig.url_base}/dashboard`;
-          console.log(dst);
           break;
 
         case 'paket':
@@ -43,9 +42,6 @@ class Header extends Component {
           dst = `${biqConfig.url_base}/agen`;
 
       }
-
-      console.log(this.props.user_profile.kelompok);
-      console.log(dst);
 
       window.location = dst;
 

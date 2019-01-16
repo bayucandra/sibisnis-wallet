@@ -8,7 +8,8 @@ import $ from 'jquery';
 let window_el = $(window);
 let state_default = {
   is_app_initialized: false
-  , is_es_initialized: false
+  , sse: { initializing: false, initialized: false, error: false }
+  // , is_es_initialized: false
   , is_logging_out: false
   , logout_response: {}
   , is_logged_in: false
@@ -59,17 +60,16 @@ export default ( state = state_default, action ) => {
       new_state.is_logged_in = is_logged_in === true || is_logged_in === 'true';
       break;
 
-    case actionTypes.app.SSE_AGEN_INIT:
-      new_state = { is_es_initialized: false };
-      if ( biqHelper.utils.isNull( esProvider.state.es ) ) {
-        try {
-          esProvider.init();
-          new_state.is_es_initialized = true;
-        } catch(e) {
-          new_state.is_es_initialized = false;
-          console.error( 'ERROR::actionTypes.app.SSE_AGEN_INIT: ' + e.message );
-        }
-      }
+    case actionTypes.app.SSE_AGEN_INITIALIZING:
+      new_state = {
+        sse: Object.assign( {}, state_default.sse, { initializing: true } )
+      };
+      break;
+
+    case actionTypes.app.SSE_AGEN_INITIALIZED:
+      new_state = {
+        sse: Object.assign( {}, state_default.sse, action.payload )
+      };
       break;
 
     case actionTypes.app.ROUTER_CHANGE:

@@ -6,9 +6,16 @@ import actionTypes from "../../action-types/index";
     }
   }
 
-  function appSseAgenInit() {
+  function appSseAgenInitializing() {
     return {
-      type: actionTypes.app.SSE_AGEN_INIT
+      type: actionTypes.app.SSE_AGEN_INITIALIZING
+    }
+  }
+
+  function appSseAgenInitialized( payload = { initialized: true, error: false } ) {
+    return {
+      type: actionTypes.app.SSE_AGEN_INITIALIZED,
+      payload
     }
   }
 
@@ -111,7 +118,8 @@ import actionTypes from "../../action-types/index";
 
   const actions = {
     appInit,
-    appSseAgenInit,
+    appSseAgenInitializing,
+    appSseAgenInitialized,
     appLogout,
     appLoggingOut,
     appLoggedOut,

@@ -59,16 +59,8 @@ class App extends Component {
     if ( process.env.NODE_ENV === 'development' ) console.log('initializing app');
 
     dispatch(appActions.appInit());
-    dispatch(appActions.appSseAgenInit());
+    dispatch(appActions.appSseAgenInitializing());
     dispatch(userActions.userProfileGet());
-
-    if ( process.env.NODE_ENV === 'production' ) {
-      esProvider.addEventListener('login', (e) => {
-        if (e.data === 'false' || !e.data) {
-          dispatch(appActions.appLogout());
-        }
-      });
-    }
 
 
     let source$ = fromEvent(window, 'resize')
@@ -98,8 +90,6 @@ class App extends Component {
 
   }
 
-  shouldCompo
-
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     let {dispatch} = this.props;
     if ( this.props.location !== nextProps.location ) {
@@ -112,6 +102,42 @@ class App extends Component {
       dispatch( appActions.appStatesReset() );
       dispatch( appActions.appRedirectToAgen() );
       return false;
+    }
+
+    if ( !this.props.app.sse.initializing && nextProps.app.sse.initializing ) {
+      if ( biqHelper.utils.isNull( esProvider.state.es ) ) {
+        try {
+          esProvider.init();
+          dispatch( appActions.appSseAgenInitialized( { initialized: true, error: false } ) );
+        } catch(e) {
+          dispatch( appActions.appSseAgenInitialized( { initialized: false, error: true } ) );
+          console.error( 'ERROR::actionTypes.app.SSE_AGEN_INIT: ' + e.message );
+        }
+
+        return false;
+      }
+    }
+
+    if ( !this.props.app.sse.initialized && nextProps.app.sse.initialized ) {
+
+      if ( process.env.NODE_ENV === 'production' ) {
+        esProvider.addEventListener('login', (e) => {
+          if (e.data === 'false' || !e.data) {
+            dispatch(appActions.appLogout());
+          }
+        });
+      }
+
+      esProvider.addEventListener('saldo_member', (e) => {
+        let balance_current = this.props.user_profile.saldo;
+        let balance_update = e.data;
+
+        if ( balance_current !== balance_update ) {
+          dispatch( userActions.userProfileUpdate({saldo: balance_update}) );
+        }
+
+      });
+
     }
 
     return true;

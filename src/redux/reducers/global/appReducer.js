@@ -12,7 +12,8 @@ let state_default = {
   , is_logging_out: false
   , logout_response: {}
   , is_logged_in: false
-  , should_redirect_to_agen: false
+  , should_switch_platform: false
+  , platform_kelompok: ''
   , header_mobile_show: true
   , header_menu_mobile_show: true
   , loading_indicator_show: false
@@ -100,8 +101,8 @@ export default ( state = state_default, action ) => {
       new_state = { loading_indicator_show: false };
       break;
 
-    case actionTypes.app.REDIRECT_TO_AGEN:
-      new_state = { should_redirect_to_agen: true };
+    case actionTypes.app.SWITCH_PLATFORM:
+      new_state = { should_switch_platform: true };
       break;
 
 

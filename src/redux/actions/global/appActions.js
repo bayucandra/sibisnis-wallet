@@ -69,7 +69,7 @@ import actionTypes from "../../action-types/index";
 
   function appRedirectToAgen() {
     return {
-      type: actionTypes.app.REDIRECT_TO_AGEN
+      type: actionTypes.app.SWITCH_PLATFORM
     }
   }
 

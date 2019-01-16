@@ -98,7 +98,9 @@ class App extends Component {
 
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldCompo
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
     let {dispatch} = this.props;
     if ( this.props.location !== nextProps.location ) {
       dispatch( appActions.appRouterChange( { header_mobile_show : true, header_menu_mobile_show: true } ) );//default should always true, it will be overridden at page/component part if it should be false
@@ -106,6 +108,7 @@ class App extends Component {
 
     if ( nextProps.app.is_app_initialized && this.props.app.is_logged_in && !nextProps.app.is_logged_in ) {
       biqHelper.localStorage.clear();
+      biqConfig.platform_kelompok = this.props.user_profile.kelompok.trim();
       dispatch( appActions.appStatesReset() );
       dispatch( appActions.appRedirectToAgen() );
       return false;
@@ -121,7 +124,32 @@ class App extends Component {
     if (prevProps.location.pathname !== this.props.location.pathname)
       body.stop().animate({scrollTop:0}, 500, 'swing');
 
-    if( this.props.app.should_redirect_to_agen ) window.location = biqConfig.agen.url_base + '/#/login/default';
+    if( this.props.app.should_switch_platform ){
+
+      let dst = `${biqConfig.url_base}/agen`;
+
+      switch( biqConfig.platform_kelompok ) {
+
+        case 'master':
+          dst = `${biqConfig.protocol}//webmin.${biqConfig.host}`;
+          break;
+
+        case 'premium':
+          dst = `${biqConfig.url_base}/dashboard`;
+          break;
+
+        case 'paket':
+          dst = `${biqConfig.url_base}/agen`;
+          break;
+
+        default:
+          dst = `${biqConfig.url_base}/agen`;
+
+      }
+
+      window.location = dst;
+      // window.location = biqConfig.agen.url_base + '/#/login/default';
+    }
 
     if( this.props.app.is_logging_out ) {
 
@@ -212,9 +240,10 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = ( state ) => {
+const mapStateToProps = state => {
   return {
-    app: state.app
+    app: state.app,
+    user_profile: state.user.profile
   }
 };
 

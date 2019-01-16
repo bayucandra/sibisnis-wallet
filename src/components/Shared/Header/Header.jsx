@@ -98,7 +98,6 @@ class Header extends Component {
 const mapStateToProps = state => {
   return {
     header_mobile_show: state.app.header_mobile_show,
-    should_redirect_to_agen: state.app.should_redirect_to_agen,
     user_profile: state.user.profile
   }
 };

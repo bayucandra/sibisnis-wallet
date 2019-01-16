@@ -32,6 +32,7 @@ class Header extends Component {
 
         case 'premium':
           dst = `${biqConfig.url_base}/dashboard`;
+          console.log(dst);
           break;
 
         case 'paket':

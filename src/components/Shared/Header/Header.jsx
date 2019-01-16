@@ -19,26 +19,34 @@ import './Header.scss';
 class Header extends Component {
 
   _switchClick = () => {
+
     biqHelper.utils.clickTimeout( () => {
+
+      let dst = `${biqConfig.url_base}/agen`;
 
       switch( this.props.user_profile.kelompok ) {
 
         case 'master':
-          window.location = `webmin.${biqConfig.url_base}`;
+          dst = `${biqConfig.protocol}//webmin.${biqConfig.host}`;
           break;
 
         case 'premium':
-          window.location = `${biqConfig.url_base}/dashboard`;
+          dst = `${biqConfig.url_base}/dashboard`;
           break;
 
         case 'paket':
-          window.location = `${biqConfig.url_base}/agen`;
+          dst = `${biqConfig.url_base}/agen`;
           break;
 
         default:
-          window.location = `${biqConfig.url_base}/agen`;
+          dst = `${biqConfig.url_base}/agen`;
 
       }
+
+      console.log(this.props.user_profile.kelompok);
+      console.log(dst);
+
+      window.location = dst;
 
     } );
   };

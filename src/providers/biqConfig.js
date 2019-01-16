@@ -9,10 +9,13 @@ let path = path_arr.length > 0 ? path_arr.join("/") : '';
 
 let biqConfig = {};
 
-biqConfig.url_base = `${window.location.protocol}//${window.location.host}`;
+biqConfig.protocol = window.location.protocol;
+biqConfig.host = window.location.host;
+
+biqConfig.url_base = `${biqConfig.protocol}//${biqConfig.host}`;
 
 biqConfig.api = {
-  url_base: `${window.location.protocol}//${window.location.host + path}`,
+  url_base: `${biqConfig.protocol}//${biqConfig.host + path}`,
   data_package_name: {},
   csrf_token: Date.now(),
   error_response_fake: {

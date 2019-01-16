@@ -13,11 +13,13 @@ function balanceMutationfetched( data ) {
   }
 }
 
+/*
 function balanceMutationReset() {
   return {
     type: actionTypes.balanceMutation.SCROLL_PAGINATION_RESET
   }
 }
+*/
 
 
 

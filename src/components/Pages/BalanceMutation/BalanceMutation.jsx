@@ -3,16 +3,18 @@ import {connect} from 'react-redux';
 
 import biqHelper from "lib/biqHelper";
 
-import { Button } from "components/Widgets/material-ui";
 
 import appActions from "redux/actions/global/appActions";
 import balanceMutationActions from "redux/actions/pages/balanceMutationActions";
+
+import { Button } from "components/Widgets/material-ui";
 
 import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
 import HeaderMobileGeneral from "components/Shared/HeaderMobileGeneral/HeaderMobileGeneral";
 import ScrollPagination from "components/Widgets/ScrollPagination/ScrollPagination";
 
 import "./BalanceMutation.scss";
+import biqConfig from "../../../providers/biqConfig";
 
 class BalanceMutation extends Component {
 
@@ -54,10 +56,49 @@ class BalanceMutation extends Component {
 
   _numberPaginationOnClick = page_number => {
     if ( page_number < 1 ) return;
+
+    let limit_current= biqHelper.JSON.pathValueGet( this.props.mutation_number_pagination.server_response, 'response.limit' );
+    let offset_current = biqHelper.JSON.pathValueGet( this.props.mutation_number_pagination.server_response, 'response.offset' );
+    let recordsTotal = biqHelper.JSON.pathValueGet( this.props.mutation_number_pagination.server_response, 'response.recordsTotal' );
+
+    if ( biqHelper.utils.isNullSome( limit_current, offset_current, recordsTotal ) ) return null;
+
+    limit_current = biqHelper.string.toInt( limit_current );
+    offset_current = biqHelper.string.toInt( offset_current );
+    recordsTotal = biqHelper.string.toInt( recordsTotal );
+
+    let page_number_current = offset_current / limit_current + 1;
+
+    let page_total = Math.ceil( recordsTotal / limit_current );
+
+    if ( page_number_current === page_number || page_number > page_total ) return;
+
     let {dispatch} = this.props;
     let offset = (page_number - 1) * this.config.limit;
     dispatch( balanceMutationActions.balanceMutationNumberPaginationFetch( { limit: this.config.limit, offset } ) );
   };
+
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    let {dispatch} = this.props;
+
+    if (
+      !this.props.mutation_number_pagination.is_fetched
+      && nextProps.mutation_number_pagination.is_fetched
+      && biqHelper.utils.httpResponseIsError( nextProps.mutation_number_pagination.server_response.status )
+    ) {
+
+      let error_message = `Gagal mengambil data "Mutasi Saldo". Error: ${nextProps.mutation_number_pagination.server_response.status}`;
+      let server_message = biqHelper.JSON.pathValueGet( nextProps.mutation_number_pagination.server_response, 'response.response_code.message' );
+      error_message = !biqHelper.utils.isNull( server_message ) ? server_message : error_message;
+
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal', notice: error_message } ) );
+
+      return true;
+    }
+
+    return true;
+
+  }
 
   render() {
 
@@ -79,8 +120,8 @@ class BalanceMutation extends Component {
             <div className="balance-mutation-panel__body">
 
               <ScrollPagination className="mutation-table-mobile hidden-md-up" biqLimit={15}
-                biqUrl={`http://newzonatik.com:8080/sibisnis-wallet/public/api/balance-mutation.php`}
-                biqMethod={'GET'}
+                biqUrl={`${biqConfig.api.url_base}/api/wallet/mutasi_saldo`}
+                biqMethod={'POST'}
                 onFetch={this._onFetch} onFetched={this._onFetched}>
                 {
 
@@ -94,13 +135,25 @@ class BalanceMutation extends Component {
                       <div className={`biq-row-mobile${ idx === 0 ? ' is-first' : '' }`} key={el.id}>
 
                         <div className="biq-col-left">
-                          <div className="date">{ el.date }</div>
-                          <div className="description">{el.description}</div>
+                          <div className="date">{ el.tanggal }</div>
+                          <div className="description">{el.ket}</div>
                         </div>
 
                         <div className="biq-col-right">
-                          <div className="balance">{ biqHelper.utils.numberFormat( el.balance ) }</div>
-                          <div className="mutation-amount">{ biqHelper.utils.numberFormat( el.amount ) }</div>
+                          <div className="balance">{ biqHelper.utils.numberFormat( el.lastsaldo ) }</div>
+                          <div className="mutation-amount">
+
+                            { ( function() {
+                              let debet = biqHelper.string.toInt( el.debet );
+                              let kredit = biqHelper.string.toInt( el.kredit );
+
+                              let sign = kredit === 0 ? '+' : '-';
+                              let value = kredit === 0 ? debet : kredit;
+
+                              return `${sign}${biqHelper.utils.numberFormat(value)}`;
+                            } )() }
+
+                          </div>
                         </div>
 
                       </div>
@@ -140,14 +193,32 @@ class BalanceMutation extends Component {
                       return (
                         <div className="biq-row" key={el.id}>
                           <div className="biq-col biq-col--spacer-start"/>
-                          <div className="biq-col biq-col--date">{ el.date }</div>
-                          <div className="biq-col biq-col--description">{ el.description }</div>
-                          <div className="biq-col biq-col--amount">{ biqHelper.utils.numberFormat( el.amount, 'Rp' ) }</div>
-                          <div className="biq-col biq-col--balance">{ biqHelper.utils.numberFormat( el.balance, 'Rp' ) }</div>
+                          <div className="biq-col biq-col--date">{ el.tanggal }</div>
+                          <div className="biq-col biq-col--description">{ el.ket }</div>
+                          <div className="biq-col biq-col--amount">{ ( function() {
+                            let debet = biqHelper.string.toInt( el.debet );
+                            let kredit = biqHelper.string.toInt( el.kredit );
+
+                            let sign = kredit === 0 ? '+' : '-';
+                            let value = kredit === 0 ? debet : kredit;
+
+                            return `${sign} ${biqHelper.utils.numberFormat(value)}`;
+                          } )() }</div>
+                          <div className="biq-col biq-col--balance">{ biqHelper.utils.numberFormat( el.lastsaldo, 'Rp ' ) }</div>
                         </div>
                       );
                     } )
                   }
+
+                  {
+                    this.props.mutation_number_pagination.is_fetching
+                      &&
+                    <div className="c-loading-indicator">
+                      <div className="c-loading-indicator__circle"/>
+                      <div className="c-loading-indicator__label">Loading...</div>
+                    </div>
+                  }
+
 
                 </div>
 
@@ -155,10 +226,9 @@ class BalanceMutation extends Component {
                 <div className="mutation-table-desktop__footer">
 
                   <div className="pagination">
-                    <Button className="pagination__item pagination__item--nav-first">&lt;&lt;</Button>
 
                     {
-                      this.props.mutation_number_pagination.is_fetched
+                      this.props.mutation_number_pagination.is_fetched || !biqHelper.utils.isNull( this.props.mutation_number_pagination.server_response )
 
                         ?
 
@@ -180,10 +250,30 @@ class BalanceMutation extends Component {
 
                         let page_numbers_arr = biqHelper.utils.arrayGen( page_total );
 
+                        let pagination_shown = 7;
+                        if ( page_numbers_arr.length > pagination_shown && page_number_current < pagination_shown ) {
+                          page_numbers_arr.splice( -( page_numbers_arr.length - pagination_shown ) );
+
+                        } else if( page_number_current >= pagination_shown && page_number_current <= (page_total-2) ) {
+
+                          page_numbers_arr.splice( -( page_total - page_number_current - 1 ) );
+                          page_numbers_arr.splice( 0, page_numbers_arr.length - pagination_shown );
+
+                        } else if ( page_number_current >= (page_total-2) ) {
+
+                          page_numbers_arr.splice( 0, page_numbers_arr.length - pagination_shown );
+                        }
+
                         let pagination_jsx = [];
 
                         pagination_jsx.push(
-                          <Button className="pagination__item" key={'prev_nav'} onClick={ () => this._numberPaginationOnClick( page_number_current - 1 ) }>
+                          <Button className="pagination__item pagination__item--nav-first" key={'nav_first'} onClick={ () => this._numberPaginationOnClick( 1 ) }>
+                            &lt;&lt;
+                          </Button>
+                        );
+
+                        pagination_jsx.push(
+                          <Button className="pagination__item" key={'nav_prev'} onClick={ () => this._numberPaginationOnClick( page_number_current - 1 ) }>
                             &lt;
                           </Button>
                         );
@@ -202,6 +292,18 @@ class BalanceMutation extends Component {
 
                         pagination_jsx.push(page_numbers_jsx);
 
+                        pagination_jsx.push(
+                          <Button className="pagination__item" key={"nav_next"} onClick={ () => this._numberPaginationOnClick( page_number_current + 1 ) }>
+                            &gt;
+                          </Button>
+                        );
+
+                        pagination_jsx.push(
+                          <Button className="pagination__item pagination__item--nav-last" key={"nav_last"} onClick={ () => this._numberPaginationOnClick( page_total ) }>
+                            &gt;&gt;
+                          </Button>
+                        );
+
                         return pagination_jsx;
 
                       })()
@@ -212,8 +314,6 @@ class BalanceMutation extends Component {
 
                     }
 
-                    <Button className="pagination__item">&gt;</Button>
-                    <Button className="pagination__item pagination__item--nav-last">&gt;&gt;</Button>
                   </div>
 
                 </div>

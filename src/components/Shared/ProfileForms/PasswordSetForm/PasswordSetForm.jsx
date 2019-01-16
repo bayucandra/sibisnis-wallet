@@ -198,7 +198,7 @@ class PasswordSetForm extends Component {
       let server_message = biqHelper.JSON.pathValueGet( nextProps.user_password_update.server_response, 'response.response_code.message' );
       error_message = !biqHelper.utils.isNull( server_message ) ? server_message : error_message;
 
-      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal merubah password', notice: error_message } ) );
+      dispatch( appActions.appDialogNoticeOpen( { title: 'Gagal', notice: error_message } ) );
 
       return true;
 

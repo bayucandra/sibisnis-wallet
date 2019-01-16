@@ -11,9 +11,11 @@
 
     .balance-mutation-panel {
       margin-left: 29px;
+      min-width: 0;
 
       &__body {
         background: none;
+        min-width: 0;
 
         .mutation-table-desktop {
           display: flex;
@@ -57,12 +59,13 @@
               text-overflow: ellipsis;
             }//&--description
 
+            $design-diff: 15;
             &--amount{
-              flex: ( 134 - $margin-right ) 1 0;
+              flex: ( 134 - $design-diff - $margin-right ) 1 0;
             }//&--amount
 
             &--balance {
-              flex: ( 105 - $margin-right ) 1 0;
+              flex: ( 105 + $design-diff - $margin-right ) 1 0;
             }//&--balance
 
           }//.biq-col
@@ -86,9 +89,11 @@
           }//&__header
 
           &__body {
+            position:relative;
             display: flex;
             flex-direction: column;
             justify-content: flex-start;
+            min-height: 300px;
 
             .biq-row {
               display: flex;
@@ -104,6 +109,10 @@
               letter-spacing: 0.3px;
               color: map-get($colors, charcoal-grey);
             }//.biq-row
+
+            .c-loading-indicator {
+              background: rgba( #FFFFFF, 0.8 );
+            }//.c-loading-indicator
 
           }//&__body
 

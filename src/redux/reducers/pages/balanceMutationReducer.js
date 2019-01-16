@@ -38,7 +38,15 @@ export default ( state = state_default, action ) => {
 
 
     case actionTypes.balanceMutation.NUMBER_PAGINATION_FETCH:
-      new_state = { mutation_number_pagination: Object.assign( {}, state_default.mutation_number_pagination, { is_fetching: true  } ) };
+      new_state = { mutation_number_pagination: Object.assign(
+        {},
+          state_default.mutation_number_pagination,
+        {
+            is_fetching: true,
+            server_response: state.mutation_number_pagination.server_response//maintain current response
+          }
+        )
+      };
       break;
 
     case actionTypes.balanceMutation.NUMBER_PAGINATION_FETCHED:

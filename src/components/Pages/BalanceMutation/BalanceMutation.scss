@@ -30,7 +30,7 @@
           flex: none;
           display: flex;
           justify-content: space-between;
-          height: 81px;
+          min-height: 81px;
           padding: 9.5px 15px;
           box-sizing: border-box;
           border-top: 1px solid map-get( $colors, very-light-pink-ten );
@@ -86,6 +86,8 @@
             }//.balance
 
             .mutation-amount {
+              white-space: nowrap;
+
               margin-top: 2px;
               font-size: 16px;
               font-weight: normal;

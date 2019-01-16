@@ -5,6 +5,7 @@ import { switchMap, map, takeUntil, filter, catchError } from "rxjs/operators";
 
 import actionTypes from "redux/action-types";
 import balanceMutationActions from "redux/actions/pages/balanceMutationActions";
+import biqConfig from "../../../providers/biqConfig";
 
 
 const balanceMutationNumberPaginationFetch = action$ => action$.pipe(
@@ -15,12 +16,13 @@ const balanceMutationNumberPaginationFetch = action$ => action$.pipe(
 
     action => {
 
-      let url = `http://newzonatik.com:8080/sibisnis-wallet/public/api/balance-mutation.php?limit=${action.payload.limit}&offset=${action.payload.offset}`;
+      let url = `${biqConfig.api.url_base}/api/wallet/mutasi_saldo`;
       let ajax$ = rxAjax({
         url: url,
-        method: 'GET',
+        method: 'POST',
         crossDomain: true,
-        withCredentials: true
+        withCredentials: true,
+        body: Object.assign( {}, biqConfig.api.data_auth, { limit: action.payload.limit, offset: action.payload.offset } )
       });
 
       return ajax$.pipe(

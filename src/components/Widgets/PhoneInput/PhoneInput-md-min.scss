@@ -1,0 +1,21 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .w-phone-input {
+
+    &__input {
+      margin-top: 12px;
+
+      &__clear-btn {
+        right: 20px;
+      }//&__clear-btn
+
+    }//&__input
+
+    &__notice {
+      margin-top: 7px;
+      min-height: 22px;
+    }//&__notice
+
+  }//.w-phone-input
+
+}

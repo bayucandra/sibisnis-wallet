@@ -302,7 +302,10 @@ class Profile extends Component {
 
                                 :
 
-                              'Ubah'
+                              !this.state.address_input_desktop?
+                                'Ubah'
+                                  :
+                                'Tutup'
                           }
                         </span>
 

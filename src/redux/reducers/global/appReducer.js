@@ -1,7 +1,5 @@
 import actionTypes from "redux/action-types";
 import biqHelper from "lib/biqHelper";
-// import biqConfig from "../../providers/biqConfig";
-import esProvider from "../../../providers/esProvider";
 
 import $ from 'jquery';
 

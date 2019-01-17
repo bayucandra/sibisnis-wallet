@@ -156,7 +156,7 @@ class SideNavMain extends Component {
             </div>
           </Button>
 
-          <Button className={ `nav-btn nav-btn--transfer-saldo${ is_transfer_saldo_page ? ' is-active' : '' }` }  onClick={ () => this._onNavigationClick('/dashboard') }>
+          <Button className={ `nav-btn nav-btn--transfer-saldo${ is_transfer_saldo_page ? ' is-active' : '' }` }  onClick={ () => this._onNavigationClick('/balance-transfer') }>
             <div className="nav-btn__inner">
               <div className="icon icon--transfer-saldo"/>
               <div className="label">Transfer Saldo</div>

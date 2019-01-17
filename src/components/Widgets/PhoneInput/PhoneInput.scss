@@ -1,0 +1,108 @@
+@import "../../../styles/variables";
+
+.w-phone-input {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  margin-top: 15px;
+
+  &__label {
+    font-size: 13px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: map-get($colors, charcoal-grey);
+  }//&__label
+
+  &__input {
+    position: relative;
+    display: flex;
+    margin-top: 5px;
+    border: 1px solid map-get( $colors, gray-87 );
+    border-radius: 5px;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    font-size: 15px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.5px;
+    color: map-get($colors, charcoal-grey);
+
+    &__country-code {
+      height: 50px;
+      width: 88px;
+      line-height: 50px;
+      border-right: 0.5px solid map-get( $colors, gray-87 );
+      text-align: center;
+
+      &:after {
+        content: ' ';
+        display: inline-block;
+        width: 6px; height: 6px;
+        margin-left: 13px;
+        box-sizing: border-box;
+        border-color: map-get( $colors, brown-grey-two );
+        border-style: solid;
+        border-width: 0 1.5px 1.5px 0;
+        transform: rotate( 45deg ) translateY( -4px );
+        transform-origin: center;
+      }//&:after
+
+    }//&__country-code
+
+    &__field {
+      flex: 1 1 1px;
+      height: 50px;
+      padding: 0 10px;
+      line-height: 50px;
+      border-top-right-radius: 5px;
+      border-bottom-right-radius: 5px;
+
+      font-size: 15px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      letter-spacing: 0.5px;
+      color: map-get($colors, charcoal-grey);
+    }//&__field
+
+    &__clear-btn {
+      position: absolute;
+      top: 50%;
+      right: 13px;
+      width: 24px;
+      height: 24px;
+      border-radius: (24px/2);
+      transform: translateY( -50% );
+      background: url( '../../../images/icons/close-text.svg' ) no-repeat center;
+      background-size: contain;
+    }//&__clear-btn
+
+  }//&__input
+
+  &__notice {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    min-height: 19px;
+
+    .error {
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.58;
+      letter-spacing: 0.5px;
+      color: map-get($colors, strawberry);
+    }//.error
+
+  }//&__notice
+
+}//.w-phone-input
+
+@import "./PhoneInput-md-min";

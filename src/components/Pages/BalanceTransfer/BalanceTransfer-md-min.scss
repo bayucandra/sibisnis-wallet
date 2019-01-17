@@ -1,0 +1,53 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-balance-transfer {
+
+    &__inner {
+      flex: none;
+      flex-direction: row;
+      align-items: flex-start;
+    }//&__inner
+
+    .l-balance-transfer-panel {
+      margin-left: 29px;
+      border-radius: 5px;
+      box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+      overflow: hidden;
+
+      &__title {
+        margin: 21px 0 0 30px;
+
+        font-size: 16px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, charcoal-grey);
+      }//&__title
+
+      &__body {
+        flex: none;
+        padding: 0 50px 41px 30px;
+
+        .w-phone-input {
+          margin-top: 51px;
+        }//.w-phone-input
+
+        .footer {
+          justify-content: flex-end;
+          margin-top: 52px;
+
+          .submit-btn {
+            flex: none;
+          }//.submit-btn
+
+        }//.footer
+
+      }//&__body
+
+    }//.l-balance-transfer-panel
+
+  }//.l-balance-transfer
+
+}//@media

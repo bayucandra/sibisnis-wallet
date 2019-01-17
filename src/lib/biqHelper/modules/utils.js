@@ -240,31 +240,6 @@ class BiqHelperUtils {
     return ret;
   }
 
-  phoneDashFormat( input ) {
-
-    if( typeof input === 'number') {
-        input = input.toString();
-    } else if( typeof input !== 'string') {
-      return '';
-    }
-
-    let ret = '';
-
-    let inc = 0;
-    for ( let i=input.length - 1; i>=0; i-- ) {
-
-      ret = input.substring( i, i+1 ) + ret;
-      if( (inc + 1) % 4 === 0 && i !== 0 ) {
-        ret = '-' + ret;
-      }
-
-      inc++;
-    }
-
-    return ret;
-
-  }
-
   dataURIToBlob(dataURI) {
     dataURI = dataURI.replace(/^data:/, '');
 

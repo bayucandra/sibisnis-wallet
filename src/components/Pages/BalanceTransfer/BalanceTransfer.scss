@@ -1,0 +1,67 @@
+@import "../../../styles/variables";
+
+.l-balance-transfer {
+
+  &__inner {
+    flex: 1 1 1px;
+    flex-direction: column;
+    align-items: normal;
+    justify-content: flex-start;
+  }//&__inner
+
+  .l-balance-transfer-panel {
+    flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+    background: #FFFFFF;
+
+    &__body {
+      flex: 1 1 1px;
+      display: flex;
+      flex-direction: column;
+      padding: 0 15px;
+      overflow-y: auto;
+
+      .w-phone-input {
+        margin-top: 40px;
+      }//.w-phone-input
+
+      .footer {
+        display: flex;
+        margin-top: 30px;
+
+        .submit-btn {
+          flex: 1 1 1px;
+          min-width: 180px;
+          height: 50px;
+          border-radius: 5px;
+          box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
+          background-color: map-get($colors, dark-mint);
+          opacity: 0.6;
+          cursor: not-allowed;
+
+          font-size: 14px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: 0.5px;
+          text-align: center;
+          color: #ffffff;
+
+          &.is-ready {
+            opacity: 1;
+            cursor: pointer;
+          }//&.is-ready
+
+        }//.submit-btn
+
+      }//.footer
+
+    }//&__body
+
+  }//.l-balance-transfer-panel
+
+}//.l-balance-transfer
+
+@import "./BalanceTransfer-md-min";

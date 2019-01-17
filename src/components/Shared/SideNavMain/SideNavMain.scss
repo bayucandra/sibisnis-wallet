@@ -254,8 +254,6 @@
       &.is-active {
         font-weight: bold;
         color: map-get($colors, dark-sky-blue);
-        background-color: map-get($colors, very-light-blue);
-
       }//&.is-active
 
     }//.nav-btn

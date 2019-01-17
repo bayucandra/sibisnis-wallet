@@ -65,6 +65,7 @@
 
         &.is-active {
           position: relative;
+          background-color: map-get($colors, very-light-blue);
 
           &:before {
             content: ' ';

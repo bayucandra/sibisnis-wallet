@@ -100,7 +100,7 @@ class BalanceTransactionInfo extends Component {
 
           <div className="info-section__account-number">
             <div className="label">Nomor akun :</div>
-            <div className="value">{biqHelper.utils.phoneDashFormat(this.props.user_profile.kontak)}</div>
+            <div className="value">{biqHelper.phone.dashFormat(this.props.user_profile.kontak)}</div>
           </div>
 
           <div className="info-section__nominal">

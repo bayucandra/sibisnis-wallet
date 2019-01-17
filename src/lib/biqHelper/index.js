@@ -2,6 +2,7 @@ import {BiqHelperString} from "./modules/string";
 import {BiqHelperLocalStorage} from "./modules/localStorage";
 import {BiqHelperJSON} from "./modules/json";
 import {BiqHelperUtils} from "./modules/utils";
+import {BiqHelperPhone} from "./modules/phone";
 import {BiqHelperMediaQuery} from "./modules/mediaQuery";
 import {BiqHelperMoment} from "./modules/moment";
 import {BiqHelperImage} from "./modules/image";
@@ -15,6 +16,7 @@ class biqHelperClass {
     this.localStorage = new BiqHelperLocalStorage();
     this.JSON = new BiqHelperJSON();
     this.utils = new BiqHelperUtils();
+    this.phone = new BiqHelperPhone();
     this.mediaQuery = new BiqHelperMediaQuery();
     this.moment = new BiqHelperMoment();
     this.image = new BiqHelperImage();

@@ -7,6 +7,7 @@ import news from "./pages/newsActionType";
 import newsDetail from "./pages/newsDetailActionType";
 import balance from "./pages/balanceActionType";
 import balanceMutation from "./pages/balanceMutationActionType";
+import balanceTransfer from "./pages/balanceTransferActionType";
 
 
 export default {
@@ -18,5 +19,6 @@ export default {
   news,
   newsDetail,
   balance,
-  balanceMutation
+  balanceMutation,
+  balanceTransfer
 };

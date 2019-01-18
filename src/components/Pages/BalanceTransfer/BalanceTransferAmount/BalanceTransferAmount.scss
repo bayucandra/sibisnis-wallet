@@ -1,0 +1,35 @@
+@import "../../../../styles/variables";
+
+.l-balance-transfer-amount {
+  flex: 1 1 1px;
+  display: flex;
+  flex-direction: column;
+  background: #FFFFFF;
+
+  &__body {
+    flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+    padding: 0 15px;
+    overflow-y: auto;
+
+    .destination {
+      display: flex;
+      flex-direction: column;
+      margin-top: 40px;
+
+      &__title {
+        font-size: 13px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.4px;
+        color: map-get($colors, charcoal-grey);
+      }//&__title
+
+    }//destination
+
+  }//&__body
+
+}//.l-balance-transfer-amount

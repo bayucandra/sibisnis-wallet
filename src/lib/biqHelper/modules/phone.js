@@ -37,6 +37,9 @@ class BiqHelperPhone {
       case 'number':
         val = '0' + val.toString();
         break;
+
+      default:
+
     }
 
     val = val.replace( / /g, '' );

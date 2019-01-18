@@ -8,8 +8,8 @@ import biqHelper from "lib/biqHelper";
 
 import {Button} from "components/Widgets/material-ui";
 
+import HeaderMobileGeneral from "components/Shared/HeaderMobileGeneral/HeaderMobileGeneral";
 import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
-import HeaderMenuMobile from "components/Shared/HeaderMenuMobile/HeaderMenuMobile";
 import EmailVerificationForm from "components/Shared/ProfileForms/EmailVerificationForm";
 
 import AddressVerificationForm from "components/Shared/ProfileForms/AddressVerificationForm/AddressVerificationForm";
@@ -143,15 +143,7 @@ class Profile extends Component {
 
           <div className="l-profile__panel">
 
-            <div className="l-profile__panel__header hidden-md-up">
-
-              <Button className="back-btn">&nbsp;</Button>
-
-              <div className="label">Detail Profile</div>
-
-              <HeaderMenuMobile/>
-
-            </div>
+            <HeaderMobileGeneral headerTitle="Detail Profile"/>
 
             <div className="l-profile__panel__body">
 

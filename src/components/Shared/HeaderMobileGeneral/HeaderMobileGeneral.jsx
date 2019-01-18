@@ -18,6 +18,11 @@ class HeaderMobileGeneral extends Component {
   }
 
   _backBtnClick = () => {
+    if( typeof this.props.backBtnClick === 'function' ) {
+      this.props.backBtnClick();
+      return;
+    }
+
     biqHelper.utils.clickTimeout( ()=>{
       this.props.history.push( this.router_back_path );
     } );
@@ -46,6 +51,8 @@ class HeaderMobileGeneral extends Component {
 }
 
 HeaderMobileGeneral.defaultProps = {
+  backBtnClick: null,
+  headerRouterBack: '/dashboard',
   hasBackBtn : true,
   headerTitle: '',
   headerButtonWidget: null

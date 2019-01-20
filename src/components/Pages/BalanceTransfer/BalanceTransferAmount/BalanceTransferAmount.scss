@@ -28,8 +28,185 @@
         color: map-get($colors, charcoal-grey);
       }//&__title
 
-    }//destination
+      &__detail {
+        display: flex;
+        flex-direction: column;
+        margin-top: 10px;
+        border-radius: 5px;
+        border: 1px solid map-get( $colors, gray-87 );
+
+        .record {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          height: 38px;
+          box-sizing: border-box;
+
+          &--first {
+            border-bottom: 1px solid map-get( $colors, gray-87 );
+          }//&--first
+
+          &__label {
+            margin-left: 20px;
+
+            font-size: 14px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.5px;
+            color: rgba(0, 0, 0, 0.87);
+          }//.label
+
+          &__value {
+            margin-right: 20px;
+
+            font-size: 14px;
+            font-weight: 600;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: 0.5px;
+            color: map-get($colors, steel-grey);
+          }//&__value
+
+        }//.record
+
+      }//&__detail
+
+    }//.destination
+
+    .nominal {
+      margin-top: 30px;
+    }//.nominal
+
+    .description {
+      margin-top: 12px;
+    }//.description
+
+    .action {
+      display: flex;
+      flex-direction: column;
+      margin-top: 35px;
+
+      .submit-btn {
+        height: 50px;
+        border-radius: 5px;
+        box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
+        background-color: map-get($colors, dark-mint);
+
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        text-align: center;
+        color: #ffffff;
+      }//.submit-btn
+
+      .cancel-btn {
+        height: 50px;
+        margin-top: 20px;
+        border-radius: 5px;
+
+        font-size: 13px;
+        font-weight: 600;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.3px;
+        text-align: center;
+        color: map-get($colors, deep-sky-blue);
+      }//.cancel-btn
+
+    }//.action
 
   }//&__body
 
 }//.l-balance-transfer-amount
+
+
+
+.modal-inner.balance-transfer-password-input {
+
+  .password-input-panel {
+    flex: 1 1 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 25px;
+    border-radius: 5px;
+    background-color: map-get($colors, light-grey-8);
+    pointer-events: auto;
+
+    .title {
+      margin: 20px 0 0;
+      font-size: 16px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.6px;
+      color: rgba(0, 0, 0, 0.87);
+    }//.title
+
+    .password-input {
+      width: 250px;
+      margin-top: 58px - 16px;
+
+      input[type="password"] {
+        font-size: 19px;
+        letter-spacing: 2px;
+      }
+
+      input[type="password"], input[type="text"] {
+        text-align: center;
+      }
+
+    }//.password-input
+
+    .action {
+      display: flex;
+      flex-direction: column;
+      margin-top: 40px - ( 12px + 8px );
+
+      .submit-btn {
+        width: 160px;
+        height: 45px;
+        border-radius: 5px;
+        box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
+        background-color: map-get($colors, dark-mint);
+
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        text-align: center;
+        color: #ffffff;
+      }//.submit-btn
+
+      .cancel-btn {
+        height: 45px;
+        margin: 21px 0 20px;
+        border-radius: 5px;
+
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: 0.5px;
+        text-align: center;
+        color: rgba(0, 0, 0, 0.87);
+      }//.cancel-btn
+
+    }//.action
+
+  }//.password-input-panel
+
+}//..modal-inner.balance-transfer-password-input
+
+@import "./BalanceTransferAmount-md-min";

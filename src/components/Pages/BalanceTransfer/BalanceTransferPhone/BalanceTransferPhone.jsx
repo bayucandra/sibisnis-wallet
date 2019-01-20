@@ -26,14 +26,21 @@ class BalanceTransferPhone extends Component {
   };
 
   _onSubmit = () => {
-    let {dispatch} = this.props;
+    biqHelper.utils.clickTimeout( () => {
 
-    if ( biqHelper.utils.isNull( this.state.input.value ) || !this.state.input.is_valid ) {
-      dispatch( appActions.appDialogNoticeOpen( { title: 'Periksa input', notice:'Harap masukkan nomor HP yang valid' } ) );
-      return;
-    }
+      let {dispatch} = this.props;
 
-    dispatch( balanceTransferActions.memberInfoFetch( this.state.input.value ) );
+      if (biqHelper.utils.isNull(this.state.input.value) || !this.state.input.is_valid) {
+        dispatch(appActions.appDialogNoticeOpen({
+          title: 'Periksa input',
+          notice: 'Harap masukkan nomor HP yang valid'
+        }));
+        return;
+      }
+
+      dispatch(balanceTransferActions.memberInfoFetch(this.state.input.value));
+
+    });
   };
 
   componentDidMount() {

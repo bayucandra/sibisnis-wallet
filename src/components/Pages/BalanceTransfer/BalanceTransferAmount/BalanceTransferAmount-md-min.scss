@@ -1,0 +1,104 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-balance-transfer-amount {
+    margin-left: 29px;
+    border-radius: 5px;
+    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+    background-color: #ffffff;
+
+    &__title {
+      margin: 21px 0 0 30px;
+
+      font-size: 16px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      color: map-get($colors, charcoal-grey);
+    }//&__title
+
+    &__body {
+      flex: none;
+      padding: 0 50px 51px 30px;
+
+      .destination {
+        margin-top: 51px;
+
+        &__detail {
+
+          .record {
+            height: 48px;
+
+            &__label {
+              font-size: 14px;
+              font-weight: 600;
+              font-style: normal;
+              font-stretch: normal;
+              line-height: normal;
+              letter-spacing: 0.5px;
+              color: map-get($colors, steel-grey);
+            }//&__label
+
+          }//.record
+
+        }//&__detail
+
+      }//.destination
+
+      .nominal {
+        margin-top: 40px;
+      }//.description
+
+      .description {
+        margin-top: 29px;
+      }//.description
+
+      .action {
+        flex-direction: row;
+        justify-content: flex-end;
+        margin-top: 39px;
+
+        .cancel-btn {
+          order: -1;
+          width: 190px;
+          height: 50px;
+          margin-top: 0;
+          margin-right: 25px;
+          border: 1px solid map-get( $colors, gray-87 );
+        }//.cancel-btn
+
+        .submit-btn {
+          order: 0;
+          width: 180px;
+          height: 50px;
+        }//.submit-btn
+
+      }//.action
+
+    }//&__body
+
+  }//.l-balance-transfer-amount
+
+  .modal-inner.balance-transfer-password-input {
+
+    .password-input-panel {
+      flex: none;
+      width: 500px;
+
+      .action {
+        display: flex;
+        flex-direction: column;
+        margin-top: 46px - ( 12px + 8px );
+
+        .cancel-btn {
+          margin: 25px 0 30px;
+        }//.cancel-btn
+
+      }//.action
+
+    }//.password-input-panel
+
+  }//.modal-inner.balance-transfer-password-input
+
+}//@media

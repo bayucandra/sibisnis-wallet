@@ -34,7 +34,7 @@ class Balance extends Component {
   render() {
 
     return (
-      <div className={`main-wrapper${!this.props.header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper l-balance`}>
+      <div className={`main-wrapper${!this.props.header_mobile_show ? ' main-wrapper--mobile-no-header' : ''} biq-wrapper biq-wrapper--md-narrow-side-padding l-balance`}>
         <div className="biq-wrapper__inner l-balance__inner">
 
           <SideNavMain cssClasses={"visible-md-up"}/>

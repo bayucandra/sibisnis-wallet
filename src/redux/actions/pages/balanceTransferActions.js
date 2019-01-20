@@ -28,9 +28,21 @@ function memberInfoReset() {
   }
 }
 
+
+
+function nominalSubmit( payload = { saldo_transfer: 0, member_transfer_id: '', password: '' } ) {
+  return {
+    type: actionTypes.balanceTransfer.NOMINAL_SUBMIT,
+    payload: payload
+  }
+}
+
+
 export default {
   memberInfoFetch,
   memberInfoFetched,
   memberInfoCanceled,
-  memberInfoReset
+  memberInfoReset,
+
+  nominalSubmit
 }

@@ -3,8 +3,10 @@ import {connect} from 'react-redux';
 import { Switch, Route } from 'react-router-dom';
 
 import appActions from "redux/actions/global/appActions";
+import balanceTransferActions from "redux/actions/pages/balanceTransferActions";
 
 import SideNavMain from "components/Shared/SideNavMain/SideNavMain";
+import HeaderMobileGeneral from "components/Shared/HeaderMobileGeneral/HeaderMobileGeneral";
 
 import BalanceTransferPhone from "./BalanceTransferPhone";
 import BalanceTransferAmount from "./BalanceTransferAmount";
@@ -36,6 +38,13 @@ class BalanceTransfer extends Component {
     return true;
   }
 
+  componentWillUnmount() {
+    let {dispatch} = this.props;
+
+    dispatch( balanceTransferActions.memberInfoCanceled() );
+
+  }
+
   render() {
 
     return (
@@ -63,7 +72,7 @@ class BalanceTransfer extends Component {
 
             :
 
-          null
+          <HeaderMobileGeneral headerTitle="Transfer saldo"/>
 
         }
 

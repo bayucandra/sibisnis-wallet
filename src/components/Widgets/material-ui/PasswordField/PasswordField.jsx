@@ -74,7 +74,6 @@ class PasswordField extends Component {
 
   render() {
     let customClass = biqHelper.utils.isNull( this.props.className ) ? '' : ' ' + this.props.className;
-    let label = biqHelper.utils.isNull( this.props.label ) ? 'Password' : this.props.label;
     let helperText = biqHelper.utils.isNull( this.props.helperText ) ? '' : this.props.helperText;
     let isError = biqHelper.utils.isNull( this.props.error ) ? false : this.props.error;
 
@@ -83,7 +82,16 @@ class PasswordField extends Component {
 
     return (
       <FormControl error={isError} className={`w-password-field${this.props.passwordTestShow ? ' w-password-field--password-test-show' : ''}${customClass}`}>
-        <InputLabel htmlFor="component-helper">{ label }</InputLabel>
+        {
+          (
+            !biqHelper.utils.isNull( this.props.label )
+            || this.props.label === ""
+          )
+
+          &&
+
+          <InputLabel htmlFor="component-helper">{this.props.label}</InputLabel>
+        }
         <Input type={this.state.is_show_password ? 'text' : 'password'} value={input_value} onChange={ this._onChange }
            onFocus={this._onFocus} onBlur={this._onBlur}/>
 

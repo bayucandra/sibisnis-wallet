@@ -268,13 +268,13 @@ class BalanceMutation extends Component {
 
                         pagination_jsx.push(
                           <Button className="pagination__item pagination__item--nav-first" key={'nav_first'} onClick={ () => this._numberPaginationOnClick( 1 ) }>
-                            &lt;&lt;
+                            &nbsp;
                           </Button>
                         );
 
                         pagination_jsx.push(
-                          <Button className="pagination__item" key={'nav_prev'} onClick={ () => this._numberPaginationOnClick( page_number_current - 1 ) }>
-                            &lt;
+                          <Button className="pagination__item pagination__item--nav-prev" key={'nav_prev'} onClick={ () => this._numberPaginationOnClick( page_number_current - 1 ) }>
+                            &nbsp;
                           </Button>
                         );
 
@@ -293,14 +293,14 @@ class BalanceMutation extends Component {
                         pagination_jsx.push(page_numbers_jsx);
 
                         pagination_jsx.push(
-                          <Button className="pagination__item" key={"nav_next"} onClick={ () => this._numberPaginationOnClick( page_number_current + 1 ) }>
-                            &gt;
+                          <Button className="pagination__item pagination__item--nav-next" key={"nav_next"} onClick={ () => this._numberPaginationOnClick( page_number_current + 1 ) }>
+                            &nbsp;
                           </Button>
                         );
 
                         pagination_jsx.push(
                           <Button className="pagination__item pagination__item--nav-last" key={"nav_last"} onClick={ () => this._numberPaginationOnClick( page_total ) }>
-                            &gt;&gt;
+                            &nbsp;
                           </Button>
                         );
 

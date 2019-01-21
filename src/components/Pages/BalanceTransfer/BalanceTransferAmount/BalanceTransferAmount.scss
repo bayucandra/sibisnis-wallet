@@ -131,6 +131,7 @@
 .modal-inner.balance-transfer-password-input {
 
   .password-input-panel {
+    position: relative;
     flex: 1 1 1px;
     display: flex;
     flex-direction: column;
@@ -163,6 +164,14 @@
       input[type="password"], input[type="text"] {
         text-align: center;
       }
+
+      .w-password-field {
+
+        &__helper-text {
+          text-align: center;
+        }//&__helper-text
+
+      }//.w-password-field
 
     }//.password-input
 

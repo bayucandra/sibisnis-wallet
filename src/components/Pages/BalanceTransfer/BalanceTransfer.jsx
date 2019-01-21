@@ -10,17 +10,11 @@ import HeaderMobileGeneral from "components/Shared/HeaderMobileGeneral/HeaderMob
 
 import BalanceTransferPhone from "./BalanceTransferPhone";
 import BalanceTransferAmount from "./BalanceTransferAmount";
+import BalanceTransferSuccess from "./BalanceTransferSuccess/BalanceTransferSuccess";
 
 import "./BalanceTransfer.scss";
 
 class BalanceTransfer extends Component {
-
-  componentDidMount() {
-    let {dispatch} = this.props;
-
-    dispatch( appActions.appRouterChange( { header_mobile_show: false } ) );
-
-  }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     let {dispatch} = this.props;
@@ -42,6 +36,7 @@ class BalanceTransfer extends Component {
     let {dispatch} = this.props;
 
     dispatch( balanceTransferActions.memberInfoCanceled() );
+    dispatch( balanceTransferActions.nominalCanceled() );
 
   }
 
@@ -62,6 +57,7 @@ class BalanceTransfer extends Component {
               <SideNavMain cssClasses={"visible-md-up"}/>
 
               <Switch>
+                <Route path="/balance-transfer/success" component={BalanceTransferSuccess}/>
                 <Route path="/balance-transfer/amount" component={BalanceTransferAmount}/>
                 <Route path="/balance-transfer" component={BalanceTransferPhone}/>
               </Switch>

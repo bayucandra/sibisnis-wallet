@@ -135,6 +135,7 @@
                 margin-right: 10px;
                 border-radius: 13px;
                 border: 1px solid map-get( $colors, very-light-pink-five );
+                transition: all 250ms ease-in-out;
 
                 font-size: 13px;
                 font-weight: normal;
@@ -151,9 +152,54 @@
                   color: #ffffff;
                 }//&.is-active
 
+                &--nav-first {
+                  background: url('../../../images/icons/double-next.svg') no-repeat center;
+                  background-size: contain;
+                  transform: rotate( 180deg );
+                  transform-origin: center;
+                  border: none;
+
+                  &:hover {
+                    transform: rotate( 180deg ) scale( 1.14 );
+                  }//&:hover
+
+                }//&--nav-first
+
+                &--nav-prev {
+                  background: url('../../../images/icons/singlenext.svg') no-repeat center;
+                  background-size: contain;
+                  transform: rotate( 180deg );
+                  transform-origin: center;
+                  border: none;
+
+                  &:hover {
+                    transform: rotate( 180deg ) scale( 1.14 );
+                  }//&:hover
+
+                }//&--nav-prev
+
+                &--nav-next {
+                  background: url('../../../images/icons/singlenext.svg') no-repeat center;
+                  background-size: contain;
+                  border: none;
+
+                  &:hover {
+                    transform: scale( 1.14 );
+                  }//&:hover
+
+                }//&--nav-next
+
                 &--nav-last {
                   margin-right: 0;
-                }//&--nav-first
+                  background: url('../../../images/icons/double-next.svg') no-repeat center;
+                  background-size: contain;
+                  border: none;
+
+                  &:hover {
+                    transform: scale( 1.14 );
+                  }//&:hover
+
+                }//&--nav-last
 
               }//&__item
 

@@ -1,0 +1,33 @@
+@media screen and ( min-width: map-get( $bp-mobile-first, md ) ) {
+
+  .l-balance-transfer-success {
+    margin-left: 29px;
+    border-radius: 5px;
+    box-shadow: 0 4px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 4px 0 rgba(0, 0, 0, 0.11);
+
+    &__info-block {
+
+      .icon {
+        width: 241px;
+        height: 156px;
+      }//.icon
+
+      .title {
+        margin-top: 28px;
+      }//.title
+
+      .notice {
+        width: 390px;
+        margin-top: 6px;
+      }//.notice
+
+      .check-mutation-btn {
+        width: 190px;
+        margin-bottom: 61px;
+      }//.check-mutation-btn
+
+    }//&__info-block
+
+  }//.l-balance-transfer-success
+
+}

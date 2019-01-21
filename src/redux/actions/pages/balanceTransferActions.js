@@ -37,6 +37,21 @@ function nominalSubmit( payload = { saldo_transfer: 0, member_transfer_id: '', p
   }
 }
 
+function nominalSubmitted( response ) {
+
+  return {
+    type: actionTypes.balanceTransfer.NOMINAL_SUBMITTED,
+    payload: response
+  }
+
+}
+
+function nominalCanceled() {
+  return {
+    type: actionTypes.balanceTransfer.NOMINAL_CANCELED
+  }
+}
+
 
 export default {
   memberInfoFetch,
@@ -44,5 +59,7 @@ export default {
   memberInfoCanceled,
   memberInfoReset,
 
-  nominalSubmit
+  nominalSubmit,
+  nominalSubmitted,
+  nominalCanceled
 }

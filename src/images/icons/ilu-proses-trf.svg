@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="241" height="156" viewBox="0 0 241 156">
+    <defs>
+        <path id="a" d="M2.4 0H84a2.4 2.4 0 0 1 2.4 2.4v55.127a2.4 2.4 0 0 1-2.4 2.4H2.4a2.4 2.4 0 0 1-2.4-2.4V2.4A2.4 2.4 0 0 1 2.4 0z"/>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <g transform="translate(.927 28.625)">
+            <path fill="#F1B7FF" d="M13.576 125.198c-4.3-23.149 1.576-37.116 17.628-41.901 24.079-7.178 40.021-13.586 45.41-42.238 5.39-28.652 47.754-37.527 62.423-13.592 14.67 23.935 31.034 35.357 49.94 36.127 18.906.77 54.649 6.28 45.588 61.604H13.575z" opacity=".1"/>
+            <path fill="#A7BBFF" d="M1.97 125.198c-4.162-24.791 1.526-39.75 17.065-44.875 23.307-7.687 38.74-14.55 43.956-45.235 5.217-30.686 46.226-40.19 60.426-14.557 14.2 25.634 30.04 37.866 48.341 38.691 18.301.825 52.9 6.726 44.13 65.976H1.97z" opacity=".1"/>
+            <path fill="#5ECFF1" stroke="#1F589F" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M.073 125.375h233.475"/>
+            <g stroke="#23D658" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
+                <path d="M175.172 100.75v6.003M178.172 103.752h-6"/>
+            </g>
+            <g stroke="#FF8DF9" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.6">
+                <path d="M132.18 24.517v6.003M135.18 27.519h-6"/>
+            </g>
+            <ellipse cx="55.569" cy="56.393" stroke="#FE624B" stroke-width="1.6" rx="3.615" ry="3.618"/>
+            <ellipse cx="179.428" cy="3.001" stroke="#FFBE35" stroke-width="1.6" rx="2.625" ry="2.626"/>
+            <ellipse cx="20.199" cy="112.542" stroke="#E363DD" stroke-width="1.6" rx="2.625" ry="2.626"/>
+            <ellipse cx="214.797" cy="94.142" stroke="#B794FF" stroke-width="1.6" rx="2.25" ry="2.251"/>
+            <ellipse cx="8.947" cy="62.756" stroke="#9071FF" stroke-width="1.6" rx="1.875" ry="1.876"/>
+            <g transform="translate(73 49.775)">
+                <path fill="#F1B552" stroke="#1F589F" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M.97 15.664L65.405.435a2.4 2.4 0 0 1 2.814 1.533l4.864 13.696H.97z"/>
+                <use fill="#FFD973" stroke="#1F589F" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" transform="translate(0 15.2)" xlink:href="#a"/>
+                <path fill="#FFD973" stroke="#1F589F" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M74.2 33.6h13V56h-13C68.014 56 63 50.986 63 44.8c0-6.186 5.014-11.2 11.2-11.2z"/>
+                <circle cx="73.4" cy="45.2" r="3.6" fill="#FFD973" stroke="#1F589F" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                <path stroke="#1F589F" stroke-dasharray="6.4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7.304 23.6h69.608M7.304 66.8h69.608"/>
+            </g>
+        </g>
+        <g transform="translate(138 78)">
+            <circle cx="20.527" cy="20" r="20" fill="#58D87F"/>
+            <path stroke="#FFF" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.64 21.335l4.429 4.43 9.6-9.6"/>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,88 @@
+@import "../../../../styles/variables";
+
+.l-balance-transfer-success {
+  flex: 1 1 1px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #FFFFFF;
+
+  &__title {
+    width: 100%;
+    margin: 0;
+    padding: 21px 0 0 30px;
+    box-sizing: border-box;
+    text-align: left;
+
+    font-size: 16px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 0.4px;
+    color: map-get($colors, charcoal-grey);
+  }//&__title
+
+  &__info-block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .icon {
+      width: 150px;
+      height: 97px;
+      margin-top: 40px;
+      background: url('../../../../images/icons/ilu-proses-trf.svg') no-repeat center;
+      background-size: contain;
+    }//.icon
+
+    .title {
+      margin-top: 33px;
+
+      font-size: 16px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.4px;
+      text-align: center;
+      color: map-get($colors, charcoal-grey);
+    }//.title
+
+    .notice {
+      width: 320px;
+      margin-top: 9px;
+
+      font-size: 13px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.77;
+      letter-spacing: 0.2px;
+      text-align: center;
+      color: map-get($colors, steel-grey);
+    }//.notice
+
+    .check-mutation-btn {
+      width: 230px;
+      height: 50px;
+      margin-top: 53px;
+      border-radius: 5px;
+      box-shadow: 0 10px 30px 0 rgba(127, 127, 127, 0.3);
+      background-color: map-get($colors, dark-mint);
+
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: 0.5px;
+      text-align: center;
+      color: #ffffff;
+    }//.check-mutation-btn
+
+  }//&__info-block
+
+}//.l-balance-transfer-success
+
+@import "BalanceTransferSuccess-md-min";

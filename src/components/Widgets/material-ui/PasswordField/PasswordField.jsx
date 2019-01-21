@@ -1,7 +1,4 @@
 import React, {Component} from 'react';
-// import ReactDOM from 'react-dom';
-// import PropTypes from 'prop-types';
-// import { withStyles } from '@material-ui/core/styles';
 import biqHelper from "lib/biqHelper";
 
 import FormControl from '@material-ui/core/FormControl';
@@ -90,12 +87,13 @@ class PasswordField extends Component {
 
           &&
 
-          <InputLabel htmlFor="component-helper">{this.props.label}</InputLabel>
+          <InputLabel>{this.props.label}</InputLabel>
         }
         <Input type={this.state.is_show_password ? 'text' : 'password'} value={input_value} onChange={ this._onChange }
+           autoFocus={!biqHelper.utils.isNull(this.props.autoFocus) ? this.props.autoFocus : false}
            onFocus={this._onFocus} onBlur={this._onBlur}/>
 
-        <FormHelperText id="component-helper-text">{helperText}</FormHelperText>
+        <FormHelperText className="w-password-field__helper-text">{helperText}</FormHelperText>
         <Button className={ `show-toggle-btn${this.state.is_show_password ? ' is-shown' : ''}` } onClick={this._showToggle}>&nbsp;</Button>
 
         <div className={`password-test${password_test_visible ? ' is-visible' : ''}`}>
@@ -138,7 +136,7 @@ class PasswordField extends Component {
 }
 
 PasswordField.defaultProps = {
-  passwordTestShow: false,
+  passwordTestShow: false,//Show test error
   isConfirmField: false,
   passwordTestGet: null//Function to get password test result
 };

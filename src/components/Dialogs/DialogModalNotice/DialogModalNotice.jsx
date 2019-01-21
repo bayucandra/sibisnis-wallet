@@ -19,6 +19,7 @@ class DialogModalNotice extends Component {
     return (
 
       <Modal
+        disableEnforceFocus
         open={this.props.dialog_notice.is_open}
         onClose={this._modalClose}>
 

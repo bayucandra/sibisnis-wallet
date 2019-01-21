@@ -106,7 +106,7 @@ class SideNavMain extends Component {
 
     let is_desktop_page = this.props.location.pathname === '/dashboard';
     let is_mutasi_saldo_page = this.props.location.pathname === '/balance-mutation';
-    let is_transfer_saldo_page = false;
+    let is_transfer_saldo_page = this.props.location.pathname.search('/balance-transfer') !== -1;
 
     return (
 

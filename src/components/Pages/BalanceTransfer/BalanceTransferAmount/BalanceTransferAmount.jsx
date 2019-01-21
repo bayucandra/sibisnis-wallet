@@ -156,6 +156,7 @@ class BalanceTransferAmount extends Component {
       } else if( biqHelper.utils.httpResponseIsSuccess( nextProps.nominal_submit.server_response.status ) ){
 
         this.setState({ password_input: false }, () => {
+          dispatch( balanceTransferActions.memberInfoReset() );
           this.props.history.push('/balance-transfer/success');
         });
 
@@ -204,6 +205,7 @@ class BalanceTransferAmount extends Component {
             className="nominal mui-number-field mui-number-field--no-spinner"
             type="number"
             label="Nominal transfer"
+            placeholder="Nominal transfer"
             value={this.state.nominal.value}
             onChange={ e =>this.setState( { nominal: Object.assign({}, this.state.nominal, { value: e.target.value }) } )}
             helperText={ this.state.nominal.error_message }
@@ -212,6 +214,7 @@ class BalanceTransferAmount extends Component {
           <TextField
             className="description"
             label="Keterangan (Opsional)"
+            placeholder="Keterangan transfer"
             value={this.state.description}
             onChange={(e)=>this.setState( { description: e.target.value } )}
             helperText={""}

@@ -1,7 +1,7 @@
 {
   "main.css": "./static/css/main.760dbe58.chunk.css",
-  "main.js": "./static/js/main.4b0235b0.chunk.js",
-  "main.js.map": "./static/js/main.4b0235b0.chunk.js.map",
+  "main.js": "./static/js/main.8900252e.chunk.js",
+  "main.js.map": "./static/js/main.8900252e.chunk.js.map",
   "static/css/1.bbff9b49.chunk.css": "./static/css/1.bbff9b49.chunk.css",
   "static/js/1.18f2ff6f.chunk.js": "./static/js/1.18f2ff6f.chunk.js",
   "static/js/1.18f2ff6f.chunk.js.map": "./static/js/1.18f2ff6f.chunk.js.map",
@@ -27,7 +27,7 @@
   "static/media/ico-upload-desktop.svg": "./static/media/ico-upload-desktop.19926ea4.svg",
   "static/media/upload-sukses.svg": "./static/media/upload-sukses.569e39df.svg",
   "static/media/upload-gagal.svg": "./static/media/upload-gagal.f7b7d674.svg",
-  "static/media/styles.scss": "./static/media/Nunito-Black.76e62b37.ttf",
+  "static/media/styles.scss": "./static/media/Nunito-Italic.7726e581.ttf",
   "static/media/PasswordField.scss": "./static/media/ic-visibility.e6529dc0.svg",
   "static/media/ModalNotice.scss": "./static/media/gagal.4ce7e798.svg",
   "static/media/BalanceProfileVerification.scss": "./static/media/ic-check.a91bcfe3.svg",
@@ -48,9 +48,9 @@
   "static/media/PhoneInput.scss": "./static/media/close-text.fc56c919.svg",
   "static/media/BalanceTransferSuccess.scss": "./static/media/ilu-proses-trf.ccfbc2c6.svg",
   "static/media/CameraCapture.scss": "./static/media/ico-kamera-finish.09d19219.svg",
-  "static/css/main.760dbe58.chunk.css.map": "./static/css/main.760dbe58.chunk.css.map",
   "static/css/1.bbff9b49.chunk.css.map": "./static/css/1.bbff9b49.chunk.css.map",
+  "static/css/main.760dbe58.chunk.css.map": "./static/css/main.760dbe58.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.afb4361943e3467646c6a3ebab404598.js": "./precache-manifest.afb4361943e3467646c6a3ebab404598.js",
+  "precache-manifest.8e1013f8d9f524b3c502f8eca3e6e37d.js": "./precache-manifest.8e1013f8d9f524b3c502f8eca3e6e37d.js",
   "service-worker.js": "./service-worker.js"
 }

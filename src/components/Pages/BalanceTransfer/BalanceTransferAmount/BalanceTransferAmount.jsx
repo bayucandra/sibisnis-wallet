@@ -97,11 +97,13 @@ class BalanceTransferAmount extends Component {
       let saldo_transfer= this.state.nominal.value;
       let member_transfer_id = biqHelper.JSON.pathValueGet( this.props.member_info.server_response, "response.data.memberid" );
       let password = this.state.password_value;
+      let keterangan = this.state.description;
 
       dispatch(balanceTransferActions.nominalSubmit({
         saldo_transfer,
         member_transfer_id,
-        password
+        password,
+        keterangan
       }));
 
     } );

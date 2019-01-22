@@ -30,7 +30,7 @@ function memberInfoReset() {
 
 
 
-function nominalSubmit( payload = { saldo_transfer: 0, member_transfer_id: '', password: '' } ) {
+function nominalSubmit( payload = { saldo_transfer: 0, member_transfer_id: '', password: '', keterangan: '' } ) {
   return {
     type: actionTypes.balanceTransfer.NOMINAL_SUBMIT,
     payload: payload

@@ -154,7 +154,7 @@ class WalletProvider {
       }
       return false;
     });
-    return ret.length === 1 ? ret[0] : {};
+    return ret.length > 0 ? ret[0] : {};
   }
 
   bankIconGet( abbreviation, type ) {

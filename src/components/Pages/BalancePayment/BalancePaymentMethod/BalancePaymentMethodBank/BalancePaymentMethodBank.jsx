@@ -184,7 +184,7 @@ class BalancePaymentMethodBank extends Component {
 
                 {
                   walletProvider.bankListGet()
-                    .map((el) => {
+                    .map((el, idx) => {
                       let icon = walletProvider.bankIconGet( el.payment_method, 'main' );
                       let bank_record = walletProvider.bankByMethodAbreviation( el.payment_method );
                       let icon_width = 0;
@@ -201,7 +201,7 @@ class BalancePaymentMethodBank extends Component {
                       }
 
                       return (
-                        <Button className={`bank-select${ this._bankSelectedClassGen( el.payment_method ) }`} onClick={ () => this._bankSelectClick( el )} key={el.payment_method}>
+                        <Button className={`bank-select${ this._bankSelectedClassGen( el.payment_method ) }`} onClick={ () => this._bankSelectClick( el )} key={idx}>
                           <div className="bank-select__radio-circle"/>
                           <div className="bank-select__label">{el.bank_name}</div>
                           <div className="bank-select__spacer"/>

@@ -4,7 +4,7 @@ self.__precacheManifest = [
     "url": "./static/media/profile-active.a52cfd1b.svg"
   },
   {
-    "revision": "8900252eccdbb5a9a7f2",
+    "revision": "974d7b7d9fad27ae5c76",
     "url": "./static/css/main.760dbe58.chunk.css"
   },
   {
@@ -108,44 +108,44 @@ self.__precacheManifest = [
     "url": "./static/media/Nunito-Regular.65bb0a15.ttf"
   },
   {
-    "revision": "424413200c2a4c02e03d6edf064960aa",
-    "url": "./static/media/Nunito-LightItalic.42441320.ttf"
-  },
-  {
     "revision": "592f55ff60492e54ca877f588bb8d52e",
     "url": "./static/media/Nunito-ExtraLightItalic.592f55ff.ttf"
-  },
-  {
-    "revision": "c41c2502180f63ce383b6e3cc042617a",
-    "url": "./static/media/Nunito-Light.c41c2502.ttf"
   },
   {
     "revision": "1b31a5055cad7ed13ad2c1bc423adec6",
     "url": "./static/media/Nunito-SemiBoldItalic.1b31a505.ttf"
   },
   {
-    "revision": "725d81f848fb5c0189c9fd6102d33ee6",
-    "url": "./static/media/Nunito-BoldItalic.725d81f8.ttf"
+    "revision": "424413200c2a4c02e03d6edf064960aa",
+    "url": "./static/media/Nunito-LightItalic.42441320.ttf"
   },
   {
     "revision": "713ac08dfb7141494d4a69f344ff69fd",
     "url": "./static/media/Nunito-SemiBold.713ac08d.ttf"
   },
   {
+    "revision": "6f47bcfc065790f02ed3cb8b51bef56f",
+    "url": "./static/media/Nunito-Bold.6f47bcfc.ttf"
+  },
+  {
+    "revision": "2d623765c6268f283e93862ff2209af1",
+    "url": "./static/media/Nunito-ExtraBoldItalic.2d623765.ttf"
+  },
+  {
     "revision": "bffb5c4446bb138c323417f225980727",
     "url": "./static/media/Nunito-BlackItalic.bffb5c44.ttf"
   },
   {
-    "revision": "6f47bcfc065790f02ed3cb8b51bef56f",
-    "url": "./static/media/Nunito-Bold.6f47bcfc.ttf"
+    "revision": "725d81f848fb5c0189c9fd6102d33ee6",
+    "url": "./static/media/Nunito-BoldItalic.725d81f8.ttf"
   },
   {
     "revision": "8f56148bb7b75bdf3358914c28cb798f",
     "url": "./static/media/Nunito-ExtraBold.8f56148b.ttf"
   },
   {
-    "revision": "2d623765c6268f283e93862ff2209af1",
-    "url": "./static/media/Nunito-ExtraBoldItalic.2d623765.ttf"
+    "revision": "c41c2502180f63ce383b6e3cc042617a",
+    "url": "./static/media/Nunito-Light.c41c2502.ttf"
   },
   {
     "revision": "76e62b379c08d7d94c86ad5301d4abb5",
@@ -176,8 +176,8 @@ self.__precacheManifest = [
     "url": "./static/media/profile.3a4a29a3.svg"
   },
   {
-    "revision": "8900252eccdbb5a9a7f2",
-    "url": "./static/js/main.8900252e.chunk.js"
+    "revision": "974d7b7d9fad27ae5c76",
+    "url": "./static/js/main.974d7b7d.chunk.js"
   },
   {
     "revision": "9aa4efd935efd20a12fe25c377b7e103",
@@ -256,12 +256,12 @@ self.__precacheManifest = [
     "url": "./static/media/close-blue.e7d10810.svg"
   },
   {
-    "revision": "20949ffbb679cc6a99f3347814838060",
-    "url": "./static/media/radio-disable.20949ffb.svg"
-  },
-  {
     "revision": "6bba17812b53df2741f9457cd1793853",
     "url": "./static/media/radio-active.6bba1781.svg"
+  },
+  {
+    "revision": "20949ffbb679cc6a99f3347814838060",
+    "url": "./static/media/radio-disable.20949ffb.svg"
   },
   {
     "revision": "4a870804b7e0013b3b3e8969a9686845",
@@ -276,12 +276,12 @@ self.__precacheManifest = [
     "url": "./static/media/warning-1.6bb145cf.svg"
   },
   {
-    "revision": "b68ea91968c5cabad02499fe19cc6c87",
-    "url": "./static/media/icon-white-close.b68ea919.svg"
-  },
-  {
     "revision": "5b98f8d8b26e2d847737266348bc8dbf",
     "url": "./static/media/icon-white-cancel.5b98f8d8.svg"
+  },
+  {
+    "revision": "b68ea91968c5cabad02499fe19cc6c87",
+    "url": "./static/media/icon-white-close.b68ea919.svg"
   },
   {
     "revision": "9653500007188c37fbc6ec934079f668",
@@ -348,7 +348,7 @@ self.__precacheManifest = [
     "url": "./static/css/1.bbff9b49.chunk.css"
   },
   {
-    "revision": "85fd93ba306174fb8905c7e5dbdaedf9",
+    "revision": "b8841f09ddfe1c70f4f7c161618613ce",
     "url": "./index.html"
   }
 ];

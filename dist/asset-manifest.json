@@ -1,7 +1,7 @@
 {
   "main.css": "./static/css/main.760dbe58.chunk.css",
-  "main.js": "./static/js/main.a20da21e.chunk.js",
-  "main.js.map": "./static/js/main.a20da21e.chunk.js.map",
+  "main.js": "./static/js/main.08de8940.chunk.js",
+  "main.js.map": "./static/js/main.08de8940.chunk.js.map",
   "static/css/1.bbff9b49.chunk.css": "./static/css/1.bbff9b49.chunk.css",
   "static/js/1.18f2ff6f.chunk.js": "./static/js/1.18f2ff6f.chunk.js",
   "static/js/1.18f2ff6f.chunk.js.map": "./static/js/1.18f2ff6f.chunk.js.map",
@@ -38,7 +38,7 @@
   "static/media/HeaderMobile.scss": "./static/media/back-white.805e99d2.svg",
   "static/media/NewsDetail.scss": "./static/media/back-blue-new.c7857648.svg",
   "static/media/BalancePaymentStatusIndomaret.scss": "./static/media/warning-1.6bb145cf.svg",
-  "static/media/BalancePaymentMethodBank.scss": "./static/media/radio-disable.20949ffb.svg",
+  "static/media/BalancePaymentMethodBank.scss": "./static/media/radio-active.6bba1781.svg",
   "static/media/BalancePaymentDone.scss": "./static/media/accept.466b8083.svg",
   "static/media/BalancePaymentStatusBank.scss": "./static/media/help.704c45a7.svg",
   "static/media/BalancePaymentConfirmation.scss": "./static/media/ico-upload-sukses.2094b289.svg",
@@ -51,6 +51,6 @@
   "static/css/1.bbff9b49.chunk.css.map": "./static/css/1.bbff9b49.chunk.css.map",
   "static/css/main.760dbe58.chunk.css.map": "./static/css/main.760dbe58.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.0cdcb89ddc0c94e2777aa33fa616fd19.js": "./precache-manifest.0cdcb89ddc0c94e2777aa33fa616fd19.js",
+  "precache-manifest.822ba5041658f7cce27bc9d42a65e4fe.js": "./precache-manifest.822ba5041658f7cce27bc9d42a65e4fe.js",
   "service-worker.js": "./service-worker.js"
 }

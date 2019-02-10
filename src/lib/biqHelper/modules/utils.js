@@ -18,7 +18,7 @@ class BiqHelperUtils {
     }
 
     try {
-      return typeof val === 'undefined' || (typeof val === 'string' && val.trim() === '') || val === null || val.length === 0 || json_is_empty;
+      return typeof val === 'undefined' || (typeof val === 'string' && val.trim() === '') || val === null || ( typeof val !== 'function' && val.length === 0) || json_is_empty;
     } catch (e) {
       return true;
     }

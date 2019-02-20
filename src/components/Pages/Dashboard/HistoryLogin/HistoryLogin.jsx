@@ -66,7 +66,11 @@ class HistoryLogin extends Component {
                 let location = biqHelper.utils.isNull(el.data.location) ? {} : el.data.location;
                 let country = location.country;
                 let ip = location.ip;
-                let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
+                let browser = !biqHelper.utils.isNull( el.data.headers ) ?
+                  biqHelper.utils.browserDetect( el.data.headers['User-Agent'] )
+                    :
+                  '';
+
                 return (
                   <CustomAccordion
                     key={id}

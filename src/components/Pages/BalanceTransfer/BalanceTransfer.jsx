@@ -37,6 +37,7 @@ class BalanceTransfer extends Component {
 
     dispatch( balanceTransferActions.memberInfoCanceled() );
     dispatch( balanceTransferActions.nominalCanceled() );
+    dispatch( balanceTransferActions.memberInfoReset() );
 
   }
 

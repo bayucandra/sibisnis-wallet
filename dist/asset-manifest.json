@@ -1,7 +1,7 @@
 {
   "main.css": "./static/css/main.760dbe58.chunk.css",
-  "main.js": "./static/js/main.7f8616de.chunk.js",
-  "main.js.map": "./static/js/main.7f8616de.chunk.js.map",
+  "main.js": "./static/js/main.40731a39.chunk.js",
+  "main.js.map": "./static/js/main.40731a39.chunk.js.map",
   "static/css/1.bbff9b49.chunk.css": "./static/css/1.bbff9b49.chunk.css",
   "static/js/1.18f2ff6f.chunk.js": "./static/js/1.18f2ff6f.chunk.js",
   "static/js/1.18f2ff6f.chunk.js.map": "./static/js/1.18f2ff6f.chunk.js.map",
@@ -27,7 +27,7 @@
   "static/media/ico-upload-desktop.svg": "./static/media/ico-upload-desktop.19926ea4.svg",
   "static/media/upload-sukses.svg": "./static/media/upload-sukses.569e39df.svg",
   "static/media/upload-gagal.svg": "./static/media/upload-gagal.f7b7d674.svg",
-  "static/media/styles.scss": "./static/media/Nunito-ExtraBoldItalic.2d623765.ttf",
+  "static/media/styles.scss": "./static/media/Nunito-ExtraBold.8f56148b.ttf",
   "static/media/PasswordField.scss": "./static/media/ic-visibility.e6529dc0.svg",
   "static/media/ModalNotice.scss": "./static/media/gagal.4ce7e798.svg",
   "static/media/BalanceProfileVerification.scss": "./static/media/ic-check.a91bcfe3.svg",
@@ -48,9 +48,9 @@
   "static/media/PhoneInput.scss": "./static/media/close-text.fc56c919.svg",
   "static/media/BalanceTransferSuccess.scss": "./static/media/ilu-proses-trf.ccfbc2c6.svg",
   "static/media/CameraCapture.scss": "./static/media/ico-kamera-finish.09d19219.svg",
-  "static/css/main.760dbe58.chunk.css.map": "./static/css/main.760dbe58.chunk.css.map",
   "static/css/1.bbff9b49.chunk.css.map": "./static/css/1.bbff9b49.chunk.css.map",
+  "static/css/main.760dbe58.chunk.css.map": "./static/css/main.760dbe58.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.5c37df8005017fa3e6efd0ce30fdd0ed.js": "./precache-manifest.5c37df8005017fa3e6efd0ce30fdd0ed.js",
+  "precache-manifest.121e10593406e8b41debe63043e3893d.js": "./precache-manifest.121e10593406e8b41debe63043e3893d.js",
   "service-worker.js": "./service-worker.js"
 }

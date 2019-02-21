@@ -118,17 +118,20 @@ class LoginHistory extends Component {
                     let date_access = moment( el.date_access ).format('DD MMM YYYY , HH:mm');
                     let country = el.data.location.country;
                     let ip = el.data.location.ip;
-                    let browser = biqHelper.utils.browserDetect( el.data.headers['User-Agent'] );
+
+                    let browser = !biqHelper.utils.isNull( el.data.headers ) ?
+                      biqHelper.utils.browserDetect( el.data.headers['User-Agent'] )
+                      :
+                      '';
                     return (
-                      <>
+                      <React.Fragment key={id}>
                         <CustomAccordion
                           className="hidden-md-up hidden-md-up--block"
-                          key={id}
                           title="Tanggal"
                           date={date_access}
                           accordionBody={<HistoryList country={country} ip={ip} browser={browser} />} />
 
-                        <div className={`login-history-record${ idx === 0 ? ' is-first' : '' }`}>
+                        <div className={`login-history-record visible-md-up${ idx === 0 ? ' is-first' : '' }`}>
                           <div className="biq-col biq-col--spacer-start"/>
                           <div className="biq-col biq-col--date">{ date_access }</div>
                           <div className="biq-col biq-col--country">{country}</div>
@@ -136,7 +139,7 @@ class LoginHistory extends Component {
                           <div className="biq-col biq-col--browser">{browser}</div>
                         </div>
 
-                      </>
+                      </React.Fragment>
                     );
                   })
 

@@ -140,14 +140,14 @@ class BalanceMutation extends Component {
                         </div>
 
                         <div className="biq-col-right">
-                          <div className="balance">{ biqHelper.utils.numberFormat( el.lastsaldo ) }</div>
+                          <div className="balance">{ biqHelper.utils.numberFormat( el.currsaldo ) }</div>
                           <div className="mutation-amount">
 
                             { ( function() {
                               let debet = biqHelper.string.toInt( el.debet );
                               let kredit = biqHelper.string.toInt( el.kredit );
 
-                              let sign = kredit === 0 ? '+' : '-';
+                              let sign = kredit === 0 ? '-' : '+';
                               let value = kredit === 0 ? debet : kredit;
 
                               return `${sign}${biqHelper.utils.numberFormat(value)}`;
@@ -199,12 +199,12 @@ class BalanceMutation extends Component {
                             let debet = biqHelper.string.toInt( el.debet );
                             let kredit = biqHelper.string.toInt( el.kredit );
 
-                            let sign = kredit === 0 ? '+' : '-';
+                            let sign = kredit === 0 ? '-' : '+';
                             let value = kredit === 0 ? debet : kredit;
 
                             return `${sign} ${biqHelper.utils.numberFormat(value)}`;
                           } )() }</div>
-                          <div className="biq-col biq-col--balance">{ biqHelper.utils.numberFormat( el.lastsaldo, 'Rp ' ) }</div>
+                          <div className="biq-col biq-col--balance">{ biqHelper.utils.numberFormat( el.currsaldo, 'Rp ' ) }</div>
                         </div>
                       );
                     } )

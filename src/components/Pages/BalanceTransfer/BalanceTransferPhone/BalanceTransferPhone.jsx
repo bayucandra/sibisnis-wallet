@@ -69,6 +69,11 @@ class BalanceTransferPhone extends Component {
 
     }
   }
+/*
+  componentWillUnmount() {
+    let {dispatch} = this.props;
+    dispatch( balanceTransferActions.memberInfoReset() );
+  }*/
 
   render() {
 

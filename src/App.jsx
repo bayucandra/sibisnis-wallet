@@ -124,11 +124,6 @@ class App extends Component {
       dispatch( appActions.appRouterChange( { header_mobile_show : true, header_menu_mobile_show: true } ) );//default should always true, it will be overridden at page/component part if it should be false
     }
 
-    if( nextProps.app.is_app_initialized && !nextProps.app.is_logged_in ) {
-      this._switchPlatform();
-      return false
-    }
-
     if ( nextProps.app.is_app_initialized && this.props.app.is_logged_in && !nextProps.app.is_logged_in ) {
       biqHelper.localStorage.clear();
       biqConfig.platform_kelompok = this.props.user_profile.kelompok.trim();

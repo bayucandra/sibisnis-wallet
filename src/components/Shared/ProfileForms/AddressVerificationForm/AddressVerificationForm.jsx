@@ -267,7 +267,8 @@ class AddressVerificationForm extends Component {
       this.setState( { kabupaten_is_loading: false } );
       let input_field = $('.select-dropdown--kabupaten .mui-text-field__input input[type="text"]');
 
-      input_field.focus();
+      if( this.props.isVisible )
+        input_field.focus();
 
     } );
 
@@ -308,7 +309,9 @@ class AddressVerificationForm extends Component {
       } );
 
       this.setState( { kecamatan_is_loading: false } );
-      $('.select-dropdown--kecamatan .mui-text-field__input input[type="text"]').focus();
+
+      if( this.props.isVisible )
+        $('.select-dropdown--kecamatan .mui-text-field__input input[type="text"]').focus();
 
     } );
 
@@ -341,7 +344,9 @@ class AddressVerificationForm extends Component {
           }
         });
         this.setState( { kelurahan_is_loading: false } );
-        $('.select-dropdown--kelurahan .mui-text-field__input input[type="text"]').focus();
+
+        if( this.props.isVisible )
+          $('.select-dropdown--kelurahan .mui-text-field__input input[type="text"]').focus();
 
       } );
 
@@ -359,7 +364,9 @@ class AddressVerificationForm extends Component {
     if(biqHelper.utils.isNull(this.state.kelurahan_selected)) return;
 
     let address_input_el = $('.address-verification-form .alamat textarea');
-    address_input_el.focus();
+
+    if( this.props.isVisible )
+      address_input_el.focus();
 
     if ( typeof params.callback === 'function') {
       params.callback( params.callback_params );

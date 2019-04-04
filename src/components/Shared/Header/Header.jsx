@@ -72,7 +72,7 @@ class Header extends Component {
             </Button>
 
             <Button className="brand" onClick={this._goToDashboard}>
-               BantulPulsa
+              { biqHelper.string.capitalize(biqConfig.subdomain) }
             </Button>
 
           </div>

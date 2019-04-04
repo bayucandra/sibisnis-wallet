@@ -55,6 +55,33 @@ class App extends Component {
     this.setState( { modal_is_open: true } );
   };
 
+  _switchPlatform = () => {
+
+    let dst = `${biqConfig.url_base}/agen`;
+
+    switch( biqConfig.platform_kelompok ) {
+
+      case 'master':
+        dst = `${biqConfig.protocol}//webmin.${biqConfig.host}`;
+        break;
+
+      case 'premium':
+        dst = `${biqConfig.url_base}/dashboard`;
+        break;
+
+      case 'paket':
+        dst = `${biqConfig.url_base}/agen`;
+        break;
+
+      default:
+        dst = `${biqConfig.url_base}/agen`;
+
+    }
+
+    window.location = dst;
+
+  };
+
   componentDidMount(){
     let {dispatch} = this.props;
     if ( process.env.NODE_ENV === 'development' ) console.log('initializing app');
@@ -95,6 +122,11 @@ class App extends Component {
     let {dispatch} = this.props;
     if ( this.props.location !== nextProps.location ) {
       dispatch( appActions.appRouterChange( { header_mobile_show : true, header_menu_mobile_show: true } ) );//default should always true, it will be overridden at page/component part if it should be false
+    }
+
+    if( nextProps.app.is_app_initialized && !nextProps.app.is_logged_in ) {
+      this._switchPlatform();
+      return false
     }
 
     if ( nextProps.app.is_app_initialized && this.props.app.is_logged_in && !nextProps.app.is_logged_in ) {
@@ -152,29 +184,7 @@ class App extends Component {
       body.stop().animate({scrollTop:0}, 500, 'swing');
 
     if( this.props.app.should_switch_platform ){
-
-      let dst = `${biqConfig.url_base}/agen`;
-
-      switch( biqConfig.platform_kelompok ) {
-
-        case 'master':
-          dst = `${biqConfig.protocol}//webmin.${biqConfig.host}`;
-          break;
-
-        case 'premium':
-          dst = `${biqConfig.url_base}/dashboard`;
-          break;
-
-        case 'paket':
-          dst = `${biqConfig.url_base}/agen`;
-          break;
-
-        default:
-          dst = `${biqConfig.url_base}/agen`;
-
-      }
-
-      window.location = dst;
+      this._switchPlatform();
       // window.location = biqConfig.agen.url_base + '/#/login/default';
     }
 

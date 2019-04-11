@@ -30,9 +30,9 @@ class BalanceMutation extends Component {
     let {dispatch} = this.props;
     dispatch( appActions.appRouterChange( { header_mobile_show : false } ) );
 
-    if ( !this.props.mutation_number_pagination.is_fetched ) {
+    // if ( !this.props.mutation_number_pagination.is_fetched ) {
       dispatch( balanceMutationActions.balanceMutationNumberPaginationFetch( { limit: this.config.limit, offset: 0 } ) );
-    }
+    // }
 
   }
 

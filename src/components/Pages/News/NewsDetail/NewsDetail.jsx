@@ -36,6 +36,7 @@ class NewsDetail extends Component {
   render() {
     let data = biqHelper.JSON.pathValueGet( this.props.news_data.server_response, 'response.data' );
     data = biqHelper.utils.isNull( data ) ? {} : data;
+    let image_data = biqHelper.JSON.parse( data.image );
 
     return (
       <div className="main-wrapper main-wrapper--mobile-no-header biq-wrapper l-news-detail">
@@ -61,13 +62,11 @@ class NewsDetail extends Component {
                 </div>
               </div>
 
-              <div className="image"/>
+              <div className="image" style={{ backgroundImage: `url('${image_data.fileUrl}')` }}/>
 
             </div>
 
-            <div className="l-news-detail__panel__body">
-              { data.detail_berita }
-            </div>
+            <div className="l-news-detail__panel__body" dangerouslySetInnerHTML={{ __html: data.detail_berita }}/>
 
           </div>
 

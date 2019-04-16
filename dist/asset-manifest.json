@@ -1,7 +1,7 @@
 {
   "main.css": "./static/css/main.760dbe58.chunk.css",
-  "main.js": "./static/js/main.4b42e2c0.chunk.js",
-  "main.js.map": "./static/js/main.4b42e2c0.chunk.js.map",
+  "main.js": "./static/js/main.82a204f4.chunk.js",
+  "main.js.map": "./static/js/main.82a204f4.chunk.js.map",
   "static/css/1.bbff9b49.chunk.css": "./static/css/1.bbff9b49.chunk.css",
   "static/js/1.18f2ff6f.chunk.js": "./static/js/1.18f2ff6f.chunk.js",
   "static/js/1.18f2ff6f.chunk.js.map": "./static/js/1.18f2ff6f.chunk.js.map",
@@ -27,7 +27,7 @@
   "static/media/ico-upload-desktop.svg": "./static/media/ico-upload-desktop.19926ea4.svg",
   "static/media/upload-sukses.svg": "./static/media/upload-sukses.569e39df.svg",
   "static/media/upload-gagal.svg": "./static/media/upload-gagal.f7b7d674.svg",
-  "static/media/styles.scss": "./static/media/Nunito-Italic.7726e581.ttf",
+  "static/media/styles.scss": "./static/media/Nunito-BlackItalic.bffb5c44.ttf",
   "static/media/PasswordField.scss": "./static/media/ic-visibility.e6529dc0.svg",
   "static/media/ModalNotice.scss": "./static/media/gagal.4ce7e798.svg",
   "static/media/BalanceProfileVerification.scss": "./static/media/ic-check.a91bcfe3.svg",
@@ -38,7 +38,7 @@
   "static/media/HeaderMobile.scss": "./static/media/back-white.805e99d2.svg",
   "static/media/NewsDetail.scss": "./static/media/back-blue-new.c7857648.svg",
   "static/media/BalancePaymentStatusIndomaret.scss": "./static/media/warning-1.6bb145cf.svg",
-  "static/media/BalancePaymentMethodBank.scss": "./static/media/radio-disable.20949ffb.svg",
+  "static/media/BalancePaymentMethodBank.scss": "./static/media/radio-active.6bba1781.svg",
   "static/media/BalancePaymentDone.scss": "./static/media/accept.466b8083.svg",
   "static/media/BalancePaymentStatusBank.scss": "./static/media/help.704c45a7.svg",
   "static/media/BalancePaymentConfirmation.scss": "./static/media/ico-upload-sukses.2094b289.svg",
@@ -51,6 +51,6 @@
   "static/css/main.760dbe58.chunk.css.map": "./static/css/main.760dbe58.chunk.css.map",
   "static/css/1.bbff9b49.chunk.css.map": "./static/css/1.bbff9b49.chunk.css.map",
   "index.html": "./index.html",
-  "precache-manifest.cecb1e416dee3cd5ffd352e20a86884c.js": "./precache-manifest.cecb1e416dee3cd5ffd352e20a86884c.js",
+  "precache-manifest.2694e799b6133496bd83a6d2b8e58340.js": "./precache-manifest.2694e799b6133496bd83a6d2b8e58340.js",
   "service-worker.js": "./service-worker.js"
 }

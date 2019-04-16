@@ -139,7 +139,7 @@ class CameraCapture extends Component {
             this._modalClose();
 
             setTimeout(
-              () => dispatch( userActions.userProfileUpdate( { photo: res.response.data.value } ) ),
+              () => dispatch( userActions.userProfileUpdate( { photo: res.response.data.path } ) ),
               300
             );
 

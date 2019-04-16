@@ -47,6 +47,30 @@ class App extends Component {
     }
   };
 
+  _titleUpdate = () => {
+    let title_text = biqHelper.string.capitalize( biqConfig.subdomain );
+    let title_el = $('head title');
+
+    if( biqHelper.utils.isNull(title_el) )
+      return;
+
+    let subtitle = this._subTitleText();
+
+    if( !biqHelper.utils.isNull( subtitle ) ) {
+      title_text = `${title_text} - ${subtitle}`;
+    }
+
+    title_el.html( title_text );
+  };
+
+  _subTitleText = () => {
+    let pathname = biqHelper.JSON.pathValueGet( this.props, 'location.pathname', '' );
+    let title_str = pathname.substring( 1, pathname.length ).split('/')[0];
+    title_str = title_str.replace( /-/g, ' ' );
+
+    return biqHelper.string.capitalize( title_str );
+  };
+
   _modalClose = () => {
     this.setState( { modal_is_open: false } );
   };
@@ -172,6 +196,7 @@ class App extends Component {
   }
 
   componentDidUpdate(prevProps, prevState, snapshot) {
+    this._titleUpdate();
     // window.scrollTo(0,0);
     let {dispatch} = this.props;
     let body = $('html, body');

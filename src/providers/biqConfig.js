@@ -11,6 +11,7 @@ let biqConfig = {};
 
 biqConfig.protocol = window.location.protocol;
 biqConfig.host = window.location.host;
+biqConfig.subdomain = window.location.hostname.split('.')[0];
 
 biqConfig.url_base = `${biqConfig.protocol}//${biqConfig.host}`;
 biqConfig.subdomain = window.location.hostname.split('.')[0];

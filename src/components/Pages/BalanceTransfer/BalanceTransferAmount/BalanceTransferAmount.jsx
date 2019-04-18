@@ -11,6 +11,7 @@ import HeaderMobileGeneral from "components/Shared/HeaderMobileGeneral/HeaderMob
 
 import "./BalanceTransferAmount.scss";
 import {TextField} from "@material-ui/core";
+import BiqInputNumber from 'components/Widgets/BiqInputNumber'
 import Modal from "@material-ui/core/es/Modal";
 import LoadingIndicatorBar from "../../../Widgets/LoadingIndicatorBar";
 
@@ -201,7 +202,6 @@ class BalanceTransferAmount extends Component {
 
           </div>
 
-
           <TextField
             error={ this.state.nominal.error }
             className="nominal mui-number-field mui-number-field--no-spinner"
@@ -209,8 +209,11 @@ class BalanceTransferAmount extends Component {
             label="Nominal transfer"
             placeholder="Nominal transfer"
             value={this.state.nominal.value}
-            onChange={ e =>this.setState( { nominal: Object.assign({}, this.state.nominal, { value: e.target.value }) } )}
+            onChange={ e => this.setState( { nominal: Object.assign({}, this.state.nominal, { value: e.target.value }) } ) }
             helperText={ this.state.nominal.error_message }
+            InputProps={{
+              inputComponent: BiqInputNumber,
+            }}
           />
 
           <TextField

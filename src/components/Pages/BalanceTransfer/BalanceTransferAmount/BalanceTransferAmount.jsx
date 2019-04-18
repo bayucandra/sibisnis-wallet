@@ -205,7 +205,6 @@ class BalanceTransferAmount extends Component {
           <TextField
             error={ this.state.nominal.error }
             className="nominal mui-number-field mui-number-field--no-spinner"
-            type="number"
             label="Nominal transfer"
             placeholder="Nominal transfer"
             value={this.state.nominal.value}

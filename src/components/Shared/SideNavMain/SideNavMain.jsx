@@ -65,7 +65,10 @@ class SideNavMain extends Component {
 
   _balanceRender() {
 
-    const {saldo} = biqHelper.string.toFloat(this.props.user_profile);
+    let {saldo} = this.props.user_profile;
+    if( typeof saldo === 'string' ){
+      saldo = saldo.replace(/\./, ',');
+    }
     biqHelper.utils.assignDefault( saldo, 'N/A' );
     return (
       <div className="balance-info">

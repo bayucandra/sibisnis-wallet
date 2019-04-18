@@ -225,7 +225,10 @@ class BiqHelperUtils {
     Object.assign( params, opt );
 
     input = this.isNull( input ) ? 0 : input;
-    let ret = prefix + input.toString().replace(/\B(?=(\d{3})+(?!\d))/g, params.thousand_separator);
+
+    let input_str_arr = input.toString().split('.');
+
+    let ret = prefix + input_str_arr[0].replace(/\B(?=(\d{3})+(?!\d))/g, params.thousand_separator);
 
     if ( params.split_last_thousand === true ) {
       let last_thousand_pos = ret.search( /(?:.(?!\d{3}))+$/ );
@@ -236,6 +239,11 @@ class BiqHelperUtils {
         last_thousand
       ]
     }
+
+    let decimal_separator = params.thousand_separator === '.' ? ',' : '.';
+
+    if( input_str_arr.length === 2 )
+      ret = ret + decimal_separator + input_str_arr[1];
 
     return ret;
   }

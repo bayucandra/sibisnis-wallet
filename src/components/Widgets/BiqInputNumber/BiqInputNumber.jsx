@@ -44,7 +44,9 @@ const BiqNumberFormat = (props) => {
           },
         });
       }}
-      thousandSeparator
+      thousandSeparator="."
+      decimalSeparator=","
+      decimalScale={0}
       // prefix="$"
     />
   );

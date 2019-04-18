@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import BiqInputNumber from "components/Widgets/BiqInputNumber";
-import { TextField } from "@material-ui/core"
 
 import biqHelper from "../../../../lib/biqHelper";
 
@@ -17,7 +15,6 @@ import "./BalanceTransferPhone.scss";
 class BalanceTransferPhone extends Component {
 
   state = {
-    numberformat: 3000,
     input: {
       is_valid: false,
       value: ''
@@ -44,10 +41,6 @@ class BalanceTransferPhone extends Component {
       dispatch(balanceTransferActions.memberInfoFetch(this.state.input.value));
 
     });
-  };
-
-  _handleChange = () => {
-
   };
 
   componentDidMount() {
@@ -86,7 +79,6 @@ class BalanceTransferPhone extends Component {
         <HeaderMobileGeneral headerTitle="Transfer saldo"/>
 
         <h1 className="l-balance-transfer-phone__title visible-md-up">Transfer Saldo</h1>
-
 
         <div className="l-balance-transfer-phone__body">
           <PhoneInput label="Nomor Hp Tujuan" onChange={this._inputChange}/>

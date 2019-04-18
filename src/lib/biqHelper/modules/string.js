@@ -14,6 +14,14 @@ class BiqHelperString {
     }
   }
 
+  toFloat( str ){
+    try {
+      return typeof str === 'string' ? parseFloat( str ) : str;
+    } catch( e ) {
+      return 0;
+    }
+  }
+
 }
 
 export { BiqHelperString };

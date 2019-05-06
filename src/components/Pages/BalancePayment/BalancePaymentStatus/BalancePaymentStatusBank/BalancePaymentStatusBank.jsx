@@ -26,7 +26,7 @@ class BalancePaymentStatusBank extends Component {
     let data = this.props.biqData;
 
     let bank_record = walletProvider.bankByMethodAbreviation(data.bank);
-    let bank_icon_size = biqHelper.JSON.pathValueGet( bank_record, 'icons.main.size_default' );
+    let bank_icon_size = biqHelper.JSON.pathValueGet( bank_record, 'icons.main.size_default', [] );
 
     let amount_arr = biqHelper.utils.numberFormat( data.nominal_origin, 'Rp ', { split_last_thousand: true } );
 

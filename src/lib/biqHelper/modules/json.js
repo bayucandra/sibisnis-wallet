@@ -71,7 +71,10 @@ class BiqHelperJSON {
     let json_obj = arguments[0];//JSON object
     let json_path = arguments[1];//String of json path eg: Root.branch.branch.leave
 
-    if ( this.pathIsNull( json_obj, json_path ) ) return null;
+    if ( this.pathIsNull( json_obj, json_path ) && typeof arguments[2] !== 'undefined')
+      return arguments[2];
+    else if( this.pathIsNull( json_obj, json_path ) )
+      return null
 
     let json_path_split = json_path.split('.');
 

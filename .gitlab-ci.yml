@@ -1,0 +1,28 @@
+before_script:
+  - apt-get -y update -qq
+  - apt-get -y install rsync -qq
+  - 'which ssh-agent || ( apt-get install -qq openssh-client )'
+  - eval $(ssh-agent -s)
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+  - '[[ -f /.dockerenv ]] && echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config'
+
+deploy_staging:
+  type: deploy
+  environment: Staging
+  only:
+    - master
+  script:
+    - echo "$SSH_PRIVATE_KEY_STAGING" | tr -d '\r' | ssh-add - > /dev/null
+    - rsync -hrvz --delete dist/ ${STAGING_SERVER}:${APP_ROOT}
+    - ssh ${STAGING_SERVER} "ls -la ${APP_ROOT}"
+
+deploy_production:
+  type: deploy
+  environment: Production
+  only:
+    - deploy
+  script:
+    - echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add - > /dev/null
+    - rsync -hrvz --delete dist/ ${PRODUCTION_SERVER}:${APP_ROOT}
+    - ssh ${PRODUCTION_SERVER} "ls -la ${APP_ROOT}"

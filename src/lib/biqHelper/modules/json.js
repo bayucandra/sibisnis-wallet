@@ -86,6 +86,10 @@ class BiqHelperJSON {
       }
     }
 
+    if ( biqHelperUtils.isNull(cur_path) && typeof arguments[2] !== 'undefined') {
+      cur_path = arguments[2];
+    }
+
     return cur_path;
 
   }

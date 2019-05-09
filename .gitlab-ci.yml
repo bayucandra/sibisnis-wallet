@@ -13,7 +13,7 @@ deploy_staging:
   only:
     - master
   script:
-    - echo "${SSH_PRIVATE_KEY_STAGING}" | tr -d '\r' | ssh-add - > /dev/null
+    - echo "$SSH_PRIVATE_KEY_STAGING" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -hrvz --delete dist/ ${STAGING_SERVER}:${APP_ROOT}
     - ssh ${STAGING_SERVER} "ls -la ${APP_ROOT}"
 
@@ -23,6 +23,6 @@ deploy_production:
   only:
     - deploy
   script:
-    - echo "${SSH_PRIVATE_KEY_PROD}" | tr -d '\r' | ssh-add - > /dev/null
+    - echo "$SSH_PRIVATE_KEY_PROD" | tr -d '\r' | ssh-add - > /dev/null
     - rsync -hrvz --delete dist/ ${PRODUCTION_SERVER}:${APP_ROOT}
     - ssh ${PRODUCTION_SERVER} "ls -la ${APP_ROOT}"

@@ -148,9 +148,11 @@ class App extends Component {
       dispatch( appActions.appRouterChange( { header_mobile_show : true, header_menu_mobile_show: true } ) );//default should always true, it will be overridden at page/component part if it should be false
     }
 
-    if ( nextProps.app.is_app_initialized && this.props.app.is_logged_in && !nextProps.app.is_logged_in ) {
+    if ( nextProps.app.is_app_initialized && /*this.props.app.is_logged_in && */!nextProps.app.is_logged_in ) {
       biqHelper.localStorage.clear();
-      biqConfig.platform_kelompok = this.props.user_profile.kelompok.trim();
+      if( this.props.user_profile.hasOwnProperty('kelompok') ) {
+        biqConfig.platform_kelompok = this.props.user_profile.kelompok.trim();
+      }
       dispatch( appActions.appStatesReset() );
       dispatch( appActions.appRedirectToAgen() );
       return false;
@@ -172,13 +174,13 @@ class App extends Component {
 
     if ( !this.props.app.sse.initialized && nextProps.app.sse.initialized ) {
 
-      if ( process.env.NODE_ENV === 'production' ) {
+      // if ( process.env.NODE_ENV === 'production' ) {
         esProvider.addEventListener('login', (e) => {
           if (e.data === 'false' || !e.data) {
             dispatch(appActions.appLogout());
           }
         });
-      }
+      // }
 
       esProvider.addEventListener('saldo_member', (e) => {
         let balance_current = this.props.user_profile.saldo;

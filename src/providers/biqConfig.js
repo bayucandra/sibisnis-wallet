@@ -42,10 +42,12 @@ biqConfig.platform_kelompok = '';
 
 if ( process.env.NODE_ENV === 'development' || localStorage.getItem('pengembangan') === 'benar' ) {//TODO: !!!!!For development only, remove this conditional block at production stage
   // biqConfig.api.url_base = 'http://dealer.sibisnis.ml';
-  biqConfig.api.url_base = 'https://delaerfree.kitaon.ga';
+  // biqConfig.api.url_base = 'https://delaerfree.kitaon.ga';
+  biqConfig.api.url_base = 'https://bukopin.kitaon.co.id';
   biqConfig.api.data_package_name = {
     // 'Package-Name' : 'COM.ZON32080288.PPOB'
-    'Package-Name' : 'COM.ZON50470939.PPOB'
+    // 'Package-Name' : 'COM.ZON50470939.PPOB'
+    'Package-Name' : 'COM.ZON54363534.PPOB'
   };
 }
 

@@ -89,8 +89,15 @@
     }
 
     &__email {
+      width: 100%;
+      box-sizing: border-box;
       margin-top: 5px;
-      @include text-setup($charcoal-grey, 13px);
+      padding: 0 10px;
+      word-wrap: break-word;
+      text-align: center;
+
+      color: map-get( $colors, charcoal-grey );
+      font-size: 13px;
       font-weight: normal;
       font-style: normal;
       font-stretch: normal;

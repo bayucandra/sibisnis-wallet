@@ -54,6 +54,7 @@ class BalanceTopUp extends Component {
     biqHelper.utils.clickTimeout( () => {
       dispatch( balanceActions.balanceNominalSet( nominal ) );
       dispatch( balanceActions.balanceMethodReset() );
+      dispatch( balanceActions.balanceMethodSet('manual_transfer') );
       this.props.history.push('/balance/payment');
     } );
   };

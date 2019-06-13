@@ -27,7 +27,7 @@ class BalancePaymentMethodBank extends Component {
     biqHelper.utils.clickTimeout( ()=>{
       let {dispatch} = this.props;
       dispatch( balanceActions.balanceMethodReset() );
-      this.props.history.push('/balance/payment/method');
+      this.props.history.push('/balance');
     } );
   };
 

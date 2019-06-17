@@ -15,7 +15,7 @@ const logout = action$ => action$.pipe(
       url: `${biqConfig.api.url_base}/api/logout`,
       crossDomain: true,
       withCredentials: true,
-      data: Object.assign( {}, biqConfig.api.data_auth )
+      body: Object.assign( {}, biqConfig.api.data_auth )
     })
       .pipe(
 
@@ -34,6 +34,30 @@ const logout = action$ => action$.pipe(
   )
 );
 
+const hostChecked = action$ => action$.pipe(
+  ofType( actionTypes.app.HOST_CHECK ),
+  switchMap(
+    action => rxAjax({
+      method: 'POST',
+      url: `${biqConfig.api.url_base}/api/login/host_checked`,
+      crossDomain: true,
+      withCredentials: true,
+      body: Object.assign({
+        host: biqConfig.host,
+        folder: biqConfig.folder
+      }, biqConfig.api.data_auth)
+    })
+      .pipe(
+        map( res => appActions.appHostChecked({ status: res.status, response: res.response }) ),
+        catchError(err => of({
+          type: actionTypes.app.HOST_CHECKED,
+          payload: { status: err.xhr.status, response: err.xhr.response }
+        }))
+      )
+  )
+);
+
 export default [
-  logout
+  logout,
+  hostChecked
 ];

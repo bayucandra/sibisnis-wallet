@@ -11,10 +11,13 @@ let biqConfig = {};
 
 biqConfig.protocol = window.location.protocol;
 biqConfig.host = window.location.host;
+biqConfig.folder = window.location.pathname.split('/')[1];
 biqConfig.subdomain = window.location.hostname.split('.')[0];
 
 biqConfig.url_base = `${biqConfig.protocol}//${biqConfig.host}`;
 biqConfig.subdomain = window.location.hostname.split('.')[0];
+
+biqConfig.rxAjaxOptions = {};
 
 biqConfig.api = {
   url_base: `${biqConfig.protocol}//${biqConfig.host + path}`,
@@ -43,12 +46,19 @@ biqConfig.platform_kelompok = '';
 if ( process.env.NODE_ENV === 'development' || localStorage.getItem('pengembangan') === 'benar' ) {//TODO: !!!!!For development only, remove this conditional block at production stage
   // biqConfig.api.url_base = 'http://dealer.sibisnis.ml';
   // biqConfig.api.url_base = 'https://delaerfree.kitaon.ga';
+  biqConfig.host = 'bukopin.kitaon.co.id';
+  biqConfig.folder = 'wallet';
   biqConfig.api.url_base = 'https://bukopin.kitaon.co.id';
   biqConfig.api.data_package_name = {
     // 'Package-Name' : 'COM.ZON32080288.PPOB'
     // 'Package-Name' : 'COM.ZON50470939.PPOB'
     'Package-Name' : 'COM.ZON54363534.PPOB'
   };
+
+  biqConfig.rxAjaxOptions = {
+    crossDomain: true,
+    withCredentials: true
+  }
 }
 
 biqConfig.api.data_auth = Object.assign( {}, biqConfig.api.data_package_name, { csrf_token: biqConfig.api.csrf_token } );

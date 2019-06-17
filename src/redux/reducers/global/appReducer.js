@@ -6,6 +6,7 @@ import $ from 'jquery';
 let window_el = $(window);
 let state_default = {
   is_app_initialized: false
+  , host_checked: { is_ready: false, allowed_url: '' }
   , sse: { initializing: false, initialized: false, error: false }
   // , is_es_initialized: false
   , is_logging_out: false
@@ -56,6 +57,13 @@ export default ( state = state_default, action ) => {
 
       new_state = { is_app_initialized: true, is_logged_in: false };
       new_state.is_logged_in = is_logged_in === true || is_logged_in === 'true';
+      break;
+
+    case actionTypes.app.HOST_CHECKED:
+      const allowed_url = biqHelper.JSON.pathValueGet(action.payload.response, 'data.allowed_url');
+      new_state = {
+        host_checked: Object.assign({}, { is_ready: true, allowed_url: allowed_url })
+      }
       break;
 
     case actionTypes.app.SSE_AGEN_INITIALIZING:

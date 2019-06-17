@@ -6,6 +6,19 @@ import actionTypes from "../../action-types/index";
     }
   }
 
+  function appHostCheck() {
+    return {
+      type: actionTypes.app.HOST_CHECK
+    }
+  }
+
+  function appHostChecked( payload ) {
+    return {
+      type: actionTypes.app.HOST_CHECKED,
+      payload
+    }
+  }
+
   function appSseAgenInitializing() {
     return {
       type: actionTypes.app.SSE_AGEN_INITIALIZING
@@ -118,6 +131,8 @@ import actionTypes from "../../action-types/index";
 
   const actions = {
     appInit,
+    appHostCheck,
+    appHostChecked,
     appSseAgenInitializing,
     appSseAgenInitialized,
     appLogout,

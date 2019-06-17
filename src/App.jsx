@@ -111,6 +111,7 @@ class App extends Component {
     if ( process.env.NODE_ENV === 'development' ) console.log('initializing app');
 
     dispatch(appActions.appInit());
+    dispatch(appActions.appHostCheck());
     dispatch(appActions.appSseAgenInitializing());
     dispatch(userActions.userProfileGet());
 
@@ -144,6 +145,24 @@ class App extends Component {
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     let {dispatch} = this.props;
+
+    const current_url = biqConfig.host + '/' + biqConfig.folder;
+
+    if (
+      nextProps.app.host_checked.is_ready
+      && nextProps.app.host_checked.allowed_url !== this.props.app.host_checked.allowed_url
+    ) {
+      console.log('Current URL: ' + current_url);
+      console.log('Allowed URL: ' + nextProps.app.host_checked.allowed_url);
+    }
+
+    if (
+      nextProps.app.host_checked.is_ready
+      && nextProps.app.host_checked.allowed_url !== biqConfig.host
+    ) {
+
+    }
+
     if ( this.props.location !== nextProps.location ) {
       dispatch( appActions.appRouterChange( { header_mobile_show : true, header_menu_mobile_show: true } ) );//default should always true, it will be overridden at page/component part if it should be false
     }

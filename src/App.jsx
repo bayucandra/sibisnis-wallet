@@ -83,7 +83,8 @@ class App extends Component {
 
     let dst = `${biqConfig.url_base}/agen`;
 
-    switch( biqConfig.platform_kelompok ) {
+    const platform_kelompok = biqHelper.JSON.pathValueGet(this.props, 'user_profile.kelompok', '').trim();
+    switch( platform_kelompok ) {
 
       case 'master':
         dst = `${biqConfig.protocol}//webmin.${biqConfig.host}`;
@@ -98,7 +99,7 @@ class App extends Component {
         break;
 
       default:
-        dst = `${biqConfig.url_base}/agen`;
+        dst = `${biqConfig.url_base}`;
 
     }
 
@@ -158,9 +159,9 @@ class App extends Component {
 
     if (
       nextProps.app.host_checked.is_ready
-      && nextProps.app.host_checked.allowed_url !== biqConfig.host
+      && nextProps.app.host_checked.allowed_url !== current_url
     ) {
-
+      window.location = nextProps.app.host_checked.allowed_url;
     }
 
     if ( this.props.location !== nextProps.location ) {
@@ -169,9 +170,6 @@ class App extends Component {
 
     if ( nextProps.app.is_app_initialized && /*this.props.app.is_logged_in && */!nextProps.app.is_logged_in ) {
       biqHelper.localStorage.clear();
-      if( this.props.user_profile.hasOwnProperty('kelompok') ) {
-        biqConfig.platform_kelompok = this.props.user_profile.kelompok.trim();
-      }
       dispatch( appActions.appStatesReset() );
       dispatch( appActions.appRedirectToAgen() );
       return false;

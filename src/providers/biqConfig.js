@@ -40,8 +40,6 @@ biqConfig.local_storage_key = {
   wallet_bank_list: 'wallet_bank_list'
 };
 
-biqConfig.platform_kelompok = '';
-
 
 if ( process.env.NODE_ENV === 'development' || localStorage.getItem('pengembangan') === 'benar' ) {//TODO: !!!!!For development only, remove this conditional block at production stage
   // biqConfig.api.url_base = 'http://dealer.sibisnis.ml';

@@ -13,7 +13,6 @@ let state_default = {
   , logout_response: {}
   , is_logged_in: false
   , should_switch_platform: false
-  , platform_kelompok: ''
   , header_mobile_show: true
   , header_menu_mobile_show: true
   , loading_indicator_show: false

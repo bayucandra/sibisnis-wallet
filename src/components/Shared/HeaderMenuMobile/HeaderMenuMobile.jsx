@@ -30,30 +30,8 @@ class HeaderMenuMobile extends  Component {
 
   _switchClick = () => {
     biqHelper.utils.clickTimeout( () => {
-
-      let dst = `${biqConfig.url_base}/agen`;
-
-      switch( this.props.user_profile.kelompok.trim() ) {
-
-        case 'master':
-          dst = `${biqConfig.protocol}//webmin.${biqConfig.host}`;
-          break;
-
-        case 'premium':
-          dst = `${biqConfig.url_base}/dashboard`;
-          break;
-
-        case 'paket':
-          dst = `${biqConfig.url_base}/agen`;
-          break;
-
-        default:
-          dst = `${biqConfig.url_base}/agen`;
-
-      }
-
-      window.location = dst;
-
+      let {dispatch} = this.props;
+      dispatch( appActions.appRedirectToAgen() );
     } );
   };
 

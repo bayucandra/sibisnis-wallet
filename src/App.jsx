@@ -165,8 +165,7 @@ class App extends Component {
       nextProps.app.host_checked.is_ready
       && nextProps.app.host_checked.allowed_url !== current_url
     ) {
-
-      // window.location = biqConfig.protocol + '//' + nextProps.app.host_checked.allowed_url;
+      window.location = biqConfig.protocol + '//' + nextProps.app.host_checked.allowed_url;
     }
 
     if ( this.props.location !== nextProps.location ) {

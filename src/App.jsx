@@ -99,15 +99,14 @@ class App extends Component {
         break;
 
       default:
-        dst = `${biqConfig.url_base}`;
+
+        if ( !process.env.NODE_ENV === 'development' ) {
+          dst = `${biqConfig.url_base}`;
+        }
 
     }
 
-    if ( process.env.NODE_ENV === 'development' ) {
-      window.location = dst + '/agen';
-    } else {
-      window.location = dst;
-    }
+    window.location = dst;
 
   };
 

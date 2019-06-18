@@ -103,7 +103,11 @@ class App extends Component {
 
     }
 
-    window.location = dst;
+    if ( process.env.NODE_ENV === 'development' ) {
+      window.location = dst + '/agen';
+    } else {
+      window.location = dst;
+    }
 
   };
 
@@ -161,7 +165,8 @@ class App extends Component {
       nextProps.app.host_checked.is_ready
       && nextProps.app.host_checked.allowed_url !== current_url
     ) {
-      window.location = nextProps.app.host_checked.allowed_url;
+
+      // window.location = biqConfig.protocol + '//' + nextProps.app.host_checked.allowed_url;
     }
 
     if ( this.props.location !== nextProps.location ) {

@@ -154,14 +154,6 @@ class App extends Component {
 
     if (
       nextProps.app.host_checked.is_ready
-      && nextProps.app.host_checked.allowed_url !== this.props.app.host_checked.allowed_url
-    ) {
-      console.log('Current URL: ' + current_url);
-      console.log('Allowed URL: ' + nextProps.app.host_checked.allowed_url);
-    }
-
-    if (
-      nextProps.app.host_checked.is_ready
       && nextProps.app.host_checked.allowed_url !== current_url
     ) {
       window.location = biqConfig.protocol + '//' + nextProps.app.host_checked.allowed_url;

@@ -16,8 +16,7 @@ const userPasswordUpdateSubmit = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/wallet/password_update`,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign( {}, action.payload.params, biqConfig.api.data_auth )
       });
 
@@ -50,8 +49,7 @@ const userPasswordUpdateOtp = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/wallet/otp_password_wallet`,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign( {}, biqConfig.api.data_auth )
       });
 

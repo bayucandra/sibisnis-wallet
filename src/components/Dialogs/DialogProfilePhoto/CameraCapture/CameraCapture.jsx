@@ -118,8 +118,7 @@ class CameraCapture extends Component {
       let ajax$ = rxAjax({
         url: biqConfig.api.url_base + '/api/wallet/profile_update',
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: form_data,
       })
         .pipe(

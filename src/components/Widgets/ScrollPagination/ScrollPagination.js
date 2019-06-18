@@ -10,6 +10,7 @@ import appActions from "redux/actions/global/appActions";
 import biqHelper from "../../../lib/biqHelper";
 
 import "./ScrollPagination.scss";
+import biqConfig from '../../../providers/biqConfig'
 
 class ScrollPagination extends Component{
 
@@ -93,8 +94,7 @@ class ScrollPagination extends Component{
     let ajax$ = rxAjax({
       url: url,
       method: this.props.biqMethod,
-      crossDomain: true,
-      withCredentials: true,
+      ...biqConfig.rxAjaxOptions,
       body: data
     });
 

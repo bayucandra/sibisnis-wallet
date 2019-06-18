@@ -20,8 +20,7 @@ const balanceMutationNumberPaginationFetch = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: url,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign( {}, biqConfig.api.data_auth, { limit: action.payload.limit, offset: action.payload.offset } )
       });
 

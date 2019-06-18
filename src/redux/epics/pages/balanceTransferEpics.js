@@ -19,8 +19,7 @@ const balanceTransferMemberInfoFetch = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/wallet/member_info`,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign( {}, biqConfig.api.data_auth, { nomor_hp : action.payload } )
       });
 
@@ -55,8 +54,7 @@ const balanceTransferNominalSubmit = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/wallet/transfer_saldo`,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign( {}, biqConfig.api.data_auth, action.payload )
       });
 

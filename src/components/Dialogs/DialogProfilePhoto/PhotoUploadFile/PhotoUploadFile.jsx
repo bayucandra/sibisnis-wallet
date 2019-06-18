@@ -151,8 +151,7 @@ class PhotoUploadFile extends Component {
           url: biqConfig.api.url_base + '/api/wallet/profile_update',
           // url: 'http://newzonatik.com/agen/dev-api/preflight.php',
           method: 'POST',
-          crossDomain: true,
-          withCredentials: true,
+          ...biqConfig.rxAjaxOptions,
           body: form_data,
           progressSubscriber
         });

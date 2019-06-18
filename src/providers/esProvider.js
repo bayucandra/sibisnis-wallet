@@ -17,7 +17,7 @@ class EsProvider {
 
   init(){
     let url = biqConfig.api.url_base + '/api/SSE';
-    this.state.es = new EventSource( url, { withCredentials: true } );
+    this.state.es = new EventSource( url, { withCredentials: biqConfig.rxAjaxOptions.withCredentials } );
 
     if ( this.state.pending_listeners.length > 0 ) {
       this.state.pending_listeners.forEach( function( e ){

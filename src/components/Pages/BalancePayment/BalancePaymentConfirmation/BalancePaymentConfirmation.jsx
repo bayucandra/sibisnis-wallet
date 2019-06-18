@@ -136,8 +136,7 @@ class BalancePaymentConfirmation extends Component{
     this.imageObj[key].rxAjax$ = rxAjax({
       url: `${biqConfig.api.url_base}/api/wallet/konfirmasi_pembayaran`,
       method: 'POST',
-      crossDomain: true,
-      withCredentials: true,
+      ...biqConfig.rxAjaxOptions,
       body: form_data,
       progressSubscriber
     });

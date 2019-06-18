@@ -1,3 +1,5 @@
+import biqConfig from '../../../providers/biqConfig'
+
 class BiqHelperScrollPagination {
 
   constructor( p_obj ) {
@@ -136,7 +138,7 @@ class BiqHelperScrollPagination {
       data: data,//mean first page requested with page:0
       dataType: 'json',
       xhrFields: {
-        withCredentials: true
+        withCredentials: biqConfig.rxAjaxOptions.withCredentials
       },
       success: response => {
         let data = [];

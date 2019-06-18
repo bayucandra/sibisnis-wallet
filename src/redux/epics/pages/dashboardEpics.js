@@ -14,8 +14,7 @@ const dashboardEmailVerificationSubmit = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/wallet/verifikasi_email`,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign({}, biqConfig.api.data_auth)
       });
 
@@ -47,8 +46,7 @@ const dashboardLoginHistoryFetch = action$ =>
         let ajax$ = rxAjax({
           url: `${biqConfig.api.url_base}/api/wallet/history_login`,
           method: 'POST',
-          crossDomain: true,
-          withCredentials: true,
+          ...biqConfig.rxAjaxOptions,
           body: Object.assign(
             {
               memberid: action.payload.memberid,
@@ -92,8 +90,7 @@ const newsFetch = action$ =>
         let ajax$ = rxAjax({
           url: `${biqConfig.api.url_base}/api/wallet/list_berita?limit=5&offset=0`,
           method: 'GET',
-          crossDomain: true,
-          withCredentials: true
+          ...biqConfig.rxAjaxOptions,
         });
 
         return ajax$.pipe(

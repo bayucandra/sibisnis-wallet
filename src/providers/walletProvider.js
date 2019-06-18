@@ -15,8 +15,7 @@ class WalletProvider {
   paymentStatusFetch$ = rxAjax({
     url: `${biqConfig.api.url_base}/api/wallet/list_deposit_status`,
     method: 'POST',
-    crossDomain: true,
-    withCredentials: true,
+    ...biqConfig.rxAjaxOptions,
     body: Object.assign( {}, biqConfig.api.data_auth )
   })
     .pipe(
@@ -75,8 +74,7 @@ class WalletProvider {
   bankListFetch$ = rxAjax({
     url: `${biqConfig.api.url_base}/api/wallet/list_bank`,
     method: 'POST',
-    crossDomain: true,
-    withCredentials: true,
+    ...biqConfig.rxAjaxOptions,
     body: Object.assign( {}, biqConfig.api.data_auth )
   })
     .pipe(

@@ -17,7 +17,9 @@ biqConfig.subdomain = window.location.hostname.split('.')[0];
 biqConfig.url_base = `${biqConfig.protocol}//${biqConfig.host}`;
 biqConfig.subdomain = window.location.hostname.split('.')[0];
 
-biqConfig.rxAjaxOptions = {};
+biqConfig.rxAjaxOptions = {
+  withCredentials: true
+};
 
 biqConfig.api = {
   url_base: `${biqConfig.protocol}//${biqConfig.host + path}`,
@@ -54,8 +56,8 @@ if ( process.env.NODE_ENV === 'development' || localStorage.getItem('pengembanga
   };
 
   biqConfig.rxAjaxOptions = {
-    crossDomain: true,
-    withCredentials: true
+    ...biqConfig.rxAjaxOptions,
+    crossDomain: true
   }
 }
 

@@ -16,8 +16,7 @@ const paymentMethodFetch = action$ => action$.pipe(
     action => rxAjax({
       url: `${biqConfig.api.url_base}/api/wallet/list_payment_method`,
       method: 'POST',
-      crossDomain: true,
-      withCredentials: true,
+      ...biqConfig.rxAjaxOptions,
       body: Object.assign({}, biqConfig.api.data_auth)
     })
       .pipe(
@@ -59,8 +58,7 @@ const paymentBankSubmit = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: url,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign(action.payload, biqConfig.api.data_auth)
       });
 
@@ -119,8 +117,7 @@ const paymentTransactionFetch = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/wallet/deposit_detail`,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign({id: action.payload.id_deposit}, biqConfig.api.data_auth)
       });
 

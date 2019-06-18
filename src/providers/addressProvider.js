@@ -9,8 +9,7 @@ class AddressProvider {
   provinsiFetch$ = rxAjax({
       url: `${biqConfig.api.url_base}/api/address/provinsi`,
       method: 'POST',
-      crossDomain: true,
-      withCredentials: true,
+    ...biqConfig.rxAjaxOptions,
       body: Object.assign( {}, biqConfig.api.data_auth )
     })
       .pipe(
@@ -43,8 +42,7 @@ class AddressProvider {
   kabupatenFetch$ = rxAjax({
     url: `${biqConfig.api.url_base}/api/address/kota_kab`,
     method: 'POST',
-    crossDomain: true,
-    withCredentials: true,
+    ...biqConfig.rxAjaxOptions,
     body: Object.assign( { id_provinsi: 'all' }, biqConfig.api.data_auth )
   })
     .pipe(
@@ -76,8 +74,7 @@ class AddressProvider {
   kecamatanFetch$ = rxAjax({
     url: biqConfig.api.url_base + '/api/address/kecamatan',
     method: 'POST',
-    crossDomain: true,
-    withCredentials: true,
+    ...biqConfig.rxAjaxOptions,
     body: Object.assign( { id_kotakab: 'all' }, biqConfig.api.data_auth )
   })
     .pipe(
@@ -104,8 +101,7 @@ class AddressProvider {
     return rxAjax({
       url: biqConfig.api.url_base + '/api/address/kelurahan',
       method: 'POST',
-      crossDomain: true,
-      withCredentials: true,
+      ...biqConfig.rxAjaxOptions,
       body: Object.assign({id_kecamatan: id_kecamatan}, biqConfig.api.data_auth )
     })
       .pipe(

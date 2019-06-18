@@ -18,8 +18,7 @@ const newsDetailFetch = action$ => action$.pipe(
       let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/wallet/detail_berita?id=${action.payload.news_id}`,
         method: 'GET',
-        crossDomain: true,
-        withCredentials: true
+        ...biqConfig.rxAjaxOptions,
       });
 
       return ajax$.pipe(

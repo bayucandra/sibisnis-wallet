@@ -371,8 +371,7 @@ class DialogAddressInput extends React.Component {
       let ajax$ = rxAjax({
         url: `${biqConfig.api.url_base}/api/address/edit`,
         method: 'POST',
-        crossDomain: true,
-        withCredentials: true,
+        ...biqConfig.rxAjaxOptions,
         body: Object.assign( data, biqConfig.api.data_auth )
       });
 

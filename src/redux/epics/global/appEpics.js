@@ -13,8 +13,7 @@ const logout = action$ => action$.pipe(
     action => rxAjax({
       method: 'POST',
       url: `${biqConfig.api.url_base}/api/logout`,
-      crossDomain: true,
-      withCredentials: true,
+      ...biqConfig.rxAjaxOptions,
       body: Object.assign( {}, biqConfig.api.data_auth )
     })
       .pipe(
@@ -40,8 +39,7 @@ const hostChecked = action$ => action$.pipe(
     action => rxAjax({
       method: 'POST',
       url: `${biqConfig.api.url_base}/api/login/host_checked`,
-      crossDomain: true,
-      withCredentials: true,
+      ...biqConfig.rxAjaxOptions,
       body: Object.assign({
         host: biqConfig.host,
         folder: biqConfig.folder

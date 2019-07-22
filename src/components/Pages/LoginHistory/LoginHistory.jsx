@@ -106,7 +106,7 @@ class LoginHistory extends Component {
 
             <ScrollPagination className={ `l-login-history__panel__body` } ref={this.refPanel} biqLimit={15}
               biqUrl={`${biqConfig.api.url_base}/api/wallet/history_login`} biqMethod={'POST'}
-              biqData={ Object.assign( { memberid: this.props.user_profile.memberid, action: 'login' }, biqConfig.api.data_auth ) }
+              biqData={ Object.assign( { memberid: this.props.user_profile.memberid, action: 'login' }, biqConfig.api.data_auth, biqHelper.utils.csrfGet() ) }
               onFetch={this._onFetch} onFetched={ this._onFetched }>
 
 

@@ -141,7 +141,7 @@ class BalanceTopUpHistory extends Component {
 
           <ScrollPagination className={`history-panel__body`} ref={this.refPanelBody}
               biqUrl={`${biqConfig.api.url_base}/api/wallet/list_deposit`} biqMethod={'POST'}
-              biqData={ Object.assign( { memberid: this.props.user_profile.memberid }, biqConfig.api.data_auth ) }
+              biqData={ Object.assign( { memberid: this.props.user_profile.memberid }, biqConfig.api.data_auth, biqHelper.utils.csrfGet() ) }
               onFetch={this._onFetch} onFetched={ this._onFetched }>
             {
               !biqHelper.utils.isNull( data ) && data.length &&

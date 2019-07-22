@@ -122,6 +122,7 @@ class BalanceMutation extends Component {
               <ScrollPagination className="mutation-table-mobile hidden-md-up" biqLimit={15}
                 biqUrl={`${biqConfig.api.url_base}/api/wallet/mutasi_saldo`}
                 biqMethod={'POST'}
+                biqData={ Object.assign({}, biqHelper.utils.csrfGet()) }
                 onFetch={this._onFetch} onFetched={this._onFetched}>
                 {
 

@@ -6,6 +6,7 @@ import { switchMap, map, takeUntil, filter, catchError } from "rxjs/operators";
 import actionTypes from "redux/action-types";
 import balanceMutationActions from "redux/actions/pages/balanceMutationActions";
 import biqConfig from "../../../providers/biqConfig";
+import biqHelper from '../../../lib/biqHelper'
 
 
 const balanceMutationNumberPaginationFetch = action$ => action$.pipe(
@@ -21,7 +22,12 @@ const balanceMutationNumberPaginationFetch = action$ => action$.pipe(
         url: url,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign( {}, biqConfig.api.data_auth, { limit: action.payload.limit, offset: action.payload.offset } )
+        body: Object.assign(
+          {},
+          biqConfig.api.data_auth,
+          { limit: action.payload.limit, offset: action.payload.offset },
+          biqHelper.utils.csrfGet()
+          )
       });
 
       return ajax$.pipe(

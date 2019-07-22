@@ -16,7 +16,11 @@ class WalletProvider {
     url: `${biqConfig.api.url_base}/api/wallet/list_deposit_status`,
     method: 'POST',
     ...biqConfig.rxAjaxOptions,
-    body: Object.assign( {}, biqConfig.api.data_auth )
+    body: Object.assign(
+      {},
+      biqConfig.api.data_auth,
+      biqHelper.utils.csrfGet()
+    )
   })
     .pipe(
       map(e => e.response),
@@ -75,7 +79,11 @@ class WalletProvider {
     url: `${biqConfig.api.url_base}/api/wallet/list_bank`,
     method: 'POST',
     ...biqConfig.rxAjaxOptions,
-    body: Object.assign( {}, biqConfig.api.data_auth )
+    body: Object.assign(
+      {},
+      biqConfig.api.data_auth,
+      biqHelper.utils.csrfGet()
+    )
   })
     .pipe(
       map(e => e.response),

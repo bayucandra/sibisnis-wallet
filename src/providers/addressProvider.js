@@ -10,7 +10,11 @@ class AddressProvider {
       url: `${biqConfig.api.url_base}/api/address/provinsi`,
       method: 'POST',
     ...biqConfig.rxAjaxOptions,
-      body: Object.assign( {}, biqConfig.api.data_auth )
+      body: Object.assign(
+        {},
+        biqConfig.api.data_auth,
+        biqHelper.utils.csrfGet()
+      )
     })
       .pipe(
         map((e) => e.response),
@@ -43,7 +47,11 @@ class AddressProvider {
     url: `${biqConfig.api.url_base}/api/address/kota_kab`,
     method: 'POST',
     ...biqConfig.rxAjaxOptions,
-    body: Object.assign( { id_provinsi: 'all' }, biqConfig.api.data_auth )
+    body: Object.assign(
+      { id_provinsi: 'all' },
+      biqConfig.api.data_auth,
+      biqHelper.utils.csrfGet()
+    )
   })
     .pipe(
       map((e) => e.response),
@@ -75,7 +83,11 @@ class AddressProvider {
     url: biqConfig.api.url_base + '/api/address/kecamatan',
     method: 'POST',
     ...biqConfig.rxAjaxOptions,
-    body: Object.assign( { id_kotakab: 'all' }, biqConfig.api.data_auth )
+    body: Object.assign(
+      { id_kotakab: 'all' },
+      biqConfig.api.data_auth,
+      biqHelper.utils.csrfGet()
+    )
   })
     .pipe(
       map((e) => e.response),
@@ -102,7 +114,11 @@ class AddressProvider {
       url: biqConfig.api.url_base + '/api/address/kelurahan',
       method: 'POST',
       ...biqConfig.rxAjaxOptions,
-      body: Object.assign({id_kecamatan: id_kecamatan}, biqConfig.api.data_auth )
+      body: Object.assign(
+        {id_kecamatan: id_kecamatan},
+        biqConfig.api.data_auth,
+        biqHelper.utils.csrfGet()
+      )
     })
       .pipe(
         map( e => e.response),

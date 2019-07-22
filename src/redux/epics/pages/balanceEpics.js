@@ -17,7 +17,11 @@ const paymentMethodFetch = action$ => action$.pipe(
       url: `${biqConfig.api.url_base}/api/wallet/list_payment_method`,
       method: 'POST',
       ...biqConfig.rxAjaxOptions,
-      body: Object.assign({}, biqConfig.api.data_auth)
+      body: Object.assign(
+        {},
+        biqConfig.api.data_auth,
+        biqHelper.utils.csrfGet()
+      )
     })
       .pipe(
 
@@ -59,7 +63,11 @@ const paymentBankSubmit = action$ => action$.pipe(
         url: url,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign(action.payload, biqConfig.api.data_auth)
+        body: Object.assign(
+          action.payload,
+          biqConfig.api.data_auth,
+          biqHelper.utils.csrfGet()
+        )
       });
 
       if (payment_method === 'indomaret') {//TODO: For development purpose only, remove soon when the API is ready
@@ -118,7 +126,11 @@ const paymentTransactionFetch = action$ => action$.pipe(
         url: `${biqConfig.api.url_base}/api/wallet/deposit_detail`,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign({id: action.payload.id_deposit}, biqConfig.api.data_auth)
+        body: Object.assign(
+          {id: action.payload.id_deposit},
+          biqConfig.api.data_auth,
+          biqHelper.utils.csrfGet()
+        )
       });
 
       if (action.payload.id_deposit === '-1') {//TODO: for development purpose only(dummy data), remove very soon

@@ -143,7 +143,7 @@ class PhotoUploadFile extends Component {
         let form_data = new FormData();
         form_data.append( 'column', 'image' );
         form_data.append( 'value', blob, this.state.img_file_name );
-        form_data.append( 'csrf_token', biqConfig.api.csrf_token );
+        form_data.append( '_csrf', biqHelper.utils.csrfGet()['_csrf'] );
 
         const progressSubscriber = new Subject();
 

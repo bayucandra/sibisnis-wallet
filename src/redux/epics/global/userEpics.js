@@ -6,6 +6,7 @@ import { switchMap, map, takeUntil, filter, catchError } from "rxjs/operators";
 import actionTypes from "redux/action-types";
 import userActions from "redux/actions/global/userActions";
 import biqConfig from "../../../providers/biqConfig";
+import biqHelper from '../../../lib/biqHelper'
 
 const userPasswordUpdateSubmit = action$ => action$.pipe(
 
@@ -17,7 +18,12 @@ const userPasswordUpdateSubmit = action$ => action$.pipe(
         url: `${biqConfig.api.url_base}/api/wallet/password_update`,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign( {}, action.payload.params, biqConfig.api.data_auth )
+        body: Object.assign(
+          {},
+          action.payload.params,
+          biqConfig.api.data_auth,
+          biqHelper.utils.csrfGet()
+        )
       });
 
       return ajax$.pipe(
@@ -50,7 +56,11 @@ const userPasswordUpdateOtp = action$ => action$.pipe(
         url: `${biqConfig.api.url_base}/api/wallet/otp_password_wallet`,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign( {}, biqConfig.api.data_auth )
+        body: Object.assign(
+          {},
+          biqConfig.api.data_auth,
+          biqHelper.utils.csrfGet()
+        )
       });
 
       return ajax$.pipe(

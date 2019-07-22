@@ -6,6 +6,7 @@ import {switchMap, map, takeUntil, filter, catchError } from 'rxjs/operators';
 import actionTypes from "../../action-types";
 import biqConfig from "../../../providers/biqConfig";
 import appActions from "../../actions/global/appActions";
+import biqHelper from '../../../lib/biqHelper'
 
 const logout = action$ => action$.pipe(
   ofType( actionTypes.app.LOGOUT ),
@@ -14,7 +15,11 @@ const logout = action$ => action$.pipe(
       method: 'POST',
       url: `${biqConfig.api.url_base}/api/logout`,
       ...biqConfig.rxAjaxOptions,
-      body: Object.assign( {}, biqConfig.api.data_auth )
+      body: Object.assign(
+        {},
+        biqConfig.api.data_auth,
+        biqHelper.utils.csrfGet()
+      )
     })
       .pipe(
 
@@ -40,10 +45,14 @@ const hostChecked = action$ => action$.pipe(
       method: 'POST',
       url: `${biqConfig.api.url_base}/api/login/host_checked`,
       ...biqConfig.rxAjaxOptions,
-      body: Object.assign({
-        host: biqConfig.host,
-        folder: biqConfig.folder
-      }, biqConfig.api.data_auth)
+      body: Object.assign(
+        {
+          host: biqConfig.host,
+          folder: biqConfig.folder
+        },
+        biqConfig.api.data_auth,
+        biqHelper.utils.csrfGet()
+      )
     })
       .pipe(
         map( res => appActions.appHostChecked({ status: res.status, response: res.response }) ),

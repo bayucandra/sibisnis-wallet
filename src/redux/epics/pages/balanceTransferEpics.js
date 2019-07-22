@@ -7,6 +7,7 @@ import actionTypes from "redux/action-types";
 import balanceTransferActions from "redux/actions/pages/balanceTransferActions";
 
 import biqConfig from "../../../providers/biqConfig";
+import biqHelper from '../../../lib/biqHelper'
 
 
 const balanceTransferMemberInfoFetch = action$ => action$.pipe(
@@ -20,7 +21,12 @@ const balanceTransferMemberInfoFetch = action$ => action$.pipe(
         url: `${biqConfig.api.url_base}/api/wallet/member_info`,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign( {}, biqConfig.api.data_auth, { nomor_hp : action.payload } )
+        body: Object.assign(
+          {},
+          biqConfig.api.data_auth,
+          { nomor_hp : action.payload },
+          biqHelper.utils.csrfGet()
+        )
       });
 
       return ajax$.pipe(
@@ -55,7 +61,12 @@ const balanceTransferNominalSubmit = action$ => action$.pipe(
         url: `${biqConfig.api.url_base}/api/wallet/transfer_saldo`,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign( {}, biqConfig.api.data_auth, action.payload )
+        body: Object.assign(
+          {},
+          biqConfig.api.data_auth,
+          action.payload,
+          biqHelper.utils.csrfGet()
+        )
       });
 
       return ajax$.pipe(

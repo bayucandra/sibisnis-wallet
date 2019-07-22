@@ -129,7 +129,7 @@ class BalancePaymentConfirmation extends Component{
     form_data.append('invoice_number', biqHelper.JSON.pathValueGet(this.props.balance.payment_transaction.server_response, 'response.data.invoice_number'));
     form_data.append('memberid', biqHelper.JSON.pathValueGet( this.props.user, 'profile.memberid' ));
     form_data.append( 'image', image_data.blob, image_data.name );
-    form_data.append( 'scrf_token', biqConfig.api.csrf_token );
+    form_data.append( '_csrf', biqHelper.utils.csrfGet()['_csrf'] );
 
     let progressSubscriber = new Subject();
 

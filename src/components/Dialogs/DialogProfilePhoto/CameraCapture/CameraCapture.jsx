@@ -113,7 +113,7 @@ class CameraCapture extends Component {
       let form_data = new FormData();
       form_data.append( 'column', 'image' );
       form_data.append( 'value', blob, `Camera-${Math.round((new Date()).getTime() / 1000)}.png` );
-      form_data.append( 'csrf_token', biqConfig.api.csrf_token );
+      form_data.append( '_csrf', biqHelper.utils.csrfGet()['_csrf'] );
 
       let ajax$ = rxAjax({
         url: biqConfig.api.url_base + '/api/wallet/profile_update',

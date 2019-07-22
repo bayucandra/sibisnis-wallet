@@ -6,6 +6,7 @@ import {switchMap, map, takeUntil, filter, catchError} from 'rxjs/operators';
 import actionTypes from "redux/action-types";
 import dashboardActions from "redux/actions/pages/dashboardActions";
 import biqConfig from "providers/biqConfig";
+import biqHelper from '../../../lib/biqHelper'
 
 const dashboardEmailVerificationSubmit = action$ => action$.pipe(
   ofType( actionTypes.dashboard.EMAIL_VERIFICATION_SUBMIT ),
@@ -15,7 +16,11 @@ const dashboardEmailVerificationSubmit = action$ => action$.pipe(
         url: `${biqConfig.api.url_base}/api/wallet/verifikasi_email`,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign({}, biqConfig.api.data_auth)
+        body: Object.assign(
+          {},
+          biqConfig.api.data_auth,
+          biqHelper.utils.csrfGet()
+        )
       });
 
       return ajax$.pipe(
@@ -54,7 +59,8 @@ const dashboardLoginHistoryFetch = action$ =>
               limit: 5,
               offset: 0
             },
-            biqConfig.api.data_auth
+            biqConfig.api.data_auth,
+            biqHelper.utils.csrfGet()
           )
         });
 

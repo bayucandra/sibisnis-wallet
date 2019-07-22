@@ -409,7 +409,11 @@ class AddressVerificationForm extends Component {
         url: `${biqConfig.api.url_base}/api/address/edit`,
         method: 'POST',
         ...biqConfig.rxAjaxOptions,
-        body: Object.assign( data, biqConfig.api.data_auth )
+        body: Object.assign(
+          data,
+          biqConfig.api.data_auth,
+          biqHelper.utils.csrfGet()
+        )
       });
 /*
       ajax$ = throwError({
